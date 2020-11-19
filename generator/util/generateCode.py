@@ -87,7 +87,15 @@ def generate_code_for(filename, overwrite=True):
 
 def generate_other_library_code(name, language, overwrite, ob):
     '''
-    Documentation for this function held off until issue #12 resolved.
+    Documentation for this function incomplete until issue #12 resolved.
+
+    Generate code when it's not a package.
+
+    :param name: `name` attribute node value, e.g. "dyn" for samples/dyn.xml
+    :param language: <language> node `name` value, e.g. "SBGN" or "SedML".
+    :param overwrite: see issue #12 TODO
+    :param ob: big dictionary structure representing nodes from the XML file.
+    :returns: nothing
     '''
     if not create_dir_structure(name, language, overwrite):
         print('Problem encountered creating directories')
@@ -127,11 +135,11 @@ def generate_global_files():
 
 def generate_package_code(name, language, overwrite, ob):
     '''
-    Documentation for this function held off until issue #12 resolved.
+    Generate code for a package.
 
     :param name: `name` attribute node value, e.g. "dyn" for samples/dyn.xml
     :param language: <language> node `name` value, e.g. "SBGN" or "SedML".
-    :param overwrite: see issue #12
+    :param overwrite: see issue #12 TODO
     :param ob: big dictionary structure representing nodes from the XML file.
     :returns: nothing
     '''
@@ -149,9 +157,9 @@ def generate_package_code(name, language, overwrite, ob):
 
 def generate_example_files(ob):
     '''
-    Generate the files in the `examples` directory
+    Generate the CMake/C++ files in the `examples` directory
 
-    :param ob: pkg_object
+    :param ob: pkg_object (big dictionary structure of info from XML file)
     :return: returns nothing
     '''
     this_dir = os.getcwd()
@@ -162,6 +170,13 @@ def generate_example_files(ob):
 
 
 def generate_cmake_files(name, ob):
+    """
+    Generate CMake files in directory `name`.
+
+    :param name: directory in which to create the files.
+    :param ob: big dictionary structure of info from XML file
+    :return: returns nothing.
+    """
     os.chdir('{0}'.format(name))
     this_dir = os.getcwd()
     cmake = CMakeFiles.CMakeFiles(ob, this_dir, True)
@@ -170,6 +185,13 @@ def generate_cmake_files(name, ob):
 
 
 def generate_cmake_files_for_other(name, ob):
+    """
+    Generate CMake base files for other library implementations.
+
+    :param name: directory in which to create the files.
+    :param ob: big dictionary structure of info from XML file
+    :return: returns nothing.
+    """
     os.chdir('{0}'.format(name))
     this_dir = os.getcwd()
     cmake = CMakeFiles.CMakeFiles(ob, this_dir, True)
@@ -178,6 +200,14 @@ def generate_cmake_files_for_other(name, ob):
 
 
 def generate_bindings_files(name, ob):
+    """
+    Verbosely generate bindings files for C/C++ code to
+    connect to code in other languages.
+
+    :param name: used in name of directory in which to create the files.
+    :param ob: big dictionary structure of info from XML file
+    :return: returns nothing.
+    """
     this_dir = os.getcwd()
     csharp_dir = '{0}{1}src{1}bindings{1}csharp'.format(name, os.sep)
     java_dir = '{0}{1}src{1}bindings{1}java'.format(name, os.sep)
@@ -236,6 +266,16 @@ def generate_bindings_files(name, ob):
 
 
 def generate_bindings_files_for_other(name, ob):
+    """
+    Called when we're not generating code for a package.
+
+    TODO: why can't we just use generate_bindings_files() instead of this?
+    The code is virtually identical. Just a few less files created here.
+
+    :param name: used in name of directory in which to create the files.
+    :param ob: big dictionary structure of info from XML file
+    :return: returns nothing.
+    """
     this_dir = os.getcwd()
     csharp_dir = '{0}{1}src{1}bindings{1}csharp'.format(name, os.sep)
     java_dir = '{0}{1}src{1}bindings{1}java'.format(name, os.sep)
@@ -294,6 +334,13 @@ def generate_bindings_files_for_other(name, ob):
 
 
 def generate_code_files(name, ob):
+    """
+    Write Extension files (for plugins) and Validation files (for cpp).
+
+    :param name: used in name of directory in which to create the files.
+    :param ob: big dictionary structure of info from XML file
+    :return: returns nothing.
+    """
     this_dir = os.getcwd()
     language = gv.language
     common_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}common'.format(name,
