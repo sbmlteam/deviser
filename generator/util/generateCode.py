@@ -64,7 +64,7 @@ def generate_code_for(filename, overwrite=True):
     # Attempt to parse the XML file:
     gv.running_tests = False
     parser = ParseXML.ParseXML(filename)
-    ob = []
+    ob = []  # The big structure of dictionaries etc created from the DOM.
     if gv.code_returned == gv.return_codes['success']:
         # catch a problem in the parsing
         try:
@@ -103,16 +103,23 @@ def generate_other_library_code(name, language, overwrite, ob):
 
 
 def generate_global_files():
+    """
+    Generate the global files required
+    e.g. VERSION.txt, README.md, LICENSE.txt
+    """
     version = BaseFile.BaseFile('VERSION', 'txt')
     major = gv.library_version['major']
     minor = gv.library_version['minor']
     rev = gv.library_version['revision']
     version.write_line_verbatim('{0}.{1}.{2}\n'.format(major, minor, rev))
     version.close_file()
+
+    # Copy mydir/../util/templates/README.md
     readme = BaseTemplateFile.BaseTemplateFile('README.md', 'util')
     fileout = BaseFile.BaseFile('README', 'md')
     readme.copy_file_contents(fileout, 'README.md')
     fileout.close_file()
+
     lic = BaseFile.BaseFile('LICENSE', 'txt')
     lic.write_line_verbatim('LICENSE\n')
     lic.close_file()
@@ -121,12 +128,18 @@ def generate_global_files():
 def generate_package_code(name, language, overwrite, ob):
     '''
     Documentation for this function held off until issue #12 resolved.
+
+    :param name: `name` attribute node value, e.g. "dyn" for samples/dyn.xml
+    :param language: <language> node `name` value, e.g. "SBGN" or "SedML".
+    :param overwrite: see issue #12
+    :param ob: big dictionary structure representing nodes from the XML file.
+    :returns: nothing
     '''
     if not create_dir_structure(name, language, overwrite):
-        print('Problem encountered creating directories')
+        print('Problem encountered creating directories.')
         print('Either delete what directory structure is there or')
-        print('re run with overwrite=True')
-        return False
+        print('re-run with overwrite=True.')
+        return
     gv.populate_error_list(ob)
     generate_code_files(name, ob)
     generate_bindings_files(name, ob)
@@ -138,7 +151,7 @@ def generate_example_files(ob):
     '''
     Generate the files in the `examples` directory
 
-    :param ob:
+    :param ob: pkg_object
     :return: returns nothing
     '''
     this_dir = os.getcwd()
