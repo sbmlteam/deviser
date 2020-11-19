@@ -44,7 +44,7 @@ from code_files import ExtensionFiles, CppFiles, ValidationFiles, BaseClassFiles
 from bindings_files import BindingsFiles
 from cmake_files import CMakeFiles
 from base_files import BaseFile, BaseTemplateFile, BaseTxtFile
-from util import global_variables, strFunctions
+from util import global_variables as gv, strFunctions
 import shutil
 
 directories = []
@@ -70,30 +70,30 @@ def generate_code_for(filename, overwrite=True):
     """
 
     # Attempt to parse the XML file:
-    global_variables.running_tests = False
+    gv.running_tests = False
     parser = ParseXML.ParseXML(filename)
     ob = []
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == \
+            gv.return_codes['success']:
         # catch a problem in the parsing
         try:
             ob = parser.parse_deviser_xml()
         except:
-            global_variables.code_returned \
-                = global_variables.return_codes['parsing error']
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+            gv.code_returned \
+                = gv.return_codes['parsing error']
+    if gv.code_returned == \
+            gv.return_codes['success']:
         name = ob['name'.lower()]
-        language = global_variables.language
+        language = gv.language
         # TO DO REMEMBER TO REMOVE   TODO why?
         # try:
-        if global_variables.is_package:
+        if gv.is_package:
             generate_package_code(name, language, overwrite, ob)
         else:
             generate_other_library_code(name, language, overwrite, ob)
         # except:
-        #     global_variables.code_returned \
-        #         = global_variables.return_codes['unknown error - please report']
+        #     gv.code_returned \
+        #         = gv.return_codes['unknown error - please report']
 
 
 def generate_other_library_code(name, language, overwrite, ob):
@@ -115,9 +115,9 @@ def generate_other_library_code(name, language, overwrite, ob):
 
 def generate_global_files():
     version = BaseFile.BaseFile('VERSION', 'txt')
-    major = global_variables.library_version['major']
-    minor = global_variables.library_version['minor']
-    rev = global_variables.library_version['revision']
+    major = gv.library_version['major']
+    minor = gv.library_version['minor']
+    rev = gv.library_version['revision']
     version.write_line_verbatim('{0}.{1}.{2}\n'.format(major, minor, rev))
     version.close_file()
     readme = BaseTemplateFile.BaseTemplateFile('README.md', 'util')
@@ -138,7 +138,7 @@ def generate_package_code(name, language, overwrite, ob):
         print('Either delete what directory structure is there or')
         print('re run with overwrite=True')
         return False
-    global_variables.populate_error_list(ob)
+    gv.populate_error_list(ob)
     generate_code_files(name, ob)
     generate_bindings_files(name, ob)
     generate_cmake_files(name, ob)
@@ -291,7 +291,7 @@ def generate_bindings_files_for_other(name, ob):
 
 def generate_code_files(name, ob):
     this_dir = os.getcwd()
-    language = global_variables.language
+    language = gv.language
     common_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}common'.format(name,
                                                                     os.sep,
                                                                     language)
@@ -333,9 +333,9 @@ def generate_code_files(name, ob):
     for working_class in ob['baseElements']:
         all_files = CppFiles.CppFiles(working_class, True)
         all_files.write_files()
-    for add_file in global_variables.add_implementation:
+    for add_file in gv.add_implementation:
         shutil.copy(add_file, os.getcwd())
-    for add_file in global_variables.add_declaration:
+    for add_file in gv.add_declaration:
         shutil.copy(add_file, os.getcwd())
 
     os.chdir(this_dir)
@@ -343,8 +343,8 @@ def generate_code_files(name, ob):
 
 def generate_other_library_code_files(name, ob):
     this_dir = os.getcwd()
-    language = global_variables.language
-    prefix = global_variables.prefix
+    language = gv.language
+    prefix = gv.prefix
     main_dir = '{0}{1}src{1}{2}'.format(name, os.sep, language)
     common_dir = '{0}{1}src{1}{2}{1}common'.format(name, os.sep, language)
     binding_dir = '{0}{1}src{1}bindings'.format(name, os.sep)
@@ -355,7 +355,7 @@ def generate_other_library_code_files(name, ob):
     # this populates the error structures
     valid = ValidationFiles.ValidationFiles(ob, True)
     for working_class in ob['baseElements']:
-        if working_class['name'] == global_variables.document_class:
+        if working_class['name'] == gv.document_class:
             working_class['document'] = True
         all_files = CppFiles.CppFiles(working_class, True)
         all_files.write_files()
@@ -433,7 +433,7 @@ def create_dir_structure(pkgname, lang, overwrite):
     '''
         Documentation for this function held off until issue #12 resolved.
     '''
-    if global_variables.is_package:
+    if gv.is_package:
         populate_package_directories(pkgname, lang)
     else:
         populate_other_library_directories(pkgname, lang)
@@ -487,18 +487,18 @@ def create_dir(name, skip_existing):
 
 def main(args):
     if len(args) != 2:  # TODO could be *too many* args as well.
-        global_variables.code_returned = \
-            global_variables.return_codes['missing function argument']
+        gv.code_returned = \
+            gv.return_codes['missing function argument']
         print ('Usage: generateCode.py xmlfile')
     else:
         generate_code_for(args[1])
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == \
+            gv.return_codes['success']:
         print('code successfully written')
     else:
         print('writing code failed')
 
-    return global_variables.code_returned
+    return gv.code_returned
 
 if __name__ == '__main__':
     main(sys.argv)
