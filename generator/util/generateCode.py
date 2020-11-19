@@ -64,16 +64,13 @@ def generate_code_for(filename, overwrite=True):
     gv.running_tests = False
     parser = ParseXML.ParseXML(filename)
     ob = []
-    if gv.code_returned == \
-            gv.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
         # catch a problem in the parsing
         try:
             ob = parser.parse_deviser_xml()
         except:
-            gv.code_returned \
-                = gv.return_codes['parsing error']
-    if gv.code_returned == \
-            gv.return_codes['success']:
+            gv.code_returned = gv.return_codes['parsing error']
+    if gv.code_returned == gv.return_codes['success']:
         name = ob['name'.lower()]
         language = gv.language
         # TO DO REMEMBER TO REMOVE   TODO why?
@@ -480,13 +477,11 @@ def create_dir(name, skip_existing):
 
 def main(args):
     if len(args) != 2:  # TODO could be *too many* args as well.
-        gv.code_returned = \
-            gv.return_codes['missing function argument']
-        print ('Usage: generateCode.py xmlfile')
+        gv.code_returned = gv.return_codes['missing function argument']
+        print('Usage: generateCode.py xmlfile')
     else:
         generate_code_for(args[1])
-    if gv.code_returned == \
-            gv.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
         print('code successfully written')
     else:
         print('writing code failed')
