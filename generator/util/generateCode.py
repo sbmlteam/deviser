@@ -40,10 +40,11 @@
 import sys
 import os
 from parseXML import ParseXML
-from code_files import ExtensionFiles, CppFiles, ValidationFiles, BaseClassFiles
+from code_files import (ExtensionFiles, CppFiles, ValidationFiles,
+                        BaseClassFiles)
 from bindings_files import BindingsFiles
 from cmake_files import CMakeFiles
-from base_files import BaseFile, BaseTemplateFile, BaseTxtFile
+from base_files import BaseFile, BaseTemplateFile  # , BaseTxtFile
 from util import global_variables as gv, strFunctions
 import shutil
 
@@ -68,7 +69,7 @@ def generate_code_for(filename, overwrite=True):
         # catch a problem in the parsing
         try:
             ob = parser.parse_deviser_xml()
-        except:
+        except Exception:
             gv.code_returned = gv.return_codes['parsing error']
     if gv.code_returned == gv.return_codes['success']:
         name = ob['name'.lower()]
@@ -225,12 +226,12 @@ def generate_bindings_files_for_other(name, ob):
     this_dir = os.getcwd()
     csharp_dir = '{0}{1}src{1}bindings{1}csharp'.format(name, os.sep)
     java_dir = '{0}{1}src{1}bindings{1}java'.format(name, os.sep)
-    javascript_dir = '{0}{1}src{1}bindings{1}javascript'.format(name, os.sep)
-    perl_dir = '{0}{1}src{1}bindings{1}perl'.format(name, os.sep)
-    php_dir = '{0}{1}src{1}bindings{1}php'.format(name, os.sep)
+    # javascript_dir = '{0}{1}src{1}bindings{1}javascript'.format(name, os.sep)
+    # perl_dir = '{0}{1}src{1}bindings{1}perl'.format(name, os.sep)
+    # php_dir = '{0}{1}src{1}bindings{1}php'.format(name, os.sep)
     python_dir = '{0}{1}src{1}bindings{1}python'.format(name, os.sep)
-    r_dir = '{0}{1}src{1}bindings{1}r'.format(name, os.sep)
-    ruby_dir = '{0}{1}src{1}bindings{1}ruby'.format(name, os.sep)
+    # r_dir = '{0}{1}src{1}bindings{1}r'.format(name, os.sep)
+    # ruby_dir = '{0}{1}src{1}bindings{1}ruby'.format(name, os.sep)
     swig_dir = '{0}{1}src{1}bindings{1}swig'.format(name, os.sep)
 
     os.chdir(java_dir)
@@ -337,19 +338,20 @@ def generate_other_library_code_files(name, ob):
     prefix = gv.prefix
     main_dir = '{0}{1}src{1}{2}'.format(name, os.sep, language)
     common_dir = '{0}{1}src{1}{2}{1}common'.format(name, os.sep, language)
-    binding_dir = '{0}{1}src{1}bindings'.format(name, os.sep)
+    # binding_dir = '{0}{1}src{1}bindings'.format(name, os.sep)
     os.chdir(main_dir)
 # take these lines out to write without prefix
     for working_class in ob['baseElements']:
         strFunctions.prefix_classes(working_class)
     # this populates the error structures
-    valid = ValidationFiles.ValidationFiles(ob, True)
+    ValidationFiles.ValidationFiles(ob, True)  # Can check retval if required.
     for working_class in ob['baseElements']:
         if working_class['name'] == gv.document_class:
             working_class['document'] = True
         all_files = CppFiles.CppFiles(working_class, True)
         all_files.write_files()
-    base_files = BaseClassFiles.BaseClassFiles(prefix, ob['baseElements'], True)
+    base_files = BaseClassFiles.\
+        BaseClassFiles(prefix, ob['baseElements'], True)
     base_files.write_files()
     os.chdir(this_dir)
     os.chdir(common_dir)
@@ -455,16 +457,17 @@ def check_directory_structure():
 
 
 def create_dir(name, skip_existing):
-    """ skip_existing seems to be a synonym for `overwrite` parameter, used
-     in function create_dir_structure(). I don't think it is being used properly here.
+    """ skip_existing seems to be a synonym for `overwrite` parameter,
+     used in function create_dir_structure(). I don't think it is being
+     used properly here.
 
-     See issue #12
+     See deviser issue #12
      """
     if os.path.exists(name):
         if skip_existing:
             done = True
         else:
-            print('some parts of the directory structure exist and ' \
+            print('some parts of the directory structure exist and '
                   'others are missing')
             print('terminating as we are not sure what is going on')
             done = False
