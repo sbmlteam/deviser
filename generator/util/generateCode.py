@@ -204,7 +204,7 @@ def generate_bindings_files(name, ob):
     Verbosely generate bindings files for C/C++ code to
     connect to code in other languages.
 
-    :param name: used in name of directory in which to create the files.
+    :param name: used in names of directories in which to create the files.
     :param ob: big dictionary structure of info from XML file
     :return: returns nothing.
     """
@@ -272,7 +272,7 @@ def generate_bindings_files_for_other(name, ob):
     TODO: why can't we just use generate_bindings_files() instead of this?
     The code is virtually identical. Just a few less files created here.
 
-    :param name: used in name of directory in which to create the files.
+    :param name: used in names of directories in which to create the files.
     :param ob: big dictionary structure of info from XML file
     :return: returns nothing.
     """
@@ -336,8 +336,9 @@ def generate_bindings_files_for_other(name, ob):
 def generate_code_files(name, ob):
     """
     Write Extension files (for plugins) and Validation files (for cpp).
+    Called by generate_package_code()
 
-    :param name: used in name of directory in which to create the files.
+    :param name: used in names of directories in which to create the files.
     :param ob: big dictionary structure of info from XML file
     :return: returns nothing.
     """
@@ -393,6 +394,14 @@ def generate_code_files(name, ob):
 
 
 def generate_other_library_code_files(name, ob):
+    """
+    Used when not generating a package.
+    Called by generate_other_library_code()
+
+    :param name: used in names of directories in which to create the files.
+    :param ob: big dictionary structure of info from XML file
+    :return: returns nothing.
+    """
     this_dir = os.getcwd()
     language = gv.language
     prefix = gv.prefix
@@ -400,9 +409,11 @@ def generate_other_library_code_files(name, ob):
     common_dir = '{0}{1}src{1}{2}{1}common'.format(name, os.sep, language)
     # binding_dir = '{0}{1}src{1}bindings'.format(name, os.sep)
     os.chdir(main_dir)
-# take these lines out to write without prefix
+
+    # take these lines out to write without prefix
     for working_class in ob['baseElements']:
         strFunctions.prefix_classes(working_class)
+
     # this populates the error structures
     ValidationFiles.ValidationFiles(ob, True)  # Can check retval if required.
     for working_class in ob['baseElements']:
@@ -414,6 +425,7 @@ def generate_other_library_code_files(name, ob):
         BaseClassFiles(prefix, ob['baseElements'], True)
     base_files.write_files()
     os.chdir(this_dir)
+
     os.chdir(common_dir)
     base_files.write_common_files()
     ext = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
