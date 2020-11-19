@@ -49,15 +49,6 @@ import shutil
 
 directories = []
 
-# TODO: this code (and other code files) would be a bit more readable
-# (and smaller) if we changed a line like:
-#  if global_variables.code_returned == \
-#             global_variables.return_codes['success']:
-# to:
-#  if code_returned == return_codes['success']:
-# or:
-#  import global_variables as gv
-#  if gv.code_returned == gv.return_codes['success']:
 
 def generate_code_for(filename, overwrite=True):
     """
@@ -144,6 +135,7 @@ def generate_package_code(name, language, overwrite, ob):
     generate_cmake_files(name, ob)
     generate_example_files(ob)
 
+
 def generate_example_files(ob):
     '''
     Generate the files in the `examples` directory
@@ -156,6 +148,7 @@ def generate_example_files(ob):
     cmake = CMakeFiles.CMakeFiles(ob, this_dir, True)
     cmake.write_example_files()
     os.chdir(this_dir)
+
 
 def generate_cmake_files(name, ob):
     os.chdir('{0}'.format(name))
@@ -499,6 +492,7 @@ def main(args):
         print('writing code failed')
 
     return gv.code_returned
+
 
 if __name__ == '__main__':
     main(sys.argv)
