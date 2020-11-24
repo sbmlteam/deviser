@@ -199,6 +199,35 @@ def generate_cmake_files_for_other(name, ob):
     os.chdir(this_dir)
 
 
+def generate_files_in_dir(dir1, dir2, language, ob):
+    """
+    cd into a directory, write out files, then cd back to initial directory.
+
+    :param dir1: dictionary to enter and create language files in.
+    :param dir2: dictionary we started from.
+    :param language: a string like "csharp" or "java".
+    :param ob: the large dictionary structure of node information.
+    :return: returns nothing.
+
+    This function is to replace blocks of code like this:
+
+    os.chdir(csharp_dir)
+    bind = BindingsFiles.BindingFiles(ob, 'csharp', True)
+    bind.write_files()
+    os.chdir(this_dir)
+
+    We could add an option for swig. But we would then have to check it worked
+    for the swig call in both generate_bindings_files() and
+    generate_bindings_files_for_other(); the latter has a call to
+    write_swig_library_files(), but the latter has the usual write_files()
+    call.
+    """
+    os.chdir(dir1)
+    bind = BindingsFiles.BindingFiles(ob, language, True)
+    bind.write_files()
+    os.chdir(dir2)
+
+
 def generate_bindings_files(name, ob):
     """
     Verbosely generate bindings files for C/C++ code to
@@ -219,50 +248,59 @@ def generate_bindings_files(name, ob):
     ruby_dir = '{0}{1}src{1}bindings{1}ruby'.format(name, os.sep)
     swig_dir = '{0}{1}src{1}bindings{1}swig'.format(name, os.sep)
 
-    os.chdir(csharp_dir)
-    bind = BindingsFiles.BindingFiles(ob, 'csharp', True)
-    bind.write_files()
-    os.chdir(this_dir)
+    #os.chdir(csharp_dir)
+    #bind = BindingsFiles.BindingFiles(ob, 'csharp', True)
+    #bind.write_files()
+    #os.chdir(this_dir)
+    generate_files_in_dir(csharp_dir, this_dir, 'csharp', ob)
 
-    os.chdir(java_dir)
-    bind = BindingsFiles.BindingFiles(ob, 'java', True)
-    bind.write_files()
-    os.chdir(this_dir)
+    #os.chdir(java_dir)
+    #bind = BindingsFiles.BindingFiles(ob, 'java', True)
+    #bind.write_files()
+    #os.chdir(this_dir)
+    generate_files_in_dir(java_dir, this_dir, 'java', ob)
 
-    os.chdir(javascript_dir)
-    bind = BindingsFiles.BindingFiles(ob, 'javascript', True)
-    bind.write_files()
-    os.chdir(this_dir)
+    #os.chdir(javascript_dir)
+    #bind = BindingsFiles.BindingFiles(ob, 'javascript', True)
+    #bind.write_files()
+    #os.chdir(this_dir)
+    generate_files_in_dir(javascript_dir, this_dir, 'javascript', ob)
 
-    os.chdir(perl_dir)
-    bind = BindingsFiles.BindingFiles(ob, 'perl', True)
-    bind.write_files()
-    os.chdir(this_dir)
+    #os.chdir(perl_dir)
+    #bind = BindingsFiles.BindingFiles(ob, 'perl', True)
+    #bind.write_files()
+    #os.chdir(this_dir)
+    generate_files_in_dir(perl_dir, this_dir, 'perl', ob)
 
-    os.chdir(php_dir)
-    bind = BindingsFiles.BindingFiles(ob, 'php', True)
-    bind.write_files()
-    os.chdir(this_dir)
+    #os.chdir(php_dir)
+    #bind = BindingsFiles.BindingFiles(ob, 'php', True)
+    #bind.write_files()
+    #os.chdir(this_dir)
+    generate_files_in_dir(php_dir, this_dir, 'php', ob)
 
-    os.chdir(python_dir)
-    bind = BindingsFiles.BindingFiles(ob, 'python', True)
-    bind.write_files()
-    os.chdir(this_dir)
+    #os.chdir(python_dir)
+    #bind = BindingsFiles.BindingFiles(ob, 'python', True)
+    #bind.write_files()
+    #os.chdir(this_dir)
+    generate_files_in_dir(python_dir, this_dir, 'python', ob)
 
-    os.chdir(r_dir)
-    bind = BindingsFiles.BindingFiles(ob, 'r', True)
-    bind.write_files()
-    os.chdir(this_dir)
+    #os.chdir(r_dir)
+    #bind = BindingsFiles.BindingFiles(ob, 'r', True)
+    #bind.write_files()
+    #os.chdir(this_dir)
+    generate_files_in_dir(r_dir, this_dir, 'r', ob)
 
-    os.chdir(ruby_dir)
-    bind = BindingsFiles.BindingFiles(ob, 'ruby', True)
-    bind.write_files()
-    os.chdir(this_dir)
+    #os.chdir(ruby_dir)
+    #bind = BindingsFiles.BindingFiles(ob, 'ruby', True)
+    #bind.write_files()
+    #os.chdir(this_dir)
+    generate_files_in_dir(ruby_dir, this_dir, 'ruby', ob)
 
-    os.chdir(swig_dir)
-    bind = BindingsFiles.BindingFiles(ob, 'swig', True)
-    bind.write_files()
-    os.chdir(this_dir)
+    #os.chdir(swig_dir)
+    #bind = BindingsFiles.BindingFiles(ob, 'swig', True)
+    #bind.write_files()
+    #os.chdir(this_dir)
+    generate_files_in_dir(swig_dir, this_dir, 'swig', ob)
 
 
 def generate_bindings_files_for_other(name, ob):
@@ -271,6 +309,8 @@ def generate_bindings_files_for_other(name, ob):
 
     TODO: why can't we just use generate_bindings_files() instead of this?
     The code is virtually identical. Just a few less files created here.
+    And we could have a function rather than all the os.chdir() steps
+    etc.
 
     :param name: used in names of directories in which to create the files.
     :param ob: big dictionary structure of info from XML file
@@ -287,50 +327,58 @@ def generate_bindings_files_for_other(name, ob):
     # ruby_dir = '{0}{1}src{1}bindings{1}ruby'.format(name, os.sep)
     swig_dir = '{0}{1}src{1}bindings{1}swig'.format(name, os.sep)
 
-    os.chdir(java_dir)
-    bind = BindingsFiles.BindingFiles(ob, 'java', True)
-    bind.write_files()
-    os.chdir(this_dir)
+    #os.chdir(java_dir)
+    #bind = BindingsFiles.BindingFiles(ob, 'java', True)
+    #bind.write_files()
+    #os.chdir(this_dir)
+    generate_files_in_dir(java_dir, this_dir, 'java', ob)
 
-    # os.chdir(javascript_dir)
-    # bind = BindingsFiles.BindingFiles(ob, 'javascript', True)
-    # bind.write_files()
-    # os.chdir(this_dir)
+    # #os.chdir(javascript_dir)
+    # #bind = BindingsFiles.BindingFiles(ob, 'javascript', True)
+    # #bind.write_files()
+    # #os.chdir(this_dir)
+    # generate_files_in_dir(javascript_dir, this_dir, 'javascript', ob)
     #
-    # os.chdir(perl_dir)
-    # bind = BindingsFiles.BindingFiles(ob, 'perl', True)
-    # bind.write_files()
-    # os.chdir(this_dir)
+    # #os.chdir(perl_dir)
+    # #bind = BindingsFiles.BindingFiles(ob, 'perl', True)
+    # #bind.write_files()
+    # #os.chdir(this_dir)
+    # generate_files_in_dir(perl_dir, this_dir, 'perl', ob)
     #
-    # os.chdir(php_dir)
-    # bind = BindingsFiles.BindingFiles(ob, 'php', True)
-    # bind.write_files()
-    # os.chdir(this_dir)
+    # #os.chdir(php_dir)
+    # #bind = BindingsFiles.BindingFiles(ob, 'php', True)
+    # #bind.write_files()
+    # #os.chdir(this_dir)
+    # generate_files_in_dir(php_dir, this_dir, 'php', ob)
     #
-    os.chdir(python_dir)
-    bind = BindingsFiles.BindingFiles(ob, 'python', True)
-    bind.write_files()
-    os.chdir(this_dir)
+    #os.chdir(python_dir)
+    #bind = BindingsFiles.BindingFiles(ob, 'python', True)
+    #bind.write_files()
+    #os.chdir(this_dir)
+    generate_files_in_dir(python_dir, this_dir, 'python', ob)
 
-    # os.chdir(r_dir)
-    # bind = BindingsFiles.BindingFiles(ob, 'r', True)
-    # bind.write_files()
-    # os.chdir(this_dir)
+    # #os.chdir(r_dir)
+    # #bind = BindingsFiles.BindingFiles(ob, 'r', True)
+    # #bind.write_files()
+    # #os.chdir(this_dir)
+    # generate_files_in_dir(r_dir, this_dir, 'r', ob)
     #
-    # os.chdir(ruby_dir)
-    # bind = BindingsFiles.BindingFiles(ob, 'ruby', True)
-    # bind.write_files()
-    # os.chdir(this_dir)
+    # #os.chdir(ruby_dir)
+    # #bind = BindingsFiles.BindingFiles(ob, 'ruby', True)
+    # #bind.write_files()
+    # #os.chdir(this_dir)
+    # generate_files_in_dir(ruby_dir, this_dir, 'ruby', ob)
 
     os.chdir(swig_dir)
     bind = BindingsFiles.BindingFiles(ob, 'swig', True)
-    bind.write_swig_library_files()
+    bind.write_swig_library_files()  # This line doesn't appear in generate_bindings_files().
     os.chdir(this_dir)
 
-    os.chdir(csharp_dir)
-    bind = BindingsFiles.BindingFiles(ob, 'csharp', True)
-    bind.write_files()
-    os.chdir(this_dir)
+    #os.chdir(csharp_dir)
+    #bind = BindingsFiles.BindingFiles(ob, 'csharp', True)
+    #bind.write_files()
+    #os.chdir(this_dir)
+    generate_files_in_dir(csharp_dir, this_dir, 'csharp', ob)
 
 
 def generate_code_files(name, ob):
@@ -495,7 +543,7 @@ def populate_other_library_directories(name, lang):
 
 def create_dir_structure(pkgname, lang, overwrite):
     '''
-        Documentation for this function held off until issue #12 resolved.
+    Documentation for this function held off until issue #12 resolved.
     '''
     if gv.is_package:
         populate_package_directories(pkgname, lang)
