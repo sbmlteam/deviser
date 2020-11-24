@@ -327,46 +327,15 @@ def generate_bindings_files_for_other(name, ob):
     # ruby_dir = '{0}{1}src{1}bindings{1}ruby'.format(name, os.sep)
     swig_dir = '{0}{1}src{1}bindings{1}swig'.format(name, os.sep)
 
-    #os.chdir(java_dir)
-    #bind = BindingsFiles.BindingFiles(ob, 'java', True)
-    #bind.write_files()
-    #os.chdir(this_dir)
     generate_files_in_dir(java_dir, this_dir, 'java', ob)
 
-    # #os.chdir(javascript_dir)
-    # #bind = BindingsFiles.BindingFiles(ob, 'javascript', True)
-    # #bind.write_files()
-    # #os.chdir(this_dir)
     # generate_files_in_dir(javascript_dir, this_dir, 'javascript', ob)
-    #
-    # #os.chdir(perl_dir)
-    # #bind = BindingsFiles.BindingFiles(ob, 'perl', True)
-    # #bind.write_files()
-    # #os.chdir(this_dir)
     # generate_files_in_dir(perl_dir, this_dir, 'perl', ob)
-    #
-    # #os.chdir(php_dir)
-    # #bind = BindingsFiles.BindingFiles(ob, 'php', True)
-    # #bind.write_files()
-    # #os.chdir(this_dir)
     # generate_files_in_dir(php_dir, this_dir, 'php', ob)
-    #
-    #os.chdir(python_dir)
-    #bind = BindingsFiles.BindingFiles(ob, 'python', True)
-    #bind.write_files()
-    #os.chdir(this_dir)
+
     generate_files_in_dir(python_dir, this_dir, 'python', ob)
 
-    # #os.chdir(r_dir)
-    # #bind = BindingsFiles.BindingFiles(ob, 'r', True)
-    # #bind.write_files()
-    # #os.chdir(this_dir)
     # generate_files_in_dir(r_dir, this_dir, 'r', ob)
-    #
-    # #os.chdir(ruby_dir)
-    # #bind = BindingsFiles.BindingFiles(ob, 'ruby', True)
-    # #bind.write_files()
-    # #os.chdir(this_dir)
     # generate_files_in_dir(ruby_dir, this_dir, 'ruby', ob)
 
     os.chdir(swig_dir)
@@ -374,10 +343,6 @@ def generate_bindings_files_for_other(name, ob):
     bind.write_swig_library_files()  # This line doesn't appear in generate_bindings_files().
     os.chdir(this_dir)
 
-    #os.chdir(csharp_dir)
-    #bind = BindingsFiles.BindingFiles(ob, 'csharp', True)
-    #bind.write_files()
-    #os.chdir(this_dir)
     generate_files_in_dir(csharp_dir, this_dir, 'csharp', ob)
 
 
