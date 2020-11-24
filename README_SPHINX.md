@@ -69,6 +69,19 @@ And add `import sphinx_rtd_theme` near top of `conf.py`.
 [NB python2 doesn’t allow virtual environments (`python –m venv myenv`)
 for local install of `sphinx-apidoc`, etc.] 
 
+To ensure that the class `__init__()` functions are nicely documented,
+add the following [solution from StackOverflow](https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method) to `conf.py`:
+```
+def skip(app, what, name, obj, would_skip, options):
+    if name == "__init__":
+        return False
+    return would_skip
+
+def setup(app):
+    app.connect("autodoc-skip-member", skip)
+```
+More generally, the `setup()` function can be used for advanced configuration. 
+
 
 ### Building the HTML pages.
  
