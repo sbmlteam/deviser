@@ -98,6 +98,10 @@ We don't really want to add the `.rst` and `.html` files to git, as we can alway
 regenerate them.
 
 ### Re-building
+NB: using the `-f` option to force rebuilding will overwrite the existing `conf.py`, so 
+you may wish to make a copy before doing this! And although the `-n` and `-f` options
+can be used together, the dry-run will NOT show that a new `conf.py` is created.
+
 If you make a change to the docs in your Python code, the relevant `.rst` and `.html` files
 will need to be re-built. In this case the `-f` option will need to be added to the 
 `sphinx-apidoc` command, to force it to overwrite the existing `.rst` file(s). And the
