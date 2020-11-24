@@ -82,8 +82,21 @@ source_suffix = {
  # e.g. rather than "class A.B.C", just say "class C".
 add_module_names = False
 
-# Output docstring from __init__.py() as well as module-level docstring.
-autoclass_content = 'both'
+# Output docstring from __init__.py() as well as class-level docstring.
+#autoclass_content = 'both'
+
+# Answer from
+# https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method
+# The autoclass_content = 'both' option does display the docstring from
+# __init__(), but doesn't have the name of this function displayed,
+# so the following way is better:
+def skip(app, what, name, obj, would_skip, options):
+    if name == "__init__":
+        return False
+    return would_skip
+
+def setup(app):
+    app.connect("autodoc-skip-member", skip)
 
 # -- Extension configuration -------------------------------------------------
 
