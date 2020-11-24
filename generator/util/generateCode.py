@@ -199,12 +199,12 @@ def generate_cmake_files_for_other(name, ob):
     os.chdir(this_dir)
 
 
-def generate_binding_files_in_dir(name, startdir, language, ob):
+def generate_binding_files_in_dir(name, start_dir, language, ob):
     """
     cd into a directory, write out files, then cd back to initial directory.
 
     :param name:
-    :param startdir: dictionary we started from.
+    :param start_dir: dictionary we started from.
     :param language: a string like "csharp" or "java".
     :param ob: the large dictionary structure of node information.
     :return: returns nothing.
@@ -227,7 +227,7 @@ def generate_binding_files_in_dir(name, startdir, language, ob):
     os.chdir(lang_dir)
     bind = BindingsFiles.BindingFiles(ob, language, True)
     bind.write_files()
-    os.chdir(startdir)
+    os.chdir(start_dir)
 
 
 def generate_bindings_files(name, ob):
@@ -243,18 +243,9 @@ def generate_bindings_files(name, ob):
 
     languages = ['csharp', 'java', 'javascript', 'perl', 'php', 'python', \
                  'r', 'ruby', 'swig']
+
     for lang in languages:
         generate_binding_files_in_dir(name, this_dir, lang, ob)
-
-    #generate_binding_files_in_dir(name, this_dir, 'csharp', ob)
-    #generate_binding_files_in_dir(name, this_dir, 'java', ob)
-    #generate_binding_files_in_dir(name, this_dir, 'javascript', ob)
-    #generate_binding_files_in_dir(name, this_dir, 'perl', ob)
-    #generate_binding_files_in_dir(name, this_dir, 'php', ob)
-    #generate_binding_files_in_dir(name, this_dir, 'python', ob)
-    #generate_binding_files_in_dir(name, this_dir, 'r', ob)
-    #generate_binding_files_in_dir(name, this_dir, 'ruby', ob)
-    #generate_binding_files_in_dir(name, this_dir, 'swig', ob)
 
 
 def generate_bindings_files_for_other(name, ob):
@@ -385,59 +376,57 @@ def generate_other_library_code_files(name, ob):
 
 # Functions to create the appropriate directory structure
 def populate_package_directories(name, lang):
-    global directories
+    # global directories
     sep = os.sep
     directories = ['{0}'.format(name),
                    '{0}{1}examples'.format(name, sep),
                    '{0}{1}examples{1}c++'.format(name, sep),
                    '{0}{1}examples{1}c++{1}{0}'.format(name, sep),
                    '{0}{1}src'.format(name, sep),
-                   '{0}{1}src{1}bindings'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}csharp'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}java'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}javascript'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}perl'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}php'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}python'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}r'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}ruby'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}swig'.format(name, sep),
-                   '{0}{1}src{1}{2}'.format(name, sep, lang),
-                   '{0}{1}src{1}{2}{1}packages'.format(name, sep, lang),
-                   '{0}{1}src{1}{2}{1}packages{1}{0}'.format(name, sep, lang),
-                   '{0}{1}src{1}{2}{1}packages{1}{0}{1}common'.format(name,
+                   '{0}{1}src{1}bindings'.format(name, sep),]
+
+    for language in ['csharp', 'java', 'javascript', 'perl', 'php',
+        'python', 'r', 'ruby', 'swig']:
+        directories.append('{0}{1}src{1}bindings{1}{2}'.format(name, sep, language))
+
+    directories += ['{0}{1}src{1}{2}'.format(name, sep, lang),
+                    '{0}{1}src{1}{2}{1}packages'.format(name, sep, lang),
+                    '{0}{1}src{1}{2}{1}packages{1}{0}'.format(name, sep, lang),
+                    '{0}{1}src{1}{2}{1}packages{1}{0}{1}common'.format(name,
                                                                       sep,
                                                                       lang),
-                   '{0}{1}src{1}{2}{1}packages{1}{0}{1}extension'.format(name,
+                    '{0}{1}src{1}{2}{1}packages{1}{0}{1}extension'.format(name,
                                                                          sep,
                                                                          lang),
-                   '{0}{1}src{1}{2}{1}packages{1}{0}{1}{2}'.format(name, sep,
+                    '{0}{1}src{1}{2}{1}packages{1}{0}{1}{2}'.format(name, sep,
                                                                    lang),
-                   '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator'.format(name,
+                    '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator'.format(name,
                                                                          sep,
                                                                          lang),
-                   '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator{1}'
-                   'constraints'.format(name, sep, lang)]
+                    '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator{1}'
+                    'constraints'.format(name, sep, lang)]
+
+    return directories
 
 
 def populate_other_library_directories(name, lang):
-    global directories
+    # global directories
     sep = os.sep
     directories = ['{0}'.format(name),
                    '{0}{1}examples'.format(name, sep),
                    '{0}{1}src'.format(name, sep),
-                   '{0}{1}src{1}bindings'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}csharp'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}java'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}javascript'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}perl'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}php'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}python'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}r'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}ruby'.format(name, sep),
-                   '{0}{1}src{1}bindings{1}swig'.format(name, sep),
-                   '{0}{1}src{1}{2}'.format(name, sep, lang),
-                   '{0}{1}src{1}{2}{1}common'.format(name, sep, lang)]
+                   '{0}{1}src{1}bindings'.format(name, sep),]
+
+    # I don't know if the ordering of `directories` matters, so I'm keeping
+    # it the same as it already was.
+    for language in ['csharp', 'java', 'javascript', 'perl', 'php', 'python',
+        'r', 'ruby', 'swig']:
+        directories.append('{0}{1}src{1}bindings{1}{2}'.format(name, sep, language))
+
+    directories.append('{0}{1}src{1}{2}'.format(name, sep, lang))
+    directories.append('{0}{1}src{1}{2}{1}common'.format(name, sep, lang))
+
+    return directories
 
 
 def create_dir_structure(pkgname, lang, overwrite):
@@ -445,16 +434,16 @@ def create_dir_structure(pkgname, lang, overwrite):
     Documentation for this function held off until issue #12 resolved.
     '''
     if gv.is_package:
-        populate_package_directories(pkgname, lang)
+        directories = populate_package_directories(pkgname, lang)
     else:
-        populate_other_library_directories(pkgname, lang)
+        directories = populate_other_library_directories(pkgname, lang)
     print('creating directory structure for {0}'.format(pkgname))
     index = 0
     all_present = False
     if os.path.exists(pkgname):
-        all_present = check_directory_structure()
+        all_present = check_directory_structure(directories)
         index = 1
-    done = True
+    done = True  # TODO `ok` might be more accurate than `done`, esp. in this loop!
     if not all_present:
         while done and index < len(directories):
             done = create_dir(directories[index], overwrite)
@@ -467,8 +456,13 @@ def create_dir_structure(pkgname, lang, overwrite):
     return done
 
 
-def check_directory_structure():
-    global directories
+def check_directory_structure(directories):
+    """
+    Check that all directories in a list exist
+
+    :param directories: the list of directories (strings)
+    :return: True if they all exist, else False.
+    """
     for directory in directories:
         if not os.path.exists(directory):
             return False
@@ -478,7 +472,7 @@ def check_directory_structure():
 def create_dir(name, skip_existing):
     """ skip_existing seems to be a synonym for `overwrite` parameter,
      used in function create_dir_structure(). I don't think it is being
-     used properly here.
+     used properly here. Because they are used in opposite senses
 
      See deviser issue #12
      """
