@@ -517,8 +517,11 @@ def create_dir(name, skip_existing):
 
 
 def main(args):
-    if len(args) != 2:  # TODO could be *too many* args as well.
+    if len(args) < 2:
         gv.code_returned = gv.return_codes['missing function argument']
+        print('Usage: generateCode.py xmlfile')
+    elif len(args) > 2:
+        gv.code_returned = gv.return_codes['invalid function arguments']
         print('Usage: generateCode.py xmlfile')
     else:
         generate_code_for(args[1])
