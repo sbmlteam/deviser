@@ -82,6 +82,9 @@ source_suffix = {
  # e.g. rather than "class A.B.C", just say "class C".
 add_module_names = False
 
+# Output docstring from __init__.py() as well as module-level docstring.
+autoclass_content = 'both'
+
 # -- Extension configuration -------------------------------------------------
 
 # -- Options for todo extension ----------------------------------------------
