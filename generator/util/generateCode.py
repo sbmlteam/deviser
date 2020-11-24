@@ -44,11 +44,9 @@ from code_files import (ExtensionFiles, CppFiles, ValidationFiles,
                         BaseClassFiles)
 from bindings_files import BindingsFiles
 from cmake_files import CMakeFiles
-from base_files import BaseFile, BaseTemplateFile  # , BaseTxtFile
+from base_files import BaseFile, BaseTemplateFile
 from util import global_variables as gv, strFunctions
 import shutil
-
-directories = []
 
 
 def generate_code_for(filename, overwrite=True):
@@ -199,11 +197,11 @@ def generate_cmake_files_for_other(name, ob):
     os.chdir(this_dir)
 
 
-def generate_binding_files_in_dir(name, start_dir, language, ob):
+def generate_bindings_files_in_dir(name, start_dir, language, ob):
     """
     cd into a directory, write out files, then cd back to initial directory.
 
-    :param name:
+    :param name: `name` attribute node value, e.g. "dyn" for samples/dyn.xml
     :param start_dir: dictionary we started from.
     :param language: a string like "csharp" or "java".
     :param ob: the large dictionary structure of node information.
@@ -235,17 +233,18 @@ def generate_bindings_files(name, ob):
     Verbosely generate bindings files for C/C++ code to
     connect to code in other languages.
 
-    :param name: used in names of directories in which to create the files.
+    :param name: `name` attribute node value, e.g. "dyn" for samples/dyn.xml
+     We use this in the names of directories in which to create the files.
     :param ob: big dictionary structure of info from XML file
     :return: returns nothing.
     """
     this_dir = os.getcwd()
 
-    languages = ['csharp', 'java', 'javascript', 'perl', 'php', 'python', \
+    languages = ['csharp', 'java', 'javascript', 'perl', 'php', 'python',
                  'r', 'ruby', 'swig']
 
     for lang in languages:
-        generate_binding_files_in_dir(name, this_dir, lang, ob)
+        generate_bindings_files_in_dir(name, this_dir, lang, ob)
 
 
 def generate_bindings_files_for_other(name, ob):
@@ -258,10 +257,10 @@ def generate_bindings_files_for_other(name, ob):
     """
     this_dir = os.getcwd()
     languages = ['csharp', 'java', 'python', ]
-                 # 'javascript', 'perl', 'php', 'r', 'ruby', 'swig']
+    # 'javascript', 'perl', 'php', 'r', 'ruby', 'swig']
 
     for lang in languages:
-        generate_binding_files_in_dir(name, this_dir, lang, ob)
+        generate_bindings_files_in_dir(name, this_dir, lang, ob)
 
     swig_dir = '{0}{1}src{1}bindings{1}swig'.format(name, os.sep)
     os.chdir(swig_dir)
@@ -376,33 +375,37 @@ def generate_other_library_code_files(name, ob):
 
 # Functions to create the appropriate directory structure
 def populate_package_directories(name, lang):
-    # global directories
+    """
+
+    :param name:
+    :param lang:
+    :return:
+    """
     sep = os.sep
     directories = ['{0}'.format(name),
                    '{0}{1}examples'.format(name, sep),
                    '{0}{1}examples{1}c++'.format(name, sep),
                    '{0}{1}examples{1}c++{1}{0}'.format(name, sep),
                    '{0}{1}src'.format(name, sep),
-                   '{0}{1}src{1}bindings'.format(name, sep),]
+                   '{0}{1}src{1}bindings'.format(name, sep), ]
 
     for language in ['csharp', 'java', 'javascript', 'perl', 'php',
-        'python', 'r', 'ruby', 'swig']:
-        directories.append('{0}{1}src{1}bindings{1}{2}'.format(name, sep, language))
+                     'python', 'r', 'ruby', 'swig']:
+        directories.append('{0}{1}src{1}bindings{1}{2}'.
+                           format(name, sep, language))
 
     directories += ['{0}{1}src{1}{2}'.format(name, sep, lang),
                     '{0}{1}src{1}{2}{1}packages'.format(name, sep, lang),
                     '{0}{1}src{1}{2}{1}packages{1}{0}'.format(name, sep, lang),
                     '{0}{1}src{1}{2}{1}packages{1}{0}{1}common'.format(name,
-                                                                      sep,
-                                                                      lang),
-                    '{0}{1}src{1}{2}{1}packages{1}{0}{1}extension'.format(name,
-                                                                         sep,
-                                                                         lang),
+                                                                       sep,
+                                                                       lang),
+                    '{0}{1}src{1}{2}{1}packages{1}{0}{1}extension'.
+                    format(name, sep, lang),
                     '{0}{1}src{1}{2}{1}packages{1}{0}{1}{2}'.format(name, sep,
-                                                                   lang),
-                    '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator'.format(name,
-                                                                         sep,
-                                                                         lang),
+                                                                    lang),
+                    '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator'.
+                    format(name, sep, lang),
                     '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator{1}'
                     'constraints'.format(name, sep, lang)]
 
@@ -415,13 +418,14 @@ def populate_other_library_directories(name, lang):
     directories = ['{0}'.format(name),
                    '{0}{1}examples'.format(name, sep),
                    '{0}{1}src'.format(name, sep),
-                   '{0}{1}src{1}bindings'.format(name, sep),]
+                   '{0}{1}src{1}bindings'.format(name, sep), ]
 
     # I don't know if the ordering of `directories` matters, so I'm keeping
     # it the same as it already was.
     for language in ['csharp', 'java', 'javascript', 'perl', 'php', 'python',
-        'r', 'ruby', 'swig']:
-        directories.append('{0}{1}src{1}bindings{1}{2}'.format(name, sep, language))
+                     'r', 'ruby', 'swig']:
+        directories.append('{0}{1}src{1}bindings{1}{2}'.format(name, sep,
+                                                               language))
 
     directories.append('{0}{1}src{1}{2}'.format(name, sep, lang))
     directories.append('{0}{1}src{1}{2}{1}common'.format(name, sep, lang))
@@ -443,7 +447,7 @@ def create_dir_structure(pkgname, lang, overwrite):
     if os.path.exists(pkgname):
         all_present = check_directory_structure(directories)
         index = 1
-    done = True  # TODO `ok` might be more accurate than `done`, esp. in this loop!
+    done = True  # TODO `ok` prob more accurate than `done`, esp. in this loop!
     if not all_present:
         while done and index < len(directories):
             done = create_dir(directories[index], overwrite)
