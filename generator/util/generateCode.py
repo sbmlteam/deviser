@@ -87,7 +87,7 @@ def generate_other_library_code(name, language, overwrite, ob):
     '''
     Documentation for this function incomplete until issue #12 resolved.
 
-    Generate code when it's not a package.
+    Generate code when it's NOT a package.
 
     :param name: `name` attribute node value, e.g. "dyn" for samples/dyn.xml
     :param language: <language> node `name` value, e.g. "SBGN" or "SedML".
@@ -376,10 +376,12 @@ def generate_other_library_code_files(name, ob):
 # Functions to create the appropriate directory structure
 def populate_package_directories(name, lang):
     """
+    Generate a list of directories (strings) which we want to populate
+    if we are creating a package.
 
-    :param name:
-    :param lang:
-    :return:
+    :param name: `name` attribute node value from XML file.
+    :param lang: <language> name value, e.g. "SBGN" or "SedML".
+    :return: the list of directories.
     """
     sep = os.sep
     directories = ['{0}'.format(name),
@@ -413,7 +415,14 @@ def populate_package_directories(name, lang):
 
 
 def populate_other_library_directories(name, lang):
-    # global directories
+    """
+    Create list of directories to populate if we are NOT creating a package.
+
+    :param name: `name` attribute node value from XML file
+    :param lang: <language> name value, e.g. "SBGN" or "SedML".
+    :return: the list of directories (strings).
+    """
+
     sep = os.sep
     directories = ['{0}'.format(name),
                    '{0}{1}examples'.format(name, sep),
@@ -436,6 +445,11 @@ def populate_other_library_directories(name, lang):
 def create_dir_structure(pkgname, lang, overwrite):
     '''
     Documentation for this function held off until issue #12 resolved.
+
+    :param pkgname: `name` attribute node value from XML file.
+    :param lang: <language> name value, e.g. "SBGN" or "SedML".
+    :param overwrite:
+    :return:
     '''
     if gv.is_package:
         directories = populate_package_directories(pkgname, lang)
@@ -479,6 +493,10 @@ def create_dir(name, skip_existing):
      used properly here. Because they are used in opposite senses
 
      See deviser issue #12
+
+     :name:
+     :skip_existing:
+     :returns: True if ...
      """
     if os.path.exists(name):
         if skip_existing:
