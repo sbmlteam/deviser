@@ -74,12 +74,13 @@ def get_sid_refs_for_class(working_class):
 def has_children(attributes):
     for attribute in attributes:
         att_type = attribute['type']
-        if att_type == 'element' or att_type == 'lo_element' or att_type == 'inline_lo_element':
+        if att_type == 'element' or att_type == 'lo_element'\
+                or att_type == 'inline_lo_element':
             return True
     return False
 
 
-# return True is any of the attributes refer to elements but not math
+# return True if any of the attributes refer to elements but not math
 def has_children_not_math(attributes):
     for i in range(0, len(attributes)):
         if attributes[i]['type'] == 'lo_element':
@@ -121,6 +122,7 @@ def is_inline_child(class_object):
             inline_parents.append(parent)
     return inline_parents
 
+
 def get_inline_parents(class_object):
     parents = []
     if class_object['is_list_of']:
@@ -132,6 +134,7 @@ def get_inline_parents(class_object):
             if attrib['element'] == name and element['name'] not in parents:
                 parents.append(element['name'])
     return parents
+
 
 # return the parent class of this class
 # if it is not given we assume it is a child of a plugin
@@ -202,7 +205,8 @@ def add_concrete_to_list(root, concrete, mylist):
     current = get_class(concrete['element'], root)
 
     if current is not None:
-        # sometimes the baseclass is also instantiated (the ui calls the property isbaseclass)
+        # sometimes the baseclass is also instantiated
+        # (the ui calls the property isbaseclass)
         if current['abstract'] is False or is_instantiated(current):
             concrete['typecode'] = current['typecode']
             found = False
@@ -210,12 +214,13 @@ def add_concrete_to_list(root, concrete, mylist):
             while not found and i < len(mylist):
                 if mylist[i]['element'] == concrete['element']:
                     found = True
-                i+=1
+                i += 1
             if not found:
                 mylist.append(concrete)
         else:
             for c in current['concrete']:
-                # full comparison too expensive ... causes stackoverflow, just compare the element name
+                # full comparison too expensive ... causes stackoverflow,
+                # just compare the element name
                 if c['element'] != concrete['element']:
                     add_concrete_to_list(root, c, mylist)
                 else:
@@ -225,7 +230,7 @@ def add_concrete_to_list(root, concrete, mylist):
                     while not found and i < len(mylist):
                         if mylist[i]['element'] == concrete['element']:
                             found = True
-                        i+=1
+                        i += 1
                     if not found:
                         mylist.append(concrete)
 
@@ -358,6 +363,7 @@ def has_lo_attribute(element, attribute):
                 return True
     return False
 
+
 def isV2BaseAttribute(element, attribute):
     if attribute != 'id' and attribute != 'name':
         return False
@@ -377,7 +383,8 @@ def overwrites_name(root, name):
     unprefixed_name = strFunctions.remove_prefix(name)
     for element in root['baseElements']:
         for attrib in element['attribs']:
-            if attrib['element'] == unprefixed_name and attrib['type'] != 'SIdRef':
+            if attrib['element'] == unprefixed_name and \
+                    attrib['type'] != 'SIdRef':
                 if not strFunctions.compare_no_case(name, attrib['xml_name']):
                     overwrites = True
     return overwrites
@@ -411,13 +418,17 @@ def get_static_extension_attribs(num_versions, lv_info):
     attribs.append(att)
     for i in range(0, num_versions):
         this_lv = lv_info[i]
-        name = 'xmlnsL{1}V{2}V{0}'.format(this_lv['pkg_version'], this_lv['core_level'], this_lv['core_version'])
+        name = 'xmlnsL{1}V{2}V{0}'.format(this_lv['pkg_version'],
+                                          this_lv['core_level'],
+                                          this_lv['core_version'])
         cap_name = strFunctions.upper_first(name)
         att = dict({'name': name,
                     'capAttName': cap_name,
                     'attTypeCode': 'std::string&',
                     'attType': 'string',
-                    'memberName': [this_lv['pkg_version'], this_lv['core_level'], this_lv['core_version']]})
+                    'memberName': [this_lv['pkg_version'],
+                                   this_lv['core_level'],
+                                   this_lv['core_version']]})
         attribs.append(att)
 
     return attribs
@@ -438,7 +449,7 @@ def get_typecode_enum(elements):
 
 
 # get enumeration values
-def get_enum(element, class_name = ''):
+def get_enum(element, class_name=''):
     # this function works slightly differently with enums for documentation
     # it will only have a classname for them
     if class_name == '':
@@ -470,7 +481,8 @@ def get_enum(element, class_name = ''):
         return [value, strvalue, max_length]
     else:
         name = element['name']
-        nameclass = class_name + strFunctions.upper_first(name)
+        # nameclass = class_name + strFunctions.upper_first(name)
+        _ = class_name + strFunctions.upper_first(name)
         value = []
         strvalue = []
         for i in range(0, len(element['values'])):
@@ -481,7 +493,6 @@ def get_enum(element, class_name = ''):
         # value.append(tc)
         # strvalue.append('invalid {0}'.format(nameclass))
         return [value, strvalue]
-
 
 
 def get_default_enum_value(attribute):
@@ -555,12 +566,13 @@ def get_other_element_children(this_object, element):
             other_children.append(child['lo_attribs'][i]['element'])
     return other_children
 
+
 # get children that are concrete instanstaitions
 def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
     children = []
     for j in range(0, len(concretes)):
         if concretes[j]['element'] == 'CSGeometry':
-            continue;
+            continue
         grandchildren = get_children(concretes[j]['element'],
                                      root, reqd_only, '', base_attributes)
         children.append(grandchildren)
@@ -583,11 +595,14 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
         for i in range(0, num_attribs):
             att_type = child['attribs'][i]['type']
             if att_type == 'element':
-                # for distrib we have a child that is a list of children of itself
+                # for distrib we have a child that is a list of
+                # children of itself
                 # this will cause recursion
                 if name != child['attribs'][i]['element']:
-                    grandchildren = get_children(child['attribs'][i]['element'],
-                                                 root, reqd_only, child['attribs'][i]['xml_name'])
+                    grandchildren = \
+                        get_children(child['attribs'][i]['element'],
+                                     root, reqd_only,
+                                     child['attribs'][i]['xml_name'])
                     children.append(grandchildren)
             elif att_type == 'lo_element':
                 if 'concrete' in child['attribs'][i]:
@@ -595,35 +610,54 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
                     if num == 0:
                         continue
                     elif name == 'MixedGeometry' and num > 0:
-                        continue;
+                        continue
                     else:
                         base = get_class(child['attribs'][i]['element'], root)
-                        grandchildren = get_concrete_children(child['attribs'][i]['concrete'],
-                                                         root, reqd_only, base['attribs'], child['attribs'][i]['element'])
-#                        for j in range(0, num):
-#                            grandchildren = get_concrete_children(child['attribs'][i]['concrete'],
-#                                                         root, reqd_only, '', base['attribs'])
-#                            grandchildren = get_children(child['attribs'][i]['concrete'][j]['element'],
-#                                                         root, reqd_only, '', base['attribs'])
+                        grandchildren = \
+                            get_concrete_children(
+                                child['attribs'][i]['concrete'],
+                                root, reqd_only, base['attribs'],
+                                child['attribs'][i]['element'])
+
+                        # for j in range(0, num):
+                        #     grandchildren = get_concrete_children(
+                        #         child['attribs'][i]['concrete'],
+                        #         root, reqd_only, '', base['attribs'])
+                        #     grandchildren =
+                        #        get_children(
+                        #          child['attribs'][i]['concrete']\
+                        #                 [j]['element'],
+                        #                 root, reqd_only, '',
+                        #                 base['attribs'])
+
                         children.append(grandchildren[0])
-#                        if not reqd_only:
-#                            grandchildren = insert_list_of(grandchildren, child['attribs'][i]['element'], root)
+
+                        # if not reqd_only:
+                        #   grandchildren = insert_list_of(grandchildren,
+                        #   child['attribs'][i]['element'], root)
 
                 else:
-                    # for distrib we have a child that is a list of children of itself
+                    # for distrib we have a child that is a list
+                    # of children of itself
                     # this will cause recursion
                     if name != child['attribs'][i]['element']:
-                        grandchildren = get_children(child['attribs'][i]['element'],
-                                                     root, reqd_only)
+                        grandchildren = \
+                            get_children(child['attribs'][i]['element'],
+                                         root, reqd_only)
                         if not reqd_only:
-                            grandchildren = insert_list_of(grandchildren, child['attribs'][i]['element'], root)
+                            grandchildren = \
+                                insert_list_of(grandchildren,
+                                               child['attribs'][i]['element'],
+                                               root)
                         children.append(grandchildren)
             elif att_type == 'inline_lo_element':
-                # for distrib we have a child that is a list of children of itself
+                # for distrib we have a child that is a list of children
+                # of itself
                 # this will cause recursion
                 if name != child['attribs'][i]['element']:
-                    grandchildren = get_children(child['attribs'][i]['element'],
-                                                 root, reqd_only)
+                    grandchildren = \
+                        get_children(child['attribs'][i]['element'],
+                                     root, reqd_only)
                     children.append(grandchildren)
             else:
                 continue
@@ -648,6 +682,7 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
         name = xml_name
     return dict({'name': name, 'children': children, 'attribs': reqd_attribs})
 
+
 # get a list of names of child elements
 def get_child_elements(elements, lo_elements, root=None):
     child_elements = []
@@ -666,16 +701,19 @@ def get_child_elements(elements, lo_elements, root=None):
             name = strFunctions.remove_prefix(elem['name'])
             # if 'xml_name' in elem and elem['xml_name'] != '':
             #     name = elem['xml_name']
-            [used_child_name, unused] = strFunctions.remove_hyphens(elem['capAttName'])
+            [used_child_name, unused] = \
+                strFunctions.remove_hyphens(elem['capAttName'])
             # if 'used_child_name' in elem and elem['used_child_name'] != '':
             #     used_child_name = elem['used_child_name']
             child_elements.append(dict({'name': name, 'typecode': typecode,
-                                        'concrete': concs, 'element': elem['element'],
+                                        'concrete': concs,
+                                        'element': elem['element'],
                                         'used_name': used_child_name}))
     for elem in lo_elements:
         if elem['element'] != 'ASTNode*' and elem['element'] != 'XMLNode*':
             if root:
-                thisclass = get_class(strFunctions.lower_first(elem['element']), root)
+                thisclass = \
+                    get_class(strFunctions.lower_first(elem['element']), root)
                 if thisclass and 'typecode' in thisclass:
                     typecode = thisclass['typecode']
             if 'concrete' in elem:
@@ -683,17 +721,21 @@ def get_child_elements(elements, lo_elements, root=None):
                 concs = get_concretes(root, conc)
             else:
                 concs = None
-            xmlname = strFunctions.singular(strFunctions.remove_prefix(elem['name']))
-            name = strFunctions.lower_first(strFunctions.remove_prefix(elem['element']))
+            xmlname = strFunctions.\
+                singular(strFunctions.remove_prefix(elem['name']))
+            name = strFunctions.\
+                lower_first(strFunctions.remove_prefix(elem['element']))
             if not elem['is_plugin'] and (xmlname != name):
                 name = xmlname
             used_child_name = name
             if 'used_child_name' in elem and elem['used_child_name'] != '':
                 used_child_name = elem['used_child_name']
             child_elements.append(dict({'name': name, 'typecode': typecode,
-                                        'concrete': concs, 'element': elem['element'],
+                                        'concrete': concs,
+                                        'element': elem['element'],
                                         'used_name': used_child_name}))
     return child_elements
+
 
 # insert a listOfParent into the tree
 def insert_list_of(original, child_name, root):
@@ -709,18 +751,19 @@ def insert_list_of(original, child_name, root):
         for element in original:
             lo_children.append(element)
         new_child = []
-        new_child.append(dict({'name': lo_name, 'children': lo_children, 'attribs': lo_attribs}))
+        new_child.append(dict({'name': lo_name, 'children': lo_children,
+                               'attribs': lo_attribs}))
     else:
         lo_children.append(original)
-        new_child = dict({'name': lo_name, 'children': lo_children, 'attribs': lo_attribs})
+        new_child = dict({'name': lo_name, 'children': lo_children,
+                          'attribs': lo_attribs})
     return new_child
-
 
 
 # create a tree structure with each plugin listing its direct children
 # and each class listing its direct children
 # if reqd_only is false it will add the listOf elements as well
-def create_object_tree(pkg_object, reqd_only = True):
+def create_object_tree(pkg_object, reqd_only=True):
     tree = []
     root = None
     for i in range(0, len(pkg_object['plugins'])):
@@ -736,9 +779,12 @@ def create_object_tree(pkg_object, reqd_only = True):
             root = plugin['lo_extension'][0]['root']
         for j in range(0, len(plugin['lo_extension'])):
             grandchildren = get_children(plugin['lo_extension'][j]['name'],
-                                         root, reqd_only, plugin['lo_extension'][j]['xml_name'])
+                                         root, reqd_only,
+                                         plugin['lo_extension'][j]['xml_name'])
             if not reqd_only:
-                grandchildren = insert_list_of(grandchildren, plugin['lo_extension'][j]['name'], root)
+                grandchildren = insert_list_of(
+                    grandchildren,
+                    plugin['lo_extension'][j]['name'], root)
             children.append(grandchildren)
         branch = dict({'base': plugin['sbase'],
                        'ext': 'core',
@@ -748,22 +794,25 @@ def create_object_tree(pkg_object, reqd_only = True):
     return tree
 
 
-#return true if the attribute type given represents a number
+# return true if the attribute type given represents a number
 def is_number(att_type):
     number = False
     if att_type == 'double' or att_type == 'uint' or att_type == 'int':
         number = True
     return number
 
-#return true if the attribute type given represents an element
+
+# return true if the attribute type given represents an element
 def is_element(att_type):
     element = False
     if att_type == 'element' or att_type == 'lo_element' or \
-                    att_type == 'inline_lo_element':
+            att_type == 'inline_lo_element':
         element = True
     return element
 
-# create a list of attribute types and names for use with generic attribute functions
+
+# create a list of attribute types and names for use with
+# generic attribute functions
 def sort_attributes(all_attributes):
     double_atts = []
     uint_atts = []
@@ -789,6 +838,7 @@ def sort_attributes(all_attributes):
                  'int_atts': int_atts,
                  'string_atts': string_atts})
 
+
 def is_lo_repeated(class_object):
     count = 0
     if 'root' not in class_object or class_object['root'] is None:
@@ -802,12 +852,13 @@ def is_lo_repeated(class_object):
         #     # skip this element
         #     continue
         for attrib in element['attribs']:
-            if attrib['type'] == 'lo_element' or attrib['type'] == 'inline_lo_element':
+            if attrib['type'] == 'lo_element' \
+                    or attrib['type'] == 'inline_lo_element':
                 if attrib['element'] == child:
-                    if 'xml_name' in attrib and attrib['xml_name'].lower() != strFunctions.remove_prefix(attrib['element']).lower():
+                    if 'xml_name' in attrib and \
+                            attrib['xml_name'].lower() != strFunctions. \
+                            remove_prefix(attrib['element']).lower():
                         count = count + 1
     if count > 0:
         return True
     return False
-
-
