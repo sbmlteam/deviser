@@ -46,12 +46,14 @@ from util import global_variables as gv
 """Code used to generate the examples."""
 
 
-def generate_example_for(filename):  # , overwrite=True):
+def generate_example_for(filename, my_func, is_package=True):
     """
     Extract data structure from an XML file and write
     example code with it.
 
     :param filename: the XML file we are using
+    :param my_func: the function we will execute as part of this function
+    :param is_package: set to False if it's not a package.
     :returns: returns nothing, but does update gv.code_returned.
     """
     gv.running_tests = False
@@ -66,11 +68,15 @@ def generate_example_for(filename):  # , overwrite=True):
     if gv.code_returned == gv.return_codes['success']:
         # Next line does nothing, should be name = ob['name'].lower() anyway?
         # name = ob['name'.lower()]
-        try:
-            if gv.is_package:
-                generate_example_code(ob)
-        except Exception:
-            gv.code_returned = gv.return_codes['unknown error - please report']
+        if is_package:
+            try:
+                if gv.is_package:
+                    my_func(ob)  # generate_example_code(ob)
+            except Exception:
+                gv.code_returned = \
+                    gv.return_codes['unknown error - please report']
+        else:
+            my_func(ob)
 
 
 def generate_example_code(ob):
@@ -97,7 +103,7 @@ def main(args):
         gv.code_returned = gv.return_codes['missing function argument']
         print('Usage: generateCode.py xmlfile')
     else:
-        generate_example_for(args[1])
+        generate_example_for(args[1], generate_example_code)
     if gv.code_returned == gv.return_codes['success']:
         print('code successfully written')
     else:

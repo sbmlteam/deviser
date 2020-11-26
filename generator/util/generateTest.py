@@ -40,34 +40,11 @@
 import sys
 
 from code_files import CppTestFile
-from parseXML import ParseXML
+from generateExamples import generate_example_for  # As almost identical anyway
 
 from util import global_variables as gv
 
-
-def generate_example_for(filename):  # , overwrite=True):
-    """
-    Very similar to version in generateExamples.py
-    except this version comments out the second
-    try/except block. and that version has a line
-    if gv.is_package: in its second try block/except block.
-    """
-    gv.running_tests = False
-    parser = ParseXML.ParseXML(filename)
-    ob = dict()
-    if gv.code_returned == gv.return_codes['success']:
-        # catch a problem in the parsing
-        try:
-            ob = parser.parse_deviser_xml()
-        except Exception:
-            gv.code_returned = gv.return_codes['parsing error']
-    if gv.code_returned == gv.return_codes['success']:
-        # name = ob['name'.lower()]
-        # try:
-        generate_example_code(ob)
-#        except:
-#            gv.code_returned \
-#                = gv.return_codes['unknown error - please report']
+"""Code to generate tests"""
 
 
 def generate_example_code(ob):
@@ -94,7 +71,7 @@ def main(args):
         gv.code_returned = gv.return_codes['missing function argument']
         print('Usage: generateCode.py xmlfile')
     else:
-        generate_example_for(args[1])
+        generate_example_for(args[1], generate_example_code, is_package=False)
     if gv.code_returned == gv.return_codes['success']:
         print('code successfully written')
     else:
