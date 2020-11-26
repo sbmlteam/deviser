@@ -37,18 +37,33 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+"""general functions for querying objects"""
+
 from . import strFunctions
 
 
-# return True is any of the attributes are of type SIdRef
 def has_sid_ref(attributes):
+    """
+    Iterate over dictionaries (representing attribute nodes) to see if
+    any attribute nodes are of type SIdRef
+    e.g. the following will return True
+
+    <attributes>
+         <attribute name="id" required="false" type="SId" abstract="false"/>
+    </attributes>
+
+    :param attributes: structure containing attribute dictionaries
+    :return: Return True if any of the <attribute> nodes are of type SIdRef
+    """
     if any(attribute['type'] == 'SIdRef' for attribute in attributes):
         return True
     return False
 
 
-# return a set of attributes that are of type SIdRef
 def get_sid_refs(attributes, unit=False):
+    """
+    return a set of attributes that are of type SIdRef
+    """
     sid_refs = []
     if not unit:
         match = 'SIdRef'
@@ -60,8 +75,10 @@ def get_sid_refs(attributes, unit=False):
     return sid_refs
 
 
-# return a set of attributes that are SIdRefs for the given class
 def get_sid_refs_for_class(working_class):
+    """
+    return a set of attributes that are SIdRefs for the given class
+    """
     sid_refs = []
     child_element = get_class(working_class['element'],
                               working_class['root'])
@@ -70,8 +87,10 @@ def get_sid_refs_for_class(working_class):
     return sid_refs
 
 
-# return True is any of the attributes refer to elements
 def has_children(attributes):
+    """
+    return True if any of the attributes refer to elements
+    """
     for attribute in attributes:
         att_type = attribute['type']
         if att_type == 'element' or att_type == 'lo_element'\
@@ -80,8 +99,10 @@ def has_children(attributes):
     return False
 
 
-# return True if any of the attributes refer to elements but not math
 def has_children_not_math(attributes):
+    """
+    return True if any of the attributes refer to elements but not math
+    """
     for i in range(0, len(attributes)):
         if attributes[i]['type'] == 'lo_element':
             return True
@@ -91,8 +112,10 @@ def has_children_not_math(attributes):
     return False
 
 
-# return the class with the matching name from the root object
 def get_class(name, root_object):
+    """
+    return the class with the matching name from the root object
+    """
     if name.startswith('listOf') or name.startswith('ListOf'):
         name = strFunctions.singular(name[6:])
     else:
@@ -108,6 +131,9 @@ def get_class(name, root_object):
 
 
 def is_inline_child(class_object):
+    """
+
+    """
     inline_parents = []
     parents = get_inline_parents(class_object)
     for parent in parents:
@@ -124,6 +150,9 @@ def is_inline_child(class_object):
 
 
 def get_inline_parents(class_object):
+    """
+
+    """
     parents = []
     if class_object['is_list_of']:
         name = class_object['lo_child']
@@ -136,10 +165,12 @@ def get_inline_parents(class_object):
     return parents
 
 
-# return the parent class of this class
-# if it is not given we assume it is a child of a plugin
-# and get the base of the plugin
 def get_parent_class(class_object):
+    """
+    return the parent class of this class
+    if it is not given we assume it is a child of a plugin
+    and get the base of the plugin
+    """
     parent = ''
     if class_object['is_list_of']:
         name = class_object['lo_child']
@@ -178,16 +209,20 @@ def get_parent_class(class_object):
     return parent
 
 
-# return a list of the actual concrete classes
 def get_concretes(root_object, concrete_list):
+    """
+    return a list of the actual concrete classes
+    """
     concretes = []
     for c in concrete_list:
         add_concrete_to_list(root_object, c, concretes)
     return concretes
 
 
-# basic function that checks whether the given element is instantiated
 def is_instantiated(element):
+    """
+    basic function that checks whether the given element is instantiated
+    """
     if element is None:
         return False
     if 'concrete' not in element:
@@ -200,8 +235,10 @@ def is_instantiated(element):
     return False
 
 
-# add the non-abstract class to the list
 def add_concrete_to_list(root, concrete, mylist):
+    """
+    add the non-abstract class to the list
+    """
     current = get_class(concrete['element'], root)
 
     if current is not None:
@@ -235,9 +272,11 @@ def add_concrete_to_list(root, concrete, mylist):
                         mylist.append(concrete)
 
 
-# return a set of attributes with any elements/lo_elements removed
-# populating the version information
 def separate_attributes(full_attributes):
+    """
+    return a set of attributes with any elements/lo_elements removed
+    populating the version information
+    """
     attributes = []
     for i in range(0, len(full_attributes)):
         att_type = full_attributes[i]['attType']
@@ -252,8 +291,10 @@ def separate_attributes(full_attributes):
     return attributes
 
 
-# return attributes for the given version only
 def get_version_attributes(attributes, version):
+    """
+    return attributes for the given version only
+    """
     ver_attribs = []
     for i in range(0, len(attributes)):
         att_type = attributes[i]['attType']
@@ -263,8 +304,10 @@ def get_version_attributes(attributes, version):
     return ver_attribs
 
 
-# return attributes for the given version only
 def get_version_elements(elements, version):
+    """
+    return attributes for the given version only
+    """
     ver_attribs = []
     for i in range(0, len(elements)):
         if elements[i]['version'] == version:
@@ -272,9 +315,11 @@ def get_version_elements(elements, version):
     return ver_attribs
 
 
-# return a set of unique attributes
-#  any with multiple versions appear only once
 def get_unique_attributes(full_attributes):
+    """
+    return a set of unique attributes
+    any with multiple versions appear only once
+    """
     attributes = []
     for i in range(0, len(full_attributes)):
         name = full_attributes[i]['name']
@@ -287,6 +332,9 @@ def get_unique_attributes(full_attributes):
 
 
 def get_matching_element(name, match_name, list_elements):
+    """
+
+    """
     element = None
     if not list_elements:
         return element
@@ -296,23 +344,29 @@ def get_matching_element(name, match_name, list_elements):
     return element
 
 
-# return True is any of the attributes are of type array
 def has_array(attributes):
+    """
+    return True if any of the attributes are of type array
+    """
     if any(attribute['type'] == 'array' for attribute in attributes):
         return True
     return False
 
 
-# return True is any of the attributes are of type vector
 def has_vector(attributes):
+    """
+    return True is any of the attributes are of type vector
+    """
     if any(attribute['type'] == 'vector' for attribute in attributes):
         return True
     return False
 
 
-# return True is any of the attributes have another package
-# and a listt of packages
 def has_other_packages(attributes):
+    """
+    return True is any of the attributes have another package
+    and a listt of packages
+    """
     list_pkgs = []
     has_pack = False
     for attribute in attributes:
@@ -322,22 +376,28 @@ def has_other_packages(attributes):
     return [has_pack, list_pkgs]
 
 
-# return True is the attribute is saved as a string
 def is_string(attribute):
+    """
+    return True if the attribute is saved as a string
+    """
     if attribute['attType'] == 'string':
         return True
     return False
 
 
-# return True is the attribute has an isSet member variable
 def has_is_set_member(attribute):
+    """
+    return True if the attribute has an isSet member variable
+    """
     if attribute['isNumber'] or attribute['attType'] == 'boolean':
         return True
     return False
 
 
-# return True if the element has the attribute specified
 def has_attribute(element, attribute):
+    """
+    return True if the element has the attribute specified
+    """
     if element is None:
         return False
     elif element['attribs'] is None:
@@ -349,8 +409,10 @@ def has_attribute(element, attribute):
     return False
 
 
-# return True if the listOf class for element has the attribute specified
 def has_lo_attribute(element, attribute):
+    """
+    return True if the listOf class for element has the attribute specified
+    """
     if element is None:
         return False
     elif isV2BaseAttribute(element, attribute):
@@ -365,6 +427,9 @@ def has_lo_attribute(element, attribute):
 
 
 def isV2BaseAttribute(element, attribute):
+    """
+
+    """
     if attribute != 'id' and attribute != 'name':
         return False
     if 'root' in element:
@@ -374,9 +439,11 @@ def isV2BaseAttribute(element, attribute):
     return False
 
 
-# works out if any classes use this element
-# with a different name
 def overwrites_name(root, name):
+    """
+    works out if any classes use this element
+    with a different name
+    """
     if root is None:
         return False
     overwrites = False
@@ -391,6 +458,9 @@ def overwrites_name(root, name):
 
 
 def get_static_extension_attribs(num_versions, lv_info):
+    """
+
+    """
     attribs = []
     att = dict({'name': 'packageName',
                 'capAttName': 'PackageName',
@@ -434,8 +504,10 @@ def get_static_extension_attribs(num_versions, lv_info):
     return attribs
 
 
-# get an enumeration of the typecodes of the elements
 def get_typecode_enum(elements):
+    """
+    get an enumeration of the typecodes of the elements
+    """
     value = []
     strvalue = []
     max_length = 0
@@ -448,10 +520,13 @@ def get_typecode_enum(elements):
     return [value, strvalue, max_length]
 
 
-# get enumeration values
 def get_enum(element, class_name=''):
-    # this function works slightly differently with enums for documentation
-    # it will only have a classname for them
+    """
+    get enumeration values
+
+    this function works slightly differently with enums for documentation
+    it will only have a classname for them
+    """
     if class_name == '':
         name = element['name']
         value = []
@@ -496,6 +571,9 @@ def get_enum(element, class_name=''):
 
 
 def get_default_enum_value(attribute):
+    """
+
+    """
     default = 'INVALID'
     name = attribute['element']
     enums = attribute['root']['enums']
@@ -507,6 +585,9 @@ def get_default_enum_value(attribute):
 
 
 def get_first_enum_value(attribute):
+    """
+
+    """
     value = ''
     name = attribute['element']
     enums = attribute['root']['enums']
@@ -518,6 +599,9 @@ def get_first_enum_value(attribute):
 
 
 def get_prefix(name):
+    """
+
+    """
     prefix = ''
     first = True
     for i in range(0, len(name)):
@@ -534,6 +618,9 @@ def get_prefix(name):
 
 
 def get_typecode_format(name, language):
+    """
+
+    """
     tc = language.upper()
     for i in range(0, len(name)):
         char = name[i]
@@ -544,6 +631,9 @@ def get_typecode_format(name, language):
 
 
 def get_max_length(elements, attribute):
+    """
+
+    """
     if elements is None:
         return 0
     if attribute not in elements[0]:
@@ -557,6 +647,9 @@ def get_max_length(elements, attribute):
 
 
 def get_other_element_children(this_object, element):
+    """
+
+    """
     other_children = []
     child = get_class(element['element'], this_object['root'])
     if child is None or 'lo_attribs' not in child:
@@ -567,8 +660,10 @@ def get_other_element_children(this_object, element):
     return other_children
 
 
-# get children that are concrete instanstaitions
 def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
+    """
+    get children that are concrete instantiations
+    """
     children = []
     for j in range(0, len(concretes)):
         if concretes[j]['element'] == 'CSGeometry':
@@ -581,8 +676,10 @@ def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
     return children
 
 
-# get the child elements of the class name
 def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
+    """
+    get the child elements of the class name
+    """
     child = get_class(name, root)
     if not child:
         if name == 'ASTNode':
@@ -683,8 +780,10 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
     return dict({'name': name, 'children': children, 'attribs': reqd_attribs})
 
 
-# get a list of names of child elements
 def get_child_elements(elements, lo_elements, root=None):
+    """
+    get a list of names of child elements
+    """
     child_elements = []
     typecode = 'TO_DO'
     for elem in elements:
@@ -737,8 +836,10 @@ def get_child_elements(elements, lo_elements, root=None):
     return child_elements
 
 
-# insert a listOfParent into the tree
 def insert_list_of(original, child_name, root):
+    """
+    insert a listOfParent into the tree
+    """
     child = get_class(child_name, root)
     lo_name = strFunctions.list_of_name(child['name'])
     if 'lo_elementName' in child and len(child['lo_elementName']) > 0:
@@ -760,10 +861,12 @@ def insert_list_of(original, child_name, root):
     return new_child
 
 
-# create a tree structure with each plugin listing its direct children
-# and each class listing its direct children
-# if reqd_only is false it will add the listOf elements as well
 def create_object_tree(pkg_object, reqd_only=True):
+    """
+    create a tree structure with each plugin listing its direct children
+    and each class listing its direct children
+    if reqd_only is false it will add the listOf elements as well
+    """
     tree = []
     root = None
     for i in range(0, len(pkg_object['plugins'])):
@@ -794,16 +897,20 @@ def create_object_tree(pkg_object, reqd_only=True):
     return tree
 
 
-# return true if the attribute type given represents a number
 def is_number(att_type):
+    """
+    return true if the attribute type given represents a number
+    """
     number = False
     if att_type == 'double' or att_type == 'uint' or att_type == 'int':
         number = True
     return number
 
 
-# return true if the attribute type given represents an element
 def is_element(att_type):
+    """
+    return true if the attribute type given represents an element
+    """
     element = False
     if att_type == 'element' or att_type == 'lo_element' or \
             att_type == 'inline_lo_element':
@@ -811,9 +918,11 @@ def is_element(att_type):
     return element
 
 
-# create a list of attribute types and names for use with
-# generic attribute functions
 def sort_attributes(all_attributes):
+    """
+    create a list of attribute types and names for use with
+    generic attribute functions
+    """
     double_atts = []
     uint_atts = []
     int_atts = []
@@ -840,6 +949,9 @@ def sort_attributes(all_attributes):
 
 
 def is_lo_repeated(class_object):
+    """
+
+    """
     count = 0
     if 'root' not in class_object or class_object['root'] is None:
         return False
