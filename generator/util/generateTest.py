@@ -69,7 +69,7 @@ def main(args):
     """
     if len(args) != 2:
         gv.code_returned = gv.return_codes['missing function argument']
-        print('Usage: generateCode.py xmlfile')
+        print('Usage: generateTest.py xmlfile')
     else:
         generate_example_for(args[1], generate_example_code, is_package=False)
     if gv.code_returned == gv.return_codes['success']:

@@ -76,7 +76,7 @@ def main(args):
     if len(args) != 2:
         global_variables.code_returned = \
             global_variables.return_codes['missing function argument']
-        print ('Usage: generateCode.py xmlfile')
+        print ('Usage: generateXML.py xmlfile')
     else:
         generate_xml_for(args[1])
     if global_variables.code_returned == \
