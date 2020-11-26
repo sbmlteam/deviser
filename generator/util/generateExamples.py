@@ -88,7 +88,7 @@ def generate_example_code(ob):
 
 def main(args):
     """
-    Main function. Check correct number of args and generates example.
+    Main function. Checks correct number of args and generates example.
 
     :param args: the command-line arguments
     :returns: the `global_variable.code_returned` value

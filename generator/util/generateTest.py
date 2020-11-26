@@ -39,54 +39,69 @@
 
 import sys
 
-from parseXML import ParseXML
-from util import global_variables
 from code_files import CppTestFile
+from parseXML import ParseXML
+
+from util import global_variables as gv
 
 
-def generate_example_for(filename, overwrite=True):
-    global_variables.running_tests = False
+def generate_example_for(filename):  # , overwrite=True):
+    """
+    Very similar to version in generateExamples.py
+    except this version comments out the second
+    try/except block. and that version has a line
+    if gv.is_package: in its second try block/except block.
+    """
+    gv.running_tests = False
     parser = ParseXML.ParseXML(filename)
     ob = dict()
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
         # catch a problem in the parsing
         try:
             ob = parser.parse_deviser_xml()
-        except:
-            global_variables.code_returned \
-                = global_variables.return_codes['parsing error']
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
-        name = ob['name'.lower()]
-#        try:
+        except Exception:
+            gv.code_returned = gv.return_codes['parsing error']
+    if gv.code_returned == gv.return_codes['success']:
+        # name = ob['name'.lower()]
+        # try:
         generate_example_code(ob)
 #        except:
-#            global_variables.code_returned \
-#                = global_variables.return_codes['unknown error - please report']
+#            gv.code_returned \
+#                = gv.return_codes['unknown error - please report']
 
 
 def generate_example_code(ob):
+    '''
+    Generate the example code for a pkg_code object
+    (big dictionary structure of information from an XML file).
+
+    :param ob: the pkg_code object
+    :return: returns nothing
+    '''
     ex = CppTestFile.CppTestFile(ob)
     ex.write_file()
     ex.close_file()
 
 
-
 def main(args):
+    """
+    Main function. Checks correct number of args and generates example.
+
+    :param args: the command-line arguments
+    :returns: the `global_variable.code_returned` value
+    """
     if len(args) != 2:
-        global_variables.code_returned = \
-            global_variables.return_codes['missing function argument']
-        print ('Usage: generateCode.py xmlfile')
+        gv.code_returned = gv.return_codes['missing function argument']
+        print('Usage: generateCode.py xmlfile')
     else:
         generate_example_for(args[1])
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
         print('code successfully written')
     else:
         print('writing code failed')
 
-    return global_variables.code_returned
+    return gv.code_returned
+
 
 if __name__ == '__main__':
     main(sys.argv)
