@@ -39,12 +39,21 @@
 
 import sys
 
+from code_files import CppExampleFile
 from parseXML import ParseXML
 from util import global_variables as gv
-from code_files import CppExampleFile
+
+"""Code used to generate the examples."""
 
 
-def generate_example_for(filename, overwrite=True):
+def generate_example_for(filename):  # , overwrite=True):
+    """
+    Extract data structure from an XML file and write
+    example code with it.
+
+    :param filename: the XML file we are using
+    :returns: returns nothing, but does update gv.code_returned.
+    """
     gv.running_tests = False
     parser = ParseXML.ParseXML(filename)
     ob = dict()
@@ -52,28 +61,41 @@ def generate_example_for(filename, overwrite=True):
         # catch a problem in the parsing
         try:
             ob = parser.parse_deviser_xml()
-        except:
+        except Exception:
             gv.code_returned = gv.return_codes['parsing error']
     if gv.code_returned == gv.return_codes['success']:
-        name = ob['name'.lower()]
+        # Next line does nothing, should be name = ob['name'].lower() anyway?
+        # name = ob['name'.lower()]
         try:
             if gv.is_package:
                 generate_example_code(ob)
-        except:
+        except Exception:
             gv.code_returned = gv.return_codes['unknown error - please report']
 
 
 def generate_example_code(ob):
+    '''
+    Generate the example code for a pkg_code object
+    (big dictionary structure of information from an XML file).
+
+    :param ob: the pkg_code object
+    :return: returns nothing
+    '''
     ex = CppExampleFile.CppExampleFile(ob)
     ex.write_file()
     ex.close_file()
 
 
-
 def main(args):
+    """
+    Main function. Check correct number of args and generates example.
+
+    :param args: the command-line arguments
+    :returns: the `global_variable.code_returned` value
+    """
     if len(args) != 2:
         gv.code_returned = gv.return_codes['missing function argument']
-        print ('Usage: generateCode.py xmlfile')
+        print('Usage: generateCode.py xmlfile')
     else:
         generate_example_for(args[1])
     if gv.code_returned == gv.return_codes['success']:
@@ -82,6 +104,7 @@ def main(args):
         print('writing code failed')
 
     return gv.code_returned
+
 
 if __name__ == '__main__':
     main(sys.argv)
