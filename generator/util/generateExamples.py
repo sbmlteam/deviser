@@ -40,31 +40,27 @@
 import sys
 
 from parseXML import ParseXML
-from util import global_variables
+from util import global_variables as gv
 from code_files import CppExampleFile
 
 
 def generate_example_for(filename, overwrite=True):
-    global_variables.running_tests = False
+    gv.running_tests = False
     parser = ParseXML.ParseXML(filename)
     ob = dict()
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
         # catch a problem in the parsing
         try:
             ob = parser.parse_deviser_xml()
         except:
-            global_variables.code_returned \
-                = global_variables.return_codes['parsing error']
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+            gv.code_returned = gv.return_codes['parsing error']
+    if gv.code_returned == gv.return_codes['success']:
         name = ob['name'.lower()]
         try:
-            if global_variables.is_package:
+            if gv.is_package:
                 generate_example_code(ob)
         except:
-            global_variables.code_returned \
-                = global_variables.return_codes['unknown error - please report']
+            gv.code_returned = gv.return_codes['unknown error - please report']
 
 
 def generate_example_code(ob):
@@ -76,18 +72,16 @@ def generate_example_code(ob):
 
 def main(args):
     if len(args) != 2:
-        global_variables.code_returned = \
-            global_variables.return_codes['missing function argument']
+        gv.code_returned = gv.return_codes['missing function argument']
         print ('Usage: generateCode.py xmlfile')
     else:
         generate_example_for(args[1])
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
         print('code successfully written')
     else:
         print('writing code failed')
 
-    return global_variables.code_returned
+    return gv.code_returned
 
 if __name__ == '__main__':
     main(sys.argv)
