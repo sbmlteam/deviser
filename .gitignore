@@ -74,3 +74,8 @@ sphinx-docs/*.rst
 sphinx-docs/Makefile
 sphinx-docs/make.bat
 
+# Sphinx documentation
+sphinx-docs/_build
+sphinx-docs/_static
+sphinx-docs/_templates
+
