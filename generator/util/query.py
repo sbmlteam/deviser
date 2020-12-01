@@ -46,10 +46,12 @@ def has_sid_ref(attributes):
     """
     Iterate over dictionaries (representing attribute nodes) to see if
     any attribute nodes are of type SIdRef
-    e.g. the following will return True
+    e.g. the following will return True (... to represent content).
 
     <attributes>
+         <attribute ... />
          <attribute name="id" required="false" type="SId" abstract="false"/>
+         <attribute ... />
     </attributes>
 
     :param attributes: structure containing attribute dictionaries
@@ -123,7 +125,7 @@ def has_children(attributes):
 def has_children_not_math(attributes):
     """
     Return True if any of the attributes refer to elements but *not* math
-    e.g. this attribute node would return False:
+    e.g. this attribute node would not match:
     <attribute name="math" required="true" type="element" element="ASTNode*...
 
     :param attributes: the <attribute> nodes we want to check
@@ -140,7 +142,11 @@ def has_children_not_math(attributes):
 
 def get_class(name, root_object):
     """
-    return the class with the matching name from the root object
+    Return the class with the matching name from the root object
+
+    :param name:
+    :param root_object:
+    :return:
     """
     if name.startswith('listOf') or name.startswith('ListOf'):
         name = strFunctions.singular(name[6:])
@@ -158,7 +164,48 @@ def get_class(name, root_object):
 
 def is_inline_child(class_object):
     """
+    If this object is an 'inline child', get list of inline parents.
 
+    According to the manual:
+    On occasion an element may contain multiple children of the same type
+    which are not specified as being within a listOf element. From a code
+    point of view it is easier to consider these children as being within
+    a listOf element as this provides functionality to access and
+    manipulate potentially variable numbers of child elements.
+    The 'inline_lo_element' type allows the user to specify that there are
+    multiple instances of the same child element but that these do not occur
+    within a specified ListOf element.
+
+    e.g. The parameter nodes here are not inline children
+    (and child element type = 'lo_element'):
+
+    <container>
+        <listOfParameters>
+            <parameter attributes= . . . />
+            <parameter attributes= . . . />
+           . . .
+        </listOfParameters>
+    </container>
+
+    but the parameter nodes here are inline children.
+    (Child element type = 'inline_lo_element'):
+
+    <container>
+        <parameter attributes= . . . />
+        <parameter attributes= . . . />
+        . . .
+    </container>
+
+    NB A single parameter node like the following has type = 'element':
+    <container>
+        <parameter attributes= . . . />
+    </container>
+
+    This function is called from ../code_files/CppHeaderFile.py,
+    which iterates over the list returned.
+
+    :param class_object:
+    :return: list of parents
     """
     inline_parents = []
     parents = get_inline_parents(class_object)
@@ -178,6 +225,8 @@ def is_inline_child(class_object):
 def get_inline_parents(class_object):
     """
 
+    :param class_object:
+    :return:
     """
     parents = []
     if class_object['is_list_of']:
@@ -193,9 +242,12 @@ def get_inline_parents(class_object):
 
 def get_parent_class(class_object):
     """
-    return the parent class of this class
+    Return the parent class of this class.
     if it is not given we assume it is a child of a plugin
-    and get the base of the plugin
+    and get the base of the plugin.
+
+    :param class_object: the object representing the class.
+    :return: parent class, if found.
     """
     parent = ''
     if class_object['is_list_of']:
@@ -203,6 +255,7 @@ def get_parent_class(class_object):
     else:
         name = class_object['name']
     found = False
+
     if 'parent' in class_object:
         parent = class_object['parent']
     else:
@@ -211,9 +264,10 @@ def get_parent_class(class_object):
             base = plugin['sbase']
             for extension in plugin['lo_extension']:
                 if extension['name'] == name:
-                    parent = base
-                    found = True
-                    break
+                    return base
+                    #parent = base
+                    #found = True
+                    #break
             if not found:
                 for extension in plugin['extension']:
                     if extension['name'] == name:
@@ -222,16 +276,19 @@ def get_parent_class(class_object):
                         break
             if found:
                 break
+
     if not found and len(parent) == 0:
         for element in class_object['root']['baseElements']:
             if element['name'] != name:
                 for attrib in element['attribs']:
                     if attrib['element'] == name:
-                        parent = element['name']
-                        found = True
-                        break
+                        return element['name']
+                        #parent = element['name']
+                        #found = True
+                        #break
             if found:
                 break
+
     return parent
 
 
