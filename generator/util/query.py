@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-"""general functions for querying objects"""
+"""General functions for querying objects"""
 
 from . import strFunctions
 
@@ -62,13 +62,17 @@ def has_sid_ref(attributes):
 
 def get_sid_refs(attributes, unit=False):
     """
-    return a set of attributes that are of type SIdRef
+    Return a set of attributes that are of type SIdRef or UnitSidRef
+
+    :param attributes: The set of attributes we wish to select from.
+    :param unit: True to match on 'UnitSidRef', otherwise match on 'SidRef'.
+    :return: the list of attributes which match.
     """
     sid_refs = []
-    if not unit:
-        match = 'SIdRef'
-    else:
+    if unit:
         match = 'UnitSIdRef'
+    else:
+        match = 'SIdRef'
     for i in range(0, len(attributes)):
         if strFunctions.compare_no_case(attributes[i]['type'], match):
             sid_refs.append(attributes[i])
@@ -77,7 +81,10 @@ def get_sid_refs(attributes, unit=False):
 
 def get_sid_refs_for_class(working_class):
     """
-    return a set of attributes that are SIdRefs for the given class
+    Return a set of attributes that are SIdRefs for the given class.
+
+    :param working_class: TODO I'm not sure of this one.
+    :return: the list of selected attributes, if any.
     """
     sid_refs = []
     child_element = get_class(working_class['element'],
@@ -89,19 +96,38 @@ def get_sid_refs_for_class(working_class):
 
 def has_children(attributes):
     """
-    return True if any of the attributes refer to elements
+    Return True if any of the attributes refer to elements
+    (i.e. 'type' is 'element', 'lo_element' or 'inline_lo_element')
+    e.g.
+    <attribute name="boundaryMin" required="true" type="element"
+     element="Boundary" abstract="false"/>
+
+     TODO is this a correct example of such a node? Or could it be a
+     listOfAttribute node, like this:
+
+     <listOfAttribute name="defaultTerm" required="true" type="element"
+      element="DefaultTerm" abstract="false" />
+
+    ???
+
+    :param attributes: the attributes to check
+    :return: True if at least one type match
     """
     for attribute in attributes:
         att_type = attribute['type']
-        if att_type == 'element' or att_type == 'lo_element'\
-                or att_type == 'inline_lo_element':
+        if att_type in ['element', 'lo_element', 'inline_lo_element']:
             return True
     return False
 
 
 def has_children_not_math(attributes):
     """
-    return True if any of the attributes refer to elements but not math
+    Return True if any of the attributes refer to elements but *not* math
+    e.g. this attribute node would return False:
+    <attribute name="math" required="true" type="element" element="ASTNode*...
+
+    :param attributes: the <attribute> nodes we want to check
+    :return: see above.
     """
     for i in range(0, len(attributes)):
         if attributes[i]['type'] == 'lo_element':
