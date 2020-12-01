@@ -58,7 +58,7 @@ def generate_code_for(filename, overwrite=True):
     for the given filename
 
     :param filename: name of file to parse, e.g. samples/dyn.xml
-    :param overwrite: currently an issue (#12)
+    :param overwrite: overwrite existing code if set to True.
     :return: returns nothing
     """
 
@@ -81,20 +81,18 @@ def generate_code_for(filename, overwrite=True):
             generate_package_code(name, language, overwrite, ob)
         else:
             generate_other_library_code(name, language, overwrite, ob)
-        # except:
+        # except Exception:
         #     gv.code_returned \
         #         = gv.return_codes['unknown error - please report']
 
 
 def generate_other_library_code(name, language, overwrite, ob):
     '''
-    Documentation for this function incomplete until issue #12 resolved.
-
     Generate code when it's NOT a package.
 
     :param name: `name` attribute node value, e.g. "dyn" for samples/dyn.xml
     :param language: <language> node `name` value, e.g. "SBGN" or "SedML".
-    :param overwrite: see issue #12 TODO
+    :param overwrite: set to True to overwrite existing.
     :param ob: big dictionary structure representing nodes from the XML file.
     :returns: nothing
     '''
@@ -140,7 +138,7 @@ def generate_package_code(name, language, overwrite, ob):
 
     :param name: `name` attribute node value, e.g. "dyn" for samples/dyn.xml
     :param language: <language> node `name` value, e.g. "SBGN" or "SedML".
-    :param overwrite: see issue #12 TODO
+    :param overwrite: set to True to overwrite existing code.
     :param ob: big dictionary structure representing nodes from the XML file.
     :returns: nothing
     '''
@@ -447,12 +445,12 @@ def populate_other_library_directories(name, lang):
 
 def create_dir_structure(pkgname, lang, overwrite):
     '''
-    Documentation for this function held off until issue #12 resolved.
+    Create the required directory structure.
 
     :param pkgname: `name` attribute node value from XML file.
     :param lang: <language> name value, e.g. "SBGN" or "SedML".
-    :param overwrite:
-    :return:
+    :param overwrite: if True, overwrite existing directory structure.
+    :return: OK if successful
     '''
     if gv.is_package:
         directories = populate_package_directories(pkgname, lang)
@@ -464,17 +462,17 @@ def create_dir_structure(pkgname, lang, overwrite):
     if os.path.exists(pkgname):
         all_present = check_directory_structure(directories)
         index = 1
-    done = True  # TODO `ok` prob more accurate than `done`, esp. in this loop!
+    ok = True
     if not all_present:
-        while done and index < len(directories):
-            done = create_dir(directories[index], overwrite)
+        while ok and index < len(directories):
+            ok = create_dir(directories[index], overwrite)
             index += 1
     elif not overwrite:
         print('directory already exists - terminating to avoid overwriting')
-        done = False
+        ok = False
     else:
         print('directory already exists - files may get overwritten')
-    return done
+    return ok
 
 
 def check_directory_structure(directories):
@@ -490,30 +488,29 @@ def check_directory_structure(directories):
     return True
 
 
-def create_dir(name, skip_existing):
-    """ skip_existing seems to be a synonym for `overwrite` parameter,
-     used in function create_dir_structure(). I don't think it is being
-     used properly here. Because they are used in opposite senses
+def create_dir(name, overwrite):
+    """
+    Check to see if a directory exists, and overwrite it if necessary.
 
-     See deviser issue #12
-
-     :name:
-     :skip_existing:
-     :returns: True if ...
+    :name: path to directory
+    :overwrite: Set to True to overwrite an existing directory, False to not.
+    :returns: True if directory is created/overwritten, else False.
      """
     if os.path.exists(name):
-        if skip_existing:
-            done = True
+        if overwrite:
+            print('Overwriting existing dir {0}'.format(name))
+            shutil.rmtree(name)
+            os.mkdir(name)
+            return True
         else:
             print('some parts of the directory structure exist and '
                   'others are missing')
             print('terminating as we are not sure what is going on')
-            done = False
+            return False
     else:
         os.mkdir(name)
         print('creating dir {0}'.format(name))
-        done = True
-    return done
+        return True
 
 
 def main(args):
