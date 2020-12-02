@@ -297,9 +297,9 @@ def get_parent_class(class_object):
                 for attrib in element['attribs']:
                     if attrib['element'] == name:
                         return element['name']
-                        #parent = element['name']
-                        #found = True
-                        #break
+                        # parent = element['name']
+                        # found = True
+                        # break
             # if found:
             #    break
 
@@ -325,7 +325,9 @@ def is_instantiated(element):
     Basic function that checks whether the given element is instantiated.
 
     :param element: the element object to check.
-    :returns: True if instantiated (TODO add description of line with string equality check)
+    :returns: True if instantiated
+
+    TODO add description of line with string equality check
     """
     if element is None:
         return False
@@ -582,7 +584,7 @@ def has_lo_attribute(element, attribute):
 
     :param element:
     :param attribute:
-    :return: Return True if the listOf class for element has the attribute specified
+    :return: Return True if listOf class for element has attribute specified
     """
     if element is None:
         return False
