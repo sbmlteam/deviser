@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # @file    strFunctions.py
-# @brief   functions atht adjust strings in some way
+# @brief   functions that adjust strings in some way
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #
@@ -37,8 +37,10 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+"""Functions that adjust strings in some way"""
+
 import re
-from util import global_variables
+from util import global_variables as gv
 
 
 def upper_first(word):
@@ -92,8 +94,8 @@ def abbrev_lo_name(loname):
 
 def list_of_name(name, addPrefix=True):
     prefix = ''
-    if addPrefix and not global_variables.is_package:
-        prefix = global_variables.prefix
+    if addPrefix and not gv.is_package:
+        prefix = gv.prefix
     return prefix + 'ListOf' + plural_no_prefix(name)
 
 
@@ -112,7 +114,7 @@ def cap_list_of_name_no_prefix(name):
 
 
 def plural_no_prefix(name):
-    if global_variables.is_package:
+    if gv.is_package:
         return plural(name)
     else:
         new_name = remove_prefix(name)
@@ -151,15 +153,15 @@ def singular(name):
 
 def remove_prefix(name, in_concrete=False, remove_package=False, prefix='', remove_doc_prefix=False):
     prefix_to_remove = ''
-    if global_variables.prefix == 'SBML':
+    if gv.prefix == 'SBML':
         # we might want to remove the name of the package
-        if not in_concrete and global_variables.is_package \
-                and global_variables.package_prefix != '':
-           prefix_to_remove = global_variables.package_prefix
+        if not in_concrete and gv.is_package \
+                and gv.package_prefix != '':
+           prefix_to_remove = gv.package_prefix
         elif remove_package and prefix != '':
             prefix_to_remove = prefix
     else:
-        prefix_to_remove = global_variables.prefix
+        prefix_to_remove = gv.prefix
     length = len(prefix_to_remove)
     if length == 0:
         return name
@@ -401,14 +403,14 @@ def get_class_from_plugin(plugin, package):
     return name
 
 def prefix_name(name):
-    if name.startswith(global_variables.prefix):
+    if name.startswith(gv.prefix):
         return name
     elif name == 'XMLNode' or name == 'ASTNode':
         return name
     elif name == 'SBase':
-        return '{0}Base'.format(global_variables.prefix)
+        return '{0}Base'.format(gv.prefix)
     else:
-        return '{0}{1}'.format(global_variables.prefix, name)
+        return '{0}{1}'.format(gv.prefix, name)
 
 
 # Prefix names - if we are working with another library we want class
@@ -416,7 +418,7 @@ def prefix_name(name):
 def prefix_classes(working_class):
     existing_name = working_class['name']
     working_class['name'] = prefix_name(existing_name)
-    if working_class['baseClass'] != global_variables.baseClass:
+    if working_class['baseClass'] != gv.baseClass:
         working_class['baseClass'] = prefix_name(working_class['baseClass'])
     if 'elementName' not in working_class or len(working_class['elementName']) == 0:
         working_class['elementName'] = lower_first(existing_name)
