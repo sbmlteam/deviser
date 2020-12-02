@@ -46,6 +46,10 @@ def has_sid_ref(attributes):
     """
     Iterate over dictionaries (representing attribute nodes) to see if
     any attribute nodes are of type SIdRef
+
+    :param attributes: structure containing attribute dictionaries
+    :return: Return True if any of the <attribute> nodes are of type SIdRef
+
     e.g. the following will return True (... to represent content).
 
     <attributes>
@@ -53,10 +57,7 @@ def has_sid_ref(attributes):
          <attribute name="id" required="false" type="SId" abstract="false"/>
          <attribute ... />
     </attributes>
-
-    :param attributes: structure containing attribute dictionaries
-    :return: Return True if any of the <attribute> nodes are of type SIdRef
-    """
+   """
     if any(attribute['type'] == 'SIdRef' for attribute in attributes):
         return True
     return False
@@ -100,6 +101,10 @@ def has_children(attributes):
     """
     Return True if any of the attributes refer to elements
     (i.e. 'type' is 'element', 'lo_element' or 'inline_lo_element')
+
+    :param attributes: the attributes to check
+    :return: True if at least one type match
+
     e.g.
     <attribute name="boundaryMin" required="true" type="element"
      element="Boundary" abstract="false"/>
@@ -111,9 +116,6 @@ def has_children(attributes):
       element="DefaultTerm" abstract="false" />
 
     ???
-
-    :param attributes: the attributes to check
-    :return: True if at least one type match
     """
     for attribute in attributes:
         att_type = attribute['type']
@@ -125,6 +127,7 @@ def has_children(attributes):
 def has_children_not_math(attributes):
     """
     Return True if any of the attributes refer to elements but *not* math
+
     e.g. this attribute node would not match:
     <attribute name="math" required="true" type="element" element="ASTNode*...
 
@@ -151,23 +154,27 @@ def get_class(name, root_object):
     :param root_object:
     :return:
     """
+    if root_object is None:
+        return None
+    if root_object['baseElements'] is None:
+        return None
+
     if name.startswith('listOf') or name.startswith('ListOf'):
         name = strFunctions.singular(name[6:])
     else:
         name = strFunctions.upper_first(name)
-    if root_object is None:
-        return None
-    elif root_object['baseElements'] is None:
-        return None
-    else:
-        for i in range(0, len(root_object['baseElements'])):
-            if name == root_object['baseElements'][i]['name']:
-                return root_object['baseElements'][i]
+
+    for i in range(0, len(root_object['baseElements'])):
+        if name == root_object['baseElements'][i]['name']:
+            return root_object['baseElements'][i]
 
 
 def is_inline_child(class_object):
     """
     If this object is an 'inline child', get list of inline parents.
+
+    :param class_object:
+    :return: list of parents
 
     According to the manual:
     On occasion an element may contain multiple children of the same type
@@ -206,9 +213,6 @@ def is_inline_child(class_object):
 
     This function is called from ../code_files/CppHeaderFile.py,
     which iterates over the list returned.
-
-    :param class_object:
-    :return: list of parents
     """
     inline_parents = []
     parents = get_inline_parents(class_object)
@@ -304,7 +308,11 @@ def get_parent_class(class_object):
 
 def get_concretes(root_object, concrete_list):
     """
-    return a list of the actual concrete classes
+    Return a list of the actual concrete classes.
+
+    :param root_object:
+    :param concrete_list:
+    :return:
     """
     concretes = []
     for c in concrete_list:
@@ -314,7 +322,10 @@ def get_concretes(root_object, concrete_list):
 
 def is_instantiated(element):
     """
-    Basic function that checks whether the given element is instantiated
+    Basic function that checks whether the given element is instantiated.
+
+    :param element: the element object to check.
+    :returns: True if instantiated (TODO add description of line with string equality check)
     """
     if element is None:
         return False
@@ -330,7 +341,7 @@ def is_instantiated(element):
 
 def add_concrete_to_list(root, concrete, mylist):
     """
-    Add the non-abstract class to the list
+    Add the non-abstract class to the list mylist
 
     :param root:
     :param concrete:
@@ -372,8 +383,11 @@ def add_concrete_to_list(root, concrete, mylist):
 
 def separate_attributes(full_attributes):
     """
-    return a set of attributes with any elements/lo_elements removed
-    populating the version information
+    Return a set of attributes with any elements/lo_elements removed,
+    populating the version information.
+
+    :param full_attributes:
+    :return: the filtered list of attributes
     """
     attributes = []
     for i in range(0, len(full_attributes)):
@@ -410,8 +424,8 @@ def get_version_elements(elements, version):
     """
     Return elements for the given version only.
 
-    :param elements:
-    :param version:
+    :param elements: list of element objects.
+    :param version: the version we are matching on
     :return: the list of matching elements
     """
     ver_elems = []
@@ -445,7 +459,7 @@ def get_matching_element(name, match_name, list_elements):
 
     :param name:
     :param match_name: the name to match on
-    :param list_elements:
+    :param list_elements: the elements to check
     :return: the element that matches, or None if no match.
     """
     element = None
@@ -453,21 +467,22 @@ def get_matching_element(name, match_name, list_elements):
         return element
     for existing in list_elements:
         if existing[name] == match_name:
-            element = existing  # TODO could this match multiple times? Would it matter?
-    return element
+            element = existing  # TODO could this match multiple times? Would it matter? Why not return now?
+    return element  # TODO if matched multiple times we return the last match here. Is that what we want? Does it matter?
 
 
 def has_array(attributes):
     """
     Check if any of the attributes represented in a list are of type 'array'.
+
+    :param attributes: list representing the attribute nodes to check
+    :return: return True if any of the attributes are of type 'array'.
+
     e.g. if the following attribute node was represented in the list,
     we would return True:
 
     <attribute name="samples" required="true" type="array"
      element="int" abstract="false"/>
-
-    :param attributes: list representing the attribute nodes to check
-    :return: return True if any of the attributes are of type 'array'.
     """
     if any(attribute['type'] == 'array' for attribute in attributes):
         return True
@@ -477,14 +492,15 @@ def has_array(attributes):
 def has_vector(attributes):
     """
     Check if any of the attributes represented in a list are of type 'vector'.
+
+    :param attributes: list representing the attribute nodes to check
+    :return: Return True if any of the attributes are of type 'vector'
+
     e.g. if the following attribute node was represented in the list,
     we would return True:
 
     <attribute name="value" required="false" type="vector"
      element="double" abstract="false"/>
-
-    :param attributes: list representing the attribute nodes to check
-    :return: Return True if any of the attributes are of type 'vector'
     """
     if any(attribute['type'] == 'vector' for attribute in attributes):
         return True
@@ -493,8 +509,14 @@ def has_vector(attributes):
 
 def has_other_packages(attributes):
     """
-    return True is any of the attributes have another package
-    and a listt of packages
+    Check to see if a list of attributes have other packages.
+
+    :param attributes: the list to check
+    :return: Tuple with True if any of the attributes have another package,
+             plus a list of packages (empty if False).
+
+
+    TODO add example here.
     """
     list_pkgs = []
     has_pack = False
@@ -507,7 +529,10 @@ def has_other_packages(attributes):
 
 def is_string(attribute):
     """
-    return True if the attribute is saved as a string
+    Is this attribute saved as a string?
+
+    :param attribute: attribute to check
+    :return: return True if the attribute is saved as a string
     """
     if attribute['attType'] == 'string':
         return True
@@ -517,6 +542,8 @@ def is_string(attribute):
 def has_is_set_member(attribute):
     """
     return True if the attribute has an isSet member variable
+
+    TODO need an example - I can't see why this would return True if has isSet
     """
     if attribute['isNumber'] or attribute['attType'] == 'boolean':
         return True
@@ -525,7 +552,18 @@ def has_is_set_member(attribute):
 
 def has_attribute(element, attribute):
     """
-    return True if the element has the attribute specified
+    Does this element have this particular attribute?
+
+    :param element: element node object to check.
+    :param attribute: the attribute to check
+    :return: return True if the element has the attribute specified
+
+    e.g. if the element represented this node:
+
+    <element name="FooRule" typeCode="SBML_FOO_RULE" ... >
+
+    and we wanted to know if it had the typeCode attribute,
+    we would return True.
     """
     if element is None:
         return False
@@ -540,7 +578,11 @@ def has_attribute(element, attribute):
 
 def has_lo_attribute(element, attribute):
     """
-    return True if the listOf class for element has the attribute specified
+    Does the element's listOf class have the attribute specified?
+
+    :param element:
+    :param attribute:
+    :return: Return True if the listOf class for element has the attribute specified
     """
     if element is None:
         return False
@@ -557,7 +599,11 @@ def has_lo_attribute(element, attribute):
 
 def isV2BaseAttribute(element, attribute):
     """
+    Is the base version of this element 2?
 
+    :param element:
+    :param attribute:
+    :return: True if it is, else False.
     """
     if attribute != 'id' and attribute != 'name':
         return False
@@ -570,8 +616,11 @@ def isV2BaseAttribute(element, attribute):
 
 def overwrites_name(root, name):
     """
-    works out if any classes use this element
-    with a different name
+    Works out if any classes use this element with a different name.
+
+    :param root:
+    :param name:
+    :return:
     """
     if root is None:
         return False
@@ -589,6 +638,10 @@ def overwrites_name(root, name):
 def get_static_extension_attribs(num_versions, lv_info):
     """
 
+
+    :param num_versions:
+    :param lv_info:
+    :return: list of attribute dictionaries
     """
     attribs = []
     att = dict({'name': 'packageName',
@@ -635,7 +688,28 @@ def get_static_extension_attribs(num_versions, lv_info):
 
 def get_typecode_enum(elements):
     """
-    get an enumeration of the typecodes of the elements
+    Get an enumeration of the typecodes of the elements
+
+    :param elements: representation of element nodes to enumerate.
+    :return: tuple (see example)
+
+    e.g. given the following XML elements, represented in object form
+    by 'elements' parameter:
+
+    <element name="Algebraic" typeCode="SBML_FOO_ALGEBRAIC"
+             hasListOf="false" baseClass="FooRule" abstract="false"/>
+    <element name="FooRate" typeCode="SBML_FOO_FOORATE" hasListOf="false"
+             baseClass="Assignment" abstract="false" elementName="rate"/>
+    <element name="FooAssignment" typeCode="SBML_FOO_FOOASSIGNMENT"
+             hasListOf="false" baseClass="Assignment" abstract="false"
+             elementName="assignment"/>
+
+    would return [value, strvalue, max_length] with contents:
+
+    value = ["SBML_FOO_ALGEBRAIC", "SBML_FOO_FOORATE",
+             "SBML_FOO_FOOASSIGNMENT"]
+    strvalue = ["Algebraic", "FooRate", "FooAssignment"]
+    max_length = length of longest typecode = 22 (characters).
     """
     value = []
     strvalue = []
@@ -651,15 +725,19 @@ def get_typecode_enum(elements):
 
 def get_enum(element, class_name=''):
     """
-    get enumeration values
+    Get enumeration values.
+    This function works slightly differently with enums for documentation;
+    it will only have a classname for them.
 
-    this function works slightly differently with enums for documentation
-    it will only have a classname for them
+    :param element:
+    :param class_name:
+    :return:
     """
+    name = element['name']
+    value = []
+    strvalue = []
+
     if class_name == '':
-        name = element['name']
-        value = []
-        strvalue = []
         max_length = 0
         origsplittc = []
         for i in range(0, len(element['values'])):
@@ -684,11 +762,8 @@ def get_enum(element, class_name=''):
         # strvalue.append('invalid {0}'.format(name))
         return [value, strvalue, max_length]
     else:
-        name = element['name']
         # nameclass = class_name + strFunctions.upper_first(name)
         _ = class_name + strFunctions.upper_first(name)
-        value = []
-        strvalue = []
         for i in range(0, len(element['values'])):
             tc = element['values'][i]['name']
             value.append(tc)
@@ -701,7 +776,10 @@ def get_enum(element, class_name=''):
 
 def get_default_enum_value(attribute):
     """
+    TODO need an example - I'm not sure what it's finding.
 
+    :param attribute:
+    :return:
     """
     default = 'INVALID'
     name = attribute['element']
@@ -716,6 +794,9 @@ def get_default_enum_value(attribute):
 def get_first_enum_value(attribute):
     """
 
+
+    :param attribute:
+    :return:
     """
     value = ''
     name = attribute['element']
@@ -729,7 +810,10 @@ def get_first_enum_value(attribute):
 
 def get_prefix(name):
     """
+    TODO need an example to show what it does.
 
+    :param name:
+    :return:
     """
     prefix = ''
     first = True
@@ -748,7 +832,13 @@ def get_prefix(name):
 
 def get_typecode_format(name, language):
     """
+    TODO need an example
 
+    :param name:
+    :param language:
+    :param return:
+
+    called from ../code_files/ExtensionCodeFile.py/write_other_enums()
     """
     tc = language.upper()
     for i in range(0, len(name)):
@@ -761,7 +851,25 @@ def get_typecode_format(name, language):
 
 def get_max_length(elements, attribute):
     """
+    Get the max length of the attribute in a list of elements
 
+    :param elements: list of objects representing element nodes.
+    :param attribute: an attribute in those nodes
+
+    e.g. given the following elements:
+
+    <element name="Algebraic" typeCode="SBML_FOO_ALGEBRAIC" ... />
+    <element name="FooRate" typeCode="SBML_FOO_FOORATE" ... />
+    <element name="FooAssignment" typeCode="SBML_FOO_FOOASSIGNMENT" .../>
+
+    a function call like: width = query.get_max_length(elements, 'name')
+
+    will return the length of the longest string in
+    ["Algebraic", "FooRate", "FooAssignment"]
+
+    TODO will this throw an exception if elements other
+    than the first one do *not* have the attribute?
+    Is that possible?
     """
     if elements is None:
         return 0
@@ -778,6 +886,9 @@ def get_max_length(elements, attribute):
 def get_other_element_children(this_object, element):
     """
 
+    :param this_object:
+    :param element:
+    :return:
     """
     other_children = []
     child = get_class(element['element'], this_object['root'])
@@ -791,7 +902,16 @@ def get_other_element_children(this_object, element):
 
 def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
     """
-    get children that are concrete instantiations
+    Get children that are concrete instantiations
+
+    :param concretes:
+    :param root:
+    :param reqd_only:
+    :param base_attributes:
+    :param name:
+    :return:
+
+    TODO an example would be helpful.
     """
     children = []
     for j in range(0, len(concretes)):
@@ -807,7 +927,16 @@ def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
 
 def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
     """
-    get the child elements of the class name
+    Get the child elements of the class name
+
+    :param name:
+    :param root:
+    :param reqd_only:
+    :param xml_name:
+    :param base_attribs:
+    :return:
+
+    TODO lots of explanation needed!
     """
     child = get_class(name, root)
     if not child:
@@ -911,7 +1040,12 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
 
 def get_child_elements(elements, lo_elements, root=None):
     """
-    get a list of names of child elements
+    Get a list of names (and other info) of child elements.
+
+    :param elements:
+    :param lo_elements:
+    :param root:
+    :return: list of child element dictionaries
     """
     child_elements = []
     typecode = 'TO_DO'
@@ -968,6 +1102,12 @@ def get_child_elements(elements, lo_elements, root=None):
 def insert_list_of(original, child_name, root):
     """
     insert a listOfParent into the tree
+
+    :param original:
+    :param child_name:
+    :param root:
+    :return: either a list of dictionaries, or a single dictionary,
+             depending on context
     """
     child = get_class(child_name, root)
     lo_name = strFunctions.list_of_name(child['name'])
@@ -992,9 +1132,13 @@ def insert_list_of(original, child_name, root):
 
 def create_object_tree(pkg_object, reqd_only=True):
     """
-    create a tree structure with each plugin listing its direct children
-    and each class listing its direct children
-    if reqd_only is false it will add the listOf elements as well
+    Create a tree structure with each plugin listing its direct children
+    and each class listing its direct children.
+    If reqd_only is False it will add the listOf elements as well.
+
+    :param pkg_object:
+    :param reqd_only:
+    :return: list of dictionaries
     """
     tree = []
     root = None
@@ -1028,7 +1172,16 @@ def create_object_tree(pkg_object, reqd_only=True):
 
 def is_number(att_type):
     """
-    return true if the attribute type given represents a number
+    Does this attribute type represent a number?
+
+    :param att_type: the type, e.g. "int", "SIdRef", "string", ...
+    :param return: Return True if the attribute type given represents a number
+
+    e.g. an attribute node like this
+    <attribute name="ordinal" required="true" type="int" abstract="false"/>
+    has type "int", so would return True
+
+    TODO I'm assuming this is for <attribute> nodes?
     """
     number = False
     if att_type == 'double' or att_type == 'uint' or att_type == 'int':
@@ -1038,7 +1191,10 @@ def is_number(att_type):
 
 def is_element(att_type):
     """
-    return true if the attribute type given represents an element
+    Does this attribute type represent an element?
+
+    :param att_type: the type, e.g. "lo_element", "SIdRef", "string", ...
+    :return: True if the attribute type given represents an element
     """
     element = False
     if att_type == 'element' or att_type == 'lo_element' or \
@@ -1049,8 +1205,11 @@ def is_element(att_type):
 
 def sort_attributes(all_attributes):
     """
-    create a list of attribute types and names for use with
-    generic attribute functions
+    Create a list of attribute types and names for use with
+    generic attribute functions.
+
+    :param all_attributes:
+    :return: dictionary of lists of different attribute types.
     """
     double_atts = []
     uint_atts = []
@@ -1080,6 +1239,9 @@ def sort_attributes(all_attributes):
 def is_lo_repeated(class_object):
     """
 
+
+    :param class_object:
+    :return: True if
     """
     count = 0
     if 'root' not in class_object or class_object['root'] is None:
