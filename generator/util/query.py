@@ -142,7 +142,10 @@ def has_children_not_math(attributes):
 
 def get_class(name, root_object):
     """
-    Return the class with the matching name from the root object
+    Return the class with the matching name from the root object.
+    The get_class function is designed to find the specific 'name'
+    of an sbml class within the root_object, which will be the big
+    structure created by parseXML.
 
     :param name:
     :param root_object:
@@ -183,7 +186,7 @@ def is_inline_child(class_object):
         <listOfParameters>
             <parameter attributes= . . . />
             <parameter attributes= . . . />
-           . . .
+            . . .
         </listOfParameters>
     </container>
 
@@ -224,6 +227,8 @@ def is_inline_child(class_object):
 
 def get_inline_parents(class_object):
     """
+    TODO I'm guessing an inline parent is the node enclosing
+    a set of inline children, as in the last function?
 
     :param class_object:
     :return:
@@ -248,12 +253,16 @@ def get_parent_class(class_object):
 
     :param class_object: the object representing the class.
     :return: parent class, if found.
+
+    TODO add example here
+
     """
     parent = ''
     if class_object['is_list_of']:
         name = class_object['lo_child']
     else:
         name = class_object['name']
+
     found = False
 
     if 'parent' in class_object:
@@ -265,17 +274,18 @@ def get_parent_class(class_object):
             for extension in plugin['lo_extension']:
                 if extension['name'] == name:
                     return base
-                    #parent = base
-                    #found = True
-                    #break
+                    # parent = base
+                    # found = True
+                    # break
             if not found:
                 for extension in plugin['extension']:
                     if extension['name'] == name:
-                        parent = base
-                        found = True
-                        break
-            if found:
-                break
+                        return base
+                        # parent = base
+                        # found = True
+                        # break
+            # if found:
+            #    break
 
     if not found and len(parent) == 0:
         for element in class_object['root']['baseElements']:
@@ -286,8 +296,8 @@ def get_parent_class(class_object):
                         #parent = element['name']
                         #found = True
                         #break
-            if found:
-                break
+            # if found:
+            #    break
 
     return parent
 
@@ -304,7 +314,7 @@ def get_concretes(root_object, concrete_list):
 
 def is_instantiated(element):
     """
-    basic function that checks whether the given element is instantiated
+    Basic function that checks whether the given element is instantiated
     """
     if element is None:
         return False
@@ -320,7 +330,12 @@ def is_instantiated(element):
 
 def add_concrete_to_list(root, concrete, mylist):
     """
-    add the non-abstract class to the list
+    Add the non-abstract class to the list
+
+    :param root:
+    :param concrete:
+    :param mylist:
+    :return: returns nothing
     """
     current = get_class(concrete['element'], root)
 
@@ -376,7 +391,11 @@ def separate_attributes(full_attributes):
 
 def get_version_attributes(attributes, version):
     """
-    return attributes for the given version only
+    Return attributes for the given version only.
+
+    :param attributes:
+    :param version:
+    :return: the list of matching attributes
     """
     ver_attribs = []
     for i in range(0, len(attributes)):
@@ -389,19 +408,26 @@ def get_version_attributes(attributes, version):
 
 def get_version_elements(elements, version):
     """
-    return attributes for the given version only
+    Return elements for the given version only.
+
+    :param elements:
+    :param version:
+    :return: the list of matching elements
     """
-    ver_attribs = []
+    ver_elems = []
     for i in range(0, len(elements)):
         if elements[i]['version'] == version:
-            ver_attribs.append(elements[i])
-    return ver_attribs
+            ver_elems.append(elements[i])
+    return ver_elems
 
 
 def get_unique_attributes(full_attributes):
     """
-    return a set of unique attributes
-    any with multiple versions appear only once
+    Return a set of unique attributes.
+    Any with multiple versions appear only once.
+
+    :param full_attributes:
+    :return: returns the list of unique attributes.
     """
     attributes = []
     for i in range(0, len(full_attributes)):
@@ -417,19 +443,31 @@ def get_unique_attributes(full_attributes):
 def get_matching_element(name, match_name, list_elements):
     """
 
+    :param name:
+    :param match_name: the name to match on
+    :param list_elements:
+    :return: the element that matches, or None if no match.
     """
     element = None
     if not list_elements:
         return element
     for existing in list_elements:
         if existing[name] == match_name:
-            element = existing
+            element = existing  # TODO could this match multiple times? Would it matter?
     return element
 
 
 def has_array(attributes):
     """
-    return True if any of the attributes are of type array
+    Check if any of the attributes represented in a list are of type 'array'.
+    e.g. if the following attribute node was represented in the list,
+    we would return True:
+
+    <attribute name="samples" required="true" type="array"
+     element="int" abstract="false"/>
+
+    :param attributes: list representing the attribute nodes to check
+    :return: return True if any of the attributes are of type 'array'.
     """
     if any(attribute['type'] == 'array' for attribute in attributes):
         return True
@@ -438,7 +476,15 @@ def has_array(attributes):
 
 def has_vector(attributes):
     """
-    return True is any of the attributes are of type vector
+    Check if any of the attributes represented in a list are of type 'vector'.
+    e.g. if the following attribute node was represented in the list,
+    we would return True:
+
+    <attribute name="value" required="false" type="vector"
+     element="double" abstract="false"/>
+
+    :param attributes: list representing the attribute nodes to check
+    :return: Return True if any of the attributes are of type 'vector'
     """
     if any(attribute['type'] == 'vector' for attribute in attributes):
         return True
