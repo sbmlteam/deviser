@@ -92,6 +92,7 @@ def abbrev_name(element):
 def abbrev_lo_name(loname):
     return 'LO' + loname[6:]
 
+
 def list_of_name(name, addPrefix=True):
     prefix = ''
     if addPrefix and not gv.is_package:
@@ -176,14 +177,19 @@ def remove_prefix(name, in_concrete=False, remove_package=False, prefix='', remo
 
 
 def get_indefinite(name):
-    if name.startswith('a') or name.startswith('A') \
-            or name.startswith('e') or name.startswith('E') \
-            or name.startswith('i') or name.startswith('I') \
-            or name.startswith('o') or name.startswith('O') \
-            or name.startswith('u') or name.startswith('U'):
-        return 'an'
-    else:
-        return 'a'
+    """
+    Get indefinite article for the name supplied.
+
+    :param name: the name we want the indefinite article (and or a) for.
+    :return: 'an' if name starts with a vowel, else 'a'
+
+    TODO: what about words starting with h?
+    e.g. "an hotel" and "a host of reasons" are both correct :-)
+    """
+    for char in ('a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U'):
+        if name.startswith(char):
+            return 'an'
+    return 'a'
 
 
 def standard_element_name(name):
