@@ -341,15 +341,14 @@ def get_element_name_no_prefix(attribute):
 
 
 def replace_digits(name):
-   """
-   Replace the numerical digits in a string with their English words.
+    """
+    Replace the numerical digits in a string with their English words.
 
-   :param name: the input string, possibly containing digits
-   :return: the same string, but with digits replaced by words
+    :param name: the input string, possibly containing digits
+    :return: the same string, but with digits replaced by words
 
-   e.g. replace_digits("John 3:16") -> "John Three:OneSix"
-   """
-
+    e.g. replace_digits("John 3:16") -> "John Three:OneSix"
+    """
     mydict = {'0':'Zero', '1':'One', '2':'Two', '3':'Three', '4':'Four',
               '5':'Five', '6':'Six', '7':'Seven', '8':'Eight', '9':'Nine'}
 
@@ -365,14 +364,27 @@ def replace_underscore(name):
 
 
 def remove_spaces(name):
-    newname = ''
-    for i in range(0, len(name)):
-        if name[i] != ' ':
-            newname += name[i]
+    """
+    Remove all space characters in a string.
+
+    :param name: input string, possibly containing spaces
+    :return: the input string, but with space characters removed.
+
+    e.g. remove_spaces("   hello   world  ") -> "helloworld"
+    """
+    newname = name.replace(' ', '')
     return newname
 
 
 def remove_hyphens(name):
+    """
+    Remove hyphens and capitalise each word in a string.
+
+    :param name: input string
+    :return: [newstring, removed?]
+
+    e.g. remove_hyphens("this-is-a-test") -> ["thisIsATest", True]
+    """
     removed_hyphen = False
     if '-' not in name:
         return [name, removed_hyphen]
@@ -390,6 +402,7 @@ def remove_hyphens(name):
                 hyphen = True
                 removed_hyphen = True
         return [newname, removed_hyphen]
+
 
 def texify(name):
     name = replace_digits(name)
