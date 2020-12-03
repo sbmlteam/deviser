@@ -405,19 +405,27 @@ def remove_hyphens(name):
 
 
 def texify(name):
+    """
+    Replace digits with number words, escape underscores, and remove spaces.
+
+    :param name: input string, e.g. "012_27 44_8 "
+    :return: transformed string, e.g. "ZeroOneTwo\_TwoSevenFourFour\_Eight"
+    """
     name = replace_digits(name)
     name = replace_underscore(name)
     name = remove_spaces(name)
     return name
 
 
-def compare_no_case(name, reference):
-    caseless_name = name.lower()
-    caseless_ref = reference.lower()
-    if caseless_name == caseless_ref:
-        return True
-    else:
-        return False
+def compare_no_case(test, reference):
+    """
+    Are these two strings the same, when both are in lower case?
+
+    :param test: first string to compare, e.g. "this is a test"
+    :param reference: second word to compare, e.g. "This iS a TEST"
+    :return: True if both strings identical when converted to lower case.
+    """
+    return test.lower() == reference.lower()
 
 
 def get_class_from_plugin(plugin, package):
