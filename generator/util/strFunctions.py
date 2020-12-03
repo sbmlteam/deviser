@@ -195,6 +195,11 @@ def singular(name):
     "disinformation" -> "disinformation", "coxes" -> "cox",
     "parties" -> "party", "clouds" -> "cloud", "somethings" -> "something".
 
+    NB issue #34
+    "foxes" -> "fox" is ok
+    but
+    "apples" -> "appl", "skates" -> "skat" is wrong
+
     """
     returned_word = name
     length = len(name)
@@ -251,10 +256,25 @@ def get_indefinite(name):
 
 
 def standard_element_name(name):
+    """
+    Standardise an element name.
+
+    :param name: the name to standardise
+    :return: standardised name.
+
+    Remove spaces, and any trailing '*', ',' or '_t'.
+    If it's a list of something, convert to singular.
+
+    e.g. "ListOfApples*" should return "Apple", but TODO bug in singular()
+    needs fixing. (Currently -> "Appl").  See issue #34
+
+    "listOfFoxes," -> "Fox"
+    """
     name = remove_spaces(name)
     length = len(name)
     temp = name
-    # dont want * , _t at end
+
+    # Don't want * , _t at end
     if name.endswith('*'):
         temp = name[0:length-1]
     elif name.endswith(','):
@@ -262,7 +282,8 @@ def standard_element_name(name):
     elif name.endswith('_t'):
         temp = name[0:length-2]
     returned_word = temp
-    # also dont want ListOf
+
+    # Also don't want ListOf
     if returned_word.startswith('ListOf') or returned_word.startswith('listOf'):
         temp = singular(returned_word[6:length])
     return upper_first(temp)
