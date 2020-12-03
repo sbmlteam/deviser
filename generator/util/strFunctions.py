@@ -148,8 +148,22 @@ def plural(name):
         returned_word = name + 's'
     return returned_word
 
+# Good tests would be (e.g.) word == singular(plural(word)), etc.
 
 def singular(name):
+    """
+    Attempt to find the singular of a word
+
+    :param name: the word, probably in plural form.
+    :return: the singular of the word, or the word itself
+             if no singular found.
+
+    e.g.
+    "cats" -> "cat", "dogs" -> "dogs", "children" -> "child",
+    "disinformation" -> "disinformation", "coxes" -> "cox",
+    "parties" -> "party", "clouds" -> "cloud", "somethings" -> "something".
+
+    """
     returned_word = name
     length = len(name)
     if name.endswith('ies'):
@@ -222,6 +236,15 @@ def standard_element_name(name):
 
 
 def get_library_suffix(name):
+    """
+    Get library suffix of a word.
+
+    :param name: the word
+    :return: library suffix, with all but first character in lower-case.
+
+    e.g.
+    "library" -> "Rary", "libSBML" -> "Sbml", "cat" -> "Cat", "lib" -> ""
+    """
     ret_name = name.lower()
     if ret_name.startswith('lib'):
         ret_name = ret_name[3:]
