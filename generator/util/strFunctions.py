@@ -123,6 +123,17 @@ def plural_no_prefix(name):
 
 
 def plural(name):
+    """
+    Attempt to find the plural of a word
+
+    :param name: the word, probably in singular form.
+    :return: the plural of the word, or the word itself if no plural found.
+
+    e.g.
+    "cat" -> "cats", "dogs" -> "dogs", "child" -> "children",
+    "disinformation" -> "disinformation", "cox" -> "coxes",
+    "party" -> "parties", "cloud" -> "clouds", "something" -> "somethings".
+    """
     if name.endswith('s'):
         returned_word = name
     elif name.endswith('nformation'):
@@ -178,7 +189,7 @@ def remove_prefix(name, in_concrete=False, remove_package=False, prefix='', remo
 
 def get_indefinite(name):
     """
-    Get indefinite article for the name supplied.
+    Get the indefinite article for the name supplied.
 
     :param name: the name we want the indefinite article (and or a) for.
     :return: 'an' if name starts with a vowel, else 'a'
@@ -434,6 +445,7 @@ def get_class_from_plugin(plugin, package):
     name = plugin[num:length-6]
     return name
 
+
 def prefix_name(name):
     if name.startswith(gv.prefix):
         return name
@@ -467,6 +479,7 @@ def prefix_classes(working_class):
     if 'lo_class_name' in working_class and len(working_class['lo_class_name']) > 0:
         name = working_class['lo_class_name']
         working_class['lo_class_name'] = prefix_name(name)
+
 
 def is_camel_case(name):
     camel_case = False
