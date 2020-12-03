@@ -44,6 +44,18 @@ from util import global_variables as gv
 
 
 def upper_first(word):
+    """
+    Change first character of a word to upper-case.
+    Deal with words starting "csg" or "csG" differently.
+
+    :param word: word we want to change.
+    :return: changed word.
+
+    e.g.
+    "csgsomething" -> "CSGsomething", "cat" -> "Cat", "csgcat" -> "CSGcat",
+    "cscat" -> "Cscat", "csgeometry" -> "CSGeometry",
+    "csGeometry" -> "CSGeometry", "a" -> "A"
+    """
     if len(word) == 0:
         return word
     # hack for spatial CSGFoo classes
@@ -80,6 +92,17 @@ def get_indent(element):
 
 
 def abbrev_name(element):
+    """
+    Abbreviate a name. Return in lower case.
+
+    :param element: the name to abbreviate
+    :return: returns abbreviated form
+
+    e.g.
+    "thisIsATest" -> "iat"  # TODO I'm surprised we don't want "IAT", etc.
+    "CAT" -> "cat"
+    "cat" -> "c"  # TODO is that what we want?
+    """
     abbrev = ''
     for i in range(0, len(element)):
         if element[i].isupper():
@@ -90,6 +113,15 @@ def abbrev_name(element):
 
 
 def abbrev_lo_name(loname):
+    """
+    TODO I can see what it does, but I don't know why, or what sort
+    of lonames will be transformed.
+
+    :param loname: string to transform
+    :return: transformed string
+
+    e.g.  "spaghetti" -> "LOtti"
+    """
     return 'LO' + loname[6:]
 
 
@@ -177,7 +209,8 @@ def singular(name):
     return returned_word
 
 
-def remove_prefix(name, in_concrete=False, remove_package=False, prefix='', remove_doc_prefix=False):
+def remove_prefix(name, in_concrete=False, remove_package=False,
+                  prefix='', remove_doc_prefix=False):
     prefix_to_remove = ''
     if gv.prefix == 'SBML':
         # we might want to remove the name of the package
