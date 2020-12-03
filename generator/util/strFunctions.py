@@ -211,7 +211,7 @@ def standard_element_name(name):
 
 
 def get_library_suffix(name):
-    ret_name = name.lower();
+    ret_name = name.lower()
     if ret_name.startswith('lib'):
         ret_name = ret_name[3:]
     return upper_first(ret_name)
@@ -341,16 +341,21 @@ def get_element_name_no_prefix(attribute):
 
 
 def replace_digits(name):
-    name = re.sub('0', 'Zero', name)
-    name = re.sub('1', 'One', name)
-    name = re.sub('2', 'Two', name)
-    name = re.sub('3', 'Three', name)
-    name = re.sub('4', 'Four', name)
-    name = re.sub('5', 'Five', name)
-    name = re.sub('6', 'Six', name)
-    name = re.sub('7', 'Seven', name)
-    name = re.sub('8', 'Eight', name)
-    name = re.sub('9', 'Nine', name)
+   """
+   Replace the numerical digits in a string with their English words.
+
+   :param name: the input string, possibly containing digits
+   :return: the same string, but with digits replaced by words
+
+   e.g. replace_digits("John 3:16") -> "John Three:OneSix"
+   """
+
+    mydict = {'0':'Zero', '1':'One', '2':'Two', '3':'Three', '4':'Four',
+              '5':'Five', '6':'Six', '7':'Seven', '8':'Eight', '9':'Nine'}
+
+    for item in mydict:
+        name = re.sub(item, mydict[item], name)
+
     return name
 
 
