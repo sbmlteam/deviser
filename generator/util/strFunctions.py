@@ -85,7 +85,7 @@ def lower_first(word):
     returned_word = ''
     if word is None or word == '':
         return returned_word
-    elif len(word) == 1:
+    elif len(word) == 1:  # The reverse of this is not done in upper_first()
         returned_word = word[0].lower()
     elif word.startswith('CSG'):
         if word == 'CSGeometry':
@@ -146,9 +146,18 @@ def abbrev_lo_name(loname):
 
 
 def list_of_name(name, addPrefix=True):
+    """
+    Given a name, get "list of" name.
+
+    :param name: the name to get "list of" name for
+    :param addPrefix: if True, prepend the global prefix to returned string
+    :return: the "list of" name string
+    """
+    # e.g. name might be "FooParameter", and
+    # so we want "ListOfFooParameters"
     prefix = ''
     if addPrefix and not gv.is_package:
-        prefix = gv.prefix
+        prefix = gv.prefix  # e.g. "SBML"
     return prefix + 'ListOf' + plural_no_prefix(name)
 
 
@@ -183,7 +192,7 @@ def plural(name):
 
     e.g.
     "cat" -> "cats", "dogs" -> "dogs", "child" -> "children",
-    "disinformation" -> "disinformation", "cox" -> "coxes",
+    "disinformation" -> "disinformation", "fox" -> "foxes",
     "party" -> "parties", "cloud" -> "clouds", "something" -> "somethings".
     """
     if name.endswith('s'):
