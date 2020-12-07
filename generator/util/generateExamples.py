@@ -39,55 +39,78 @@
 
 import sys
 
-from parseXML import ParseXML
-from util import global_variables
 from code_files import CppExampleFile
+from parseXML import ParseXML
+from util import global_variables as gv
+
+"""Code used to generate the examples."""
 
 
-def generate_example_for(filename, overwrite=True):
-    global_variables.running_tests = False
+def generate_example_for(filename, my_func, is_package=True):
+    """
+    Extract data structure from an XML file and write
+    example code with it.
+
+    :param filename: the XML file we are using
+    :param my_func: the function we will execute as part of this function
+    :param is_package: set to False if it's not a package.
+    :returns: returns nothing, but does update gv.code_returned.
+    """
+    gv.running_tests = False
     parser = ParseXML.ParseXML(filename)
     ob = dict()
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
         # catch a problem in the parsing
         try:
             ob = parser.parse_deviser_xml()
-        except:
-            global_variables.code_returned \
-                = global_variables.return_codes['parsing error']
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
-        name = ob['name'.lower()]
-        try:
-            if global_variables.is_package:
-                generate_example_code(ob)
-        except:
-            global_variables.code_returned \
-                = global_variables.return_codes['unknown error - please report']
+        except Exception:
+            gv.code_returned = gv.return_codes['parsing error']
+    if gv.code_returned == gv.return_codes['success']:
+        # Next line does nothing, should be name = ob['name'].lower() anyway?
+        # name = ob['name'.lower()]
+        if is_package:
+            try:
+                if gv.is_package:
+                    my_func(ob)  # generate_example_code(ob)
+            except Exception:
+                gv.code_returned = \
+                    gv.return_codes['unknown error - please report']
+        else:
+            my_func(ob)
 
 
 def generate_example_code(ob):
+    '''
+    Generate the example code for a pkg_code object
+    (big dictionary structure of information from an XML file).
+
+    :param ob: the pkg_code object
+    :return: returns nothing
+    '''
     ex = CppExampleFile.CppExampleFile(ob)
     ex.write_file()
     ex.close_file()
 
 
-
 def main(args):
+    """
+    Main function. Checks correct number of args and generates example.
+
+    :param args: the command-line arguments
+    :returns: the `global_variable.code_returned` value
+    """
     if len(args) != 2:
-        global_variables.code_returned = \
-            global_variables.return_codes['missing function argument']
-        print ('Usage: generateCode.py xmlfile')
+        gv.code_returned = gv.return_codes['missing function argument']
+        print('Usage: generateExamples.py xmlfile')
     else:
-        generate_example_for(args[1])
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+        generate_example_for(args[1], generate_example_code)
+    if gv.code_returned == gv.return_codes['success']:
         print('code successfully written')
     else:
         print('writing code failed')
 
-    return global_variables.code_returned
+    return gv.code_returned
+
 
 if __name__ == '__main__':
     main(sys.argv)

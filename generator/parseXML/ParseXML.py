@@ -76,6 +76,7 @@ class ParseXML():
     def __init__(self, filename):
         '''
         ParseXML constructor. Check XML file exists and parse it.
+        Store the data structures generated in self.dom.
         Initialise instance variables.
 
         :param filename: The (path to the) XML file to parse
@@ -1227,8 +1228,10 @@ class ParseXML():
 
     def parse_deviser_xml(self):
         """
-        Parses the filename given in __init__ (e.g. "dyn.xml") and returns a
-        big dictionary with the definition contained in it.
+        In the constructor, a file (e.g. "dyn.xml") is parsed
+        into a Document Object Model instance (self.dom). Now
+        we iterate over that object's nodes to create the big 'package'
+        dictionary structure.
 
         :return: the big `package` dictionary structure
 
