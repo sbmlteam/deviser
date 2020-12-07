@@ -70,6 +70,17 @@ def upper_first(word):
 
 
 def lower_first(word):
+    """
+    Change first character of a word to lower-case.
+    Deal with words starting "CSG" differently.
+
+    :param word: word we want to change.
+    :return: changed word.
+
+    TODO: could perhaps have one function to replace this
+    and the upper_first() function? As they are quite similar.
+
+    """
     # hack for spatial CSGFoo classes
     returned_word = ''
     if word is None or word == '':
@@ -87,6 +98,15 @@ def lower_first(word):
 
 
 def get_indent(element):
+    """
+    Given a string, e.g. 'hello', work out length
+    of string 'hello('.
+
+    :param element: string to process
+    :return: length of: string plus '('
+
+    TODO when would this be used?
+    """
     s1 = '{0}('.format(element)
     return len(s1)
 
@@ -447,6 +467,12 @@ def replace_digits(name):
 
 
 def replace_underscore(name):
+    """
+    Replace underscore characters in a string with escaped underscores.
+
+    :param name: string to process
+    :return: string with every '_' changed to '\_'.
+    """
     name = re.sub('_', '\_', name)
     return name
 
@@ -466,7 +492,7 @@ def remove_spaces(name):
 
 def remove_hyphens(name):
     """
-    Remove hyphens and capitalise each word in a string.
+    Remove hyphens and capitalise each word (after first) in a string.
 
     :param name: input string
     :return: [newstring, removed?]
