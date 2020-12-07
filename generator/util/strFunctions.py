@@ -162,20 +162,50 @@ def list_of_name(name, addPrefix=True):
 
 
 def lower_list_of_name_no_prefix(name):
+    """
+    For a string, return "list of name", possibly without the prefix.
+
+    :param name: string we want the "list of" name for
+    :return: the "list of" name, possibly without prefix.
+
+    e.g. "fox" -> "listOfFoxes"
+    """
     return 'listOf' + plural_no_prefix(upper_first(name))
 
 
 def cap_list_of_name(name, addPrefix=True):
+    """
+    Get the "list of" name for a string, with first letter in upper-case.
+
+    :param name: the string we want the "list of" name for.
+    :param addPrefix: if True, prepend returned name with global prefix
+                      (e.g. "SBML") if not a package.
+    """
     name = upper_first(name)
     return list_of_name(name, addPrefix)
 
 
 def cap_list_of_name_no_prefix(name):
+    """
+    Get the "list of" name for a string, without the prefix,
+    with the first letter in upper-case.
+
+    :param name: the string which we want the "list of" name for.
+    :return: the "list of" name.
+
+    e.g. "fox" -> "ListOfFoxes"
+    """
     name = upper_first(name)
     return list_of_name(name, False)
 
 
 def plural_no_prefix(name):
+    """
+    Return the plural of a string, removing prefix if it's not a package.
+
+    :param name: the string (in singular form)
+    :return: the plural form, without prefix if not a package.
+    """
     if gv.is_package:
         return plural(name)
     else:
@@ -245,11 +275,23 @@ def singular(name):
 
 def remove_prefix(name, in_concrete=False, remove_package=False,
                   prefix='', remove_doc_prefix=False):
+    """
+    Remove prefix from a string.
+
+    :param name: the string which we wish to remove the prefix from.
+    :param in_concrete:
+    :param remove_package: if True, and global prefix is "SBML", remove the prefix (4th function arg)
+    :param prefix: the prefix to remove if global prefix is "SBML" and remove_package is True.
+    :param remove_doc_prefix: if True, and name ends in 'Document', remove prefix.
+    :return: the input string, possibly with something removed at the beginning.
+
+    TODO an example or two would be helpful here. And I'm not sure about in_concrete argument.
+
+    """
     prefix_to_remove = ''
     if gv.prefix == 'SBML':
         # we might want to remove the name of the package
-        if not in_concrete and gv.is_package \
-                and gv.package_prefix != '':
+        if not in_concrete and gv.is_package and gv.package_prefix != '':
            prefix_to_remove = gv.package_prefix
         elif remove_package and prefix != '':
             prefix_to_remove = prefix
@@ -258,11 +300,13 @@ def remove_prefix(name, in_concrete=False, remove_package=False,
     length = len(prefix_to_remove)
     if length == 0:
         return name
-    if not name.endswith('Document') and (name.startswith(prefix_to_remove) or name.startswith(upper_first(prefix_to_remove))):
-        newname = name[length:]
+    if not name.endswith('Document') and \
+            (name.startswith(prefix_to_remove)
+             or name.startswith(upper_first(prefix_to_remove))):
+        newname = name[length:]  # Remove the prefix
     else:
         if remove_doc_prefix and name.endswith('Document'):
-            newname = name[length:]
+            newname = name[length:]  # Remove the prefix
         else:
             newname = name
     return newname
@@ -564,9 +608,11 @@ def prefix_name(name):
     elif name == 'XMLNode' or name == 'ASTNode':
         return name
     elif name == 'SBase':
-        return '{0}Base'.format(gv.prefix)
+        # return '{0}Base'.format(gv.prefix)
+        return gv.prefix + "Base"
     else:
-        return '{0}{1}'.format(gv.prefix, name)
+        # return '{0}{1}'.format(gv.prefix, name)
+        return gv.prefix + name
 
 
 # Prefix names - if we are working with another library we want class
