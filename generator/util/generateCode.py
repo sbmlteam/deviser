@@ -75,15 +75,14 @@ def generate_code_for(filename, overwrite=True):
     if gv.code_returned == gv.return_codes['success']:
         name = ob['name'.lower()]
         language = gv.language
-        # TO DO REMEMBER TO REMOVE   TODO why?
-        # try:
-        if gv.is_package:
-            generate_package_code(name, language, overwrite, ob)
-        else:
-            generate_other_library_code(name, language, overwrite, ob)
-        # except Exception:
-        #     gv.code_returned \
-        #         = gv.return_codes['unknown error - please report']
+        try:
+            if gv.is_package:
+                generate_package_code(name, language, overwrite, ob)
+            else:
+                generate_other_library_code(name, language, overwrite, ob)
+        except Exception:
+             gv.code_returned \
+                 = gv.return_codes['unknown error - please report']
 
 
 def generate_other_library_code(name, language, overwrite, ob):
