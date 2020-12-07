@@ -379,34 +379,55 @@ def get_library_suffix(name):
 
 
 def wrap_token(name, pkg=''):
-    """ returns the name wrapped as a token
-       e.g. \token{'id'} or \token{'comp:\-id'} """
+    """
+    Returns the name wrapped as a token
+    e.g. \token{'id'} or \token{'comp:\-id'}
+
+    :param name: the name to wrap
+    :param pkg: include this, if present
+    :return: the "wrapped" name
+
+    """
     if pkg == '':
         return '\\token{' + name + '}'
     else:
         return '\\token{' + pkg + ':\\-' + name + '}'
 
 
-def wrap_type(name, element, hack=False):
-    if name == 'array':
+def wrap_type(type, element, hack=False):
+    """
+
+    :param type: the type we want to wrap, e.g. 'array', 'enum',...
+    :param element:
+    :param hack: special case which can be used for 'element' type
+    :return: string describing the type and the element
+    """
+    if type == 'array':
         return 'consisting of an array of \\primtype{' + element + '}'
-    elif name == 'enum':
+    elif type == 'enum':
         element_name = texify(element)
         return 'of type \\primtype{' + element_name + '}'
-    elif name == 'element':
+    elif type == 'element':
         if hack:
             return 'of type \\' + element
         else:
             return wrap_token(element)
-    elif name == 'lo_element':
+    elif type == 'lo_element':
         return wrap_token(element)
-    elif name == 'inline_lo_element':
+    elif type == 'inline_lo_element':
         return 'TO DO: add type'
     else:
-        return 'of type \\primtype{' + name + '}'
+        return 'of type \\primtype{' + type + '}'
 
 
 def wrap_section(name, add_class=True, add_extended=False):
+    """
+
+    :param name:
+    :param add_class:
+    :param add_extended:
+    :return:
+    """
     if add_class:
         return '\\sec{' + make_class(name, add_extended) + '}'
     else:
@@ -414,6 +435,17 @@ def wrap_section(name, add_class=True, add_extended=False):
 
 
 def make_class(name, add_extended=False):
+    """
+    Add '-class' to end of a lower-case string
+
+    :param name: the string to take in, and convert to lower-case
+    :param add_extended: if True, prepend result with 'extended-'
+    :return: the string made as a class
+
+    e.g.
+    make_class("Irenaeus") -> "irenaeus-class"
+    make_class("Irenaeus", True) -> "extended-irenaeus-class"
+    """
     if add_extended:
         return 'extended-' + name.lower() + '-class'
     else:
@@ -421,11 +453,29 @@ def make_class(name, add_extended=False):
 
 
 def wrap_enum(name):
+    """
+    'Wrap' an enum
+
+    :param name: the enum to wrap
+    :return: the wrapped form of the enum
+
+    e.g. 'cat' -> '\\primtype{cat}'
+
+    TODO when, how and why would this be used? It's used in the
+    validation rules code, but at the moment I don't understand that.
+    """
 #    return '\\primtype{' + lower_first(name) + '}'
     return '\\primtype{' + name + '}'
 
 
 def get_sid_refs(refs):
+    """
+
+    :param refs: a string which is a comma-separated sequence of ...
+    :return: a tuple of ...
+
+    TODO complete the above and add description!
+    """
     if refs == '':
         return['', 'SId']
     elif ',' not in refs:
