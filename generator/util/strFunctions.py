@@ -152,9 +152,9 @@ def list_of_name(name, addPrefix=True):
     :param name: the name to get "list of" name for
     :param addPrefix: if True, prepend the global prefix to returned string
     :return: the "list of" name string
+
+    e.g. "FooParameter" -> "ListOfFooParameters"  if no gv.prefix
     """
-    # e.g. name might be "FooParameter", and
-    # so we want "ListOfFooParameters"
     prefix = ''
     if addPrefix and not gv.is_package:
         prefix = gv.prefix  # e.g. "SBML"
@@ -285,7 +285,7 @@ def remove_prefix(name, in_concrete=False, remove_package=False,
     :param remove_doc_prefix: if True, and name ends in 'Document', remove prefix.
     :return: the input string, possibly with something removed at the beginning.
 
-    TODO an example or two would be helpful here. And I'm not sure about in_concrete argument.
+    TODO an example or two would be helpful here. And I'm not sure about the in_concrete argument.
 
     """
     prefix_to_remove = ''
@@ -495,6 +495,12 @@ def get_sid_refs(refs):
 
 
 def get_element_name(attribute, addPrefix=True):
+    """
+
+    :param attribute:
+    :param addPrefix:
+    :return:
+    """
     if 'type' in attribute:
         name = ''
         if 'texname' in attribute:
@@ -522,6 +528,11 @@ def get_element_name(attribute, addPrefix=True):
 
 
 def get_element_name_no_prefix(attribute):
+    """
+
+    :param attribute:
+    :return:
+    """
     if 'type' in attribute:
         name = ''
         if 'texname' in attribute:
@@ -646,6 +657,12 @@ def compare_no_case(test, reference):
 
 
 def get_class_from_plugin(plugin, package):
+    """
+
+    :param plugin:
+    :param package:
+    :return:
+    """
     num = len(package)
     length = len(plugin)
     name = plugin[num:length-6]
@@ -653,6 +670,10 @@ def get_class_from_plugin(plugin, package):
 
 
 def prefix_name(name):
+    """
+    :param name:
+    :return:
+    """
     if name.startswith(gv.prefix):
         return name
     elif name == 'XMLNode' or name == 'ASTNode':
@@ -665,9 +686,15 @@ def prefix_name(name):
         return gv.prefix + name
 
 
-# Prefix names - if we are working with another library we want class
-# prefixed but element names to stay untouched
 def prefix_classes(working_class):
+    """
+
+    :param working_class:
+    :return:
+
+    Prefix names - if we are working with another library we want class
+    prefixed but element names to stay untouched
+    """
     existing_name = working_class['name']
     working_class['name'] = prefix_name(existing_name)
     if working_class['baseClass'] != gv.baseClass:
@@ -690,6 +717,18 @@ def prefix_classes(working_class):
 
 
 def is_camel_case(name):
+    """
+    Is this word in camel case?
+
+    :param name: the word we are interested in
+    :return: True if word is in camel case, False if not
+
+    e.g.
+    'FooParameter' -> True
+    'fooParameter' -> True
+    'fooparameter' -> False
+    'Fooparameter' -> False
+    """
     camel_case = False
     adjust_name = lower_first(remove_prefix(name))
     lower_name = adjust_name.lower()
