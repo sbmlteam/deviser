@@ -20,7 +20,7 @@ def run_strfunc_test(func, input, expected_output, **kwargs):
     actual_output = func(input, **kwargs)
     if actual_output == expected_output:
         return 0
-    else:
+    else:  # NB is the msg below meant to go in fails?
         errormsg = "*** Error in strfunc test!"
         errormsg += "function:{0}, actual output:{1}, but expected:{2}"\
             .format(func, actual_output, expected_output)
@@ -48,7 +48,10 @@ def main():
     for (input, expected) in data2.items():
         fail += run_strfunc_test(sf.lower_first, input, expected)
 
-
+    # get_indent() tests
+    data = {'': 1, 'elephant': 9}
+    for (input, expected) in data.items():
+        fail += run_strfunc_test(sf.get_indent, input, expected)
 
     # A varargs example
     fail += run_strfunc_test(sf.wrap_token, 'fred',
@@ -64,7 +67,6 @@ if __name__ == '__main__':
     """
     remaining functions to test:
     
-lower_first
 get_indent
 abbrev_name
 abbrev_lo_name
