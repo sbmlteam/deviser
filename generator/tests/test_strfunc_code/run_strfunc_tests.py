@@ -30,6 +30,9 @@ def run_strfunc_test(func, input, expected_output, **kwargs):
 
 def main():
 
+    # NOTE: the test sets below are in the same order as the functions
+    # appear in strFunctions.py. Please maintain that. Thanks.
+
     # run the individual tests
     fail = 0
 
@@ -53,9 +56,72 @@ def main():
     for (input, expected) in data.items():
         fail += run_strfunc_test(sf.get_indent, input, expected)
 
-    # A varargs example
+    # abbrev_name() tests
+
+
+    # abbrev_lo_name() tests
+
+    # list_of_name() tests
+
+    # lower_list_of_name_no_prefix() tests
+
+    # cap_list_of_name() tests
+
+    # cap_list_of_name_no_prefix() tests
+
+    # plural_no_prefix() tests
+
+    # plural() tests
+
+    # singular() tests
+
+    # remove_prefix() tests
+
+    # get_indefinite() tests
+
+    # standard_element_name() tests
+
+    # get_library_suffix() tests
+
+    # A varargs example - wrap_token
     fail += run_strfunc_test(sf.wrap_token, 'fred',
                              '\\token{cat:\\-fred}', pkg='cat')
+    # need more tests for this func
+
+    # wrap_type() tests
+
+    # wrap_section() tests
+
+    # make_class() tests
+
+    # wrap_enum() tests
+
+    # get_sid_refs() tests
+
+    # get_element_name() tests
+
+    # get_element_name_no_prefix() tests
+
+    # replace_digits() tests
+
+    # replace_underscore() tests
+
+    # remove_spaces() tests
+
+    # remove_hyphens() tests
+
+    # texify() tests
+
+    # compare_no_case() tests
+
+    # get_class_from_plugin() tests
+
+    # prefix_name() tests
+
+    # prefix_classes() tests
+
+    # is_camel_case() tests
+
 
     test_functions.report('strfunc', fail, fails, not_tested)
     return fail
@@ -64,39 +130,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-    """
-    remaining functions to test:
-    
-get_indent
-abbrev_name
-abbrev_lo_name
-list_of_name
-lower_list_of_name_no_prefix
-cap_list_of_name
-cap_list_of_name_no_prefix
-plural_no_prefix
-plural
-singular
-remove_prefix
-get_indefinite
-standard_element_name
-get_library_suffix
-wrap_token
-wrap_type
-wrap_section
-make_class
-wrap_enum
-get_sid_refs
-get_element_name
-get_element_name_no_prefix
-replace_digits
-replace_underscore
-remove_spaces
-remove_hyphens
-texify
-compare_no_case
-get_class_from_plugin
-prefix_name
-prefix_classes
-is_camel_case
-"""
