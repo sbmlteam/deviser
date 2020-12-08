@@ -36,7 +36,13 @@ def main():
 
     fail += run_strfunc_test(sf.upper_first, 'cat', 'Cat')
     # fail += run_strfunc_test(sf.upper_first, 'cat', 'CAT')  # Deliberate failure example
+    data = {'cat' : 'Cat', 'csgsomething' : 'CSGsomething', 'csgcat' : 'CSGcat',
+            'cscat' : 'Cscat', 'csgeometry' : 'CSGeometry',
+            'csGeometry' : 'CSGeometry', 'a' : 'A'}
+    for (input, expected) in data.items():
+        fail += run_strfunc_test(sf.upper_first, input, expected)
 
+    # A varargs example
     fail += run_strfunc_test(sf.wrap_token, 'fred', '\\token{cat:\\-fred}', pkg='cat')
 
     test_functions.report('strfunc', fail, fails, not_tested)
