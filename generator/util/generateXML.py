@@ -40,52 +40,61 @@
 import sys
 
 from parseXML import ParseXML
-from util import global_variables
+from util import global_variables as gv
 from validation import ValidationXMLFiles
 
 
-def generate_xml_for(filename, overwrite=True):
-    global_variables.running_tests = False
+def generate_xml_for(filename):  # , overwrite=True):
+    """
+    Parse XML input file, then write XML output file.
+
+    :param filename: the XML input file
+    :return: returns nothing
+    """
+    gv.running_tests = False
     parser = ParseXML.ParseXML(filename)
     ob = dict()
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
         # catch a problem in the parsing
         try:
             ob = parser.parse_deviser_xml()
-        except:
-            global_variables.code_returned \
-                = global_variables.return_codes['parsing error']
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
-#        try:
-        if global_variables.is_package:
+        except Exception:
+            gv.code_returned = gv.return_codes['parsing error']
+    if gv.code_returned == gv.return_codes['success']:
+        # try:
+        if gv.is_package:
             generate_example_xml(ob)
-#        except:
-#            global_variables.code_returned \
-#                = global_variables.return_codes['unknown error - please report']
+        # except Exception:
+        #  gv.code_returned = gv.return_codes['unknown error - please report']
 
 
 def generate_example_xml(ob):
+    """
+    Wrapper function to invoke the main XML Validation constructor.
+
+    :param ob: big dictionary object structure obtained from input XML file.
+    :returns: returns nothing.
+    """
     ex = ValidationXMLFiles.ValidationXMLFiles(ob)
     ex.write_all_files()
 
 
-
 def main(args):
+    """
+    Checks correct number of arguments and then invokes XML code.
+    """
     if len(args) != 2:
-        global_variables.code_returned = \
-            global_variables.return_codes['missing function argument']
-        print ('Usage: generateCode.py xmlfile')
+        gv.code_returned = gv.return_codes['missing function argument']
+        print('Usage: generateXML.py xmlfile')
     else:
         generate_xml_for(args[1])
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
         print('code successfully written')
     else:
         print('writing code failed')
 
-    return global_variables.code_returned
+    return gv.code_returned
+
 
 if __name__ == '__main__':
     main(sys.argv)
