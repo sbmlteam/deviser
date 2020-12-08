@@ -239,7 +239,9 @@ def plural(name):
         returned_word = name + 's'
     return returned_word
 
+
 # Good tests would be (e.g.) word == singular(plural(word)), etc.
+
 
 def singular(name):
     """
@@ -292,7 +294,7 @@ def remove_prefix(name, in_concrete=False, remove_package=False,
     if gv.prefix == 'SBML':
         # we might want to remove the name of the package
         if not in_concrete and gv.is_package and gv.package_prefix != '':
-           prefix_to_remove = gv.package_prefix
+            prefix_to_remove = gv.package_prefix
         elif remove_package and prefix != '':
             prefix_to_remove = prefix
     else:
@@ -396,6 +398,7 @@ def wrap_token(name, pkg=''):
 
 def wrap_type(type, element, hack=False):
     """
+    TODO Sarah, please add an explanation here!
 
     :param type: the type we want to wrap, e.g. 'array', 'enum',...
     :param element:
@@ -422,11 +425,16 @@ def wrap_type(type, element, hack=False):
 
 def wrap_section(name, add_class=True, add_extended=False):
     """
+    'Wrap' a section
+
+    TODO - a section of what???
 
     :param name:
     :param add_class:
     :param add_extended:
     :return:
+
+    e.g. "Cat" -> "\sec{cat-class}"
     """
     if add_class:
         return '\\sec{' + make_class(name, add_extended) + '}'
@@ -496,20 +504,19 @@ def get_sid_refs(refs):
 
 def get_element_name(attribute, addPrefix=True):
     """
+    Get the name of an element node
 
-    :param attribute:
-    :param addPrefix:
-    :return:
+    :param attribute: dictionary of information about the element.
+    :param addPrefix: should the prefix be prepended to the name?
+    :return: the name, if available, else 'FIX ME'.
     """
     if 'type' in attribute:
         name = ''
         if 'texname' in attribute:
             name = attribute['texname']
-        if len(name) == 0:
+        if len(name) == 0:  # No texname
             name = remove_prefix(attribute['name'])
-        if attribute['type'] == 'lo_element':
-            return '\{0}'.format(cap_list_of_name(name, addPrefix))
-        elif attribute['type'] == 'inline_lo_element':
+        if attribute['type'] in ['lo_element', 'inline_lo_element']:
             return '\{0}'.format(cap_list_of_name(name, addPrefix))
         elif attribute['type'] == 'element':
             if attribute['element'] == 'ASTNode*':
@@ -529,9 +536,13 @@ def get_element_name(attribute, addPrefix=True):
 
 def get_element_name_no_prefix(attribute):
     """
+    Get the name of an element node without the prefix.
 
-    :param attribute:
-    :return:
+    :param attribute: dictionary of information about the element.
+    :return: the name, if available, else 'FIX ME'.
+
+    TODO: a lot of similarity between this function and get_element_name().
+    Maybe some scope for combining them? Although there are some differences too.
     """
     if 'type' in attribute:
         name = ''
@@ -571,8 +582,8 @@ def replace_digits(name):
 
     e.g. replace_digits("John 3:16") -> "John Three:OneSix"
     """
-    mydict = {'0':'Zero', '1':'One', '2':'Two', '3':'Three', '4':'Four',
-              '5':'Five', '6':'Six', '7':'Seven', '8':'Eight', '9':'Nine'}
+    mydict = {'0': 'Zero', '1': 'One', '2': 'Two', '3': 'Three', '4': 'Four',
+              '5': 'Five', '6': 'Six', '7': 'Seven', '8': 'Eight', '9': 'Nine'}
 
     for item in mydict:
         name = re.sub(item, mydict[item], name)
@@ -658,10 +669,13 @@ def compare_no_case(test, reference):
 
 def get_class_from_plugin(plugin, package):
     """
+    Get the name of a class from a plugin
 
     :param plugin:
     :param package:
-    :return:
+    :return: the name of the class
+
+    TODO: need example here, and document the function parameters.
     """
     num = len(package)
     length = len(plugin)
@@ -671,8 +685,11 @@ def get_class_from_plugin(plugin, package):
 
 def prefix_name(name):
     """
-    :param name:
-    :return:
+    Prepend the global variables' prefix to a word, if not already present.
+    Except for certain cases.
+
+    :param name: the word
+    :return: the prefixed word
     """
     if name.startswith(gv.prefix):
         return name
@@ -688,9 +705,11 @@ def prefix_name(name):
 
 def prefix_classes(working_class):
     """
+    Prefix the names of items in a dictionary of information about
+    an element node.
 
-    :param working_class:
-    :return:
+    :param working_class: the dictionary
+    :return: nothing
 
     Prefix names - if we are working with another library we want class
     prefixed but element names to stay untouched
@@ -711,7 +730,8 @@ def prefix_classes(working_class):
         # if 'concrete' in attrib and len(attrib['concrete']) > 0:
         #     for conc in attrib['concrete']:
         #         conc['element'] = prefix_name(conc['element'])
-    if 'lo_class_name' in working_class and len(working_class['lo_class_name']) > 0:
+    if 'lo_class_name' in working_class \
+            and len(working_class['lo_class_name']) > 0:
         name = working_class['lo_class_name']
         working_class['lo_class_name'] = prefix_name(name)
 
