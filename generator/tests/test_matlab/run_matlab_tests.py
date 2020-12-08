@@ -77,7 +77,7 @@ def run_matlab_test(name):
 
 def main():
 
-    # set up the enivornment
+    # set up the environment
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
     (path_to_tests, other) = os.path.split(this_dir)
