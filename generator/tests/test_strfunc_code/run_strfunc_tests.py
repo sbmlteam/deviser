@@ -80,6 +80,8 @@ def main():
     not_tested = []
     fail = 0
 
+    ##################################################################
+
     # upper_first() tests
     fail += run_strfunc_test(sf.upper_first, 'cat', 'Cat', fails)
     # fail += run_strfunc_test(sf.upper_first, 'cat', 'CAT')  # Failure test
@@ -198,7 +200,7 @@ def main():
     fail += run_strfunc_test(sf.replace_digits, "John 3:16", "John Three:OneSix", fails)
 
     # replace_underscore() tests
-    data = {"this_is_a_test": "this\_is\_a\_test", "cat": "cat"}
+    data = {"this_is_a_test": "this\_is\_a\_test", "cat": "cat", "_": "\_"}
     fail += execute_tests(sf.replace_underscore, data, fails)
 
     # remove_spaces() tests
@@ -211,17 +213,32 @@ def main():
     fail += execute_tests(sf.remove_hyphens, data, fails)
 
     # texify() tests
+    fail += run_strfunc_test(sf.texify, "012_27 cat44_8 ",
+                             "ZeroOneTwo\_TwoSevencatFourFour\_Eight", fails)
 
     # compare_no_case() tests
+    fail += run_strfunc_test(sf.compare_no_case, "This iS a TEST", True, fails,
+                             reference="this is a test")
 
     # get_class_from_plugin() tests
+    # TODO we need an example for that function.
 
     # prefix_name() tests
+    gv.reset()
+    gv.prefix = "DABS"
+    data = {"DABS": "DABS", "DABSCAT": "DABSCAT", "dabs": "DABSdabs",
+            "SBase": "DABSBase", "XMLNode": "XMLNode",
+            "XMLNodeAgain": "DABSXMLNodeAgain", "ASTNode": "ASTNode"}
+    fail += execute_tests(sf.prefix_name, data, fails)
 
     # prefix_classes() tests
 
     # is_camel_case() tests
+    data = {'FooParameter': True, 'fooParameter': True, 'fooparameter': False,
+            'Fooparameter': False}
+    fail += execute_tests(sf.is_camel_case, data, fails)
 
+    ##################################################################
 
     test_functions.report('strfunc', fail, fails, not_tested)
     return fail
