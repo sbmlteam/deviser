@@ -618,11 +618,13 @@ def remove_spaces(name):
 def remove_hyphens(name):
     """
     Remove hyphens and capitalise each word (after first) in a string.
+    A bit different if there is only one word (see examples below).
 
     :param name: input string
     :return: [newstring, removed?]
 
     e.g. remove_hyphens("this-is-a-test") -> ["thisIsATest", True]
+    "cat-" -> ["cat", True], "-cat" -> ["Cat", True]
     """
     removed_hyphen = False
     if '-' not in name:

@@ -195,12 +195,20 @@ def main():
     # get_element_name_no_prefix() tests
 
     # replace_digits() tests
+    fail += run_strfunc_test(sf.replace_digits, "John 3:16", "John Three:OneSix", fails)
 
     # replace_underscore() tests
+    data = {"this_is_a_test": "this\_is\_a\_test", "cat": "cat"}
+    fail += execute_tests(sf.replace_underscore, data, fails)
 
     # remove_spaces() tests
+    data = {"   hello   world  ": "helloworld", "dogfish": "dogfish"}
+    fail += execute_tests(sf.remove_spaces, data, fails)
 
     # remove_hyphens() tests
+    data = {"this-is-a-test": ["thisIsATest", True], "cat": ["cat", False],
+            "cat-": ["cat", True], "-cat": ["Cat", True] }
+    fail += execute_tests(sf.remove_hyphens, data, fails)
 
     # texify() tests
 
