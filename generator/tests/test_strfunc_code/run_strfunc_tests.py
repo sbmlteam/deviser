@@ -81,7 +81,8 @@ def main():
     fail += execute_tests(sf.get_indent, data)
 
     # abbrev_name() tests
-
+    data = {"thisIsATest": "iat", "CAT": "cat", "cat": "c", "c": "c", "C": "c"}
+    fail += execute_tests(sf.abbrev_name, data)
 
     # abbrev_lo_name() tests
 

@@ -127,8 +127,8 @@ def abbrev_name(element):
     for i in range(0, len(element)):
         if element[i].isupper():
             abbrev = abbrev + element[i]
-    if abbrev == '' and len(element) > 0:
-        abbrev = element[0]
+    if abbrev == '' and len(element) > 0:  # element is all lower-case
+        abbrev = element[0]  # just return the first letter in element
     return abbrev.lower()
 
 
