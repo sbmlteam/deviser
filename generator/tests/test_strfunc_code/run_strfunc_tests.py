@@ -165,22 +165,28 @@ def main():
             "zither": "a"}
     fail += execute_tests(sf.get_indefinite, data, fails)
 
-    # standard_element_name() tests
+    # standard_element_name() tests - another tricky one!
 
     # get_library_suffix() tests
+    data = {"library": "Rary", "libSBML": "Sbml", "cat": "Cat", "lib": ""}
+    fail += execute_tests(sf.get_library_suffix, data, fails)
 
     # A varargs example - wrap_token
     fail += run_strfunc_test(sf.wrap_token, 'fred',
                              '\\token{cat:\\-fred}', fails, pkg='cat')
-    # need more tests for this func
+    # need more tests for this func!
 
-    # wrap_type() tests
+    # wrap_type() tests - I don't really understand this one!
 
-    # wrap_section() tests
+    # wrap_section() tests - or this one!
 
     # make_class() tests
+    fail += run_strfunc_test(sf.make_class, 'Irenaeus', 'irenaeus-class', fails)
+    fail += run_strfunc_test(sf.make_class, 'Irenaeus', 'extended-irenaeus-class',
+                             fails, add_extended=True)
 
     # wrap_enum() tests
+    fail += run_strfunc_test(sf.wrap_enum, 'cat', '\\primtype{cat}', fails)
 
     # get_sid_refs() tests
 
