@@ -103,8 +103,14 @@ def main():
     fail += execute_tests(sf.list_of_name, data, fails, addPrefix=True)
 
     # lower_list_of_name_no_prefix() tests
+    data = {"fox": "listOfFoxes", "cat": "listOfCats", "child": "listOfChildren"}
+    fail += execute_tests(sf.lower_list_of_name_no_prefix, data, fails)
 
     # cap_list_of_name() tests
+    data = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats"}
+    fail += execute_tests(sf.cap_list_of_name, data, fails, addPrefix=False)
+    data = {"FooParameter": "SBMLListOfFooParameters", "cat": "SBMLListOfCats"}
+    fail += execute_tests(sf.cap_list_of_name, data, fails, addPrefix=True)
 
     # cap_list_of_name_no_prefix() tests
 
