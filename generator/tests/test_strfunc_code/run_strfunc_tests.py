@@ -12,11 +12,11 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
 ##############################################################################
 # Set up variables
-fails = []
-not_tested = []
+#fails = []
+#not_tested = []
 
 
-def run_strfunc_test(func, input, expected_output, **kwargs):
+def run_strfunc_test(func, input, expected_output, fails, **kwargs):
     """
     Run a single test case on a strFunc function, and check that
     the actual output returned is the same as that expected.
@@ -24,33 +24,37 @@ def run_strfunc_test(func, input, expected_output, **kwargs):
     :param func: the strFunc function under test
     :param input: input to function
     :param expected_output: what we expect the function to return
+    :param fails: the list of failure information strings.
     :param **kwargs: any additional named arguments for the function
     :return: 0 on success, 1 on failure
     """
     actual_output = func(input, **kwargs)
+    # We should maybe use test_functions.compare_return_codes() here,
+    # although none of the other test files seem to use it!
     if actual_output == expected_output:
         return 0
-    else:  # NB is the msg below meant to go in fails?
-        errormsg = "*** Error in strfunc test!"
-        errormsg += "function:{0}, actual output:{1}, but expected:{2}"\
-            .format(func, actual_output, expected_output)
-        print(errormsg)
+    else:
+        errormsg = "*** Error in strfunc test! "
+        errormsg += "function:{0}, input:{1}, actual output:{2}, but expected:{3}."\
+            .format(func, input, actual_output, expected_output)
+        fails.append(errormsg)
         return 1
 
 
-def execute_tests(func, test_data, **kwargs):
+def execute_tests(func, test_data, fails, **kwargs):
     """
     Execute a set of individual tests on a strFunc function.
 
     :param func: the function under test
     :param test_data: dictionary of test data
                       (keys=inputs, values=expected outputs)
+    :param fails: the list of failure information strings.
     :param **kwargs: any named arguments for the function
     :return: number of failed tests for this set.
     """
     counter = 0
     for (input, expected) in test_data.items():
-        counter += run_strfunc_test(func, input, expected, **kwargs)
+        counter += run_strfunc_test(func, input, expected, fails, **kwargs)
     return counter
 
 
@@ -59,34 +63,36 @@ def main():
     # NOTE: the test sets below are in the same order as the functions
     # appear in strFunctions.py. Please maintain that. Thanks.
 
-    # run the individual tests
+    # Set up variables
+    fails = []
+    not_tested = []
     fail = 0
 
     # upper_first() tests
-    fail += run_strfunc_test(sf.upper_first, 'cat', 'Cat')
+    fail += run_strfunc_test(sf.upper_first, 'cat', 'Cat', fails)
     # fail += run_strfunc_test(sf.upper_first, 'cat', 'CAT')  # Failure test
     data = {'cat': 'Cat', 'csgsomething': 'CSGsomething', 'csgcat': 'CSGcat',
             'cscat': 'Cscat', 'csgeometry': 'CSGeometry',
             'csGeometry': 'CSGeometry', 'a': 'A'}
-    fail += execute_tests(sf.upper_first, data)
+    fail += execute_tests(sf.upper_first, data, fails)
 
     # lower_first() tests - it's virtually the exact opposite of upper_first()
     data2 = {}  # Exact opposite of dictionary used in upper_first() tests.
     for (input, expected) in data.items():
         data2[expected] = input
-    fail += execute_tests(sf.lower_first, data2)
+    fail += execute_tests(sf.lower_first, data2, fails)
 
     # get_indent() tests
     data = {'': 1, 'elephant': 9}
-    fail += execute_tests(sf.get_indent, data)
+    fail += execute_tests(sf.get_indent, data, fails)
 
     # abbrev_name() tests
     data = {"thisIsATest": "iat", "CAT": "cat", "cat": "c", "c": "c", "C": "c"}
-    fail += execute_tests(sf.abbrev_name, data)
+    fail += execute_tests(sf.abbrev_name, data, fails)
 
     # abbrev_lo_name() tests
     data = {"spaghetti": "LOtti", "SPAGHETTI": "LOTTI", "": "LO"}
-    fail += execute_tests(sf.abbrev_lo_name, data)
+    fail += execute_tests(sf.abbrev_lo_name, data, fails)
 
     # list_of_name() tests
 
@@ -113,7 +119,7 @@ def main():
 
     # A varargs example - wrap_token
     fail += run_strfunc_test(sf.wrap_token, 'fred',
-                             '\\token{cat:\\-fred}', pkg='cat')
+                             '\\token{cat:\\-fred}', fails, pkg='cat')
     # need more tests for this func
 
     # wrap_type() tests
