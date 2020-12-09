@@ -52,6 +52,9 @@ def execute_tests(func, test_data, fails, **kwargs):
     :param fails: the list of failure information strings.
     :param **kwargs: any named arguments for the function
     :return: number of failed tests for this set.
+
+    TODO should move this to test_functions.py? The test function to run one test
+    (here, `run_str_func`) could be a new func2 argument above, to make this more generic.
     """
     counter = 0
     for (input, expected) in test_data.items():
@@ -66,6 +69,8 @@ def swap_dictionary(old_dict):
 
     :param old_dict: the old (i.e. input) dictionary
     :return: the newly-created dictionary
+
+    TODO should move this to test_functions.py?
     """
     new_dict = {}
     for (key, value) in old_dict.items():
@@ -82,6 +87,8 @@ def compare_dictionaries(input, expected, fails):
     :param expected: what the first is expected to be
     :param fails: the list of failure cases' strings
     :return 0 on success, 1 on failure.
+
+    TODO should move this to test_functions.py?
     """
     if input == expected:
        return 0
@@ -111,6 +118,8 @@ def check_keys(first, second, fails):
     :param second: the second dictionary
     :fails: the list of failure cases we are keeping
     :return: nothing
+
+    TODO should move this to test_functions.py?
     """
     first_keys = list(first.keys())
     for k in first_keys:
@@ -288,15 +297,16 @@ def main():
     fail += execute_tests(sf.prefix_name, data, fails)
 
     # prefix_classes() tests
-    # This func doesn't return anything at the moment. Could get it to
-    # return the updated dictionary if necessary, but best not to change the code.
-    # Want to compare updated dictionary with what we expect
+    # This func doesn't return anything at the moment. So we have to
+    # compare "changing" dictionary with what we expect it to be once
+    # it's changed.
     gv.reset()
-    input_dict = {'name': 'Colin', 'baseClass': gv.baseClass }
+    changing_dict = {'name': 'Colin', 'baseClass': gv.baseClass}
     expected_dict = {'name': 'SBMLColin', 'baseClass': gv.baseClass,
                      'elementName': 'colin'}
-    run_strfunc_test(sf.prefix_classes, input_dict, "", fails)  # Do not consume return value
-    fail += compare_dictionaries(input_dict, expected_dict, fails)
+    run_strfunc_test(sf.prefix_classes, changing_dict, "", fails)  # Do not consume return value
+    fail += compare_dictionaries(changing_dict, expected_dict, fails)
+    # Need a test with attributes in the dictionaries.
 
     # is_camel_case() tests
     data = {'FooParameter': True, 'fooParameter': True, 'fooparameter': False,
