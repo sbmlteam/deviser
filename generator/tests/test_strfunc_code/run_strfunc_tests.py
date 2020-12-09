@@ -56,6 +56,20 @@ def execute_tests(func, test_data, fails, **kwargs):
     return counter
 
 
+def swap_dictionary(old_dict):
+    """
+    Use the values of the old dictionary as keys for the new one,
+    and the keys of the old dictionary as the values of the new one.
+
+    :param old_dict: the old (i.e. input) dictionary
+    :return: the newly-created dictionary
+    """
+    new_dict = {}
+    for (key, value) in old_dict.items():
+        new_dict[value] = key
+    return new_dict
+
+
 def main():
 
     # NOTE: the test sets below are in the same order as the functions
@@ -75,9 +89,10 @@ def main():
     fail += execute_tests(sf.upper_first, data, fails)
 
     # lower_first() tests - it's virtually the exact opposite of upper_first()
-    data2 = {}  # Exact opposite of dictionary used in upper_first() tests.
-    for (input, expected) in data.items():
-        data2[expected] = input
+    #data2 = {}  # Exact opposite of dictionary used in upper_first() tests.
+    #for (input, expected) in data.items():
+        #data2[expected] = input
+    data2 = swap_dictionary(data)
     fail += execute_tests(sf.lower_first, data2, fails)
 
     # get_indent() tests
@@ -117,12 +132,31 @@ def main():
     # cap_list_of_name_no_prefix() tests
     gv.reset()
     data = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats"}
-    #fail += execute_tests(sf.cap_list_of_name_no_prefix, data, fails)
+    fail += execute_tests(sf.cap_list_of_name_no_prefix, data, fails)
+
     # plural_no_prefix() tests
+    # TODO this one and remove_prefix() are a bit tricky (broken?)
+    gv.reset()
+    data = {"fox": "foxes", "child": "children", "SBMLchild": "SBMLchildren"}
+    fail += execute_tests(sf.plural_no_prefix, data, fails)
+    gv.is_package = False
+    gv.prefix = "Rosie"
+    data = {"Rosiefox": "foxes", "Rosiechild": "children", "RosieCat": "Cats"}
+    fail += execute_tests(sf.plural_no_prefix, data, fails)
+    gv.is_package = True
+    data = {"Rosiefox": "Rosiefoxes", "Rosiechild": "Rosiechildren", "RosieCat": "RosieCats"}
+    fail += execute_tests(sf.plural_no_prefix, data, fails)
 
     # plural() tests
+    data = {"cat": "cats", "dogs": "dogs", "child": "children",
+            "disinformation": "disinformation", "fox": "foxes",
+            "party": "parties", "cloud": "clouds", "something": "somethings"}
+    fail += execute_tests(sf.plural, data, fails)
 
     # singular() tests
+    data2 = swap_dictionary(data)
+    data2['dogs'] = 'dog'
+    fail += execute_tests(sf.singular, data2, fails)
 
     # remove_prefix() tests
 
