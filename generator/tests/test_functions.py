@@ -51,7 +51,7 @@ def read_file(path):
     return contents
 
 
-# do a string comparison of the contents of two file
+# do a string comparison of the contents of two files
 def compare_files(infile, outfile, fails, not_tested):
     ret = 0
     if not os.path.isfile(infile):

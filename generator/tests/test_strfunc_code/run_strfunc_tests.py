@@ -17,6 +17,16 @@ not_tested = []
 
 
 def run_strfunc_test(func, input, expected_output, **kwargs):
+    """
+    Run a single test case on a strFunc function, and check that
+    the actual output returned is the same as that expected.
+
+    :param func: the strFunc function under test
+    :param input: input to function
+    :param expected_output: what we expect the function to return
+    :param **kwargs: any additional named arguments for the function
+    :return: 0 on success, 1 on failure
+    """
     actual_output = func(input, **kwargs)
     if actual_output == expected_output:
         return 0
@@ -26,6 +36,22 @@ def run_strfunc_test(func, input, expected_output, **kwargs):
             .format(func, actual_output, expected_output)
         print(errormsg)
         return 1
+
+
+def execute_tests(func, test_data, **kwargs):
+    """
+    Execute a set of individual tests on a strFunc function.
+
+    :param func: the function under test
+    :param test_data: dictionary of test data
+                      (keys=inputs, values=expected outputs)
+    :param **kwargs: any named arguments for the function
+    :return: number of failed tests for this set.
+    """
+    counter = 0
+    for (input, expected) in test_data.items():
+        counter += run_strfunc_test(func, input, expected, **kwargs)
+    return counter
 
 
 def main():
@@ -42,19 +68,17 @@ def main():
     data = {'cat': 'Cat', 'csgsomething': 'CSGsomething', 'csgcat': 'CSGcat',
             'cscat': 'Cscat', 'csgeometry': 'CSGeometry',
             'csGeometry': 'CSGeometry', 'a': 'A'}
-    data2 = {}  # Exact opposite of the data dictionary. Used in next test!
-    for (input, expected) in data.items():
-        fail += run_strfunc_test(sf.upper_first, input, expected)
-        data2[expected] = input
+    fail += execute_tests(sf.upper_first, data)
 
     # lower_first() tests - it's virtually the exact opposite of upper_first()
-    for (input, expected) in data2.items():
-        fail += run_strfunc_test(sf.lower_first, input, expected)
+    data2 = {}  # Exact opposite of dictionary used in upper_first() tests.
+    for (input, expected) in data.items():
+        data2[expected] = input
+    fail += execute_tests(sf.lower_first, data2)
 
     # get_indent() tests
     data = {'': 1, 'elephant': 9}
-    for (input, expected) in data.items():
-        fail += run_strfunc_test(sf.get_indent, input, expected)
+    fail += execute_tests(sf.get_indent, data)
 
     # abbrev_name() tests
 
