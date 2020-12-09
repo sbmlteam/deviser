@@ -89,9 +89,6 @@ def main():
     fail += execute_tests(sf.upper_first, data, fails)
 
     # lower_first() tests - it's virtually the exact opposite of upper_first()
-    #data2 = {}  # Exact opposite of dictionary used in upper_first() tests.
-    #for (input, expected) in data.items():
-        #data2[expected] = input
     data2 = swap_dictionary(data)
     fail += execute_tests(sf.lower_first, data2, fails)
 
@@ -155,12 +152,18 @@ def main():
 
     # singular() tests
     data2 = swap_dictionary(data)
-    data2['dogs'] = 'dog'
+    data2['dogs'] = 'dog'  # Just need to tweak this one entry. Otherwise OK.
     fail += execute_tests(sf.singular, data2, fails)
 
-    # remove_prefix() tests
+    # remove_prefix() tests - this is a complicated function to test!
+
+
 
     # get_indefinite() tests
+    data = {"apple": "an", "biscuit": "a", "elephant": "an", "image": "an",
+            "polar bear": "a", "orangutan": "an", "under secretary": "an",
+            "zither": "a"}
+    fail += execute_tests(sf.get_indefinite, data, fails)
 
     # standard_element_name() tests
 
