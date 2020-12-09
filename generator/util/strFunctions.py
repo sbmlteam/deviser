@@ -722,6 +722,18 @@ def prefix_classes(working_class):
         working_class['baseClass'] = prefix_name(working_class['baseClass'])
     if 'elementName' not in working_class or len(working_class['elementName']) == 0:
         working_class['elementName'] = lower_first(existing_name)
+
+    if 'lo_class_name' in working_class \
+            and len(working_class['lo_class_name']) > 0:
+        name = working_class['lo_class_name']
+        working_class['lo_class_name'] = prefix_name(name)
+
+    # TODO will 'attribs' always be a key which is present?
+    # I added this check so a simple test would work, but I don't
+    # know if this will actually ever occur in real life.
+    if 'attribs' not in working_class:  # Is this ever true?
+        return
+
     for attrib in working_class['attribs']:
         if attrib['type'] == 'lo_element' or attrib['type'] == 'element' or \
                         attrib['type'] == 'inline_lo_element':
@@ -732,10 +744,7 @@ def prefix_classes(working_class):
         # if 'concrete' in attrib and len(attrib['concrete']) > 0:
         #     for conc in attrib['concrete']:
         #         conc['element'] = prefix_name(conc['element'])
-    if 'lo_class_name' in working_class \
-            and len(working_class['lo_class_name']) > 0:
-        name = working_class['lo_class_name']
-        working_class['lo_class_name'] = prefix_name(name)
+
 
 
 def is_camel_case(name):
