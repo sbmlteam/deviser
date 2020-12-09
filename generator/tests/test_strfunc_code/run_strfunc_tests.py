@@ -2,18 +2,16 @@
 import os
 import sys
 
+
 import test_functions
 
-from util import strFunctions as sf
+from util import strFunctions as sf, global_variables as gv
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
 
 ##############################################################################
-# Set up variables
-#fails = []
-#not_tested = []
 
 
 def run_strfunc_test(func, input, expected_output, fails, **kwargs):
@@ -95,7 +93,14 @@ def main():
     fail += execute_tests(sf.abbrev_lo_name, data, fails)
 
     # list_of_name() tests
-
+    gv.reset()
+    data = {"FooParameter": "ListOfFooParameters"}
+    fail += execute_tests(sf.list_of_name, data, fails, addPrefix=True)
+    fail += execute_tests(sf.list_of_name, data, fails, addPrefix=False)
+    print(f"gv is package: {gv.is_package}, gv prefix: {gv.prefix}")
+    gv.is_package = False
+    data = {"FooParameter": "SBMLListOfFooParameters"}
+    fail += execute_tests(sf.list_of_name, data, fails, addPrefix=True)
 
     # lower_list_of_name_no_prefix() tests
 
