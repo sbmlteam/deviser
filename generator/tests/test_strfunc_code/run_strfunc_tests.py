@@ -53,7 +53,7 @@ def execute_tests(func, test_data, fails, **kwargs):
     :param **kwargs: any named arguments for the function
     :return: number of failed tests for this set.
 
-    TODO should move this to test_functions.py? The test function to run
+    TODO should we move this to test_functions.py? The test function to run
     one test (here, `run_str_func`) could be a new func2 argument above,
     to make this more generic.
     """
@@ -71,7 +71,7 @@ def swap_dictionary(old_dict):
     :param old_dict: the old (i.e. input) dictionary
     :return: the newly-created dictionary
 
-    TODO should move this to test_functions.py?
+    TODO should we move this to test_functions.py?
     """
     new_dict = {}
     for (key, value) in old_dict.items():
@@ -89,7 +89,7 @@ def compare_dictionaries(input, expected, fails):
     :param fails: the list of failure cases' strings
     :return 0 on success, 1 on failure.
 
-    TODO should move this to test_functions.py?
+    TODO should we move this to test_functions.py?
     """
     if input == expected:
        return 0
@@ -120,7 +120,7 @@ def check_keys(first, second, fails):
     :fails: the list of failure cases we are keeping
     :return: nothing
 
-    TODO should move this to test_functions.py?
+    TODO should we move this to test_functions.py?
     """
     first_keys = list(first.keys())
     for k in first_keys:
@@ -223,8 +223,11 @@ def main():
     fail += execute_tests(sf.singular, data2, fails)
 
     # remove_prefix() tests - this is a complicated function to test!
-
-
+    gv.reset()  # gv.prefix now "SBML"
+    # TODO This is a bit complicated to test. It may be best for Sarah
+    # to write the tests and check this function is doing what it's
+    # meant to. Named function arguments can be used in the tests,
+    # like those done above for testing cap_list_of_name().
 
     # get_indefinite() tests
     data = {"apple": "an", "biscuit": "a", "elephant": "an", "image": "an",
@@ -233,6 +236,10 @@ def main():
     fail += execute_tests(sf.get_indefinite, data, fails)
 
     # standard_element_name() tests - another tricky one!
+    # TODO - it might be best to wait until the bug in singular() is fixed
+    # (issue #34).
+    data = {"listOfFoxes,": "Fox"}
+    fail += execute_tests(sf.standard_element_name, data, fails)
 
     # get_library_suffix() tests
     data = {"library": "Rary", "libSBML": "Sbml", "cat": "Cat", "lib": ""}
