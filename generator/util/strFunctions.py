@@ -482,7 +482,9 @@ def get_sid_refs(refs):
     :param refs: a string which is a comma-separated sequence of ...
     :return: a tuple of ...
 
-    TODO complete the above and add description!
+    TODO complete the above and add description! Why/how/where is this used?
+
+    get_sid_refs('cat,dog') = ["Cat or \Dog", "CatOrDog"]
     """
     if refs == '':
         return['', 'SId']
@@ -531,7 +533,7 @@ def get_element_name(attribute, addPrefix=True):
         else:
             return '\{0}'.format(upper_first(remove_prefix(attribute['name'])))
     else:
-        return 'FIX ME'
+        return 'FIX ME'  # 'FIX_ME' ?
 
 
 def get_element_name_no_prefix(attribute):
@@ -570,7 +572,7 @@ def get_element_name_no_prefix(attribute):
         else:
             return '\{0}'.format(upper_first(attribute['name']))
     else:
-        return 'FIX ME'
+        return 'FIX ME'  # Should this be 'FIX_ME'? Does it matter?
 
 
 def replace_digits(name):

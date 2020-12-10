@@ -24,7 +24,7 @@ def run_strfunc_test(func, input, expected_output, fails, **kwargs):
 
     :param func: the strFunc function under test
     :param input: input to function
-    :param expected_output: what we expect the function to return
+    :param expected_output: what we expect the function to return. Can be None.
     :param fails: the list of failure information strings.
     :param **kwargs: any additional named arguments for the function
     :return: 0 on success, 1 on failure
@@ -53,8 +53,9 @@ def execute_tests(func, test_data, fails, **kwargs):
     :param **kwargs: any named arguments for the function
     :return: number of failed tests for this set.
 
-    TODO should move this to test_functions.py? The test function to run one test
-    (here, `run_str_func`) could be a new func2 argument above, to make this more generic.
+    TODO should move this to test_functions.py? The test function to run
+    one test (here, `run_str_func`) could be a new func2 argument above,
+    to make this more generic.
     """
     counter = 0
     for (input, expected) in test_data.items():
@@ -255,7 +256,11 @@ def main():
     # wrap_enum() tests
     fail += run_strfunc_test(sf.wrap_enum, 'cat', '\\primtype{cat}', fails)
 
-    # get_sid_refs() tests
+    # get_sid_refs() tests 'cat': 'Cat', 'csgsomething': 'CSGsomething',
+    data = {'': ['', 'SId'], 'cat': ['Cat', 'Cat'],
+            'csgsomething': ['CSGsomething', 'CSGsomething'],
+            'cat,dog': ["Cat or \Dog", "CatOrDog"],}
+    fail += execute_tests(sf.get_sid_refs, data, fails)
 
     # get_element_name() tests
 
@@ -286,7 +291,7 @@ def main():
                              reference="this is a test")
 
     # get_class_from_plugin() tests
-    # TODO we need an example for that function.
+    # TODO we need a meaningful example for that function.
 
     # prefix_name() tests
     gv.reset()
@@ -300,13 +305,32 @@ def main():
     # This func doesn't return anything at the moment. So we have to
     # compare "changing" dictionary with what we expect it to be once
     # it's changed.
-    gv.reset()
+    gv.reset()  # gv.prefix is now "SBML"
     changing_dict = {'name': 'Colin', 'baseClass': gv.baseClass}
     expected_dict = {'name': 'SBMLColin', 'baseClass': gv.baseClass,
                      'elementName': 'colin'}
-    run_strfunc_test(sf.prefix_classes, changing_dict, "", fails)  # Do not consume return value
+    run_strfunc_test(sf.prefix_classes, changing_dict, None, fails)  # Do not consume return value
     fail += compare_dictionaries(changing_dict, expected_dict, fails)
-    # Need a test with attributes in the dictionaries.
+
+    # Now a test of the same function, this time with a list of attribute dictionaries
+    # as a value in `changing_dict` and `expected_dict`:
+    attrib1_before = {'type': 'lo_element', 'element': 'Dabs',}
+    attrib1_after = {'type': 'lo_element', 'element': 'SBMLDabs',}
+    attrib2_before = {'type': 'inline_lo_element', 'element': 'ASTNode'}
+    attrib2_after = {'type': 'inline_lo_element', 'element': 'ASTNode'}
+    concrete_before = [{'element': 'test'}]
+    concrete_after = [{'element': 'SBMLtest'}]
+    attrib2_before['concrete'] = concrete_before
+    attrib2_after['concrete'] = concrete_after
+    attribs_before = [attrib1_before, attrib2_before]
+    attribs_after = [attrib1_after, attrib2_after]
+    changing_dict = {'name': 'Colin', 'baseClass': gv.baseClass,
+                     'lo_class_name': 'Dabs', 'attribs': attribs_before}
+    expected_dict = {'name': 'SBMLColin', 'baseClass': gv.baseClass,
+                     'elementName': 'colin', 'lo_class_name': 'SBMLDabs', 'attribs': attribs_after}
+    run_strfunc_test(sf.prefix_classes, changing_dict, None, fails)  # Do not consume return value
+    fail += compare_dictionaries(changing_dict, expected_dict, fails)
+
 
     # is_camel_case() tests
     data = {'FooParameter': True, 'fooParameter': True, 'fooparameter': False,
