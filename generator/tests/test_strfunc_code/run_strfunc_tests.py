@@ -265,12 +265,20 @@ def main():
     # get_element_name() tests
     attribute1 = {'something': 'something else'}  # expect "FIX_ME"
     attribute2 = {'type': 'element', 'element': 'ASTNode*' , 'texname': 'tex'}  # expect 'MathML math'
-    attribute3 = {'isListOf': 'somethingrandom', 'name': 'Foo'}  # expect "ListOfFoos"
+    attribute3 = {'isListOf': 'somethingrandom', 'name': 'SBMLFoo'}  # expect "ListOfFoos"
     fail += run_strfunc_test(sf.get_element_name, attribute1, "FIX_ME", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute2, "MathML math", fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute3, "\ListOfFoos", fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute3, "\ListOfSBMLFoos", fails)
+
+    # At the moment, the same tests are used for both get_element_name() and
+    # get_element_name_no_prefix(). They are quite similar functions. Ideally
+    # I guess we should add a test which gives a different result between them.
+    # Otherwise there is little point in having both functions. TODO
 
     # get_element_name_no_prefix() tests
+    fail += run_strfunc_test(sf.get_element_name_no_prefix, attribute1, "FIX_ME", fails)
+    fail += run_strfunc_test(sf.get_element_name_no_prefix, attribute2, "MathML math", fails)
+    fail += run_strfunc_test(sf.get_element_name_no_prefix, attribute3, "\ListOfSBMLFoos", fails)
 
     # replace_digits() tests
     fail += run_strfunc_test(sf.replace_digits, "John 3:16", "John Three:OneSix", fails)
