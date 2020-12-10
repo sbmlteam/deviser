@@ -263,6 +263,12 @@ def main():
     fail += execute_tests(sf.get_sid_refs, data, fails)
 
     # get_element_name() tests
+    attribute1 = {'something': 'something else'}  # expect "FIX_ME"
+    attribute2 = {'type': 'element', 'element': 'ASTNode*' , 'texname': 'tex'}  # expect 'MathML math'
+    attribute3 = {'isListOf': 'somethingrandom', 'name': 'Foo'}  # expect "ListOfFoos"
+    fail += run_strfunc_test(sf.get_element_name, attribute1, "FIX_ME", fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute2, "MathML math", fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute3, "\ListOfFoos", fails)
 
     # get_element_name_no_prefix() tests
 

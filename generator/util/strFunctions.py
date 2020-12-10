@@ -510,7 +510,7 @@ def get_element_name(attribute, addPrefix=True):
 
     :param attribute: dictionary of information about the element.
     :param addPrefix: should the prefix be prepended to the name?
-    :return: the name, if available, else 'FIX ME'.
+    :return: the name, if available, else 'FIX_ME'.
     """
     if 'type' in attribute:
         name = ''
@@ -533,7 +533,7 @@ def get_element_name(attribute, addPrefix=True):
         else:
             return '\{0}'.format(upper_first(remove_prefix(attribute['name'])))
     else:
-        return 'FIX ME'  # 'FIX_ME' ?
+        return 'FIX_ME'
 
 
 def get_element_name_no_prefix(attribute):
@@ -541,7 +541,7 @@ def get_element_name_no_prefix(attribute):
     Get the name of an element node without the prefix.
 
     :param attribute: dictionary of information about the element.
-    :return: the name, if available, else 'FIX ME'.
+    :return: the name, if available, else 'FIX_ME'.
 
     TODO: a lot of similarity between this function and get_element_name().
     Maybe some scope for combining them? Although there are some differences too.
@@ -572,7 +572,7 @@ def get_element_name_no_prefix(attribute):
         else:
             return '\{0}'.format(upper_first(attribute['name']))
     else:
-        return 'FIX ME'  # Should this be 'FIX_ME'? Does it matter?
+        return 'FIX_ME'
 
 
 def replace_digits(name):
