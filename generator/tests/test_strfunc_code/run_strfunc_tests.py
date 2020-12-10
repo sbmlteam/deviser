@@ -92,7 +92,7 @@ def compare_dictionaries(input, expected, fails):
     TODO should we move this to test_functions.py?
     """
     if input == expected:
-       return 0
+        return 0
 
     # Failure.
     errormsg = "*** Error in strfunc test! "
@@ -208,7 +208,8 @@ def main():
     data = {"Rosiefox": "foxes", "Rosiechild": "children", "RosieCat": "Cats"}
     fail += execute_tests(sf.plural_no_prefix, data, fails)
     gv.is_package = True
-    data = {"Rosiefox": "Rosiefoxes", "Rosiechild": "Rosiechildren", "RosieCat": "RosieCats"}
+    data = {"Rosiefox": "Rosiefoxes", "Rosiechild": "Rosiechildren",
+            "RosieCat": "RosieCats"}
     fail += execute_tests(sf.plural_no_prefix, data, fails)
 
     # plural() tests
@@ -266,13 +267,13 @@ def main():
     # get_sid_refs() tests 'cat': 'Cat', 'csgsomething': 'CSGsomething',
     data = {'': ['', 'SId'], 'cat': ['Cat', 'Cat'],
             'csgsomething': ['CSGsomething', 'CSGsomething'],
-            'cat,dog': ["Cat or \Dog", "CatOrDog"],}
+            'cat,dog': ["Cat or \Dog", "CatOrDog"]}
     fail += execute_tests(sf.get_sid_refs, data, fails)
 
     # get_element_name() tests
-    attribute1 = {'something': 'something else'}  # expect "FIX_ME"
-    attribute2 = {'type': 'element', 'element': 'ASTNode*' , 'texname': 'tex'}  # expect 'MathML math'
-    attribute3 = {'isListOf': 'somethingrandom', 'name': 'SBMLFoo'}  # expect "ListOfFoos"
+    attribute1 = {'something': 'something else'}
+    attribute2 = {'type': 'element', 'element': 'ASTNode*', 'texname': 'tex'}
+    attribute3 = {'isListOf': 'somethingrandom', 'name': 'SBMLFoo'}
     fail += run_strfunc_test(sf.get_element_name, attribute1, "FIX_ME", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute2, "MathML math", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute3, "\ListOfSBMLFoos", fails)
@@ -300,7 +301,7 @@ def main():
 
     # remove_hyphens() tests
     data = {"this-is-a-test": ["thisIsATest", True], "cat": ["cat", False],
-            "cat-": ["cat", True], "-cat": ["Cat", True] }
+            "cat-": ["cat", True], "-cat": ["Cat", True]}
     fail += execute_tests(sf.remove_hyphens, data, fails)
 
     # texify() tests
@@ -335,8 +336,8 @@ def main():
 
     # Now a test of the same function, this time with a list of attribute dictionaries
     # as a value in `changing_dict` and `expected_dict`:
-    attrib1_before = {'type': 'lo_element', 'element': 'Dabs',}
-    attrib1_after = {'type': 'lo_element', 'element': 'SBMLDabs',}
+    attrib1_before = {'type': 'lo_element', 'element': 'Dabs'}
+    attrib1_after = {'type': 'lo_element', 'element': 'SBMLDabs'}
     attrib2_before = {'type': 'inline_lo_element', 'element': 'ASTNode'}
     attrib2_after = {'type': 'inline_lo_element', 'element': 'ASTNode'}
     concrete_before = [{'element': 'test'}]
@@ -366,4 +367,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
