@@ -4,7 +4,7 @@ import os
 import shutil
 import sys 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
-from util import global_variables
+from util import global_variables as gv
 
 
 path_to_tests = ''
@@ -26,8 +26,8 @@ def set_path_to_tests(dirname):
 # set running tests variable
 # needs to be separate as the global run test function uses it
 def set_running_tests():
-    global_variables.running_tests = True
-    global_variables.code_returned = global_variables.return_codes['success']
+    gv.running_tests = True
+    gv.code_returned = gv.return_codes['success']
 
 
 # get the xml filename
@@ -75,16 +75,16 @@ def compare_files(infile, outfile, fails, not_tested):
 
 def compare_return_codes(name, flag, expected_return, fails):
     ret = 0
-    this_return = global_variables.code_returned
-    expected = global_variables.get_return_code(expected_return)
+    this_return = gv.code_returned
+    expected = gv.get_return_code(expected_return)
     if this_return == expected_return:
         print('{0} returned \'{1}\' as expected'.format(name, expected))
     else:
         ret = 1
         fails.append('{0}: {1} {2}'.format(name, flag, expected_return))
         print('Incorrect Return: {0} Expected: '
-              '{1}'.format(global_variables.get_return_code(this_return),
-                           global_variables.get_return_code(expected_return)))
+              '{1}'.format(gv.get_return_code(this_return),
+                           gv.get_return_code(expected_return)))
     return ret
 
 
