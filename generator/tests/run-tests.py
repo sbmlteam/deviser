@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import os
-import sys
 import test_functions
 
 ##############################################################################
@@ -15,6 +14,13 @@ this_dir = ''
 
 
 def run_test(name, test_type):
+    """
+    Run a test suite.
+
+    :param name: name of test suite, e.g. 'binding'
+    :param test_type: e.g. 'codes', TODO what is it?
+    :return: nothing
+    """
     global total_fail
     test_name = 'test_{0}_{1}'.format(name, test_type)
     test_case = os.path.join(this_dir, test_name)
@@ -28,6 +34,9 @@ def run_test(name, test_type):
 
 
 def main():
+    """
+    Run all the test suites and output helpful messages.
+    """
     test_functions.set_running_tests()
     global this_dir
     this_dir = os.path.dirname(os.path.abspath(__file__))
