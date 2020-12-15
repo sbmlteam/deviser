@@ -2,12 +2,12 @@
 
 import os
 import sys
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 import deviser
 import test_functions
 from util import global_variables as gv
-
 
 ##############################################################################
 # Set up variables
@@ -28,7 +28,7 @@ def generate_deviser(args):
 
 def run_deviser_test(name, flag, expected_return):
     """
-    General function for running Deviser tests.
+    General function for running command-line Deviser tests.
 
     :param name: general name of test
     :param flag: a command-line flag
@@ -38,17 +38,13 @@ def run_deviser_test(name, flag, expected_return):
     error = gv.get_return_code(expected_return)
     filename = test_functions.set_up_test(name, flag, error)
     args = []
-    if flag in ['-g', '-l', 'wrong']:  # == '-g'or flag == '-l':
+    if flag in ['-g', '-l', 'wrong']:
         args.append('deviser')
         args.append(flag)
         args.append(filename)
     elif flag == 'missing':
         args.append('deviser')
         args.append(filename)
-    #elif flag == 'wrong':
-    #    args.append('deviser')
-    #    args.append(flag)
-    #    args.append(filename)
 
     generate_deviser(args)
     fail = test_functions.compare_return_codes(name, flag, expected_return,
@@ -80,10 +76,9 @@ def main():
                              gv.return_codes['missing function argument'])
     fail += run_deviser_test('test_child', 'wrong',
                              gv.return_codes['invalid function arguments'])
-    # TODO sort for latest python
+    # TODO sort for latest python ** UPDATE 15th December 2020 this seems to work fine on Python 2 and 3.6.12
     # fail += run_deviser_test('test_child', '-l',
-    #                          gv.
-    #                          return_codes['success'])
+    #                          gv.return_codes['success'])
     fail += run_deviser_test('invalid', '-g',
                              gv.return_codes['parsing error'])
     fail += run_deviser_test('invalid', '-l',
@@ -96,7 +91,6 @@ def main():
                              gv.return_codes['unknown type used'])
     fail += run_deviser_test('bad_concretes', '-g',
                              gv.return_codes['missing required information'])
-
 
     test_functions.report('EXIT CODES', fail, fails, not_tested)
     return fail
