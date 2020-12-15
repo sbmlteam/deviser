@@ -42,7 +42,7 @@ def set_up_test(name, class_name, test_case=''):
     Get the xml filename, and print a banner defining the test.
 
     :param name: stub of XML filename, e.g. 'dyn' for filename 'dyn.xml'
-    :param class_name: test class, e.g.
+    :param class_name: test class, e.g. 'MATLAB', 'Examples'.
     :param test_case: brief test description, to output on screen
     :return: path to the required XML file.
     """
@@ -103,8 +103,8 @@ def compare_return_codes(name, flag, expected_return, fails):
     """
     Compare return code from a test with that expected.
 
-    :param name:
-    :param flag:
+    :param name: general name of test
+    :param flag: a command-line flag
     :param expected_return: expected return code from a test
     :param fails: list of failure cases
     :return: 0 on success, 1 on failure.
@@ -123,8 +123,15 @@ def compare_return_codes(name, flag, expected_return, fails):
     return ret
 
 
-# run a set of tests
 def run_tests(test_name, name, fails):
+    """
+    Run a set of tests.
+
+    :param test_name: name of test, e.g. 'test_binding_code'
+    :param name: e.g. 'code' TODO not entirely sure what this is
+    :param fails: list of failure cases
+    :returns: 0 if all tests pass, 1 if at least one failure case.
+    """
     ret = 0
     print('====================================================')
     print('Running {0}'.format(test_name))
@@ -148,8 +155,16 @@ def run_tests(test_name, name, fails):
     return ret
 
 
-# write a report for the tests
 def report(name, fail, fails, not_tested):
+    """
+    Write a report for the tests.
+
+    :param name: name of test suite, e.g. 'EXIT CODES'
+    :param fail: number of test failures encountered
+    :param fails: list of failure cases
+    :param not_tested: list of untested cases
+    :returns: nothing
+    """
     print('****************************************************************')
     print('REPORT for {0} Tests'.format(name))
 
