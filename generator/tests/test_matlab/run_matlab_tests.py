@@ -16,6 +16,7 @@ import test_functions
 # Set up variables
 fails = []
 not_tested = []
+filetypes = ['sf', 'dv', 'vt']
 
 
 ##############################################################################
@@ -26,12 +27,9 @@ def generate_matlab_files(filename, name):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
-    ml = BaseMatlabFile.BaseMatlabFile(name, ob, 'sf')
-    ml.write_file()
-    ml = BaseMatlabFile.BaseMatlabFile(name, ob, 'dv')
-    ml.write_file()
-    ml = BaseMatlabFile.BaseMatlabFile(name, ob, 'vt')
-    ml.write_file()
+    for type in filetypes:  #['sf', 'dv', 'vt']:
+        ml = BaseMatlabFile.BaseMatlabFile(name, ob, type)
+        ml.write_file()
     os.chdir('../.')
 
 
@@ -44,15 +42,10 @@ def compare_files(correct_file, temp_file):
 
 
 def compare_matlab(name, filetype):
-    if filetype == 'sf':
-        correct_file = '.\\test-matlab\\{0}sf.m'.format(name)
-        temp_file = '.\\temp\\{0}sf.m'.format(name)
-    elif filetype == 'dv':
-        correct_file = '.\\test-matlab\\{0}dv.m'.format(name)
-        temp_file = '.\\temp\\{0}dv.m'.format(name)
-    elif filetype == 'vt':
-        correct_file = '.\\test-matlab\\{0}vt.m'.format(name)
-        temp_file = '.\\temp\\{0}vt.m'.format(name)
+
+    assert filetype in filetypes  # ['sf', 'dv', 'vt']
+    correct_file = '.\\test-matlab\\{0}{1}.m'.format(name, filetype)
+    temp_file = '.\\temp\\{0}{1}.m'.format(name, filetype)
     return compare_files(correct_file, temp_file)
 
 
@@ -64,11 +57,11 @@ def compare_matlab(name, filetype):
 def run_matlab_test(name):
     filename = test_functions.set_up_test(name, 'MATLAB')
     generate_matlab_files(filename, name)
-    fail = compare_matlab(name, 'sf')
-    fail += compare_matlab(name, 'dv')
-    fail += compare_matlab(name, 'vt')
+    fails_here = 0
+    for filetype in filetypes:  #['sf', 'dv', 'vt']:
+        fails_here += compare_matlab(name, filetype)
     print('')
-    return fail
+    return fails_here
 
 
 #########################################################################
@@ -77,7 +70,7 @@ def run_matlab_test(name):
 
 def main():
 
-    # set up the enivornment
+    # Set up the environment.
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
     (path_to_tests, other) = os.path.split(this_dir)
@@ -86,7 +79,7 @@ def main():
         os.mkdir('temp')
     fail = 0
 
-    # run the individual tests
+    # Run the individual tests.
     name = 'qual'
     fail += run_matlab_test(name)
 
