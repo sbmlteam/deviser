@@ -49,6 +49,8 @@ def test_deviser(name, flag, expected_return):
     elif flag == 'missing':
         args.append('deviser')
         args.append(filename)
+    else:
+        raise Exception
 
     deviser.main(args)
     #fail = test_functions.compare_return_codes(name, flag, expected_return,
