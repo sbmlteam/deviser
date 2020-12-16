@@ -70,24 +70,24 @@ def compare_files(correct_file, temp_file):
                                         not_tested)
 
 def compare_examples(pkg):
-    correct_file = os.path.normpath('./test-examples\\{0}\\{0}_example1.cpp'.format(pkg))
-    temp_file = os.path.normpath('.\\temp\\{0}\\{0}_example1.cpp'.format(pkg))
+    correct_file = os.path.normpath('./test-examples/{0}/{0}_example1.cpp'.format(pkg))
+    temp_file = os.path.normpath('./temp/{0}/{0}_example1.cpp'.format(pkg))
     return compare_files(correct_file, temp_file)
 
 def compare_xml(pkg):
-    correct_file = os.path.normpath('.\\test-examples\\{0}\\test_xml.xml'.format(pkg))
-    temp_file = os.path.normpath('.\\temp\\{0}\\test_xml.xml'.format(pkg))
+    correct_file = os.path.normpath('./test-examples/{0}/test_xml.xml'.format(pkg))
+    temp_file = os.path.normpath('./temp/{0}/test_xml.xml'.format(pkg))
     return compare_files(correct_file, temp_file)
 
 
 def compare_xml_fails(pkg):
     fail = 0
-    correct_file_dir = os.path.normpath('.\\test-examples\\{0}'.format(pkg))
-    temp_file_dir = os.path.normpath('.\\temp\\{0}'.format(pkg))
+    correct_file_dir = os.path.normpath('./test-examples/{0}'.format(pkg))
+    temp_file_dir = os.path.normpath('./temp/{0}'.format(pkg))
     for f in os.listdir(temp_file_dir):
         if f.endswith('xml'):
-            correct_file = os.path.normpath('{0}\\{1}'.format(correct_file_dir, f))
-            temp_file = os.path.normpath('{0}\\{1}'.format(temp_file_dir, f))
+            correct_file = os.path.normpath('{0}/{1}'.format(correct_file_dir, f))
+            temp_file = os.path.normpath('{0}/{1}'.format(temp_file_dir, f))
             fail += compare_files(correct_file, temp_file)
     return fail
 
