@@ -26,6 +26,14 @@ from util import global_variables as gv
     ('bad_concretes', '-g', 'missing required information'),
 ])
 def test_deviser(name, flag, expected_return):
+    """
+    General function for running command-line Deviser tests.
+
+    :param name: general name of test
+    :param flag: a command-line flag
+    :param expected_return: what we expect the test to return.
+    :return: 0 on success, 1 on failure
+    """
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
@@ -45,12 +53,7 @@ def test_deviser(name, flag, expected_return):
     deviser.main(args)
     #fail = test_functions.compare_return_codes(name, flag, expected_return,
     #                                           fails)
-    print('')
+    #print('')
     #return fail
 
-#ef func(x):
-#    return x + 1
-
-#def test_answer():
-#    assert func(3) == 4
 
