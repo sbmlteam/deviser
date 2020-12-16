@@ -22,27 +22,24 @@ not_tested = []
 ##############################################################################
 # Specific generation functions
 
-
-def generate_example(filename):
+def common(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
     if not os.path.exists(ob['name']):
         os.mkdir(ob['name'])
     os.chdir('./{0}'.format(ob['name']))
+    return ob
+
+def generate_example(filename):
+    ob = common(filename)
     all_files = CppExampleFile.CppExampleFile(ob)
     all_files.write_file()
     os.chdir('../../.')
     return ob['name']
 
-
 def generate_xml(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    if not os.path.exists(ob['name']):
-        os.mkdir(ob['name'])
-    os.chdir('./{0}'.format(ob['name']))
+    ob = common(filename)
     all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
     all_files.write_file('test_xml')
     os.chdir('../../.')
@@ -50,24 +47,14 @@ def generate_xml(filename):
 
 
 def generate_xml_fails(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    if not os.path.exists(ob['name']):
-        os.mkdir(ob['name'])
-    os.chdir('./{0}'.format(ob['name']))
+    ob = common(filename)
     all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
     all_files.write_all_files()
     os.chdir('../../.')
     return ob['name']
 
 def generate_some_xml_fails(filename, start, stop, number=-1):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    if not os.path.exists(ob['name']):
-        os.mkdir(ob['name'])
-    os.chdir('./{0}'.format(ob['name']))
+    ob = common(filename)
     all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
     if number > -1:
         all_files.set_num_components(number)
@@ -83,24 +70,24 @@ def compare_files(correct_file, temp_file):
                                         not_tested)
 
 def compare_examples(pkg):
-    correct_file = '.\\test-examples\\{0}\\{0}_example1.cpp'.format(pkg)
-    temp_file = '.\\temp\\{0}\\{0}_example1.cpp'.format(pkg)
+    correct_file = os.path.normpath('./test-examples\\{0}\\{0}_example1.cpp'.format(pkg))
+    temp_file = os.path.normpath('.\\temp\\{0}\\{0}_example1.cpp'.format(pkg))
     return compare_files(correct_file, temp_file)
 
 def compare_xml(pkg):
-    correct_file = '.\\test-examples\\{0}\\test_xml.xml'.format(pkg)
-    temp_file = '.\\temp\\{0}\\test_xml.xml'.format(pkg)
+    correct_file = os.path.normpath('.\\test-examples\\{0}\\test_xml.xml'.format(pkg))
+    temp_file = os.path.normpath('.\\temp\\{0}\\test_xml.xml'.format(pkg))
     return compare_files(correct_file, temp_file)
 
 
 def compare_xml_fails(pkg):
     fail = 0
-    correct_file_dir = '.\\test-examples\\{0}'.format(pkg)
-    temp_file_dir = '.\\temp\\{0}'.format(pkg)
+    correct_file_dir = os.path.normpath('.\\test-examples\\{0}'.format(pkg))
+    temp_file_dir = os.path.normpath('.\\temp\\{0}'.format(pkg))
     for f in os.listdir(temp_file_dir):
         if f.endswith('xml'):
-            correct_file = '{0}\\{1}'.format(correct_file_dir, f)
-            temp_file = '{0}\\{1}'.format(temp_file_dir, f)
+            correct_file = os.path.normpath('{0}\\{1}'.format(correct_file_dir, f))
+            temp_file = os.path.normpath('{0}\\{1}'.format(temp_file_dir, f))
             fail += compare_files(correct_file, temp_file)
     return fail
 
@@ -179,8 +166,8 @@ def main():
     # name = 'qual'
     # fail += run_xml_test(name)
     #
-    # name = 'spatial'
-    # fail += run_xml_test(name)
+    name = 'spatial'
+    fail += run_xml_test(name)
     #
     # name = 'spatial'
     # fail += run_specific_xml_fail_tests(name, 8, 13)
