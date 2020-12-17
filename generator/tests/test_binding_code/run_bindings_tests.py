@@ -94,14 +94,14 @@ def compare_files(correct_file, temp_file):
 
 
 def compare_code(name, binding, ext):
-    correct_file = '.\\test-binding\\{0}\\{1}.{2}'.format(binding, name, ext)
-    temp_file = '.\\temp\\{0}\\{1}.{2}'.format(binding, name, ext)
+    correct_file = os.path.normpath('./test-binding/{0}/{1}.{2}'.format(binding, name, ext))
+    temp_file = os.path.normpath('./temp/{0}/{1}.{2}'.format(binding, name, ext))
     return compare_files(correct_file, temp_file)
 
 
 def compare_ext_headers(class_name):
-    correct_file = '.\\test-extension\\{0}.h'.format(class_name)
-    temp_file = '.\\temp\\{0}.h'.format(class_name)
+    correct_file = os.path.normpath('./test-extension/{0}.h'.format(class_name))
+    temp_file = ('./temp/{0}.h'.format(class_name))
     return compare_files(correct_file, temp_file)
 
 
