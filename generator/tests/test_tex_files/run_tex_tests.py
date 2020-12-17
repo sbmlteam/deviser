@@ -18,9 +18,6 @@ fails = []
 not_tested = []
 
 
-##############################################################################
-# Specific generation functions
-
 def setup(filename, name):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
@@ -31,51 +28,17 @@ def setup(filename, name):
     return ob
 
 
-def generate_validator(filename, name):
+def generate_files(filename, name, type):
+    assert type in ['apdx-validation', 'macros', 'body']
     ob = setup(filename, name)
-    all_files = TexValidationRulesFile.TexValidationRulesFile(ob)
+    if type == 'apdx-validation':
+        all_files = TexValidationRulesFile.TexValidationRulesFile(ob)
+    elif type == 'macros':
+        all_files = TexMacrosFile.TexMacrosFile(ob)
+    else:  # type == 'body':
+        all_files = TexBodySyntaxFile.TexBodySyntaxFile(ob)
     all_files.write_file()
     os.chdir('../../.')
-
-
-def generate_macros(filename, name):
-    ob = setup(filename, name)
-    all_files = TexMacrosFile.TexMacrosFile(ob)
-    all_files.write_file()
-    os.chdir('../../.')
-
-
-def generate_body(filename, name):
-    ob = setup(filename, name)
-    all_files = TexBodySyntaxFile.TexBodySyntaxFile(ob)
-    all_files.write_file()
-    os.chdir('../../.')
-
-
-#############################################################################
-# Specific compare functions
-
-def compare_files(correct_file, temp_file):
-    return test_functions.compare_files(correct_file, temp_file, fails,
-                                        not_tested)
-
-
-def compare_validation(name):
-    correct_file = os.path.normpath('./test-tex/{0}/apdx-validation.tex'.format(name))
-    temp_file = os.path.normpath('./temp/{0}/apdx-validation.tex'.format(name))
-    return compare_files(correct_file, temp_file)
-
-
-def compare_macros(name):
-    correct_file = os.path.normpath('./test-tex/{0}/macros.tex'.format(name))
-    temp_file = os.path.normpath('./temp/{0}/macros.tex'.format(name))
-    return compare_files(correct_file, temp_file)
-
-
-def compare_body(name):
-    correct_file = os.path.normpath('./test-tex/{0}/body.tex'.format(name))
-    temp_file = os.path.normpath('./temp/{0}/body.tex'.format(name))
-    return compare_files(correct_file, temp_file)
 
 
 def compare_items(name, type):
@@ -91,17 +54,7 @@ def compare_items(name, type):
 
 def run_test(name, test_type):
     filename = test_functions.set_up_test(name, 'Tex', test_type)
-    fail = 0
-    #fail = compare_items(name, test_type)
-    if test_type == 'apdx-validation':
-        generate_validator(filename, name)
-        #fail = compare_validation(name)
-    elif test_type == 'macros':
-        generate_macros(filename, name)
-        #fail = compare_macros(name)
-    elif test_type == 'body':
-        generate_body(filename, name)
-        #fail = compare_body(name)
+    generate_files(filename, name, test_type)
     fail = compare_items(name, test_type)
     print('')
     return fail
