@@ -9,7 +9,6 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 from code_files import CppExampleFile
 from validation import ValidationXMLFiles
 from parseXML import ParseXML
-from util import strFunctions
 
 from tests import test_functions
 
@@ -22,7 +21,7 @@ not_tested = []
 ##############################################################################
 # Specific generation functions
 
-def common(filename):
+def set_up(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
@@ -31,15 +30,17 @@ def common(filename):
     os.chdir('./{0}'.format(ob['name']))
     return ob
 
+
 def generate_example(filename):
-    ob = common(filename)
+    ob = set_up(filename)
     all_files = CppExampleFile.CppExampleFile(ob)
     all_files.write_file()
     os.chdir('../../.')
     return ob['name']
 
+
 def generate_xml(filename):
-    ob = common(filename)
+    ob = set_up(filename)
     all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
     all_files.write_file('test_xml')
     os.chdir('../../.')
@@ -47,14 +48,15 @@ def generate_xml(filename):
 
 
 def generate_xml_fails(filename):
-    ob = common(filename)
+    ob = set_up(filename)
     all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
     all_files.write_all_files()
     os.chdir('../../.')
     return ob['name']
 
+
 def generate_some_xml_fails(filename, start, stop, number=-1):
-    ob = common(filename)
+    ob = set_up(filename)
     all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
     if number > -1:
         all_files.set_num_components(number)
@@ -65,14 +67,17 @@ def generate_some_xml_fails(filename, start, stop, number=-1):
 #############################################################################
 # Specific compare functions
 
+
 def compare_files(correct_file, temp_file):
     return test_functions.compare_files(correct_file, temp_file, fails,
                                         not_tested)
+
 
 def compare_examples(pkg):
     correct_file = os.path.normpath('./test-examples/{0}/{0}_example1.cpp'.format(pkg))
     temp_file = os.path.normpath('./temp/{0}/{0}_example1.cpp'.format(pkg))
     return compare_files(correct_file, temp_file)
+
 
 def compare_xml(pkg):
     correct_file = os.path.normpath('./test-examples/{0}/test_xml.xml'.format(pkg))
@@ -92,11 +97,8 @@ def compare_xml_fails(pkg):
     return fail
 
 
-
-
 #############################################################################
 # Specific test functions
-
 
 def run_test(name):
     filename = test_functions.set_up_test(name, 'Examples')
@@ -105,6 +107,7 @@ def run_test(name):
     print('')
     return fail
 
+
 def run_xml_test(name):
     filename = test_functions.set_up_test(name, 'Examples')
     pkg = generate_xml(filename)
@@ -112,12 +115,14 @@ def run_xml_test(name):
     print('')
     return fail
 
+
 def run_xml_fail_tests(name):
     filename = test_functions.set_up_test(name, 'Examples')
     pkg = generate_xml_fails(filename)
     fail = compare_xml_fails(pkg)
     print('')
     return fail
+
 
 def run_specific_xml_fail_tests(name, start, stop, number=-1):
     filename = test_functions.set_up_test(name, 'Examples')
@@ -132,7 +137,7 @@ def run_specific_xml_fail_tests(name, start, stop, number=-1):
 
 def main():
 
-    # set up the enivornment
+    # Set up the environment
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
     (path_to_tests, other) = os.path.split(this_dir)
@@ -168,29 +173,13 @@ def main():
 
     name = 'spatial'
     fail += run_xml_test(name)
-
-    name = 'spatial'
     fail += run_specific_xml_fail_tests(name, 8, 13)
-
-    name = 'spatial'
     fail += run_specific_xml_fail_tests(name, 15, 19)
-
-    name = 'spatial'
     fail += run_specific_xml_fail_tests(name, 22, 26)
-
-    name = 'spatial'
     fail += run_specific_xml_fail_tests(name, 32, 36)
-
-    name = 'spatial'
     fail += run_specific_xml_fail_tests(name, 41, 45)
-
-    name = 'spatial'
     fail += run_specific_xml_fail_tests(name, 53, 54)
-
-    name = 'spatial'
     fail += run_specific_xml_fail_tests(name, 60, 61)
-
-    name = 'spatial'
     fail += run_specific_xml_fail_tests(name, 65, 66)
 
     #name = 'multi'
