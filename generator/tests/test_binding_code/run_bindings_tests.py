@@ -20,6 +20,15 @@ not_tested = []
 # Specific generation functions
 
 def set_up(filename, binding):
+    """
+    Generic set-up code used by all the specific generation functions.
+    Parse XML file and use the big dictionary structure obtained to
+    generate a bindings file of the required binding.
+
+    :param filename: the XML file to parse
+    :param binding: the required binding, e.g. 'csharp', 'java', etc.
+    :return: the new file object
+    """
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
@@ -33,16 +42,27 @@ def set_up(filename, binding):
 
 
 def generate_bindings_downcast_ext(filename, binding):
+    """
+    Generate a downcast extension.
+    """
     all_files = set_up(filename, binding)
     all_files.write_downcast_extension()
     os.chdir('../..')
 
+
 def generate_bindings_downcast_ns(filename, binding):
+    """
+    Generate a downcast namespace.
+    """
     all_files = set_up(filename, binding)
     all_files.write_downcast_namespace()
     os.chdir('../..')
 
+
 def generate_bindings_downcast_pkgs(filename, binding, local):
+    """
+    Generate a downcast package.
+    """
     all_files = set_up(filename, binding)
     if binding == 'swig':
         all_files.write_swig_files()
@@ -52,7 +72,11 @@ def generate_bindings_downcast_pkgs(filename, binding, local):
         all_files.write_downcast_packages()
     os.chdir('../..')
 
+
 def generate_bindings_downcast_plugins(filename, binding):
+    """
+    Generate a downcast plugin.
+    """
     all_files = set_up(filename, binding)
     all_files.write_downcast_plugins()
     os.chdir('../..')
