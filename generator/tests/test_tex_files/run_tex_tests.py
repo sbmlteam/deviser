@@ -21,38 +21,32 @@ not_tested = []
 ##############################################################################
 # Specific generation functions
 
-
-def generate_validator(filename, name):
+def setup(filename, name):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
     if not os.path.isdir(name):
         os.mkdir(name)
     os.chdir(name)
+    return ob
+
+
+def generate_validator(filename, name):
+    ob = setup(filename, name)
     all_files = TexValidationRulesFile.TexValidationRulesFile(ob)
     all_files.write_file()
     os.chdir('../../.')
 
 
 def generate_macros(filename, name):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    if not os.path.isdir(name):
-        os.mkdir(name)
-    os.chdir(name)
+    ob = setup(filename, name)
     all_files = TexMacrosFile.TexMacrosFile(ob)
     all_files.write_file()
     os.chdir('../../.')
 
 
 def generate_body(filename, name):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    if not os.path.isdir(name):
-        os.mkdir(name)
-    os.chdir(name)
+    ob = setup(filename, name)
     all_files = TexBodySyntaxFile.TexBodySyntaxFile(ob)
     all_files.write_file()
     os.chdir('../../.')
@@ -114,14 +108,20 @@ def main():
     # Set up the environment.
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
-    (path_to_tests, other) = os.path.split(this_dir)
+    (path_to_tests, _) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir('temp'):
         os.mkdir('temp')
     fail = 0
 
+    # These tests all appear to be independent from each other,
+    # so I'm assuming their order doesn't matter.
+    name = 'spatial'
+    test_case = 'body'
+    fail += run_test(name, test_case)
+
     if runall:
-        # run the individual tests
+        # Run the other individual tests.
         name = 'qual'
         test_case = 'validation'
         fail += run_test(name, test_case)
@@ -159,18 +159,6 @@ def main():
         fail += run_test(name, test_case)
 
         name = 'test_att'
-        test_case = 'validation'
-        fail += run_test(name, test_case)
-
-        name = 'spatial'
-        test_case = 'validation'
-        fail += run_test(name, test_case)
-
-        name = 'spatial'
-        test_case = 'body'
-        fail += run_test(name, test_case)
-    else:
-        name = 'spatial'
         test_case = 'validation'
         fail += run_test(name, test_case)
 
