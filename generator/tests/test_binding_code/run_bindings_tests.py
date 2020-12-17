@@ -19,71 +19,43 @@ not_tested = []
 ##############################################################################
 # Specific generation functions
 
+def set_up(filename, binding):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    if os.path.isdir(binding):
+        os.chdir(binding)
+    else:
+        os.makedirs(binding)
+        os.chdir(binding)
+    all_files = BindingsFiles.BindingFiles(ob, binding, True)
+    return all_files
+
 
 def generate_bindings_downcast_ext(filename, binding):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    if os.path.isdir(binding):
-        os.chdir(binding)
-    else:
-        os.makedirs(binding)
-        os.chdir(binding)
-    all_files = BindingsFiles.BindingFiles(ob, binding, True)
+    all_files = set_up(filename, binding)
     all_files.write_downcast_extension()
-    os.chdir('../.')
-    os.chdir('../.')
-
+    os.chdir('../..')
 
 def generate_bindings_downcast_ns(filename, binding):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    if os.path.isdir(binding):
-        os.chdir(binding)
-    else:
-        os.makedirs(binding)
-        os.chdir(binding)
-    all_files = BindingsFiles.BindingFiles(ob, binding, True)
+    all_files = set_up(filename, binding)
     all_files.write_downcast_namespace()
-    os.chdir('../.')
-    os.chdir('../.')
-
+    os.chdir('../..')
 
 def generate_bindings_downcast_pkgs(filename, binding, local):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    if os.path.isdir(binding):
-        os.chdir(binding)
-    else:
-        os.makedirs(binding)
-        os.chdir(binding)
-    all_files = BindingsFiles.BindingFiles(ob, binding, True)
+    all_files = set_up(filename, binding)
     if binding == 'swig':
         all_files.write_swig_files()
     elif local:
         all_files.write_local()
     else:
         all_files.write_downcast_packages()
-    os.chdir('../.')
-    os.chdir('../.')
-
+    os.chdir('../..')
 
 def generate_bindings_downcast_plugins(filename, binding):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    if os.path.isdir(binding):
-        os.chdir(binding)
-    else:
-        os.makedirs(binding)
-        os.chdir(binding)
-    all_files = BindingsFiles.BindingFiles(ob, binding, True)
+    all_files = set_up(filename, binding)
     all_files.write_downcast_plugins()
-    os.chdir('../.')
-    os.chdir('../.')
-
+    os.chdir('../..')
 
 #############################################################################
 # Specific compare functions
