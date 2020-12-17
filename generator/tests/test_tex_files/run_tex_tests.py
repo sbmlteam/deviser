@@ -12,7 +12,6 @@ from parseXML import ParseXML
 import test_functions
 
 
-
 ##############################################################################
 # Set up variables
 fails = []
@@ -68,20 +67,20 @@ def compare_files(correct_file, temp_file):
 
 
 def compare_validation(name):
-    correct_file = '.\\test-tex\\{0}\\apdx-validation.tex'.format(name)
-    temp_file = '.\\temp\\{0}\\apdx-validation.tex'.format(name)
+    correct_file = os.path.normpath('./test-tex/{0}/apdx-validation.tex'.format(name))
+    temp_file = os.path.normpath('./temp/{0}/apdx-validation.tex'.format(name))
     return compare_files(correct_file, temp_file)
 
 
 def compare_macros(name):
-    correct_file = '.\\test-tex\\{0}\\macros.tex'.format(name)
-    temp_file = '.\\temp\\{0}\\macros.tex'.format(name)
+    correct_file = os.path.normpath('./test-tex/{0}/macros.tex'.format(name))
+    temp_file = os.path.normpath('./temp/{0}/macros.tex'.format(name))
     return compare_files(correct_file, temp_file)
 
 
 def compare_body(name):
-    correct_file = '.\\test-tex\\{0}\\body.tex'.format(name)
-    temp_file = '.\\temp\\{0}\\body.tex'.format(name)
+    correct_file = os.path.normpath('./test-tex/{0}/body.tex'.format(name))
+    temp_file = os.path.normpath('./temp/{0}/body.tex'.format(name))
     return compare_files(correct_file, temp_file)
 
 
@@ -112,7 +111,7 @@ def run_test(name, test_type):
 def main():
 
     runall = True
-    # set up the enivornment
+    # Set up the environment.
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
     (path_to_tests, other) = os.path.split(this_dir)
