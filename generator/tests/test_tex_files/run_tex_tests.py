@@ -78,6 +78,13 @@ def compare_body(name):
     return compare_files(correct_file, temp_file)
 
 
+def compare_items(name, type):
+    assert type in ['apdx-validation', 'macros', 'body']
+    correct_file = os.path.normpath('./test-tex/{0}/{1}.tex'.format(name, type))
+    temp_file = os.path.normpath('./temp/{0}/{1}.tex'.format(name, type))
+    return test_functions.compare_files(correct_file, temp_file, fails,
+                                        not_tested)
+
 #############################################################################
 # Specific test functions
 
@@ -85,15 +92,17 @@ def compare_body(name):
 def run_test(name, test_type):
     filename = test_functions.set_up_test(name, 'Tex', test_type)
     fail = 0
-    if test_type == 'validation':
+    #fail = compare_items(name, test_type)
+    if test_type == 'apdx-validation':
         generate_validator(filename, name)
-        fail = compare_validation(name)
+        #fail = compare_validation(name)
     elif test_type == 'macros':
         generate_macros(filename, name)
-        fail = compare_macros(name)
+        #fail = compare_macros(name)
     elif test_type == 'body':
         generate_body(filename, name)
-        fail = compare_body(name)
+        #fail = compare_body(name)
+    fail = compare_items(name, test_type)
     print('')
     return fail
 
@@ -123,7 +132,7 @@ def main():
     if runall:
         # Run the other individual tests.
         name = 'qual'
-        test_case = 'validation'
+        test_case = 'apdx-validation'
         fail += run_test(name, test_case)
 
         name = 'groups'
@@ -131,7 +140,7 @@ def main():
         fail += run_test(name, test_case)
 
         name = 'groups'
-        test_case = 'validation'
+        test_case = 'apdx-validation'
         fail += run_test(name, test_case)
 
         name = 'groups'
@@ -139,11 +148,11 @@ def main():
         fail += run_test(name, test_case)
 
         name = 'unknown_type'
-        test_case = 'validation'
+        test_case = 'apdx-validation'
         fail += run_test(name, test_case)
 
         name = 'test_sidrefs'
-        test_case = 'validation'
+        test_case = 'apdx-validation'
         fail += run_test(name, test_case)
 
         name = 'test_sidrefs'
@@ -151,7 +160,7 @@ def main():
         fail += run_test(name, test_case)
 
         name = 'test_lists'
-        test_case = 'validation'
+        test_case = 'apdx-validation'
         fail += run_test(name, test_case)
 
         name = 'test_lists'
@@ -159,7 +168,7 @@ def main():
         fail += run_test(name, test_case)
 
         name = 'test_att'
-        test_case = 'validation'
+        test_case = 'apdx-validation'
         fail += run_test(name, test_case)
 
     # write summary
