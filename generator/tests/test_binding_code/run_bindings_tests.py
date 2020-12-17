@@ -85,6 +85,14 @@ def generate_bindings_downcast_plugins(filename, binding):
 # Specific compare functions
 
 def compare_code(name, binding, ext):
+    """
+    Compare a reference file with a temporary test version of the file.
+
+    :param name: name of reference file
+    :param binding: which binding, e.g. 'java'
+    :param ext: the file extension
+    :returns: 0 on success or missing file, 1 on failure.
+    """
     correct_file = os.path.normpath('./test-binding/{0}/{1}.{2}'.format(binding, name, ext))
     temp_file = os.path.normpath('./temp/{0}/{1}.{2}'.format(binding, name, ext))
     return test_functions.compare_files(correct_file, temp_file, fails,
@@ -92,6 +100,9 @@ def compare_code(name, binding, ext):
 
 
 def compare_ext_headers(class_name):
+    """
+    TODO This function doesn't appear to be used anywhere.
+    """
     correct_file = os.path.normpath('./test-extension/{0}.h'.format(class_name))
     temp_file = ('./temp/{0}.h'.format(class_name))
     return test_functions.compare_files(correct_file, temp_file, fails,
@@ -102,6 +113,13 @@ def compare_ext_headers(class_name):
 # Specific test functions
 
 def run_ns_test(name, binding, ext):
+    """
+    Run a namespace test.
+
+    :param name: package name
+    :param binding: the required binding, e.g. 'csharp', 'java', etc.
+    :param ext: the file extension
+    """
     filename = test_functions.set_up_test(name, 'downcast-ns', binding)
     generate_bindings_downcast_ns(filename, binding)
     if name == 'test_vers':
@@ -112,7 +130,17 @@ def run_ns_test(name, binding, ext):
     return fail
 
 
+# TODO I'm not sure what these different test functions are testing, exactly.
+
+
 def run_test(name, binding, ext):
+    """
+    Run a test. TODO Sarah please expand...
+
+    :param name: package name
+    :param binding: the required binding, e.g. 'csharp', 'java', etc.
+    :param ext: the file extension
+    """
     filename = test_functions.set_up_test(name, 'downcast-ext', binding)
     generate_bindings_downcast_ext(filename, binding)
     if name == 'test_vers':
@@ -124,6 +152,13 @@ def run_test(name, binding, ext):
 
 
 def run_pkgs_test(name, binding, ext):
+    """
+    Run a test. TODO Sarah please expand...
+
+    :param name: package name
+    :param binding: the required binding, e.g. 'csharp', 'java', etc.
+    :param ext: the file extension
+    """
     filename = test_functions.set_up_test(name, 'downcast-packages', binding)
     generate_bindings_downcast_pkgs(filename, binding, False)
     if name == 'test_vers':
@@ -138,6 +173,14 @@ def run_pkgs_test(name, binding, ext):
 
 
 def run_local_test(name, binding, ext, local):
+    """
+    Run a test. TODO Sarah please expand...
+
+    :param name: package name
+    :param binding: the required binding, e.g. 'csharp', 'java', etc.
+    :param ext: the file extension
+    :param local: TODO Sarah please expand...
+    """
     filename = test_functions.set_up_test(name, 'local', binding)
     generate_bindings_downcast_pkgs(filename, binding, local)
     if binding == 'csharp' or binding == 'java':
@@ -150,6 +193,13 @@ def run_local_test(name, binding, ext, local):
 
 
 def run_plugin_test(name, binding, ext):
+    """
+    Run a test. TODO Sarah please expand...
+
+    :param name: package name
+    :param binding: the required binding, e.g. 'csharp', 'java', etc.
+    :param ext: the file extension
+    """
     filename = test_functions.set_up_test(name, 'downcast-plugins', binding)
     generate_bindings_downcast_plugins(filename, binding)
     fail = compare_code('local-downcast-plugins-{0}'.format(name),
@@ -159,6 +209,13 @@ def run_plugin_test(name, binding, ext):
 
 
 def run_swig_test(name, binding, ext):
+    """
+    Run a test. TODO Sarah please expand...
+
+    :param name: package name
+    :param binding: the required binding, e.g. 'csharp', 'java', etc.
+    :param ext: the file extension
+    """
     filename = test_functions.set_up_test(name, 'native', binding)
     generate_bindings_downcast_pkgs(filename, binding, True)
     fail = compare_code('{0}-package'.format(name), binding, ext)
@@ -171,22 +228,27 @@ def run_swig_test(name, binding, ext):
 
 def main():
 
-    # set up the enivornment
+    # Set up the environment.
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
-    (path_to_tests, other) = os.path.split(this_dir)
+    (path_to_tests, _) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir('temp'):
         os.mkdir('temp')
     fail = 0
 
-    runall = True
-#    runall = False
-    if runall:
+    run_all = True
+
+    if run_all:
         # run the individual tests
+        # Using pytest parameterization would be good here.
+
         name = 'spatial'
         test_case = 'csharp'
         ext = 'i'
+        # my_tuple = ('spatial', 'csharp', 'i')
+        # fail += run_test(my_tuple[0], my_tuple[1], my_tuple[2])
+        # fail += run_test(name=my_tuple[0], binding=my_tuple[1], ext=my_tuple[2])
         fail += run_test(name, test_case, ext)
 
         name = 'spatial'
@@ -314,9 +376,11 @@ def main():
         name = 'test_vers'
         test_case = 'java'
         ext = 'i'
-#        fail += run_test(name, test_case, ext)
+        # TODO Why are two of these tests commented out here?
+        # They didn't raise any errors when I tried running them.
+        # fail += run_test(name, test_case, ext)
         fail += run_ns_test(name, test_case, ext)
-#        fail += run_pkgs_test(name, test_case, ext)
+        # fail += run_pkgs_test(name, test_case, ext)
 
     test_functions.report('BINDINGS', fail, fails, not_tested)
     return fail
