@@ -233,6 +233,9 @@ def run_specific_xml_fail_tests(name, start, stop, number=-1):
 # Main function
 
 
+# TODO sort out the tests which are failing, and those which are being
+# skipped because a file isn't present.
+
 def main():
 
     # Set up the environment
