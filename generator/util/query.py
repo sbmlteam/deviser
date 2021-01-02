@@ -832,10 +832,38 @@ def get_enum(element, class_name=''):
 
 def get_default_enum_value(attribute):
     """
-    TODO need an example - I'm not sure what it's finding.
+    Returns the default/invalid value for the enumeration of
+    values for the given attribute.
 
-    :param attribute:
-    :return:
+    e.g. An attribute
+        <attribute name="transitionEffect" required="true" type="enum"
+                    element="TransitionOutputEffect" abstract="false" />
+
+    uses values from the enumeration specified
+        <enum>
+          <enum name="TransitionOutputEffect">
+          <enumValues>
+            <enumValue name="OUTPUT_TRANSITION_EFFECT_PRODUCTION"
+                        value="production" />
+            <enumValue name="OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL"
+                        value="assignment level" />
+          </enumValues>
+        </enum>
+
+    Processing of the XML should have added a further value to the
+    enum equivalent to
+            <enumValue name="OUTPUT_TRANSITION_INVALID"
+                        value="invalid TransitionOutputEffect value" />
+
+    The function returns the name of the invalid enumeration value.
+
+    get_default_enum_value(attribute dict for transitionEffect)
+    will return string 'OUTPUT_TRANSITION_INVALID'
+
+    :param attribute: attribute dict for required
+    :return: string representing the invalid enum value or 'INVALID' if
+    the attribute dict does not have an element name corresponding to a
+    listed enumeration.
     """
     default = 'INVALID'
     name = attribute['element']
