@@ -526,8 +526,24 @@ def has_other_packages(attributes):
     :return: Tuple with True if any of the attributes have another package,
              plus a list of packages (empty if False).
 
+    e.g. the following entries would result in a return of
+        [True, ['layout']]
 
-    TODO add example here.
+    <elements>
+        <element name="LineEnding" ...>
+          <attributes>
+            <attribute name="boundingBox" required="false" type="element"
+                    element="BoundingBox" abstract="false"/>
+          </attributes>
+        </element>
+    ...
+    </elements>
+    <mappings>
+        <mapping name="BoundingBox" package="layout"/>
+    </mappings>
+
+    Note: the additional attribute information is populated by the
+    BaseCppFile expand_class and expand_attributes functions
     """
     list_pkgs = []
     has_pack = False
