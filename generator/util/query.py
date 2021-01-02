@@ -570,8 +570,33 @@ def has_is_set_member(attribute):
     """
     return True if the attribute has an isSet member variable
 
-    TODO need an example - I can't see why this would return True if has isSet
+    e.g. in order to determine in code whether an attribute of type
+    boolean or number has been explicitly set the variable say 'constant'
+    is stored with an additional isSetConstant variable of type boolean
+    that can be queried to determine if the variable value has been
+    explicitly set
+
+    Consider Foo class with member variables 'constant' (boolean) and
+    'number' (unsigned int  defaulting to 0)
+
+    <foo/>
+
+    would result in variables:
+        mConstant = False
+        mIsSetConstant = False
+        mNumber = 0
+        mIsSetNumber = False
+
+    <foo constant="false" number="0"/>
+
+    would result in variables:
+        mConstant = False
+        mIsSetConstant = True
+        mNumber = 0
+        mIsSetNumber = True
     """
+    # deviser creates an isSetXYZ variable for any attribute that
+    # is a number or a boolean
     if attribute['isNumber'] or attribute['attType'] == 'boolean':
         return True
     return False
