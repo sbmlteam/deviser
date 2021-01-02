@@ -689,6 +689,10 @@ def overwrites_name(root, name):
 
 def get_static_extension_attribs(num_versions, lv_info):
     """
+    Creates a set of attributes that will be used with a
+    PkgExtension class when generating the code.
+    This facilitate the reuse of class code generation for member
+    variable getters and setters.
 
 
     :param num_versions:
