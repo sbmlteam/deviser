@@ -919,28 +919,28 @@ def get_first_enum_value(attribute):
             break
     return value
 
-
-def get_prefix(name):
-    """
-    TODO need an example to show what it does.
-
-    :param name:
-    :return:
-    """
-    prefix = ''
-    first = True
-    for i in range(0, len(name)):
-        char = name[i]
-        if char.isupper():
-            if first:
-                prefix += char
-                first = False
-            else:
-                prefix += '_{0}'.format(char)
-        else:
-            prefix += char.upper()
-    return prefix
-
+# commented out as is not used but may be needed so leave for now
+# def get_prefix(name):
+#     """
+#     TODO revisit
+#
+#     :param name:
+#     :return:
+#     """
+#     prefix = ''
+#     first = True
+#     for i in range(0, len(name)):
+#         char = name[i]
+#         if char.isupper():
+#             if first:
+#                 prefix += char
+#                 first = False
+#             else:
+#                 prefix += '_{0}'.format(char)
+#         else:
+#             prefix += char.upper()
+#     return prefix
+#
 
 def get_typecode_format(name, language):
     """
