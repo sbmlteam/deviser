@@ -942,19 +942,25 @@ def get_first_enum_value(attribute):
 #     return prefix
 #
 
-def get_typecode_format(name, language):
+def get_typecode_format(classname, language):
     """
-    TODO need an example
+    Formats the typecode for the class in a standard format:
+    uppercase language followed by '_' followed by uppercase classname
+    with any classnames using camelcase separated by '_'
+    where class name contains camelcase
 
-    :param name:
-    :param language:
-    :param return:
+    e.g.
+    get_typecode_format(model, sbml) returns SBML_MODEL
+    get_typecode_format(speciesReference, sbml) returns SBML_SPECIES_REFERENCE
+    get_typecode_format(model, sedml) returns SEDML_MODEL
 
-    called from ../code_files/ExtensionCodeFile.py/write_other_enums()
-    """
+    :param classname: name of the class
+    :param language: name of the XML language being targeted
+    :return: string representing the formatted typecode
+   """
     tc = language.upper()
-    for i in range(0, len(name)):
-        char = name[i]
+    for i in range(0, len(classname)):
+        char = classname[i]
         if char.isupper():
             tc += '_'
         tc += char.upper()
