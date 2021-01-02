@@ -1003,10 +1003,27 @@ def get_max_length(elements, attribute):
 
 def get_other_element_children(this_object, element):
     """
+    Return a list of the names of other elements that may be
+    children of the ListOfFoo element.
 
-    :param this_object:
-    :param element:
-    :return:
+    e.g. In this case the DefaultTerm object is contained within the
+    ListOfFunctionTerms which also contains FunctionTerm Objects
+    <listOfFunctionsTerms>
+        <functionTerm ... />
+        <functionTerm ... />
+        <defaultTerm ... />
+    </listOfFunctionTerms>
+
+    get_other_element_children(parent_object dict, functionTerm object dict)
+        returns ['defaultTerm']
+
+
+    :param this_object: object dict to be queried
+    :param element: dict of element (e.g.Foo) for which we wish to discover
+    whether the corresponding listOfFoo element contains children of a type
+    other than Foo
+    :return: list of names of any children of a listOfFoo that are not of
+    type Foo
     """
     other_children = []
     child = get_class(element['element'], this_object['root'])
