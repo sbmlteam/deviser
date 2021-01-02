@@ -877,10 +877,38 @@ def get_default_enum_value(attribute):
 
 def get_first_enum_value(attribute):
     """
+    Returns the first value in the list for the enumeration of values
+    for the given attribute.
 
+    e.g. An attribute
+        <attribute name="transitionEffect" required="true" type="enum"
+                    element="TransitionOutputEffect" abstract="false" />
 
-    :param attribute:
-    :return:
+    uses values from the enumeration specified
+        <enum>
+          <enum name="TransitionOutputEffect">
+          <enumValues>
+            <enumValue name="OUTPUT_TRANSITION_EFFECT_PRODUCTION"
+                        value="production" />
+            <enumValue name="OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL"
+                        value="assignment level" />
+          </enumValues>
+        </enum>
+
+    Processing of the XML should have added a further value to the
+    enum equivalent to
+            <enumValue name="OUTPUT_TRANSITION_INVALID"
+                        value="invalid TransitionOutputEffect value" />
+
+    The function returns the name of the first listed enumeration value.
+
+    get_First_enum_value(attribute dict for transitionEffect)
+    will return string 'OUTPUT_TRANSITION_EFFECT_PRODUCTION'
+
+    :param attribute: attribute dict for required
+    :return: string representing the first enum value or '' if
+    the attribute dict does not have an element name corresponding to a
+    listed enumeration.
     """
     value = ''
     name = attribute['element']
