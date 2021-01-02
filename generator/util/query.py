@@ -258,7 +258,16 @@ def get_parent_class(class_object):
     :param class_object: the object representing the class.
     :return: parent class, if found.
 
-    TODO add example here
+    e.g. the 'unit' attribute is an element of type'Unit'
+    so get_parent_class(class_object_for Unit) would return 'ArrayChild'
+
+    <element name="ArrayChild" typeCode="SBML_TEST_ARRAYCHILD" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="arrayChild">
+      <attributes>
+        <attribute name="unit" required="false" type="element" element="Unit" abstract="false"/>
+      </attributes>
+    </element>
+
+
 
     """
     parent = ''
