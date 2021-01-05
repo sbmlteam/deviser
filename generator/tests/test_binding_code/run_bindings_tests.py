@@ -43,7 +43,7 @@ def set_up(filename, binding):
 
 def generate_bindings_downcast_ext(filename, binding):
     """
-    Generate a downcast extension.
+    Generate a downcast extension.  TODO such as?
     """
     all_files = set_up(filename, binding)
     all_files.write_downcast_extension()
@@ -52,7 +52,7 @@ def generate_bindings_downcast_ext(filename, binding):
 
 def generate_bindings_downcast_ns(filename, binding):
     """
-    Generate a downcast namespace.
+    Generate a downcast namespace.   TODO such as?
     """
     all_files = set_up(filename, binding)
     all_files.write_downcast_namespace()
@@ -61,7 +61,11 @@ def generate_bindings_downcast_ns(filename, binding):
 
 def generate_bindings_downcast_pkgs(filename, binding, local):
     """
-    Generate a downcast package.
+    Generate a downcast package. TODO such as?
+
+    :param filename:
+    :param binding:
+    :param local:
     """
     all_files = set_up(filename, binding)
     if binding == 'swig':
@@ -75,7 +79,7 @@ def generate_bindings_downcast_pkgs(filename, binding, local):
 
 def generate_bindings_downcast_plugins(filename, binding):
     """
-    Generate a downcast plugin.
+    Generate a downcast plugin.  TODO such as?
     """
     all_files = set_up(filename, binding)
     all_files.write_downcast_plugins()
@@ -119,6 +123,7 @@ def run_ns_test(name, binding, ext):
     :param name: package name
     :param binding: the required binding, e.g. 'csharp', 'java', etc.
     :param ext: the file extension
+    :return: 0 on success or missing file, 1 on failure.
     """
     filename = test_functions.set_up_test(name, 'downcast-ns', binding)
     generate_bindings_downcast_ns(filename, binding)
@@ -140,6 +145,7 @@ def run_test(name, binding, ext):
     :param name: package name
     :param binding: the required binding, e.g. 'csharp', 'java', etc.
     :param ext: the file extension
+    :return: 0 on success or missing file, 1 on failure.
     """
     filename = test_functions.set_up_test(name, 'downcast-ext', binding)
     generate_bindings_downcast_ext(filename, binding)
@@ -153,11 +159,12 @@ def run_test(name, binding, ext):
 
 def run_pkgs_test(name, binding, ext):
     """
-    Run a test. TODO Sarah please expand...
+    Run a pkgs test. TODO Sarah please expand...
 
     :param name: package name
     :param binding: the required binding, e.g. 'csharp', 'java', etc.
     :param ext: the file extension
+    :return: 0 on success or missing file, 1 on failure.
     """
     filename = test_functions.set_up_test(name, 'downcast-packages', binding)
     generate_bindings_downcast_pkgs(filename, binding, False)
@@ -174,12 +181,13 @@ def run_pkgs_test(name, binding, ext):
 
 def run_local_test(name, binding, ext, local):
     """
-    Run a test. TODO Sarah please expand...
+    Run a local test. TODO Sarah please expand...
 
     :param name: package name
     :param binding: the required binding, e.g. 'csharp', 'java', etc.
     :param ext: the file extension
     :param local: TODO Sarah please expand...
+    :return: 0 on success or missing file, 1 on failure.
     """
     filename = test_functions.set_up_test(name, 'local', binding)
     generate_bindings_downcast_pkgs(filename, binding, local)
@@ -194,11 +202,12 @@ def run_local_test(name, binding, ext, local):
 
 def run_plugin_test(name, binding, ext):
     """
-    Run a test. TODO Sarah please expand...
+    Run a plugin test. TODO Sarah please expand...
 
     :param name: package name
     :param binding: the required binding, e.g. 'csharp', 'java', etc.
     :param ext: the file extension
+    :return: 0 on success or missing file, 1 on failure.
     """
     filename = test_functions.set_up_test(name, 'downcast-plugins', binding)
     generate_bindings_downcast_plugins(filename, binding)
@@ -210,11 +219,12 @@ def run_plugin_test(name, binding, ext):
 
 def run_swig_test(name, binding, ext):
     """
-    Run a test. TODO Sarah please expand...
+    Run a SWIG test. TODO Sarah please expand...
 
     :param name: package name
     :param binding: the required binding, e.g. 'csharp', 'java', etc.
     :param ext: the file extension
+    :return: 0 on success or missing file, 1 on failure.
     """
     filename = test_functions.set_up_test(name, 'native', binding)
     generate_bindings_downcast_pkgs(filename, binding, True)
@@ -241,7 +251,7 @@ def main():
 
     if run_all:
         # run the individual tests
-        # Using pytest parameterization would be good here.
+        # TODO Using pytest parameterization would be good here.
 
         name = 'spatial'
         test_case = 'csharp'

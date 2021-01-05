@@ -76,7 +76,7 @@ def compare_files(infile, outfile, fails, not_tested):
     :param outfile: file generated during tests
     :param fails: list of failure cases
     :param not_tested: list of untested cases
-    :returns: 0 on success, or file not present; 1 on failure. TODO if file is not present, isn't that a failure?
+    :returns: 0 on success, or file not present; 1 on failure.
     """
     ret = 0
     if not os.path.isfile(infile):
