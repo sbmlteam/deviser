@@ -23,36 +23,44 @@ not_tested = []
 
 
 def generate_cmake_files(filename):
+    """
+    Generic set-up code used by the test wrapper function.
+    Parse XML file and use the big dictionary structure obtained to
+    generate the CMake package files.
+
+    :param filename: the XML file to parse
+    :return: nothing
+    """
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    os.chdir(os.path.normpath('./temp'))
     if not os.path.exists('src'):
         os.mkdir('src')
     all_files = CMakeFiles.CMakeFiles(ob, os.getcwd(), True)
     all_files.write_package_files()
-    os.chdir('../.')
+    os.chdir(os.path.normpath('../.'))
 
 
 def generate_cmake_register_files(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    os.chdir(os.path.normpath('./temp'))
     all_files = CMakeFiles.CMakeFiles(ob, os.getcwd(), True)
     all_files.write_register_files()
-    os.chdir('../.')
+    os.chdir(os.path.normpath('../.'))
 
 def generate_cmake_example_files(filename, name):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    os.chdir(os.path.normpath('./temp'))
     if not os.path.exists('examples'):
         os.mkdir('examples')
-        os.mkdir('examples/c++')
-    os.mkdir('examples/c++/{0}'.format(name))
+        os.mkdir(os.path.normpath('examples/c++'))
+    os.mkdir(os.path.normpath('examples/c++/{0}'.format(name)))
     os.chdir('examples')
     all_files = CMakeFiles.CMakeFiles(ob, os.getcwd(), True)
     all_files.write_example_files()
-    os.chdir('../../../../.')
+    os.chdir(os.path.normpath('../../../../.'))
 
 
 #############################################################################
@@ -65,35 +73,35 @@ def compare_files(correct_file, temp_file):
 
 def compare_cmake(name, is_src=False):
     if is_src:
-        correct_file = '.\\test-cmake\\{0}-package.cmake'.format(name)
-        temp_file = '.\\temp\\{0}-package.cmake'.format(name)
+        correct_file = os.path.normpath('./test-cmake/{0}-package.cmake'.format(name))
+        temp_file = os.path.normpath('./temp/{0}-package.cmake'.format(name))
     else:
-        correct_file = '.\\test-cmake\\{0}-package.cmake'.format(name)
-        temp_file = '.\\temp\\{0}-package.cmake'.format(name)
+        correct_file = os.path.normpath('./test-cmake/{0}-package.cmake'.format(name))
+        temp_file = os.path.normpath('./temp/{0}-package.cmake'.format(name))
     return compare_files(correct_file, temp_file)
 
 
 def compare_cmake_register(name, is_cxx=False):
     if is_cxx:
-        correct_file = '.\\test-cmake\\{0}-register.h'.format(name)
-        temp_file = '.\\temp\\{0}-register.h'.format(name)
+        correct_file = os.path.normpath('./test-cmake/{0}-register.h'.format(name))
+        temp_file = os.path.normpath('./temp/{0}-register.h'.format(name))
     else:
-        correct_file = '.\\test-cmake\\{0}-register.cxx'.format(name)
-        temp_file = '.\\temp\\{0}-register.cxx'.format(name)
+        correct_file = os.path.normpath('./test-cmake/{0}-register.cxx'.format(name))
+        temp_file = os.path.normpath('./temp/{0}-register.cxx'.format(name))
     return compare_files(correct_file, temp_file)
 
 def compare_cmake_example(name, is_txt=False):
     if is_txt and name=='spatial':
-        correct_file = '.\\test-cmake\\examples\\CMakeLists.txt'
-        temp_file = '.\\temp\\examples\\c++\\{0}\\CMakeLists.txt'.format(name)
+        correct_file = os.path.normpath('./test-cmake/examples/CMakeLists.txt')
+        temp_file = os.path.normpath('./temp/examples/c++/{0}/CMakeLists.txt'.format(name))
     else:
-        correct_file = '.\\test-cmake\\examples\\{0}-package.cmake'.format(name)
-        temp_file = '.\\temp\\examples\\{0}-package.cmake'.format(name)
+        correct_file = os.path.normpath('./test-cmake/examples/{0}-package.cmake'.format(name))
+        temp_file = os.path.normpath('./temp/examples/{0}-package.cmake'.format(name))
     return compare_files(correct_file, temp_file)
 
 def compare_examples(name):
-    correct_file = '.\\test-cmake\\examples\\c++\\{0}_example1.cpp'.format(name)
-    temp_file = '.\\temp\\examples\\c++\\{0}\\{0}_example1.cpp'.format(name)
+    correct_file = os.path.normpath('./test-cmake/examples/c++/{0}_example1.cpp'.format(name))
+    temp_file = os.path.normpath('./temp/examples/c++/{0}/{0}_example1.cpp'.format(name))
     return compare_files(correct_file, temp_file)
 
 #############################################################################
@@ -135,7 +143,7 @@ def run_example_test(name):
 
 def main():
 
-    # set up the enivornment
+    # Set up the environment.
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
     (path_to_tests, other) = os.path.split(this_dir)
@@ -144,7 +152,7 @@ def main():
         os.mkdir('temp')
     fail = 0
 
-    # run the individual tests
+    # Run the individual tests.  TODO Consider using a pytest fixture.
     name = 'spatial'
     fail += run_cmake_test(name)
 
