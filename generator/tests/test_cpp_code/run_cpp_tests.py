@@ -38,7 +38,9 @@ def generate_new_cpp_header(filename, num):
     Generate cpp files.
 
     :param filename: name of XML file to parse.
-    :param num:
+    :param num: TODO seems to be index of item in list which is the value
+        (in the big dictionary structure) for the key 'baseElements'.
+        But I don't fully understand this.
     :return: nothing
     """
     ob = common_setup(filename)
@@ -65,20 +67,36 @@ def generate_generic_header(filename, package):
 def generate_extension_header(filename):
     generate_generic_header(filename, '')
 
+
 def generate_types_header(filename):
     generate_generic_header(filename, 'types')
+
 
 def generate_fwd_header(filename):
     generate_generic_header(filename, 'fwd')
 
+
 def generate_plugin_header(filename, num):
+    """
+    Generate plugin files.
+
+    :param filename: XML file to parse.
+    :param num: plugin #.
+    :return: nothing.
+    """
     ob = common_setup(filename)
     all_files = ExtensionFiles.ExtensionFiles(ob, '', True)
-    all_files.write_plugin_files(num)  # NB this line is different to above functions.
+    all_files.write_plugin_files(num)
     os.chdir('../.')
 
 
 def generate_error_header(filename):
+    """
+    Generate error header files.
+
+    :param filename: XML file to parse
+    :return: nothing
+    """
     ob = common_setup(filename)
     all_files = ValidationFiles.ValidationFiles(ob, True)
     all_files.write_error_header()
@@ -87,6 +105,12 @@ def generate_error_header(filename):
 
 
 def generate_validator(filename):
+    """
+    Generate the set of Validation files.
+
+    :param filename: XML file to parse.
+    :return: nothing
+    """
     ob = common_setup(filename)
     all_files = ValidationFiles.ValidationFiles(ob, True)
     all_files.write_validator_files()
@@ -94,6 +118,12 @@ def generate_validator(filename):
 
 
 def generate_constraints(filename):
+    """
+    Generate the 'constraints' files.
+
+    :param filename: XML file to parse
+    :return: nothing.
+    """
     ob = common_setup(filename)
     all_files = ValidationFiles.ValidationFiles(ob, True)
     all_files.write_constraints()
@@ -106,6 +136,7 @@ def generate_constraints(filename):
 def compare_files(correct_file, temp_file):
     return test_functions.compare_files(correct_file, temp_file, fails,
                                         not_tested)
+
 
 
 def compare_code_headers(class_name):
