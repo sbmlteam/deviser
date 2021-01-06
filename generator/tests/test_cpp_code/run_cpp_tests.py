@@ -20,18 +20,29 @@ not_tested = []
 ##############################################################################
 # Specific generation functions
 
+def common_setup(filename):
+    """
+    Generic set-up code. Parse XML file and go into ./temp.
+
+    :param filename: XML file to parse
+    :return: the big dictionary structure generated from the XML.
+    """
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    return ob
+
 
 def generate_new_cpp_header(filename, num):
     """
+    Generate cpp files.
 
     :param filename: name of XML file to parse.
     :param num:
     :return: nothing
     """
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
+    ob = common_setup(filename)
     working_class = ob['baseElements'][num]
-    os.chdir('./temp')
     all_files = CppFiles.CppFiles(working_class, True)
     all_files.write_files()
     os.chdir('../.')
@@ -39,15 +50,13 @@ def generate_new_cpp_header(filename, num):
 
 def generate_generic_header(filename, package):
     """
-    Parse XML file and create files with specified package.
+    Generate Extension files with specified package.
 
     :param filename: XML file to parse.
     :param package: required package, e.g. 'types', 'fwd' or ''
     :return: nothing.
     """
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    ob = common_setup(filename)
     all_files = ExtensionFiles.ExtensionFiles(ob, package, True)
     all_files.write_files()
     os.chdir('../.')
@@ -63,18 +72,14 @@ def generate_fwd_header(filename):
     generate_generic_header(filename, 'fwd')
 
 def generate_plugin_header(filename, num):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    ob = common_setup(filename)
     all_files = ExtensionFiles.ExtensionFiles(ob, '', True)
     all_files.write_plugin_files(num)  # NB this line is different to above functions.
     os.chdir('../.')
 
 
 def generate_error_header(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    ob = common_setup(filename)
     all_files = ValidationFiles.ValidationFiles(ob, True)
     all_files.write_error_header()
     all_files.write_error_table_header()
@@ -82,18 +87,14 @@ def generate_error_header(filename):
 
 
 def generate_validator(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    ob = common_setup(filename)
     all_files = ValidationFiles.ValidationFiles(ob, True)
     all_files.write_validator_files()
     os.chdir('../.')
 
 
 def generate_constraints(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    ob = common_setup(filename)
     all_files = ValidationFiles.ValidationFiles(ob, True)
     all_files.write_constraints()
     os.chdir('../.')
