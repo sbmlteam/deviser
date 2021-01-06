@@ -199,14 +199,38 @@ def run_constraints_test(name, class_name, test_case):
 
 def main():
 
+
+    # TODO Currently, nearly all tests are failing on Python 2 (on Linux)
+    # Only AnalyticVolume and Arc pass.
+    # But previously, the files were just being skipped anyway.
+
+
     runall = True
- #   runall = False
+    # runall = False
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir('temp'):
         os.mkdir('temp')
     fail = 0
+
+    # Run the next couple of tests always:
+
+    # TODO This test is currently failing.
+    name = 'copy'
+    num = 0
+    class_name = 'Def'
+    list_of = ''
+    test_case = 'class with XMLNode'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    # name = 'copy_add'
+    # num = 0
+    # class_name = 'Abc'
+    # list_of = ''
+    # test_case = 'class with additional code'
+    # fail += run_test(name, num, class_name, test_case, list_of)
+
 
     if runall:
         # run the individual tests
@@ -822,20 +846,6 @@ def main():
         test_case = 'versions of plugins - elements'
         fail += run_plug_test(name, class_name, test_case, num)
 
-        # name = 'copy_add'
-        # num = 0
-        # class_name = 'Abc'
-        # list_of = ''
-        # test_case = 'class with additional code'
-        # fail += run_test(name, num, class_name, test_case, list_of)
-
-        name = 'copy'
-        num = 0
-        class_name = 'Def'
-        list_of = ''
-        test_case = 'class with XMLNode'
-        fail += run_test(name, num, class_name, test_case, list_of)
-
         name = 'twoAtOnce'
         num = 0
         class_name = 'TwoatonceSBasePlugin'
@@ -1011,19 +1021,8 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        # name = 'copy_add'
-        # num = 0
-        # class_name = 'Abc'
-        # list_of = ''
-        # test_case = 'class with additional code'
-        # fail += run_test(name, num, class_name, test_case, list_of)
+        pass
 
-        name = 'copy'
-        num = 0
-        class_name = 'Def'
-        list_of = ''
-        test_case = 'class with XMLNode'
-        fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
