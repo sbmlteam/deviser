@@ -292,11 +292,11 @@ def run_constraints_test(name, class_name, test_case):
 
 def main():
 
-
-    # TODO Currently, nearly all tests are failing on Python 2 (on Linux)
-    # Only AnalyticVolume and Arc pass.
-    # But previously, the tests were just being skipped (on Linux) anyway.
-
+    # NB the reference files in test-code/ and test-extension/ were
+    # presumably generated on Windows. I am running these tests on a
+    # MacBook (so like Linux). The file comparison works Ok for
+    # Python 3 but not Python 2. I ran all the reference files through
+    # dos2unix and now all the tests work under Python 2 unless noted below.
 
     runall = True
     # runall = False
