@@ -104,30 +104,30 @@ def compare_files(correct_file, temp_file):
 
 
 def compare_code_headers(class_name):
-    correct_file = '.\\test-code\\{0}.h'.format(class_name)
-    temp_file = '.\\temp\\{0}.h'.format(class_name)
+    correct_file = os.path.normpath('./test-code/{0}.h'.format(class_name))
+    temp_file = os.path.normpath('./temp/{0}.h'.format(class_name))
     return compare_files(correct_file, temp_file)
 
 
 def compare_ext_headers(class_name):
-    correct_file = '.\\test-extension\\{0}.h'.format(class_name)
-    temp_file = '.\\temp\\{0}.h'.format(class_name)
+    correct_file = os.path.normpath('./test-extension/{0}.h'.format(class_name))
+    temp_file = os.path.normpath('./temp/{0}.h'.format(class_name))
     return compare_files(correct_file, temp_file)
 
 
 def compare_code_impl(class_name):
-    correct_file = '.\\test-code\\{0}.cpp'.format(class_name)
-    temp_file = '.\\temp\\{0}.cpp'.format(class_name)
+    correct_file = os.path.normpath('./test-code/{0}.cpp'.format(class_name))
+    temp_file = os.path.normpath('./temp/{0}.cpp'.format(class_name))
     return compare_files(correct_file, temp_file)
 
 
 def compare_ext_impl(class_name, declared=False):
     if declared:
-        correct_file = '.\\test-extension\\{0}Declared.cxx'.format(class_name)
-        temp_file = '.\\temp\\{0}Declared.cxx'.format(class_name)
+        correct_file = os.path.normpath('./test-extension/{0}Declared.cxx'.format(class_name))
+        temp_file = os.path.normpath('./temp/{0}Declared.cxx'.format(class_name))
     else:
-        correct_file = '.\\test-extension\\{0}.cpp'.format(class_name)
-        temp_file = '.\\temp\\{0}.cpp'.format(class_name)
+        correct_file = os.path.normpath('./test-extension/{0}.cpp'.format(class_name))
+        temp_file = os.path.normpath('./temp/{0}.cpp'.format(class_name))
     return compare_files(correct_file, temp_file)
 
 
