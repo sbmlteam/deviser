@@ -183,6 +183,16 @@ def compare_ext_impl(class_name, declared=False):
 # Specific test functions
 
 def run_test(name, num, class_name, test_case, list_of):
+    """
+    Most commonly-used test function.
+
+    :param name: which set of tests this relates to. e.g. 'test_att'
+    :param num: index??? TODO please Sarah.
+    :param class_name: C++ class name/start of .h and .cpp file names.
+    :param test_case: brief description, e.g. 'all types attributes required'
+    :param list_of: e.g. 'ListOfFunctionTerms'. Can be ''.
+    :return: number of test failures.
+    """
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_new_cpp_header(filename, num)
     fail = compare_code_headers(class_name)
@@ -196,6 +206,15 @@ def run_test(name, num, class_name, test_case, list_of):
 
 
 def run_ext_test(name, class_name, test_case, test):
+    """
+    Run an 'extension' test.
+
+    :param name: which set of tests this relates to, e.g. 'qual'
+    :param class_name: C++ class name/start of .h and .cpp file names, e.g. 'QualExtension'.
+    :param test_case: brief description, e.g. 'basic extension file'
+    :param test: integer specifying which type of header file to generate.
+    :return: number of failed tests
+    """
     filename = test_functions.set_up_test(name, class_name, test_case)
     if test == 0:
         generate_extension_header(filename)
@@ -211,6 +230,15 @@ def run_ext_test(name, class_name, test_case, test):
 
 
 def run_plug_test(name, class_name, test_case, num):
+    """
+    Run a 'plugin' test.
+
+    :param name: which set of tests this relates to, e.g. 'qual'
+    :param class_name: C++ class name/start of .h and .cpp file names, e.g. 'QualModelPlugin'
+    :param test_case: brief description, e.g. 'basic plugin'
+    :param num: plugin #. TODO I'm not too sure about this. Please can we have an example?
+    :return: number of failed tests.
+    """
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_plugin_header(filename, num)
     fail = compare_ext_headers(class_name)
@@ -220,6 +248,15 @@ def run_plug_test(name, class_name, test_case, num):
 
 
 def run_valid_test(name, class_name, test_case, is_ext=True):
+    """
+    Run a 'validation' test.
+
+    :param name: which set of tests this relates to, e.g. 'test_att'
+    :param class_name: C++ class name/start of .h and .cpp file names, e.g. 'TestSBMLError'
+    :param test_case: brief description, e.g. 'error enumeration'
+    :param is_ext: determines which file to generate. TODO please amend this, Sarah. Thanks.
+    :return: number of failed tests.
+    """
     filename = test_functions.set_up_test(name, class_name, test_case)
     if is_ext:
         generate_error_header(filename)
@@ -234,6 +271,14 @@ def run_valid_test(name, class_name, test_case, is_ext=True):
 
 
 def run_constraints_test(name, class_name, test_case):
+    """
+    Run a 'constraints' test.
+
+    :param name: which set of tests this relates to, e.g. 'spatial'
+    :param class_name: C++ class name/start of .h and .cpp file names, e.g. 'SpatialConsistencyConstraints'
+    :param test_case: brief description, e.g. 'constraints'
+    :return: number of failed tests
+    """
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_constraints(filename)
     fail = compare_ext_impl(class_name)
@@ -250,7 +295,7 @@ def main():
 
     # TODO Currently, nearly all tests are failing on Python 2 (on Linux)
     # Only AnalyticVolume and Arc pass.
-    # But previously, the files were just being skipped (on Linux) anyway.
+    # But previously, the tests were just being skipped (on Linux) anyway.
 
 
     runall = True
@@ -326,7 +371,7 @@ def main():
 
         name = 'test_att'
         class_name = 'TestSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'qual'
