@@ -108,10 +108,12 @@ def compare_cmake(name, is_src=False):
     :return: 0 on success, or file not present; 1 on failure.
     """
     if is_src:
-        correct_file = os.path.normpath('./test-cmake/{0}-package.cmake'.format(name))
+        correct_file = os.path.normpath('./test-cmake/{0}-package.cmake'.
+                                        format(name))
         temp_file = os.path.normpath('./temp/{0}-package.cmake'.format(name))
     else:
-        correct_file = os.path.normpath('./test-cmake/{0}-package.cmake'.format(name))
+        correct_file = os.path.normpath('./test-cmake/{0}-package.cmake'.
+                                        format(name))
         temp_file = os.path.normpath('./temp/{0}-package.cmake'.format(name))
     return compare_files(correct_file, temp_file)
 
@@ -125,10 +127,12 @@ def compare_cmake_register(name, is_cxx=False):
     :return: 0 on success, or file not present; 1 on failure.
     """
     if is_cxx:
-        correct_file = os.path.normpath('./test-cmake/{0}-register.h'.format(name))
+        correct_file = os.path.normpath('./test-cmake/{0}-register.h'.
+                                        format(name))
         temp_file = os.path.normpath('./temp/{0}-register.h'.format(name))
     else:
-        correct_file = os.path.normpath('./test-cmake/{0}-register.cxx'.format(name))
+        correct_file = os.path.normpath('./test-cmake/{0}-register.cxx'.
+                                        format(name))
         temp_file = os.path.normpath('./temp/{0}-register.cxx'.format(name))
     return compare_files(correct_file, temp_file)
 
@@ -142,7 +146,7 @@ def compare_cmake_example(name, is_txt=False):
     :param is_txt: Use True if files end in .txt, otherwise False
     :return: 0 on success, or file not present; 1 on failure.
     """
-    if is_txt and name=='spatial':
+    if is_txt and name == 'spatial':
         correct_file = os.path.normpath('./test-cmake/examples/CMakeLists.txt')
         temp_file = os.path.normpath('./temp/examples/c++/{0}/CMakeLists.txt'.format(name))
     else:
@@ -212,10 +216,8 @@ def run_example_test(name):
     return fail
 
 
-
 #########################################################################
 # Main function
-
 
 def main():
     """
