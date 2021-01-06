@@ -31,10 +31,10 @@ def set_up(filename):
     """
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    os.chdir(os.path.normpath('./temp'))
     if not os.path.exists(ob['name']):
         os.mkdir(ob['name'])
-    os.chdir('./{0}'.format(ob['name']))
+    os.chdir(os.path.normpath('./{0}'.format(ob['name'])))
     return ob
 
 
@@ -48,7 +48,7 @@ def generate_example(filename):
     ob = set_up(filename)
     all_files = CppExampleFile.CppExampleFile(ob)
     all_files.write_file()
-    os.chdir('../../.')
+    os.chdir(os.path.normpath('../../.'))
     return ob['name']
 
 
@@ -62,7 +62,7 @@ def generate_xml(filename):
     ob = set_up(filename)
     all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
     all_files.write_file('test_xml')
-    os.chdir('../../.')
+    os.chdir(os.path.normpath('../../.'))
     return ob['name']
 
 
@@ -76,7 +76,7 @@ def generate_xml_fails(filename):
     ob = set_up(filename)
     all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
     all_files.write_all_files()
-    os.chdir('../../.')
+    os.chdir(os.path.normpath('../../.'))
     return ob['name']
 
 
@@ -97,7 +97,7 @@ def generate_some_xml_fails(filename, start, stop, number=-1):
     if number > -1:
         all_files.set_num_components(number)
     all_files.write_test_files(start, stop)
-    os.chdir('../../.')
+    os.chdir(os.path.normpath('../../.'))
     return ob['name']
 
 #############################################################################
