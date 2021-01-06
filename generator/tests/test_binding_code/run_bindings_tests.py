@@ -31,7 +31,7 @@ def set_up(filename, binding):
     """
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    os.chdir(os.path.normpath('./temp'))
     if os.path.isdir(binding):
         os.chdir(binding)
     else:
@@ -47,7 +47,7 @@ def generate_bindings_downcast_ext(filename, binding):
     """
     all_files = set_up(filename, binding)
     all_files.write_downcast_extension()
-    os.chdir('../..')
+    os.chdir(os.path.normpath('../..'))
 
 
 def generate_bindings_downcast_ns(filename, binding):
@@ -56,7 +56,7 @@ def generate_bindings_downcast_ns(filename, binding):
     """
     all_files = set_up(filename, binding)
     all_files.write_downcast_namespace()
-    os.chdir('../..')
+    os.chdir(os.path.normpath('../..'))
 
 
 def generate_bindings_downcast_pkgs(filename, binding, local):
@@ -74,7 +74,7 @@ def generate_bindings_downcast_pkgs(filename, binding, local):
         all_files.write_local()
     else:
         all_files.write_downcast_packages()
-    os.chdir('../..')
+    os.chdir(os.path.normpath('../..'))
 
 
 def generate_bindings_downcast_plugins(filename, binding):
@@ -83,7 +83,7 @@ def generate_bindings_downcast_plugins(filename, binding):
     """
     all_files = set_up(filename, binding)
     all_files.write_downcast_plugins()
-    os.chdir('../..')
+    os.chdir(os.path.normpath('../..'))
 
 #############################################################################
 # Specific compare functions
@@ -108,7 +108,7 @@ def compare_ext_headers(class_name):
     TODO This function doesn't appear to be used anywhere.
     """
     correct_file = os.path.normpath('./test-extension/{0}.h'.format(class_name))
-    temp_file = ('./temp/{0}.h'.format(class_name))
+    temp_file = os.path.normpath('./temp/{0}.h'.format(class_name))
     return test_functions.compare_files(correct_file, temp_file, fails,
                                         not_tested)
 
