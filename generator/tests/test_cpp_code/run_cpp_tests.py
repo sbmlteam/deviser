@@ -22,6 +22,12 @@ not_tested = []
 
 
 def generate_new_cpp_header(filename, num):
+    """
+
+    :param filename: name of XML file to parse.
+    :param num:
+    :return: nothing
+    """
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     working_class = ob['baseElements'][num]
@@ -31,39 +37,37 @@ def generate_new_cpp_header(filename, num):
     os.chdir('../.')
 
 
-def generate_extension_header(filename):
+def generate_generic_header(filename, package):
+    """
+    Parse XML file and create files with specified package.
+
+    :param filename: XML file to parse.
+    :param package: required package, e.g. 'types', 'fwd' or ''
+    :return: nothing.
+    """
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
-    all_files = ExtensionFiles.ExtensionFiles(ob, '', True)
+    all_files = ExtensionFiles.ExtensionFiles(ob, package, True)
     all_files.write_files()
     os.chdir('../.')
 
+
+def generate_extension_header(filename):
+    generate_generic_header(filename, '')
 
 def generate_types_header(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    all_files = ExtensionFiles.ExtensionFiles(ob, 'types', True)
-    all_files.write_files()
-    os.chdir('../.')
-
+    generate_generic_header(filename, 'types')
 
 def generate_fwd_header(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    all_files = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
-    all_files.write_files()
-    os.chdir('../.')
-
+    generate_generic_header(filename, 'fwd')
 
 def generate_plugin_header(filename, num):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
     all_files = ExtensionFiles.ExtensionFiles(ob, '', True)
-    all_files.write_plugin_files(num)
+    all_files.write_plugin_files(num)  # NB this line is different to above functions.
     os.chdir('../.')
 
 
@@ -202,7 +206,7 @@ def main():
 
     # TODO Currently, nearly all tests are failing on Python 2 (on Linux)
     # Only AnalyticVolume and Arc pass.
-    # But previously, the files were just being skipped anyway.
+    # But previously, the files were just being skipped (on Linux) anyway.
 
 
     runall = True
