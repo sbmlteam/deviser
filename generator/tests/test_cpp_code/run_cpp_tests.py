@@ -133,39 +133,48 @@ def generate_constraints(filename):
 #############################################################################
 # Specific compare functions
 
-def compare_files(correct_file, temp_file):
+#def compare_files(correct_file, temp_file):
+#    return test_functions.compare_files(correct_file, temp_file, fails,
+#                                        not_tested)
+
+def compare_files(folder, class_name, file_extension):
+    correct_file = os.path.normpath('./{0}/{1}{2}'.format(folder, class_name, file_extension))
+    temp_file = os.path.normpath('./temp/{0}{1}'.format(class_name, file_extension))
     return test_functions.compare_files(correct_file, temp_file, fails,
                                         not_tested)
 
-
-
 def compare_code_headers(class_name):
-    correct_file = os.path.normpath('./test-code/{0}.h'.format(class_name))
-    temp_file = os.path.normpath('./temp/{0}.h'.format(class_name))
-    return compare_files(correct_file, temp_file)
+    #correct_file = os.path.normpath('./test-code/{0}.h'.format(class_name))
+    #temp_file = os.path.normpath('./temp/{0}.h'.format(class_name))
+    #return compare_files(correct_file, temp_file)
+    return compare_files('test-code', class_name, '.h')
 
 
 def compare_ext_headers(class_name):
-    correct_file = os.path.normpath('./test-extension/{0}.h'.format(class_name))
-    temp_file = os.path.normpath('./temp/{0}.h'.format(class_name))
-    return compare_files(correct_file, temp_file)
+    #correct_file = os.path.normpath('./test-extension/{0}.h'.format(class_name))
+    #temp_file = os.path.normpath('./temp/{0}.h'.format(class_name))
+    #return compare_files(correct_file, temp_file)
+    return compare_files('test-extension', class_name, '.h')
 
 
 def compare_code_impl(class_name):
-    correct_file = os.path.normpath('./test-code/{0}.cpp'.format(class_name))
-    temp_file = os.path.normpath('./temp/{0}.cpp'.format(class_name))
-    return compare_files(correct_file, temp_file)
+    #correct_file = os.path.normpath('./test-code/{0}.cpp'.format(class_name))
+    #temp_file = os.path.normpath('./temp/{0}.cpp'.format(class_name))
+    #return compare_files(correct_file, temp_file)
+    return compare_files('test-code', class_name, '.cpp')
 
 
 def compare_ext_impl(class_name, declared=False):
     if declared:
-        correct_file = os.path.normpath('./test-extension/{0}Declared.cxx'.format(class_name))
-        temp_file = os.path.normpath('./temp/{0}Declared.cxx'.format(class_name))
+        #correct_file = os.path.normpath('./test-extension/{0}Declared.cxx'.format(class_name))
+        #temp_file = os.path.normpath('./temp/{0}Declared.cxx'.format(class_name))
+        ending = 'Declared.cxx'
     else:
-        correct_file = os.path.normpath('./test-extension/{0}.cpp'.format(class_name))
-        temp_file = os.path.normpath('./temp/{0}.cpp'.format(class_name))
-    return compare_files(correct_file, temp_file)
-
+        ending = '.cpp'
+        #correct_file = os.path.normpath('./test-extension/{0}.cpp'.format(class_name))
+        #temp_file = os.path.normpath('./temp/{0}.cpp'.format(class_name))
+    #return compare_files(correct_file, temp_file)
+    return compare_files('test-extension', class_name, ending)
 
 #############################################################################
 # Specific test functions
