@@ -67,8 +67,8 @@ def compare_matlab(name, filetype):
     :return: 0 if files identical, 1 otherwise.
     """
     assert filetype in filetypes
-    correct_file = '.\\test-matlab\\{0}{1}.m'.format(name, filetype)
-    temp_file = '.\\temp\\{0}{1}.m'.format(name, filetype)
+    correct_file = os.path.normpath('./test-matlab/{0}{1}.m'.format(name, filetype))
+    temp_file = os.path.normpath('./temp/{0}{1}.m'.format(name, filetype))
     return compare_files(correct_file, temp_file)
 
 
