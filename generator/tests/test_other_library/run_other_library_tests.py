@@ -24,21 +24,11 @@ not_tested = []
 
 
 def generate_new_cpp_header(filename, num):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    for wc in ob['baseElements']:
-        strFunctions.prefix_classes(wc)
-    for working_class in ob['baseElements']:
-        if working_class['name'] == global_variables.document_class:
-            working_class['document'] = True
+    ob = common_set_up(filename)
     working_class = ob['baseElements'][num]
     if working_class['name'] == global_variables.document_class:
         working_class['document'] = True
-    os.chdir('./temp')
-    newdir = global_variables.language
-    if not os.path.isdir(newdir):
-        os.mkdir(newdir)
-    os.chdir(newdir)
+    go_into_new_directory()
     all_files = CppFiles.CppFiles(working_class, True)
     all_files.write_files()
     os.chdir('../../.')
@@ -57,10 +47,10 @@ def common_set_up(filename):
 
 def go_into_new_directory():
     os.chdir('./temp')
-    newdir = global_variables.language
-    if not os.path.isdir(newdir):
-        os.mkdir(newdir)
-    os.chdir(newdir)
+    new_dir = global_variables.language
+    if not os.path.isdir(new_dir):
+        os.mkdir(new_dir)
+    os.chdir(new_dir)
 
 
 def generate_templates(filename):
@@ -110,11 +100,9 @@ def generate_binding(filename, binding):
     ob = common_set_up(filename)
     go_into_new_directory()
 
-    if os.path.isdir(binding):
-        os.chdir(binding)
-    else:
-        os.makedirs(binding)
-        os.chdir(binding)
+    if not os.path.isdir(binding):
+        os.mkdir(binding)
+    os.chdir(binding)
     all_files = BindingsFiles.BindingFiles(ob, binding, True)
     all_files.write_files()
     os.chdir('../.')
@@ -143,7 +131,7 @@ def generate_cmake(filename, binding):
 
 
 def generate_global(filename):
-    common_set_up(filename)  # don't need ob
+    common_set_up(filename)  # Don't need ob!
     go_into_new_directory()
     generateCode.generate_global_files()
     os.chdir('../../.')
