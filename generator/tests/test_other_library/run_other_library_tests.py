@@ -35,6 +35,12 @@ def generate_new_cpp_header(filename, num):
 
 
 def common_set_up(filename):
+    """
+    Perform common setting-up steps.
+
+    :param filename: name of XML file to parse.
+    :return: big dictionary structure obtained from the parsing.
+    """
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     for wc in ob['baseElements']:
@@ -46,6 +52,9 @@ def common_set_up(filename):
 
 
 def go_into_new_directory():
+    """
+    Create the new directory if required. Go into it.
+    """
     os.chdir('./temp')
     new_dir = global_variables.language
     if not os.path.isdir(new_dir):
@@ -113,11 +122,10 @@ def generate_cmake(filename, binding):
     ob = common_set_up(filename)
     go_into_new_directory()
 
-    if os.path.isdir(binding):
-        os.chdir(binding)
-    else:
-        os.makedirs(binding)
-        os.chdir(binding)
+    if not os.path.isdir(binding):
+        os.mkdir(binding)
+    os.chdir(binding)
+
     this_dir = os.getcwd()
     test_functions.create_dir('src')
     os.chdir('src')
@@ -143,54 +151,52 @@ def compare_files(correct_file, temp_file):
     return test_functions.compare_files(correct_file, temp_file, fails,
                                         not_tested)
 
+#########
+
+def compare_code(class_name, end):
+    correct_file = os.path.normpath('./test-code/{1}/{0}{2}'.format(class_name, global_variables.language, end))
+    temp_file = os.path.normpath('./temp/{1}/{0}{2}'.format(class_name, global_variables.language, end))
+    return compare_files(correct_file, temp_file)
 
 def compare_code_headers(class_name):
-    correct_file = os.path.normpath('./test-code/{1}/{0}.h'.format(class_name, global_variables.language))
-    temp_file = os.path.normpath('./temp/{1}/{0}.h'.format(class_name, global_variables.language))
-    return compare_files(correct_file, temp_file)
-
+    return compare_code(class_name, ".h")
 
 def compare_code_impl(class_name):
-    correct_file = os.path.normpath('./test-code/{1}/{0}.cpp'.format(class_name, global_variables.language))
-    temp_file = os.path.normpath('./temp/{1}/{0}.cpp'.format(class_name, global_variables.language))
-    return compare_files(correct_file, temp_file)
-
+    return compare_code(class_name, ".cpp")
 
 def compare_code_cmake(class_name):
-    correct_file = os.path.normpath('./test-code/{1}/{0}.cmake'.format(class_name, global_variables.language))
-    temp_file = os.path.normpath('./temp/{1}/{0}.cmake'.format(class_name, global_variables.language))
-    return compare_files(correct_file, temp_file)
-
+    return compare_code(class_name, ".cmake")
 
 def compare_code_txt(class_name, ext='txt'):
-    correct_file = os.path.normpath('./test-code/{2}/{0}.{1}'.format(class_name, ext, global_variables.language))
-    temp_file = os.path.normpath('./temp/{2}/{0}.{1}'.format(class_name, ext, global_variables.language))
-    return compare_files(correct_file, temp_file)
+    return compare_code(class_name, ext)
 
+#########
 
+def compare_binding(class_name, binding, prefix, end):
+    correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}{4}'.format(binding, class_name, prefix, global_variables.language, end))
+    temp_file = os.path.normpath('./temp/{2}/{0}/{1}{3}'.format(binding, class_name, global_variables.language, end))
+    return compare_files(correct_file, temp_file) #./temp/lang/binding/classname.end
+                                                  #./temp/lang/binding/prefix/classname.i
 def compare_binding_headers(class_name, binding, prefix):
-    correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}.h'.format(binding, class_name, prefix, global_variables.language))
-    temp_file = os.path.normpath('./temp/{2}/{0}/{1}.h'.format(binding, class_name, global_variables.language))
-    return compare_files(correct_file, temp_file)
-
+    return compare_binding(class_name, binding, prefix, ".h")
 
 def compare_binding_impl(class_name, binding, prefix):
-    correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}.cpp'.format(binding, class_name, prefix, global_variables.language))
-    temp_file = os.path.normpath('./temp/{2}/{0}/{1}.cpp'.format(binding, class_name, global_variables.language))
-    return compare_files(correct_file, temp_file)
+    return compare_binding(class_name, binding, prefix, ".cpp")
 
+###########
+
+def compare_other_binding(class_name, binding, prefix, end):
+    correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}{4}'.format(binding, class_name, prefix, global_variables.language, end))
+    temp_file = os.path.normpath('./temp/{3}/{0}/{2}/{1}{4}'.format(binding, class_name, prefix, global_variables.language, end))
+    return compare_files(correct_file, temp_file)
 
 def compare_binding_interface(class_name, binding, prefix):
-    correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}.i'.format(binding, class_name, prefix, global_variables.language))
-    temp_file = os.path.normpath('./temp/{3}/{0}/{2}/{1}.i'.format(binding, class_name, prefix, global_variables.language))
-    return compare_files(correct_file, temp_file)
-
+    return compare_other_binding(class_name, binding, prefix, ".i")
 
 def compare_binding_file(class_name, binding, prefix):
-    correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}'.format(binding, class_name, prefix, global_variables.language))
-    temp_file = os.path.normpath('./temp/{3}/{0}/{2}/{1}'.format(binding, class_name, prefix, global_variables.language))
-    return compare_files(correct_file, temp_file)
+    return compare_other_binding(class_name, binding, prefix, "")
 
+##########
 
 def compare_cmake_file(this_dir, prefix):
     correct_file = os.path.normpath('./test-code/{2}/cmake/{1}/{0}/CMakeLists.txt'.format(this_dir, prefix, global_variables.language))
@@ -504,7 +510,7 @@ def main():
 
     test_all = True
 #    test_all = False
-    # set up the enivornment
+    # Set up the environment.
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
@@ -523,8 +529,6 @@ def main():
         list_of = ''
         test_case = 'attribute with different xml name'
         fail += run_test(name, num, class_name, test_case, list_of)
-
-
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail
