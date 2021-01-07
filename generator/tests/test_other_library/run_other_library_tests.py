@@ -173,7 +173,9 @@ def compare_code_txt(class_name, ext='.txt'):
 #########
 
 def compare_binding(class_name, binding, prefix, end):
-    correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}{4}'.format(binding, class_name, prefix, gv.language, end))
+    #correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}{4}'.format(binding, class_name, prefix, gv.language, end))
+    correct_file = os.path.normpath('./test-code/{2}/{0}/{1}{3}'.format(binding, class_name, gv.language, end))
+
     temp_file = os.path.normpath('./temp/{2}/{0}/{1}{3}'.format(binding, class_name, gv.language, end))
     return compare_files(correct_file, temp_file) #./temp/lang/binding/classname.end
                                                   #./temp/lang/binding/prefix/classname.i
@@ -186,7 +188,9 @@ def compare_binding_impl(class_name, binding, prefix):
 ###########
 
 def compare_other_binding(class_name, binding, prefix, end):
-    correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}{4}'.format(binding, class_name, prefix, gv.language, end))
+    #correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}{4}'.format(binding, class_name, prefix, gv.language, end))
+    correct_file = os.path.normpath(
+        './test-code/{2}/{0}/{1}{3}'.format(binding, class_name, gv.language, end))
     temp_file = os.path.normpath('./temp/{3}/{0}/{2}/{1}{4}'.format(binding, class_name, prefix, gv.language, end))
     return compare_files(correct_file, temp_file)
 
@@ -199,7 +203,8 @@ def compare_binding_file(class_name, binding, prefix):
 ##########
 
 def compare_cmake_file(this_dir, prefix):
-    correct_file = os.path.normpath('./test-code/{2}/cmake/{1}/{0}/CMakeLists.txt'.format(this_dir, prefix, gv.language))
+    #correct_file = os.path.normpath('./test-code/{2}/cmake/{1}/{0}/CMakeLists.txt'.format(this_dir, prefix, gv.language))
+    correct_file = os.path.normpath('./test-code/{1}/cmake/{0}/CMakeLists.txt'.format(this_dir, gv.language))
     temp_file = os.path.normpath('./temp/{1}/cmake/{0}/CMakeLists.txt'.format(this_dir, gv.language))
     return compare_files(correct_file, temp_file)
 
