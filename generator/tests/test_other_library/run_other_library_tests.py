@@ -55,15 +55,20 @@ def common_set_up(filename):
     return ob
 
 
-def generate_templates(filename):
-    ob = common_set_up(filename)
-    global_variables.populate_error_list(ob)
-    ValidationFiles.ValidationFiles(ob, True)
+def go_into_new_directory():
     os.chdir('./temp')
     newdir = global_variables.language
     if not os.path.isdir(newdir):
         os.mkdir(newdir)
     os.chdir(newdir)
+
+
+def generate_templates(filename):
+    ob = common_set_up(filename)
+    global_variables.populate_error_list(ob)
+    ValidationFiles.ValidationFiles(ob, True)
+    go_into_new_directory()
+
     prefix = global_variables.prefix
     base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
     base_files.write_files()
@@ -73,12 +78,8 @@ def generate_templates(filename):
 def generate_common_templates(filename):
     ob = common_set_up(filename)
     global_variables.populate_error_list(ob)
-    #prefix = global_variables.prefix
-    os.chdir('./temp')
-    newdir = global_variables.language
-    if not os.path.isdir(newdir):
-        os.mkdir(newdir)
-    os.chdir(newdir)
+    go_into_new_directory()
+
     prefix = global_variables.prefix
     base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
     base_files.write_common_files()
@@ -88,11 +89,8 @@ def generate_common_templates(filename):
 def generate_forward(filename):
     ob = common_set_up(filename)
     global_variables.populate_error_list(ob)
-    os.chdir('./temp')
-    newdir = global_variables.language
-    if not os.path.isdir(newdir):
-        os.mkdir(newdir)
-    os.chdir(newdir)
+    go_into_new_directory()
+
     ext = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
     ext.write_files()
     os.chdir('../../.')
@@ -101,11 +99,8 @@ def generate_forward(filename):
 def generate_enum(filename):
     ob = common_set_up(filename)
     global_variables.populate_error_list(ob)
-    os.chdir('./temp')
-    newdir = global_variables.language
-    if not os.path.isdir(newdir):
-        os.mkdir(newdir)
-    os.chdir(newdir)
+    go_into_new_directory()
+
     ext = ExtensionFiles.ExtensionFiles(ob, 'enums', True)
     ext.write_files()
     os.chdir('../../.')
@@ -113,11 +108,8 @@ def generate_enum(filename):
 
 def generate_binding(filename, binding):
     ob = common_set_up(filename)
-    os.chdir('./temp')
-    newdir = global_variables.language
-    if not os.path.isdir(newdir):
-        os.mkdir(newdir)
-    os.chdir(newdir)
+    go_into_new_directory()
+
     if os.path.isdir(binding):
         os.chdir(binding)
     else:
@@ -131,11 +123,8 @@ def generate_binding(filename, binding):
 
 def generate_cmake(filename, binding):
     ob = common_set_up(filename)
-    os.chdir('./temp')
-    newdir = global_variables.language
-    if not os.path.isdir(newdir):
-        os.mkdir(newdir)
-    os.chdir(newdir)
+    go_into_new_directory()
+
     if os.path.isdir(binding):
         os.chdir(binding)
     else:
@@ -155,11 +144,7 @@ def generate_cmake(filename, binding):
 
 def generate_global(filename):
     common_set_up(filename)  # don't need ob
-    os.chdir('./temp')
-    newdir = global_variables.language
-    if not os.path.isdir(newdir):
-        os.mkdir(newdir)
-    os.chdir(newdir)
+    go_into_new_directory()
     generateCode.generate_global_files()
     os.chdir('../../.')
 
