@@ -195,50 +195,50 @@ def compare_files(correct_file, temp_file):
 
 
 def compare_code_headers(class_name):
-    correct_file = '.\\test-code\\{1}\\{0}.h'.format(class_name, global_variables.language)
-    temp_file = '.\\temp\\{1}\\{0}.h'.format(class_name, global_variables.language)
+    correct_file = os.path.normpath('./test-code/{1}/{0}.h'.format(class_name, global_variables.language))
+    temp_file = os.path.normpath('./temp/{1}/{0}.h'.format(class_name, global_variables.language))
     return compare_files(correct_file, temp_file)
 
 
 def compare_code_impl(class_name):
-    correct_file = '.\\test-code\\{1}\\{0}.cpp'.format(class_name, global_variables.language)
-    temp_file = '.\\temp\\{1}\\{0}.cpp'.format(class_name, global_variables.language)
+    correct_file = os.path.normpath('./test-code/{1}/{0}.cpp'.format(class_name, global_variables.language))
+    temp_file = os.path.normpath('./temp/{1}/{0}.cpp'.format(class_name, global_variables.language))
     return compare_files(correct_file, temp_file)
 
 
 def compare_code_cmake(class_name):
-    correct_file = '.\\test-code\\{1}\\{0}.cmake'.format(class_name, global_variables.language)
-    temp_file = '.\\temp\\{1}\\{0}.cmake'.format(class_name, global_variables.language)
+    correct_file = os.path.normpath('./test-code/{1}/{0}.cmake'.format(class_name, global_variables.language))
+    temp_file = os.path.normpath('./temp/{1}/{0}.cmake'.format(class_name, global_variables.language))
     return compare_files(correct_file, temp_file)
 
 def compare_code_txt(class_name, ext='txt'):
-    correct_file = '.\\test-code\\{2}\\{0}.{1}'.format(class_name, ext, global_variables.language)
-    temp_file = '.\\temp\\{2}\\{0}.{1}'.format(class_name, ext, global_variables.language)
+    correct_file = os.path.normpath('./test-code/{2}/{0}.{1}'.format(class_name, ext, global_variables.language))
+    temp_file = os.path.normpath('./temp/{2}/{0}.{1}'.format(class_name, ext, global_variables.language))
     return compare_files(correct_file, temp_file)
 
 def compare_binding_headers(class_name, binding, prefix):
-    correct_file = '.\\test-code\\{3}\\{0}\\{2}\\{1}.h'.format(binding, class_name, prefix, global_variables.language)
-    temp_file = '.\\temp\\{2}\\{0}\\{1}.h'.format(binding, class_name, global_variables.language)
+    correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}.h'.format(binding, class_name, prefix, global_variables.language))
+    temp_file = os.path.normpath('./temp/{2}/{0}/{1}.h'.format(binding, class_name, global_variables.language))
     return compare_files(correct_file, temp_file)
 
 def compare_binding_impl(class_name, binding, prefix):
-    correct_file = '.\\test-code\\{3}\\{0}\\{2}\\{1}.cpp'.format(binding, class_name, prefix, global_variables.language)
-    temp_file = '.\\temp\\{2}\\{0}\\{1}.cpp'.format(binding, class_name, global_variables.language)
+    correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}.cpp'.format(binding, class_name, prefix, global_variables.language))
+    temp_file = os.path.normpath('./temp/{2}/{0}/{1}.cpp'.format(binding, class_name, global_variables.language))
     return compare_files(correct_file, temp_file)
 
 def compare_binding_interface(class_name, binding, prefix):
-    correct_file = '.\\test-code\\{3}\\{0}\\{2}\\{1}.i'.format(binding, class_name, prefix, global_variables.language)
-    temp_file = '.\\temp\\{3}\\{0}\\{2}\\{1}.i'.format(binding, class_name, prefix, global_variables.language)
+    correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}.i'.format(binding, class_name, prefix, global_variables.language))
+    temp_file = os.path.normpath('./temp/{3}/{0}/{2}/{1}.i'.format(binding, class_name, prefix, global_variables.language))
     return compare_files(correct_file, temp_file)
 
 def compare_binding_file(class_name, binding, prefix):
-    correct_file = '.\\test-code\\{3}\\{0}\\{2}\\{1}'.format(binding, class_name, prefix, global_variables.language)
-    temp_file = '.\\temp\\{3}\\{0}\\{2}\\{1}'.format(binding, class_name, prefix, global_variables.language)
+    correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}'.format(binding, class_name, prefix, global_variables.language))
+    temp_file = os.path.normpath('./temp/{3}/{0}/{2}/{1}'.format(binding, class_name, prefix, global_variables.language))
     return compare_files(correct_file, temp_file)
 
 def compare_cmake_file(this_dir, prefix):
-    correct_file = '.\\test-code\\{2}\\cmake\\{1}\\{0}\\CMakeLists.txt'.format(this_dir, prefix, global_variables.language)
-    temp_file = '.\\temp\\{1}\\cmake\\{0}\\CMakeLists.txt'.format(this_dir, global_variables.language)
+    correct_file = os.path.normpath('./test-code/{2}/cmake/{1}/{0}/CMakeLists.txt'.format(this_dir, prefix, global_variables.language))
+    temp_file = os.path.normpath('./temp/{1}/cmake/{0}/CMakeLists.txt'.format(this_dir, global_variables.language))
     return compare_files(correct_file, temp_file)
 
 #############################################################################
@@ -350,8 +350,8 @@ def test_cmake(name, class_name, test_case, binding, prefix):
     fail = 0
     fail += compare_cmake_file('{0}'.format(prefix), prefix)
     fail += compare_cmake_file('src'.format(prefix), prefix)
-    fail += compare_cmake_file('src\\bindings'.format(prefix), prefix)
-    fail += compare_cmake_file('src\\{0}'.format(global_variables.language, prefix), prefix)
+    fail += compare_cmake_file('src/bindings'.format(prefix), prefix)
+    fail += compare_cmake_file('src/{0}'.format(global_variables.language, prefix), prefix)
     print('')
     return fail
 
