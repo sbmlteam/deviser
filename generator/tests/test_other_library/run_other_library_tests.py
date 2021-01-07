@@ -167,7 +167,7 @@ def compare_code_impl(class_name):
 def compare_code_cmake(class_name):
     return compare_code(class_name, ".cmake")
 
-def compare_code_txt(class_name, ext='txt'):
+def compare_code_txt(class_name, ext='.txt'):
     return compare_code(class_name, ext)
 
 #########
@@ -290,7 +290,7 @@ def test_bindings(name, class_name, test_case, binding, prefix):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_binding(filename, binding)
     fail = 0
-    if binding == 'swig':
+    if binding == 'swig':  # all skipped
         fail += compare_binding_headers('ListWrapper', binding, prefix)
         fail += compare_binding_headers('OStream', binding, prefix)
         fail += compare_binding_impl('OStream', binding, prefix)
@@ -298,7 +298,7 @@ def test_bindings(name, class_name, test_case, binding, prefix):
         fail += compare_binding_headers('lib{0}'.format(prefix), binding, prefix)
         fail += compare_binding_interface('lib{0}'.format(prefix), binding, prefix)
         fail += compare_binding_interface('ASTNodes', binding, prefix)
-    elif binding == 'csharp':
+    elif binding == 'csharp':  # these aren't tested
         fail += compare_binding_impl('local', binding, prefix)
         fail += compare_binding_interface('local', binding, prefix)
         fail += compare_binding_interface('lib{0}'.format(prefix), binding, prefix)
@@ -312,7 +312,7 @@ def test_bindings(name, class_name, test_case, binding, prefix):
 def test_cmake(name, class_name, test_case, binding, prefix):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_cmake(filename, binding)
-    fail = 0
+    fail = 0   # skipped, or at least the middle two
     fail += compare_cmake_file('{0}'.format(prefix), prefix)
     fail += compare_cmake_file('src'.format(prefix), prefix)
     fail += compare_cmake_file('src/bindings'.format(prefix), prefix)
@@ -326,7 +326,7 @@ def test_global(name, class_name, test_case):
     generate_global(filename)
     fail = 0
     fail += compare_code_txt('VERSION')
-    fail += compare_code_txt('README', 'md')
+    fail += compare_code_txt('README', '.md')
     print('')
     return fail
 
@@ -339,14 +339,14 @@ def testSedML(fail):
 
     name = 'test_sedml'
     num = 1
-    class_name = 'SedModel'
-    list_of = 'SedListOfModels'
+    class_name = 'SedModel'  # fails
+    list_of = 'SedListOfModels'  # fails
     test_case = 'model'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 0
-    class_name = 'SedDocument'
+    class_name = 'SedDocument' # fails
     list_of = ''
     test_case = 'document'
     fail += run_test(name, num, class_name, test_case, list_of)
@@ -382,28 +382,28 @@ def testSedML(fail):
 
     name = 'test_sedml'
     num = 26
-    class_name = 'SedSetValue'
+    class_name = 'SedSetValue' # fails
     list_of = ''
     test_case = 'astnode used'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 12
-    class_name = 'SedDataGenerator'
+    class_name = 'SedDataGenerator'  # fails
     list_of = ''
     test_case = 'astnode in getElementBySId bug'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 33
-    class_name = 'SedRepeatedTask'
+    class_name = 'SedRepeatedTask' # fails
     list_of = ''
     test_case = 'attribute with different xml name'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 7
-    class_name = 'SedSimulation'
+    class_name = 'SedSimulation' # fails
     list_of = ''
     test_case = 'child element'
     fail += run_test(name, num, class_name, test_case, list_of)
@@ -417,15 +417,15 @@ def testSedML(fail):
 
     name = 'test_sedml'
     num = 10
-    class_name = 'SedAbstractTask'
-    list_of = 'SedListOfTasks'
+    class_name = 'SedAbstractTask'  # fails
+    list_of = 'SedListOfTasks'  # fails
     test_case = 'catch different abstract types'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 13
-    class_name = 'SedOutput'
-    list_of = 'SedListOfOutputs'
+    class_name = 'SedOutput' # fails
+    list_of = 'SedListOfOutputs' # fails
     test_case = 'catch different abstract types'
     fail += run_test(name, num, class_name, test_case, list_of)
 
@@ -460,8 +460,8 @@ def testCombine(fail):
 
     name = 'combine-archive'
     num = 0
-    class_name = 'CaContent'
-    list_of = 'CaListOfContents'
+    class_name = 'CaContent'  # fails
+    list_of = 'CaListOfContents'  # fails
     test_case = 'check includes'
     fail += run_test(name, num, class_name, test_case, list_of)
 
