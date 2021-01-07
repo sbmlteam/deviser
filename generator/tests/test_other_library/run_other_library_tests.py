@@ -172,45 +172,36 @@ def compare_code_txt(class_name, ext='.txt'):
 
 #########
 
-def compare_binding(class_name, binding, prefix, end):
-    #correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}{4}'.format(binding, class_name, prefix, gv.language, end))
+def compare_binding(class_name, binding, end, prefix=""):
     correct_file = os.path.normpath('./test-code/{2}/{0}/{1}{3}'.format(binding, class_name, gv.language, end))
-
-    temp_file = os.path.normpath('./temp/{2}/{0}/{1}{3}'.format(binding, class_name, gv.language, end))
-    return compare_files(correct_file, temp_file) #./temp/lang/binding/classname.end
-                                                  #./temp/lang/binding/prefix/classname.i
-def compare_binding_headers(class_name, binding, prefix):
-    return compare_binding(class_name, binding, prefix, ".h")
-
-def compare_binding_impl(class_name, binding, prefix):
-    return compare_binding(class_name, binding, prefix, ".cpp")
-
-###########
-
-def compare_other_binding(class_name, binding, prefix, end):
-    #correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}{4}'.format(binding, class_name, prefix, gv.language, end))
-    correct_file = os.path.normpath(
-        './test-code/{2}/{0}/{1}{3}'.format(binding, class_name, gv.language, end))
+    #if prefix:
     temp_file = os.path.normpath('./temp/{3}/{0}/{2}/{1}{4}'.format(binding, class_name, prefix, gv.language, end))
+    #else:
+        #temp_file = os.path.normpath('./temp/{2}/{0}/{1}{3}'.format(binding, class_name, gv.language, end))
     return compare_files(correct_file, temp_file)
 
+def compare_binding_headers(class_name, binding, prefix):
+    return compare_binding(class_name, binding, ".h", prefix)
+# temp/omex/swig/combine/OStream.h=================>> MISSING
+# temp/sedml/swig/sedml/OStream.h=================>> MISSING
+# compare_binding_headers('OStream', binding is swig, prefix is sedml or combine??)
+# present: temp/omex/swig/OStream.h  and  temp/sedml/swig/OStream.h
+
+def compare_binding_impl(class_name, binding, prefix):
+    return compare_binding(class_name, binding, ".cpp", prefix)
+
 def compare_binding_interface(class_name, binding, prefix):
-    return compare_other_binding(class_name, binding, prefix, ".i")
+    return compare_binding(class_name, binding, ".i", prefix)
 
 def compare_binding_file(class_name, binding, prefix):
-    return compare_other_binding(class_name, binding, prefix, "")
+    return compare_binding(class_name, binding, "", prefix)
 
 ##########
-"""
-The following files were not tested:
-test-code/sedml/cmake/sedml/CMakeLists.txt
-test-code/omex/cmake/combine/CMakeLists.txt
-"""
+
 def compare_cmake_file(this_dir, prefix):
-    #correct_file = os.path.normpath('./test-code/{2}/cmake/{1}/{0}/CMakeLists.txt'.format(this_dir, prefix, gv.language))
-    #correct_file = os.path.normpath('./test-code/{1}/cmake/{0}/CMakeLists.txt'.format(this_dir, gv.language))
     correct_file = os.path.normpath('./test-code/{0}/cmake/CMakeLists.txt'.format(gv.language))
     temp_file = os.path.normpath('./temp/{1}/cmake/{0}/CMakeLists.txt'.format(this_dir, gv.language))
+    #temp_file = os.path.normpath('./temp/{0}/cmake/{0}/CMakeLists.txt'.format(gv.language))
     return compare_files(correct_file, temp_file)
 
 #############################################################################
@@ -300,21 +291,21 @@ def test_bindings(name, class_name, test_case, binding, prefix):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_binding(filename, binding)
     fail = 0
-    if binding == 'swig':  # all skipped
-        fail += compare_binding_headers('ListWrapper', binding, prefix)
-        fail += compare_binding_headers('OStream', binding, prefix)
-        fail += compare_binding_impl('OStream', binding, prefix)
-        fail += compare_binding_interface('std_set', binding, prefix)
-        fail += compare_binding_headers('lib{0}'.format(prefix), binding, prefix)
-        fail += compare_binding_interface('lib{0}'.format(prefix), binding, prefix)
-        fail += compare_binding_interface('ASTNodes', binding, prefix)
-    elif binding == 'csharp':  # these aren't tested
-        fail += compare_binding_impl('local', binding, prefix)
-        fail += compare_binding_interface('local', binding, prefix)
-        fail += compare_binding_interface('lib{0}'.format(prefix), binding, prefix)
-        fail += compare_binding_file('CMakeLists.txt', binding, prefix)
-        fail += compare_binding_file('compile-native-files.cmake', binding, prefix)
-        fail += compare_binding_file('AssemblyInfo.cs.in', binding, prefix)
+    if binding == 'swig':
+        fail += compare_binding_headers('ListWrapper', binding, "") #prefix)
+        fail += compare_binding_headers('OStream', binding, "") #prefix)
+        fail += compare_binding_impl('OStream', binding, "") #prefix)
+        fail += compare_binding_interface('std_set', binding, "") #prefix)
+        fail += compare_binding_headers('lib{0}'.format(prefix), binding, "") #prefix)
+        fail += compare_binding_interface('lib{0}'.format(prefix), binding, "") #prefix)
+        fail += compare_binding_interface('ASTNodes', binding, "") #prefix)
+    elif binding == 'csharp':
+        fail += compare_binding_impl('local', binding, "") #prefix)
+        fail += compare_binding_interface('local', binding, "") #prefix)
+        fail += compare_binding_interface('lib{0}'.format(prefix), binding, "") #prefix)
+        fail += compare_binding_file('CMakeLists.txt', binding, "") #prefix)
+        fail += compare_binding_file('compile-native-files.cmake', binding, "") #prefix)
+        fail += compare_binding_file('AssemblyInfo.cs.in', binding, "") #prefix)
     print('')
     return fail
 
@@ -322,13 +313,17 @@ def test_bindings(name, class_name, test_case, binding, prefix):
 def test_cmake(name, class_name, test_case, binding, prefix):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_cmake(filename, binding)
-    fail = 0   # skipped, or at least some are
+    fail = 0
     fail += compare_cmake_file('{0}'.format(prefix), prefix)
     fail += compare_cmake_file('src', prefix)
     fail += compare_cmake_file('src/bindings', prefix)
-    fail += compare_cmake_file('src/{0}'.format(gv.language, prefix), prefix)
+    fail += compare_cmake_file('src/{0}'.format(gv.language), prefix)
     print('')
     return fail
+#temp/sedml/cmake/sedml/CMakeLists.txt=================>> MISSING
+#temp/sedml/cmake/src/bindings/CMakeLists.txt present
+#temp/omex/cmake/combine/CMakeLists.txt=================>> MISSING
+# temp/omex/cmake/src/bindings/CMakeLists.txt present
 
 
 def test_global(name, class_name, test_case):
