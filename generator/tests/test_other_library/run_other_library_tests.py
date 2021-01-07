@@ -43,15 +43,20 @@ def generate_new_cpp_header(filename, num):
     all_files.write_files()
     os.chdir('../../.')
 
-def generate_templates(filename):
+
+def common_set_up(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
-    prefix = global_variables.prefix
     for wc in ob['baseElements']:
         strFunctions.prefix_classes(wc)
     for working_class in ob['baseElements']:
         if working_class['name'] == global_variables.document_class:
             working_class['document'] = True
+    return ob
+
+
+def generate_templates(filename):
+    ob = common_set_up(filename)
     global_variables.populate_error_list(ob)
     ValidationFiles.ValidationFiles(ob, True)
     os.chdir('./temp')
@@ -59,37 +64,29 @@ def generate_templates(filename):
     if not os.path.isdir(newdir):
         os.mkdir(newdir)
     os.chdir(newdir)
+    prefix = global_variables.prefix
     base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
     base_files.write_files()
     os.chdir('../../.')
 
+
 def generate_common_templates(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    for wc in ob['baseElements']:
-        strFunctions.prefix_classes(wc)
-    for working_class in ob['baseElements']:
-        if working_class['name'] == global_variables.document_class:
-            working_class['document'] = True
+    ob = common_set_up(filename)
     global_variables.populate_error_list(ob)
-    prefix = global_variables.prefix
+    #prefix = global_variables.prefix
     os.chdir('./temp')
     newdir = global_variables.language
     if not os.path.isdir(newdir):
         os.mkdir(newdir)
     os.chdir(newdir)
+    prefix = global_variables.prefix
     base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
     base_files.write_common_files()
     os.chdir('../../.')
 
+
 def generate_forward(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    for wc in ob['baseElements']:
-        strFunctions.prefix_classes(wc)
-    for working_class in ob['baseElements']:
-        if working_class['name'] == global_variables.document_class:
-            working_class['document'] = True
+    ob = common_set_up(filename)
     global_variables.populate_error_list(ob)
     os.chdir('./temp')
     newdir = global_variables.language
@@ -100,14 +97,9 @@ def generate_forward(filename):
     ext.write_files()
     os.chdir('../../.')
 
+
 def generate_enum(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    for wc in ob['baseElements']:
-        strFunctions.prefix_classes(wc)
-    for working_class in ob['baseElements']:
-        if working_class['name'] == global_variables.document_class:
-            working_class['document'] = True
+    ob = common_set_up(filename)
     global_variables.populate_error_list(ob)
     os.chdir('./temp')
     newdir = global_variables.language
@@ -118,14 +110,9 @@ def generate_enum(filename):
     ext.write_files()
     os.chdir('../../.')
 
+
 def generate_binding(filename, binding):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    for wc in ob['baseElements']:
-        strFunctions.prefix_classes(wc)
-    for working_class in ob['baseElements']:
-        if working_class['name'] == global_variables.document_class:
-            working_class['document'] = True
+    ob = common_set_up(filename)
     os.chdir('./temp')
     newdir = global_variables.language
     if not os.path.isdir(newdir):
@@ -141,14 +128,9 @@ def generate_binding(filename, binding):
     os.chdir('../.')
     os.chdir('../../.')
 
+
 def generate_cmake(filename, binding):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    for wc in ob['baseElements']:
-        strFunctions.prefix_classes(wc)
-    for working_class in ob['baseElements']:
-        if working_class['name'] == global_variables.document_class:
-            working_class['document'] = True
+    ob = common_set_up(filename)
     os.chdir('./temp')
     newdir = global_variables.language
     if not os.path.isdir(newdir):
@@ -170,14 +152,9 @@ def generate_cmake(filename, binding):
     os.chdir('../.')
     os.chdir('../../.')
 
+
 def generate_global(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    for wc in ob['baseElements']:
-        strFunctions.prefix_classes(wc)
-    for working_class in ob['baseElements']:
-        if working_class['name'] == global_variables.document_class:
-            working_class['document'] = True
+    common_set_up(filename)  # don't need ob
     os.chdir('./temp')
     newdir = global_variables.language
     if not os.path.isdir(newdir):
@@ -211,30 +188,36 @@ def compare_code_cmake(class_name):
     temp_file = os.path.normpath('./temp/{1}/{0}.cmake'.format(class_name, global_variables.language))
     return compare_files(correct_file, temp_file)
 
+
 def compare_code_txt(class_name, ext='txt'):
     correct_file = os.path.normpath('./test-code/{2}/{0}.{1}'.format(class_name, ext, global_variables.language))
     temp_file = os.path.normpath('./temp/{2}/{0}.{1}'.format(class_name, ext, global_variables.language))
     return compare_files(correct_file, temp_file)
+
 
 def compare_binding_headers(class_name, binding, prefix):
     correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}.h'.format(binding, class_name, prefix, global_variables.language))
     temp_file = os.path.normpath('./temp/{2}/{0}/{1}.h'.format(binding, class_name, global_variables.language))
     return compare_files(correct_file, temp_file)
 
+
 def compare_binding_impl(class_name, binding, prefix):
     correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}.cpp'.format(binding, class_name, prefix, global_variables.language))
     temp_file = os.path.normpath('./temp/{2}/{0}/{1}.cpp'.format(binding, class_name, global_variables.language))
     return compare_files(correct_file, temp_file)
+
 
 def compare_binding_interface(class_name, binding, prefix):
     correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}.i'.format(binding, class_name, prefix, global_variables.language))
     temp_file = os.path.normpath('./temp/{3}/{0}/{2}/{1}.i'.format(binding, class_name, prefix, global_variables.language))
     return compare_files(correct_file, temp_file)
 
+
 def compare_binding_file(class_name, binding, prefix):
     correct_file = os.path.normpath('./test-code/{3}/{0}/{2}/{1}'.format(binding, class_name, prefix, global_variables.language))
     temp_file = os.path.normpath('./temp/{3}/{0}/{2}/{1}'.format(binding, class_name, prefix, global_variables.language))
     return compare_files(correct_file, temp_file)
+
 
 def compare_cmake_file(this_dir, prefix):
     correct_file = os.path.normpath('./test-code/{2}/cmake/{1}/{0}/CMakeLists.txt'.format(this_dir, prefix, global_variables.language))
@@ -267,6 +250,7 @@ def run_templates(name, class_name, test_case, list_of):
     print('')
     return fail
 
+
 def test_other_templates(prefix):
     fail = compare_code_headers('{0}ConstructorException'.format(prefix))
     fail += compare_code_impl('{0}ConstructorException'.format(prefix))
@@ -288,6 +272,7 @@ def test_other_templates(prefix):
     fail += compare_code_headers('{0}ErrorTable'.format(prefix))
     print('')
     return fail
+
 
 def test_common_templates(name, class_name, test_case, prefix, lib):
     filename = test_functions.set_up_test(name, class_name, test_case)
@@ -344,6 +329,7 @@ def test_bindings(name, class_name, test_case, binding, prefix):
     print('')
     return fail
 
+
 def test_cmake(name, class_name, test_case, binding, prefix):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_cmake(filename, binding)
@@ -354,6 +340,7 @@ def test_cmake(name, class_name, test_case, binding, prefix):
     fail += compare_cmake_file('src/{0}'.format(global_variables.language, prefix), prefix)
     print('')
     return fail
+
 
 def test_global(name, class_name, test_case):
     filename = test_functions.set_up_test(name, class_name, test_case)
@@ -487,6 +474,7 @@ def testSedML(fail):
     fail += test_global(name, class_name, test_case)
 
     return fail
+
 
 def testCombine(fail):
     global_variables.reset()
