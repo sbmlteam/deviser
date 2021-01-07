@@ -201,10 +201,15 @@ def compare_binding_file(class_name, binding, prefix):
     return compare_other_binding(class_name, binding, prefix, "")
 
 ##########
-
+"""
+The following files were not tested:
+test-code/sedml/cmake/sedml/CMakeLists.txt
+test-code/omex/cmake/combine/CMakeLists.txt
+"""
 def compare_cmake_file(this_dir, prefix):
     #correct_file = os.path.normpath('./test-code/{2}/cmake/{1}/{0}/CMakeLists.txt'.format(this_dir, prefix, gv.language))
-    correct_file = os.path.normpath('./test-code/{1}/cmake/{0}/CMakeLists.txt'.format(this_dir, gv.language))
+    #correct_file = os.path.normpath('./test-code/{1}/cmake/{0}/CMakeLists.txt'.format(this_dir, gv.language))
+    correct_file = os.path.normpath('./test-code/{0}/cmake/CMakeLists.txt'.format(gv.language))
     temp_file = os.path.normpath('./temp/{1}/cmake/{0}/CMakeLists.txt'.format(this_dir, gv.language))
     return compare_files(correct_file, temp_file)
 
@@ -317,10 +322,10 @@ def test_bindings(name, class_name, test_case, binding, prefix):
 def test_cmake(name, class_name, test_case, binding, prefix):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_cmake(filename, binding)
-    fail = 0   # skipped, or at least the middle two
+    fail = 0   # skipped, or at least some are
     fail += compare_cmake_file('{0}'.format(prefix), prefix)
-    fail += compare_cmake_file('src'.format(prefix), prefix)
-    fail += compare_cmake_file('src/bindings'.format(prefix), prefix)
+    fail += compare_cmake_file('src', prefix)
+    fail += compare_cmake_file('src/bindings', prefix)
     fail += compare_cmake_file('src/{0}'.format(gv.language, prefix), prefix)
     print('')
     return fail
