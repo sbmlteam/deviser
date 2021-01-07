@@ -174,13 +174,15 @@ def compare_ext_impl(class_name, declared=False):
     Wrapper to help compare two extension implementation files.
     """
     if declared:
-         ending = 'Declared.cxx'
+        ending = 'Declared.cxx'
     else:
         ending = '.cpp'
     return compare_files('test-extension', class_name, ending)
 
+
 #############################################################################
 # Specific test functions
+
 
 def run_test(name, num, class_name, test_case, list_of):
     """
@@ -294,7 +296,7 @@ def main():
 
     # NB the reference files in test-code/ and test-extension/ were
     # presumably generated on Windows. I am running these tests on a
-    # MacBook (so like Linux). The file comparison works Ok for
+    # MacBook (so like Linux). The file comparison works OK for
     # Python 3 but not Python 2. I ran all the reference files through
     # dos2unix and now all the tests work under Python 2 unless noted below.
 
@@ -317,13 +319,13 @@ def main():
     test_case = 'class with XMLNode'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    # This one isn't working either.
     # name = 'copy_add'
     # num = 0
     # class_name = 'Abc'
     # list_of = ''
     # test_case = 'class with additional code'
     # fail += run_test(name, num, class_name, test_case, list_of)
-
 
     if runall:
         # run the individual tests
@@ -413,7 +415,7 @@ def main():
 
         name = 'qual'
         class_name = 'qualfwd'
-        test_case = 'forward declarations '
+        test_case = 'forward declarations'
         fail += run_ext_test(name, class_name, test_case, 2)
 
         name = 'qual'
@@ -424,7 +426,7 @@ def main():
 
         name = 'qual'
         class_name = 'QualSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'qual'
@@ -616,7 +618,7 @@ def main():
 
         name = 'groups'
         class_name = 'GroupsSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'test_vers'
@@ -673,7 +675,7 @@ def main():
 
         name = 'fbc_v2'
         class_name = 'FbcSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'fbc_v2'
@@ -724,8 +726,11 @@ def main():
 
         name = 'test_sidrefs'
         class_name = 'RefsSBMLError'
-        test_case = 'sidref with multiple targets '
+        test_case = 'sidref with multiple targets'
         fail += run_valid_test(name, class_name, test_case)
+
+        # TODO Sarah, I'm guessing maybe the next few tests are iterating over something?
+        # Because it's not clear; all these "diff spacing" tests look identical.
 
         name = 'test_sidrefs_1'
         class_name = 'RefsSBMLError'
@@ -749,7 +754,7 @@ def main():
 
         name = 'test_lists'
         class_name = 'FooSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'nasty_lists'
@@ -901,14 +906,14 @@ def main():
 
         name = 'new_distrib'
         class_name = 'DistribSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'new_distrib'
         num = 11
         class_name = 'ExternalParameter'
         list_of = ''
-        test_case = 'class contains a listOf iteself'
+        test_case = 'class contains a listOf itself'
         fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'test_core_vers'
@@ -925,7 +930,7 @@ def main():
         num = 0
         class_name = 'ClassOneTwo'
         list_of = ''
-        test_case = 'core version and package version not 1 '
+        test_case = 'core version and package version not 1'
         fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'test_core_vers_multipkg'
@@ -967,7 +972,7 @@ def main():
         # leave out for now as all validation needs reviewing for multiple
         name = 'twoAtOnce'
         class_name = 'TwoAtOnceSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
 #        fail += run_valid_test(name, class_name, test_case)
 
 # leave out as need to work on automatically adding prefix
@@ -1014,7 +1019,7 @@ def main():
 
         name = 'render'
         class_name = 'RenderSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'render'
@@ -1091,8 +1096,8 @@ def main():
         test_case = 'contains list of itself but with other listof used elsewhere'
         fail += run_test(name, num, class_name, test_case, list_of)
 
-# not yet sorted
-       # name = 'arrays'
+        # not yet sorted
+        # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
         # fail += run_ext_test(name, class_name, test_case, 1)
@@ -1116,9 +1121,9 @@ def main():
     else:
         pass
 
-
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
+
 
 if __name__ == '__main__':
     main()
