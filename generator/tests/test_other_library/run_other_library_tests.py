@@ -314,16 +314,12 @@ def test_cmake(name, class_name, test_case, binding, prefix):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_cmake(filename, binding)
     fail = 0
-    fail += compare_cmake_file('{0}'.format(prefix), prefix)
+    fail += compare_cmake_file("", prefix)
     fail += compare_cmake_file('src', prefix)
     fail += compare_cmake_file('src/bindings', prefix)
     fail += compare_cmake_file('src/{0}'.format(gv.language), prefix)
     print('')
     return fail
-#temp/sedml/cmake/sedml/CMakeLists.txt=================>> MISSING
-#temp/sedml/cmake/src/bindings/CMakeLists.txt present
-#temp/omex/cmake/combine/CMakeLists.txt=================>> MISSING
-# temp/omex/cmake/src/bindings/CMakeLists.txt present
 
 
 def test_global(name, class_name, test_case):
@@ -344,14 +340,14 @@ def testSedML(fail):
 
     name = 'test_sedml'
     num = 1
-    class_name = 'SedModel'  # fails
-    list_of = 'SedListOfModels'  # fails
+    class_name = 'SedModel'
+    list_of = 'SedListOfModels'
     test_case = 'model'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 0
-    class_name = 'SedDocument' # fails
+    class_name = 'SedDocument'
     list_of = ''
     test_case = 'document'
     fail += run_test(name, num, class_name, test_case, list_of)
@@ -387,28 +383,28 @@ def testSedML(fail):
 
     name = 'test_sedml'
     num = 26
-    class_name = 'SedSetValue' # fails
+    class_name = 'SedSetValue'
     list_of = ''
     test_case = 'astnode used'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 12
-    class_name = 'SedDataGenerator'  # fails
+    class_name = 'SedDataGenerator'
     list_of = ''
     test_case = 'astnode in getElementBySId bug'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 33
-    class_name = 'SedRepeatedTask' # fails
+    class_name = 'SedRepeatedTask'
     list_of = ''
     test_case = 'attribute with different xml name'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 7
-    class_name = 'SedSimulation' # fails
+    class_name = 'SedSimulation'
     list_of = ''
     test_case = 'child element'
     fail += run_test(name, num, class_name, test_case, list_of)
@@ -422,15 +418,15 @@ def testSedML(fail):
 
     name = 'test_sedml'
     num = 10
-    class_name = 'SedAbstractTask'  # fails
-    list_of = 'SedListOfTasks'  # fails
+    class_name = 'SedAbstractTask'
+    list_of = 'SedListOfTasks'
     test_case = 'catch different abstract types'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 13
-    class_name = 'SedOutput' # fails
-    list_of = 'SedListOfOutputs' # fails
+    class_name = 'SedOutput'
+    list_of = 'SedListOfOutputs'
     test_case = 'catch different abstract types'
     fail += run_test(name, num, class_name, test_case, list_of)
 
@@ -465,8 +461,8 @@ def testCombine(fail):
 
     name = 'combine-archive'
     num = 0
-    class_name = 'CaContent'  # fails
-    list_of = 'CaListOfContents'  # fails
+    class_name = 'CaContent'
+    list_of = 'CaListOfContents'
     test_case = 'check includes'
     fail += run_test(name, num, class_name, test_case, list_of)
 
