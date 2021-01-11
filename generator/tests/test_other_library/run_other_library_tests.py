@@ -165,7 +165,7 @@ def generate_cmake(filename, binding):
     Write CMake files CMakeLists.txt
 
     :param filename: the XML file to parse.
-    :param binding:
+    :param binding: language binding, e.g. 'cmake'.
     :return: nothing
     """
     ob = common_set_up(filename)
@@ -219,7 +219,7 @@ def compare_files(correct_file, temp_file):
 
 def compare_code(class_name, end):
     """
-    Compare two "code" files. Are they identical?
+    Compare two 'code' files. Are they identical?
 
     :param class_name: name of C++ class used in the test.
     :param end: file extension, e.g. ".h", ".txt", etc.
@@ -276,6 +276,12 @@ def compare_binding_file(class_name, binding, prefix):
 ##########
 
 def compare_cmake_file(this_dir):
+    """
+    Compare a temporary test CMakeLists.txt file with the reference one.
+
+    :param this_dir: lowest subdir containing the reference version of the file.
+    :return: 0 on success, or file not present; 1 on failure.
+    """
     correct_file = os.path.normpath('./test-code/{0}/cmake/CMakeLists.txt'.format(gv.language))
     temp_file = os.path.normpath('./temp/{1}/cmake/{0}/CMakeLists.txt'.format(this_dir, gv.language))
     return compare_files(correct_file, temp_file)
@@ -284,6 +290,16 @@ def compare_cmake_file(this_dir):
 # Specific test functions
 
 def run_test(name, num, class_name, test_case, list_of):
+    """
+    Run the C++ file tests.
+
+    :param name: name of test group e.g. 'test_sedml', 'combine-archive'.
+    :param num: list index TODO please clarify
+    :param class_name: name of C++ class (and thus .cpp/.h filenames), e.g. 'CaContent'
+    :param test_case: brief test description
+    :param list_of: class name (and thus filenames) of any corresponding "list of" class, e.g. 'CaListOfContents'
+    :return: number of failed tests
+    """
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_new_cpp_header(filename, num)
     fail = compare_code_headers(class_name)
@@ -387,6 +403,17 @@ def test_bindings(name, class_name, test_case, binding, prefix):
 
 
 def test_cmake(name, class_name, test_case, binding):  # , prefix):
+    """
+    Generate and compare CMake files.
+
+    TODO the following need more details:
+
+    :param name: name of test, e.g. 'test_sedml' or 'combine-archive'.
+    :param class_name:   e.g. 'libsedml' or 'libcombine'
+    :param test_case: seems to always be 'cmake'!
+    :param binding: and so does this!
+    :returns: number of failed tests
+    """
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_cmake(filename, binding)
     fail = 0
@@ -399,6 +426,14 @@ def test_cmake(name, class_name, test_case, binding):  # , prefix):
 
 
 def test_global(name, class_name, test_case):
+    """
+    Generate and compare 'global' files, e.g. VERSION.txt, README.md.
+
+    :param name: test file stub, e.g. 'test_sedml' for test_sedml.xml
+    :param class_name: test class e.g. 'libsedml'
+    :param test_case: brief description of test, e.g. 'global files'
+    :returns: number of failed tests.
+    """
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_global(filename)
     fail = 0
@@ -412,6 +447,12 @@ def test_global(name, class_name, test_case):
 # Main functions
 
 def testSedML(fail):
+    """
+    Run the sedml tests.
+
+    :param fail: integer number of tests failed so far
+    :returns: updated value of `fail` after running these tests.
+    """
     gv.reset()
 
     name = 'test_sedml'
@@ -533,6 +574,12 @@ def testSedML(fail):
 
 
 def testCombine(fail):
+    """
+    Run the 'combine' tests.
+
+    :param fail: integer number of tests failed so far
+    :returns: updated value of `fail` after running these tests.
+    """
     gv.reset()
 
     name = 'combine-archive'
@@ -548,7 +595,6 @@ def testCombine(fail):
     test_case = 'templates'
     fail += run_templates(name, class_name, test_case, list_of)
     fail += test_other_templates('Ca')
-
 
     name = 'combine-archive'
     class_name = 'CaBase'
@@ -587,6 +633,7 @@ def main():
 
     test_all = True
 #    test_all = False
+
     # Set up the environment.
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
