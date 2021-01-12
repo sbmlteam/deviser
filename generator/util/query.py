@@ -107,16 +107,15 @@ def has_children(attributes):
     :return: True if at least one type match
 
     e.g.
+
     <attribute name="boundaryMin" required="true" type="element"
      element="Boundary" abstract="false"/>
 
-     TODO is this a correct example of such a node? Or could it be a
-     listOfAttribute node, like this:
+     or
 
      <listOfAttribute name="defaultTerm" required="true" type="element"
       element="DefaultTerm" abstract="false" />
 
-    ???
     """
     for attribute in attributes:
         att_type = attribute['type']
@@ -233,6 +232,9 @@ def is_inline_child(class_object):
     return inline_parents
 
 
+# Sarah added issue: Sort out is_inline_child and get_inline_parents #35
+
+
 def get_inline_parents(class_object):
     """
     TODO I'm guessing an inline parent is the node enclosing
@@ -255,6 +257,8 @@ def get_inline_parents(class_object):
 
 def get_parent_class(class_object):
     """
+    NB Open Github Issue: Revise query get_parent_class code #36
+
     Return the parent class of this class.
     if it is not given we assume it is a child of a plugin
     and get the base of the plugin.
@@ -480,8 +484,8 @@ def get_matching_element(name, match_name, list_elements):
         return element
     for existing in list_elements:
         if existing[name] == match_name:
-            element = existing  # TODO could this match multiple times? Would it matter? Why not return now?
-    return element  # TODO if matched multiple times we return the last match here. Is that what we want? Does it matter?
+            return existing
+    return element
 
 
 def has_array(attributes):
@@ -558,10 +562,10 @@ def has_other_packages(attributes):
 
 def is_string(attribute):
     """
-    Is this attribute saved as a string?
+    Is the attribute of Type string?
 
     :param attribute: attribute to check
-    :return: return True if the attribute is saved as a string
+    :return: return True if the attribute is of Type string
     """
     if attribute['attType'] == 'string':
         return True
@@ -576,7 +580,7 @@ def has_is_set_member(attribute):
     :return: True if attribute has isSet member variable, False otherwise
 
     e.g. in order to determine in code whether an attribute of type
-    boolean or number has been explicitly set the variable say 'constant'
+    boolean or number has been explicitly set, the variable, say 'constant',
     is stored with an additional isSetConstant variable of type boolean
     that can be queried to determine if the variable value has been
     explicitly set
@@ -599,9 +603,10 @@ def has_is_set_member(attribute):
         mIsSetConstant = True
         mNumber = 0
         mIsSetNumber = True
+
+    Deviser creates an isSetXYZ variable for any attribute that
+    is a number or a boolean
     """
-    # deviser creates an isSetXYZ variable for any attribute that
-    # is a number or a boolean
     if attribute['isNumber'] or attribute['attType'] == 'boolean':
         return True
     return False
@@ -911,6 +916,9 @@ def get_first_enum_value(attribute):
             <enumValue name="OUTPUT_TRANSITION_INVALID"
                         value="invalid TransitionOutputEffect value" />
 
+    because as part of the parseXML and then further parsing of the results
+    the code will automatically add an INVALID value to any enumeration
+
     The function returns the name of the first listed enumeration value.
 
     get_First_enum_value(attribute dict for transitionEffect)
@@ -995,7 +1003,8 @@ def get_max_length(elements, attribute):
 
     TODO will this throw an exception if elements other
     than the first one do *not* have the attribute?
-    Is that possible?
+    Is that possible? <--- Issue added to Github:
+    Look at query get_max_length #38
     """
     if elements is None:
         return 0
