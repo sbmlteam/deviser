@@ -37,34 +37,37 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import sys
+"""Function for generating all latex files"""
+
 import os
+import sys
 
 import spec_files
 from parseXML import ParseXML
-from util import global_variables
+from util import global_variables as gv
 
 
 def generateLatexFor(filename):
-    # look to see if figures are present
-    global_variables.deviser_file = filename
-    global_variables.current_dir = os.getcwd()
-    figs_dir = '{0}{1}{2}'.format(global_variables.current_dir, os.sep,
-                                  'figures')
+
+    # Look to see if figures are present:
+    gv.deviser_file = filename
+    gv.current_dir = os.getcwd()
+    figs_dir = '{0}{1}{2}'.format(gv.current_dir, os.sep, 'figures')
     if os.path.exists(figs_dir):
-        global_variables.figures_present = True
+        gv.figures_present = True
+
+    # Now get info from XML file.
     parser = ParseXML.ParseXML(filename)
     ob = dict()
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
         # catch a problem in the parsing
         try:
             ob = parser.parse_deviser_xml()
-        except:
-            global_variables.code_returned \
-                = global_variables.return_codes['parsing error']
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+        except Exception:
+            gv.code_returned = gv.return_codes['parsing error']
+
+    if gv.code_returned == gv.return_codes['success']:
+        # File writing:
         try:
             ff = spec_files.TexValidationRulesFile.TexValidationRulesFile(ob)
             ff.write_file()
@@ -75,12 +78,12 @@ def generateLatexFor(filename):
             macros = spec_files.TexMacrosFile.TexMacrosFile(ob)
             macros.write_file()
             macros.close_file()
-        except:
-            global_variables.code_returned = \
-                global_variables.return_codes['unknown error - please report']
+        except Exception:
+            gv.code_returned = gv.return_codes['unknown error - please report']
 
 
 def main(args):
+    """Checks correct number of args, then invokes main generate function."""
     if len(args) != 2:
         print('Usage: generateLatex.py xmlfile')
     else:
