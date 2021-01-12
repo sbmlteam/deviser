@@ -37,6 +37,8 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+# TODO consider moving this to base_files directory?
+
 import re
 import os
 

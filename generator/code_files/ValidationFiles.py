@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # @file    ValidationFiles.py
-# @brief   class for generating cpp files
+# @brief   class for generating cpp files  TODO is it really? Then what are CppFiles.py and friends for?
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #
@@ -47,7 +47,7 @@ from . import ValidatorCodeFile
 
 
 class ValidationFiles():
-    """Class for all Cpp files"""
+    """Class for all Cpp files   TODO Is it? """
 
     def __init__(self, lib_object, verbose=False):
         # members from object
