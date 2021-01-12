@@ -129,11 +129,12 @@ def has_children_not_math(attributes):
     """
     Return True if any of the attributes refer to elements but *not* math
 
+    :param attributes: the <attribute> nodes we want to check
+    :return: see above.
+
     e.g. this attribute node would not match:
     <attribute name="math" required="true" type="element" element="ASTNode*...
 
-    :param attributes: the <attribute> nodes we want to check
-    :return: see above.
     """
     for i in range(0, len(attributes)):
         if attributes[i]['type'] == 'lo_element':
@@ -147,13 +148,15 @@ def has_children_not_math(attributes):
 def get_class(name, root_object):
     """
     Return the class with the matching name from the root object.
+
+    :param name: name of th class to find
+    :param root_object: dict of all elements
+    :return: the structure representing class 'name'
+
     The get_class function is designed to find the specific 'name'
     of an sbml class within the root_object, which will be the big
     structure created by parseXML.
 
-    :param name:
-    :param root_object:
-    :return:
     """
     if root_object is None:
         return None
@@ -174,8 +177,8 @@ def is_inline_child(class_object):
     """
     If this object is an 'inline child', get list of inline parents.
 
-    :param class_object:
-    :return: list of parents
+    :param class_object: structure representing a class
+    :return: list of parents objects for which this class is an inline child
 
     According to the manual:
     On occasion an element may contain multiple children of the same type
@@ -268,8 +271,6 @@ def get_parent_class(class_object):
       </attributes>
     </element>
 
-
-
     """
     parent = ''
     if class_object['is_list_of']:
@@ -320,7 +321,7 @@ def get_concretes(root_object, concrete_list):
     """
     Return a list of the actual concrete classes.
 
-    :param root_object:
+    :param root_object: dict of all elements
     :param concrete_list:
     :return:
     """
@@ -355,7 +356,7 @@ def add_concrete_to_list(root, concrete, mylist):
     """
     Add the non-abstract class to the list mylist
 
-    :param root:
+    :param root: dict of all elements
     :param concrete:
     :param mylist:
     :return: returns nothing
@@ -419,8 +420,8 @@ def get_version_attributes(attributes, version):
     """
     Return attributes for the given version only.
 
-    :param attributes:
-    :param version:
+    :param attributes: list of attribute objects.
+    :param version: the version we are matching on
     :return: the list of matching attributes
     """
     ver_attribs = []
@@ -452,7 +453,7 @@ def get_unique_attributes(full_attributes):
     Return a set of unique attributes.
     Any with multiple versions appear only once.
 
-    :param full_attributes:
+    :param full_attributes: list of all attribute objects
     :return: returns the list of unique attributes.
     """
     attributes = []
@@ -569,7 +570,10 @@ def is_string(attribute):
 
 def has_is_set_member(attribute):
     """
-    return True if the attribute has an isSet member variable
+    return True if the attribute has an isSet member variable.
+
+    :param attribute: an attribute object
+    :return: True if attribute has isSet member variable, False otherwise
 
     e.g. in order to determine in code whether an attribute of type
     boolean or number has been explicitly set the variable say 'constant'
@@ -633,8 +637,8 @@ def has_lo_attribute(element, attribute):
     """
     Does the element's listOf class have the attribute specified?
 
-    :param element:
-    :param attribute:
+    :param element: an elelemnt object
+    :param attribute: an attribute object
     :return: Return True if listOf class for element has attribute specified
     """
     if element is None:
@@ -652,11 +656,11 @@ def has_lo_attribute(element, attribute):
 
 def isV2BaseAttribute(element, attribute):
     """
-    Is the base version of this element 2?
+    Is the base version of this element equal to 2 ?
 
-    :param element:
-    :param attribute:
-    :return: True if it is, else False.
+    :param element: an element object
+    :param attribute: an attribute object
+    :return: True if base_version is 2, False otherwise.
     """
     if attribute != 'id' and attribute != 'name':
         return False
@@ -669,11 +673,12 @@ def isV2BaseAttribute(element, attribute):
 
 def overwrites_name(root, name):
     """
-    Works out if any classes use this element with a different name.
+    Works out if the xml name used for this attribute is different from the
+    name used in the dict objects.
 
-    :param root:
-    :param name:
-    :return:
+    :param root_object: dict of all elements
+    :param name: the name of the attribute to check
+    :return: True if the attribute has a different xml name, False otherwise
     """
     if root is None:
         return False
@@ -836,6 +841,11 @@ def get_default_enum_value(attribute):
     Returns the default/invalid value for the enumeration of
     values for the given attribute.
 
+    :param attribute: attribute dict for required
+    :return: string representing the invalid enum value or 'INVALID' if
+    the attribute dict does not have an element name corresponding to a
+    listed enumeration.
+
     e.g. An attribute
         <attribute name="transitionEffect" required="true" type="enum"
                     element="TransitionOutputEffect" abstract="false" />
@@ -860,11 +870,6 @@ def get_default_enum_value(attribute):
 
     get_default_enum_value(attribute dict for transitionEffect)
     will return string 'OUTPUT_TRANSITION_INVALID'
-
-    :param attribute: attribute dict for required
-    :return: string representing the invalid enum value or 'INVALID' if
-    the attribute dict does not have an element name corresponding to a
-    listed enumeration.
     """
     default = 'INVALID'
     name = attribute['element']
@@ -880,6 +885,11 @@ def get_first_enum_value(attribute):
     """
     Returns the first value in the list for the enumeration of values
     for the given attribute.
+
+    :param attribute: attribute dict for required
+    :return: string representing the first enum value or '' if
+    the attribute dict does not have an element name corresponding to a
+    listed enumeration.
 
     e.g. An attribute
         <attribute name="transitionEffect" required="true" type="enum"
@@ -906,10 +916,6 @@ def get_first_enum_value(attribute):
     get_First_enum_value(attribute dict for transitionEffect)
     will return string 'OUTPUT_TRANSITION_EFFECT_PRODUCTION'
 
-    :param attribute: attribute dict for required
-    :return: string representing the first enum value or '' if
-    the attribute dict does not have an element name corresponding to a
-    listed enumeration.
     """
     value = ''
     name = attribute['element']
@@ -950,14 +956,15 @@ def get_typecode_format(classname, language):
     with any classnames using camelcase separated by '_'
     where class name contains camelcase
 
+    :param classname: name of the class
+    :param language: name of the XML language being targeted
+    :return: string representing the formatted typecode
+
     e.g.
     get_typecode_format(model, sbml) returns SBML_MODEL
     get_typecode_format(speciesReference, sbml) returns SBML_SPECIES_REFERENCE
     get_typecode_format(model, sedml) returns SEDML_MODEL
 
-    :param classname: name of the class
-    :param language: name of the XML language being targeted
-    :return: string representing the formatted typecode
    """
     tc = language.upper()
     for i in range(0, len(classname)):
@@ -1007,6 +1014,13 @@ def get_other_element_children(this_object, element):
     Return a list of the names of other elements that may be
     children of the ListOfFoo element.
 
+    :param this_object: object dict to be queried
+    :param element: dict of element (e.g.Foo) for which we wish to discover
+    whether the corresponding listOfFoo element contains children of a type
+    other than Foo
+    :return: list of names of any children of a listOfFoo that are not of
+    type Foo
+
     e.g. In this case the DefaultTerm object is contained within the
     ListOfFunctionTerms which also contains FunctionTerm Objects
     <listOfFunctionsTerms>
@@ -1018,13 +1032,6 @@ def get_other_element_children(this_object, element):
     get_other_element_children(parent_object dict, functionTerm object dict)
         returns ['defaultTerm']
 
-
-    :param this_object: object dict to be queried
-    :param element: dict of element (e.g.Foo) for which we wish to discover
-    whether the corresponding listOfFoo element contains children of a type
-    other than Foo
-    :return: list of names of any children of a listOfFoo that are not of
-    type Foo
     """
     other_children = []
     child = get_class(element['element'], this_object['root'])
@@ -1041,7 +1048,7 @@ def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
     Get children that are concrete instantiations
 
     :param concretes:
-    :param root:
+    :param root: dict of all elements
     :param reqd_only:
     :param base_attributes:
     :param name:
