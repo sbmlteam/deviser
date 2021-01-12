@@ -4,6 +4,7 @@
 # @brief   general functions for querying objects
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author  Matthew Gillman
 #
 # <!--------------------------------------------------------------------------
 #
