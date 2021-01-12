@@ -37,55 +37,66 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+"""Function for generating RNG schema"""
+
 import sys
 
 from parseXML import ParseXML
-from util import global_variables
+from util import global_variables as gv
 from validation import RNGSchemaFiles
 
 
-def generate_rng_for(filename, overwrite=True):
-    global_variables.running_tests = False
+def generate_rng_for(filename):  # , overwrite=True):
+    """
+    Parse XML file and then invokes RNG file generation code.
+
+    :param filename: the XML file to parse
+    :return: returns nothing.
+    """
+    gv.running_tests = False
     parser = ParseXML.ParseXML(filename)
     ob = dict()
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
         # catch a problem in the parsing
         try:
             ob = parser.parse_deviser_xml()
-        except:
-            global_variables.code_returned \
-                = global_variables.return_codes['parsing error']
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
-#        try:
-        if global_variables.is_package:
+        except Exception:
+            gv.code_returned = gv.return_codes['parsing error']
+    if gv.code_returned == gv.return_codes['success']:
+        # try:
+        if gv.is_package:
             generate_rng(ob)
-#        except:
-#            global_variables.code_returned \
-#                = global_variables.return_codes['unknown error - please report']
+        # except Exception :
+        # gv.code_returned = gv.return_codes['unknown error - please report']
 
 
 def generate_rng(ob):
+    """
+    Wrapper function. Creates RNG Schema file.
+
+    :param ob: the big dictionary object produced by XML file parsing.
+    :return: returns nothing.
+    """
     ex = RNGSchemaFiles.RNGSchemaFiles(ob)
     ex.write_file()
 
 
-
 def main(args):
+    """
+    Checks correct number of arguments and then invokes RNG code.
+    """
     if len(args) != 2:
-        global_variables.code_returned = \
-            global_variables.return_codes['missing function argument']
-        print ('Usage: generateCode.py xmlfile')
+        gv.code_returned = gv.return_codes['missing function argument']
+        print('Usage: generateRNG.py xmlfile')
     else:
         generate_rng_for(args[1])
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
         print('code successfully written')
     else:
         print('writing rng failed')
 
-    return global_variables.code_returned
+    return gv.code_returned
+
 
 if __name__ == '__main__':
     main(sys.argv)

@@ -67,11 +67,8 @@
 
 from xml.dom.minidom import *
 import os.path
-from util import query
-
-from util import strFunctions
-from util import global_variables as gv
-
+from util import query, strFunctions, global_variables as gv
+# get_matching_element is defined in util/query.py
 
 class ParseXML():
     """Class for all Cpp Header files"""
@@ -79,6 +76,7 @@ class ParseXML():
     def __init__(self, filename):
         '''
         ParseXML constructor. Check XML file exists and parse it.
+        Store the data structures generated in self.dom.
         Initialise instance variables.
 
         :param filename: The (path to the) XML file to parse
@@ -87,8 +85,7 @@ class ParseXML():
             gv.code_returned = gv.return_codes['failed to read file']
             print('{0} not found'.format(filename))
 
-        if gv.code_returned == \
-                gv.return_codes['success']:
+        if gv.code_returned == gv.return_codes['success']:
             self.dom = parse(filename)  # A Document Object Model (i.e. a Document) instance.
 
         self.temp_dir = os.path.dirname(filename)
@@ -96,8 +93,13 @@ class ParseXML():
 
         self.concrete_dict = dict({})
         self.package_name = ''
+
+        # These two lists hold dictionary structures referred to
+        # as "elements". But the elements in the self.sbml_elements
+        # list have more keys than those in the self.elements list.
         self.elements = []
         self.sbml_elements = []
+
         self.num_versions = 1
         self.plugins = []
 
@@ -111,12 +113,13 @@ class ParseXML():
         Get **boolean** value of a node's value string
 
         :param v: the string value
-        :returns: True if v exists and v.lower() has the value
+        :return: True if v exists and v.lower() has the value
                   "yes", "true", or "1".
                   Else False.
 
         i.e.
-        In  : [to_bool(x) for x in ['false', 'true', '0', '1', None, 'yes', 'no', 'Yes']]
+        In  : [to_bool(x) for x in
+              ['false', 'true', '0', '1', None, 'yes', 'no', 'Yes']]
         Out : [False, True, False, True, False, True, False, True]
         '''
         if v is None:
@@ -218,6 +221,18 @@ class ParseXML():
 
     @staticmethod
     def get_int_value(self, node, name):
+        '''
+        Obtains the string value of a node with attribute `name`
+        and converts it to an int, which it returns
+
+        :param node: the node in question
+        :param name: the name of the attribute node whose value we want
+        :return: returns the integer which is stored in string form in the attribute node's value.
+
+        e.g. for a case like <pkgVersion level="3" version="1" pkg_version="1">
+        the node is pkgVersion and the name is one of 'level,' 'version' or 'pkg_version'
+        In this example the int value returned would be, respectively, 3, 1 or 1
+        '''
         temp = node.getAttributeNode(name)
         if temp is None:
             return 0
@@ -225,6 +240,16 @@ class ParseXML():
 
     @staticmethod
     def get_type_value(self, node):
+        '''
+        Given a node like:
+        <attribute name="sampledVolume" required="false" type="lo_element"
+         element="SampledVolume" abstract="false"/>
+        get the value of the "type" node's value, in "standardized" form
+
+        :param node: the node, e.g. <attribute>
+        :return: looks up key (e.g. "lo_element") in standardize_types()'s dictionary
+        and returns the value (in this example, "lo_element" is returned).
+        '''
         temp = node.getAttributeNode('type')
         if temp is None:
             return None
@@ -232,14 +257,34 @@ class ParseXML():
 
     @staticmethod
     def get_element_value(self, node):
+        '''
+        Given an <attribute> node, get the "standard form" of the element node's value
+
+        :param node: the attribute node
+        :return: returns "standard form" of the name (e.g. "SampledVolume")
+           (see strFunctions.standard_element_name())
+
+        Example <attribute> node:
+        <attribute name="sampledVolume" required="false" type="lo_element"
+         element="SampledVolume" abstract="false"/>
+        '''
         element = ''
-        temp = self.get_value(node, 'element')
+        temp = self.get_value(node, 'element')  # e.g. "SampledVolume"
         if temp is not None:
             element = strFunctions.standard_element_name(temp)
         return element
 
     @staticmethod
     def get_element_name_value(self, node, name):
+        '''
+        Given an <element> node, obtain the value of the attribute called `name`
+
+        :param node: the node
+        :param name: the name of the value required (e.g. "elementName")
+        :return: the string value required, adjusted if required (e.g. "csgNode").
+
+        Example element node:  <element ... elementName="csgNode" ...>
+        '''
         xml_element_name = ''
         temp = self.get_value(node, name)
         # we expect this to be camel case starting with lower
@@ -292,8 +337,7 @@ class ParseXML():
     def get_mapping(self, node):
         '''
         Used to get information from a <mapping> node
-        e.g.
-        <mapping name="DimensionDescription" package="numl"/>
+        e.g. <mapping name="DimensionDescription" package="numl"/>
 
         :param node: the <mapping> node to interrogate
         :return: returns [name, package] tuple
@@ -318,6 +362,7 @@ class ParseXML():
 
 
     @staticmethod
+
     def get_loclass_name_value(self, node):
         """
         Get the name of the listOfClass from an <element> node
@@ -346,6 +391,8 @@ class ParseXML():
         :param name: the name of the attribute whose value we want.
                      Example name = "additionalDecls"
         :return: the filename (e.g. "spatial_geometry.h.txt")
+
+        e.g. <element name="Geometry"...additionalDecls="spatial_geometry.h.txt"...>
         '''
         add_code = self.get_value(node, name)
         if add_code is not None:
@@ -360,6 +407,21 @@ class ParseXML():
 
     @staticmethod
     def get_lo_min_children(self, node):
+        '''
+        Gets the integer value of a <element> node's
+        minNumListOfChildren attribute node.
+
+        :param node: the <element> node in question
+        :return: returns this value, if present, else returns 1.
+
+        TODO: does this return value of 1 matter? Some of the sample XML files
+        e.g. sbgn.xml have existing minNumListOfChildren attribute values of 1
+        Sarah: "SBML did have the rule that a ListOf element could not be
+        empty so the minNumListOfChildren was '1' by default - hence the code.
+        This does need revisiting - I've added an issue"
+
+        See issue 23.
+        '''
         name = 'minNumListOfChildren'
         temp = node.getAttributeNode(name)
         if temp is None:
@@ -368,6 +430,19 @@ class ParseXML():
 
     @staticmethod
     def get_typecode(self, node):
+        '''
+        Given an <element> node, pulls out the value of its
+        typeCode attribute node, if present, and sends this
+        back, possibly changing it a little before doing so.
+
+        :param node: the <element> node
+        :return: returns the (possibly tweaked) value.
+
+        e.g. given an element like:
+        <element name="SedDocument" typeCode="SEDML_DOCUMENT" ...>
+        this will return "SEDML_DOCUMENT"
+        Whereas a typeCode value of "SBML_SOMETHING" will return "SOMETHING".
+        '''
         name = 'typeCode'
         temp = node.getAttributeNode(name)
         if temp is None:
@@ -390,14 +465,35 @@ class ParseXML():
         Pulls out classname and typename "parts" of the name of an <enum> node,
         depending on whether an upper-case letter is found in the name or not.
 
-        TODO: why?
-
         :param enum_name: The name of the <enum> node. e.g. "BoundaryKind"
         :return: returns tuple with classname and typename "parts" of name,
                  e.g. cname="BOUNDARY" and tname="KIND".
                  But if enum_name is all lower-case (after first character),
                  return it in upper case as the value for cname,
                  and set tname to "" (empty string).
+
+        Explanation from Sarah:
+
+        So this one is due to the different styles of naming in an enum.
+        We want the code to end up with a name that is FOO_BAR_XYZ but we
+        cannot guarantee that these have been entered this way. I used
+        cname (classname) and tname (typename) to distinguish.
+
+        So you might have BOUNDARYKIND or BOUNDARY_KIND or BoundaryKind;
+        which are all the classname and so we want:
+
+        typedef enum
+        {
+        SPATIAL_BOUNDARYKIND_ROBIN_VALUE_COEFFICIENT /*!< The spatial boundarykind is @c "Robin_valueCoefficient". /
+      , SPATIAL_BOUNDARYKIND_ROBIN_INWARD_NORMAL_GRADIENT_COEFFICIENT /!< The spatial boundarykind is @c "Robin_inwardNormalGradientCoefficient". /
+      , SPATIAL_BOUNDARYKIND_ROBIN_SUM /!< The spatial boundarykind is @c "Robin_sum". /
+      , SPATIAL_BOUNDARYKIND_NEUMANN /!< The spatial boundarykind is @c "Neumann". /
+      , SPATIAL_BOUNDARYKIND_DIRICHLET /!< The spatial boundarykind is @c "Dirichlet". /
+      , SPATIAL_BOUNDARYKIND_INVALID /!< Invalid BoundaryKind value. */
+      } BoundaryKind_t;
+
+    so first two parts are always the same and then the part after second _ is value - which might have underscores.
+
         """
         break_found = False
         for i in range(1, len(enum_name)):
@@ -417,6 +513,20 @@ class ParseXML():
 
     @staticmethod
     def find_element(elements, name):
+        '''
+        Find a dictionary with name `name`
+
+        :param elements: a list of "element" dictionaries
+        :param name: name to look for, e.g. "FooKineticLaw"
+        :return: the existing element dictionary, if it exists; else None.
+
+        In more detail:
+        Given a list of "elements" dictionaries and a name
+        (e.g. "FooKineticLaw"), see if any dictionaries in
+        the list have a 'name' entry with value name
+        (i.e. name to search for is "FooKineticLaw" in this example.)
+        Return that dictionary, or None if not found..
+        '''
         if elements is None or name is None:
             return None
         else:
@@ -428,16 +538,53 @@ class ParseXML():
 
     @staticmethod
     def find_lo_element(elements, name):
+        '''
+        TODO: Sarah, please check if this description is correct!
+
+        Does a dictionary in `elements` list have a "listOf" entry for `name`?
+
+        :param elements: list of "element" dictionaries
+        :param name: value of name concerned.:
+        :return: returns matching dictionary, if there is one in the list.
+
+        e.g. given a name of "FooParameter", and a list of "element" dictionaries
+        representing a set of element nodes, including this one:
+
+        <element name="FooParameter" ... hasListOf="true" ...
+         listOfName="listOfParameters" ...
+         listOfClassName="ListOfFooParameters" ... >
+
+        iterate over the dictionaries and, for any with an entry for
+        key 'isListOf' [which corresponds to a hasListOf attribute node],
+        which has the value True, then see if
+        that dictionary has a "listOfClassName" entry with value
+        "ListOfFooParameters". If so, return that dictionary object.
+
+        If the dictionary has an empty entry for key "listOfClassName", update that
+        entry with the value "ListOfFooParameters", and return that dictionary object.
+
+        If no element dictionaries meet the matching criteria, return None.
+        '''
         if elements is None or name is None:
             return None
+
         for element in elements:
+
+            # Does the <element> node has attribute hasListOf="true"?
             if 'isListOf' in element and element['isListOf'] is True:
+
+                # e.g. element['name'] might be "FooParameter", and
+                # so name_to_match is "ListOfFooParameters"
                 name_to_match = strFunctions.list_of_name(element['name'])
                 if 'listOfClassName' in element:
                     if element['listOfClassName'] != '':
                         name_to_match = element['listOfClassName']
                     else:
                         element['listOfClassName'] = name_to_match
+
+                # TODO have I explained the above correctly, given this next line?
+                # I'm confused because isn't name_to_match.lower() "listoffooparameters"
+                # and name.lower() "fooparameter"? If so, they won't match!
                 if name_to_match.lower() == name.lower():
                     return element
         return None
@@ -447,6 +594,12 @@ class ParseXML():
     # Functions for standardizing types/name etc
 
     def standardize_types(self, attrib_type):
+        '''
+        For different types, return a "standardized" form
+
+        :param attrib_type: (string) value of the type (e.g. 'boolean')
+        :return: returns the "standardized" type string (e.g. 'bool')
+        '''
         name = attrib_type.lower()
         if self.matches_unsigned_int(name):
             return 'uint'
@@ -466,6 +619,14 @@ class ParseXML():
 
     @staticmethod
     def matches_unsigned_int(name):
+        '''
+        Specialist function to check that a type string
+        is (or is equivalent to) "unsigned int"
+
+        :param name: the value of the type string, e.g. "positive int"
+        :return: True if this is (or equivalent to) unsigned int type;
+        False otherwise.
+        '''
         if name == 'unsigned integer':
             return True
         elif name == 'unsigned int':
@@ -487,6 +648,15 @@ class ParseXML():
 
     @staticmethod
     def get_concrete_list(self, node):
+        '''
+        Given an <element> node, find any child <concrete> nodes.
+        :param node: the <element> node
+        :return: a list of dictionaries, each of which contains values for
+             the "name" and "element" attribute value nodes in the <concrete> node(s)
+
+        Example of a <concrete> node, nested under an <element> node:
+        <concrete name="csgPrimitive" element="CSGPrimitive" minNumChildren="0" maxNumChildren="0"/>
+        '''
         concrete_list = []
         for concrete in node.getElementsByTagName('concrete'):
             concrete_list.append(
@@ -561,29 +731,32 @@ class ParseXML():
     @staticmethod
     def get_element_description(self, node, version_count):
         '''
-
+        Extract information from an <element> node
 
         :param node: the <element> node
         :param version_count: the number of package versions
            (Strictly, the number of <pkgVersion> nodes in the
            XML file we parse.)
-        :return:
-        '''
+        :return: returns an "element" dictionary of info. If this element
+            already exists in the self.sbml_elements list of dictionaries,
+            return that; else, create a new such dictionary and return it.
 
-        # Example <element> node:
-        #
-        # <element name="DynElement" typeCode="SBML_DYN_DYNELEMENT"
-        # hasListOf="true" hasChildren="false" hasMath="false"
-        # childrenOverwriteElementName="false" minNumListOfChildren="0"
-        # maxNumListOfChildren="0" abstract="false">
-        #
-        element_name = self.get_element_class_name(self, node)
+        Example <element> node:
+
+        <element name="DynElement" typeCode="SBML_DYN_DYNELEMENT"
+         hasListOf="true" hasChildren="false" hasMath="false"
+         childrenOverwriteElementName="false" minNumListOfChildren="0"
+         maxNumListOfChildren="0" abstract="false">
+        '''
+        element_name = self.get_element_class_name(self, node)  # e.g. "DynElement"
         if not element_name:
             self.report_error(gv.return_codes['missing required information'],
                               'A Class must have a Name')
         element = None
         # check whether we have an element with this
-        # name in a different version
+        # name in a different version, i.e. does element_name
+        # occur in any of the element dictionaries in
+        # the self.sbml_element list of dictionaries?
         if version_count > 0:
             element = query.get_matching_element('name', element_name,
                                                  self.sbml_elements)
@@ -591,12 +764,15 @@ class ParseXML():
             #     if existing['name'] == element_name:
             #         element = existing
 
-        if element:
+        if element:  # Found an existing element with this name.
+            # <attribute> node(s) are listed within an <element> node
             for attr in node.getElementsByTagName('attribute'):
+                # Add the dictionary for attribute `attr` to the list.
                 element['attribs'].append(
                     self.get_attribute_description(self, attr, version_count))
 
             for attr in node.getElementsByTagName('listOfAttribute'):
+                # e.g. <listOfAttribute name="local" required="true" type="bool" abstract="false"/>
                 element['lo_attribs'].append(
                     self.get_attribute_description(self, attr, version_count))
             element['num_versions'] = self.num_versions
@@ -605,6 +781,7 @@ class ParseXML():
             return None
 
         else:
+            # Extract information to use in generating a new "element" dictionary.
             base_class = self.get_value(node, 'baseClass')
             if not base_class:
                 base_class = 'SBase'
@@ -621,6 +798,7 @@ class ParseXML():
                 self.get_element_name_value(self, node, 'elementName')
             xml_lo_element_name = \
                 self.get_element_name_value(self, node, 'listOfName')
+            # Some element nodes have a listOfClassName attribute node:
             lo_class_name = \
                 self.get_loclass_name_value(self, node)
             min_lo_children = self.get_lo_min_children(self, node)
@@ -669,14 +847,37 @@ class ParseXML():
 
     @staticmethod
     def get_plugin_description(self, node, version_count):
-        ext_point = self.get_value(node, 'extensionPoint')
+        '''
+        Get information from a <plugin> node (nested within a <pkgVersion> node)
+        and create a new dictionary, and return it, or update an existing one,
+        if present, and return None.
+
+        :param node: the <plugin> node
+        :param version_count: number of <plugin> nodes
+        :return: returns a new dictionary or None.
+
+        Example <plugin> node:
+
+        <plugin extensionPoint="Model">
+          <attributes>
+            <attribute name="useFoo" required="true" type="boolean" abstract="false"/>
+          </attributes>
+        </plugin>
+        '''
+        ext_point = self.get_value(node, 'extensionPoint')  # e.g. "Model"
         plugin = None
         # check whether we have an element with this
         # name in a different version
         if version_count > 0:
             plugin = query.get_matching_element('sbase', ext_point,
                                                 self.plugins)
+
         if plugin:
+            # We already have info about this plugin in self.plugins;
+            # now update it.
+
+            # Some <plugin> nodes have a reference node
+            # e.g. <reference name="FooKineticLaw"/>
             for reference in node.getElementsByTagName('reference'):
                 temp = self.find_element(self.elements,
                                          self.get_value(reference, 'name'))
@@ -750,10 +951,10 @@ class ParseXML():
         list (of dictionaries).
 
         :param pkg_node: The <pkgVersion> node
-
+        :return: returns nothing
         '''
 
-        # version_count = self.get_int_value(self, pkg_node, 'version_count')
+        # [Old code: version_count = self.get_int_value(self, pkg_node, 'version_count')]
 
         # read concrete versions of abstract classes and fill dictionary
         for node in pkg_node.getElementsByTagName('element'):
@@ -789,7 +990,15 @@ class ParseXML():
                 self.sbml_elements.append(element)
 
     def get_plugins_for_version(self, pkg_node):
-#        version_count = self.get_int_value(self, pkg_node, 'version_count')
+        '''
+        Given a <pkgVersion> node, iterate over its <plugin> nodes, if any,
+        and update the self.plugins list.
+
+        :param pkg_node: the pkgVersion node
+        :return: this function doesn't return anything.
+        '''
+
+        # [Old code: version_count = self.get_int_value(self, pkg_node, 'version_count')]
 
         for node in pkg_node.getElementsByTagName('plugin'):
             plugin = self.get_plugin_description(self, node, self.version_count)
@@ -797,15 +1006,56 @@ class ParseXML():
                 self.plugins.append(plugin)
 
     @staticmethod
-    def find_child_occurences(name, elements):
+    def find_child_occurrences(name, elements):
+        '''
+        :param name: the name attribute of an <element> node
+        :param element: list of dictionaries, each representing an <element> node
+        :return: returns list containing [found, parent] (NB can be [False, '']).
+
+        e.g. given the structure (from file samples/sbgn.xml):
+
+        <element name="Point" ....>
+          <attributes>
+            <attribute name="x" required="true" type="double" abstract="false"/>
+            <attribute name="y" required="true" type="double" abstract="false"/>
+            <attribute name="point" required="false" ... element="Point" ... abstract="false"/>
+          </attributes>
+        </element>
+
+        the third <attribute> node is a "child" of the "Point" element.
+        Actually, a grandchild to be more precise.
+
+        The <attribute> node has to be nested within its parent <element>
+        node, as in this example. Again, its grandparent to be more precise.
+
+        We are using the same terms to mean two things:
+        (1) parent and child, as here  (and grandparent, grandchild, etc)
+        (2) given a node <outer>, with one or more node(s) <inner> nested
+        within it, I have said in other places that <outer> is the parent
+        node and <inner> the child node
+
+        '''
         found = False
         parent = ''
         num_elements = len(elements)
         index = 0
+
+        # Iterate over the `elements` list of dictionaries:
         while not found and index < num_elements:
+
+            # Find the `elem` dictionary at this position:
             elem = elements[index]
             if 'attribs' in elem:
+                # Iterate over the list of dictionaries stored
+                # as value of elem's 'attribs' entry (this
+                # corresponds to the <attribute> nodes nested within
+                # this <element> node
                 for attr in elem['attribs']:
+
+                    # If the <attribute> node's type attribute is 'lo_element'
+                    # or 'element', AND its element attribute is the same
+                    # as the name attribute of the <element> node, that means
+                    # the <attribute> node is a child of the <element> node
                     if attr['type'] == 'lo_element' \
                             or attr['type'] == 'element':
                         if attr['element'] == name:
@@ -815,14 +1065,34 @@ class ParseXML():
         return [found, parent]
 
     def add_parent_elements(self, package):
+        '''
+        Given the dictionary `package`, iterate over the list of
+        dictionaries stored as the value of its 'baseElements'
+        entry. For each dictionary, if it is a "child" of another
+        dictionary, update its "parent" entry with that dictionary.
+
+        :param package: the main dictionary which holds the other components.
+        :returns: nothing.
+        '''
         for elem in package['baseElements']:
             name = elem['name']
             [occurs_as_child, parent] = \
-                self.find_child_occurences(name, package['baseElements'])
+                self.find_child_occurrences(name, package['baseElements'])
             if occurs_as_child:
                 elem['parent'] = parent
 
     def get_version_information(self, node):
+        '''
+        Extract version information from a <version> node and
+        return it in a dictionary
+
+        :param node: the version node
+        :return: dict with entries for 'level', 'version' and 'namespace'.
+
+        Example <version> node:
+
+         <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/>
+        '''
         level = self.get_int_value(self, node, 'level')
         version = self.get_int_value(self, node, 'version')
         namespace = self.get_value(node, 'namespace')
@@ -831,6 +1101,13 @@ class ParseXML():
                      'namespace': namespace})
 
     def get_dependency_information(self, node):
+        '''
+        Get information from a <dependency> node
+        e.g. <dependency library_name="libnuml" prefix="NUML"/>
+
+        :param node: the dependency node
+        :return: returns a dictionary with the extracted information.
+        '''
         library = self.get_value(node, 'library_name')
         prefix = self.get_value(node, 'prefix')
         return dict({'library': library,
@@ -852,6 +1129,8 @@ class ParseXML():
         The <language> node can also contain nodes of at least the following
         types: <library_version>, <language_version> and <dependencies>.
         These are also interrogated in this function.
+
+        TODO: Sarah would prefer to have new functions for interrogating each type of node
         """
         language = self.get_value(node, 'name')
         base_class = self.get_value(node, 'baseClass')
@@ -873,6 +1152,8 @@ class ParseXML():
         versions = node.getElementsByTagName('language_versions')
         specification = []
         # A <language_versions> node can contain multiple <version> nodes.
+        # Example:
+        # <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/>
         # If the NodeList of <language_version> nodes has at least one entry,
         # we get the first one and then iterate over the <version> node(s)
         # it has, if any:
@@ -939,6 +1220,14 @@ class ParseXML():
 
     @staticmethod
     def report_error(code, message):
+        '''
+        Prints an error to output (probably stdout)
+
+        :param code: one of the return_codes entries from global_variables
+        e.g. gv.return_codes['missing required information']
+        :param message: a message to go with the code, e.g. 'A Class must have a Name'
+        :return: returns nothing.
+        '''
         gv.code_returned = code
         print('{0}'.format(gv.get_return_code(code)))
         print('{0}'.format(message))
@@ -948,8 +1237,10 @@ class ParseXML():
 
     def parse_deviser_xml(self):
         """
-        Parses the filename given in __init__ (e.g. "dyn.xml") and returns a
-        big dictionary with the definition contained in it.
+        In the constructor, a file (e.g. "dyn.xml") is parsed
+        into a Document Object Model instance (self.dom). Now
+        we iterate over that object's nodes to create the big 'package'
+        dictionary structure.
 
         :return: the big `package` dictionary structure
 
@@ -1012,7 +1303,7 @@ class ParseXML():
         sbml_version = 1
         pkg_version = 1
         self.num_versions = len(self.dom.getElementsByTagName('pkgVersion'))
-        self.version_count = 0
+        self.version_count = 0  # Number of pkgVersion nodes in the document.
 
         # Iterate over pkgVersion nodes.
         lv_info = []  # List of dictionaries, one dict per <pkgVersion> node.
@@ -1087,6 +1378,7 @@ class ParseXML():
                         })
 
         list_all_element = ['SBase', 'XMLNode', 'ASTNode', 'UncertMLNode']
+
         # link elements
         for elem in package['elements']:
             list_all_element.append(elem['name'])
