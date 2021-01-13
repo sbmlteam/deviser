@@ -104,10 +104,10 @@ def get_sid_refs_for_class(working_class):
 def has_children(attributes):
     """
     Return True if any of the attributes refer to elements
-    (i.e. 'type' is 'element', 'lo_element' or 'inline_lo_element')
+    (i.e. `type` is 'element', 'lo_element' or 'inline_lo_element')
 
     :param attributes: the attributes to check
-    :return: True if at least one type match
+    :return: `True` if at least one type match
 
     e.g.
 
@@ -161,9 +161,9 @@ def get_class(name, root_object):
 
     :param name: name of the class to find
     :param root_object: dict of all elements
-    :return: the structure representing class 'name'
+    :return: the structure representing class `name`
 
-    The get_class function is designed to find the specific 'name'
+    The `get_class` function is designed to find the specific `name`
     of an sbml class within the root_object, which will be the big
     structure created by parseXML.
     """
@@ -386,7 +386,7 @@ def is_instantiated(element):
 
 def add_concrete_to_list(root, concrete, mylist):
     """
-    Add the non-abstract class to the list mylist
+    Add the non-abstract class to the list `mylist`
 
     :param root: dict of all elements
     :param concrete:
@@ -521,10 +521,10 @@ def has_array(attributes):
     Check if any of the attributes represented in a list are of type 'array'.
 
     :param attributes: list representing the attribute nodes to check
-    :return: return True if any of the attributes are of type 'array'.
+    :return: return `True` if any of the attributes are of type 'array'.
 
     e.g. if the following attribute node was represented in the list,
-    we would return True:
+    we would return `True`:
 
     .. code-block:: xml
 
@@ -541,10 +541,10 @@ def has_vector(attributes):
     Check if any of the attributes represented in a list are of type 'vector'.
 
     :param attributes: list representing the attribute nodes to check
-    :return: Return True if any of the attributes are of type 'vector'
+    :return: Return `True` if any of the attributes are of type 'vector'
 
     e.g. if the following attribute node was represented in the list,
-    we would return True:
+    we would return `True`:
 
     .. code-block:: xml
 
@@ -561,11 +561,14 @@ def has_other_packages(attributes):
     Check to see if a list of attributes have other packages.
 
     :param attributes: the list to check
-    :return: Tuple with True if any of the attributes have another package,
-             plus a list of packages (empty if False).
+    :return: Tuple with `True` if any of the attributes have another package,
+             plus a list of packages (empty if `False`).
 
     e.g. the following entries would result in a return of
-        [True, ['layout']]
+
+    .. code-block:: default
+
+       [True, ['layout']]
 
     .. code-block:: xml
 
@@ -583,7 +586,7 @@ def has_other_packages(attributes):
        </mappings>
 
     Note: the additional attribute information is populated by the
-    BaseCppFile expand_class and expand_attributes functions
+    BaseCppFile expand_class() and expand_attributes() functions
     """
     list_pkgs = []
     has_pack = False
@@ -664,7 +667,7 @@ def has_attribute(element, attribute):
 
     :param element: element node object to check.
     :param attribute: the attribute to check
-    :return: return True if the element has the attribute specified
+    :return: return `True` if the element has the attribute specified
 
     e.g. if the element represented this node:
 
@@ -673,7 +676,7 @@ def has_attribute(element, attribute):
        <element name="FooRule" typeCode="SBML_FOO_RULE" ... >
 
     and we wanted to know if it had the typeCode attribute,
-    we would return True.
+    we would return `True`.
     """
     if element is None:
         return False
@@ -731,7 +734,7 @@ def overwrites_name(root, name):
 
     :param root_object: dict of all elements
     :param name: the name of the attribute to check
-    :return: True if the attribute has a different xml name, False otherwise
+    :return: `True` if the attribute has a different xml name, `False` otherwise
     """
     if root is None:
         return False
@@ -752,7 +755,6 @@ def get_static_extension_attribs(num_versions, lv_info):
     PkgExtension class when generating the code.
     This facilitates the reuse of class code generation for member
     variable getters and setters.
-
 
     :param num_versions:
     :param lv_info:
@@ -938,9 +940,17 @@ def get_default_enum_value(attribute):
                    value="invalid TransitionOutputEffect value" />
 
     The function returns the name of the invalid enumeration value.
+    For example:
 
-    get_default_enum_value(attribute dict for transitionEffect)
-    will return string 'OUTPUT_TRANSITION_INVALID'
+    .. code-block::
+
+       get_default_enum_value(attribute dict for transitionEffect)
+
+    will return string
+
+    .. code-block:: default
+
+       'OUTPUT_TRANSITION_INVALID'
     """
     default = 'INVALID'
     name = attribute['element']
@@ -995,9 +1005,17 @@ def get_first_enum_value(attribute):
     the code will automatically add an INVALID value to any enumeration
 
     The function returns the name of the first listed enumeration value.
+    For example:
 
-    get_First_enum_value(attribute dict for transitionEffect)
-    will return string 'OUTPUT_TRANSITION_EFFECT_PRODUCTION'
+    .. code-block:: default
+
+       get_First_enum_value(attribute dict for transitionEffect)
+
+    will return string
+
+    .. code-block:: default
+
+       'OUTPUT_TRANSITION_EFFECT_PRODUCTION'
     """
     value = ''
     name = attribute['element']
@@ -1109,7 +1127,10 @@ def get_max_length(elements, attribute):
        width = query.get_max_length(elements, 'name')
 
     will return the length of the longest string in
-    ["Algebraic", "FooRate", "FooAssignment"]
+
+    .. code-block:: default
+
+       ["Algebraic", "FooRate", "FooAssignment"]
 
     TODO will this throw an exception if elements other
     than the first one do *not* have the attribute?
@@ -1134,14 +1155,14 @@ def get_other_element_children(this_object, element):
     children of the ListOfFoo element.
 
     :param this_object: object dict to be queried
-    :param element: dict of element (e.g.Foo) for which we wish to discover
-    whether the corresponding listOfFoo element contains children of a type
-    other than Foo
-    :return: list of names of any children of a listOfFoo that are not of
-    type Foo
+    :param element: dict of element (e.g. `Foo`) for which we wish to discover
+    whether the corresponding `listOfFoo` element contains children of a type
+    other than `Foo`
+    :return: list of names of any children of a `listOfFoo` that are not of
+    type `Foo`
 
-    e.g. In this case the DefaultTerm object is contained within the
-    ListOfFunctionTerms which also contains FunctionTerm Objects:
+    e.g. In this case the `DefaultTerm` object is contained within the
+    `ListOfFunctionTerms` which also contains `FunctionTerm` Objects:
 
     .. code-block:: xml
 
@@ -1446,11 +1467,15 @@ def is_number(att_type):
     Does this attribute type represent a number?
 
     :param att_type: the type, e.g. "int", "SIdRef", "string", ...
-    :param return: Return True if the attribute type given represents a number
+    :param return: Return `True` if the attribute type given represents a number
 
     e.g. an attribute node like this
-    <attribute name="ordinal" required="true" type="int" abstract="false"/>
-    has type "int", so would return True
+
+    .. code-block:: XML
+
+       <attribute name="ordinal" required="true" type="int" abstract="false"/>
+
+    has type "int", so would return `True`.
 
     TODO I'm assuming this is for <attribute> nodes?
     """
@@ -1465,7 +1490,7 @@ def is_element(att_type):
     Does this attribute type represent an element?
 
     :param att_type: the type, e.g. "lo_element", "SIdRef", "string", ...
-    :return: True if the attribute type given represents an element
+    :return: `True` if the attribute type given represents an element
     """
     element = False
     if att_type == 'element' or att_type == 'lo_element' or \
