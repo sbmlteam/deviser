@@ -73,31 +73,26 @@ class BaseCppFile(BaseFile.BaseFile):
 
         self.class_object = {}
 
-        # declare variables that will populate by the class object
+        # Declare variables that will be populated by the class object.
         if not self.name:
             self.name = ''
-        self.is_list_of = ''
-        self.class_name = ''
-        self.package = ''
-        self.typecode = ''
-        self.list_of_name = ''
-        self.list_of_child = ''
+
+        self.is_list_of, self.class_name, self.package, \
+            self.typecode, self.list_of_name, self.list_of_child,\
+            self.sid_refs, self.unit_sid_refs = ('',) * 8
+
         self.has_std_base = True
         self.std_base = gv.std_base
-        self.sid_refs = ''
-        self.unit_sid_refs = ''
-        self.add_decls = None
-        self.add_impl = None
-        self.overwrites_children = False
-        self.has_math = False
-        self.has_children = False
-        self.has_only_math = False
-        self.has_non_std_children = False
+
+        self.add_decls, self.add_impl = None, None
+
+        self.overwrites_children, self.has_math, self.has_children,\
+            self.has_only_math, self.has_parent_list_of, self.is_plugin,\
+            self.is_doc_plugin, self.has_non_std_children = (False,) * 8
+
         self.num_non_std_children = 0
         self.class_attributes = []
-        self.has_parent_list_of = False
-        self.is_plugin = False
-        self.is_doc_plugin = False
+
 
     ########################################################################
 
