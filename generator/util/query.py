@@ -163,7 +163,7 @@ def get_class(name, root_object):
     :param root_object: dict of all elements
     :return: the structure representing class `name`
 
-    The `get_class` function is designed to find the specific `name`
+    The `get_class()` function is designed to find the specific `name`
     of an sbml class within the root_object, which will be the big
     structure created by parseXML.
     """
@@ -190,14 +190,15 @@ def is_inline_child(class_object):
     :return: list of parents objects for which this class is an inline child
 
     According to the manual:
-    On occasion an element may contain multiple children of the same type
+
+    `On occasion an element may contain multiple children of the same type
     which are not specified as being within a listOf element. From a code
     point of view it is easier to consider these children as being within
     a listOf element as this provides functionality to access and
     manipulate potentially variable numbers of child elements.
     The 'inline_lo_element' type allows the user to specify that there are
     multiple instances of the same child element but that these do not occur
-    within a specified ListOf element.
+    within a specified ListOf element.`
 
     e.g. The parameter nodes here are not inline children
     (and child element type = 'lo_element'):
@@ -283,7 +284,7 @@ def get_parent_class(class_object):
     :param class_object: the object representing the class.
     :return: parent class, if found.
 
-    e.g. in the following XML, the 'unit' attribute is an element of type'Unit'
+    e.g. in the following XML, the 'unit' attribute is an element of type 'Unit'
     so
 
     .. code-block:: default
@@ -586,7 +587,7 @@ def has_other_packages(attributes):
        </mappings>
 
     Note: the additional attribute information is populated by the
-    BaseCppFile expand_class() and expand_attributes() functions
+    BaseCppFile `expand_class()` and `expand_attributes()` functions.
     """
     list_pkgs = []
     has_pack = False
@@ -602,7 +603,7 @@ def is_string(attribute):
     Is the attribute of Type string?
 
     :param attribute: attribute to check
-    :return: return True if the attribute is of Type string
+    :return: return `True` if the attribute is of Type string
     """
     if attribute['attType'] == 'string':
         return True
@@ -916,7 +917,7 @@ def get_default_enum_value(attribute):
     .. code-block:: xml
 
        <attribute name="transitionEffect" required="true" type="enum"
-                   element="TransitionOutputEffect" abstract="false" />
+                  element="TransitionOutputEffect" abstract="false" />
 
     uses values from the enumeration specified
 
@@ -925,9 +926,9 @@ def get_default_enum_value(attribute):
        <enum name="TransitionOutputEffect">
          <enumValues>
            <enumValue name="OUTPUT_TRANSITION_EFFECT_PRODUCTION"
-                       value="production" />
+                      value="production" />
            <enumValue name="OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL"
-                       value="assignment level" />
+                      value="assignment level" />
          </enumValues>
        </enum>
 
@@ -937,7 +938,7 @@ def get_default_enum_value(attribute):
     .. code-block:: xml
 
        <enumValue name="OUTPUT_TRANSITION_INVALID"
-                   value="invalid TransitionOutputEffect value" />
+                  value="invalid TransitionOutputEffect value" />
 
     The function returns the name of the invalid enumeration value.
     For example:
@@ -977,7 +978,7 @@ def get_first_enum_value(attribute):
     .. code-block:: xml
 
        <attribute name="transitionEffect" required="true" type="enum"
-                   element="TransitionOutputEffect" abstract="false" />
+                  element="TransitionOutputEffect" abstract="false" />
 
     uses values from the enumeration specified:
 
@@ -987,9 +988,9 @@ def get_first_enum_value(attribute):
          <enum name="TransitionOutputEffect">
          <enumValues>
            <enumValue name="OUTPUT_TRANSITION_EFFECT_PRODUCTION"
-                       value="production" />
+                      value="production" />
            <enumValue name="OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL"
-                       value="assignment level" />
+                      value="assignment level" />
          </enumValues>
        </enum>
 
@@ -999,7 +1000,7 @@ def get_first_enum_value(attribute):
     .. code-block:: xml
 
        <enumValue name="OUTPUT_TRANSITION_INVALID"
-                   value="invalid TransitionOutputEffect value" />
+                  value="invalid TransitionOutputEffect value" />
 
     because as part of the parseXML and then further parsing of the results
     the code will automatically add an INVALID value to any enumeration
@@ -1114,7 +1115,7 @@ def get_max_length(elements, attribute):
 
     e.g. given the following elements:
 
-    .. code-block:: xml
+    .. code-block:: XML
 
        <element name="Algebraic" typeCode="SBML_FOO_ALGEBRAIC" ... />
        <element name="FooRate" typeCode="SBML_FOO_FOORATE" ... />
@@ -1156,10 +1157,10 @@ def get_other_element_children(this_object, element):
 
     :param this_object: object dict to be queried
     :param element: dict of element (e.g. `Foo`) for which we wish to discover
-    whether the corresponding `listOfFoo` element contains children of a type
-    other than `Foo`
+        whether the corresponding `listOfFoo` element contains children of a type
+        other than `Foo`
     :return: list of names of any children of a `listOfFoo` that are not of
-    type `Foo`
+        type `Foo`
 
     e.g. In this case the `DefaultTerm` object is contained within the
     `ListOfFunctionTerms` which also contains `FunctionTerm` Objects:
@@ -1426,7 +1427,7 @@ def create_object_tree(pkg_object, reqd_only=True):
     """
     Create a tree structure with each plugin listing its direct children
     and each class listing its direct children.
-    If reqd_only is False it will add the listOf elements as well.
+    If `reqd_only` is `False` it will add the `listOf` elements as well.
 
     :param pkg_object:
     :param reqd_only:
