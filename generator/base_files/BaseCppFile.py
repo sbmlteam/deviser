@@ -40,7 +40,7 @@
 
 
 from . import BaseFile
-from util import strFunctions, query, global_variables as gv
+from util import strFunctions as SF, query, global_variables as gv
 
 
 class BaseCppFile(BaseFile.BaseFile):
@@ -117,7 +117,7 @@ class BaseCppFile(BaseFile.BaseFile):
             self.list_of_child = ''
         # check case of things where we assume upper/lower
         if self.package[0].islower():
-            self.package = strFunctions.upper_first(class_object['package'])
+            self.package = SF.upper_first(class_object['package'])
 
         # are we a plugin
         if 'is_plugin' in class_object:
@@ -218,23 +218,23 @@ class BaseCppFile(BaseFile.BaseFile):
     def expand_attributes(self, attributes):
         for i in range(0, len(attributes)):
             mydict = attributes[i]
-            [attrib_name, had_hyphen] = strFunctions.remove_hyphens(mydict['name'])
-            capname = strFunctions.upper_first(attrib_name)
+            [attrib_name, had_hyphen] = SF.remove_hyphens(mydict['name'])
+            capname = SF.upper_first(attrib_name)
             if had_hyphen:
                 orig_name = mydict['name']
-                mydict['name'] = strFunctions.lower_first(orig_name)
+                mydict['name'] = SF.lower_first(orig_name)
             else:
-                mydict['name'] = strFunctions.lower_first(capname)
+                mydict['name'] = SF.lower_first(capname)
             # we may want the name to reflect an element
             if 'element' in mydict and mydict['element'] != '':
                 if 'xml_name' in mydict and mydict['xml_name'] != '':
-                    possible_name = strFunctions.singular(mydict['xml_name'])
+                    possible_name = SF.singular(mydict['xml_name'])
                     # need to catch case where the xmlname is lower case but comes from a camel case element
-                    if strFunctions.is_camel_case(mydict['element']):
-                        if possible_name == strFunctions.remove_prefix(mydict['element']).lower():
-                            capname = strFunctions.upper_first(strFunctions.remove_prefix(mydict['element']))
+                    if SF.is_camel_case(mydict['element']):
+                        if possible_name == SF.remove_prefix(mydict['element']).lower():
+                            capname = SF.upper_first(SF.remove_prefix(mydict['element']))
                     elif possible_name != attrib_name:
-                        capname = strFunctions.upper_first(mydict['xml_name'])
+                        capname = SF.upper_first(mydict['xml_name'])
 
             # mydict['capAttName'] = capname
             # mydict['memberName'] = 'm' + capname
@@ -244,7 +244,7 @@ class BaseCppFile(BaseFile.BaseFile):
             # mydict['isVector'] = False
             # mydict['children_overwrite'] = False
             mydict.update({'capAttName': capname, 'memberName': 'm' + capname,
-                           'pluralName': strFunctions.plural(attrib_name),
+                           'pluralName': SF.plural(attrib_name),
                            'isEnum': False, 'isArray': False,
                            'isVector': False, 'children_overwrite': False})
 
@@ -353,16 +353,16 @@ class BaseCppFile(BaseFile.BaseFile):
                 if mydict['attTypeCode'] == 'XMLNode*' and not gv.is_package:
                     mydict['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}*'.format(mydict['element'])
                     mydict['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}_t*'.format(mydict['element'])
-                    # mydict['capAttName'] = strFunctions.remove_prefix(mydict['element'])
+                    # mydict['capAttName'] = SF.remove_prefix(mydict['element'])
                 mydict['isNumber'] = False
                 mydict['default'] = 'NULL'
                 if 'xml_name' in mydict and mydict['xml_name'] != '':
                     possible_name = mydict['xml_name']
                     # need to catch case where the xmlname is lower case but comes from a camel case element
-                    if strFunctions.is_camel_case(mydict['element']) and possible_name == strFunctions.remove_prefix(mydict['element']).lower():
-                        possible_name = strFunctions.lower_first(mydict['capAttName'])
-                    [mydict['used_child_name'], unused] = strFunctions.remove_hyphens(possible_name)
-                if strFunctions.compare_no_case(strFunctions.remove_prefix(el_name), at_name):
+                    if SF.is_camel_case(mydict['element']) and possible_name == SF.remove_prefix(mydict['element']).lower():
+                        possible_name = SF.lower_first(mydict['capAttName'])
+                    [mydict['used_child_name'], unused] = SF.remove_hyphens(possible_name)
+                if SF.compare_no_case(SF.remove_prefix(el_name), at_name):
                     mydict['children_overwrite'] = False
                 else:
                     mydict['children_overwrite'] = True
@@ -371,30 +371,30 @@ class BaseCppFile(BaseFile.BaseFile):
                 if childclass and 'lo_class_name' in childclass and childclass['lo_class_name'] != '':
                     name = childclass['lo_class_name']
                 else:
-                    name = strFunctions.list_of_name(mydict['element'])
-                plural = strFunctions.plural_no_prefix(mydict['element'])
+                    name = SF.list_of_name(mydict['element'])
+                plural = SF.plural_no_prefix(mydict['element'])
 
                 # mydict['attType'] = 'lo_element'
                 # mydict['attTypeCode'] = name
                 # mydict['CType'] = 'ListOf_t'
                 # mydict['memberName'] = 'm' + plural
-                # mydict['capAttName'] = strFunctions.remove_prefix(mydict['element'])
+                # mydict['capAttName'] = SF.remove_prefix(mydict['element'])
                 # mydict['isNumber'] = False
                 # mydict['default'] = 'NULL'
                 mydict.update({'attType': 'lo_element', 'attTypeCode': name,
                                'CType': 'ListOf_t', 'memberName': 'm' + plural,
-                               'capAttName': strFunctions.remove_prefix(mydict['element']),
+                               'capAttName': SF.remove_prefix(mydict['element']),
                                'isNumber': False, 'default': 'NULL'})
 
                 if 'xml_name' in mydict and mydict['xml_name'] != '':
                     possible_name = mydict['xml_name']
                     if mydict['xml_name'] != mydict['pluralName']:
-                        possible_name = strFunctions.singular(mydict['xml_name'])
+                        possible_name = SF.singular(mydict['xml_name'])
                     # need to catch case where the xmlname is lower case but comes from a camel case element
-                    if strFunctions.is_camel_case(mydict['element']) and possible_name == strFunctions.remove_prefix(mydict['element']).lower():
-                        possible_name = strFunctions.lower_first(mydict['capAttName'])
+                    if SF.is_camel_case(mydict['element']) and possible_name == SF.remove_prefix(mydict['element']).lower():
+                        possible_name = SF.lower_first(mydict['capAttName'])
                     mydict['used_child_name'] = possible_name
-                if attrib_name == strFunctions.lower_first(strFunctions.remove_prefix(self.name)):
+                if attrib_name == SF.lower_first(SF.remove_prefix(self.name)):
                     mydict['recursive_child'] = True
                     mydict['attTypeCode'] = '{0} *'.format(name)
                     mydict['listOfClassName'] = name
@@ -404,7 +404,7 @@ class BaseCppFile(BaseFile.BaseFile):
                     mydict['element'] = 'int'
                 else:
                     mydict['element'] = \
-                        strFunctions.lower_first(mydict['element'])
+                        SF.lower_first(mydict['element'])
                 mydict['attType'] = 'array'
                 mydict['attTypeCode'] = mydict['element'] + '*'
                 mydict['CType'] = mydict['attTypeCode']
@@ -416,7 +416,7 @@ class BaseCppFile(BaseFile.BaseFile):
                     mydict['element'] = 'int'
                 else:
                     mydict['element'] = \
-                        strFunctions.lower_first(mydict['element'])
+                        SF.lower_first(mydict['element'])
                 mydict['attType'] = 'vector'
                 mydict['attTypeCode'] = 'std::vector<{0}>'.format(mydict['element'])
                 mydict['CType'] = mydict['attTypeCode']
@@ -455,13 +455,13 @@ class BaseCppFile(BaseFile.BaseFile):
                         if att_type == 'element' or att_type == 'lo_element' or att_type == 'inline_lo_element':
                             continue;
                         else:
-                            attribute['capAttName'] = strFunctions.upper_first(attribute['name'])
+                            attribute['capAttName'] = SF.upper_first(attribute['name'])
                             attribute['memberName'] = 'm{0}'.format(attribute['capAttName'])
 
     def create_lo_other_child_element_class(self, name, parent):
-        capname = strFunctions.upper_first(name)
+        capname = SF.upper_first(name)
         element = dict({'isArray': False,
-                        'name': strFunctions.lower_first(capname),
+                        'name': SF.lower_first(capname),
                         'attTypeCode': capname + '*',
                         'CType': capname + '_t *',
                         'capAttName': capname,
@@ -503,7 +503,7 @@ class BaseCppFile(BaseFile.BaseFile):
             if att_type == 'lo_element' and name not in listed_elements:
                 # check for concrete instances
                 if attribute['type'] == 'inline_lo_element':
-                    capname = strFunctions.upper_first(name)
+                    capname = SF.upper_first(name)
                     attrib_class = query.get_class(capname, attribute['root'])
                     if attrib_class and 'concrete' in attrib_class:
                         attribute['concrete'] = attrib_class['concrete']
@@ -867,7 +867,7 @@ class BaseCppFile(BaseFile.BaseFile):
 
     # Function to write the header about the typecode enumeration
     def write_type_code_enum_header(self, package):
-        up_package = strFunctions.upper_first(package)
+        up_package = SF.upper_first(package)
         self.open_comment()
         self.write_comment_line('@enum {0}{1}'
                                 'TypeCode_t'.format(self.cap_language,
@@ -923,8 +923,8 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_line('{0} {1};'.format('}', name))
 
     def write_enum_header(self, name, classname, typename):
-        classname = strFunctions.upper_first(classname)
-        up_typename = strFunctions.upper_first(typename)
+        classname = SF.upper_first(classname)
+        up_typename = SF.upper_first(typename)
         self.open_comment()
         self.write_comment_line('@enum {0}'.format(name))
         if gv.library_name != 'Libsbml':
