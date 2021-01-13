@@ -46,12 +46,12 @@ from . import strFunctions
 def has_sid_ref(attributes):
     """
     Iterate over dictionaries (representing attribute nodes) to see if
-    any attribute nodes are of type SIdRef
+    any attribute nodes are of type `SIdRef`
 
     :param attributes: structure containing attribute dictionaries
-    :return: Return True if any of the <attribute> nodes are of type SIdRef
+    :return: Return True if any of the `<attribute>` nodes are of type `SIdRef`
 
-    e.g. the following will return True (... to represent content).
+    e.g. the following will return `True` (... to represent content).
 
     .. code-block:: xml
 
@@ -69,10 +69,10 @@ def has_sid_ref(attributes):
 
 def get_sid_refs(attributes, unit=False):
     """
-    Return a set of attributes that are of type SIdRef or UnitSidRef
+    Return a set of attributes that are of type `SIdRef` or `UnitSidRef`
 
     :param attributes: The set of attributes we wish to select from.
-    :param unit: True to match on 'UnitSidRef', otherwise match on 'SidRef'.
+    :param unit: True to match on `UnitSidRef`, otherwise match on `SidRef`.
     :return: the list of attributes which match.
     """
     sid_refs = []
@@ -123,6 +123,7 @@ def has_children(attributes):
        <listOfAttribute name="defaultTerm" required="true" type="element"
           element="DefaultTerm" abstract="false" />
 
+    would both return `True`.
     """
     for attribute in attributes:
         att_type = attribute['type']
@@ -610,16 +611,16 @@ def has_is_set_member(attribute):
     return True if the attribute has an isSet member variable.
 
     :param attribute: an attribute object
-    :return: True if attribute has isSet member variable, False otherwise
+    :return: `True` if attribute has `isSet` member variable, `False` otherwise
 
     e.g. in order to determine in code whether an attribute of type
-    boolean or number has been explicitly set, the variable, say 'constant',
-    is stored with an additional isSetConstant variable of type boolean
+    boolean or number has been explicitly set, the variable, say `constant`,
+    is stored with an additional `isSetConstant` variable of type boolean
     that can be queried to determine if the variable value has been
     explicitly set
 
-    Consider Foo class with member variables 'constant' (boolean) and
-    'number' (unsigned int  defaulting to 0)
+    Consider Foo class with member variables `constant` (boolean) and
+    `number` (unsigned int, defaulting to 0):
 
     .. code-block:: xml
 
@@ -627,10 +628,12 @@ def has_is_set_member(attribute):
 
     would result in variables:
 
-        mConstant = False
-        mIsSetConstant = False
-        mNumber = 0
-        mIsSetNumber = False
+    .. code-block:: default
+
+       mConstant = False
+       mIsSetConstant = False
+       mNumber = 0
+       mIsSetNumber = False
 
     whereas
 
@@ -639,12 +642,15 @@ def has_is_set_member(attribute):
        <foo constant="false" number="0"/>
 
     would result in variables:
-        mConstant = False
-        mIsSetConstant = True
-        mNumber = 0
-        mIsSetNumber = True
 
-    Deviser creates an isSetXYZ variable for any attribute that
+    .. code-block:: default
+
+       mConstant = False
+       mIsSetConstant = True
+       mNumber = 0
+       mIsSetNumber = True
+
+    Deviser creates an `isSetXYZ` variable for any attribute that
     is a number or a boolean
     """
     if attribute['isNumber'] or attribute['attType'] == 'boolean':
@@ -682,11 +688,11 @@ def has_attribute(element, attribute):
 
 def has_lo_attribute(element, attribute):
     """
-    Does the element's listOf class have the attribute specified?
+    Does the element's `listOf` class have the attribute specified?
 
     :param element: an element object
     :param attribute: an attribute object
-    :return: Return True if listOf class for element has attribute specified
+    :return: Return `True` if `listOf` class for element has attribute specified
     """
     if element is None:
         return False
@@ -707,7 +713,7 @@ def isV2BaseAttribute(element, attribute):
 
     :param element: an element object
     :param attribute: an attribute object
-    :return: True if base_version is 2, False otherwise.
+    :return: `True` if `base_version` is 2, `False` otherwise.
     """
     if attribute != 'id' and attribute != 'name':
         return False
@@ -914,8 +920,7 @@ def get_default_enum_value(attribute):
 
     .. code-block:: xml
 
-       <enum>
-         <enum name="TransitionOutputEffect">
+       <enum name="TransitionOutputEffect">
          <enumValues>
            <enumValue name="OUTPUT_TRANSITION_EFFECT_PRODUCTION"
                        value="production" />
