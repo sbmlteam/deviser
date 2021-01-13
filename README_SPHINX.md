@@ -141,4 +141,48 @@ source_suffix = {
 '.rst': 'restructuredtext',
 '.txt': 'restructuredtext',
 '.md': 'markdown',
-}``` 
+}```
+
+### I just want to make some changes to my docstrings!
+Assuming you have the latest version of the Deviser generator code, the workflow steps are:
+1. Make whatever changes you want to your docstrings in the .py files.
+2. In top-level `deviser` directory, make a back-up of `conf.py`: `cp sphinx-docs/conf.py .`
+3. Run `sphinx-apidoc`:
+`sphinx-apidoc -f -o sphinx-docs -e -M -F --ext-autodoc --ext-doctest --ext-coverage --ext-githubpages generator '*tests*' `
+4. Now put the saved copy of `conf.py` into `sphinx-docs/`: `cp conf.py sphinx-docs`
+5. `cd sphinx-docs`
+6. `make html BUILDDIR="../sphinx-html"`
+7. Look at the generated html code and look at what effect your changes have had.
+
+### Getting nicely-formatted XML in your generated html docs.
+i.e. if you have a docstring for a Python function, and you have one or more blocks of
+XML code within that docstring, this is how you make the XML look nice in your generated docs.
+You need to have [Pygments](https://pygments.org) installed: `pip install Pygments`
+And you use a [code-block](https://www.sphinx-doc.org/en/1.5.1/markup/code.html#directive-code-block)
+directive.
+
+Example from `query.py`
+```
+def has_sid_ref(attributes):
+    """
+    Iterate over dictionaries (representing attribute nodes) to see if
+    any attribute nodes are of type SIdRef
+
+    :param attributes: structure containing attribute dictionaries
+    :return: Return True if any of the <attribute> nodes are of type SIdRef
+
+    e.g. the following will return True (... to represent content).
+
+    .. code-block:: xml
+
+       <attributes>
+          <attribute ... />
+          <attribute name="id" required="false" type="SId" abstract="false"/>
+          <attribute ... />
+       </attributes>
+   """
+```
+Note that the beginning of the code is aligned with the 'c' in 'code-block'.
+And the blank line between the `code-block` directive and the XML code is also required.
+Some docstrings have multiple blocks of XML. separated by explanatory text. In such
+cases multiple `code-block` directives are required, one per XML code block.   
