@@ -194,23 +194,26 @@ class BaseCppFile(BaseFile.BaseFile):
         self.document = False
         if 'document' in class_object:
             self.document = class_object['document']
+
         # add info back to the class_object so we can pass it on
-        self.class_object['package'] = self.package
-        self.class_object['class_attributes'] = self.class_attributes
-        self.class_object['child_lo_elements'] = self.child_lo_elements
-        self.class_object['child_elements'] = self.child_elements
-        self.class_object['concretes'] = self.concretes
-        self.class_object['has_array'] = query.has_array(self.class_attributes)
-        self.class_object['has_vector'] = query.has_vector(self.class_attributes)
-        self.class_object['has_math'] = self.has_math
-        self.class_object['has_children'] = self.has_children
-        self.class_object['has_only_math'] = self.has_only_math
-        self.class_object['has_parent_list_of'] = self.has_parent_list_of
-        self.class_object['num_children'] = self.num_children
-        self.class_object['has_non_std_chilren'] = self.has_non_std_children
-        self.class_object['num_non_std_children'] = self.num_non_std_children
-        self.class_object['is_header'] = self.is_header
-        self.class_object['document'] = self.document
+        self.class_object. \
+            update({'package': self.package,
+                    'class_attributes': self.class_attributes,
+                    'child_lo_elements': self.child_lo_elements,
+                    'child_elements': self.child_elements,
+                    'concretes': self.concretes,
+                    'has_array': query.has_array(self.class_attributes),
+                    'has_vector': query.has_vector(self.class_attributes),
+                    'has_math': self.has_math,
+                    'has_children': self.has_children,
+                    'has_only_math': self.has_only_math,
+                    'has_parent_list_of': self.has_parent_list_of,
+                    'num_children': self.num_children,
+                    'has_non_std_chilren': self.has_non_std_children,  #### spelling
+                    'num_non_std_children': self.num_non_std_children,
+                    'is_header': self.is_header,
+                    'document': self.document, })
+
 
     ########################################################################
 
@@ -366,9 +369,6 @@ class BaseCppFile(BaseFile.BaseFile):
                 mydict['attTypeCode'] = 'std::vector<{0}>'.format(mydict['element'])
                 mydict['CType'] = mydict['attTypeCode']
                 mydict.update({'attType': 'vector', 'isNumber': False, 'default': 'NULL'})
-                # mydict['attType'] = 'vector'
-                # mydict['isNumber'] = False
-                # mydict['default'] = 'NULL'
 
             else:
                 gv.code_returned = gv.return_codes['unknown type used']
