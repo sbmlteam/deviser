@@ -1269,7 +1269,7 @@ def get_child_elements(elements, lo_elements, root=None):
                                         'used_name': used_child_name}))
     return child_elements
 
-
+# NOT USED - Investigate
 def insert_list_of(original, child_name, root):
     """
     insert a listOfParent into the tree
