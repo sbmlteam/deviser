@@ -716,8 +716,9 @@ def get_static_extension_attribs(num_versions, lv_info):
     variable getters and setters.
 
 
-    :param num_versions:
-    :param lv_info:
+    :param num_versions: number of versions
+    :param lv_info: structure representing the level and version information
+        for each of the versions being used
     :return: list of attribute dictionaries
     """
     attribs = []
