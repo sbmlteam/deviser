@@ -1072,10 +1072,12 @@ def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
     """
     Get children that are concrete instantiations
 
-    :param concretes:
+    :param concretes: list of the class_objects identified as concrete classes
     :param root: dict of all elements
-    :param reqd_only:
-    :param base_attributes:
+    :param reqd_only: boolean to allow list to be filtered on attributes
+        that are required
+    :param base_attributes: list of attributes that are on the base class of
+        the concrete classes
     :param name:
     :return:
 
@@ -1098,8 +1100,9 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
     Get the child elements of the class name
 
     :param name:
-    :param root:
-    :param reqd_only:
+    :param root: dict of all elements
+    :param reqd_only: boolean to allow list to be filtered on attributes
+        that are required
     :param xml_name:
     :param base_attribs:
     :return:
