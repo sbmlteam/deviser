@@ -44,15 +44,16 @@ from util import strFunctions as SF, query, global_variables as gv
 
 
 class BaseCppFile(BaseFile.BaseFile):
-    """Common base class for all c++ files"""
+    """Common base class for all C++ files"""
 
     def __init__(self, name, extension, attributes):
         """
-        BaseCppFile constructor.
+        BaseCppFile constructor. Initialise object and open file
+        handle for writing.
 
-        :param name:
-        :param extension:
-        :param attributes:
+        :param name: name of file, without extension
+        :param extension: file extension (no dot), e.g. 'h', 'cpp', 'cxx'
+        :param attributes: list of attribute dictionaries, can be None
         """
         BaseFile.BaseFile.__init__(self, name, extension)
 
@@ -66,7 +67,7 @@ class BaseCppFile(BaseFile.BaseFile):
             self.child_elements = self.get_children()
             self.child_lo_elements = self.get_lo_children()
         else:
-            self.attributes = []
+            self.attributes = []  # List of dictionaries
             self.child_elements = []
             self.child_lo_elements = []
 
@@ -231,11 +232,13 @@ class BaseCppFile(BaseFile.BaseFile):
         """
         Function to expand the attribute information
 
-        :param attributes: a list (?? of attribute nodes?)
+        :param attributes: a list of dictionaries (?? of attribute nodes?)
         :return: the updated list of attributes
         """
         for i in range(0, len(attributes)):
+
             mydict = attributes[i]
+
             [attrib_name, had_hyphen] = SF.remove_hyphens(mydict['name'])
             capname = SF.upper_first(attrib_name)
             if had_hyphen:
@@ -243,6 +246,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 mydict['name'] = SF.lower_first(orig_name)
             else:
                 mydict['name'] = SF.lower_first(capname)
+
             # we may want the name to reflect an element
             if 'element' in mydict and mydict['element'] != '':
                 if 'xml_name' in mydict and mydict['xml_name'] != '':
@@ -1253,6 +1257,12 @@ class BaseCppFile(BaseFile.BaseFile):
     @staticmethod
     def open_single_comment(self):
         """
+        Open a C-style comment.
+
+        TODO: self.num_tabs is defined in the parent class. So,
+        the definition of a tab (here, two space chars)
+        should probably be be defined globally, and perhaps have a
+        setter method also (only if needed).
 
         :returns: nothing
         """
