@@ -326,7 +326,7 @@ def get_concretes(root_object, concrete_list):
     Return a list of the actual concrete classes.
 
     :param root_object: dict of all elements
-    :param concrete_list:
+    :param concrete_list: list of the concrete classes
     :return:
     """
     concretes = []
@@ -343,6 +343,8 @@ def is_instantiated(element):
     :returns: True if instantiated
 
     TODO add description of line with string equality check
+    what does c['element] = element['element'] compare
+    Added issue #43
     """
     if element is None:
         return False
