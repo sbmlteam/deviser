@@ -47,6 +47,13 @@ class BaseCppFile(BaseFile.BaseFile):
     """Common base class for all c++ files"""
 
     def __init__(self, name, extension, attributes):
+        """
+        BaseCppFile constructor.
+
+        :param name:
+        :param extension:
+        :param attributes:
+        """
         BaseFile.BaseFile.__init__(self, name, extension)
 
         # members that might get overridden if creating another library
@@ -97,6 +104,11 @@ class BaseCppFile(BaseFile.BaseFile):
     ########################################################################
 
     def expand_class(self, class_object):
+        """
+
+        :param class_object:
+        :return: nothing
+        """
         self.class_object = class_object
         self.is_list_of = class_object['is_list_of']
         self.has_parent_list_of = class_object['hasListOf']
@@ -104,17 +116,19 @@ class BaseCppFile(BaseFile.BaseFile):
         self.class_name = class_object['name']
         self.package = class_object['package']
         self.typecode = class_object['typecode']
+
         if class_object['is_list_of']:
             self.list_of_name = class_object['list_of_name']
             self.list_of_child = class_object['lo_child']
         else:
             self.list_of_name = ''
             self.list_of_child = ''
-        # check case of things where we assume upper/lower
+
+        # Check case of things where we assume upper/lower:
         if self.package[0].islower():
             self.package = SF.upper_first(class_object['package'])
 
-        # are we a plugin
+        # Are we a plugin?
         if 'is_plugin' in class_object:
             self.is_plugin = class_object['is_plugin']
         if 'is_doc_plugin' in class_object:
@@ -145,7 +159,7 @@ class BaseCppFile(BaseFile.BaseFile):
         self.class_object['has_std_base'] = self.has_std_base
         self.class_object['std_base'] = self.std_base
 
-        # references
+        # References
         self.sid_refs = class_object['sid_refs']
         self.unit_sid_refs = class_object['unit_sid_refs']
         if 'addDecls' in class_object:
@@ -168,7 +182,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 not query.has_children_not_math(class_object['attribs']):
             self.has_only_math = True
 
-        # mark child elements as ML nodes
+        # Mark child elements as ML nodes:
         for i in range(0, len(self.child_elements)):
             element = self.child_elements[i]
             if element['element'].endswith('Node') \
@@ -185,12 +199,12 @@ class BaseCppFile(BaseFile.BaseFile):
 
         self.class_attributes = query.separate_attributes(self.attributes)
 
-        # document class for other libraries
+        # Document class for other libraries:
         self.document = False
         if 'document' in class_object:
             self.document = class_object['document']
 
-        # add info back to the class_object so we can pass it on
+        # Add info back to the class_object so we can pass it on:
         self.class_object. \
             update({'package': self.package,
                     'class_attributes': self.class_attributes,
@@ -204,7 +218,7 @@ class BaseCppFile(BaseFile.BaseFile):
                     'has_only_math': self.has_only_math,
                     'has_parent_list_of': self.has_parent_list_of,
                     'num_children': self.num_children,
-                    'has_non_std_chilren': self.has_non_std_children,  #### spelling
+                    'has_non_std_children': self.has_non_std_children,
                     'num_non_std_children': self.num_non_std_children,
                     'is_header': self.is_header,
                     'document': self.document, })
@@ -212,8 +226,14 @@ class BaseCppFile(BaseFile.BaseFile):
 
     ########################################################################
 
-    # Function to expand the attribute information
+
     def expand_attributes(self, attributes):
+        """
+        Function to expand the attribute information
+
+        :param attributes: a list (?? of attribute nodes?)
+        :return: the updated list of attributes
+        """
         for i in range(0, len(attributes)):
             mydict = attributes[i]
             [attrib_name, had_hyphen] = SF.remove_hyphens(mydict['name'])
@@ -307,9 +327,10 @@ class BaseCppFile(BaseFile.BaseFile):
                 if 'xml_name' in mydict and mydict['xml_name'] != '':
                     possible_name = mydict['xml_name']
                     # need to catch case where the xmlname is lower case but comes from a camel case element
-                    if SF.is_camel_case(mydict['element']) and possible_name == SF.remove_prefix(mydict['element']).lower():
+                    if SF.is_camel_case(mydict['element']) and \
+                            possible_name == SF.remove_prefix(mydict['element']).lower():
                         possible_name = SF.lower_first(mydict['capAttName'])
-                    [mydict['used_child_name'], unused] = SF.remove_hyphens(possible_name)
+                    [mydict['used_child_name'], _] = SF.remove_hyphens(possible_name)
                 if SF.compare_no_case(SF.remove_prefix(el_name), at_name):
                     mydict['children_overwrite'] = False
                 else:
@@ -377,6 +398,10 @@ class BaseCppFile(BaseFile.BaseFile):
 
 
     def sort_name_mismatches(self):
+        """
+
+        :returns: nothing
+        """
         need_to_adjust = False
         names_to_sort = []
         xml_names = []
@@ -395,13 +420,20 @@ class BaseCppFile(BaseFile.BaseFile):
                 for attribute in self.attributes:
                     if 'xml_name' in attribute and attribute['xml_name'] == name:
                         att_type = attribute['attType']
-                        if att_type == 'element' or att_type == 'lo_element' or att_type == 'inline_lo_element':
+                        if att_type in ['element', 'lo_element', 'inline_lo_element']:
                             continue;
                         else:
                             attribute['capAttName'] = SF.upper_first(attribute['name'])
                             attribute['memberName'] = 'm{0}'.format(attribute['capAttName'])
 
+
     def create_lo_other_child_element_class(self, name, parent):
+        """
+
+        :param name:
+        :param parent:
+        :return:
+        """
         capname = SF.upper_first(name)
         element = dict({'isArray': False,
                         'name': SF.lower_first(capname),
@@ -423,7 +455,12 @@ class BaseCppFile(BaseFile.BaseFile):
                             'child_elements': [element]})
         return child_class
 
+
     def get_children(self):
+        """
+
+        :return:
+        """
         elements = []
         listed_elements = []
         for i in range(0, len(self.attributes)):
@@ -434,7 +471,12 @@ class BaseCppFile(BaseFile.BaseFile):
                 listed_elements.append(name)
         return elements
 
+
     def get_lo_children(self):
+        """
+
+        :return:
+        """
         elements = []
         listed_elements = []
         for i in range(0, len(self.attributes)):
@@ -469,52 +511,96 @@ class BaseCppFile(BaseFile.BaseFile):
 
     # functions cpp ns
     def write_cppns_begin(self):
+        """
+
+        :returns: nothing
+        """
         self.skip_line(2)
         self.write_line('{0}_CPP_NAMESPACE_BEGIN'
                         .format(self.library_name.upper()))
         self.skip_line(2)
 
+
     def write_cppns_end(self):
+        """
+
+        :returns: nothing
+        """
         self.skip_line(2)
         self.write_line('{0}_CPP_NAMESPACE_END'
                         .format(self.library_name.upper()))
         self.skip_line(2)
 
+
     def write_cppns_use(self):
+        """
+
+        :returns: nothing
+        """
         self.skip_line(2)
         self.write_line('{0}_CPP_NAMESPACE_USE'
                         .format(self.library_name.upper()))
         self.skip_line(2)
 
+
     # functions c declaration
     def write_cdecl_begin(self):
+        """
+
+        :returns: nothing
+        """
         self.skip_line(2)
         self.write_line('BEGIN_C_DECLS')
         self.skip_line(2)
 
+
     def write_cdecl_end(self):
+        """
+
+        :returns: nothing
+        """
         self.skip_line(2)
         self.write_line('END_C_DECLS')
         self.skip_line(2)
 
+
     # functions swig directive
     def write_swig_begin(self):
+        """
+
+        :returns: nothing
+        """
         self.skip_line(2)
         self.write_line('#ifndef SWIG')
         self.skip_line(2)
 
+
     def write_swig_end(self):
+        """
+
+        :returns: nothing
+        """
         self.skip_line(2)
         self.write_line('#endif  /*  !SWIG  */')
         self.skip_line(2)
 
+
     # functions cplusplus directive
     def write_cpp_begin(self):
+        """
+
+        :returns: nothing
+        """
         self.skip_line(2)
         self.write_line('#ifdef __cplusplus')
         self.skip_line(2)
 
+
     def write_cpp_end(self):
+        """
+
+        :returns: nothing
+        """
         self.skip_line(2)
         self.write_line('#endif  /*  __cplusplus  */')
         self.skip_line(2)
@@ -527,6 +613,16 @@ class BaseCppFile(BaseFile.BaseFile):
                               function_name, arguments, return_type,
                               is_const=False, is_virtual=False,
                               is_abstract=False):
+        """
+
+        :param function_name:
+        :param arguments:
+        :param return_type:
+        :param is_const:
+        :param is_virtual:
+        :param is_abstract:
+        :return: nothing
+        """
         is_cpp = self.is_cpp_api
         num_arguments = len(arguments)
         if not is_cpp:
@@ -565,12 +661,12 @@ class BaseCppFile(BaseFile.BaseFile):
             saved_line = line
             line = line + arguments[0] + ', '
             # create the full line
-            for n in range(1, num_arguments-1):
+            for n in range(1, num_arguments - 1):
                 line = line + arguments[n] + ', '
             if is_cpp and is_const:
-                line = line + arguments[num_arguments-1] + ') const;'
+                line = line + arguments[num_arguments - 1] + ') const;'
             else:
-                line = line + arguments[num_arguments-1] + ');'
+                line = line + arguments[num_arguments - 1] + ');'
             # look at length and adjust
             if len(line) >= self.line_length:
                 # do something else
@@ -595,9 +691,19 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 self.write_line(line)
 
+
     def write_class_function_header(self, function_name, arguments,
                                     return_type, is_const=False,
                                     constructor_args=None):
+        """
+
+        :param function_name:
+        :param arguments:
+        :param return_type:
+        :param is_const:
+        :param constructor_args:
+        :return: nothing
+        """
         is_cpp = self.is_cpp_api
         num_arguments = len(arguments)
         if not is_cpp:
@@ -662,6 +768,15 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_comment_header(self, title_line, params, return_line,
                              object_name, additional=None):
+        """
+
+        :param title_line:
+        :param params:
+        :param return_line:
+        :param object_name:
+        :param additional:
+        :return: nothing
+        """
         if additional is None:
             additional = []
         self.open_comment()
@@ -685,7 +800,13 @@ class BaseCppFile(BaseFile.BaseFile):
             self.write_comment_line('@memberof {0}'.format(object_name))
         self.close_comment()
 
+
     def write_brief_header(self, title_line):
+        """
+
+        :param title_line:
+        :return: nothing
+        """
         self.open_single_comment(self)
         self.write_comment_line(title_line)
         self.close_comment()
@@ -694,6 +815,12 @@ class BaseCppFile(BaseFile.BaseFile):
 
 # Function for writing a function definition with comment
     def write_function_declaration(self, code, exclude=False):
+        """
+
+        :param code:
+        :param exclude:
+        :return: nothing
+        """
         if code is not None:
             if exclude:
                 self.write_doxygen_start()
@@ -722,8 +849,16 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 self.skip_line(2)
 
-    # Function for writing a function implementation
+
     def write_function_implementation(self, code, exclude=False, test=False):
+        """
+        Function for writing a function implementation
+
+        :param code:
+        :param exclude:
+        :param test:
+        :return: nothing
+        """
         if code is not None:
             if exclude:
                 self.write_doxygen_start()
@@ -762,8 +897,15 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 self.skip_line(2)
 
-    # Function for writing a function implementation
+
     def write_inline_function_implementation(self, code, exclude=False):
+        """
+        Function for writing a function implementation
+
+        :param code:
+        :param exclude:
+        :return: nothing
+        """
         if code is not None:
             if exclude:
                 self.write_doxygen_start()
@@ -793,8 +935,14 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 self.skip_line(2)
 
-    # Function for writing a function implementation
+
     def write_function_verbatim(self, code):
+        """
+        Function for writing a function implementation
+
+        :param code:
+        :return: nothing
+        """
         if code is not None:
             self.write_brief_header(code['title_line'])
             self.write_line(code['function'])
@@ -808,8 +956,14 @@ class BaseCppFile(BaseFile.BaseFile):
                 self.write_line('};')
                 self.skip_line(2)
 
-    # Function to write the header about the typecode enumeration
+
     def write_type_code_enum_header(self, package):
+        """
+        Function to write the header about the typecode enumeration
+
+        :param package:
+        :return: nothing
+        """
         up_package = SF.upper_first(package)
         self.open_comment()
         self.write_comment_line('@enum {0}{1}'
@@ -827,8 +981,18 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_comment_line('@copydetails doc_additional_typecode_details')
         self.close_comment()
 
-    # Function to write the header about the typecode enumeration
+
     def write_enum(self, name, enum_no, enum_val, enum_str, length):
+        """
+        Function to write the header about the typecode enumeration
+
+        :param name:
+        :param enum_no:
+        :param enum_val:
+        :param enum_str:
+        :param length:
+        :return: nothing
+        """
         number = len(enum_val)
         if len(enum_str) != number:
             return
@@ -865,7 +1029,15 @@ class BaseCppFile(BaseFile.BaseFile):
                     self.file_out.write('  /*!< The {1} {2} is @c \"{0}\". */\n'.format(enum_str[i], parts[0].lower(), parts[1].lower()))
         self.write_line('{0} {1};'.format('}', name))
 
+
     def write_enum_header(self, name, classname, typename):
+        """
+
+        :param name:
+        :param classname:
+        :param typename:
+        :return: nothing
+        """
         classname = SF.upper_first(classname)
         up_typename = SF.upper_first(typename)
         self.open_comment()
@@ -888,8 +1060,15 @@ class BaseCppFile(BaseFile.BaseFile):
             self.write_comment_line('@endif')
         self.close_comment()
 
-    # Function to write the header about the typecode enumeration
+
     def write_enum_strings(self, name, enum_str):
+        """
+        Function to write the header about the typecode enumeration
+
+        :param name:
+        :param enum_str:
+        :return: nothing
+        """
         number = len(enum_str)
         self.write_line('static')
         self.write_line('const char* {0}[] ='.format(name))
@@ -906,11 +1085,23 @@ class BaseCppFile(BaseFile.BaseFile):
     # FUNCTIONS FOR WRITING STANDARD FUNCTION Implementation
 
     def write_implementation(self, implementation):
+        """
+
+        :param implementation:
+        :returns: nothing
+        """
         self.write_line('{')
         self.write_nested_implementation(implementation)
         self.write_line('}')
 
+
     def write_implementation_block(self, code_type, code):
+        """
+
+        :param code_type:
+        :param code:
+        :returns: nothing
+        """
         if code_type == 'line':
             self.write_lines(code)
         elif code_type == 'comment':
@@ -928,7 +1119,13 @@ class BaseCppFile(BaseFile.BaseFile):
         elif code_type == 'try':
             self.write_try_block(code)
 
+
     def write_nested_implementation(self, implementation):
+        """
+
+        :param implementation:
+        :returns: nothing
+        """
         num = len(implementation)
         self.up_indent()
         for i in range(0, num):
@@ -946,15 +1143,33 @@ class BaseCppFile(BaseFile.BaseFile):
                     self.write_line('{0};'.format(this_impl))
         self.down_indent()
 
+
     def write_lines(self, code):
+        """
+
+        :param code:
+        :returns: nothing
+        """
         for i in range(0, len(code)):
             self.write_line('{0};'.format(code[i]))
 
+
     def write_comments(self, code):
+        """
+
+        :param code:
+        :returns: nothing
+        """
         for i in range(0, len(code)):
             self.write_line('// {0}'.format(code[i]))
 
+
     def write_if_else_block(self, code):
+        """
+
+        :param code:
+        :returns: nothing
+        """
         if_code = [code[0]]
         i = 1
         while i < len(code) and code[i] != 'else':
@@ -963,7 +1178,13 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_block('if', if_code, True)
         self.write_block('else', code[i+1:len(code)], False)
 
+
     def write_else_if_block(self, code):
+        """
+
+        :param code:
+        :returns: nothing
+        """
         if_code = [code[0]]
         i = 1
         while i < len(code) and code[i] != 'else if':
@@ -990,7 +1211,13 @@ class BaseCppFile(BaseFile.BaseFile):
                     self.write_block('else', code[i+1:len(code)], False)
                     break
 
+
     def write_try_block(self, code):
+        """
+
+        :param code:
+        :returns: nothing
+        """
         try_code = [code[0]]
         i = 1
         while i < len(code) and code[i] != 'catch':
@@ -999,7 +1226,15 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_block('try', try_code, False)
         self.write_block('catch', code[i+1:len(code)], True)
 
+
     def write_block(self, block_start, code, condition):
+        """
+
+        :param block_start:
+        :param code:
+        :param condition:
+        :returns: nothing
+        """
         if condition:
             self.write_line('{0} ({1})'.format(block_start, code[0]))
             self.write_line('{')
@@ -1017,6 +1252,10 @@ class BaseCppFile(BaseFile.BaseFile):
 
     @staticmethod
     def open_single_comment(self):
+        """
+
+        :returns: nothing
+        """
         tabs = ''
         for i in range(0, int(self.num_tabs)):
             tabs += '  '
