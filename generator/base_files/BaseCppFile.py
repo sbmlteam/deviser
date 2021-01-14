@@ -230,15 +230,23 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def expand_attributes(self, attributes):
         """
-        Function to expand the attribute information
+        Function to expand the attribute information.
 
-        :param attributes: a list of dictionaries (?? of attribute nodes?)
-        :return: the updated list of attributes
+        :param attributes: a list of dictionaries, each storing data about
+               an <attribute> node, obtained by parsing the XML file.
+        :return: the updated list of dictionaries.
+
+        The attributes passed as argument come from parseXML. This
+        function adds further information and makes sure all fields
+        have a value rather than having some dictionaries that don't
+        have a particular entry.
         """
         for i in range(0, len(attributes)):
 
+            # Get the ith dictionary in the list:
             mydict = attributes[i]
 
+            # Update dictionary's 'name' entry:
             [attrib_name, had_hyphen] = SF.remove_hyphens(mydict['name'])
             capname = SF.upper_first(attrib_name)
             if had_hyphen:
@@ -247,11 +255,13 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 mydict['name'] = SF.lower_first(capname)
 
-            # we may want the name to reflect an element
+            # We may want the name to reflect an element:
             if 'element' in mydict and mydict['element'] != '':
                 if 'xml_name' in mydict and mydict['xml_name'] != '':
                     possible_name = SF.singular(mydict['xml_name'])
-                    # need to catch case where the xmlname is lower case but comes from a camel case element
+
+                    # Need to catch the case where the xml_name is lower case
+                    # but comes from a camel case element:
                     if SF.is_camel_case(mydict['element']):
                         if possible_name == SF.remove_prefix(mydict['element']).lower():
                             capname = SF.upper_first(SF.remove_prefix(mydict['element']))
@@ -265,6 +275,8 @@ class BaseCppFile(BaseFile.BaseFile):
 
             att_type = mydict['type']
 
+            # Now update the dictionary, with the set of values according
+            # to att_type:
             if att_type in ['SId', 'SIdRef', 'IDREF', 'ID']:
                 mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
                                'CType': 'const char *', 'isNumber': False,
@@ -330,7 +342,8 @@ class BaseCppFile(BaseFile.BaseFile):
                 mydict['default'] = 'NULL'
                 if 'xml_name' in mydict and mydict['xml_name'] != '':
                     possible_name = mydict['xml_name']
-                    # need to catch case where the xmlname is lower case but comes from a camel case element
+                    # Need to catch the case where the xml_name is lower case
+                    # but comes from a camel case element:
                     if SF.is_camel_case(mydict['element']) and \
                             possible_name == SF.remove_prefix(mydict['element']).lower():
                         possible_name = SF.lower_first(mydict['capAttName'])
@@ -356,7 +369,9 @@ class BaseCppFile(BaseFile.BaseFile):
                     possible_name = mydict['xml_name']
                     if mydict['xml_name'] != mydict['pluralName']:
                         possible_name = SF.singular(mydict['xml_name'])
-                    # need to catch case where the xmlname is lower case but comes from a camel case element
+
+                    # Need to catch case where the xml_name is lower case but
+                    # comes from a camel case element:
                     if SF.is_camel_case(mydict['element']) and \
                             possible_name == SF.remove_prefix(mydict['element']).lower():
                         possible_name = SF.lower_first(mydict['capAttName'])
