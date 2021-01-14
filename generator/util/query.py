@@ -801,29 +801,34 @@ def get_typecode_enum(elements):
     return [value, strvalue, max_length]
 
 
-def get_enum(element, class_name=''):
+def get_enum(enum_element, class_name=''):
     """
     Get enumeration values.
     This function works slightly differently with enums for documentation;
     it will only have a classname for them.
 
-    :param element:
-    :param class_name:
-    :return:
+    :param enum_element: enum element to search
+    :param class_name: name of class associated with this enum
+        defaults to empty string
+    :return: a list containing two lists and optional an integer
+        first list of enum values
+        second list of enum string values
+        optional integer representing the maximum length of the enum values
+        if class_name is not supplied
     """
-    name = element['name']
+    name = enum_element['name']
     value = []
     strvalue = []
 
     if class_name == '':
         max_length = 0
         origsplittc = []
-        for i in range(0, len(element['values'])):
-            tc = element['values'][i]['name']
+        for i in range(0, len(enum_element['values'])):
+            tc = enum_element['values'][i]['name']
             if len(tc) > max_length:
                 max_length = len(tc)
             value.append(tc)
-            strvalue.append(element['values'][i]['value'])
+            strvalue.append(enum_element['values'][i]['value'])
             if i == 0:
                 origsplittc = tc.split('_')
             else:
@@ -842,10 +847,10 @@ def get_enum(element, class_name=''):
     else:
         # nameclass = class_name + strFunctions.upper_first(name)
         _ = class_name + strFunctions.upper_first(name)
-        for i in range(0, len(element['values'])):
-            tc = element['values'][i]['name']
+        for i in range(0, len(enum_element['values'])):
+            tc = enum_element['values'][i]['name']
             value.append(tc)
-            strvalue.append(element['values'][i]['value'])
+            strvalue.append(enum_element['values'][i]['value'])
         # tc = get_prefix(nameclass) + '_INVALID'
         # value.append(tc)
         # strvalue.append('invalid {0}'.format(nameclass))
