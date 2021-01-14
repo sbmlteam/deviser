@@ -2,9 +2,9 @@
 #
 # @file    query.py
 # @brief   general functions for querying objects
-# @author  Frank Bergmann
-# @author  Sarah Keating
-# @author  Matthew Gillman
+# @author  Frank T. Bergmann
+# @author  Sarah M. Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
