@@ -473,19 +473,27 @@ def get_unique_attributes(full_attributes):
     return attributes
 
 
-def get_matching_element(name, match_name, list_elements):
+def get_matching_element(fieldname, match_name, list_elements):
     """
+    Return an element from the list given where the given field for that
+    object matches the name given to match
 
-    :param name:
+    :param fieldname: the name of the dictionary field to match on
     :param match_name: the name to match on
     :param list_elements: the elements to check
     :return: the element that matches, or None if no match.
+
+    e.g.
+    list_elements is a set of class objects which all have a field named 'name'
+    get_matching_element('name', 'Geometry', list_elements)
+    wll return the class_object from the list where
+        class_object['name'] == 'Geometry'
     """
     element = None
     if not list_elements:
         return element
     for existing in list_elements:
-        if existing[name] == match_name:
+        if existing[fieldname] == match_name:
             return existing
     return element
 
