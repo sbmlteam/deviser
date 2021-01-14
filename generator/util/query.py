@@ -1409,10 +1409,27 @@ def sort_attributes(all_attributes):
 
 def is_lo_repeated(class_object):
     """
+    Is the ListOf class for this class used more than once ?
 
+    :param class_object: class_object to query
+    :return: True if the ListOf this class is used more than once,
+        False otherwise
 
-    :param class_object:
-    :return: True if
+    e.g. the following uses ListOfPoints more than once
+
+        <element name="Point" hasListOf="true" ...>
+          <attributes>
+            <attribute name="point" required="false" type="inline_lo_element"
+                element="Point" xmlName="point" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Arc" ...>
+          <attributes>
+            <attribute name="next" required="false" type="inline_lo_element"
+                element="Point" xmlName="next" abstract="false"/>
+          </attributes>
+        </element>
+
     """
     count = 0
     if 'root' not in class_object or class_object['root'] is None:
