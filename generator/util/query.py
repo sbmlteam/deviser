@@ -53,11 +53,13 @@ def has_sid_ref(attributes):
 
     e.g. the following will return True (... to represent content).
 
-    <attributes>
-         <attribute ... />
-         <attribute name="id" required="false" type="SId" abstract="false"/>
-         <attribute ... />
-    </attributes>
+    .. code-block:: xml
+
+       <attributes>
+          <attribute ... />
+          <attribute name="id" required="false" type="SId" abstract="false"/>
+          <attribute ... />
+       </attributes>
    """
     if any(attribute['type'] == 'SIdRef' for attribute in attributes):
         return True
@@ -108,13 +110,15 @@ def has_children(attributes):
 
     e.g.
 
-    <attribute name="boundaryMin" required="true" type="element"
-     element="Boundary" abstract="false"/>
+    .. code-block:: xml
+
+       <attribute name="boundaryMin" required="true" type="element"
+          element="Boundary" abstract="false"/>
 
      or
 
-     <listOfAttribute name="defaultTerm" required="true" type="element"
-      element="DefaultTerm" abstract="false" />
+       <listOfAttribute name="defaultTerm" required="true" type="element"
+          element="DefaultTerm" abstract="false" />
 
     """
     for attribute in attributes:
@@ -148,7 +152,7 @@ def get_class(name, root_object):
     """
     Return the class with the matching name from the root object.
 
-    :param name: name of th class to find
+    :param name: name of the class to find
     :param root_object: dict of all elements
     :return: the structure representing class 'name'
 
@@ -192,27 +196,34 @@ def is_inline_child(class_object):
     e.g. The parameter nodes here are not inline children
     (and child element type = 'lo_element'):
 
-    <container>
-        <listOfParameters>
-            <parameter attributes= . . . />
-            <parameter attributes= . . . />
-            . . .
-        </listOfParameters>
-    </container>
+    .. code-block:: xml
+
+       <container>
+           <listOfParameters>
+               <parameter attributes= . . . />
+               <parameter attributes= . . . />
+               . . .
+           </listOfParameters>
+       </container>
 
     but the parameter nodes here are inline children.
     (Child element type = 'inline_lo_element'):
 
-    <container>
-        <parameter attributes= . . . />
-        <parameter attributes= . . . />
-        . . .
-    </container>
+    .. code-block:: xml
+
+       <container>
+           <parameter attributes= . . . />
+           <parameter attributes= . . . />
+           . . .
+       </container>
 
     NB A single parameter node like the following has type = 'element':
-    <container>
-        <parameter attributes= . . . />
-    </container>
+
+    .. code-block:: xml
+
+       <container>
+           <parameter attributes= . . . />
+       </container>
 
     This function is called from ../code_files/CppHeaderFile.py,
     which iterates over the list returned.
@@ -652,7 +663,7 @@ def has_lo_attribute(element, attribute):
     """
     Does the element's listOf class have the attribute specified?
 
-    :param element: an elelemnt object
+    :param element: an element object
     :param attribute: an attribute object
     :return: Return True if listOf class for element has attribute specified
     """
