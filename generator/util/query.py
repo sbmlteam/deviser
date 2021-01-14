@@ -363,8 +363,8 @@ def add_concrete_to_list(root, concrete, mylist):
     Add the non-abstract class to the list mylist
 
     :param root: dict of all elements
-    :param concrete:
-    :param mylist:
+    :param concrete: class object potential representing a concrete class
+    :param mylist: list to be appended to
     :return: returns nothing
     """
     current = get_class(concrete['element'], root)
