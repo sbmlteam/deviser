@@ -513,9 +513,16 @@ def get_matching_element(fieldname, match_name, list_elements):
 
     e.g.
     list_elements is a set of class objects which all have a field named 'name'
-    get_matching_element('name', 'Geometry', list_elements)
+
+    .. code-block:: default
+
+       get_matching_element('name', 'Geometry', list_elements)
+
     will return the class_object from the list where
-        class_object['name'] == 'Geometry'
+
+    .. code-block:: default
+
+       class_object['name'] == 'Geometry'
     """
     element = None
     if not list_elements:
@@ -1111,7 +1118,7 @@ def get_typecode_format(classname, language):
     .. code-block:: default
 
         SEDML_MODEL
-=   """
+    """
     tc = language.upper()
     for i in range(0, len(classname)):
         char = classname[i]
@@ -1559,6 +1566,8 @@ def is_lo_repeated(class_object):
         False otherwise
 
     e.g. the following uses ListOfPoints more than once
+
+    .. code-block:: xml
 
         <element name="Point" hasListOf="true" ...>
           <attributes>
