@@ -2,9 +2,9 @@
 #
 # @file    query.py
 # @brief   general functions for querying objects
-# @author  Frank Bergmann
-# @author  Sarah Keating
-# @author  Matthew Gillman
+# @author  Frank T. Bergmann
+# @author  Sarah M. Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -60,7 +60,6 @@ def has_sid_ref(attributes):
           <attribute name="id" required="false" type="SId" abstract="false"/>
           <attribute ... />
        </attributes>
-
    """
     if any(attribute['type'] == 'SIdRef' for attribute in attributes):
         return True
@@ -144,7 +143,6 @@ def has_children_not_math(attributes):
     .. code-block:: xml
 
        <attribute name="math" required="true" type="element" element="ASTNode*...>
-
     """
     for i in range(0, len(attributes)):
         if attributes[i]['type'] == 'lo_element':
@@ -355,7 +353,7 @@ def get_concretes(root_object, concrete_list):
     Return a list of the actual concrete classes.
 
     :param root_object: dict of all elements
-    :param concrete_list:
+    :param concrete_list: list of the concrete classes
     :return:
     """
     concretes = []
@@ -371,7 +369,10 @@ def is_instantiated(element):
     :param element: the element object to check.
     :returns: True if instantiated
 
-    TODO add description of line with string equality check
+    TODO add description of line with string equality check;
+    what does c['element] = element['element'] compare?
+
+    Added issue #43
     """
     if element is None:
         return False
@@ -390,8 +391,8 @@ def add_concrete_to_list(root, concrete, mylist):
     Add the non-abstract class to the list `mylist`
 
     :param root: dict of all elements
-    :param concrete:
-    :param mylist:
+    :param concrete: class object potential representing a concrete class
+    :param mylist: list to be appended to
     :return: returns nothing
     """
     current = get_class(concrete['element'], root)
@@ -500,19 +501,27 @@ def get_unique_attributes(full_attributes):
     return attributes
 
 
-def get_matching_element(name, match_name, list_elements):
+def get_matching_element(fieldname, match_name, list_elements):
     """
+    Return an element from the list given where the given field for that
+    object matches the name given to match
 
-    :param name:
+    :param fieldname: the name of the dictionary field to match on
     :param match_name: the name to match on
     :param list_elements: the elements to check
     :return: the element that matches, or None if no match.
+
+    e.g.
+    list_elements is a set of class objects which all have a field named 'name'
+    get_matching_element('name', 'Geometry', list_elements)
+    will return the class_object from the list where
+        class_object['name'] == 'Geometry'
     """
     element = None
     if not list_elements:
         return element
     for existing in list_elements:
-        if existing[name] == match_name:
+        if existing[fieldname] == match_name:
             return existing
     return element
 
@@ -757,8 +766,9 @@ def get_static_extension_attribs(num_versions, lv_info):
     This facilitates the reuse of class code generation for member
     variable getters and setters.
 
-    :param num_versions:
-    :param lv_info:
+    :param num_versions: number of versions
+    :param lv_info: structure representing the level and version information
+        for each of the versions being used
     :return: list of attribute dictionaries
     """
     attribs = []
@@ -851,29 +861,34 @@ def get_typecode_enum(elements):
     return [value, strvalue, max_length]
 
 
-def get_enum(element, class_name=''):
+def get_enum(enum_element, class_name=''):
     """
     Get enumeration values.
     This function works slightly differently with enums for documentation;
     it will only have a classname for them.
 
-    :param element:
-    :param class_name:
-    :return:
+    :param enum_element: enum element to search
+    :param class_name: name of class associated with this enum
+        defaults to empty string
+    :return: a list containing two lists and optional an integer
+        first list of enum values
+        second list of enum string values
+        optional integer representing the maximum length of the enum values
+        if class_name is not supplied
     """
-    name = element['name']
+    name = enum_element['name']
     value = []
     strvalue = []
 
     if class_name == '':
         max_length = 0
         origsplittc = []
-        for i in range(0, len(element['values'])):
-            tc = element['values'][i]['name']
+        for i in range(0, len(enum_element['values'])):
+            tc = enum_element['values'][i]['name']
             if len(tc) > max_length:
                 max_length = len(tc)
             value.append(tc)
-            strvalue.append(element['values'][i]['value'])
+            strvalue.append(enum_element['values'][i]['value'])
             if i == 0:
                 origsplittc = tc.split('_')
             else:
@@ -892,10 +907,10 @@ def get_enum(element, class_name=''):
     else:
         # nameclass = class_name + strFunctions.upper_first(name)
         _ = class_name + strFunctions.upper_first(name)
-        for i in range(0, len(element['values'])):
-            tc = element['values'][i]['name']
+        for i in range(0, len(enum_element['values'])):
+            tc = enum_element['values'][i]['name']
             value.append(tc)
-            strvalue.append(element['values'][i]['value'])
+            strvalue.append(enum_element['values'][i]['value'])
         # tc = get_prefix(nameclass) + '_INVALID'
         # value.append(tc)
         # strvalue.append('invalid {0}'.format(nameclass))
@@ -1096,7 +1111,7 @@ def get_typecode_format(classname, language):
     .. code-block:: default
 
         SEDML_MODEL
-   """
+=   """
     tc = language.upper()
     for i in range(0, len(classname)):
         char = classname[i]
@@ -1197,12 +1212,12 @@ def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
     """
     Get children that are concrete instantiations
 
-    :param concretes:
+    :param concretes: list of the class_objects identified as concrete classes
     :param root: dict of all elements
-    :param reqd_only:
-    :param base_attributes:
-    :param name:
-    :return:
+    :param reqd_only: boolean to allow list to be filtered on attributes
+        that are required
+    :param base_attributes: list of attributes that are on the base class of
+        the concrete classes
 
     TODO an example would be helpful.
     """
@@ -1223,8 +1238,9 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
     Get the child elements of the class name
 
     :param name:
-    :param root:
-    :param reqd_only:
+    :param root: dict of all elements
+    :param reqd_only: boolean to allow list to be filtered on attributes
+        that are required
     :param xml_name:
     :param base_attribs:
     :return:
@@ -1392,6 +1408,7 @@ def get_child_elements(elements, lo_elements, root=None):
     return child_elements
 
 
+# NOT USED - Investigate
 def insert_list_of(original, child_name, root):
     """
     insert a listOfParent into the tree
@@ -1535,10 +1552,26 @@ def sort_attributes(all_attributes):
 
 def is_lo_repeated(class_object):
     """
+    Is the ListOf class for this class used more than once ?
 
+    :param class_object: class_object to query
+    :return: True if the ListOf this class is used more than once,
+        False otherwise
 
-    :param class_object:
-    :return: True if
+    e.g. the following uses ListOfPoints more than once
+
+        <element name="Point" hasListOf="true" ...>
+          <attributes>
+            <attribute name="point" required="false" type="inline_lo_element"
+                element="Point" xmlName="point" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Arc" ...>
+          <attributes>
+            <attribute name="next" required="false" type="inline_lo_element"
+                element="Point" xmlName="next" abstract="false"/>
+          </attributes>
+        </element>
     """
     count = 0
     if 'root' not in class_object or class_object['root'] is None:
