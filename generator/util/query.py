@@ -1352,7 +1352,6 @@ def is_number(att_type):
     <attribute name="ordinal" required="true" type="int" abstract="false"/>
     has type "int", so would return True
 
-    TODO I'm assuming this is for <attribute> nodes?
     """
     number = False
     if att_type == 'double' or att_type == 'uint' or att_type == 'int':
