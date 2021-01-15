@@ -43,7 +43,10 @@ def set_up(filename, binding):
 
 def generate_bindings_downcast_ext(filename, binding):
     """
-    Generate a downcast extension.  TODO such as?
+    Generate a downcast extension file.
+
+    :param filename: name of the file to generate
+    :param binding: string indicating which language binding to generate
     """
     all_files = set_up(filename, binding)
     all_files.write_downcast_extension()
@@ -136,7 +139,30 @@ def run_ns_test(name, binding, ext):
 
 
 # TODO I'm not sure what these different test functions are testing, exactly.
+"""
+Generating the binding files creates a number of files for each language,
+as well as swig and local specific files.
 
+Every language will generate a file to downcast extensions, namespaces and 
+specific classes. 
+
+e.g. generating csharp bindings for package 'spatial' will result in files:
+
+bindings
+    csharp
+        local-downcast-extension-spatial.i
+        local-downcast-namespaces-spatial.i
+        local-packages-spatial.i
+    swig
+        spatial-packages.h
+        spatial-packages.i
+        
+Certain languages will also require .cpp files.
+
+Testing these involves creating each of these specific files for a 
+language/package combination and having distinct functions to create and
+compare the files. 
+"""
 
 def run_test(name, binding, ext):
     """
