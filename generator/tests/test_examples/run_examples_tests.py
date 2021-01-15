@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+####################################################
+## NOTE this file is a work in progress and not part of testing as yet
+
+
 import os
 
 import sys
