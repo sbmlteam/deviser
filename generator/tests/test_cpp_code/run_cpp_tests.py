@@ -249,14 +249,16 @@ def run_plug_test(name, class_name, test_case, num):
     return fail
 
 
-def run_valid_test(name, class_name, test_case, is_ext=True):
+def run_valid_test(name, class_name, test_case, generate_error_files=True):
     """
     Run a 'validation' test.
 
     :param name: which set of tests this relates to, e.g. 'test_att'
-    :param class_name: C++ class name/start of .h and .cpp file names, e.g. 'TestSBMLError'
+    :param class_name: C++ class name/start of .h and .cpp file names,
+        e.g. 'TestSBMLError' or SBMLValidator.h
     :param test_case: brief description, e.g. 'error enumeration'
-    :param is_ext: determines which file to generate. TODO please amend this, Sarah. Thanks.
+    :param generate_error_files: determines which file to generate, Error.h and
+        ErrorTable.h if True, otherwise Validator files
     :return: number of failed tests.
     """
     filename = test_functions.set_up_test(name, class_name, test_case)
