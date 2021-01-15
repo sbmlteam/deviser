@@ -262,7 +262,7 @@ def run_valid_test(name, class_name, test_case, generate_error_files=True):
     :return: number of failed tests.
     """
     filename = test_functions.set_up_test(name, class_name, test_case)
-    if is_ext:
+    if generate_error_files:
         generate_error_header(filename)
         fail = compare_ext_headers(class_name)
         fail += compare_ext_headers('{0}Table'.format(class_name))
