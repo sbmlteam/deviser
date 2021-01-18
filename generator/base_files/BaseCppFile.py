@@ -275,145 +275,157 @@ class BaseCppFile(BaseFile.BaseFile):
 
             att_type = mydict['type']
 
-            # Now update the dictionary, with the set of values according
-            # to att_type:
-            if att_type in ['SId', 'SIdRef', 'IDREF', 'ID']:
-                mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
-                               'CType': 'const char *', 'isNumber': False,
-                               'default': '""'})
+            #### from here
 
-            elif att_type in ['UnitSId', 'UnitSIdRef']:
-                mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
-                               'CType': 'const char *', 'isNumber': False,
-                               'default': '""'})
 
-            elif att_type == 'string':
-                mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
-                               'CType': 'const char *', 'isNumber': False,
-                               'default': '""'})
+            ### to here
 
-            elif att_type == 'double':
-                mydict.update({'attType': 'double', 'attTypeCode': 'double',
-                               'CType': 'double', 'isNumber': True,
-                               'default': 'util_NaN()'})
-
-            elif att_type == 'int':
-                mydict.update({'attType': 'integer', 'attTypeCode': 'int',
-                               'CType': 'int', 'isNumber': True,
-                               'default': '{0}_INT_MAX'.format(self.cap_language)})
-
-            elif att_type == 'uint':
-                mydict.update({'attType': 'unsigned integer',
-                               'attTypeCode': 'unsigned int',
-                               'CType': 'unsigned int', 'isNumber': True,
-                               'default': '{0}_INT_MAX'.format(self.cap_language)})
-
-            elif att_type in ['bool', 'boolean']:
-                mydict.update({'attType': 'boolean', 'attTypeCode': 'bool',
-                               'CType': 'int', 'isNumber': False,
-                               'default': 'false'})
-
-            elif att_type == 'enum':
-                mydict.update({'isEnum': True, 'attType': 'enum',
-                               'isNumber': False,
-                               'default': query.get_default_enum_value(mydict)})
-                mydict['attTypeCode'] = mydict['element'] + '_t'
-                mydict['CType'] = mydict['element'] + '_t'
-
-            elif att_type == 'element':
-                el_name = mydict['element']
-                at_name = attrib_name
-                mydict['attType'] = 'element'
-                if attrib_name == 'math':
-                    if gv.is_package:
-                        mydict['attTypeCode'] = 'ASTNode*'
-                        mydict['CType'] = 'ASTNode_t*'
-                    else:
-                        mydict['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode*'
-                        mydict['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode_t*'
-                else:
-                    mydict['attTypeCode'] = mydict['element']+'*'
-                    mydict['CType'] = mydict['element']+'_t*'
-                if mydict['attTypeCode'] == 'XMLNode*' and not gv.is_package:
-                    mydict['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}*'.format(mydict['element'])
-                    mydict['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}_t*'.format(mydict['element'])
-                    # mydict['capAttName'] = SF.remove_prefix(mydict['element'])
-                mydict['isNumber'] = False
-                mydict['default'] = 'NULL'
-                if 'xml_name' in mydict and mydict['xml_name'] != '':
-                    possible_name = mydict['xml_name']
-                    # Need to catch the case where the xml_name is lower case
-                    # but comes from a camel case element:
-                    if SF.is_camel_case(mydict['element']) and \
-                            possible_name == SF.remove_prefix(mydict['element']).lower():
-                        possible_name = SF.lower_first(mydict['capAttName'])
-                    [mydict['used_child_name'], _] = SF.remove_hyphens(possible_name)
-                if SF.compare_no_case(SF.remove_prefix(el_name), at_name):
-                    mydict['children_overwrite'] = False
-                else:
-                    mydict['children_overwrite'] = True
-
-            elif att_type in ['lo_element', 'inline_lo_element']:
-                childclass = query.get_class(mydict['element'], mydict['root'])
-                if childclass and 'lo_class_name' in childclass and childclass['lo_class_name'] != '':
-                    name = childclass['lo_class_name']
-                else:
-                    name = SF.list_of_name(mydict['element'])
-                plural = SF.plural_no_prefix(mydict['element'])
-                mydict.update({'attType': 'lo_element', 'attTypeCode': name,
-                               'CType': 'ListOf_t', 'memberName': 'm' + plural,
-                               'capAttName': SF.remove_prefix(mydict['element']),
-                               'isNumber': False, 'default': 'NULL'})
-
-                if 'xml_name' in mydict and mydict['xml_name'] != '':
-                    possible_name = mydict['xml_name']
-                    if mydict['xml_name'] != mydict['pluralName']:
-                        possible_name = SF.singular(mydict['xml_name'])
-
-                    # Need to catch case where the xml_name is lower case but
-                    # comes from a camel case element:
-                    if SF.is_camel_case(mydict['element']) and \
-                            possible_name == SF.remove_prefix(mydict['element']).lower():
-                        possible_name = SF.lower_first(mydict['capAttName'])
-                    mydict['used_child_name'] = possible_name
-                if attrib_name == SF.lower_first(SF.remove_prefix(self.name)):
-                    mydict['recursive_child'] = True
-                    mydict['attTypeCode'] = '{0} *'.format(name)
-                    mydict['listOfClassName'] = name
-
-            elif att_type == 'array':
-                mydict['isArray'] = True
-                if mydict['element'] in ['Integer', 'integer']:
-                    mydict['element'] = 'int'
-                else:
-                    mydict['element'] = SF.lower_first(mydict['element'])
-                # mydict['attType'] = 'array'
-                mydict['attTypeCode'] = mydict['element'] + '*'
-                mydict['CType'] = mydict['attTypeCode']
-                # mydict['isNumber'] = False
-                # mydict['default'] = 'NULL'
-                mydict.update({'attType': 'array', 'isNumber': False,
-                               'default': 'NULL'})
-
-            elif att_type == 'vector':
-                mydict['isVector'] = True
-                if mydict['element'] in ['Integer', 'integer']:
-                    mydict['element'] = 'int'
-                else:
-                    mydict['element'] = SF.lower_first(mydict['element'])
-                mydict['attTypeCode'] = 'std::vector<{0}>'.format(mydict['element'])
-                mydict['CType'] = mydict['attTypeCode']
-                mydict.update({'attType': 'vector', 'isNumber': False, 'default': 'NULL'})
-
-            else:
-                gv.code_returned = gv.return_codes['unknown type used']
-                mydict['attType'] = 'FIXME_{0}'.format(att_type)
-                mydict['attTypeCode'] = 'FIXME_{0}'.format(att_type)
-                mydict['CType'] = 'FIXME_{0}'.format(att_type)
-                mydict['isNumber'] = False
-                mydict['default'] = 'FIXME_{0}'.format(att_type)
+            self.update_attribute_dictionary(att_type, mydict, attrib_name)
 
         return attributes
+
+
+    def update_attribute_dictionary(self, att_type, mydict, attrib_name):
+
+        # Now update the dictionary, with the set of values according
+        # to att_type:
+        if att_type in ['SId', 'SIdRef', 'IDREF', 'ID']:
+            mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
+                           'CType': 'const char *', 'isNumber': False,
+                           'default': '""'})
+
+        elif att_type in ['UnitSId', 'UnitSIdRef']:
+            mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
+                           'CType': 'const char *', 'isNumber': False,
+                           'default': '""'})
+
+        elif att_type == 'string':
+            mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
+                           'CType': 'const char *', 'isNumber': False,
+                           'default': '""'})
+
+        elif att_type == 'double':
+            mydict.update({'attType': 'double', 'attTypeCode': 'double',
+                           'CType': 'double', 'isNumber': True,
+                           'default': 'util_NaN()'})
+
+        elif att_type == 'int':
+            mydict.update({'attType': 'integer', 'attTypeCode': 'int',
+                           'CType': 'int', 'isNumber': True,
+                           'default': '{0}_INT_MAX'.format(self.cap_language)})
+
+        elif att_type == 'uint':
+            mydict.update({'attType': 'unsigned integer',
+                           'attTypeCode': 'unsigned int',
+                           'CType': 'unsigned int', 'isNumber': True,
+                           'default': '{0}_INT_MAX'.format(self.cap_language)})
+
+        elif att_type in ['bool', 'boolean']:
+            mydict.update({'attType': 'boolean', 'attTypeCode': 'bool',
+                           'CType': 'int', 'isNumber': False,
+                           'default': 'false'})
+
+        elif att_type == 'enum':
+            mydict.update({'isEnum': True, 'attType': 'enum',
+                           'isNumber': False,
+                           'default': query.get_default_enum_value(mydict)})
+            mydict['attTypeCode'] = mydict['element'] + '_t'
+            mydict['CType'] = mydict['element'] + '_t'
+
+        elif att_type == 'element':
+            el_name = mydict['element']
+            at_name = attrib_name
+            mydict['attType'] = 'element'
+            if attrib_name == 'math':
+                if gv.is_package:
+                    mydict['attTypeCode'] = 'ASTNode*'
+                    mydict['CType'] = 'ASTNode_t*'
+                else:
+                    mydict['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode*'
+                    mydict['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode_t*'
+            else:
+                mydict['attTypeCode'] = mydict['element'] + '*'
+                mydict['CType'] = mydict['element'] + '_t*'
+            if mydict['attTypeCode'] == 'XMLNode*' and not gv.is_package:
+                mydict['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}*'.format(mydict['element'])
+                mydict['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}_t*'.format(mydict['element'])
+                # mydict['capAttName'] = SF.remove_prefix(mydict['element'])
+            mydict['isNumber'] = False
+            mydict['default'] = 'NULL'
+            if 'xml_name' in mydict and mydict['xml_name'] != '':
+                possible_name = mydict['xml_name']
+                # Need to catch the case where the xml_name is lower case
+                # but comes from a camel case element:
+                if SF.is_camel_case(mydict['element']) and \
+                        possible_name == SF.remove_prefix(mydict['element']).lower():
+                    possible_name = SF.lower_first(mydict['capAttName'])
+                [mydict['used_child_name'], _] = SF.remove_hyphens(possible_name)
+            if SF.compare_no_case(SF.remove_prefix(el_name), at_name):
+                mydict['children_overwrite'] = False
+            else:
+                mydict['children_overwrite'] = True
+
+        elif att_type in ['lo_element', 'inline_lo_element']:
+            childclass = query.get_class(mydict['element'], mydict['root'])
+            if childclass and 'lo_class_name' in childclass and childclass['lo_class_name'] != '':
+                name = childclass['lo_class_name']
+            else:
+                name = SF.list_of_name(mydict['element'])
+            plural = SF.plural_no_prefix(mydict['element'])
+            mydict.update({'attType': 'lo_element', 'attTypeCode': name,
+                           'CType': 'ListOf_t', 'memberName': 'm' + plural,
+                           'capAttName': SF.remove_prefix(mydict['element']),
+                           'isNumber': False, 'default': 'NULL'})
+
+            if 'xml_name' in mydict and mydict['xml_name'] != '':
+                possible_name = mydict['xml_name']
+                if mydict['xml_name'] != mydict['pluralName']:
+                    possible_name = SF.singular(mydict['xml_name'])
+
+                # Need to catch case where the xml_name is lower case but
+                # comes from a camel case element:
+                if SF.is_camel_case(mydict['element']) and \
+                        possible_name == SF.remove_prefix(mydict['element']).lower():
+                    possible_name = SF.lower_first(mydict['capAttName'])
+                mydict['used_child_name'] = possible_name
+            if attrib_name == SF.lower_first(SF.remove_prefix(self.name)):
+                mydict['recursive_child'] = True
+                mydict['attTypeCode'] = '{0} *'.format(name)
+                mydict['listOfClassName'] = name
+
+        elif att_type == 'array':
+            mydict['isArray'] = True
+            if mydict['element'] in ['Integer', 'integer']:
+                mydict['element'] = 'int'
+            else:
+                mydict['element'] = SF.lower_first(mydict['element'])
+            # mydict['attType'] = 'array'
+            mydict['attTypeCode'] = mydict['element'] + '*'
+            mydict['CType'] = mydict['attTypeCode']
+            # mydict['isNumber'] = False
+            # mydict['default'] = 'NULL'
+            mydict.update({'attType': 'array', 'isNumber': False,
+                           'default': 'NULL'})
+
+        elif att_type == 'vector':
+            mydict['isVector'] = True
+            if mydict['element'] in ['Integer', 'integer']:
+                mydict['element'] = 'int'
+            else:
+                mydict['element'] = SF.lower_first(mydict['element'])
+            mydict['attTypeCode'] = 'std::vector<{0}>'.format(mydict['element'])
+            mydict['CType'] = mydict['attTypeCode']
+            mydict.update({'attType': 'vector', 'isNumber': False, 'default': 'NULL'})
+
+        else:
+            gv.code_returned = gv.return_codes['unknown type used']
+            mydict['attType'] = 'FIXME_{0}'.format(att_type)
+            mydict['attTypeCode'] = 'FIXME_{0}'.format(att_type)
+            mydict['CType'] = 'FIXME_{0}'.format(att_type)
+            mydict['isNumber'] = False
+            mydict['default'] = 'FIXME_{0}'.format(att_type)
+
+        #return
 
 
     def sort_name_mismatches(self):
