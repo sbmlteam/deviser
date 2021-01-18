@@ -293,20 +293,21 @@ class BaseCppFile(BaseFile.BaseFile):
 
         # Now update the dictionary, with the set of values according
         # to att_type:
-        if att_type in ['SId', 'SIdRef', 'IDREF', 'ID']:
+        if att_type in ['SId', 'SIdRef', 'IDREF', 'ID', 'UnitSId',
+                        'UnitSIdRef', 'string']:
             mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
                            'CType': 'const char *', 'isNumber': False,
                            'default': '""'})
 
-        elif att_type in ['UnitSId', 'UnitSIdRef']:
-            mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
-                           'CType': 'const char *', 'isNumber': False,
-                           'default': '""'})
+        # elif att_type in ['UnitSId', 'UnitSIdRef']:
+        #    mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
+        #                   'CType': 'const char *', 'isNumber': False,
+        #                   'default': '""'})
 
-        elif att_type == 'string':
-            mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
-                           'CType': 'const char *', 'isNumber': False,
-                           'default': '""'})
+        # elif att_type == 'string':
+        #    mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
+        #                   'CType': 'const char *', 'isNumber': False,
+        #                   'default': '""'})
 
         elif att_type == 'double':
             mydict.update({'attType': 'double', 'attTypeCode': 'double',
