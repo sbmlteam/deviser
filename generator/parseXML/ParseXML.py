@@ -362,16 +362,25 @@ class ParseXML():
 
 
     @staticmethod
-    def get_loclass_name_value(self, node, name):
-        '''
-        TODO: resolve issue #16 before documenting this function.
-        '''
-        xml_loclass_name = ''
-        temp = self.get_value(node, name)
-        # we expect this to be camelCase starting with lower
+
+    def get_loclass_name_value(self, node):
+        """
+        Get the name of the listOfClass from an <element> node
+
+        :param node: the <element> node
+        :return: returns the listOf classname, ensuring it starts in upper-case.
+                 Else returns ``.
+
+        e.g. Given a node like:
+        <element name="QualitativeSpecies"  hasListOf="true"  .../>
+               returns "ListOfQualitativeSpecies"
+        """
+        loclass_name = ''
+        temp = self.get_value(node, 'listOfClassName')
+        # we expect this to be camelCase starting with an uppercase
         if temp is not None:
-            xml_loclass_name = strFunctions.upper_first(temp)  # See issue 16
-        return xml_loclass_name
+            loclass_name = strFunctions.upper_first(temp)
+        return loclass_name
 
     @staticmethod
     def get_add_code_value(self, node, name):
@@ -791,7 +800,7 @@ class ParseXML():
                 self.get_element_name_value(self, node, 'listOfName')
             # Some element nodes have a listOfClassName attribute node:
             lo_class_name = \
-                self.get_loclass_name_value(self, node, 'listOfClassName')
+                self.get_loclass_name_value(self, node)
             min_lo_children = self.get_lo_min_children(self, node)
             add_decls = self.get_add_code_value(self, node, 'additionalDecls')
             add_defs = self.get_add_code_value(self, node, 'additionalDefs')

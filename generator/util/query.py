@@ -2,8 +2,9 @@
 #
 # @file    query.py
 # @brief   general functions for querying objects
-# @author  Frank Bergmann
-# @author  Sarah Keating
+# @author  Frank T. Bergmann
+# @author  Sarah M. Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -37,31 +38,60 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+"""General functions for querying objects"""
+
 from . import strFunctions
 
 
-# return True is any of the attributes are of type SIdRef
 def has_sid_ref(attributes):
+    """
+    Iterate over dictionaries (representing attribute nodes) to see if
+    any attribute nodes are of type SIdRef
+
+    :param attributes: structure containing attribute dictionaries
+    :return: Return True if any of the <attribute> nodes are of type SIdRef
+
+    e.g. the following will return True (... to represent content).
+
+    .. code-block:: xml
+
+       <attributes>
+          <attribute ... />
+          <attribute name="id" required="false" type="SId" abstract="false"/>
+          <attribute ... />
+       </attributes>
+   """
     if any(attribute['type'] == 'SIdRef' for attribute in attributes):
         return True
     return False
 
 
-# return a set of attributes that are of type SIdRef
 def get_sid_refs(attributes, unit=False):
+    """
+    Return a set of attributes that are of type SIdRef or UnitSidRef
+
+    :param attributes: The set of attributes we wish to select from.
+    :param unit: True to match on 'UnitSidRef', otherwise match on 'SidRef'.
+    :return: the list of attributes which match.
+    """
     sid_refs = []
-    if not unit:
-        match = 'SIdRef'
-    else:
+    if unit:
         match = 'UnitSIdRef'
+    else:
+        match = 'SIdRef'
     for i in range(0, len(attributes)):
         if strFunctions.compare_no_case(attributes[i]['type'], match):
             sid_refs.append(attributes[i])
     return sid_refs
 
 
-# return a set of attributes that are SIdRefs for the given class
 def get_sid_refs_for_class(working_class):
+    """
+    Return a set of attributes that are SIdRefs for the given class.
+
+    :param working_class: TODO I'm not sure of this one.
+    :return: the list of selected attributes, if any.
+    """
     sid_refs = []
     child_element = get_class(working_class['element'],
                               working_class['root'])
@@ -70,17 +100,45 @@ def get_sid_refs_for_class(working_class):
     return sid_refs
 
 
-# return True is any of the attributes refer to elements
 def has_children(attributes):
+    """
+    Return True if any of the attributes refer to elements
+    (i.e. 'type' is 'element', 'lo_element' or 'inline_lo_element')
+
+    :param attributes: the attributes to check
+    :return: True if at least one type match
+
+    e.g.
+
+    .. code-block:: xml
+
+       <attribute name="boundaryMin" required="true" type="element"
+          element="Boundary" abstract="false"/>
+
+     or
+
+       <listOfAttribute name="defaultTerm" required="true" type="element"
+          element="DefaultTerm" abstract="false" />
+
+    """
     for attribute in attributes:
         att_type = attribute['type']
-        if att_type == 'element' or att_type == 'lo_element' or att_type == 'inline_lo_element':
+        if att_type in ['element', 'lo_element', 'inline_lo_element']:
             return True
     return False
 
 
-# return True is any of the attributes refer to elements but not math
 def has_children_not_math(attributes):
+    """
+    Return True if any of the attributes refer to elements but *not* math
+
+    :param attributes: the <attribute> nodes we want to check
+    :return: see above.
+
+    e.g. this attribute node would not match:
+    <attribute name="math" required="true" type="element" element="ASTNode*...
+
+    """
     for i in range(0, len(attributes)):
         if attributes[i]['type'] == 'lo_element':
             return True
@@ -90,23 +148,86 @@ def has_children_not_math(attributes):
     return False
 
 
-# return the class with the matching name from the root object
 def get_class(name, root_object):
+    """
+    Return the class with the matching name from the root object.
+
+    :param name: name of the class to find
+    :param root_object: dict of all elements
+    :return: the structure representing class 'name'
+
+    The get_class function is designed to find the specific 'name'
+    of an sbml class within the root_object, which will be the big
+    structure created by parseXML.
+
+    """
+    if root_object is None:
+        return None
+    if root_object['baseElements'] is None:
+        return None
+
     if name.startswith('listOf') or name.startswith('ListOf'):
         name = strFunctions.singular(name[6:])
     else:
         name = strFunctions.upper_first(name)
-    if root_object is None:
-        return None
-    elif root_object['baseElements'] is None:
-        return None
-    else:
-        for i in range(0, len(root_object['baseElements'])):
-            if name == root_object['baseElements'][i]['name']:
-                return root_object['baseElements'][i]
+
+    for i in range(0, len(root_object['baseElements'])):
+        if name == root_object['baseElements'][i]['name']:
+            return root_object['baseElements'][i]
 
 
 def is_inline_child(class_object):
+    """
+    If this object is an 'inline child', get list of inline parents.
+
+    :param class_object: structure representing a class
+    :return: list of parents objects for which this class is an inline child
+
+    According to the manual:
+    On occasion an element may contain multiple children of the same type
+    which are not specified as being within a listOf element. From a code
+    point of view it is easier to consider these children as being within
+    a listOf element as this provides functionality to access and
+    manipulate potentially variable numbers of child elements.
+    The 'inline_lo_element' type allows the user to specify that there are
+    multiple instances of the same child element but that these do not occur
+    within a specified ListOf element.
+
+    e.g. The parameter nodes here are not inline children
+    (and child element type = 'lo_element'):
+
+    .. code-block:: xml
+
+       <container>
+           <listOfParameters>
+               <parameter attributes= . . . />
+               <parameter attributes= . . . />
+               . . .
+           </listOfParameters>
+       </container>
+
+    but the parameter nodes here are inline children.
+    (Child element type = 'inline_lo_element'):
+
+    .. code-block:: xml
+
+       <container>
+           <parameter attributes= . . . />
+           <parameter attributes= . . . />
+           . . .
+       </container>
+
+    NB A single parameter node like the following has type = 'element':
+
+    .. code-block:: xml
+
+       <container>
+           <parameter attributes= . . . />
+       </container>
+
+    This function is called from ../code_files/CppHeaderFile.py,
+    which iterates over the list returned.
+    """
     inline_parents = []
     parents = get_inline_parents(class_object)
     for parent in parents:
@@ -121,7 +242,18 @@ def is_inline_child(class_object):
             inline_parents.append(parent)
     return inline_parents
 
+
+# Sarah added issue: Sort out is_inline_child and get_inline_parents #35
+
+
 def get_inline_parents(class_object):
+    """
+    TODO I'm guessing an inline parent is the node enclosing
+    a set of inline children, as in the last function?
+
+    :param class_object:
+    :return:
+    """
     parents = []
     if class_object['is_list_of']:
         name = class_object['lo_child']
@@ -133,16 +265,36 @@ def get_inline_parents(class_object):
                 parents.append(element['name'])
     return parents
 
-# return the parent class of this class
-# if it is not given we assume it is a child of a plugin
-# and get the base of the plugin
+
 def get_parent_class(class_object):
+    """
+    NB Open Github Issue: Revise query get_parent_class code #36
+
+    Return the parent class of this class.
+    if it is not given we assume it is a child of a plugin
+    and get the base of the plugin.
+
+    :param class_object: the object representing the class.
+    :return: parent class, if found.
+
+    e.g. the 'unit' attribute is an element of type'Unit'
+    so get_parent_class(class_object_for Unit) would return 'ArrayChild'
+
+    <element name="ArrayChild" typeCode="SBML_TEST_ARRAYCHILD" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="arrayChild">
+      <attributes>
+        <attribute name="unit" required="false" type="element" element="Unit" abstract="false"/>
+      </attributes>
+    </element>
+
+    """
     parent = ''
     if class_object['is_list_of']:
         name = class_object['lo_child']
     else:
         name = class_object['name']
+
     found = False
+
     if 'parent' in class_object:
         parent = class_object['parent']
     else:
@@ -151,40 +303,60 @@ def get_parent_class(class_object):
             base = plugin['sbase']
             for extension in plugin['lo_extension']:
                 if extension['name'] == name:
-                    parent = base
-                    found = True
-                    break
+                    return base
+                    # parent = base
+                    # found = True
+                    # break
             if not found:
                 for extension in plugin['extension']:
                     if extension['name'] == name:
-                        parent = base
-                        found = True
-                        break
-            if found:
-                break
+                        return base
+                        # parent = base
+                        # found = True
+                        # break
+            # if found:
+            #    break
+
     if not found and len(parent) == 0:
         for element in class_object['root']['baseElements']:
             if element['name'] != name:
                 for attrib in element['attribs']:
                     if attrib['element'] == name:
-                        parent = element['name']
-                        found = True
-                        break
-            if found:
-                break
+                        return element['name']
+                        # parent = element['name']
+                        # found = True
+                        # break
+            # if found:
+            #    break
+
     return parent
 
 
-# return a list of the actual concrete classes
 def get_concretes(root_object, concrete_list):
+    """
+    Return a list of the actual concrete classes.
+
+    :param root_object: dict of all elements
+    :param concrete_list: list of the concrete classes
+    :return:
+    """
     concretes = []
     for c in concrete_list:
         add_concrete_to_list(root_object, c, concretes)
     return concretes
 
 
-# basic function that checks whether the given element is instantiated
 def is_instantiated(element):
+    """
+    Basic function that checks whether the given element is instantiated.
+
+    :param element: the element object to check.
+    :returns: True if instantiated
+
+    TODO add description of line with string equality check
+    what does c['element] = element['element'] compare
+    Added issue #43
+    """
     if element is None:
         return False
     if 'concrete' not in element:
@@ -197,12 +369,20 @@ def is_instantiated(element):
     return False
 
 
-# add the non-abstract class to the list
 def add_concrete_to_list(root, concrete, mylist):
+    """
+    Add the non-abstract class to the list mylist
+
+    :param root: dict of all elements
+    :param concrete: class object potential representing a concrete class
+    :param mylist: list to be appended to
+    :return: returns nothing
+    """
     current = get_class(concrete['element'], root)
 
     if current is not None:
-        # sometimes the baseclass is also instantiated (the ui calls the property isbaseclass)
+        # sometimes the baseclass is also instantiated
+        # (the ui calls the property isbaseclass)
         if current['abstract'] is False or is_instantiated(current):
             concrete['typecode'] = current['typecode']
             found = False
@@ -210,12 +390,13 @@ def add_concrete_to_list(root, concrete, mylist):
             while not found and i < len(mylist):
                 if mylist[i]['element'] == concrete['element']:
                     found = True
-                i+=1
+                i += 1
             if not found:
                 mylist.append(concrete)
         else:
             for c in current['concrete']:
-                # full comparison too expensive ... causes stackoverflow, just compare the element name
+                # full comparison too expensive ... causes stackoverflow,
+                # just compare the element name
                 if c['element'] != concrete['element']:
                     add_concrete_to_list(root, c, mylist)
                 else:
@@ -225,14 +406,19 @@ def add_concrete_to_list(root, concrete, mylist):
                     while not found and i < len(mylist):
                         if mylist[i]['element'] == concrete['element']:
                             found = True
-                        i+=1
+                        i += 1
                     if not found:
                         mylist.append(concrete)
 
 
-# return a set of attributes with any elements/lo_elements removed
-# populating the version information
 def separate_attributes(full_attributes):
+    """
+    Return a set of attributes with any elements/lo_elements removed,
+    populating the version information.
+
+    :param full_attributes:
+    :return: the filtered list of attributes
+    """
     attributes = []
     for i in range(0, len(full_attributes)):
         att_type = full_attributes[i]['attType']
@@ -247,8 +433,14 @@ def separate_attributes(full_attributes):
     return attributes
 
 
-# return attributes for the given version only
 def get_version_attributes(attributes, version):
+    """
+    Return attributes for the given version only.
+
+    :param attributes: list of attribute objects.
+    :param version: the version we are matching on
+    :return: the list of matching attributes
+    """
     ver_attribs = []
     for i in range(0, len(attributes)):
         att_type = attributes[i]['attType']
@@ -258,18 +450,29 @@ def get_version_attributes(attributes, version):
     return ver_attribs
 
 
-# return attributes for the given version only
 def get_version_elements(elements, version):
-    ver_attribs = []
+    """
+    Return elements for the given version only.
+
+    :param elements: list of element objects.
+    :param version: the version we are matching on
+    :return: the list of matching elements
+    """
+    ver_elems = []
     for i in range(0, len(elements)):
         if elements[i]['version'] == version:
-            ver_attribs.append(elements[i])
-    return ver_attribs
+            ver_elems.append(elements[i])
+    return ver_elems
 
 
-# return a set of unique attributes
-#  any with multiple versions appear only once
 def get_unique_attributes(full_attributes):
+    """
+    Return a set of unique attributes.
+    Any with multiple versions appear only once.
+
+    :param full_attributes: list of all attribute objects
+    :return: returns the list of unique attributes.
+    """
     attributes = []
     for i in range(0, len(full_attributes)):
         name = full_attributes[i]['name']
@@ -281,33 +484,94 @@ def get_unique_attributes(full_attributes):
     return attributes
 
 
-def get_matching_element(name, match_name, list_elements):
+def get_matching_element(fieldname, match_name, list_elements):
+    """
+    Return an element from the list given where the given field for that
+    object matches the name given to match
+
+    :param fieldname: the name of the dictionary field to match on
+    :param match_name: the name to match on
+    :param list_elements: the elements to check
+    :return: the element that matches, or None if no match.
+
+    e.g.
+    list_elements is a set of class objects which all have a field named 'name'
+    get_matching_element('name', 'Geometry', list_elements)
+    wll return the class_object from the list where
+        class_object['name'] == 'Geometry'
+    """
     element = None
     if not list_elements:
         return element
     for existing in list_elements:
-        if existing[name] == match_name:
-            element = existing
+        if existing[fieldname] == match_name:
+            return existing
     return element
 
 
-# return True is any of the attributes are of type array
 def has_array(attributes):
+    """
+    Check if any of the attributes represented in a list are of type 'array'.
+
+    :param attributes: list representing the attribute nodes to check
+    :return: return True if any of the attributes are of type 'array'.
+
+    e.g. if the following attribute node was represented in the list,
+    we would return True:
+
+    <attribute name="samples" required="true" type="array"
+     element="int" abstract="false"/>
+    """
     if any(attribute['type'] == 'array' for attribute in attributes):
         return True
     return False
 
 
-# return True is any of the attributes are of type vector
 def has_vector(attributes):
+    """
+    Check if any of the attributes represented in a list are of type 'vector'.
+
+    :param attributes: list representing the attribute nodes to check
+    :return: Return True if any of the attributes are of type 'vector'
+
+    e.g. if the following attribute node was represented in the list,
+    we would return True:
+
+    <attribute name="value" required="false" type="vector"
+     element="double" abstract="false"/>
+    """
     if any(attribute['type'] == 'vector' for attribute in attributes):
         return True
     return False
 
 
-# return True is any of the attributes have another package
-# and a listt of packages
 def has_other_packages(attributes):
+    """
+    Check to see if a list of attributes have other packages.
+
+    :param attributes: the list to check
+    :return: Tuple with True if any of the attributes have another package,
+             plus a list of packages (empty if False).
+
+    e.g. the following entries would result in a return of
+        [True, ['layout']]
+
+    <elements>
+        <element name="LineEnding" ...>
+          <attributes>
+            <attribute name="boundingBox" required="false" type="element"
+                    element="BoundingBox" abstract="false"/>
+          </attributes>
+        </element>
+    ...
+    </elements>
+    <mappings>
+        <mapping name="BoundingBox" package="layout"/>
+    </mappings>
+
+    Note: the additional attribute information is populated by the
+    BaseCppFile expand_class and expand_attributes functions
+    """
     list_pkgs = []
     has_pack = False
     for attribute in attributes:
@@ -317,22 +581,73 @@ def has_other_packages(attributes):
     return [has_pack, list_pkgs]
 
 
-# return True is the attribute is saved as a string
 def is_string(attribute):
+    """
+    Is the attribute of Type string?
+
+    :param attribute: attribute to check
+    :return: return True if the attribute is of Type string
+    """
     if attribute['attType'] == 'string':
         return True
     return False
 
 
-# return True is the attribute has an isSet member variable
 def has_is_set_member(attribute):
+    """
+    return True if the attribute has an isSet member variable.
+
+    :param attribute: an attribute object
+    :return: True if attribute has isSet member variable, False otherwise
+
+    e.g. in order to determine in code whether an attribute of type
+    boolean or number has been explicitly set, the variable, say 'constant',
+    is stored with an additional isSetConstant variable of type boolean
+    that can be queried to determine if the variable value has been
+    explicitly set
+
+    Consider Foo class with member variables 'constant' (boolean) and
+    'number' (unsigned int  defaulting to 0)
+
+    <foo/>
+
+    would result in variables:
+        mConstant = False
+        mIsSetConstant = False
+        mNumber = 0
+        mIsSetNumber = False
+
+    <foo constant="false" number="0"/>
+
+    would result in variables:
+        mConstant = False
+        mIsSetConstant = True
+        mNumber = 0
+        mIsSetNumber = True
+
+    Deviser creates an isSetXYZ variable for any attribute that
+    is a number or a boolean
+    """
     if attribute['isNumber'] or attribute['attType'] == 'boolean':
         return True
     return False
 
 
-# return True if the element has the attribute specified
 def has_attribute(element, attribute):
+    """
+    Does this element have this particular attribute?
+
+    :param element: element node object to check.
+    :param attribute: the attribute to check
+    :return: return True if the element has the attribute specified
+
+    e.g. if the element represented this node:
+
+    <element name="FooRule" typeCode="SBML_FOO_RULE" ... >
+
+    and we wanted to know if it had the typeCode attribute,
+    we would return True.
+    """
     if element is None:
         return False
     elif element['attribs'] is None:
@@ -344,8 +659,14 @@ def has_attribute(element, attribute):
     return False
 
 
-# return True if the listOf class for element has the attribute specified
 def has_lo_attribute(element, attribute):
+    """
+    Does the element's listOf class have the attribute specified?
+
+    :param element: an element object
+    :param attribute: an attribute object
+    :return: Return True if listOf class for element has attribute specified
+    """
     if element is None:
         return False
     elif isV2BaseAttribute(element, attribute):
@@ -358,7 +679,15 @@ def has_lo_attribute(element, attribute):
                 return True
     return False
 
+
 def isV2BaseAttribute(element, attribute):
+    """
+    Is the base version of this element equal to 2 ?
+
+    :param element: an element object
+    :param attribute: an attribute object
+    :return: True if base_version is 2, False otherwise.
+    """
     if attribute != 'id' and attribute != 'name':
         return False
     if 'root' in element:
@@ -368,22 +697,41 @@ def isV2BaseAttribute(element, attribute):
     return False
 
 
-# works out if any classes use this element
-# with a different name
 def overwrites_name(root, name):
+    """
+    Works out if the xml name used for this attribute is different from the
+    name used in the dict objects.
+
+    :param root_object: dict of all elements
+    :param name: the name of the attribute to check
+    :return: True if the attribute has a different xml name, False otherwise
+    """
     if root is None:
         return False
     overwrites = False
     unprefixed_name = strFunctions.remove_prefix(name)
     for element in root['baseElements']:
         for attrib in element['attribs']:
-            if attrib['element'] == unprefixed_name and attrib['type'] != 'SIdRef':
+            if attrib['element'] == unprefixed_name and \
+                    attrib['type'] != 'SIdRef':
                 if not strFunctions.compare_no_case(name, attrib['xml_name']):
                     overwrites = True
     return overwrites
 
 
 def get_static_extension_attribs(num_versions, lv_info):
+    """
+    Creates a set of attributes that will be used with a
+    PkgExtension class when generating the code.
+    This facilitates the reuse of class code generation for member
+    variable getters and setters.
+
+
+    :param num_versions: number of versions
+    :param lv_info: structure representing the level and version information
+        for each of the versions being used
+    :return: list of attribute dictionaries
+    """
     attribs = []
     att = dict({'name': 'packageName',
                 'capAttName': 'PackageName',
@@ -411,20 +759,47 @@ def get_static_extension_attribs(num_versions, lv_info):
     attribs.append(att)
     for i in range(0, num_versions):
         this_lv = lv_info[i]
-        name = 'xmlnsL{1}V{2}V{0}'.format(this_lv['pkg_version'], this_lv['core_level'], this_lv['core_version'])
+        name = 'xmlnsL{1}V{2}V{0}'.format(this_lv['pkg_version'],
+                                          this_lv['core_level'],
+                                          this_lv['core_version'])
         cap_name = strFunctions.upper_first(name)
         att = dict({'name': name,
                     'capAttName': cap_name,
                     'attTypeCode': 'std::string&',
                     'attType': 'string',
-                    'memberName': [this_lv['pkg_version'], this_lv['core_level'], this_lv['core_version']]})
+                    'memberName': [this_lv['pkg_version'],
+                                   this_lv['core_level'],
+                                   this_lv['core_version']]})
         attribs.append(att)
 
     return attribs
 
 
-# get an enumeration of the typecodes of the elements
 def get_typecode_enum(elements):
+    """
+    Get an enumeration of the typecodes of the elements
+
+    :param elements: representation of element nodes to enumerate.
+    :return: tuple (see example)
+
+    e.g. given the following XML elements, represented in object form
+    by 'elements' parameter:
+
+    <element name="Algebraic" typeCode="SBML_FOO_ALGEBRAIC"
+             hasListOf="false" baseClass="FooRule" abstract="false"/>
+    <element name="FooRate" typeCode="SBML_FOO_FOORATE" hasListOf="false"
+             baseClass="Assignment" abstract="false" elementName="rate"/>
+    <element name="FooAssignment" typeCode="SBML_FOO_FOOASSIGNMENT"
+             hasListOf="false" baseClass="Assignment" abstract="false"
+             elementName="assignment"/>
+
+    would return [value, strvalue, max_length] with contents:
+
+    value = ["SBML_FOO_ALGEBRAIC", "SBML_FOO_FOORATE",
+             "SBML_FOO_FOOASSIGNMENT"]
+    strvalue = ["Algebraic", "FooRate", "FooAssignment"]
+    max_length = length of longest typecode = 22 (characters).
+    """
     value = []
     strvalue = []
     max_length = 0
@@ -437,22 +812,34 @@ def get_typecode_enum(elements):
     return [value, strvalue, max_length]
 
 
-# get enumeration values
-def get_enum(element, class_name = ''):
-    # this function works slightly differently with enums for documentation
-    # it will only have a classname for them
+def get_enum(enum_element, class_name=''):
+    """
+    Get enumeration values.
+    This function works slightly differently with enums for documentation;
+    it will only have a classname for them.
+
+    :param enum_element: enum element to search
+    :param class_name: name of class associated with this enum
+        defaults to empty string
+    :return: a list containing two lists and optional an integer
+        first list of enum values
+        second list of enum string values
+        optional integer representing the maximum length of the enum values
+        if class_name is not supplied
+    """
+    name = enum_element['name']
+    value = []
+    strvalue = []
+
     if class_name == '':
-        name = element['name']
-        value = []
-        strvalue = []
         max_length = 0
         origsplittc = []
-        for i in range(0, len(element['values'])):
-            tc = element['values'][i]['name']
+        for i in range(0, len(enum_element['values'])):
+            tc = enum_element['values'][i]['name']
             if len(tc) > max_length:
                 max_length = len(tc)
             value.append(tc)
-            strvalue.append(element['values'][i]['value'])
+            strvalue.append(enum_element['values'][i]['value'])
             if i == 0:
                 origsplittc = tc.split('_')
             else:
@@ -469,22 +856,53 @@ def get_enum(element, class_name = ''):
         # strvalue.append('invalid {0}'.format(name))
         return [value, strvalue, max_length]
     else:
-        name = element['name']
-        nameclass = class_name + strFunctions.upper_first(name)
-        value = []
-        strvalue = []
-        for i in range(0, len(element['values'])):
-            tc = element['values'][i]['name']
+        # nameclass = class_name + strFunctions.upper_first(name)
+        _ = class_name + strFunctions.upper_first(name)
+        for i in range(0, len(enum_element['values'])):
+            tc = enum_element['values'][i]['name']
             value.append(tc)
-            strvalue.append(element['values'][i]['value'])
+            strvalue.append(enum_element['values'][i]['value'])
         # tc = get_prefix(nameclass) + '_INVALID'
         # value.append(tc)
         # strvalue.append('invalid {0}'.format(nameclass))
         return [value, strvalue]
 
 
-
 def get_default_enum_value(attribute):
+    """
+    Returns the default/invalid value for the enumeration of
+    values for the given attribute.
+
+    :param attribute: attribute dict for required
+    :return: string representing the invalid enum value or 'INVALID' if
+    the attribute dict does not have an element name corresponding to a
+    listed enumeration.
+
+    e.g. An attribute
+        <attribute name="transitionEffect" required="true" type="enum"
+                    element="TransitionOutputEffect" abstract="false" />
+
+    uses values from the enumeration specified
+        <enum>
+          <enum name="TransitionOutputEffect">
+          <enumValues>
+            <enumValue name="OUTPUT_TRANSITION_EFFECT_PRODUCTION"
+                        value="production" />
+            <enumValue name="OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL"
+                        value="assignment level" />
+          </enumValues>
+        </enum>
+
+    Processing of the XML should have added a further value to the
+    enum equivalent to
+            <enumValue name="OUTPUT_TRANSITION_INVALID"
+                        value="invalid TransitionOutputEffect value" />
+
+    The function returns the name of the invalid enumeration value.
+
+    get_default_enum_value(attribute dict for transitionEffect)
+    will return string 'OUTPUT_TRANSITION_INVALID'
+    """
     default = 'INVALID'
     name = attribute['element']
     enums = attribute['root']['enums']
@@ -496,6 +914,44 @@ def get_default_enum_value(attribute):
 
 
 def get_first_enum_value(attribute):
+    """
+    Returns the first value in the list for the enumeration of values
+    for the given attribute.
+
+    :param attribute: attribute dict for required
+    :return: string representing the first enum value or '' if
+    the attribute dict does not have an element name corresponding to a
+    listed enumeration.
+
+    e.g. An attribute
+        <attribute name="transitionEffect" required="true" type="enum"
+                    element="TransitionOutputEffect" abstract="false" />
+
+    uses values from the enumeration specified
+        <enum>
+          <enum name="TransitionOutputEffect">
+          <enumValues>
+            <enumValue name="OUTPUT_TRANSITION_EFFECT_PRODUCTION"
+                        value="production" />
+            <enumValue name="OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL"
+                        value="assignment level" />
+          </enumValues>
+        </enum>
+
+    Processing of the XML should have added a further value to the
+    enum equivalent to
+            <enumValue name="OUTPUT_TRANSITION_INVALID"
+                        value="invalid TransitionOutputEffect value" />
+
+    because as part of the parseXML and then further parsing of the results
+    the code will automatically add an INVALID value to any enumeration
+
+    The function returns the name of the first listed enumeration value.
+
+    get_First_enum_value(attribute dict for transitionEffect)
+    will return string 'OUTPUT_TRANSITION_EFFECT_PRODUCTION'
+
+    """
     value = ''
     name = attribute['element']
     enums = attribute['root']['enums']
@@ -505,27 +961,49 @@ def get_first_enum_value(attribute):
             break
     return value
 
+# commented out as is not used but may be needed so leave for now
+# def get_prefix(name):
+#     """
+#     TODO revisit
+#
+#     :param name:
+#     :return:
+#     """
+#     prefix = ''
+#     first = True
+#     for i in range(0, len(name)):
+#         char = name[i]
+#         if char.isupper():
+#             if first:
+#                 prefix += char
+#                 first = False
+#             else:
+#                 prefix += '_{0}'.format(char)
+#         else:
+#             prefix += char.upper()
+#     return prefix
+#
 
-def get_prefix(name):
-    prefix = ''
-    first = True
-    for i in range(0, len(name)):
-        char = name[i]
-        if char.isupper():
-            if first:
-                prefix += char
-                first = False
-            else:
-                prefix += '_{0}'.format(char)
-        else:
-            prefix += char.upper()
-    return prefix
+def get_typecode_format(classname, language):
+    """
+    Formats the typecode for the class in a standard format:
+    uppercase language followed by '_' followed by uppercase classname
+    with any classnames using camelcase separated by '_'
+    where class name contains camelcase
 
+    :param classname: name of the class
+    :param language: name of the XML language being targeted
+    :return: string representing the formatted typecode
 
-def get_typecode_format(name, language):
+    e.g.
+    get_typecode_format(model, sbml) returns SBML_MODEL
+    get_typecode_format(speciesReference, sbml) returns SBML_SPECIES_REFERENCE
+    get_typecode_format(model, sedml) returns SEDML_MODEL
+
+   """
     tc = language.upper()
-    for i in range(0, len(name)):
-        char = name[i]
+    for i in range(0, len(classname)):
+        char = classname[i]
         if char.isupper():
             tc += '_'
         tc += char.upper()
@@ -533,6 +1011,28 @@ def get_typecode_format(name, language):
 
 
 def get_max_length(elements, attribute):
+    """
+    Get the max length of the attribute in a list of elements
+
+    :param elements: list of objects representing element nodes.
+    :param attribute: an attribute in those nodes
+
+    e.g. given the following elements:
+
+    <element name="Algebraic" typeCode="SBML_FOO_ALGEBRAIC" ... />
+    <element name="FooRate" typeCode="SBML_FOO_FOORATE" ... />
+    <element name="FooAssignment" typeCode="SBML_FOO_FOOASSIGNMENT" .../>
+
+    a function call like: width = query.get_max_length(elements, 'name')
+
+    will return the length of the longest string in
+    ["Algebraic", "FooRate", "FooAssignment"]
+
+    TODO will this throw an exception if elements other
+    than the first one do *not* have the attribute?
+    Is that possible? <--- Issue added to Github:
+    Look at query get_max_length #38
+    """
     if elements is None:
         return 0
     if attribute not in elements[0]:
@@ -546,6 +1046,29 @@ def get_max_length(elements, attribute):
 
 
 def get_other_element_children(this_object, element):
+    """
+    Return a list of the names of other elements that may be
+    children of the ListOfFoo element.
+
+    :param this_object: object dict to be queried
+    :param element: dict of element (e.g.Foo) for which we wish to discover
+    whether the corresponding listOfFoo element contains children of a type
+    other than Foo
+    :return: list of names of any children of a listOfFoo that are not of
+    type Foo
+
+    e.g. In this case the DefaultTerm object is contained within the
+    ListOfFunctionTerms which also contains FunctionTerm Objects
+    <listOfFunctionsTerms>
+        <functionTerm ... />
+        <functionTerm ... />
+        <defaultTerm ... />
+    </listOfFunctionTerms>
+
+    get_other_element_children(parent_object dict, functionTerm object dict)
+        returns ['defaultTerm']
+
+    """
     other_children = []
     child = get_class(element['element'], this_object['root'])
     if child is None or 'lo_attribs' not in child:
@@ -555,12 +1078,26 @@ def get_other_element_children(this_object, element):
             other_children.append(child['lo_attribs'][i]['element'])
     return other_children
 
-# get children that are concrete instanstaitions
+
 def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
+    """
+    Get children that are concrete instantiations
+
+    :param concretes: list of the class_objects identified as concrete classes
+    :param root: dict of all elements
+    :param reqd_only: boolean to allow list to be filtered on attributes
+        that are required
+    :param base_attributes: list of attributes that are on the base class of
+        the concrete classes
+    :param name:
+    :return:
+
+    TODO an example would be helpful.
+    """
     children = []
     for j in range(0, len(concretes)):
         if concretes[j]['element'] == 'CSGeometry':
-            continue;
+            continue
         grandchildren = get_children(concretes[j]['element'],
                                      root, reqd_only, '', base_attributes)
         children.append(grandchildren)
@@ -569,8 +1106,20 @@ def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
     return children
 
 
-# get the child elements of the class name
 def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
+    """
+    Get the child elements of the class name
+
+    :param name:
+    :param root: dict of all elements
+    :param reqd_only: boolean to allow list to be filtered on attributes
+        that are required
+    :param xml_name:
+    :param base_attribs:
+    :return:
+
+    TODO lots of explanation needed!
+    """
     child = get_class(name, root)
     if not child:
         if name == 'ASTNode':
@@ -583,11 +1132,14 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
         for i in range(0, num_attribs):
             att_type = child['attribs'][i]['type']
             if att_type == 'element':
-                # for distrib we have a child that is a list of children of itself
+                # for distrib we have a child that is a list of
+                # children of itself
                 # this will cause recursion
                 if name != child['attribs'][i]['element']:
-                    grandchildren = get_children(child['attribs'][i]['element'],
-                                                 root, reqd_only, child['attribs'][i]['xml_name'])
+                    grandchildren = \
+                        get_children(child['attribs'][i]['element'],
+                                     root, reqd_only,
+                                     child['attribs'][i]['xml_name'])
                     children.append(grandchildren)
             elif att_type == 'lo_element':
                 if 'concrete' in child['attribs'][i]:
@@ -595,35 +1147,54 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
                     if num == 0:
                         continue
                     elif name == 'MixedGeometry' and num > 0:
-                        continue;
+                        continue
                     else:
                         base = get_class(child['attribs'][i]['element'], root)
-                        grandchildren = get_concrete_children(child['attribs'][i]['concrete'],
-                                                         root, reqd_only, base['attribs'], child['attribs'][i]['element'])
-#                        for j in range(0, num):
-#                            grandchildren = get_concrete_children(child['attribs'][i]['concrete'],
-#                                                         root, reqd_only, '', base['attribs'])
-#                            grandchildren = get_children(child['attribs'][i]['concrete'][j]['element'],
-#                                                         root, reqd_only, '', base['attribs'])
+                        grandchildren = \
+                            get_concrete_children(
+                                child['attribs'][i]['concrete'],
+                                root, reqd_only, base['attribs'],
+                                child['attribs'][i]['element'])
+
+                        # for j in range(0, num):
+                        #     grandchildren = get_concrete_children(
+                        #         child['attribs'][i]['concrete'],
+                        #         root, reqd_only, '', base['attribs'])
+                        #     grandchildren =
+                        #        get_children(
+                        #          child['attribs'][i]['concrete']\
+                        #                 [j]['element'],
+                        #                 root, reqd_only, '',
+                        #                 base['attribs'])
+
                         children.append(grandchildren[0])
-#                        if not reqd_only:
-#                            grandchildren = insert_list_of(grandchildren, child['attribs'][i]['element'], root)
+
+                        # if not reqd_only:
+                        #   grandchildren = insert_list_of(grandchildren,
+                        #   child['attribs'][i]['element'], root)
 
                 else:
-                    # for distrib we have a child that is a list of children of itself
+                    # for distrib we have a child that is a list
+                    # of children of itself
                     # this will cause recursion
                     if name != child['attribs'][i]['element']:
-                        grandchildren = get_children(child['attribs'][i]['element'],
-                                                     root, reqd_only)
+                        grandchildren = \
+                            get_children(child['attribs'][i]['element'],
+                                         root, reqd_only)
                         if not reqd_only:
-                            grandchildren = insert_list_of(grandchildren, child['attribs'][i]['element'], root)
+                            grandchildren = \
+                                insert_list_of(grandchildren,
+                                               child['attribs'][i]['element'],
+                                               root)
                         children.append(grandchildren)
             elif att_type == 'inline_lo_element':
-                # for distrib we have a child that is a list of children of itself
+                # for distrib we have a child that is a list of children
+                # of itself
                 # this will cause recursion
                 if name != child['attribs'][i]['element']:
-                    grandchildren = get_children(child['attribs'][i]['element'],
-                                                 root, reqd_only)
+                    grandchildren = \
+                        get_children(child['attribs'][i]['element'],
+                                     root, reqd_only)
                     children.append(grandchildren)
             else:
                 continue
@@ -648,8 +1219,16 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
         name = xml_name
     return dict({'name': name, 'children': children, 'attribs': reqd_attribs})
 
-# get a list of names of child elements
+
 def get_child_elements(elements, lo_elements, root=None):
+    """
+    Get a list of names (and other info) of child elements.
+
+    :param elements:
+    :param lo_elements:
+    :param root:
+    :return: list of child element dictionaries
+    """
     child_elements = []
     typecode = 'TO_DO'
     for elem in elements:
@@ -666,16 +1245,19 @@ def get_child_elements(elements, lo_elements, root=None):
             name = strFunctions.remove_prefix(elem['name'])
             # if 'xml_name' in elem and elem['xml_name'] != '':
             #     name = elem['xml_name']
-            [used_child_name, unused] = strFunctions.remove_hyphens(elem['capAttName'])
+            [used_child_name, unused] = \
+                strFunctions.remove_hyphens(elem['capAttName'])
             # if 'used_child_name' in elem and elem['used_child_name'] != '':
             #     used_child_name = elem['used_child_name']
             child_elements.append(dict({'name': name, 'typecode': typecode,
-                                        'concrete': concs, 'element': elem['element'],
+                                        'concrete': concs,
+                                        'element': elem['element'],
                                         'used_name': used_child_name}))
     for elem in lo_elements:
         if elem['element'] != 'ASTNode*' and elem['element'] != 'XMLNode*':
             if root:
-                thisclass = get_class(strFunctions.lower_first(elem['element']), root)
+                thisclass = \
+                    get_class(strFunctions.lower_first(elem['element']), root)
                 if thisclass and 'typecode' in thisclass:
                     typecode = thisclass['typecode']
             if 'concrete' in elem:
@@ -683,20 +1265,32 @@ def get_child_elements(elements, lo_elements, root=None):
                 concs = get_concretes(root, conc)
             else:
                 concs = None
-            xmlname = strFunctions.singular(strFunctions.remove_prefix(elem['name']))
-            name = strFunctions.lower_first(strFunctions.remove_prefix(elem['element']))
+            xmlname = strFunctions.\
+                singular(strFunctions.remove_prefix(elem['name']))
+            name = strFunctions.\
+                lower_first(strFunctions.remove_prefix(elem['element']))
             if not elem['is_plugin'] and (xmlname != name):
                 name = xmlname
             used_child_name = name
             if 'used_child_name' in elem and elem['used_child_name'] != '':
                 used_child_name = elem['used_child_name']
             child_elements.append(dict({'name': name, 'typecode': typecode,
-                                        'concrete': concs, 'element': elem['element'],
+                                        'concrete': concs,
+                                        'element': elem['element'],
                                         'used_name': used_child_name}))
     return child_elements
 
-# insert a listOfParent into the tree
+# NOT USED - Investigate
 def insert_list_of(original, child_name, root):
+    """
+    insert a listOfParent into the tree
+
+    :param original:
+    :param child_name:
+    :param root:
+    :return: either a list of dictionaries, or a single dictionary,
+             depending on context
+    """
     child = get_class(child_name, root)
     lo_name = strFunctions.list_of_name(child['name'])
     if 'lo_elementName' in child and len(child['lo_elementName']) > 0:
@@ -709,18 +1303,25 @@ def insert_list_of(original, child_name, root):
         for element in original:
             lo_children.append(element)
         new_child = []
-        new_child.append(dict({'name': lo_name, 'children': lo_children, 'attribs': lo_attribs}))
+        new_child.append(dict({'name': lo_name, 'children': lo_children,
+                               'attribs': lo_attribs}))
     else:
         lo_children.append(original)
-        new_child = dict({'name': lo_name, 'children': lo_children, 'attribs': lo_attribs})
+        new_child = dict({'name': lo_name, 'children': lo_children,
+                          'attribs': lo_attribs})
     return new_child
 
 
+def create_object_tree(pkg_object, reqd_only=True):
+    """
+    Create a tree structure with each plugin listing its direct children
+    and each class listing its direct children.
+    If reqd_only is False it will add the listOf elements as well.
 
-# create a tree structure with each plugin listing its direct children
-# and each class listing its direct children
-# if reqd_only is false it will add the listOf elements as well
-def create_object_tree(pkg_object, reqd_only = True):
+    :param pkg_object:
+    :param reqd_only:
+    :return: list of dictionaries
+    """
     tree = []
     root = None
     for i in range(0, len(pkg_object['plugins'])):
@@ -736,9 +1337,12 @@ def create_object_tree(pkg_object, reqd_only = True):
             root = plugin['lo_extension'][0]['root']
         for j in range(0, len(plugin['lo_extension'])):
             grandchildren = get_children(plugin['lo_extension'][j]['name'],
-                                         root, reqd_only, plugin['lo_extension'][j]['xml_name'])
+                                         root, reqd_only,
+                                         plugin['lo_extension'][j]['xml_name'])
             if not reqd_only:
-                grandchildren = insert_list_of(grandchildren, plugin['lo_extension'][j]['name'], root)
+                grandchildren = insert_list_of(
+                    grandchildren,
+                    plugin['lo_extension'][j]['name'], root)
             children.append(grandchildren)
         branch = dict({'base': plugin['sbase'],
                        'ext': 'core',
@@ -748,23 +1352,46 @@ def create_object_tree(pkg_object, reqd_only = True):
     return tree
 
 
-#return true if the attribute type given represents a number
 def is_number(att_type):
+    """
+    Does this attribute type represent a number?
+
+    :param att_type: the type, e.g. "int", "SIdRef", "string", ...
+    :param return: Return True if the attribute type given represents a number
+
+    e.g. an attribute node like this
+    <attribute name="ordinal" required="true" type="int" abstract="false"/>
+    has type "int", so would return True
+
+    """
     number = False
     if att_type == 'double' or att_type == 'uint' or att_type == 'int':
         number = True
     return number
 
-#return true if the attribute type given represents an element
+
 def is_element(att_type):
+    """
+    Does this attribute type represent an element?
+
+    :param att_type: the type, e.g. "lo_element", "SIdRef", "string", ...
+    :return: True if the attribute type given represents an element
+    """
     element = False
     if att_type == 'element' or att_type == 'lo_element' or \
-                    att_type == 'inline_lo_element':
+            att_type == 'inline_lo_element':
         element = True
     return element
 
-# create a list of attribute types and names for use with generic attribute functions
+
 def sort_attributes(all_attributes):
+    """
+    Create a list of attribute types and names for use with
+    generic attribute functions.
+
+    :param all_attributes:
+    :return: dictionary of lists of different attribute types.
+    """
     double_atts = []
     uint_atts = []
     int_atts = []
@@ -789,7 +1416,31 @@ def sort_attributes(all_attributes):
                  'int_atts': int_atts,
                  'string_atts': string_atts})
 
+
 def is_lo_repeated(class_object):
+    """
+    Is the ListOf class for this class used more than once ?
+
+    :param class_object: class_object to query
+    :return: True if the ListOf this class is used more than once,
+        False otherwise
+
+    e.g. the following uses ListOfPoints more than once
+
+        <element name="Point" hasListOf="true" ...>
+          <attributes>
+            <attribute name="point" required="false" type="inline_lo_element"
+                element="Point" xmlName="point" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Arc" ...>
+          <attributes>
+            <attribute name="next" required="false" type="inline_lo_element"
+                element="Point" xmlName="next" abstract="false"/>
+          </attributes>
+        </element>
+
+    """
     count = 0
     if 'root' not in class_object or class_object['root'] is None:
         return False
@@ -802,12 +1453,13 @@ def is_lo_repeated(class_object):
         #     # skip this element
         #     continue
         for attrib in element['attribs']:
-            if attrib['type'] == 'lo_element' or attrib['type'] == 'inline_lo_element':
+            if attrib['type'] == 'lo_element' \
+                    or attrib['type'] == 'inline_lo_element':
                 if attrib['element'] == child:
-                    if 'xml_name' in attrib and attrib['xml_name'].lower() != strFunctions.remove_prefix(attrib['element']).lower():
+                    if 'xml_name' in attrib and \
+                            attrib['xml_name'].lower() != strFunctions. \
+                            remove_prefix(attrib['element']).lower():
                         count = count + 1
     if count > 0:
         return True
     return False
-
-
