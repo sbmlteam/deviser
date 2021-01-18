@@ -338,33 +338,14 @@ class BaseCppFile(BaseFile.BaseFile):
         elif att_type == 'element':
             self.update_dict_with_element_att_type(mydict, attrib_name)
 
-
         elif att_type in ['lo_element', 'inline_lo_element']:
             self.update_dict_with_lo_element_att_type(mydict, attrib_name)
 
         elif att_type == 'array':
-            mydict['isArray'] = True
-            if mydict['element'] in ['Integer', 'integer']:
-                mydict['element'] = 'int'
-            else:
-                mydict['element'] = SF.lower_first(mydict['element'])
-            # mydict['attType'] = 'array'
-            mydict['attTypeCode'] = mydict['element'] + '*'
-            mydict['CType'] = mydict['attTypeCode']
-            # mydict['isNumber'] = False
-            # mydict['default'] = 'NULL'
-            mydict.update({'attType': 'array', 'isNumber': False,
-                           'default': 'NULL'})
+            self.update_dict_with_array_att_type(mydict)
 
         elif att_type == 'vector':
-            mydict['isVector'] = True
-            if mydict['element'] in ['Integer', 'integer']:
-                mydict['element'] = 'int'
-            else:
-                mydict['element'] = SF.lower_first(mydict['element'])
-            mydict['attTypeCode'] = 'std::vector<{0}>'.format(mydict['element'])
-            mydict['CType'] = mydict['attTypeCode']
-            mydict.update({'attType': 'vector', 'isNumber': False, 'default': 'NULL'})
+            self.update_dict_with_vector_att_type(mydict)
 
         else:
             gv.code_returned = gv.return_codes['unknown type used']
@@ -412,7 +393,6 @@ class BaseCppFile(BaseFile.BaseFile):
             mydict['children_overwrite'] = True
 
 
-
     def update_dict_with_lo_element_att_type(self, mydict, attrib_name):
 
         childclass = query.get_class(mydict['element'], mydict['root'])
@@ -441,6 +421,32 @@ class BaseCppFile(BaseFile.BaseFile):
             mydict['recursive_child'] = True
             mydict['attTypeCode'] = '{0} *'.format(name)
             mydict['listOfClassName'] = name
+
+
+    def update_dict_with_array_att_type(self, mydict):
+        mydict['isArray'] = True
+        if mydict['element'] in ['Integer', 'integer']:
+            mydict['element'] = 'int'
+        else:
+            mydict['element'] = SF.lower_first(mydict['element'])
+        # mydict['attType'] = 'array'
+        mydict['attTypeCode'] = mydict['element'] + '*'
+        mydict['CType'] = mydict['attTypeCode']
+        # mydict['isNumber'] = False
+        # mydict['default'] = 'NULL'
+        mydict.update({'attType': 'array', 'isNumber': False,
+                       'default': 'NULL'})
+
+
+    def update_dict_with_vector_att_type(self, mydict):
+        mydict['isVector'] = True
+        if mydict['element'] in ['Integer', 'integer']:
+            mydict['element'] = 'int'
+        else:
+            mydict['element'] = SF.lower_first(mydict['element'])
+        mydict['attTypeCode'] = 'std::vector<{0}>'.format(mydict['element'])
+        mydict['CType'] = mydict['attTypeCode']
+        mydict.update({'attType': 'vector', 'isNumber': False, 'default': 'NULL'})
 
 
     def sort_name_mismatches(self):
