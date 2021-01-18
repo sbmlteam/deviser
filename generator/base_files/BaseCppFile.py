@@ -286,7 +286,8 @@ class BaseCppFile(BaseFile.BaseFile):
 
         :param att_type: e.g. 'SId', 'SIdRef', 'string', 'double', 'int'.
         :param mydict: the dictionary we are updating.
-        :param attrib_name: attribute name (???), used by some att_types
+        :param attrib_name: possibly-tweaked 'name' field of <attribute> node,
+               e.g. 'math'
         :return: nothing
         """
 
@@ -357,7 +358,15 @@ class BaseCppFile(BaseFile.BaseFile):
 
 
     def update_dict_with_element_att_type(self, mydict, attrib_name):
+        """
+        Update the entries in an attribute's dictionary, when the
+        att_type is 'element'.
 
+        :param mydict: the dictionary to update
+        :param attrib_name: possibly-tweaked 'name' field of <attribute> node,
+               e.g. 'math'
+        :returns: nothing
+        """
         el_name = mydict['element']
         at_name = attrib_name
         mydict['attType'] = 'element'
@@ -394,7 +403,15 @@ class BaseCppFile(BaseFile.BaseFile):
 
 
     def update_dict_with_lo_element_att_type(self, mydict, attrib_name):
+        """
+        Update the dictionary (representing an <attribute> node) when the
+        att_type is 'lo_element' or 'inline_lo_element'.
 
+        :param mydict: the dictionary we are updating
+        :param attrib_name: possibly-tweaked 'name' field of <attribute> node,
+               e.g. 'math'
+        :return: nothing
+        """
         childclass = query.get_class(mydict['element'], mydict['root'])
         if childclass and 'lo_class_name' in childclass and childclass['lo_class_name'] != '':
             name = childclass['lo_class_name']
@@ -424,6 +441,13 @@ class BaseCppFile(BaseFile.BaseFile):
 
 
     def update_dict_with_array_att_type(self, mydict):
+        """
+        Update the dictionary (representing an <attribute> node) when the
+        att_type is 'array'.
+
+        :param mydict: the dictionary we are updating
+        :return: nothing
+        """
         mydict['isArray'] = True
         if mydict['element'] in ['Integer', 'integer']:
             mydict['element'] = 'int'
@@ -439,6 +463,13 @@ class BaseCppFile(BaseFile.BaseFile):
 
 
     def update_dict_with_vector_att_type(self, mydict):
+        """
+        Update the dictionary (representing an <attribute> node) when the
+        att_type is 'vector'.
+
+        :param mydict: the dictionary we are updating
+        :return: nothing
+        """
         mydict['isVector'] = True
         if mydict['element'] in ['Integer', 'integer']:
             mydict['element'] = 'int'
@@ -451,12 +482,13 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def sort_name_mismatches(self):
         """
-
+        We deal with duplicate xml_names, but need a bit more description here.
         :returns: nothing
         """
         need_to_adjust = False
-        names_to_sort = []
-        xml_names = []
+        xml_names = []  # Stores unique 'xml_names'
+        names_to_sort = []  # Stores duplicated 'xml_name' values.
+
         for attribute in self.attributes:
             if 'xml_name' in attribute and attribute['xml_name'] != '':
                 xml_name = attribute['xml_name']
@@ -465,18 +497,21 @@ class BaseCppFile(BaseFile.BaseFile):
                     need_to_adjust = True
                 else:
                     xml_names.append(xml_name)
-        if not need_to_adjust:
+
+        if not need_to_adjust:  # no duplicates
             return
-        else:
-            for name in names_to_sort:
-                for attribute in self.attributes:
-                    if 'xml_name' in attribute and attribute['xml_name'] == name:
-                        att_type = attribute['attType']
-                        if att_type in ['element', 'lo_element', 'inline_lo_element']:
-                            continue;
-                        else:
-                            attribute['capAttName'] = SF.upper_first(attribute['name'])
-                            attribute['memberName'] = 'm{0}'.format(attribute['capAttName'])
+
+        # We need to sort at least one name.
+        # TODO more explanatory test needed here.
+        for name in names_to_sort:
+            for attribute in self.attributes:
+                if 'xml_name' in attribute and attribute['xml_name'] == name:
+                    att_type = attribute['attType']
+                    if att_type in ['element', 'lo_element', 'inline_lo_element']:
+                        continue
+                    else:
+                        attribute['capAttName'] = SF.upper_first(attribute['name'])
+                        attribute['memberName'] = 'm{0}'.format(attribute['capAttName'])
 
 
     def create_lo_other_child_element_class(self, name, parent):
