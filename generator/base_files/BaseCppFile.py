@@ -275,17 +275,20 @@ class BaseCppFile(BaseFile.BaseFile):
 
             att_type = mydict['type']
 
-            #### from here
-
-
-            ### to here
-
             self.update_attribute_dictionary(att_type, mydict, attrib_name)
 
         return attributes
 
 
     def update_attribute_dictionary(self, att_type, mydict, attrib_name):
+        """
+        Update the dictionary which stores an attribute's values.
+
+        :param att_type: e.g. 'SId', 'SIdRef', 'string', 'double', 'int'.
+        :param mydict: the dictionary we are updating.
+        :param attrib_name: attribute name (???), used by some att_types
+        :return: nothing
+        """
 
         # Now update the dictionary, with the set of values according
         # to att_type:
@@ -333,37 +336,8 @@ class BaseCppFile(BaseFile.BaseFile):
             mydict['CType'] = mydict['element'] + '_t'
 
         elif att_type == 'element':
-            el_name = mydict['element']
-            at_name = attrib_name
-            mydict['attType'] = 'element'
-            if attrib_name == 'math':
-                if gv.is_package:
-                    mydict['attTypeCode'] = 'ASTNode*'
-                    mydict['CType'] = 'ASTNode_t*'
-                else:
-                    mydict['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode*'
-                    mydict['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode_t*'
-            else:
-                mydict['attTypeCode'] = mydict['element'] + '*'
-                mydict['CType'] = mydict['element'] + '_t*'
-            if mydict['attTypeCode'] == 'XMLNode*' and not gv.is_package:
-                mydict['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}*'.format(mydict['element'])
-                mydict['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}_t*'.format(mydict['element'])
-                # mydict['capAttName'] = SF.remove_prefix(mydict['element'])
-            mydict['isNumber'] = False
-            mydict['default'] = 'NULL'
-            if 'xml_name' in mydict and mydict['xml_name'] != '':
-                possible_name = mydict['xml_name']
-                # Need to catch the case where the xml_name is lower case
-                # but comes from a camel case element:
-                if SF.is_camel_case(mydict['element']) and \
-                        possible_name == SF.remove_prefix(mydict['element']).lower():
-                    possible_name = SF.lower_first(mydict['capAttName'])
-                [mydict['used_child_name'], _] = SF.remove_hyphens(possible_name)
-            if SF.compare_no_case(SF.remove_prefix(el_name), at_name):
-                mydict['children_overwrite'] = False
-            else:
-                mydict['children_overwrite'] = True
+            self.update_dict_with_element_att_type(mydict, attrib_name)
+
 
         elif att_type in ['lo_element', 'inline_lo_element']:
             childclass = query.get_class(mydict['element'], mydict['root'])
@@ -425,7 +399,42 @@ class BaseCppFile(BaseFile.BaseFile):
             mydict['isNumber'] = False
             mydict['default'] = 'FIXME_{0}'.format(att_type)
 
-        #return
+
+    def update_dict_with_element_att_type(self, mydict, attrib_name):
+
+        el_name = mydict['element']
+        at_name = attrib_name
+        mydict['attType'] = 'element'
+        if attrib_name == 'math':
+            if gv.is_package:
+                mydict['attTypeCode'] = 'ASTNode*'
+                mydict['CType'] = 'ASTNode_t*'
+            else:
+                mydict['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode*'
+                mydict['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode_t*'
+        else:
+            mydict['attTypeCode'] = mydict['element'] + '*'
+            mydict['CType'] = mydict['element'] + '_t*'
+
+        if mydict['attTypeCode'] == 'XMLNode*' and not gv.is_package:
+            mydict['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}*'.format(mydict['element'])
+            mydict['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}_t*'.format(mydict['element'])
+            # mydict['capAttName'] = SF.remove_prefix(mydict['element'])
+        mydict['isNumber'] = False
+        mydict['default'] = 'NULL'
+
+        if 'xml_name' in mydict and mydict['xml_name'] != '':
+            possible_name = mydict['xml_name']
+            # Need to catch the case where the xml_name is lower case
+            # but comes from a camel case element:
+            if SF.is_camel_case(mydict['element']) and \
+                    possible_name == SF.remove_prefix(mydict['element']).lower():
+                possible_name = SF.lower_first(mydict['capAttName'])
+            [mydict['used_child_name'], _] = SF.remove_hyphens(possible_name)
+        if SF.compare_no_case(SF.remove_prefix(el_name), at_name):
+            mydict['children_overwrite'] = False
+        else:
+            mydict['children_overwrite'] = True
 
 
     def sort_name_mismatches(self):
@@ -543,6 +552,7 @@ class BaseCppFile(BaseFile.BaseFile):
     # functions cpp ns
     def write_cppns_begin(self):
         """
+        Declare the beginning of a cpp namespace.
 
         :returns: nothing
         """
@@ -554,6 +564,7 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_cppns_end(self):
         """
+        Mark the end of a cpp namespace.
 
         :returns: nothing
         """
