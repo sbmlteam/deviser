@@ -103,8 +103,8 @@ def main():
         os.mkdir('temp')
     fail = 0
 
-    # These tests all appear to be independent from each other,
-    # so I'm assuming their order doesn't matter.
+    # These tests are all independent from each other,
+    # so their order doesn't matter.
     name = 'spatial'
     test_case = 'body'
     fail += run_test(name, test_case)

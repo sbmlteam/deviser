@@ -127,10 +127,15 @@ def generate_forward(filename):
 def generate_enum(filename):
     """
     According to ExtensionFile.py, this writes the extension types file.
-    TODO what does that mean?
 
     :param filename: the XML file to parse.
     :return: nothing
+
+    For SBML, the extension file includes all the enums that are associated
+    with a package. When generating code for a different library we still
+    need a file that lists any enums so we create a version of the same file.
+
+    Need to review this issue #44
     """
     ob = common_set_up(filename)
     gv.populate_error_list(ob)
@@ -297,7 +302,7 @@ def run_test(name, num, class_name, test_case, list_of):
     Run the C++ file tests.
 
     :param name: name of test group e.g. 'test_sedml', 'combine-archive'.
-    :param num: list index TODO please clarify
+    :param num: list index, so we only generate a particular class not all of them
     :param class_name: name of C++ class (and thus .cpp/.h filenames), e.g. 'CaContent'
     :param test_case: brief test description
     :param list_of: class name (and thus filenames) of any corresponding "list of" class, e.g. 'CaListOfContents'
@@ -407,7 +412,7 @@ def run_forward(name, class_name, test_case):
 
 def run_enum(name, class_name, test_case):
     """
-    Run extension types file tests. TODO is that correct?
+    Run extension types file tests.
 
     :param name: stub of XML file name, e.g. 'test_sedml' for file test_sedml.xml.
     :param class_name: test class, e.g. 'SedmlEnumerations'
@@ -454,7 +459,7 @@ def test_bindings(name, class_name, test_case, binding, prefix):
     return fail
 
 
-def test_cmake(name, class_name, test_case, binding):  # , prefix):
+def test_cmake(name, class_name):   # , test_case, binding):  # , prefix):
     """
     Generate and compare CMake files.
 
@@ -462,12 +467,10 @@ def test_cmake(name, class_name, test_case, binding):  # , prefix):
 
     :param name: name of test, e.g. 'test_sedml' or 'combine-archive'.
     :param class_name:   e.g. 'libsedml' or 'libcombine'
-    :param test_case: seems to always be 'cmake'!
-    :param binding: and so does this!
     :returns: number of failed tests
     """
-    filename = test_functions.set_up_test(name, class_name, test_case)
-    generate_cmake(filename, binding)
+    filename = test_functions.set_up_test(name, class_name, "cmake")
+    generate_cmake(filename, "cmake")
     fail = 0
     fail += compare_cmake_file("")
     fail += compare_cmake_file('src')
@@ -613,9 +616,9 @@ def testSedML(fail):
 
     name = 'test_sedml'
     class_name = 'libsedml'
-    test_case = 'cmake'
-    binding = 'cmake'
-    fail += test_cmake(name, class_name, test_case, binding)  # , 'sedml')
+    # test_case = 'cmake'
+    # binding = 'cmake'
+    fail += test_cmake(name, class_name)  # , test_case, binding)  # , 'sedml')
 
     name = 'test_sedml'
     class_name = 'libsedml'
@@ -674,9 +677,9 @@ def testCombine(fail):
 
     name = 'combine-archive'
     class_name = 'libcombine'
-    test_case = 'cmake'
-    binding = 'cmake'
-    fail += test_cmake(name, class_name, test_case, binding)  # , 'combine')
+    # test_case = 'cmake'
+    # binding = 'cmake'
+    fail += test_cmake(name, class_name)  # , test_case, binding)  # , 'combine')
 
     return fail
 
