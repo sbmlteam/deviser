@@ -340,32 +340,7 @@ class BaseCppFile(BaseFile.BaseFile):
 
 
         elif att_type in ['lo_element', 'inline_lo_element']:
-            childclass = query.get_class(mydict['element'], mydict['root'])
-            if childclass and 'lo_class_name' in childclass and childclass['lo_class_name'] != '':
-                name = childclass['lo_class_name']
-            else:
-                name = SF.list_of_name(mydict['element'])
-            plural = SF.plural_no_prefix(mydict['element'])
-            mydict.update({'attType': 'lo_element', 'attTypeCode': name,
-                           'CType': 'ListOf_t', 'memberName': 'm' + plural,
-                           'capAttName': SF.remove_prefix(mydict['element']),
-                           'isNumber': False, 'default': 'NULL'})
-
-            if 'xml_name' in mydict and mydict['xml_name'] != '':
-                possible_name = mydict['xml_name']
-                if mydict['xml_name'] != mydict['pluralName']:
-                    possible_name = SF.singular(mydict['xml_name'])
-
-                # Need to catch case where the xml_name is lower case but
-                # comes from a camel case element:
-                if SF.is_camel_case(mydict['element']) and \
-                        possible_name == SF.remove_prefix(mydict['element']).lower():
-                    possible_name = SF.lower_first(mydict['capAttName'])
-                mydict['used_child_name'] = possible_name
-            if attrib_name == SF.lower_first(SF.remove_prefix(self.name)):
-                mydict['recursive_child'] = True
-                mydict['attTypeCode'] = '{0} *'.format(name)
-                mydict['listOfClassName'] = name
+            self.update_dict_with_lo_element_att_type(mydict, attrib_name)
 
         elif att_type == 'array':
             mydict['isArray'] = True
@@ -435,6 +410,37 @@ class BaseCppFile(BaseFile.BaseFile):
             mydict['children_overwrite'] = False
         else:
             mydict['children_overwrite'] = True
+
+
+
+    def update_dict_with_lo_element_att_type(self, mydict, attrib_name):
+
+        childclass = query.get_class(mydict['element'], mydict['root'])
+        if childclass and 'lo_class_name' in childclass and childclass['lo_class_name'] != '':
+            name = childclass['lo_class_name']
+        else:
+            name = SF.list_of_name(mydict['element'])
+        plural = SF.plural_no_prefix(mydict['element'])
+        mydict.update({'attType': 'lo_element', 'attTypeCode': name,
+                       'CType': 'ListOf_t', 'memberName': 'm' + plural,
+                       'capAttName': SF.remove_prefix(mydict['element']),
+                       'isNumber': False, 'default': 'NULL'})
+
+        if 'xml_name' in mydict and mydict['xml_name'] != '':
+            possible_name = mydict['xml_name']
+            if mydict['xml_name'] != mydict['pluralName']:
+                possible_name = SF.singular(mydict['xml_name'])
+
+            # Need to catch case where the xml_name is lower case but
+            # comes from a camel case element:
+            if SF.is_camel_case(mydict['element']) and \
+                    possible_name == SF.remove_prefix(mydict['element']).lower():
+                possible_name = SF.lower_first(mydict['capAttName'])
+            mydict['used_child_name'] = possible_name
+        if attrib_name == SF.lower_first(SF.remove_prefix(self.name)):
+            mydict['recursive_child'] = True
+            mydict['attTypeCode'] = '{0} *'.format(name)
+            mydict['listOfClassName'] = name
 
 
     def sort_name_mismatches(self):
