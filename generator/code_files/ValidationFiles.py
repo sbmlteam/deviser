@@ -47,7 +47,7 @@ from . import ValidatorCodeFile
 
 
 class ValidationFiles():
-    """Class for all validation-related files   TODO Is it? """
+    """Class for all validation-related files"""
 
     def __init__(self, lib_object, verbose=False):
         # members from object

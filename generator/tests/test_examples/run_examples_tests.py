@@ -72,7 +72,8 @@ def generate_xml(filename):
 
 def generate_xml_fails(filename):
     """
-    Generate a failure example?????? TODO unsure
+    Generate a failure example (creates an xml
+    file that would fail validation)
 
     :param filename: XML file to parse
     :return: package name, e.g. 'dyn'
@@ -94,7 +95,7 @@ def generate_some_xml_fails(filename, start, stop, number=-1):
     :param number: number of files to write? TODO not sure.
     :return: package name, e.g. 'dyn'
 
-    TODO Sorry Sarah I'm a bit confused by this one!
+    Sarah: "This was a work in progress and is not included in overall test run"
     """
     ob = set_up(filename)
     all_files = ValidationXMLFiles.ValidationXMLFiles(ob)

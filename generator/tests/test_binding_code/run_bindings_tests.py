@@ -1,4 +1,28 @@
 #!/usr/bin/env python
+"""
+Generating the binding files creates a number of files for each language,
+as well as swig and local specific files.
+
+Every language will generate a file to downcast extensions, namespaces and
+specific classes.
+
+e.g. generating csharp bindings for package 'spatial' will result in files:
+
+bindings
+    csharp
+        local-downcast-extension-spatial.i
+        local-downcast-namespaces-spatial.i
+        local-packages-spatial.i
+    swig
+        spatial-packages.h
+        spatial-packages.i
+
+Certain languages will also require .cpp files.
+
+Testing these involves creating each of these specific files for a
+language/package combination and having distinct functions to create and
+compare the files.
+"""
 
 import os
 import sys
@@ -10,10 +34,12 @@ from parseXML import ParseXML
 
 import test_functions
 
+
 ##############################################################################
 # Set up variables
 fails = []
 not_tested = []
+
 
 
 ##############################################################################
@@ -55,7 +81,7 @@ def generate_bindings_downcast_ext(filename, binding):
 
 def generate_bindings_downcast_ns(filename, binding):
     """
-    Generate a downcast namespace.   TODO such as?
+    Generate a downcast namespace.
     """
     all_files = set_up(filename, binding)
     all_files.write_downcast_namespace()
@@ -64,7 +90,7 @@ def generate_bindings_downcast_ns(filename, binding):
 
 def generate_bindings_downcast_pkgs(filename, binding, local):
     """
-    Generate a downcast package. TODO such as?
+    Generate a downcast package.
 
     :param filename:
     :param binding:
@@ -82,7 +108,7 @@ def generate_bindings_downcast_pkgs(filename, binding, local):
 
 def generate_bindings_downcast_plugins(filename, binding):
     """
-    Generate a downcast plugin.  TODO such as?
+    Generate a downcast plugin.
     """
     all_files = set_up(filename, binding)
     all_files.write_downcast_plugins()
@@ -102,16 +128,6 @@ def compare_code(name, binding, ext):
     """
     correct_file = os.path.normpath('./test-binding/{0}/{1}.{2}'.format(binding, name, ext))
     temp_file = os.path.normpath('./temp/{0}/{1}.{2}'.format(binding, name, ext))
-    return test_functions.compare_files(correct_file, temp_file, fails,
-                                        not_tested)
-
-
-def compare_ext_headers(class_name):
-    """
-    TODO This function doesn't appear to be used anywhere.
-    """
-    correct_file = os.path.normpath('./test-extension/{0}.h'.format(class_name))
-    temp_file = os.path.normpath('./temp/{0}.h'.format(class_name))
     return test_functions.compare_files(correct_file, temp_file, fails,
                                         not_tested)
 
@@ -138,35 +154,9 @@ def run_ns_test(name, binding, ext):
     return fail
 
 
-# TODO I'm not sure what these different test functions are testing, exactly.
-"""
-Generating the binding files creates a number of files for each language,
-as well as swig and local specific files.
-
-Every language will generate a file to downcast extensions, namespaces and 
-specific classes. 
-
-e.g. generating csharp bindings for package 'spatial' will result in files:
-
-bindings
-    csharp
-        local-downcast-extension-spatial.i
-        local-downcast-namespaces-spatial.i
-        local-packages-spatial.i
-    swig
-        spatial-packages.h
-        spatial-packages.i
-        
-Certain languages will also require .cpp files.
-
-Testing these involves creating each of these specific files for a 
-language/package combination and having distinct functions to create and
-compare the files. 
-"""
-
 def run_test(name, binding, ext):
     """
-    Run a test. TODO Sarah please expand...
+    Run a test.
 
     :param name: package name
     :param binding: the required binding, e.g. 'csharp', 'java', etc.
@@ -185,7 +175,7 @@ def run_test(name, binding, ext):
 
 def run_pkgs_test(name, binding, ext):
     """
-    Run a pkgs test. TODO Sarah please expand...
+    Run a pkgs test.
 
     :param name: package name
     :param binding: the required binding, e.g. 'csharp', 'java', etc.
@@ -207,12 +197,12 @@ def run_pkgs_test(name, binding, ext):
 
 def run_local_test(name, binding, ext, local):
     """
-    Run a local test. TODO Sarah please expand...
+    Run a local test.
 
     :param name: package name
     :param binding: the required binding, e.g. 'csharp', 'java', etc.
     :param ext: the file extension
-    :param local: TODO Sarah please expand...
+    :param local:
     :return: 0 on success or missing file, 1 on failure.
     """
     filename = test_functions.set_up_test(name, 'local', binding)
@@ -228,7 +218,7 @@ def run_local_test(name, binding, ext, local):
 
 def run_plugin_test(name, binding, ext):
     """
-    Run a plugin test. TODO Sarah please expand...
+    Run a plugin test.
 
     :param name: package name
     :param binding: the required binding, e.g. 'csharp', 'java', etc.
@@ -245,7 +235,7 @@ def run_plugin_test(name, binding, ext):
 
 def run_swig_test(name, binding, ext):
     """
-    Run a SWIG test. TODO Sarah please expand...
+    Run a SWIG test.
 
     :param name: package name
     :param binding: the required binding, e.g. 'csharp', 'java', etc.

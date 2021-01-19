@@ -96,25 +96,16 @@ def compare_files(correct_file, temp_file):
                                         not_tested)
 
 
-def compare_cmake(name, is_src=False):
+def compare_cmake(name):  # , is_src=False):
     """
     Do a string comparison of the contents of two files.
 
-    TODO: the two cases checked by this function are identical!
-    Presumably a mistake?
-
     :param name: TODO
-    :param is_src: TODO
     :return: 0 on success, or file not present; 1 on failure.
     """
-    if is_src:
-        correct_file = os.path.normpath('./test-cmake/{0}-package.cmake'.
-                                        format(name))
-        temp_file = os.path.normpath('./temp/{0}-package.cmake'.format(name))
-    else:
-        correct_file = os.path.normpath('./test-cmake/{0}-package.cmake'.
-                                        format(name))
-        temp_file = os.path.normpath('./temp/{0}-package.cmake'.format(name))
+    correct_file = os.path.normpath('./test-cmake/{0}-package.cmake'.
+                                    format(name))
+    temp_file = os.path.normpath('./temp/{0}-package.cmake'.format(name))
     return compare_files(correct_file, temp_file)
 
 
@@ -180,7 +171,7 @@ def run_cmake_test(name):
     filename = test_functions.set_up_test(name, 'CMake')
     generate_cmake_files(filename)
     fail = compare_cmake(name)
-    fail += compare_cmake(name, True)
+    # fail += compare_cmake(name, True)
     print('')
     return fail
 

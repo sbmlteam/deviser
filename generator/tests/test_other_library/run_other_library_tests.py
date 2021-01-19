@@ -59,7 +59,8 @@ def generate_new_cpp_header(filename, num):
     Generate new C++ header and code files.
 
     :param filename: the XML file to parse.
-    :param num: TODO not too sure about this - it's a list index.
+    :param num: index allowing code to generate for just one class rather
+                than all - it's a list index.
     :return: nothing
     """
     ob = common_set_up(filename)
@@ -74,11 +75,17 @@ def generate_new_cpp_header(filename, num):
 
 def generate_templates(filename):
     """
-    TODO not sure what this does. Not sure what ValidationFiles class is for.
-    And what do we mean by 'templates' here?
+    Several of the files for other libraries are generated using
+    templates with appropriate names etc added. See
+    generator/code_files/templates.
+    This function tests these
 
     :param filename: the XML file to parse.
     :return: nothing
+
+    Validation class causes the errors for things to be enumerated and strings
+    added. These will be needed by templates so with testing we have to
+    create them first
     """
     ob = common_set_up(filename)
     gv.populate_error_list(ob)
@@ -93,7 +100,8 @@ def generate_templates(filename):
 
 def generate_common_templates(filename):
     """
-    Write the 'common' files. TODO need more explanation.
+    Write the 'common' files. These are the files that will be part of
+    the common directory as they are used by all files in library.
 
     :param filename: the XML file to parse.
     :return: nothing

@@ -38,9 +38,10 @@ def generate_new_cpp_header(filename, num):
     Generate cpp files.
 
     :param filename: name of XML file to parse.
-    :param num: TODO seems to be index of item in list which is the value
+    :param num: index of item in list which is the value
         (in the big dictionary structure) for the key 'baseElements'.
-        But I don't fully understand this.
+        It is the index so that we can do code for just one class and
+        not whole of the object returned from ParseXML
     :return: nothing
     """
     ob = common_setup(filename)
@@ -238,7 +239,8 @@ def run_plug_test(name, class_name, test_case, num):
     :param name: which set of tests this relates to, e.g. 'qual'
     :param class_name: C++ class name/start of .h and .cpp file names, e.g. 'QualModelPlugin'
     :param test_case: brief description, e.g. 'basic plugin'
-    :param num: plugin #. TODO I'm not too sure about this. Please can we have an example?
+    :param num: plugin #. It's just the index in the list of plugins that are
+                 part of large dict object form ParseXML
     :return: number of failed tests.
     """
     filename = test_functions.set_up_test(name, class_name, test_case)
@@ -731,8 +733,11 @@ def main():
         test_case = 'sidref with multiple targets'
         fail += run_valid_test(name, class_name, test_case)
 
-        # TODO Sarah, I'm guessing maybe the next few tests are iterating over something?
-        # Because it's not clear; all these "diff spacing" tests look identical.
+        # These next tests are testing the spacing of the element content
+        # eg.
+        # element="ThingA, ThingB"
+        # element=" ThingA, ThingB"
+        # element="ThingA,ThingB"
 
         name = 'test_sidrefs_1'
         class_name = 'RefsSBMLError'
