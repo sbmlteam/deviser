@@ -466,8 +466,6 @@ class BaseCppFile(BaseFile.BaseFile):
         # mydict['attType'] = 'array'
         mydict['attTypeCode'] = mydict['element'] + '*'
         mydict['CType'] = mydict['attTypeCode']
-        # mydict['isNumber'] = False
-        # mydict['default'] = 'NULL'
         mydict.update({'attType': 'array', 'isNumber': False,
                        'default': 'NULL'})
 
@@ -492,7 +490,7 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def sort_name_mismatches(self):
         """
-        We deal with duplicate xml_names, but need a bit more description here.
+        We deal with duplicate xml_names, but TODO need a bit more description here.
         :returns: nothing
         """
         need_to_adjust = False
@@ -512,7 +510,7 @@ class BaseCppFile(BaseFile.BaseFile):
             return
 
         # We need to sort at least one name.
-        # TODO more explanatory test needed here.
+        # TODO more explanatory text needed here.
         for name in names_to_sort:
             for attribute in self.attributes:
                 if 'xml_name' in attribute and attribute['xml_name'] == name:
@@ -610,8 +608,6 @@ class BaseCppFile(BaseFile.BaseFile):
     def write_cppns_begin(self):
         """
         Declare the beginning of a cpp namespace.
-
-        :returns: nothing
         """
         self.skip_line(2)
         self.write_line('{0}_CPP_NAMESPACE_BEGIN'
@@ -622,8 +618,6 @@ class BaseCppFile(BaseFile.BaseFile):
     def write_cppns_end(self):
         """
         Mark the end of a cpp namespace.
-
-        :returns: nothing
         """
         self.skip_line(2)
         self.write_line('{0}_CPP_NAMESPACE_END'
@@ -645,8 +639,12 @@ class BaseCppFile(BaseFile.BaseFile):
     # functions c declaration
     def write_cdecl_begin(self):
         """
+        Declare BEGIN_C_DECLS for portable C code.
 
-        :returns: nothing
+        See:
+        https://www.gnu.org/software/libtool/manual/html_node/C-header-files.html
+        It's for making sure the C headers can be used with different
+        compilers, when using mixed C and C++ code.
         """
         self.skip_line(2)
         self.write_line('BEGIN_C_DECLS')
@@ -655,8 +653,7 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_cdecl_end(self):
         """
-
-        :returns: nothing
+        Put at end of C code, for working with different compilers.
         """
         self.skip_line(2)
         self.write_line('END_C_DECLS')
@@ -666,8 +663,8 @@ class BaseCppFile(BaseFile.BaseFile):
     # functions swig directive
     def write_swig_begin(self):
         """
-
-        :returns: nothing
+        Used to start a block of code which you want SWIG to ignore
+        during the -includeall pass.
         """
         self.skip_line(2)
         self.write_line('#ifndef SWIG')
@@ -676,8 +673,8 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_swig_end(self):
         """
-
-        :returns: nothing
+        Used to end a block of code which you want SWIG to ignore
+        during the -includeall pass.
         """
         self.skip_line(2)
         self.write_line('#endif  /*  !SWIG  */')
@@ -687,8 +684,9 @@ class BaseCppFile(BaseFile.BaseFile):
     # functions cplusplus directive
     def write_cpp_begin(self):
         """
-
-        :returns: nothing
+        Used to mark the beginning of a C++-specific block
+        (the #ifdef should only be true if you're using a C++ compiler)
+        See https://isocpp.org/wiki/faq/mixing-c-and-cpp
         """
         self.skip_line(2)
         self.write_line('#ifdef __cplusplus')
@@ -697,8 +695,7 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_cpp_end(self):
         """
-
-        :returns: nothing
+        Used to mark the end of a C++-specific block.
         """
         self.skip_line(2)
         self.write_line('#endif  /*  __cplusplus  */')
@@ -713,13 +710,19 @@ class BaseCppFile(BaseFile.BaseFile):
                               is_const=False, is_virtual=False,
                               is_abstract=False):
         """
+        Used to write a C++ function header.
 
-        :param function_name:
-        :param arguments:
-        :param return_type:
-        :param is_const:
-        :param is_virtual:
-        :param is_abstract:
+        :param function_name: the name of the function.
+        :param arguments: the function's arguments.
+        :param return_type: the return type of the function
+        :param is_const: `True` if it's a "const function", i.e. "A member
+               function that inspects (rather than mutates) its object."
+               (see:
+               https://isocpp.org/wiki/faq/const-correctness#const-member-fns)
+        :param is_virtual: `True` if C++ function is virtual
+                 (i.e. it allows overloading).
+        :param is_abstract: `True` if this is a pure virtual
+                  function (subclasses must implement).
         :return: nothing
         """
         is_cpp = self.is_cpp_api
@@ -756,7 +759,7 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 line = line + arguments[0] + ');'
             self.write_line(line)
-        else:
+        else:  # start of code same as func below
             saved_line = line
             line = line + arguments[0] + ', '
             # create the full line
@@ -789,6 +792,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 self.write_line(line, att_start)
             else:
                 self.write_line(line)
+            # end of bit same as func below
 
 
     def write_class_function_header(self, function_name, arguments,
@@ -821,7 +825,7 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 line = line + arguments[0] + ')'
             self.write_line(line)
-        else:
+        else:  # start of block same as func above
             saved_line = line
             line = line + arguments[0] + ', '
             # create the full line
@@ -854,6 +858,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 self.write_line(line, att_start)
             else:
                 self.write_line(line)
+            # end of same bit as func above
         if constructor_args is not None:
             self.up_indent()
             for i in range(0, len(constructor_args)):
