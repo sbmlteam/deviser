@@ -251,8 +251,9 @@ def is_inline_child(class_object):
 
 def get_inline_parents(class_object):
     """
-    TODO I'm guessing an inline parent is the node enclosing
-    a set of inline children, as in the last function?
+    An inline parent is the node enclosing
+    a set of inline children, as in is_inline_child()
+    See issue # 35
 
     :param class_object:
     :return:
