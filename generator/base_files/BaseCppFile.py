@@ -262,6 +262,9 @@ class BaseCppFile(BaseFile.BaseFile):
 
                     # Need to catch the case where the xml_name is lower case
                     # but comes from a camel case element:
+                    # TODO see notes on similar code in functions
+                    # update_dict_with_element_att_type() and
+                    # update_dict_with_lo_element_att_type()
                     if SF.is_camel_case(mydict['element']):
                         if possible_name == SF.remove_prefix(mydict['element']).lower():
                             capname = SF.upper_first(SF.remove_prefix(mydict['element']))
@@ -393,6 +396,8 @@ class BaseCppFile(BaseFile.BaseFile):
             possible_name = mydict['xml_name']
             # Need to catch the case where the xml_name is lower case
             # but comes from a camel case element:
+            # TODO more explanation please
+            # TODO see note below about similar code
             if SF.is_camel_case(mydict['element']) and \
                     possible_name == SF.remove_prefix(mydict['element']).lower():
                 possible_name = SF.lower_first(mydict['capAttName'])
@@ -431,6 +436,10 @@ class BaseCppFile(BaseFile.BaseFile):
 
             # Need to catch case where the xml_name is lower case but
             # comes from a camel case element:
+            # TODO v. similar to code in update_dict_with_element_att_type(),
+            # although line starting mydict['used_child_name'] is different.
+            # Is that correct? Could/should we take out the common code and
+            # put it into a new function?
             if SF.is_camel_case(mydict['element']) and \
                     possible_name == SF.remove_prefix(mydict['element']).lower():
                 possible_name = SF.lower_first(mydict['capAttName'])
