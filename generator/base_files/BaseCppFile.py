@@ -760,38 +760,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 line = line + arguments[0] + ');'
             self.write_line(line)
         else:  # start of code same as func below
-            saved_line = line
-            line = line + arguments[0] + ', '
-            # create the full line
-            for n in range(1, num_arguments - 1):
-                line = line + arguments[n] + ', '
-            if is_cpp and is_const:
-                line = line + arguments[num_arguments - 1] + ') const;'
-            else:
-                line = line + arguments[num_arguments - 1] + ');'
-            # look at length and adjust
-            if len(line) >= self.line_length:
-                # do something else
-                line = saved_line
-                att_start = len(line)
-                line += arguments[0]
-                line += ','
-                if len(line) > self.line_length:
-                    self.write_line(saved_line)
-                    line = '' + arguments[0] + ','
-                    self.write_line(line, att_start)
-                else:
-                    self.write_line(line)
-                for i in range(1, num_arguments - 1):
-                    line = arguments[i] + ','
-                    self.write_line(line, att_start)
-                if is_cpp and is_const:
-                    line = arguments[num_arguments - 1] + ') const;'
-                else:
-                    line = arguments[num_arguments - 1] + ');'
-                self.write_line(line, att_start)
-            else:
-                self.write_line(line)
+            self.write_multiple_function_arguments(line, arguments, num_arguments, is_const, is_cpp)
             # end of bit same as func below
 
 
@@ -826,38 +795,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 line = line + arguments[0] + ')'
             self.write_line(line)
         else:  # start of block same as func above
-            saved_line = line
-            line = line + arguments[0] + ', '
-            # create the full line
-            for n in range(1, num_arguments-1):
-                line = line + arguments[n] + ', '
-            if is_cpp and is_const:
-                line = line + arguments[num_arguments-1] + ') const'
-            else:
-                line = line + arguments[num_arguments-1] + ')'
-            # look at length and adjust
-            if len(line) >= self.line_length:
-                # do something else
-                line = saved_line
-                att_start = len(line)
-                line += arguments[0]
-                line += ','
-                if len(line) > self.line_length:
-                    self.write_line(saved_line)
-                    line = '' + arguments[0] + ','
-                    self.write_line(line, att_start)
-                else:
-                    self.write_line(line)
-                for i in range(1, num_arguments - 1):
-                    line = arguments[i] + ','
-                    self.write_line(line, att_start)
-                if is_cpp and is_const:
-                    line = arguments[num_arguments - 1] + ') const'
-                else:
-                    line = arguments[num_arguments - 1] + ')'
-                self.write_line(line, att_start)
-            else:
-                self.write_line(line)
+            self.write_multiple_function_arguments(line, arguments, num_arguments, is_const, is_cpp)
             # end of same bit as func above
         if constructor_args is not None:
             self.up_indent()
@@ -865,6 +803,51 @@ class BaseCppFile(BaseFile.BaseFile):
                 self.write_line(constructor_args[i])
             self.down_indent()
 
+
+    def write_multiple_function_arguments(self, line, arguments,
+                                          num_arguments, is_const, is_cpp):
+        """
+        Write multiple (> 1) function arguments to the file.
+
+        :param line: the function name and opening bracket
+        :param arguments: the function's arguments
+        :param num_arguments: the number of arguments
+        :param is_const: `True` if this is a "const function"
+        :param is_cpp: `True` if this is a C++ header.
+        :returns: nothing
+        """
+        saved_line = line
+        line = line + arguments[0] + ', '
+        # create the full line
+        for n in range(1, num_arguments - 1):
+            line = line + arguments[n] + ', '
+        if is_cpp and is_const:
+            line = line + arguments[num_arguments - 1] + ') const;'
+        else:
+            line = line + arguments[num_arguments - 1] + ');'
+        # look at length and adjust
+        if len(line) >= self.line_length:
+            # do something else
+            line = saved_line
+            att_start = len(line)
+            line += arguments[0]
+            line += ','
+            if len(line) > self.line_length:
+                self.write_line(saved_line)
+                line = '' + arguments[0] + ','
+                self.write_line(line, att_start)
+            else:
+                self.write_line(line)
+            for i in range(1, num_arguments - 1):
+                line = arguments[i] + ','
+                self.write_line(line, att_start)
+            if is_cpp and is_const:
+                line = arguments[num_arguments - 1] + ') const;'
+            else:
+                line = arguments[num_arguments - 1] + ');'
+            self.write_line(line, att_start)
+        else:
+            self.write_line(line)
 
 ########################################################################
 
