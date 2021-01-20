@@ -302,16 +302,6 @@ class BaseCppFile(BaseFile.BaseFile):
                            'CType': 'const char *', 'isNumber': False,
                            'default': '""'})
 
-        # elif att_type in ['UnitSId', 'UnitSIdRef']:
-        #    mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
-        #                   'CType': 'const char *', 'isNumber': False,
-        #                   'default': '""'})
-
-        # elif att_type == 'string':
-        #    mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
-        #                   'CType': 'const char *', 'isNumber': False,
-        #                   'default': '""'})
-
         elif att_type == 'double':
             mydict.update({'attType': 'double', 'attTypeCode': 'double',
                            'CType': 'double', 'isNumber': True,
@@ -491,7 +481,6 @@ class BaseCppFile(BaseFile.BaseFile):
     def sort_name_mismatches(self):
         """
         We deal with duplicate xml_names, but TODO need a bit more description here.
-        :returns: nothing
         """
         need_to_adjust = False
         xml_names = []  # Stores unique 'xml_names'
@@ -524,6 +513,7 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def create_lo_other_child_element_class(self, name, parent):
         """
+        TODO I'm not sure about this one, sorry.
 
         :param name:
         :param parent:
@@ -891,8 +881,9 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_brief_header(self, title_line):
         """
+        Write a short comment in the file.
 
-        :param title_line:
+        :param title_line: the text to put in the comment.
         :return: nothing
         """
         self.open_single_comment(self)
@@ -989,6 +980,8 @@ class BaseCppFile(BaseFile.BaseFile):
     def write_inline_function_implementation(self, code, exclude=False):
         """
         Function for writing a function implementation
+        TODO Presumably a C++ inline function
+        So, shouldn't the key word 'inline' appear here somewhere?
 
         :param code:
         :param exclude:
@@ -1072,7 +1065,7 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_enum(self, name, enum_no, enum_val, enum_str, length):
         """
-        Function to write the header about the typecode enumeration
+        Function to write to the header about the typecode enumeration
 
         :param name:
         :param enum_no:
@@ -1120,9 +1113,10 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_enum_header(self, name, classname, typename):
         """
+        Write comments/Doxygen commands about an enum
 
-        :param name:
-        :param classname:
+        :param name: the name of the enum
+        :param classname: the name of the C++ class which this enum belongs to
         :param typename:
         :return: nothing
         """
@@ -1131,20 +1125,29 @@ class BaseCppFile(BaseFile.BaseFile):
         self.open_comment()
         self.write_comment_line('@enum {0}'.format(name))
         if gv.library_name != 'Libsbml':
-            self.write_comment_line('@brief Enumeration of values permitted as the value of \"{0}\".'.format(name))
+            self.write_comment_line('@brief Enumeration of values permitted'
+                                    ' as the value of \"{0}\".'.format(name))
         else:
-            self.write_comment_line('@brief Enumeration of values permitted as the value of the \"{0}\" attribute '
-                                    'on {1} objects.'.format(typename, classname))
+            self.write_comment_line('@brief Enumeration of values permitted'
+                                    ' as the value of the \"{0}\" attribute '
+                                    'on {1} objects.'.
+                                    format(typename, classname))
             self.write_blank_comment_line()
             self.write_comment_line('@if conly')
-            self.write_comment_line('@see {0}_get{1}()'.format(classname, up_typename))
-            self.write_comment_line('@see {0}_set{1}()'.format(classname, up_typename))
+            self.write_comment_line('@see {0}_get{1}()'.
+                                    format(classname, up_typename))
+            self.write_comment_line('@see {0}_set{1}()'.
+                                    format(classname, up_typename))
             self.write_comment_line('@elseif java')
-            self.write_comment_line('@see {0}::get{1}()'.format(classname, up_typename))
-            self.write_comment_line('@see {0}::set{1}(long)'.format(classname, up_typename))
+            self.write_comment_line('@see {0}::get{1}()'.
+                                    format(classname, up_typename))
+            self.write_comment_line('@see {0}::set{1}(long)'.
+                                    format(classname, up_typename))
             self.write_comment_line('@else')
-            self.write_comment_line('@see {0}::get{1}()'.format(classname, up_typename))
-            self.write_comment_line('@see {0}::set{1}()'.format(classname, up_typename))
+            self.write_comment_line('@see {0}::get{1}()'.
+                                    format(classname, up_typename))
+            self.write_comment_line('@see {0}::set{1}()'.
+                                    format(classname, up_typename))
             self.write_comment_line('@endif')
         self.close_comment()
 
@@ -1152,6 +1155,7 @@ class BaseCppFile(BaseFile.BaseFile):
     def write_enum_strings(self, name, enum_str):
         """
         Function to write the header about the typecode enumeration
+        TODO Presumably the word 'enum' is written out at some point?
 
         :param name:
         :param enum_str:
@@ -1185,9 +1189,10 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_implementation_block(self, code_type, code):
         """
+        Write a block of C/C++ code.
 
-        :param code_type:
-        :param code:
+        :param code_type: the type of the thing to write
+        :param code: the actual code to write
         :returns: nothing
         """
         if code_type == 'line':
@@ -1210,8 +1215,11 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_nested_implementation(self, implementation):
         """
+        Iterate over a set of C++ code fragments, in order to
+        write each one to an implementation file.
 
-        :param implementation:
+        :param implementation: the list of code fragments (represented
+               by dictionaries)
         :returns: nothing
         """
         num = len(implementation)
@@ -1234,8 +1242,9 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_lines(self, code):
         """
+        Write a number of code lines
 
-        :param code:
+        :param code: the list of code lines to write.
         :returns: nothing
         """
         for i in range(0, len(code)):
@@ -1244,8 +1253,9 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_comments(self, code):
         """
+        Write a number of comment lines
 
-        :param code:
+        :param code: the list of comment text items to write.
         :returns: nothing
         """
         for i in range(0, len(code)):
@@ -1254,56 +1264,61 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_if_else_block(self, code):
         """
+        Write a C/C++ if/else if/else block
 
-        :param code:
+        :param code: list of conditions to write
         :returns: nothing
         """
         if_code = [code[0]]
         i = 1
-        while i < len(code) and code[i] != 'else':
+        num = len(code)
+        while i < num and code[i] != 'else':
             if_code.append(code[i])
             i += 1
         self.write_block('if', if_code, True)
-        self.write_block('else', code[i+1:len(code)], False)
+        self.write_block('else', code[i + 1 : num], False)
 
 
     def write_else_if_block(self, code):
         """
+        Write a C/C++ else/if block
 
-        :param code:
+        :param code: list of code fragments to write
         :returns: nothing
         """
+        code_len = len(code)
         if_code = [code[0]]
-        i = 1
-        while i < len(code) and code[i] != 'else if':
+        i = 1  # index of code fragment in the list
+        while i < code_len and code[i] != 'else if':
             if_code.append(code[i])
             i += 1
         self.write_block('if', if_code, True)
         i += 1
         else_if_code = [code[i]]
         i += 1
-        while i < len(code):
-            while i < len(code) and \
+        while i < code_len:
+            while i < code_len and \
                     (code[i] != 'else if' and code[i] != "else"):
                 else_if_code.append(code[i])
                 i += 1
             self.write_block('else if', else_if_code, True)
-            if i < len(code):
+            if i < code_len:
                 flag_else = (code[i] == 'else')
                 if not flag_else:
-                    if i < len(code):
+                    if i < code_len:
                         i += 1
                         else_if_code = [code[i]]
                         i += 1
                 else:
-                    self.write_block('else', code[i+1:len(code)], False)
+                    self.write_block('else', code[i + 1 : code_len], False)
                     break
 
 
     def write_try_block(self, code):
         """
+        Write a C++ try/catch block.
 
-        :param code:
+        :param code: the code to put in the block
         :returns: nothing
         """
         try_code = [code[0]]
@@ -1312,15 +1327,17 @@ class BaseCppFile(BaseFile.BaseFile):
             try_code.append(code[i])
             i += 1
         self.write_block('try', try_code, False)
-        self.write_block('catch', code[i+1:len(code)], True)
+        self.write_block('catch', code[i + 1 : len(code)], True)
 
 
     def write_block(self, block_start, code, condition):
         """
+        Generic function for writing a block of code.
 
-        :param block_start:
-        :param code:
-        :param condition:
+        :param block_start: the first part of the block
+        :param code: the list of code fragments to write
+        :param condition: `True` if a condition applies, in which case
+                the first entry in `code` is the condition.
         :returns: nothing
         """
         if condition:
