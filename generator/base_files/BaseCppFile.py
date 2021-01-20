@@ -732,36 +732,22 @@ class BaseCppFile(BaseFile.BaseFile):
             self.write_line(return_type)
             line = function_name + '('
         else:
-            if return_type != '':
-                if is_virtual:
-                    line = 'virtual ' + return_type + ' ' + function_name + '('
-                else:
-                    line = return_type + ' ' + function_name + '('
-            else:
-                if is_virtual:
-                    line = 'virtual ' + function_name + '('
-                else:
-                    line = function_name + '('
+            # return_type may be ""
+            line = "virtual " if is_virtual else ""
+            line += return_type + ' ' if return_type != "" else ""
+            line += function_name + '('
 
         if num_arguments == 0:
-            if is_cpp and is_const:
-                line += ') const;'
-            elif is_abstract:
-                line += ') = 0;'
-            else:
-                line += ');'
-            self.write_line(line)
+            self.write_zero_or_one_function_argument(line, is_cpp, is_const,
+                                                     None, is_abstract)
         elif num_arguments == 1:
-            if is_cpp and is_const:
-                line = line + arguments[0] + ') const;'
-            elif is_abstract:
-                line = line + arguments[0] + ') = 0;'
-            else:
-                line = line + arguments[0] + ');'
-            self.write_line(line)
-        else:  # start of code same as func below
-            self.write_multiple_function_arguments(line, arguments, num_arguments, is_const, is_cpp)
-            # end of bit same as func below
+            self.write_zero_or_one_function_argument(line, is_cpp, is_const,
+                                                     arguments[0],
+                                                     is_abstract)
+        else:
+            self.write_multiple_function_arguments(line, arguments,
+                                                   num_arguments, is_const,
+                                                   is_cpp)
 
 
     def write_class_function_header(self, function_name, arguments,
@@ -783,20 +769,13 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_line(return_type)
         line = function_name + '('
         if num_arguments == 0:
-            if is_cpp and is_const:
-                line += ') const'
-            else:
-                line += ')'
-            self.write_line(line)
+            self.write_zero_or_one_function_argument(line, is_cpp, is_const)  # , None, False)
         elif num_arguments == 1:
-            if is_cpp and is_const:
-                line = line + arguments[0] + ') const'
-            else:
-                line = line + arguments[0] + ')'
-            self.write_line(line)
-        else:  # start of block same as func above
-            self.write_multiple_function_arguments(line, arguments, num_arguments, is_const, is_cpp)
-            # end of same bit as func above
+            self.write_zero_or_one_function_argument(line, is_cpp, is_const, arguments[0])
+        else:
+            self.write_multiple_function_arguments(line, arguments,
+                                                   num_arguments, is_const,
+                                                   is_cpp)
         if constructor_args is not None:
             self.up_indent()
             for i in range(0, len(constructor_args)):
@@ -804,10 +783,34 @@ class BaseCppFile(BaseFile.BaseFile):
             self.down_indent()
 
 
+    def write_zero_or_one_function_argument(self, line, is_cpp, is_const,
+                                            argument=None, is_abstract=False):
+        """
+        Use when a function has either 0 or 1 argument.
+
+        :param line: the start of the function declaration
+        :param is_cpp: `True` if it's a C++ function
+        :param is_const: `True` if it's a "const function"
+        :param argument: the sole function argument, if present, else `None`
+        :param is_abstract: `True` if it's a pure virtual function.
+        :returns: nothing
+        """
+        if argument is None:
+            argument = ""
+        line += argument + ')'
+        if is_cpp and is_const:
+            line += ' const;'
+        elif is_abstract:
+            line += ' = 0;'
+        else:
+            line += ';'
+        self.write_line(line)
+
+
     def write_multiple_function_arguments(self, line, arguments,
                                           num_arguments, is_const, is_cpp):
         """
-        Write multiple (> 1) function arguments to the file.
+        Write multiple (> 1) function arguments to the header file.
 
         :param line: the function name and opening bracket
         :param arguments: the function's arguments
@@ -817,14 +820,13 @@ class BaseCppFile(BaseFile.BaseFile):
         :returns: nothing
         """
         saved_line = line
-        line = line + arguments[0] + ', '
+        line += arguments[0] + ', '
         # create the full line
         for n in range(1, num_arguments - 1):
-            line = line + arguments[n] + ', '
-        if is_cpp and is_const:
-            line = line + arguments[num_arguments - 1] + ') const;'
-        else:
-            line = line + arguments[num_arguments - 1] + ');'
+            line += arguments[n] + ', '
+        line += arguments[num_arguments - 1] + ')'
+        line += " const;" if is_cpp and is_const else ";"
+
         # look at length and adjust
         if len(line) >= self.line_length:
             # do something else
@@ -839,12 +841,11 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 self.write_line(line)
             for i in range(1, num_arguments - 1):
+                # TODO should we also check here if len(line) > self.line_length ??
                 line = arguments[i] + ','
                 self.write_line(line, att_start)
-            if is_cpp and is_const:
-                line = arguments[num_arguments - 1] + ') const;'
-            else:
-                line = arguments[num_arguments - 1] + ');'
+            line = arguments[num_arguments - 1] + ')'
+            line += ' const;' if is_cpp and is_const else ';'
             self.write_line(line, att_start)
         else:
             self.write_line(line)
