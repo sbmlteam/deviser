@@ -89,6 +89,7 @@ class BaseCppFile(BaseFile.BaseFile):
             self.typecode, self.list_of_name, self.list_of_child,\
             self.sid_refs, self.unit_sid_refs = ('',) * 8
 
+        # Globally-defined "standard" base, e.g. gv.std_base = 'SBase'.
         self.has_std_base = True
         self.std_base = gv.std_base
 
@@ -101,13 +102,14 @@ class BaseCppFile(BaseFile.BaseFile):
         self.num_non_std_children = 0
         self.class_attributes = []
 
-
     ########################################################################
 
     def expand_class(self, class_object):
         """
+        Expand the information we hold about a C++ class.
 
-        :param class_object:
+        :param class_object: dictionary of existing information about the
+             C++ class, obtained by parsing the XML file.
         :return: nothing
         """
         self.class_object = class_object
@@ -135,7 +137,7 @@ class BaseCppFile(BaseFile.BaseFile):
         if 'is_doc_plugin' in class_object:
             self.is_doc_plugin = class_object['is_doc_plugin']
 
-        # information about the base class
+        # Information about the base class
         self.baseClass = class_object['baseClass']
         if self.language != 'sbml':
             if not self.is_list_of:
@@ -170,7 +172,8 @@ class BaseCppFile(BaseFile.BaseFile):
         if 'childrenOverwriteElementName' in class_object:
             self.overwrites_children = \
                 class_object['childrenOverwriteElementName']
-        if not self.overwrites_children and ('root' in class_object and len(class_object['root']) > 0):
+        if not self.overwrites_children and ('root' in class_object and
+                                             len(class_object['root']) > 0):
             self.overwrites_children = \
                 query.overwrites_name(class_object['root'],
                                       class_object['name'])
@@ -224,9 +227,7 @@ class BaseCppFile(BaseFile.BaseFile):
                     'is_header': self.is_header,
                     'document': self.document, })
 
-
     ########################################################################
-
 
     def expand_attributes(self, attributes):
         """
@@ -266,8 +267,10 @@ class BaseCppFile(BaseFile.BaseFile):
                     # update_dict_with_element_att_type() and
                     # update_dict_with_lo_element_att_type()
                     if SF.is_camel_case(mydict['element']):
-                        if possible_name == SF.remove_prefix(mydict['element']).lower():
-                            capname = SF.upper_first(SF.remove_prefix(mydict['element']))
+                        if possible_name == \
+                                SF.remove_prefix(mydict['element']).lower():
+                            capname = \
+                                SF.upper_first(SF.remove_prefix(mydict['element']))
                     elif possible_name != attrib_name:
                         capname = SF.upper_first(mydict['xml_name'])
 
@@ -282,7 +285,6 @@ class BaseCppFile(BaseFile.BaseFile):
 
         return attributes
 
-
     def update_attribute_dictionary(self, att_type, mydict, attrib_name):
         """
         Update the dictionary which stores an attribute's values.
@@ -293,7 +295,6 @@ class BaseCppFile(BaseFile.BaseFile):
                e.g. 'math'
         :return: nothing
         """
-
         # Now update the dictionary, with the set of values according
         # to att_type:
         if att_type in ['SId', 'SIdRef', 'IDREF', 'ID', 'UnitSId',
@@ -310,13 +311,15 @@ class BaseCppFile(BaseFile.BaseFile):
         elif att_type == 'int':
             mydict.update({'attType': 'integer', 'attTypeCode': 'int',
                            'CType': 'int', 'isNumber': True,
-                           'default': '{0}_INT_MAX'.format(self.cap_language)})
+                           'default':
+                               '{0}_INT_MAX'.format(self.cap_language)})
 
         elif att_type == 'uint':
             mydict.update({'attType': 'unsigned integer',
                            'attTypeCode': 'unsigned int',
                            'CType': 'unsigned int', 'isNumber': True,
-                           'default': '{0}_INT_MAX'.format(self.cap_language)})
+                           'default':
+                               '{0}_INT_MAX'.format(self.cap_language)})
 
         elif att_type in ['bool', 'boolean']:
             mydict.update({'attType': 'boolean', 'attTypeCode': 'bool',
@@ -350,7 +353,6 @@ class BaseCppFile(BaseFile.BaseFile):
             mydict['isNumber'] = False
             mydict['default'] = 'FIXME_{0}'.format(att_type)
 
-
     def update_dict_with_element_att_type(self, mydict, attrib_name):
         """
         Update the entries in an attribute's dictionary, when the
@@ -369,15 +371,18 @@ class BaseCppFile(BaseFile.BaseFile):
                 mydict['attTypeCode'] = 'ASTNode*'
                 mydict['CType'] = 'ASTNode_t*'
             else:
-                mydict['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode*'
+                mydict['attTypeCode'] = \
+                    'LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode*'
                 mydict['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode_t*'
         else:
             mydict['attTypeCode'] = mydict['element'] + '*'
             mydict['CType'] = mydict['element'] + '_t*'
 
         if mydict['attTypeCode'] == 'XMLNode*' and not gv.is_package:
-            mydict['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}*'.format(mydict['element'])
-            mydict['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}_t*'.format(mydict['element'])
+            mydict['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}*'.\
+                format(mydict['element'])
+            mydict['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}_t*'.\
+                format(mydict['element'])
             # mydict['capAttName'] = SF.remove_prefix(mydict['element'])
         mydict['isNumber'] = False
         mydict['default'] = 'NULL'
@@ -389,14 +394,14 @@ class BaseCppFile(BaseFile.BaseFile):
             # TODO more explanation please
             # TODO see note below about similar code
             if SF.is_camel_case(mydict['element']) and \
-                    possible_name == SF.remove_prefix(mydict['element']).lower():
+                    possible_name == \
+                    SF.remove_prefix(mydict['element']).lower():
                 possible_name = SF.lower_first(mydict['capAttName'])
             [mydict['used_child_name'], _] = SF.remove_hyphens(possible_name)
         if SF.compare_no_case(SF.remove_prefix(el_name), at_name):
             mydict['children_overwrite'] = False
         else:
             mydict['children_overwrite'] = True
-
 
     def update_dict_with_lo_element_att_type(self, mydict, attrib_name):
         """
@@ -409,7 +414,8 @@ class BaseCppFile(BaseFile.BaseFile):
         :return: nothing
         """
         childclass = query.get_class(mydict['element'], mydict['root'])
-        if childclass and 'lo_class_name' in childclass and childclass['lo_class_name'] != '':
+        if childclass and 'lo_class_name' in childclass and \
+                childclass['lo_class_name'] != '':
             name = childclass['lo_class_name']
         else:
             name = SF.list_of_name(mydict['element'])
@@ -431,14 +437,14 @@ class BaseCppFile(BaseFile.BaseFile):
             # Is that correct? Could/should we take out the common code and
             # put it into a new function?
             if SF.is_camel_case(mydict['element']) and \
-                    possible_name == SF.remove_prefix(mydict['element']).lower():
+                    possible_name == \
+                    SF.remove_prefix(mydict['element']).lower():
                 possible_name = SF.lower_first(mydict['capAttName'])
             mydict['used_child_name'] = possible_name
         if attrib_name == SF.lower_first(SF.remove_prefix(self.name)):
             mydict['recursive_child'] = True
             mydict['attTypeCode'] = '{0} *'.format(name)
             mydict['listOfClassName'] = name
-
 
     def update_dict_with_array_att_type(self, mydict):
         """
@@ -459,7 +465,6 @@ class BaseCppFile(BaseFile.BaseFile):
         mydict.update({'attType': 'array', 'isNumber': False,
                        'default': 'NULL'})
 
-
     def update_dict_with_vector_att_type(self, mydict):
         """
         Update the dictionary (representing an <attribute> node) when the
@@ -475,12 +480,13 @@ class BaseCppFile(BaseFile.BaseFile):
             mydict['element'] = SF.lower_first(mydict['element'])
         mydict['attTypeCode'] = 'std::vector<{0}>'.format(mydict['element'])
         mydict['CType'] = mydict['attTypeCode']
-        mydict.update({'attType': 'vector', 'isNumber': False, 'default': 'NULL'})
-
+        mydict.update({'attType': 'vector', 'isNumber': False,
+                       'default': 'NULL'})
 
     def sort_name_mismatches(self):
         """
-        We deal with duplicate xml_names, but TODO need a bit more description here.
+        We deal with duplicate xml_names, but TODO need a bit
+         more description here.
         """
         need_to_adjust = False
         xml_names = []  # Stores unique 'xml_names'
@@ -504,12 +510,14 @@ class BaseCppFile(BaseFile.BaseFile):
             for attribute in self.attributes:
                 if 'xml_name' in attribute and attribute['xml_name'] == name:
                     att_type = attribute['attType']
-                    if att_type in ['element', 'lo_element', 'inline_lo_element']:
+                    if att_type in ['element', 'lo_element',
+                                    'inline_lo_element']:
                         continue
                     else:
-                        attribute['capAttName'] = SF.upper_first(attribute['name'])
-                        attribute['memberName'] = 'm{0}'.format(attribute['capAttName'])
-
+                        attribute['capAttName'] = \
+                            SF.upper_first(attribute['name'])
+                        attribute['memberName'] = \
+                            'm{0}'.format(attribute['capAttName'])
 
     def create_lo_other_child_element_class(self, name, parent):
         """
@@ -540,27 +548,31 @@ class BaseCppFile(BaseFile.BaseFile):
                             'child_elements': [element]})
         return child_class
 
-
     def get_children(self):
         """
+        Iterate over the object's list of "attribute" dictionaries.
 
-        :return:
+        :return: list of dictionaries with 'element' att_type
+                 and unique names (in the list)
         """
         elements = []
         listed_elements = []
         for i in range(0, len(self.attributes)):
-            att_type = self.attributes[i]['attType']
-            name = self.attributes[i]['name']
+            mydict = self.attributes[i]
+            att_type = mydict['attType']
+            name = mydict['name']
             if att_type == 'element' and name not in listed_elements:
-                elements.append(self.attributes[i])
+                elements.append(mydict)
                 listed_elements.append(name)
         return elements
 
-
     def get_lo_children(self):
         """
+        Iterate over the object's "attribute" dictionaries.
+        TODO Sarah, please expand a bit here.
 
-        :return:
+        :return: list of dictionaries with unique names and
+            of type 'inline_lo_element'
         """
         elements = []
         listed_elements = []
@@ -568,7 +580,8 @@ class BaseCppFile(BaseFile.BaseFile):
             attribute = self.attributes[i]
             att_type = attribute['attType']
             name = attribute['name']
-            if 'xml_name' in attribute and len(attribute['xml_name']) > 0 and attribute['xml_name'] != name:
+            if 'xml_name' in attribute and len(attribute['xml_name']) > 0\
+                    and attribute['xml_name'] != name:
                 name = attribute['xml_name']
             if att_type == 'lo_element' and name not in listed_elements:
                 # check for concrete instances
@@ -585,16 +598,26 @@ class BaseCppFile(BaseFile.BaseFile):
 
     # Functions to overwrite base class settings
     def set_base_class(self, base):
+        """
+        Overwrite the class's base
+
+        :param base: the class to which we wish to set it.
+        """
         self.baseClass = base
 
     def set_std_base_class(self, base):
+        """
+        Overwrite the object's "standard" base.
+        TODO sarah please expand on this (and in member declaration above)
+
+        :param base: the class to which we wish to set it.
+        """
         self.std_base = base
 
     ########################################################################
 
     #   FUNCTIONS FOR WRITING STANDARD OPENING CLOSING ELEMENTS
 
-    # functions cpp ns
     def write_cppns_begin(self):
         """
         Declare the beginning of a cpp namespace.
@@ -603,7 +626,6 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_line('{0}_CPP_NAMESPACE_BEGIN'
                         .format(self.library_name.upper()))
         self.skip_line(2)
-
 
     def write_cppns_end(self):
         """
@@ -614,19 +636,15 @@ class BaseCppFile(BaseFile.BaseFile):
                         .format(self.library_name.upper()))
         self.skip_line(2)
 
-
     def write_cppns_use(self):
         """
-
-        :returns: nothing
+        Declare "CPP_NAMESPACE_USE"
         """
         self.skip_line(2)
         self.write_line('{0}_CPP_NAMESPACE_USE'
                         .format(self.library_name.upper()))
         self.skip_line(2)
 
-
-    # functions c declaration
     def write_cdecl_begin(self):
         """
         Declare BEGIN_C_DECLS for portable C code.
@@ -640,7 +658,6 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_line('BEGIN_C_DECLS')
         self.skip_line(2)
 
-
     def write_cdecl_end(self):
         """
         Put at end of C code, for working with different compilers.
@@ -649,8 +666,6 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_line('END_C_DECLS')
         self.skip_line(2)
 
-
-    # functions swig directive
     def write_swig_begin(self):
         """
         Used to start a block of code which you want SWIG to ignore
@@ -659,7 +674,6 @@ class BaseCppFile(BaseFile.BaseFile):
         self.skip_line(2)
         self.write_line('#ifndef SWIG')
         self.skip_line(2)
-
 
     def write_swig_end(self):
         """
@@ -670,8 +684,6 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_line('#endif  /*  !SWIG  */')
         self.skip_line(2)
 
-
-    # functions cplusplus directive
     def write_cpp_begin(self):
         """
         Used to mark the beginning of a C++-specific block
@@ -681,7 +693,6 @@ class BaseCppFile(BaseFile.BaseFile):
         self.skip_line(2)
         self.write_line('#ifdef __cplusplus')
         self.skip_line(2)
-
 
     def write_cpp_end(self):
         """
@@ -739,11 +750,12 @@ class BaseCppFile(BaseFile.BaseFile):
                                                    num_arguments, is_const,
                                                    is_cpp)
 
-
     def write_class_function_header(self, function_name, arguments,
                                     return_type, is_const=False,
                                     constructor_args=None):
         """
+        TODO Sarah, what is the difference between this and the function
+        immediately above? When is each used?
 
         :param function_name:
         :param arguments:
@@ -759,9 +771,10 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_line(return_type)
         line = function_name + '('
         if num_arguments == 0:
-            self.write_zero_or_one_function_argument(line, is_cpp, is_const)  # , None, False)
+            self.write_zero_or_one_function_argument(line, is_cpp, is_const)
         elif num_arguments == 1:
-            self.write_zero_or_one_function_argument(line, is_cpp, is_const, arguments[0])
+            self.write_zero_or_one_function_argument(line, is_cpp,
+                                                     is_const, arguments[0])
         else:
             self.write_multiple_function_arguments(line, arguments,
                                                    num_arguments, is_const,
@@ -771,7 +784,6 @@ class BaseCppFile(BaseFile.BaseFile):
             for i in range(0, len(constructor_args)):
                 self.write_line(constructor_args[i])
             self.down_indent()
-
 
     def write_zero_or_one_function_argument(self, line, is_cpp, is_const,
                                             argument=None, is_abstract=False):
@@ -795,7 +807,6 @@ class BaseCppFile(BaseFile.BaseFile):
         else:
             line += ';'
         self.write_line(line)
-
 
     def write_multiple_function_arguments(self, line, arguments,
                                           num_arguments, is_const, is_cpp):
@@ -831,7 +842,8 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 self.write_line(line)
             for i in range(1, num_arguments - 1):
-                # TODO should we also check here if len(line) > self.line_length ??
+                # TODO should we also check here
+                #  if len(line) > self.line_length ??
                 line = arguments[i] + ','
                 self.write_line(line, att_start)
             line = arguments[num_arguments - 1] + ')'
@@ -847,6 +859,9 @@ class BaseCppFile(BaseFile.BaseFile):
     def write_comment_header(self, title_line, params, return_line,
                              object_name, additional=None):
         """
+        TODO looks like this writes a comment for a function in the
+        header file.
+        But I'm not sure of the details, or what all the params are for.
 
         :param title_line:
         :param params:
@@ -878,7 +893,6 @@ class BaseCppFile(BaseFile.BaseFile):
             self.write_comment_line('@memberof {0}'.format(object_name))
         self.close_comment()
 
-
     def write_brief_header(self, title_line):
         """
         Write a short comment in the file.
@@ -892,9 +906,9 @@ class BaseCppFile(BaseFile.BaseFile):
 
 #########################################################################
 
-# Function for writing a function definition with comment
     def write_function_declaration(self, code, exclude=False):
         """
+        Write a function definition with comment.
 
         :param code:
         :param exclude:
@@ -904,7 +918,8 @@ class BaseCppFile(BaseFile.BaseFile):
             if exclude:
                 self.write_doxygen_start()
             self.write_comment_header(code['title_line'], code['params'],
-                                      code['return_lines'], code['object_name'],
+                                      code['return_lines'],
+                                      code['object_name'],
                                       code['additional'])
             if 'pure_abstract' in code and code['pure_abstract']:
                 self.write_function_header(code['function'], code['arguments'],
@@ -928,14 +943,14 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 self.skip_line(2)
 
-
     def write_function_implementation(self, code, exclude=False, test=False):
         """
-        Function for writing a function implementation
+        Function for writing a C/C++ function implementation
 
-        :param code:
-        :param exclude:
-        :param test:
+        :param code: dictionary storing information about the function.
+        :param exclude: (conditionally) exclude the function from processing
+            by Doxygen
+        :param test: `True` if we are running a test (????)
         :return: nothing
         """
         if code is not None:
@@ -976,15 +991,15 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 self.skip_line(2)
 
-
     def write_inline_function_implementation(self, code, exclude=False):
         """
         Function for writing a function implementation
-        TODO Presumably a C++ inline function
-        So, shouldn't the key word 'inline' appear here somewhere?
+        TODO Presumably a C++ inline function...
+        ...So, shouldn't the key word 'inline' appear here somewhere?
 
-        :param code:
-        :param exclude:
+        :param code: dictionary of information about the function.
+        :param exclude: (conditionally) exclude the function from processing
+            by Doxygen
         :return: nothing
         """
         if code is not None:
@@ -1016,7 +1031,6 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 self.skip_line(2)
 
-
     def write_function_verbatim(self, code):
         """
         Function for writing a function implementation
@@ -1036,7 +1050,6 @@ class BaseCppFile(BaseFile.BaseFile):
                 self.down_indent()
                 self.write_line('};')
                 self.skip_line(2)
-
 
     def write_type_code_enum_header(self, package):
         """
@@ -1061,7 +1074,6 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_blank_comment_line()
         self.write_comment_line('@copydetails doc_additional_typecode_details')
         self.close_comment()
-
 
     def write_enum(self, name, enum_no, enum_val, enum_str, length):
         """
@@ -1092,12 +1104,14 @@ class BaseCppFile(BaseFile.BaseFile):
         if writing_typecodes:
             self.file_out.write('  /*!<{0} */\n'.format(enum_str[0]))
         else:
-            self.file_out.write('  /*!< The {1} {2} is @c \"{0}\". */\n'.format(enum_str[0], parts[0].lower(), parts[1].lower()))
+            self.file_out.write('  /*!< The {1} {2} is @c \"{0}\". */\n'.
+                                format(enum_str[0], parts[0].lower(),
+                                       parts[1].lower()))
 
         for i in range(1, number):
             parts = enum_val[i].split('_')
-            self.file_out.write(', {0:{width}}'.format(enum_val[i],
-                                                      width=length))
+            self.file_out.write(', {0:{width}}'.
+                                format(enum_val[i], width=length))
             if enum_no != 0:
                 self.file_out.write('= {0:{width}}'.format(enum_no, width=5))
                 enum_no += 1
@@ -1105,11 +1119,14 @@ class BaseCppFile(BaseFile.BaseFile):
                 self.file_out.write('  /*!<{0} */\n'.format(enum_str[i]))
             else:
                 if parts[-1] == 'INVALID':
-                    self.file_out.write('  /*!< Invalid {0} value. */\n'.format(name[0:len(name)-2]))
+                    self.file_out.write('  /*!< Invalid {0} value. */\n'.
+                                        format(name[0:len(name)-2]))
                 else:
-                    self.file_out.write('  /*!< The {1} {2} is @c \"{0}\". */\n'.format(enum_str[i], parts[0].lower(), parts[1].lower()))
+                    self.file_out.\
+                        write('  /*!< The {1} {2} is @c \"{0}\". */\n'.
+                              format(enum_str[i], parts[0].lower(),
+                                     parts[1].lower()))
         self.write_line('{0} {1};'.format('}', name))
-
 
     def write_enum_header(self, name, classname, typename):
         """
@@ -1117,7 +1134,7 @@ class BaseCppFile(BaseFile.BaseFile):
 
         :param name: the name of the enum
         :param classname: the name of the C++ class which this enum belongs to
-        :param typename:
+        :param typename: the name of the type we wish to set or get ???
         :return: nothing
         """
         classname = SF.upper_first(classname)
@@ -1151,7 +1168,6 @@ class BaseCppFile(BaseFile.BaseFile):
             self.write_comment_line('@endif')
         self.close_comment()
 
-
     def write_enum_strings(self, name, enum_str):
         """
         Function to write the header about the typecode enumeration
@@ -1178,14 +1194,15 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_implementation(self, implementation):
         """
+        Write some code enclosed within braces ('{' and '}')
 
-        :param implementation:
+        :param implementation: list of code fragments, each stored in
+            a dictionary
         :returns: nothing
         """
         self.write_line('{')
         self.write_nested_implementation(implementation)
         self.write_line('}')
-
 
     def write_implementation_block(self, code_type, code):
         """
@@ -1212,11 +1229,10 @@ class BaseCppFile(BaseFile.BaseFile):
         elif code_type == 'try':
             self.write_try_block(code)
 
-
     def write_nested_implementation(self, implementation):
         """
         Iterate over a set of C++ code fragments, in order to
-        write each one to an implementation file.
+        write each one to the implementation file.
 
         :param implementation: the list of code fragments (represented
                by dictionaries)
@@ -1239,7 +1255,6 @@ class BaseCppFile(BaseFile.BaseFile):
                     self.write_line('{0};'.format(this_impl))
         self.down_indent()
 
-
     def write_lines(self, code):
         """
         Write a number of code lines
@@ -1250,7 +1265,6 @@ class BaseCppFile(BaseFile.BaseFile):
         for i in range(0, len(code)):
             self.write_line('{0};'.format(code[i]))
 
-
     def write_comments(self, code):
         """
         Write a number of comment lines
@@ -1260,7 +1274,6 @@ class BaseCppFile(BaseFile.BaseFile):
         """
         for i in range(0, len(code)):
             self.write_line('// {0}'.format(code[i]))
-
 
     def write_if_else_block(self, code):
         """
@@ -1276,12 +1289,11 @@ class BaseCppFile(BaseFile.BaseFile):
             if_code.append(code[i])
             i += 1
         self.write_block('if', if_code, True)
-        self.write_block('else', code[i + 1 : num], False)
-
+        self.write_block('else', code[i + 1: num], False)
 
     def write_else_if_block(self, code):
         """
-        Write a C/C++ else/if block
+        Write a C/C++ "else if" block
 
         :param code: list of code fragments to write
         :returns: nothing
@@ -1310,9 +1322,8 @@ class BaseCppFile(BaseFile.BaseFile):
                         else_if_code = [code[i]]
                         i += 1
                 else:
-                    self.write_block('else', code[i + 1 : code_len], False)
+                    self.write_block('else', code[i + 1: code_len], False)
                     break
-
 
     def write_try_block(self, code):
         """
@@ -1327,8 +1338,7 @@ class BaseCppFile(BaseFile.BaseFile):
             try_code.append(code[i])
             i += 1
         self.write_block('try', try_code, False)
-        self.write_block('catch', code[i + 1 : len(code)], True)
-
+        self.write_block('catch', code[i + 1: len(code)], True)
 
     def write_block(self, block_start, code, condition):
         """
