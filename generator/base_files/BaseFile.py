@@ -4,6 +4,7 @@
 # @brief   base class for all files to be generated
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -37,13 +38,19 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import global_variables, strFunctions
+from util import global_variables as gv, strFunctions as SF
 
 
 class BaseFile:
     """Common base class for all files"""
 
     def __init__(self, name, extension):
+        """
+        Constructor
+
+        :param name:
+        :param extension:
+        """
         self.name = name
         self.extension = extension
 
@@ -63,7 +70,7 @@ class BaseFile:
         elif len(self.brief_description) == 0:
             self.brief_description = 'Base file'
 
-            # derived members for spacing
+        # derived members for spacing
         self.line_length = 79
         self.num_tabs = 0
 
@@ -74,14 +81,14 @@ class BaseFile:
             self.is_header = False
 
         # members that might get overridden if creating another library
-        self.language = global_variables.language
-        self.library_name = global_variables.library_name
+        self.language = gv.language
+        self.library_name = gv.library_name
         self.cap_language = self.language.upper()
 
         self.open_br = '{'
         self.close_br = '}'
 
-        # members used here that will only cone from some
+        # members used here that will only come from some
         # instantiations of this base class
         # but it needs to know that it can resolve them
         self.class_name = ''
@@ -95,8 +102,15 @@ class BaseFile:
 
     # based on the number of tabs and the length of line specified
 
-    # function to create lines of size specified
     def create_lines(self, line, tabsize, is_comment=False):
+        """
+        Function to create lines of size specified.
+
+        :param line:
+        :param tabsize:
+        :param is_comment:
+        :return:
+        """
         max_length = self.line_length - tabsize
         if max_length <= 0:
             # we must have a line where the tabsize is so long
@@ -110,16 +124,24 @@ class BaseFile:
             return lines
         words = line.split()
         num_words = len(words)
-        if num_words == 0:
+        if num_words < 2:  #== 0:
             lines.append(line)
-        elif num_words == 1:
-            lines.append(line)
+        # elif num_words == 1:
+        #    lines.append(line)
         else:
             self.parse_lines(lines, words, max_length)
         return lines
 
     @staticmethod
     def parse_lines(lines, words, max_length):
+        """
+        appends...?
+
+        :param lines:
+        :param words:
+        :param max_length:
+        :return: nothing
+        """
         num_words = len(words)
         in_quotes = False
         quotes_closed = True
@@ -135,7 +157,7 @@ class BaseFile:
                     if words[i].startswith('\"'):
                         in_quotes = True
                         quotes_closed = False
-                    # check we dont also end
+                    # check we don't also end
                     end_found = False
                     if words[i].endswith('\"'):
                         in_quotes = False
@@ -216,7 +238,7 @@ class BaseFile:
                             i -= 1
                             rollback = False
             else:
-                # dont break between @c and true etc
+                # don't break between @c and true etc
                 # remove @c and go back a word
                 if words[i-1] == '@c':
                     lenline = len(newline)
@@ -232,34 +254,49 @@ class BaseFile:
         if len(newline) > 0:
             lines.append(newline)
 
-    # write line without worrying about size
     def write_line_verbatim(self, line):
+        """
+        Write line without worrying about size. Finish with newline
+        character.
+
+        :param line: the line to write.
+        """
         tabs = ''
         for i in range(0, int(self.num_tabs)):
             tabs += '  '
         self.file_out.write('{0}{1}\n'.format(tabs, line))
 
-    # write line without worrying about size
     def copy_line_verbatim(self, line):
+        """
+        Write line without worrying about size
+        TODO could combine with above function
+        """
         tabs = ''
         for i in range(0, int(self.num_tabs)):
             tabs += '  '
         self.file_out.write('{0}{1}'.format(tabs, line))
 
-    # functions for writing lines indenting each new line
     def write_line(self, line, space=0):
+        """
+        Functions for writing lines indenting each new line
+
+        """
         tabs = ''
         for i in range(0, int(self.num_tabs)):
             tabs += '  '
-        for i in range(0, space):
+        for i in range(0, space):  # different
             tabs += ' '
         lines = self.create_lines(line, len(tabs))
         for i in range(0, len(lines)):
             self.file_out.write('{0}{1}\n'.format(tabs, lines[i]))
-            tabs += '  '
+            tabs += '  '  # different
 
-    # functions for writing lines without indenting each new line
     def write_line_no_indent(self, line):
+        """
+        functions for writing lines without indenting each new line
+
+        TODO combine with function above
+        """
         tabs = ''
         for i in range(0, int(self.num_tabs)):
             tabs += '  '
@@ -267,15 +304,23 @@ class BaseFile:
         for i in range(0, len(lines)):
             self.file_out.write('{0}{1}\n'.format(tabs, lines[i]))
 
-    # function to write a line preserving with indenting
     def write_spaced_line(self, line):
+        """
+        Function to write a line preserving the indenting
+
+        :param line: the line to write.
+        """
         tabs = ''
         for i in range(0, int(self.num_tabs)):
             tabs += '  '
         self.file_out.write('{0}{1}\n'.format(tabs, line))
 
-    # function for blankLines
     def skip_line(self, num=1):
+        """
+        Function for blank lines
+
+        :param num: number of blank lines to write.
+        """
         for i in range(0, num):
             self.file_out.write('\n')
 
@@ -308,6 +353,16 @@ class BaseFile:
         self.file_out.write('{0} {1}\n'.format(tabs, self.comment_end))
 
     def write_doxygen_start(self):
+        """
+        From the Doxygen website:
+
+        Starts a conditional section that ends with a corresponding
+        @endcond command, which is typically found in another comment
+        block. The main purpose of this pair of commands is to (conditionally)
+        exclude part of a file from processing (by Doxygen).
+        The section between @cond and @endcond can be included by adding
+        its section label to the ENABLED_SECTIONS configuration option.
+        """
         tabs = ''
         for i in range(0, int(self.num_tabs)):
             tabs += '  '
@@ -317,6 +372,9 @@ class BaseFile:
                                     self.comment_end))
 
     def write_doxygen_end(self):
+        """
+        End the section (conditionally) excluded by Doxygen.
+        """
         tabs = ''
         for i in range(0, int(self.num_tabs)):
             tabs += '  '
@@ -324,8 +382,10 @@ class BaseFile:
                             .format(tabs, self.comment_start,
                                     self.comment_end))
 
-    # function for the library extern declaration
     def write_extern_decl(self):
+        """
+        Function for the library extern declaration
+        """
         tabs = ''
         for i in range(0, int(self.num_tabs)):
             tabs += '  '
@@ -334,8 +394,12 @@ class BaseFile:
 
     ########################################################################
 
-    # Function to copy from another file verbatim
     def copy_additional_file(self, filename):
+        """
+        Function to copy from another file verbatim
+
+        :param filename: the file we wish to copy.
+        """
         in_file = open(filename, 'r')
         for line in in_file:
             self.file_out.write('{0}'.format(line))
@@ -359,6 +423,9 @@ class BaseFile:
     # File access functions
 
     def close_file(self):
+        """
+        Close file for writing.
+        """
         self.file_out.close()
 
     ########################################################################
@@ -376,19 +443,18 @@ class BaseFile:
         # libsbml copyright
         # libsbml copyright plus custom copyright
         # custom copyright
-        if global_variables.library_name == 'Libsbml':
+        if gv.library_name == 'Libsbml':
             # we are writing code for libsbml include the copyright
             self.write_libsbml_copyright()
-            if global_variables.custom_copyright \
-                    and len(global_variables.custom_copyright) > 0:
+            if gv.custom_copyright \
+                    and len(gv.custom_copyright) > 0:
                 # we have a custom copyright as well
                 # add it
                 self.write_blank_comment_line()
                 self.write_custom_copyright()
         else:
             # we are writing code for something else
-            if not global_variables.custom_copyright \
-                    or len(global_variables.custom_copyright) == 0:
+            if not gv.custom_copyright or len(gv.custom_copyright) == 0:
                 # no copyright given so write the libsbml one
                 self.write_libsbml_copyright()
             else:
@@ -411,13 +477,16 @@ class BaseFile:
                                 '/software/libsbml/license.html')
 
     def write_custom_copyright(self):
-        filename = global_variables.custom_copyright
+        filename = gv.custom_copyright
         in_file = open(filename, 'r')
         for line in in_file:
             self.write_comment_line('{0}'.format(line))
         in_file.close()
 
     def write_libsbml_copyright(self):
+        """
+        Write libSBML copyright statement to file.
+        """
         self.write_comment_line('This file is part of libSBML.  Please visit '
                                 'http://sbml.org for more information about '
                                 'SBML, and the latest version of libSBML.')
@@ -426,8 +495,8 @@ class BaseFile:
                                 'following organizations:')
         self.write_comment_line('    1. California Institute of Technology, '
                                 'Pasadena, CA, USA')
-        self.write_comment_line('    2. University of Heidelberg, Heidelberg, '
-                                'Germany')
+        self.write_comment_line('    2. University of Heidelberg, Heidelberg,'
+                                ' Germany')
         self.write_blank_comment_line()
         self.write_comment_line('Copyright (C) 2013-2018 jointly by the '
                                 'following organizations:')
@@ -460,7 +529,7 @@ class BaseFile:
         self.open_comment()
         self.write_comment_line('@file   {0}'.format(self.filename))
         self.write_comment_line('@brief  {0}'.format(self.brief_description))
-        if global_variables.is_package:
+        if gv.is_package:
             self.write_comment_line('@author SBMLTeam')
         else:
             self.write_comment_line('@author DEVISER')
@@ -482,36 +551,48 @@ class BaseFile:
 
     def write_enum_block(self):
         self.open_comment()
-        self.write_comment_line('<!-- ~ ~ ~ ~ ~ Start of common documentation strings ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~')
-        self.write_comment_line('The following text is used as common documentation blocks copied multiple')
-        self.write_comment_line('times elsewhere in this file. The use of @class is a hack needed because')
-        self.write_comment_line('Doxygen\'s @copydetails command has limited functionality.  Symbols')
-        self.write_comment_line('beginning with "doc_" are marked as ignored in our Doxygen configuration.')
-        self.write_comment_line('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~  -->')
+        self.write_comment_line('<!-- ~ ~ ~ ~ ~ Start of common documentation'
+                                ' strings ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~')
+        self.write_comment_line('The following text is used as common'
+                                ' documentation blocks copied multiple')
+        self.write_comment_line('times elsewhere in this file. The use of'
+                                ' @class is a hack needed because')
+        self.write_comment_line('Doxygen\'s @copydetails command has limited'
+                                ' functionality.  Symbols')
+        self.write_comment_line('beginning with "doc_" are marked as ignored'
+                                ' in our Doxygen configuration.')
+        self.write_comment_line('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~'
+                                ' ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~  -->')
         self.write_blank_comment_line()
         for enum in self.enums:
             self.write_blank_comment_line()
             self.write_comment_line('@class doc_{0}_{1}'.format(self.class_name.lower(), enum['name']))
             self.write_blank_comment_line()
             self.write_comment_line('@par')
-            self.write_comment_line('The attribute "{0}" on a {1} object is used to  TODO:add explanation'.format(enum['name'], self.class_name))
+            self.write_comment_line('The attribute "{0}" on a {1} object is '
+                                    'used to  TODO:add explanation'.
+                                    format(enum['name'], self.class_name))
             self.write_blank_comment_line()
             self.write_comment_line('In the SBML')
-            self.write_comment_line('Level&nbsp;3 Version&nbsp;1 {0} specification, the following are the'.format(self.package))
+            self.write_comment_line('Level&nbsp;3 Version&nbsp;1 {0}'
+                                    ' specification, the following are the'.
+                                    format(self.package))
             self.write_comment_line('allowable values for "{0}":'.format(enum['name']))
             self.write_comment_line('<ul>')
             # dont write the invalid block
             for i in range(0, len(enum['values'])-1):
                 value = enum['values'][i]
-                self.file_out.write(' * <li> @c "{0}", TODO:add description\n'.format(value['value']))
+                self.file_out.write(' * <li> @c "{0}", '
+                                    'TODO:add description\n'.
+                                    format(value['value']))
                 self.write_blank_comment_line()
             self.write_comment_line('</ul>')
 
         self.close_comment()
 
     def write_class_comments(self, extension, plugin, validator):
-        fullname = global_variables.package_full_name
-        up_package = strFunctions.upper_first(self.package)
+        fullname = gv.package_full_name
+        up_package = SF.upper_first(self.package)
         validator_class_comment = 'The {0} class extends the ' \
                                   'Validator class from core libSBML to ' \
                                   'apply validation to the constructs ' \
@@ -529,16 +610,20 @@ class BaseFile:
         self.write_blank_comment_line()
         self.write_comment_line('@class {0}'.format(self.name))
         if extension:
-            self.write_comment_line('@sbmlbrief{0}{1}{2} Base extension class for the package'
+            self.write_comment_line('@sbmlbrief{0}{1}{2} Base extension'
+                                    ' class for the package'
                                     '.'.format(self.open_br,
                                                self.package.lower(),
                                                self.close_br))
             self.write_blank_comment_line()
             self.write_comment_line('@htmlinclude not-sbml-warning.html')
             self.write_blank_comment_line()
-            self.write_comment_line('This is the {0} package extension of the SBMLExtension class '
-                                    'that is used to facilitate libSBML plug-ins in the implementation of an SBML'
-                                    'Level&nbsp;3 package.'.format(strFunctions.upper_first(self.package)))
+            self.write_comment_line('This is the {0} package extension of the'
+                                    ' SBMLExtension class that is used to '
+                                    'facilitate libSBML plug-ins in the '
+                                    'implementation of an SBMLLevel&nbsp;3 '
+                                    'package.'.
+                                    format(SF.upper_first(self.package)))
             self.write_blank_comment_line()
             self.write_comment_line('@class {0}PkgNamespaces'
                                     ''.format(up_package))
@@ -589,6 +674,6 @@ class BaseFile:
                 excluded = True
             i += 1
         if not excluded:
-            if filename == global_variables.library_name.lower():
+            if filename == gv.library_name.lower():
                 excluded = True
         return excluded
