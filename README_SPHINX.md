@@ -16,7 +16,7 @@ Start in `Deviser/deviser` directory.
 So this next command will only pick up those files in `Deviser/deviser/generator` directory: 
  
 `$ sphinx-apidoc -n -o sphinx-docs -e -M -F --ext-autodoc --ext-doctest --ext-coverage  
---ext-githubpages generator '*tests*'`  
+--ext-githubpages generator`  
  
 The `–n` option means this is a dry-run, to see what will be produced. 
 You can then remove the –n option when you want to begin.
@@ -24,8 +24,6 @@ Here, the output directory (for .rst files) is `Deviser/deviser/sphinx-docs`
 We may not need all the extensions listed (run `sphinx-apidoc --help` for what they do.)
 The `-e` option creates separate a HTML file for each module (`.py` file), rather than
 one enormous one.
-The trailing `'*tests*'` is an exclude option; it means we don't generate documentation
-for files matching this pattern.
 
 [It's possible a couple of options above may not be needed, perhaps the `-M` and `-F` ones?]
  
@@ -93,8 +91,8 @@ Note the quotes.
  
 This will build the html docs and put them in `deviser/sphinx-html/html` 
  
-[NB if the `'*tests*'` exclude option is *not* used, the build attempt will
-encounter  circular import errors, as here:
+[NB if the `'*tests*'` exclude option is *not* used, the build attempt might
+encounter circular import errors, as here:
 ```
 reading sources... [100%] generator.tests.test_examples.run_examples_tests                                                               
 WARNING: autodoc: failed to import module 'test_examples' from module 'generator.tests'; the following exception was raised: 
@@ -102,7 +100,10 @@ cannot import name 'run_tex_tests' from partially initialized module 'generator.
 WARNING: autodoc: failed to import module 'test_examples.run_examples_tests' from module 'generator.tests'; the following exception was raised: 
 cannot import name 'run_tex_tests' from partially initialized module 'generator.tests.test_examples' (most likely due to a circular import) (../generator/tests/test_examples/__init__.py) 
 ```
-I am just leaving this here for the sake of completeness.]
+
+In that case you may need to exclude the tests, so your command will need to alter slightly to:
+`$ sphinx-apidoc -n -o sphinx-docs -e -M -F --ext-autodoc --ext-doctest --ext-coverage  
+--ext-githubpages generator '*tests*'`  ]
 
 You can then start an HTTP server (via command `python -m http.server`) 
 and navigate to the `index.html` file therein. 
@@ -141,7 +142,8 @@ source_suffix = {
 '.rst': 'restructuredtext',
 '.txt': 'restructuredtext',
 '.md': 'markdown',
-}```
+}
+```
 
 ### I just want to make some changes to my docstrings!
 Assuming you have the latest version of the Deviser generator code, the workflow steps are:
