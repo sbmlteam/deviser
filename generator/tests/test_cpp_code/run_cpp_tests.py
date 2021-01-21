@@ -20,57 +20,85 @@ not_tested = []
 ##############################################################################
 # Specific generation functions
 
+def common_setup(filename):
+    """
+    Generic set-up code. Parse XML file and go into ./temp.
 
-def generate_new_cpp_header(filename, num):
+    :param filename: XML file to parse
+    :return: the big dictionary structure generated from the XML.
+    """
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
-    working_class = ob['baseElements'][num]
     os.chdir('./temp')
+    return ob
+
+
+def generate_new_cpp_header(filename, num):
+    """
+    Generate cpp files.
+
+    :param filename: name of XML file to parse.
+    :param num: index of item in list which is the value
+        (in the big dictionary structure) for the key 'baseElements'.
+        It is the index so that we can do code for just one class and
+        not whole of the object returned from ParseXML
+    :return: nothing
+    """
+    ob = common_setup(filename)
+    working_class = ob['baseElements'][num]
     all_files = CppFiles.CppFiles(working_class, True)
     all_files.write_files()
     os.chdir('../.')
 
 
-def generate_extension_header(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    all_files = ExtensionFiles.ExtensionFiles(ob, '', True)
+def generate_generic_header(filename, package):
+    """
+    Generate Extension files with specified package.
+
+    :param filename: XML file to parse.
+    :param package: required package, e.g. 'types', 'fwd' or ''
+    :return: nothing.
+    """
+    ob = common_setup(filename)
+    all_files = ExtensionFiles.ExtensionFiles(ob, package, True)
     all_files.write_files()
     os.chdir('../.')
+
+
+def generate_extension_header(filename):
+    generate_generic_header(filename, '')
 
 
 def generate_types_header(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    all_files = ExtensionFiles.ExtensionFiles(ob, 'types', True)
-    all_files.write_files()
-    os.chdir('../.')
+    generate_generic_header(filename, 'types')
 
 
 def generate_fwd_header(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    all_files = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
-    all_files.write_files()
-    os.chdir('../.')
+    generate_generic_header(filename, 'fwd')
 
 
 def generate_plugin_header(filename, num):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    """
+    Generate plugin files.
+
+    :param filename: XML file to parse.
+    :param num: plugin #.
+    :return: nothing.
+    """
+    ob = common_setup(filename)
     all_files = ExtensionFiles.ExtensionFiles(ob, '', True)
     all_files.write_plugin_files(num)
     os.chdir('../.')
 
 
 def generate_error_header(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    """
+    Generate error header files.
+
+    :param filename: XML file to parse
+    :return: nothing
+    """
+    ob = common_setup(filename)
     all_files = ValidationFiles.ValidationFiles(ob, True)
     all_files.write_error_header()
     all_files.write_error_table_header()
@@ -78,18 +106,26 @@ def generate_error_header(filename):
 
 
 def generate_validator(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    """
+    Generate the set of Validation files.
+
+    :param filename: XML file to parse.
+    :return: nothing
+    """
+    ob = common_setup(filename)
     all_files = ValidationFiles.ValidationFiles(ob, True)
     all_files.write_validator_files()
     os.chdir('../.')
 
 
 def generate_constraints(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
+    """
+    Generate the 'constraints' files.
+
+    :param filename: XML file to parse
+    :return: nothing.
+    """
+    ob = common_setup(filename)
     all_files = ValidationFiles.ValidationFiles(ob, True)
     all_files.write_constraints()
     os.chdir('../.')
@@ -98,43 +134,68 @@ def generate_constraints(filename):
 #############################################################################
 # Specific compare functions
 
-def compare_files(correct_file, temp_file):
+def compare_files(folder, class_name, file_ending):
+    """
+    Generic function for comparing a reference file with a test one.
+
+    :param folder: directory (e.g. 'test-code', 'test-extension') housing reference file.
+    :param class_name: C++ class name, and stub of .cpp and .h files in test-code/ and test-extension/.
+    :param file_ending: end of file name, e.g. '.h', '.cpp', 'Declared.cxx'
+    :returns: 0 on success, or file not present; 1 on failure.
+    """
+    correct_file = os.path.normpath('./{0}/{1}{2}'.format(folder, class_name, file_ending))
+    temp_file = os.path.normpath('./temp/{0}{1}'.format(class_name, file_ending))
     return test_functions.compare_files(correct_file, temp_file, fails,
                                         not_tested)
 
 
 def compare_code_headers(class_name):
-    correct_file = '.\\test-code\\{0}.h'.format(class_name)
-    temp_file = '.\\temp\\{0}.h'.format(class_name)
-    return compare_files(correct_file, temp_file)
+    """
+    Wrapper to help compare two code header files.
+    """
+    return compare_files('test-code', class_name, '.h')
 
 
 def compare_ext_headers(class_name):
-    correct_file = '.\\test-extension\\{0}.h'.format(class_name)
-    temp_file = '.\\temp\\{0}.h'.format(class_name)
-    return compare_files(correct_file, temp_file)
+    """
+    Wrapper to help compare two extension header files.
+    """
+    return compare_files('test-extension', class_name, '.h')
 
 
 def compare_code_impl(class_name):
-    correct_file = '.\\test-code\\{0}.cpp'.format(class_name)
-    temp_file = '.\\temp\\{0}.cpp'.format(class_name)
-    return compare_files(correct_file, temp_file)
+    """
+    Wrapper to help compare two code implementation files.
+    """
+    return compare_files('test-code', class_name, '.cpp')
 
 
 def compare_ext_impl(class_name, declared=False):
+    """
+    Wrapper to help compare two extension implementation files.
+    """
     if declared:
-        correct_file = '.\\test-extension\\{0}Declared.cxx'.format(class_name)
-        temp_file = '.\\temp\\{0}Declared.cxx'.format(class_name)
+        ending = 'Declared.cxx'
     else:
-        correct_file = '.\\test-extension\\{0}.cpp'.format(class_name)
-        temp_file = '.\\temp\\{0}.cpp'.format(class_name)
-    return compare_files(correct_file, temp_file)
+        ending = '.cpp'
+    return compare_files('test-extension', class_name, ending)
 
 
 #############################################################################
 # Specific test functions
 
+
 def run_test(name, num, class_name, test_case, list_of):
+    """
+    Most commonly-used test function.
+
+    :param name: which set of tests this relates to. e.g. 'test_att'
+    :param num: index??? TODO please Sarah.
+    :param class_name: C++ class name/start of .h and .cpp file names.
+    :param test_case: brief description, e.g. 'all types attributes required'
+    :param list_of: e.g. 'ListOfFunctionTerms'. Can be ''.
+    :return: number of test failures.
+    """
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_new_cpp_header(filename, num)
     fail = compare_code_headers(class_name)
@@ -148,6 +209,15 @@ def run_test(name, num, class_name, test_case, list_of):
 
 
 def run_ext_test(name, class_name, test_case, test):
+    """
+    Run an 'extension' test.
+
+    :param name: which set of tests this relates to, e.g. 'qual'
+    :param class_name: C++ class name/start of .h and .cpp file names, e.g. 'QualExtension'.
+    :param test_case: brief description, e.g. 'basic extension file'
+    :param test: integer specifying which type of header file to generate.
+    :return: number of failed tests
+    """
     filename = test_functions.set_up_test(name, class_name, test_case)
     if test == 0:
         generate_extension_header(filename)
@@ -163,6 +233,16 @@ def run_ext_test(name, class_name, test_case, test):
 
 
 def run_plug_test(name, class_name, test_case, num):
+    """
+    Run a 'plugin' test.
+
+    :param name: which set of tests this relates to, e.g. 'qual'
+    :param class_name: C++ class name/start of .h and .cpp file names, e.g. 'QualModelPlugin'
+    :param test_case: brief description, e.g. 'basic plugin'
+    :param num: plugin #. It's just the index in the list of plugins that are
+                 part of large dict object form ParseXML
+    :return: number of failed tests.
+    """
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_plugin_header(filename, num)
     fail = compare_ext_headers(class_name)
@@ -171,9 +251,20 @@ def run_plug_test(name, class_name, test_case, num):
     return fail
 
 
-def run_valid_test(name, class_name, test_case, is_ext=True):
+def run_valid_test(name, class_name, test_case, generate_error_files=True):
+    """
+    Run a 'validation' test.
+
+    :param name: which set of tests this relates to, e.g. 'test_att'
+    :param class_name: C++ class name/start of .h and .cpp file names,
+        e.g. 'TestSBMLError' or SBMLValidator.h
+    :param test_case: brief description, e.g. 'error enumeration'
+    :param generate_error_files: determines which file to generate, Error.h and
+        ErrorTable.h if True, otherwise Validator files
+    :return: number of failed tests.
+    """
     filename = test_functions.set_up_test(name, class_name, test_case)
-    if is_ext:
+    if generate_error_files:
         generate_error_header(filename)
         fail = compare_ext_headers(class_name)
         fail += compare_ext_headers('{0}Table'.format(class_name))
@@ -186,6 +277,14 @@ def run_valid_test(name, class_name, test_case, is_ext=True):
 
 
 def run_constraints_test(name, class_name, test_case):
+    """
+    Run a 'constraints' test.
+
+    :param name: which set of tests this relates to, e.g. 'spatial'
+    :param class_name: C++ class name/start of .h and .cpp file names, e.g. 'SpatialConsistencyConstraints'
+    :param test_case: brief description, e.g. 'constraints'
+    :return: number of failed tests
+    """
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_constraints(filename)
     fail = compare_ext_impl(class_name)
@@ -199,14 +298,38 @@ def run_constraints_test(name, class_name, test_case):
 
 def main():
 
+    # NB the reference files in test-code/ and test-extension/ were
+    # presumably generated on Windows. I am running these tests on a
+    # MacBook (so like Linux). The file comparison works OK for
+    # Python 3 but not Python 2. I ran all the reference files through
+    # dos2unix and now all the tests work under Python 2 unless noted below.
+
     runall = True
- #   runall = False
+    # runall = False
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir('temp'):
         os.mkdir('temp')
     fail = 0
+
+    # Run the next couple of tests always:
+
+    # TODO This test is currently failing.
+    name = 'copy'
+    num = 0
+    class_name = 'Def'
+    list_of = ''
+    test_case = 'class with XMLNode'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    # This one isn't working either.
+    # name = 'copy_add'
+    # num = 0
+    # class_name = 'Abc'
+    # list_of = ''
+    # test_case = 'class with additional code'
+    # fail += run_test(name, num, class_name, test_case, list_of)
 
     if runall:
         # run the individual tests
@@ -254,7 +377,7 @@ def main():
 
         name = 'test_att'
         class_name = 'TestSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'qual'
@@ -296,7 +419,7 @@ def main():
 
         name = 'qual'
         class_name = 'qualfwd'
-        test_case = 'forward declarations '
+        test_case = 'forward declarations'
         fail += run_ext_test(name, class_name, test_case, 2)
 
         name = 'qual'
@@ -307,7 +430,7 @@ def main():
 
         name = 'qual'
         class_name = 'QualSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'qual'
@@ -499,7 +622,7 @@ def main():
 
         name = 'groups'
         class_name = 'GroupsSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'test_vers'
@@ -556,7 +679,7 @@ def main():
 
         name = 'fbc_v2'
         class_name = 'FbcSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'fbc_v2'
@@ -607,8 +730,14 @@ def main():
 
         name = 'test_sidrefs'
         class_name = 'RefsSBMLError'
-        test_case = 'sidref with multiple targets '
+        test_case = 'sidref with multiple targets'
         fail += run_valid_test(name, class_name, test_case)
+
+        # These next tests are testing the spacing of the element content
+        # eg.
+        # element="ThingA, ThingB"
+        # element=" ThingA, ThingB"
+        # element="ThingA,ThingB"
 
         name = 'test_sidrefs_1'
         class_name = 'RefsSBMLError'
@@ -632,7 +761,7 @@ def main():
 
         name = 'test_lists'
         class_name = 'FooSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'nasty_lists'
@@ -784,14 +913,14 @@ def main():
 
         name = 'new_distrib'
         class_name = 'DistribSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'new_distrib'
         num = 11
         class_name = 'ExternalParameter'
         list_of = ''
-        test_case = 'class contains a listOf iteself'
+        test_case = 'class contains a listOf itself'
         fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'test_core_vers'
@@ -808,7 +937,7 @@ def main():
         num = 0
         class_name = 'ClassOneTwo'
         list_of = ''
-        test_case = 'core version and package version not 1 '
+        test_case = 'core version and package version not 1'
         fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'test_core_vers_multipkg'
@@ -821,20 +950,6 @@ def main():
         class_name = 'CoreversMultiPkgModelPlugin'
         test_case = 'versions of plugins - elements'
         fail += run_plug_test(name, class_name, test_case, num)
-
-        # name = 'copy_add'
-        # num = 0
-        # class_name = 'Abc'
-        # list_of = ''
-        # test_case = 'class with additional code'
-        # fail += run_test(name, num, class_name, test_case, list_of)
-
-        name = 'copy'
-        num = 0
-        class_name = 'Def'
-        list_of = ''
-        test_case = 'class with XMLNode'
-        fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'twoAtOnce'
         num = 0
@@ -864,7 +979,7 @@ def main():
         # leave out for now as all validation needs reviewing for multiple
         name = 'twoAtOnce'
         class_name = 'TwoAtOnceSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
 #        fail += run_valid_test(name, class_name, test_case)
 
 # leave out as need to work on automatically adding prefix
@@ -911,7 +1026,7 @@ def main():
 
         name = 'render'
         class_name = 'RenderSBMLError'
-        test_case = 'error enumeration '
+        test_case = 'error enumeration'
         fail += run_valid_test(name, class_name, test_case)
 
         name = 'render'
@@ -988,8 +1103,8 @@ def main():
         test_case = 'contains list of itself but with other listof used elsewhere'
         fail += run_test(name, num, class_name, test_case, list_of)
 
-# not yet sorted
-       # name = 'arrays'
+        # not yet sorted
+        # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
         # fail += run_ext_test(name, class_name, test_case, 1)
@@ -1011,22 +1126,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        # name = 'copy_add'
-        # num = 0
-        # class_name = 'Abc'
-        # list_of = ''
-        # test_case = 'class with additional code'
-        # fail += run_test(name, num, class_name, test_case, list_of)
-
-        name = 'copy'
-        num = 0
-        class_name = 'Def'
-        list_of = ''
-        test_case = 'class with XMLNode'
-        fail += run_test(name, num, class_name, test_case, list_of)
+        pass
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
+
 
 if __name__ == '__main__':
     main()

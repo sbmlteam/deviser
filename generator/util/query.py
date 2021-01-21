@@ -133,7 +133,7 @@ def has_children(attributes):
 
 def has_children_not_math(attributes):
     """
-    Return True if any of the attributes refer to elements but *not* math
+    Return `True` if any of the attributes refer to elements but *not* math
 
     :param attributes: the <attribute> nodes we want to check
     :return: see above.
@@ -142,7 +142,8 @@ def has_children_not_math(attributes):
 
     .. code-block:: xml
 
-       <attribute name="math" required="true" type="element" element="ASTNode*...>
+        <attribute name="math" required="true"
+                   type="element" element="ASTNode*...>
     """
     for i in range(0, len(attributes)):
         if attributes[i]['type'] == 'lo_element':
@@ -183,6 +184,7 @@ def get_class(name, root_object):
 def is_inline_child(class_object):
     """
     If this object is an 'inline child', get list of inline parents.
+    See issue # 35
 
     :param class_object: structure representing a class
     :return: list of parents objects for which this class is an inline child
@@ -253,8 +255,9 @@ def is_inline_child(class_object):
 
 def get_inline_parents(class_object):
     """
-    TODO I'm guessing an inline parent is the node enclosing
-    a set of inline children, as in the last function?
+    An inline parent is the node enclosing
+    a set of inline children, as in is_inline_child()
+    See issue # 35
 
     :param class_object:
     :return:
@@ -367,10 +370,7 @@ def is_instantiated(element):
     Basic function that checks whether the given element is instantiated.
 
     :param element: the element object to check.
-    :returns: True if instantiated
-
-    TODO add description of line with string equality check;
-    what does c['element] = element['element'] compare?
+    :returns: `True` if instantiated
 
     Added issue #43
     """
@@ -1072,6 +1072,7 @@ def get_first_enum_value(attribute):
 #     return prefix
 #
 
+
 def get_typecode_format(classname, language):
     """
     Formats the typecode for the class in a standard format:
@@ -1492,7 +1493,8 @@ def is_number(att_type):
     Does this attribute type represent a number?
 
     :param att_type: the type, e.g. "int", "SIdRef", "string", ...
-    :param return: Return `True` if the attribute type given represents a number
+    :param return: Return `True` if the attribute type given
+        represents a number
 
     e.g. an attribute node like this
 
