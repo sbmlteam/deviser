@@ -12,95 +12,77 @@ from parseXML import ParseXML
 import test_functions
 
 
-
 ##############################################################################
 # Set up variables
 fails = []
 not_tested = []
 
 
-##############################################################################
-# Specific generation functions
+def setup(filename, name):
+    """
+    Parses XML file and obtains big dictionary structure of information
+    about it. Creates directory for test file, if required.
 
-
-def generate_validator(filename, name):
+    :param filename: name of the XML file to parse
+    :param name: name of the temporary directory
+    :returns: the big dictionary structure.
+    """
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
     if not os.path.isdir(name):
         os.mkdir(name)
     os.chdir(name)
-    all_files = TexValidationRulesFile.TexValidationRulesFile(ob)
+    return ob
+
+
+def generate_files(filename, name, type):
+    """
+    Generate the file to test.
+
+    :param filename: the name of the file
+    :param name: directory in which to create the file
+    :type: one of ['apdx-validation', 'macros', 'body']
+    :returns: nothing
+    """
+    assert type in ['apdx-validation', 'macros', 'body']
+    ob = setup(filename, name)
+    if type == 'apdx-validation':
+        all_files = TexValidationRulesFile.TexValidationRulesFile(ob)
+    elif type == 'macros':
+        all_files = TexMacrosFile.TexMacrosFile(ob)
+    else:  # type == 'body':
+        all_files = TexBodySyntaxFile.TexBodySyntaxFile(ob)
     all_files.write_file()
     os.chdir('../../.')
 
 
-def generate_macros(filename, name):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    if not os.path.isdir(name):
-        os.mkdir(name)
-    os.chdir(name)
-    all_files = TexMacrosFile.TexMacrosFile(ob)
-    all_files.write_file()
-    os.chdir('../../.')
+def compare_items(name, type):
+    """
+    Compare two files, reference and temporary versions.
 
-
-def generate_body(filename, name):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    os.chdir('./temp')
-    if not os.path.isdir(name):
-        os.mkdir(name)
-    os.chdir(name)
-    all_files = TexBodySyntaxFile.TexBodySyntaxFile(ob)
-    all_files.write_file()
-    os.chdir('../../.')
-
-
-#############################################################################
-# Specific compare functions
-
-def compare_files(correct_file, temp_file):
+    :param name: name of the directory housing the file.
+    :param type: one of ['apdx-validation', 'macros', 'body']
+    :return: 0 if success or file missing, 1 on failure
+    """
+    assert type in ['apdx-validation', 'macros', 'body']
+    correct_file = os.path.normpath('./test-tex/{0}/{1}.tex'.format(name, type))
+    temp_file = os.path.normpath('./temp/{0}/{1}.tex'.format(name, type))
     return test_functions.compare_files(correct_file, temp_file, fails,
                                         not_tested)
 
 
-def compare_validation(name):
-    correct_file = '.\\test-tex\\{0}\\apdx-validation.tex'.format(name)
-    temp_file = '.\\temp\\{0}\\apdx-validation.tex'.format(name)
-    return compare_files(correct_file, temp_file)
-
-
-def compare_macros(name):
-    correct_file = '.\\test-tex\\{0}\\macros.tex'.format(name)
-    temp_file = '.\\temp\\{0}\\macros.tex'.format(name)
-    return compare_files(correct_file, temp_file)
-
-
-def compare_body(name):
-    correct_file = '.\\test-tex\\{0}\\body.tex'.format(name)
-    temp_file = '.\\temp\\{0}\\body.tex'.format(name)
-    return compare_files(correct_file, temp_file)
-
-
-#############################################################################
-# Specific test functions
-
-
 def run_test(name, test_type):
+    """
+    Generic test function.
+
+    :param name: directory name
+    :param test_type: a valid test type e.g. 'macros'
+    :returns: 0 if success or file missing, 1 if failure.
+    """
     filename = test_functions.set_up_test(name, 'Tex', test_type)
-    fail = 0
-    if test_type == 'validation':
-        generate_validator(filename, name)
-        fail = compare_validation(name)
-    elif test_type == 'macros':
-        generate_macros(filename, name)
-        fail = compare_macros(name)
-    elif test_type == 'body':
-        generate_body(filename, name)
-        fail = compare_body(name)
+    generate_files(filename, name, test_type)
+    fail = compare_items(name, test_type)
     print('')
     return fail
 
@@ -112,19 +94,25 @@ def run_test(name, test_type):
 def main():
 
     runall = True
-    # set up the enivornment
+    # Set up the environment.
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
-    (path_to_tests, other) = os.path.split(this_dir)
+    (path_to_tests, _) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir('temp'):
         os.mkdir('temp')
     fail = 0
 
+    # These tests are all independent from each other,
+    # so their order doesn't matter.
+    name = 'spatial'
+    test_case = 'body'
+    fail += run_test(name, test_case)
+
     if runall:
-        # run the individual tests
+        # Run the other individual tests.
         name = 'qual'
-        test_case = 'validation'
+        test_case = 'apdx-validation'
         fail += run_test(name, test_case)
 
         name = 'groups'
@@ -132,7 +120,7 @@ def main():
         fail += run_test(name, test_case)
 
         name = 'groups'
-        test_case = 'validation'
+        test_case = 'apdx-validation'
         fail += run_test(name, test_case)
 
         name = 'groups'
@@ -140,11 +128,11 @@ def main():
         fail += run_test(name, test_case)
 
         name = 'unknown_type'
-        test_case = 'validation'
+        test_case = 'apdx-validation'
         fail += run_test(name, test_case)
 
         name = 'test_sidrefs'
-        test_case = 'validation'
+        test_case = 'apdx-validation'
         fail += run_test(name, test_case)
 
         name = 'test_sidrefs'
@@ -152,7 +140,7 @@ def main():
         fail += run_test(name, test_case)
 
         name = 'test_lists'
-        test_case = 'validation'
+        test_case = 'apdx-validation'
         fail += run_test(name, test_case)
 
         name = 'test_lists'
@@ -160,19 +148,7 @@ def main():
         fail += run_test(name, test_case)
 
         name = 'test_att'
-        test_case = 'validation'
-        fail += run_test(name, test_case)
-
-        name = 'spatial'
-        test_case = 'validation'
-        fail += run_test(name, test_case)
-
-        name = 'spatial'
-        test_case = 'body'
-        fail += run_test(name, test_case)
-    else:
-        name = 'spatial'
-        test_case = 'validation'
+        test_case = 'apdx-validation'
         fail += run_test(name, test_case)
 
     # write summary

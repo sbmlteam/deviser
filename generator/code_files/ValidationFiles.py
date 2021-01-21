@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # @file    ValidationFiles.py
-# @brief   class for generating cpp files
+# @brief   class for generating validation-related files
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #
@@ -47,7 +47,7 @@ from . import ValidatorCodeFile
 
 
 class ValidationFiles():
-    """Class for all Cpp files"""
+    """Class for all validation-related files"""
 
     def __init__(self, lib_object, verbose=False):
         # members from object
