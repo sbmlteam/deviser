@@ -139,7 +139,8 @@ def has_children_not_math(attributes):
 
     .. code-block:: xml
 
-    <attribute name="math" required="true" type="element" element="ASTNode*...
+        <attribute name="math" required="true"
+                   type="element" element="ASTNode*...>
 
     """
     for i in range(0, len(attributes)):
@@ -182,6 +183,7 @@ def get_class(name, root_object):
 def is_inline_child(class_object):
     """
     If this object is an 'inline child', get list of inline parents.
+    See issue # 35
 
     :param class_object: structure representing a class
     :return: list of parents objects for which this class is an inline child
@@ -355,7 +357,7 @@ def is_instantiated(element):
     Basic function that checks whether the given element is instantiated.
 
     :param element: the element object to check.
-    :returns: True if instantiated
+    :returns: `True` if instantiated
 
     Added issue #43
     """
