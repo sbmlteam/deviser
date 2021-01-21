@@ -270,7 +270,7 @@ class BaseCppFile(BaseFile.BaseFile):
                         if possible_name == \
                                 SF.remove_prefix(mydict['element']).lower():
                             capname = \
-                                SF.upper_first(SF.remove_prefix(mydict['element']))
+                                SF.upper_first(SF.remove_prefix(mydict['element']))  # noqa: E501
                     elif possible_name != attrib_name:
                         capname = SF.upper_first(mydict['xml_name'])
 
@@ -608,7 +608,8 @@ class BaseCppFile(BaseFile.BaseFile):
     def set_std_base_class(self, base):
         """
         Overwrite the object's "standard" base.
-        TODO sarah please expand on this (and in member declaration above)
+        TODO Sarah please expand on this (and in member declaration
+        for std_base above)
 
         :param base: the class to which we wish to set it.
         """
@@ -922,7 +923,8 @@ class BaseCppFile(BaseFile.BaseFile):
                                       code['object_name'],
                                       code['additional'])
             if 'pure_abstract' in code and code['pure_abstract']:
-                self.write_function_header(code['function'], code['arguments'],
+                self.write_function_header(code['function'],
+                                           code['arguments'],
                                            code['return_type'],
                                            code['constant'], code['virtual'],
                                            True)
@@ -966,7 +968,7 @@ class BaseCppFile(BaseFile.BaseFile):
                     function_name = code['function']
                 else:
                     function_name = code['object_name'] + '::' \
-                                    + code['function']
+                                  + code['function']
             if 'args_no_defaults' in code:
                 arguments = code['args_no_defaults']
             else:
@@ -1035,7 +1037,7 @@ class BaseCppFile(BaseFile.BaseFile):
         """
         Function for writing a function implementation
 
-        :param code:
+        :param code: dictionary of information about what to write.
         :return: nothing
         """
         if code is not None:
@@ -1055,7 +1057,7 @@ class BaseCppFile(BaseFile.BaseFile):
         """
         Function to write the header about the typecode enumeration
 
-        :param package:
+        :param package: name of the package ??
         :return: nothing
         """
         up_package = SF.upper_first(package)
@@ -1079,16 +1081,16 @@ class BaseCppFile(BaseFile.BaseFile):
         """
         Function to write to the header about the typecode enumeration
 
-        :param name:
-        :param enum_no:
-        :param enum_val:
-        :param enum_str:
-        :param length:
+        :param name: the name of the enum
+        :param enum_no: ???
+        :param enum_val: list of values in the enum
+        :param enum_str: list of names in the enum
+        :param length: ???
         :return: nothing
         """
         number = len(enum_val)
         if len(enum_str) != number:
-            return
+            return  # and flag up an error?
         parts = enum_val[0].split('_')
         writing_typecodes = False
         if len(parts) > 1 and parts[1].lower() == self.package:
@@ -1120,7 +1122,7 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 if parts[-1] == 'INVALID':
                     self.file_out.write('  /*!< Invalid {0} value. */\n'.
-                                        format(name[0:len(name)-2]))
+                                        format(name[0:len(name) - 2]))
                 else:
                     self.file_out.\
                         write('  /*!< The {1} {2} is @c \"{0}\". */\n'.
@@ -1173,16 +1175,16 @@ class BaseCppFile(BaseFile.BaseFile):
         Function to write the header about the typecode enumeration
         TODO Presumably the word 'enum' is written out at some point?
 
-        :param name:
-        :param enum_str:
+        :param name: the name of the enum
+        :param enum_str: list of strings of enum members ?
         :return: nothing
         """
         number = len(enum_str)
         self.write_line('static')
         self.write_line('const char* {0}[] ='.format(name))
         self.write_line('{')
-        # here we directly write out the line so that deviser does not try and
-        # chop it up into lines of a given length
+        # Here we directly write out the line so that deviser does not try and
+        # chop it up into lines of a given length:
         self.file_out.write('  \"{0}\"\n'.format(enum_str[0]))
         for i in range(1, number):
             self.file_out.write(', \"{0}\"\n'.format(enum_str[i]))
