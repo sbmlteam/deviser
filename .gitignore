@@ -79,3 +79,6 @@ sphinx-docs/_build
 sphinx-docs/_static
 sphinx-docs/_templates
 
+# ignore Sarah's batch file to create docs
+gendocs.bat
+
