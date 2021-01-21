@@ -23,7 +23,7 @@ import sphinx_rtd_theme
 project = 'generator'
 copyright = '2020, Sarah Keating et al'
 author = 'Sarah M. Keating, Frank T. Bergmann, Michael Hucka,' \
-         'Brett G. Olivier, Lucian P. Smith'
+         'Brett G. Olivier, Lucian P. Smith, Matthew S. Gillman'
 
 
 # -- General configuration ---------------------------------------------------
