@@ -439,6 +439,9 @@ class BaseFile:
         self.add_file_header()
 
     def write_licence(self):
+        """
+        Write the licence texts to the file.
+        """
         self.write_blank_comment_line()
         self.write_comment_line('<!-----------------------------------------'
                                 '---------------------------------')
@@ -468,6 +471,9 @@ class BaseFile:
                                 '---------------------------- -->')
 
     def write_gpl_licence(self):
+        """
+        Write the GPL licence to the file.
+        """
         self.write_blank_comment_line()
         self.write_comment_line('This library is free software; you can '
                                 'redistribute it and/or modify it under the '
@@ -532,6 +538,9 @@ class BaseFile:
                                 'Japan')
 
     def add_file_header(self):
+        """
+        Write the file 'header' - useful comments, etc.
+        """
         self.open_comment()
         self.write_comment_line('@file   {0}'.format(self.filename))
         self.write_comment_line('@brief  {0}'.format(self.brief_description))
@@ -695,7 +704,7 @@ class BaseFile:
     @staticmethod
     def is_excluded(filename):
         """
-        Is this file to be excluded (?? from having a comment block written?)
+        Is this file to be excluded? (?? from having a comment block written?)
 
         :param filename: the file in question
         :return: `True` if file may be excluded, `False` otherwise.
