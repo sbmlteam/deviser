@@ -136,7 +136,11 @@ def has_children_not_math(attributes):
     :return: see above.
 
     e.g. this attribute node would not match:
-    <attribute name="math" required="true" type="element" element="ASTNode*...
+
+    .. code-block:: xml
+
+        <attribute name="math" required="true"
+                   type="element" element="ASTNode*...>
 
     """
     for i in range(0, len(attributes)):
@@ -179,6 +183,7 @@ def get_class(name, root_object):
 def is_inline_child(class_object):
     """
     If this object is an 'inline child', get list of inline parents.
+    See issue # 35
 
     :param class_object: structure representing a class
     :return: list of parents objects for which this class is an inline child
@@ -248,8 +253,9 @@ def is_inline_child(class_object):
 
 def get_inline_parents(class_object):
     """
-    TODO I'm guessing an inline parent is the node enclosing
-    a set of inline children, as in the last function?
+    An inline parent is the node enclosing
+    a set of inline children, as in is_inline_child()
+    See issue # 35
 
     :param class_object:
     :return:
@@ -351,10 +357,8 @@ def is_instantiated(element):
     Basic function that checks whether the given element is instantiated.
 
     :param element: the element object to check.
-    :returns: True if instantiated
+    :returns: `True` if instantiated
 
-    TODO add description of line with string equality check
-    what does c['element] = element['element'] compare
     Added issue #43
     """
     if element is None:
@@ -497,7 +501,7 @@ def get_matching_element(fieldname, match_name, list_elements):
     e.g.
     list_elements is a set of class objects which all have a field named 'name'
     get_matching_element('name', 'Geometry', list_elements)
-    wll return the class_object from the list where
+    will return the class_object from the list where
         class_object['name'] == 'Geometry'
     """
     element = None
@@ -725,7 +729,6 @@ def get_static_extension_attribs(num_versions, lv_info):
     PkgExtension class when generating the code.
     This facilitates the reuse of class code generation for member
     variable getters and setters.
-
 
     :param num_versions: number of versions
     :param lv_info: structure representing the level and version information
