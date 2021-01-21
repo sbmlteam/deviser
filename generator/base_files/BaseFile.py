@@ -124,10 +124,8 @@ class BaseFile:
             return lines
         words = line.split()
         num_words = len(words)
-        if num_words < 2:  #== 0:
+        if num_words < 2:
             lines.append(line)
-        # elif num_words == 1:
-        #    lines.append(line)
         else:
             self.parse_lines(lines, words, max_length)
         return lines
@@ -227,7 +225,7 @@ class BaseFile:
                         # remove @c and go back a word
                         if words[i-2] == '@c':
                             templine = words[0]
-                            for j in range(1,i-2):
+                            for j in range(1, i-2):
                                 templine = templine + ' ' + words[j]
                             newline = templine
                             i -= 1
@@ -254,66 +252,71 @@ class BaseFile:
         if len(newline) > 0:
             lines.append(newline)
 
-    def write_line_verbatim(self, line):
+    def get_my_tabs(self):
+        """
+        Utility function for nice formatting.
+        """
+        tabs = ''
+        for i in range(0, int(self.num_tabs)):
+            tabs += '  '
+        return tabs
+
+    def write_line_verbatim(self, line, skip_newline=False):
         """
         Write line without worrying about size. Finish with newline
         character.
 
         :param line: the line to write.
         """
-        tabs = ''
-        for i in range(0, int(self.num_tabs)):
-            tabs += '  '
-        self.file_out.write('{0}{1}\n'.format(tabs, line))
+        #tabs = ''
+        #for i in range(0, int(self.num_tabs)):
+        #    tabs += '  '
+        tabs = self.get_my_tabs()
+        end = "\n"
+        if skip_newline:
+            end = ""
+        self.file_out.write('{0}{1}{2}'.format(tabs, line, end))
 
     def copy_line_verbatim(self, line):
         """
         Write line without worrying about size
-        TODO could combine with above function
         """
-        tabs = ''
-        for i in range(0, int(self.num_tabs)):
-            tabs += '  '
-        self.file_out.write('{0}{1}'.format(tabs, line))
+        self.write_line_verbatim(line, True)
 
-    def write_line(self, line, space=0):
+    def write_line(self, line, space=0, indent=True):
         """
         Functions for writing lines indenting each new line
 
+        :param line:
+        :param space: number of spaces
+        :param indent: set to `False` to stop indentation.
         """
-        tabs = ''
-        for i in range(0, int(self.num_tabs)):
-            tabs += '  '
-        for i in range(0, space):  # different
-            tabs += ' '
+        tabs = self.get_my_tabs()
+        if indent:
+            for i in range(0, space):
+                tabs += ' '
         lines = self.create_lines(line, len(tabs))
         for i in range(0, len(lines)):
             self.file_out.write('{0}{1}\n'.format(tabs, lines[i]))
-            tabs += '  '  # different
+            if indent:
+                tabs += '  '
 
     def write_line_no_indent(self, line):
         """
         functions for writing lines without indenting each new line
-
-        TODO combine with function above
         """
-        tabs = ''
-        for i in range(0, int(self.num_tabs)):
-            tabs += '  '
-        lines = self.create_lines(line, len(tabs))
-        for i in range(0, len(lines)):
-            self.file_out.write('{0}{1}\n'.format(tabs, lines[i]))
+        self.write_line(line, indent=False)
 
     def write_spaced_line(self, line):
         """
-        Function to write a line preserving the indenting
+        Function to write a single line, preserving the indenting
+        i.e. we do not add extra indenting
+
+        TODO I don't think this is tested anywhere yet.
 
         :param line: the line to write.
         """
-        tabs = ''
-        for i in range(0, int(self.num_tabs)):
-            tabs += '  '
-        self.file_out.write('{0}{1}\n'.format(tabs, line))
+        self.write_line(line, indent=False)
 
     def skip_line(self, num=1):
         """
@@ -326,31 +329,23 @@ class BaseFile:
 
     # functions for writing comments
     def write_comment_line(self, line):
-        tabs = ''
-        for i in range(0, int(self.num_tabs)):
-            tabs += '  '
+        tabs = self.get_my_tabs()
         lines = self.create_lines(line, len(tabs), True)
         for i in range(0, len(lines)):
             self.file_out.write('{0}{1} {2}\n'
                                 .format(tabs, self.comment, lines[i]))
 
     def write_blank_comment_line(self):
-        tabs = ''
-        for i in range(0, int(self.num_tabs)):
-            tabs += '  '
-        self.file_out.write('{0}{1}\n'.format(tabs, self.comment))
+        self.file_out.write('{0}{1}\n'.format(self.get_my_tabs(),
+                                              self.comment))
 
     def open_comment(self):
-        tabs = ''
-        for i in range(0, int(self.num_tabs)):
-            tabs += '  '
-        self.file_out.write('{0}{1}\n'.format(tabs, self.comment_start))
+        self.file_out.write('{0}{1}\n'.format(self.get_my_tabs(),
+                                              self.comment_start))
 
     def close_comment(self):
-        tabs = ''
-        for i in range(0, int(self.num_tabs)):
-            tabs += '  '
-        self.file_out.write('{0} {1}\n'.format(tabs, self.comment_end))
+        self.file_out.write('{0} {1}\n'.format(self.get_my_tabs(),
+                                               self.comment_end))
 
     def write_doxygen_start(self):
         """
@@ -363,11 +358,8 @@ class BaseFile:
         The section between @cond and @endcond can be included by adding
         its section label to the ENABLED_SECTIONS configuration option.
         """
-        tabs = ''
-        for i in range(0, int(self.num_tabs)):
-            tabs += '  '
         self.file_out.write('\n{0}{1} @cond doxygen{2}Internal {3}\n\n'
-                            .format(tabs, self.comment_start,
+                            .format(self.get_my_tabs(), self.comment_start,
                                     self.library_name,
                                     self.comment_end))
 
@@ -375,22 +367,17 @@ class BaseFile:
         """
         End the section (conditionally) excluded by Doxygen.
         """
-        tabs = ''
-        for i in range(0, int(self.num_tabs)):
-            tabs += '  '
         self.file_out.write('\n{0}{1} @endcond {2}\n\n'
-                            .format(tabs, self.comment_start,
+                            .format(self.get_my_tabs(), self.comment_start,
                                     self.comment_end))
 
     def write_extern_decl(self):
         """
         Function for the library extern declaration
         """
-        tabs = ''
-        for i in range(0, int(self.num_tabs)):
-            tabs += '  '
         self.file_out.write('{0}{1}_EXTERN\n'
-                            .format(tabs, self.library_name.upper()))
+                            .format(self.get_my_tabs(),
+                                    self.library_name.upper()))
 
     ########################################################################
 
@@ -566,7 +553,9 @@ class BaseFile:
         self.write_blank_comment_line()
         for enum in self.enums:
             self.write_blank_comment_line()
-            self.write_comment_line('@class doc_{0}_{1}'.format(self.class_name.lower(), enum['name']))
+            self.write_comment_line('@class doc_{0}_{1}'.
+                                    format(self.class_name.lower(),
+                                           enum['name']))
             self.write_blank_comment_line()
             self.write_comment_line('@par')
             self.write_comment_line('The attribute "{0}" on a {1} object is '
@@ -577,7 +566,8 @@ class BaseFile:
             self.write_comment_line('Level&nbsp;3 Version&nbsp;1 {0}'
                                     ' specification, the following are the'.
                                     format(self.package))
-            self.write_comment_line('allowable values for "{0}":'.format(enum['name']))
+            self.write_comment_line('allowable values for "{0}":'.
+                                    format(enum['name']))
             self.write_comment_line('<ul>')
             # dont write the invalid block
             for i in range(0, len(enum['values'])-1):
