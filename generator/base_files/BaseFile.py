@@ -133,7 +133,9 @@ class BaseFile:
     @staticmethod
     def parse_lines(lines, words, max_length):
         """
-        appends...?
+        TODO this is a horrendous-looking function and
+        we really need some decent test code for it.
+        And more explanatory comments!
 
         :param lines:
         :param words:
@@ -141,14 +143,12 @@ class BaseFile:
         :return: nothing
         """
         num_words = len(words)
-        in_quotes = False
         quotes_closed = True
         reopen_quotes = False
-        i = 1
         temp = words[0]
-        if temp.startswith('\"'):
-            in_quotes = True
+        in_quotes = True if temp.startswith('\"') else False
         newline = words[0]
+        i = 1
         while i < num_words:
             if len(newline) < max_length:
                 if not in_quotes:
@@ -173,7 +173,7 @@ class BaseFile:
                     elif words[i].endswith('\",') and not quotes_closed:
                         in_quotes = False
                 if len(temp) > 0:
-                    temp = temp + ' ' + words[i]
+                    temp += ' ' + words[i]
                 else:
                     if reopen_quotes:
                         temp = '\"' + words[i]
@@ -182,10 +182,7 @@ class BaseFile:
                         temp = words[i]
                 i += 1
                 if len(temp) <= max_length:
-                    if temp.endswith('\"'):
-                        quotes_closed = True
-                    elif temp.endswith('\",'):
-                        quotes_closed = True
+                    quotes_closed = True if temp.endswith('\"') else False
                     newline = temp
                 else:
                     if len(newline) == 0:
@@ -196,7 +193,7 @@ class BaseFile:
                             reopen_quotes = True
                         lines.append(temp)
                         temp = ''
-                    elif len(words[i-1]) > (max_length-5):
+                    elif len(words[i - 1]) > (max_length - 5):
                         newline = temp
                         lines.append(newline)
                         newline = ''
@@ -204,11 +201,11 @@ class BaseFile:
                     else:
                         rollback = True
                         if in_quotes:
-                            if words[i-1] == '",':
+                            if words[i - 1] == '",':
                                 # special case for validation rule messages
                                 rollback = False
                                 newline = temp
-                            elif words[i-1].startswith('\"'):
+                            elif words[i - 1].startswith('\"'):
                                 # do not add the quotes as we are throwing
                                 # the word away
                                 in_quotes = False
@@ -223,9 +220,9 @@ class BaseFile:
                             reopen_quotes = True
                         # dont break between @c and true etc
                         # remove @c and go back a word
-                        if words[i-2] == '@c':
+                        if words[i - 2] == '@c':
                             templine = words[0]
-                            for j in range(1, i-2):
+                            for j in range(1, i - 2):
                                 templine = templine + ' ' + words[j]
                             newline = templine
                             i -= 1
@@ -235,12 +232,11 @@ class BaseFile:
                         if rollback:
                             i -= 1
                             rollback = False
-            else:
-                # don't break between @c and true etc
+            else:  # Here, new line is >= max_length
+                # Don't break between @c and true etc
                 # remove @c and go back a word
-                if words[i-1] == '@c':
-                    lenline = len(newline)
-                    newline = newline[0:lenline-3]
+                if words[i - 1] == '@c':
+                    newline = newline[0: len(newline) - 3]
                     i -= 1
                 if in_quotes or not quotes_closed:
                     newline += ' \"'
@@ -268,9 +264,6 @@ class BaseFile:
 
         :param line: the line to write.
         """
-        #tabs = ''
-        #for i in range(0, int(self.num_tabs)):
-        #    tabs += '  '
         tabs = self.get_my_tabs()
         end = "\n"
         if skip_newline:
@@ -327,8 +320,12 @@ class BaseFile:
         for i in range(0, num):
             self.file_out.write('\n')
 
-    # functions for writing comments
     def write_comment_line(self, line):
+        """
+        Write a line of text in the comment block.
+
+        :param line: list of what to write
+        """
         tabs = self.get_my_tabs()
         lines = self.create_lines(line, len(tabs), True)
         for i in range(0, len(lines)):
@@ -336,14 +333,23 @@ class BaseFile:
                                 .format(tabs, self.comment, lines[i]))
 
     def write_blank_comment_line(self):
+        """
+        Write a blank line in the comment block.
+        """
         self.file_out.write('{0}{1}\n'.format(self.get_my_tabs(),
                                               self.comment))
 
     def open_comment(self):
+        """
+        Start a new comment block.
+        """
         self.file_out.write('{0}{1}\n'.format(self.get_my_tabs(),
                                               self.comment_start))
 
     def close_comment(self):
+        """
+        Finish a comment block.
+        """
         self.file_out.write('{0} {1}\n'.format(self.get_my_tabs(),
                                                self.comment_end))
 
@@ -397,9 +403,19 @@ class BaseFile:
     # Functions to alter the number of tabs being used in writing lines
 
     def up_indent(self, num=1):
+        """
+        Increase the number of tabs to use.
+
+        :param num: number of tabs to add
+        """
         self.num_tabs += num
 
     def down_indent(self, num=1):
+        """
+        Decrease the number of tabs to use.
+
+        :param num: number of tabs to drop.
+        """
         self.num_tabs -= num
         # just checking
         if self.num_tabs < 0:
@@ -464,6 +480,9 @@ class BaseFile:
                                 '/software/libsbml/license.html')
 
     def write_custom_copyright(self):
+        """
+        Write a custom copyright text, stored in another file, to this file.
+        """
         filename = gv.custom_copyright
         in_file = open(filename, 'r')
         for line in in_file:
@@ -537,6 +556,10 @@ class BaseFile:
             self.write_enum_block()
 
     def write_enum_block(self):
+        """
+        Write out a big comment block, explaining what the different enums
+        are used for.
+        """
         self.open_comment()
         self.write_comment_line('<!-- ~ ~ ~ ~ ~ Start of common documentation'
                                 ' strings ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~')
@@ -570,7 +593,7 @@ class BaseFile:
                                     format(enum['name']))
             self.write_comment_line('<ul>')
             # dont write the invalid block
-            for i in range(0, len(enum['values'])-1):
+            for i in range(0, len(enum['values']) - 1):
                 value = enum['values'][i]
                 self.file_out.write(' * <li> @c "{0}", '
                                     'TODO:add description\n'.
@@ -581,6 +604,22 @@ class BaseFile:
         self.close_comment()
 
     def write_class_comments(self, extension, plugin, validator):
+        """
+        Write a comment block about the C++ class.
+
+        :param extension: `True` if this is an extension
+        :param plugin: `True` if this is a plugin
+        :param validator: `True` if a validator
+
+        Only one of these three cases may be `True`.
+        All may be `False`.
+        """
+        # Sanity check:
+        if sum([extension, plugin, validator]) > 1:
+            # raise an error and...Not sure what Deviser usually does
+            print("Error in write_class_comments - too many true values.")
+            exit()  # TODO need something better than this. Which are true?
+
         fullname = gv.package_full_name
         up_package = SF.upper_first(self.package)
         validator_class_comment = 'The {0} class extends the ' \
@@ -655,6 +694,12 @@ class BaseFile:
 
     @staticmethod
     def is_excluded(filename):
+        """
+        Is this file to be excluded (?? from having a comment block written?)
+
+        :param filename: the file in question
+        :return: `True` if file may be excluded, `False` otherwise.
+        """
         excluded = False
         excluded_files = ['Types', 'fwd', 'Error', 'ErrorTable',
                           'ConsistencyValidator', 'package', 'register']
