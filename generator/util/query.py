@@ -276,14 +276,13 @@ def get_inline_parents(class_object):
 
 def get_parent_class(class_object):
     """
-    NB Open Github Issue: Revise query get_parent_class code #36
-
     Return the parent class of this class.
-    if it is not given we assume it is a child of a plugin
-    and get the base of the plugin.
+    If a class does not explicitly declare its parent then it's parent may
+    be the outside this package i.e. a plugin object. In this case it will be
+    referenced in a plugin object; which will be the parent.
 
     :param class_object: the object representing the class.
-    :return: parent class, if found.
+    :return: parent class, if found, or '' if not found
 
     e.g. in the following XML, the 'unit' attribute is an element of type 'Unit'
     so
@@ -308,37 +307,64 @@ def get_parent_class(class_object):
                         element="Unit" abstract="false"/>
           </attributes>
        </element>
+
+    e.g. in the following XML, the 'Def' element is reerenced by the
+     'Model' plugin
+    so
+
+    .. code-block:: default
+
+       get_parent_class(class_object_for Def)
+
+    would return
+
+    .. code-block:: default
+
+       'Model'
+
+    .. code-block:: xml
+
+      <elements>
+        <element name="Def" typeCode="SBML_COPY_ABC" ... />
+      </elements>
+      <plugins>
+        <plugin extensionPoint="Model">
+          <references>
+            <reference name="Def"/>
+          </references>
+        </plugin>
+      </plugins>
     """
-    parent = ''
+    # if class already records its parent return it
+    if 'parent' in class_object:
+        return class_object['parent']
+
+    # get the name of the class to match
     if class_object['is_list_of']:
         name = class_object['lo_child']
     else:
         name = class_object['name']
 
-    found = False
+    # look in plugins
+    plugins = class_object['root']['plugins']
+    for plugin in plugins:
+        base = plugin['sbase']
+        for extension in plugin['lo_extension']:
+            if extension['name'] == name:
+                return base
+        for extension in plugin['extension']:
+            if extension['name'] == name:
+                return base
 
-    if 'parent' in class_object:
-        parent = class_object['parent']
-    else:
-        plugins = class_object['root']['plugins']
-        for plugin in plugins:
-            base = plugin['sbase']
-            for extension in plugin['lo_extension']:
-                if extension['name'] == name:
-                    return base
-            if not found:
-                for extension in plugin['extension']:
-                    if extension['name'] == name:
-                        return base
+    # look for the class as a child element
+    # if something is an inline_lo_element it may not have its parent recorded
+    for element in class_object['root']['baseElements']:
+        if element['name'] != name:
+            for attrib in element['attribs']:
+                if attrib['element'] == name:
+                    return element['name']
 
-    if not found and len(parent) == 0:
-        for element in class_object['root']['baseElements']:
-            if element['name'] != name:
-                for attrib in element['attribs']:
-                    if attrib['element'] == name:
-                        return element['name']
-
-    return parent
+    return ''
 
 
 def get_concretes(root_object, concrete_list):
