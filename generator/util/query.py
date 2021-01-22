@@ -1178,21 +1178,16 @@ def get_max_length(elements, attribute):
     .. code-block:: default
 
        ["Algebraic", "FooRate", "FooAssignment"]
-
-    TODO will this throw an exception if elements other
-    than the first one do *not* have the attribute?
-    Is that possible? <--- Issue added to Github:
-    Look at query get_max_length #38
     """
     if elements is None:
         return 0
-    if attribute not in elements[0]:
-        return 0
-    else:
-        max_len = len(elements[0][attribute])
-    for i in range(1, len(elements)):
-        if len(elements[i][attribute]) > max_len:
-            max_len = len(elements[i][attribute])
+    max_len = 0
+    for element in elements:
+        if attribute not in element:
+            return 0
+        else:
+            if len(element[attribute]) > max_len:
+                max_len = len(element[attribute])
     return max_len
 
 
