@@ -299,10 +299,10 @@ class ParseXML():
         return self.standardize_types(temp.nodeValue)
 
     @staticmethod
-    def get_element_value(self, node):
+    def get_element_standard_name(self, node):
         '''
         Given an <attribute> node, get the "standard form" of the
-        element node's value
+        element node's name
 
         :param node: the attribute node
         :return: returns "standard form" of the name (e.g. "SampledVolume")
@@ -810,7 +810,7 @@ class ParseXML():
             self.report_error(gv.return_codes['missing required information'],
                               'An attribute must have a Type')
         attr_abstract = self.get_bool_value(self, node, 'abstract')
-        attr_element = self.get_element_value(self, node)
+        attr_element = self.get_element_standard_name(self, node)
 
         # If the type is lo_element we actually want the name to be
         # just that of the element.
@@ -1088,7 +1088,7 @@ class ParseXML():
 
             return plugin_dict
 
-    def get_elements_for_version(self, pkg_node):
+    def populate_elements_for_version(self, pkg_node):
         '''
         Iterate over <element> nodes nested within a <pkgVersion> node.
         Extract information from these. Use it to update the ParseXML
@@ -1136,7 +1136,7 @@ class ParseXML():
                                                element['min_lo_children']}))
                 self.sbml_elements.append(element)
 
-    def get_plugins_for_version(self, pkg_node):
+    def populate_plugins_for_version(self, pkg_node):
         '''
         Given a <pkgVersion> node, iterate over its <plugin> nodes, if any,
         and update the self.plugins list.
@@ -1522,8 +1522,8 @@ class ParseXML():
             pkg_version = self.get_int_value(self, node, 'pkg_version')
             # <elements> and <plugins> are nodes nested within the
             # <pkgVersion> node
-            self.get_elements_for_version(node)
-            self.get_plugins_for_version(node)
+            self.populate_elements_for_version(node)
+            self.populate_plugins_for_version(node)
             lv_info.append(dict({'core_level': sbml_level,
                                  'core_version': sbml_version,
                                  'pkg_version': pkg_version}))
