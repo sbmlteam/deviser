@@ -732,7 +732,7 @@ def has_lo_attribute(element, attribute):
     """
     if element is None:
         return False
-    elif isV2BaseAttribute(element, attribute):
+    elif is_sbml_specific_base_lo_attribute(element, attribute):
         return True
     elif element['lo_attribs'] is None:
         return False
@@ -743,20 +743,27 @@ def has_lo_attribute(element, attribute):
     return False
 
 
-def isV2BaseAttribute(element, attribute):
+def is_sbml_specific_base_lo_attribute(element, attribute):
     """
-    Is the base version of this element equal to 2 ?
+    Check whether the attribute is one of the base attributes
+    inherited by a listOf element.
 
     :param element: an element object
     :param attribute: an attribute object
-    :return: `True` if `base_version` is 2, `False` otherwise.
+    :return: `True` if the attribute is a base attribute , `False` otherwise.
+
+    In SBML Level 3 Version 2 the attributes 'id' and 'name' were added to
+    an SBase and are therefore inherited by a listOfFoo class if using
+    SBML L3V2.
     """
-    if attribute != 'id' and attribute != 'name':
-        return False
-    if 'root' in element:
-        if 'base_version' in element['root']:
-            if element['root']['base_version'] == 2:
-                return True
+    base_lo_attributes = [dict({'version': 2, 'attributes': ['id', 'name']})]
+
+    for entry in base_lo_attributes:
+        if attribute in entry['attributes']:
+            if 'root' in element:
+                if 'base_version' in element['root']:
+                    if element['root']['base_version'] == entry['version']:
+                        return True
     return False
 
 
