@@ -1166,8 +1166,33 @@ class ParseXML():
             if occurs_as_child:
                 elem['parent'] = parent
 
+    def get_language_version(self, node):
+        """
+        Extract version information from a <language_versions> node and
+        return it as a list of dictionaries representing each version
+
+        :param node: the version node
+        :return: list of dictionaries for each version.
+
+        Example <version> node:
+
+        .. code-block:: xml
+
+            <language_versions>
+                <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/>
+                <version level="0" version="2" namespace="http://sbgn.org/libsbgn/0.2"/>
+            </language_versions>
+
+        """
+        versions = node.getElementsByTagName('language_versions')
+        specification = []
+        if versions:
+            for version in versions[0].getElementsByTagName('version'):
+                specification.append(self.get_version_information(version))
+        return specification
+
     def get_version_information(self, node):
-        '''
+        """
         Extract version information from a <version> node and
         return it in a dictionary
 
@@ -1179,7 +1204,7 @@ class ParseXML():
         .. code-block:: xml
 
             <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/>
-        '''
+        """
         level = self.get_int_value(self, node, 'level')
         version = self.get_int_value(self, node, 'version')
         namespace = self.get_value(node, 'namespace')
@@ -1223,9 +1248,6 @@ class ParseXML():
 
         The <language> node can also contain nodes of at least the following
         types: <library_version>, <language_version> and <dependencies>.
-        These are also interrogated in this function.
-
-        TODO: Sarah would prefer to have new functions for interrogating each type of node
         """
         language = self.get_value(node, 'name')
         base_class = self.get_value(node, 'baseClass')
@@ -1243,66 +1265,27 @@ class ParseXML():
         else:
             is_package = True
 
-        # Get the NodeList of <language_version> nodes, if any:
-        versions = node.getElementsByTagName('language_versions')
-        specification = []
-        # A <language_versions> node can contain multiple <version> nodes.
-        # Example:
-        # <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/>
-        # If the NodeList of <language_version> nodes has at least one entry,
-        # we get the first one and then iterate over the <version> node(s)
-        # it has, if any:
-        if versions:
-            for version in versions[0].getElementsByTagName('version'):
-                specification.append(self.get_version_information(version))
+        # Get the <language_version> nodes, if any:
+        specification = self.get_language_version(node)
 
-        # Example <dependencies> node:
-        # <dependencies>
-        #   <dependency library_name="libnuml" prefix="NUML"/>
-        # </dependencies>
+        # Get <dependencies> node, if any:
         dependencies = node.getElementsByTagName('dependencies')
         dependency = []
         if dependencies:
             for depend in dependencies[0].getElementsByTagName('dependency'):
                 dependency.append(self.get_dependency_information(depend))
 
-        # Example of a <library_version> node:
-        # <library_version major="2" minor="0" revision="0"/>
-        # library = node.getElementsByTagName('library_version')
-        # if library:
-        #     # TODO can we guarantee these 3 values are always present in
-        #     # a <library_version> node?
-        #     major = self.get_int_value(self, library[0], 'major')
-        #     minor = self.get_int_value(self, library[0], 'minor')
-        #     rev = self.get_int_value(self, library[0], 'revision')
-        # else:
-        #     major = 0
-        #     minor = 0
-        #     rev = 0
-        #
-        # library_version = dict({'major': major,
-        #                         'minor': minor,
-        #                         'revision': rev})
+        # Get <library_version>
         library_version = self.get_library_version(node)
-        # variants = node.getElementsByTagName('libsbml_variants')
-        # variant = None
-        # if variants:
-        #     variant = variants[0]
 
-        # annot_element = ''
         notes_element = ''
         use_id = True
         use_name = False
-        # if variant:
-        #     base_node = variant.getElementsByTagName('base')
-        #     annot_element = self.get_value(base_node[0], 'annotationElementName')
-        #     notes_element = self.get_value(base_node[0], 'notesElementName')
-        #     use_id = self.get_bool_value(self, base_node[0], 'include_id')
-        #     use_name = self.get_bool_value(self, base_node[0], 'include_name')
 
         # some sanity checking
         if not language or language == '':
             language = 'sbml'
+
         # set the globals
         gv.set_globals(language.lower(), base_class,
                                      document_class, prefix, library_name,
