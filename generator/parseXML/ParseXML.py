@@ -970,6 +970,35 @@ class ParseXML():
 
             return element
 
+    def update_plugin_description(self, node, version_count, plugin):
+        """
+        Get information from a <plugin> node and update the existing plugin
+        with information for this version
+
+        :param node: the <plugin> node
+        :param version_count: number of <plugin> nodes
+        :param plugin: existing plugin dict to update
+        :return: nothing
+        """
+        for reference in node.getElementsByTagName('reference'):
+            temp = self.find_element(self.elements,
+                                     self.get_value(reference, 'name'))
+            if temp is not None and temp not in plugin['extension']:
+                plugin['extension'].append(temp)
+
+        # look for references to ListOf elements
+        for reference in node.getElementsByTagName('reference'):
+            temp = self.find_lo_element(self.elements,
+                                        self.get_value(reference, 'name'))
+            if temp is not None and temp not in plugin['lo_extension']:
+                plugin['lo_extension'].append(temp)
+
+        for attr in node.getElementsByTagName('attribute'):
+            plugin['attribs'].append(
+                self.get_attribute_description(self, attr, version_count))
+        plugin['num_versions'] = self.num_versions
+        plugin['version'] = version_count
+
     @staticmethod
     def get_plugin_description(self, node, version_count):
         '''
@@ -1003,29 +1032,8 @@ class ParseXML():
 
         if plugin:
             # We already have info about this plugin in self.plugins;
-            # now update it.
-
-            # Some <plugin> nodes have a reference node
-            # e.g. <reference name="FooKineticLaw"/>
-            for reference in node.getElementsByTagName('reference'):
-                temp = self.find_element(self.elements,
-                                         self.get_value(reference, 'name'))
-                if temp is not None and temp not in plugin['extension']:
-                    plugin['extension'].append(temp)
-
-            # look for references to ListOf elements
-            for reference in node.getElementsByTagName('reference'):
-                temp = self.find_lo_element(self.elements,
-                                            self.get_value(reference, 'name'))
-                if temp is not None and temp not in plugin['lo_extension']:
-                    plugin['lo_extension'].append(temp)
-
-            for attr in node.getElementsByTagName('attribute'):
-                plugin['attribs'].append(
-                    self.get_attribute_description(self, attr, version_count))
-            plugin['num_versions'] = self.num_versions
-            plugin['version'] = version_count
-
+            # now update it and return None
+            self.update_plugin_description(node, version_count, plugin)
             return None
 
         else:
