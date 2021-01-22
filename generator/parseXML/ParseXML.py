@@ -1268,22 +1268,22 @@ class ParseXML():
 
         # Example of a <library_version> node:
         # <library_version major="2" minor="0" revision="0"/>
-        library = node.getElementsByTagName('library_version')
-        if library:
-            # TODO can we guarantee these 3 values are always present in
-            # a <library_version> node?
-            major = self.get_int_value(self, library[0], 'major')
-            minor = self.get_int_value(self, library[0], 'minor')
-            rev = self.get_int_value(self, library[0], 'revision')
-        else:
-            major = 0
-            minor = 0
-            rev = 0
-
-        library_version = dict({'major': major,
-                                'minor': minor,
-                                'revision': rev})
-
+        # library = node.getElementsByTagName('library_version')
+        # if library:
+        #     # TODO can we guarantee these 3 values are always present in
+        #     # a <library_version> node?
+        #     major = self.get_int_value(self, library[0], 'major')
+        #     minor = self.get_int_value(self, library[0], 'minor')
+        #     rev = self.get_int_value(self, library[0], 'revision')
+        # else:
+        #     major = 0
+        #     minor = 0
+        #     rev = 0
+        #
+        # library_version = dict({'major': major,
+        #                         'minor': minor,
+        #                         'revision': rev})
+        library_version = self.get_library_version(node)
         # variants = node.getElementsByTagName('libsbml_variants')
         # variant = None
         # if variants:
@@ -1310,6 +1310,37 @@ class ParseXML():
                                      dependency, library_version, '', annot_element,
                                      notes_element, use_id, use_name, uses_ASTNode, uses_XMLNode,
                                      top_level_element)
+
+    def get_library_version(self, node):
+        """
+        Interrogates a <library_version> node and returns the information
+
+        :param node: the <library_version> node
+        :return: returns dict of library_version information
+
+        Example of a <language> element with <library_version> element:
+
+        .. code-block:: xml
+
+            <language  ... >
+                <library_version major="1" minor="0" revision="0"/>
+
+        """
+        library = node.getElementsByTagName('library_version')
+        if library:
+            major = self.get_int_value(self, library[0], 'major')
+            minor = self.get_int_value(self, library[0], 'minor')
+            rev = self.get_int_value(self, library[0], 'revision')
+        else:
+            major = 0
+            minor = 0
+            rev = 0
+
+        library_version = dict({'major': major,
+                                'minor': minor,
+                                'revision': rev})
+        return library_version
+
 
     #####################################################################
 
