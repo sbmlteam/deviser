@@ -300,9 +300,12 @@ def get_parent_class(class_object):
 
     .. code-block:: xml
 
-       <element name="ArrayChild" typeCode="SBML_TEST_ARRAYCHILD" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="arrayChild">
+       <element name="ArrayChild" typeCode="SBML_TEST_ARRAYCHILD"
+                hasListOf="false" ... baseClass="SBase" abstract="false"
+                elementName="arrayChild">
           <attributes>
-             <attribute name="unit" required="false" type="element" element="Unit" abstract="false"/>
+             <attribute name="unit" required="false" type="element"
+                        element="Unit" abstract="false"/>
           </attributes>
        </element>
     """
@@ -323,18 +326,10 @@ def get_parent_class(class_object):
             for extension in plugin['lo_extension']:
                 if extension['name'] == name:
                     return base
-                    # parent = base
-                    # found = True
-                    # break
             if not found:
                 for extension in plugin['extension']:
                     if extension['name'] == name:
                         return base
-                        # parent = base
-                        # found = True
-                        # break
-            # if found:
-            #    break
 
     if not found and len(parent) == 0:
         for element in class_object['root']['baseElements']:
@@ -342,11 +337,6 @@ def get_parent_class(class_object):
                 for attrib in element['attribs']:
                     if attrib['element'] == name:
                         return element['name']
-                        # parent = element['name']
-                        # found = True
-                        # break
-            # if found:
-            #    break
 
     return parent
 
