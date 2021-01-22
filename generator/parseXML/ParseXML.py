@@ -1212,8 +1212,31 @@ class ParseXML():
                      'version': version,
                      'namespace': namespace})
 
+    def get_dependencies(self, node):
+        """
+        Extract dependency information from a <dependencies> node and
+        return it as a list of dictionaries representing each dependency
+
+        :param node: the dependencies node
+        :return: list of dictionaries for each dependency.
+
+        Example <dependencies> node:
+
+        .. code-block:: xml
+
+            <dependencies>
+               <dependency library_name="libnuml" prefix="NUML"/>
+            </dependencies>
+        """
+        dependencies = node.getElementsByTagName('dependencies')
+        dependency = []
+        if dependencies:
+            for depend in dependencies[0].getElementsByTagName('dependency'):
+                dependency.append(self.get_dependency_information(depend))
+        return dependency
+
     def get_dependency_information(self, node):
-        '''
+        """
         Get information from a <dependency> node
 
         :param node: the dependency node
@@ -1224,7 +1247,7 @@ class ParseXML():
         .. code-block:: xml
 
             <dependency library_name="libnuml" prefix="NUML"/>
-        '''
+        """
         library = self.get_value(node, 'library_name')
         prefix = self.get_value(node, 'prefix')
         return dict({'library': library,
@@ -1265,22 +1288,19 @@ class ParseXML():
         else:
             is_package = True
 
+        # these may become useful
+        notes_element = ''
+        use_id = True
+        use_name = False
+
         # Get the <language_version> nodes, if any:
         specification = self.get_language_version(node)
 
         # Get <dependencies> node, if any:
-        dependencies = node.getElementsByTagName('dependencies')
-        dependency = []
-        if dependencies:
-            for depend in dependencies[0].getElementsByTagName('dependency'):
-                dependency.append(self.get_dependency_information(depend))
+        dependency = self.get_dependencies(node)
 
         # Get <library_version>
         library_version = self.get_library_version(node)
-
-        notes_element = ''
-        use_id = True
-        use_name = False
 
         # some sanity checking
         if not language or language == '':
