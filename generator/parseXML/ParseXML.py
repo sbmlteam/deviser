@@ -844,6 +844,30 @@ class ParseXML():
 
         return attribute_dict
 
+    def update_element_description(self, node, version_count, element):
+        """
+        Get information from a <element> node and update the existing element
+        with information for this version
+
+        :param node: the <element> node
+        :param version_count: the number of package versions
+        :param element: element to be pdated
+        :return: nothing
+        """
+        # <attribute> node(s) are listed within an <element> node
+        for attr in node.getElementsByTagName('attribute'):
+            # Add the dictionary for attribute `attr` to the list.
+            element['attribs'].append(
+                self.get_attribute_description(self, attr, version_count))
+
+        for attr in node.getElementsByTagName('listOfAttribute'):
+            # e.g. <listOfAttribute name="local" required="true"
+            # type="bool" abstract="false"/>
+            element['lo_attribs'].append(
+                self.get_attribute_description(self, attr, version_count))
+        element['num_versions'] = self.num_versions
+        element['version'] = version_count
+
     @staticmethod
     def get_element_description(self, node, version_count):
         '''
@@ -880,25 +904,8 @@ class ParseXML():
         if version_count > 0:
             element = query.get_matching_element('name', element_name,
                                                  self.sbml_elements)
-            # for existing in self.sbml_elements:
-            #     if existing['name'] == element_name:
-            #         element = existing
-
         if element:  # Found an existing element with this name.
-            # <attribute> node(s) are listed within an <element> node
-            for attr in node.getElementsByTagName('attribute'):
-                # Add the dictionary for attribute `attr` to the list.
-                element['attribs'].append(
-                    self.get_attribute_description(self, attr, version_count))
-
-            for attr in node.getElementsByTagName('listOfAttribute'):
-                # e.g. <listOfAttribute name="local" required="true"
-                # type="bool" abstract="false"/>
-                element['lo_attribs'].append(
-                    self.get_attribute_description(self, attr, version_count))
-            element['num_versions'] = self.num_versions
-            element['version'] = version_count
-
+            self.update_element_description(node, version_count, element)
             return None
 
         else:
