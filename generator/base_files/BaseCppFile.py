@@ -741,15 +741,17 @@ class BaseCppFile(BaseFile.BaseFile):
 
         if num_arguments == 0:
             self.write_zero_or_one_function_argument(line, is_cpp, is_const,
-                                                     None, is_abstract)
+                                                     None, is_abstract,
+                                                     add_semicolon=True)
         elif num_arguments == 1:
             self.write_zero_or_one_function_argument(line, is_cpp, is_const,
                                                      arguments[0],
-                                                     is_abstract)
+                                                     is_abstract,
+                                                     add_semicolon=True)
         else:
             self.write_multiple_function_arguments(line, arguments,
                                                    num_arguments, is_const,
-                                                   is_cpp)
+                                                   is_cpp, True)
 
     def write_class_function_header(self, function_name, arguments,
                                     return_type, is_const=False,
@@ -772,10 +774,12 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_line(return_type)
         line = function_name + '('
         if num_arguments == 0:
-            self.write_zero_or_one_function_argument(line, is_cpp, is_const)
+            self.write_zero_or_one_function_argument(line, is_cpp, is_const),
+                                                     #add_semicolon=False)
         elif num_arguments == 1:
             self.write_zero_or_one_function_argument(line, is_cpp,
-                                                     is_const, arguments[0])
+                                                     is_const, arguments[0]),
+                                                     #add_semicolon=False)
         else:
             self.write_multiple_function_arguments(line, arguments,
                                                    num_arguments, is_const,
@@ -787,7 +791,8 @@ class BaseCppFile(BaseFile.BaseFile):
             self.down_indent()
 
     def write_zero_or_one_function_argument(self, line, is_cpp, is_const,
-                                            argument=None, is_abstract=False):
+                                            argument=None, is_abstract=False,
+                                            add_semicolon=False):
         """
         Use when a function has either 0 or 1 argument.
 
@@ -802,15 +807,18 @@ class BaseCppFile(BaseFile.BaseFile):
             argument = ""
         line += argument + ')'
         if is_cpp and is_const:
-            line += ' const;'
+            line += ' const'
         elif is_abstract:
-            line += ' = 0;'
+            line += ' = 0'
         else:
+            line += ''
+        if add_semicolon:
             line += ';'
         self.write_line(line)
 
     def write_multiple_function_arguments(self, line, arguments,
-                                          num_arguments, is_const, is_cpp):
+                                          num_arguments, is_const, is_cpp,
+                                          add_semicolon=False):
         """
         Write multiple (> 1) function arguments to the header file.
 
@@ -819,6 +827,7 @@ class BaseCppFile(BaseFile.BaseFile):
         :param num_arguments: the number of arguments
         :param is_const: `True` if this is a "const function"
         :param is_cpp: `True` if this is a C++ header.
+        :param add_semicolon: True to add a ';' at the end of certain lines.
         :returns: nothing
         """
         saved_line = line
@@ -827,7 +836,9 @@ class BaseCppFile(BaseFile.BaseFile):
         for n in range(1, num_arguments - 1):
             line += arguments[n] + ', '
         line += arguments[num_arguments - 1] + ')'
-        line += " const;" if is_cpp and is_const else ";"
+        line += " const" if (is_cpp and is_const) else ""  # no semis
+        if add_semicolon:
+            line += ';'
 
         # look at length and adjust
         if len(line) >= self.line_length:
@@ -848,7 +859,9 @@ class BaseCppFile(BaseFile.BaseFile):
                 line = arguments[i] + ','
                 self.write_line(line, att_start)
             line = arguments[num_arguments - 1] + ')'
-            line += ' const;' if is_cpp and is_const else ';'
+            line += ' const' if is_cpp and is_const else ''  # no semis
+            if add_semicolon:
+                line += ';'
             self.write_line(line, att_start)
         else:
             self.write_line(line)
