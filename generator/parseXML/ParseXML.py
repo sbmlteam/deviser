@@ -851,7 +851,7 @@ class ParseXML():
 
         :param node: the <element> node
         :param version_count: the number of package versions
-        :param element: element to be pdated
+        :param element: element to be updated
         :return: nothing
         """
         # <attribute> node(s) are listed within an <element> node
