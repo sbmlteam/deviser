@@ -324,16 +324,16 @@ def get_parent_class(class_object):
 
     .. code-block:: xml
 
-      <elements>
-        <element name="Def" typeCode="SBML_COPY_ABC" ... />
-      </elements>
-      <plugins>
-        <plugin extensionPoint="Model">
-          <references>
-            <reference name="Def"/>
-          </references>
-        </plugin>
-      </plugins>
+       <elements>
+           <element name="Def" typeCode="SBML_COPY_ABC" ... />
+       </elements>
+       <plugins>
+           <plugin extensionPoint="Model">
+                <references>
+                    <reference name="Def"/>
+                </references>
+            </plugin>
+       </plugins>
     """
     # if class already records its parent return it
     if 'parent' in class_object:
