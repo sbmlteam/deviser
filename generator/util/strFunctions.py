@@ -259,9 +259,6 @@ def plural(name):
     return returned_word
 
 
-# Good tests would be (e.g.) word == singular(plural(word)), etc.
-
-
 def singular(name):
     """
     Attempt to find the singular of a word
