@@ -1139,7 +1139,8 @@ class ParseXML():
     def populate_plugins_for_version(self, pkg_node):
         '''
         Given a <pkgVersion> node, iterate over its <plugin> nodes, if any,
-        and update the self.plugins list.
+        and either create the self.plugins list or update it if it has
+        already been created.
 
         :param pkg_node: the pkgVersion node
         :return: this function doesn't return anything.
