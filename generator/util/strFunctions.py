@@ -112,24 +112,29 @@ def lower_first(word):
     return returned_word
 
 
-def abbrev_name(element):
+def abbrev_name(name):
     """
     Abbreviate a name. Return in lower case.
 
-    :param element: the name to abbreviate
+    :param name: the name to abbreviate
     :return: returns abbreviated form
 
+    This takes any capitals in the name and returns these as a lowercase
+    abbreviation of the name. This facilitates the use of names in functions
+    such as getFoo(Model *m), where m is the abbreviation of Model.
+    Note if the name argument contains no capitals then the first letter 
+    is returned as the abbreviation. 
     e.g.
-    "thisIsATest" -> "iat"  # TODO I'm surprised we don't want "IAT", etc.
+    "thisIsATest" -> "iat"
     "CAT" -> "cat"
-    "cat" -> "c"  # TODO is that what we want?
+    "cat" -> "c"
     """
     abbrev = ''
-    for i in range(0, len(element)):
-        if element[i].isupper():
-            abbrev = abbrev + element[i]
-    if abbrev == '' and len(element) > 0:  # element is all lower-case
-        abbrev = element[0]  # just return the first letter in element
+    for i in range(0, len(name)):
+        if name[i].isupper():
+            abbrev = abbrev + name[i]
+    if abbrev == '' and len(name) > 0:  # name is all lower-case
+        abbrev = name[0]  # just return the first letter in name
     return abbrev.lower()
 
 
