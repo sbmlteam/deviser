@@ -285,7 +285,7 @@ def singular(name):
     length = len(name)
     if name.endswith('ies'):
         returned_word = name[0:length-3] + 'y'
-    elif name.endswith('es'):
+    elif name.endswith('xes'):
         returned_word = name[0:length-2]
     elif name.endswith('s'):
         returned_word = name[0:length-1]

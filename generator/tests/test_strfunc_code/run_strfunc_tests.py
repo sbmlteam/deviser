@@ -225,7 +225,8 @@ def main():
     # plural() tests
     data = {"cat": "cats", "dogs": "dogs", "child": "children",
             "disinformation": "disinformation", "fox": "foxes",
-            "party": "parties", "cloud": "clouds", "something": "somethings"}
+            "party": "parties", "cloud": "clouds", "something": "somethings",
+            "apple": "apples"}
     fail += execute_tests(sf.plural, data, fails)
 
     # singular() tests
