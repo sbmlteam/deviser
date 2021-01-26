@@ -53,9 +53,9 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.comment = '%'
         self.line_length = 72
 
-        self.comment_line = 68 * '%'
-        self.long_comment_line = 78 * '%'
-        self.short_comment_line = 32 * '%'
+        self.matlab_comment_line = 68 * '%'
+        self.long_matlab_comment_line = 78 * '%'
+        self.short_matlab_comment_line = 32 * '%'
 
         self.package = object_desc['name']
         self.up_pack = self.package.upper()
@@ -93,7 +93,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('%%%%% REMOVE END')
         self.write_line('%%%%% ADD ADDITIONAL')
         self.skip_line(2)
-        self.write_line(self.long_comment_line)
+        self.write_line(self.long_matlab_comment_line)
         self.write_line('%%%% ADD isExtension')
         self.write_line('%%%% ADD isExtension')
         if self.filetype == 'sf':
@@ -125,9 +125,9 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('%%%% END functions')
 
     def write_fieldnames(self):
-        self.write_line(self.short_comment_line)
+        self.write_line(self.short_matlab_comment_line)
         self.write_line('% Fieldnames')
-        self.write_line(self.short_comment_line)
+        self.write_line(self.short_matlab_comment_line)
         self.skip_line()
         for plugin in self.plugins:
             self.write_get_plugin_fieldname(plugin)
@@ -137,9 +137,9 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.skip_line(2)
 
     def write_default_values(self):
-        self.write_line(self.short_comment_line)
+        self.write_line(self.short_matlab_comment_line)
         self.write_line('% DefaultValues')
-        self.write_line(self.short_comment_line)
+        self.write_line(self.short_matlab_comment_line)
         self.skip_line()
         for plugin in self.plugins:
             self.write_get_plugin_default_values(plugin)
@@ -149,9 +149,9 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.skip_line(2)
 
     def write_value_types(self):
-        self.write_line(self.short_comment_line)
+        self.write_line(self.short_matlab_comment_line)
         self.write_line('% ValueTypes')
-        self.write_line(self.short_comment_line)
+        self.write_line(self.short_matlab_comment_line)
         self.skip_line()
         for plugin in self.plugins:
             self.write_get_plugin_values_types(plugin)
@@ -166,8 +166,15 @@ class BaseMatlabFile(BaseFile.BaseFile):
         TODO a more descriptive name wouldn't go amiss.
         """
         self.write_line(70 * ' ' + 'version, pkgVersion)')
-        self.up_indent()
+        self.write_more_common_lines()
 
+
+    def write_more_common_lines(self):
+        """
+        Another utility function
+        TODO yep, this one also needs a better name!
+        """
+        self.up_indent()
         self.write_line('if (~isValidLevelVersionCombination(level,'
                         ' version))')
         self.up_indent()
@@ -187,7 +194,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.up_indent()
 
     def write_get_plugin_values_types(self, plugin):
-        self.write_line(self.comment_line)
+        self.write_line(self.matlab_comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] ='
                                  'get{0}{1}ValueType(level, ...'.
                                  format(self.up_pack, plugin['sbase']))
@@ -214,7 +221,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.down_indent()
 
     def write_get_class_values_types(self, sbmlclass):
-        self.write_line(68 * '%')
+        self.write_line(self.matlab_comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = '
                                  'get{0}ValueType(level, ...'.
                                  format(sbmlclass['name']))
@@ -263,7 +270,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
             return att_type
 
     def write_get_plugin_default_values(self, plugin):
-        self.write_line(68 * '%')
+        self.write_line(self.matlab_comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = '
                                  'get{0}{1}DefaultValues(level, ...'.
                                  format(self.up_pack, plugin['sbase']))
@@ -290,27 +297,11 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.down_indent()
 
     def write_get_class_default_values(self, sbmlclass):
-        self.write_line(68 * '%')
+        self.write_line(self.matlab_comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = get{0}DefaultValues(level, ...'.format(sbmlclass['name']))
         self.write_line('                                                                      version, pkgVersion)')
-        self.up_indent()
 
-        self.write_line('if (~isValidLevelVersionCombination(level, version))')
-        self.up_indent()
-        self.write_line('error (\'invalid level/version combination\');')
-        self.down_indent()
-        self.write_line('end;')
-        self.skip_line()
-
-        self.write_line('SBMLfieldnames = [];')
-        self.write_line('nNumberFields = 0;')
-        self.skip_line()
-        self.write_line('if (level == 3)')
-        self.up_indent()
-        self.write_line('if (version < 3)')
-        self.up_indent()
-        self.write_line('if (pkgVersion == 1)')
-        self.up_indent()
+        self.write_more_common_lines()
 
         num_fields = 9
         self.write_line('SBMLfieldnames = {')
@@ -336,9 +327,9 @@ class BaseMatlabFile(BaseFile.BaseFile):
     def get_type(self, attrib):
         att_type = attrib['type']
         att_name = attrib['name']
-        if att_type == 'SId' or att_type == 'SIdRef' or att_type == 'string' or att_type == 'enum':
+        if att_type in ['SId', 'SIdRef', 'string', 'enum']:
             return '\'\''
-        elif att_type == 'bool' or att_type == 'uint' or att_type == 'int':
+        elif att_type in ['bool', 'uint', 'int']:
             return 'int32(0)'
         elif att_type == 'lo_element':
             return '[]'
@@ -353,27 +344,11 @@ class BaseMatlabFile(BaseFile.BaseFile):
             return att_type
 
     def write_get_plugin_fieldname(self, plugin):
-        self.write_line(self.comment_line)
+        self.write_line(self.matlab_comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = get{0}{1}Fieldnames(level, ...'.format(self.up_pack, plugin['sbase']))
         self.write_line('                                                                      version, pkgVersion)')
-        self.up_indent()
 
-        self.write_line('if (~isValidLevelVersionCombination(level, version))')
-        self.up_indent()
-        self.write_line('error (\'invalid level/version combination\');')
-        self.down_indent()
-        self.write_line('end;')
-        self.skip_line()
-
-        self.write_line('SBMLfieldnames = [];')
-        self.write_line('nNumberFields = 0;')
-        self.skip_line()
-        self.write_line('if (level == 3)')
-        self.up_indent()
-        self.write_line('if (version < 3)')
-        self.up_indent()
-        self.write_line('if (pkgVersion == 1)')
-        self.up_indent()
+        self.write_more_common_lines()
 
         num_fields = 1
         self.write_line('SBMLfieldnames = {')
@@ -402,28 +377,11 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.down_indent()
 
     def write_get_class_fieldname(self, sbmlclass):
-        self.write_line(self.comment_line)
+        self.write_line(self.matlab_comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = get{0}Fieldnames(level, ...'.format(sbmlclass['name']))
         self.write_line('                                                                      version, pkgVersion)')
-        self.up_indent()
 
-        self.write_line('if (~isValidLevelVersionCombination(level,'
-                        ' version))')
-        self.up_indent()
-        self.write_line('error (\'invalid level/version combination\');')
-        self.down_indent()
-        self.write_line('end;')
-        self.skip_line()
-
-        self.write_line('SBMLfieldnames = [];')
-        self.write_line('nNumberFields = 0;')
-        self.skip_line()
-        self.write_line('if (level == 3)')
-        self.up_indent()
-        self.write_line('if (version < 3)')
-        self.up_indent()
-        self.write_line('if (pkgVersion == 1)')
-        self.up_indent()
+        self.write_more_common_lines()
 
         num_fields = 9
         self.write_line('SBMLfieldnames = {')
