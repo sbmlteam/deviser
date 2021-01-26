@@ -308,7 +308,7 @@ def get_parent_class(class_object):
           </attributes>
        </element>
 
-    e.g. in the following XML, the 'Def' element is reerenced by the
+    e.g. in the following XML, the 'Def' element is referenced by the
      'Model' plugin
     so
 
