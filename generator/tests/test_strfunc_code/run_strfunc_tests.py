@@ -164,7 +164,7 @@ def main():
     fail += execute_tests(sf.abbrev_name, data, fails)
 
     # abbrev_lo_name() tests
-    data = {"spaghetti": "LOtti", "SPAGHETTI": "LOTTI", "": "LO"}
+    data = {"spaghetti": "", "ListOfFoo": "LOFoo", "ListOfFOO": "LOFOO"}
     fail += execute_tests(sf.abbrev_lo_name, data, fails)
 
     # list_of_name() tests

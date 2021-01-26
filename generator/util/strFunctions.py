@@ -140,15 +140,19 @@ def abbrev_name(name):
 
 def abbrev_lo_name(loname):
     """
-    TODO I can see what it does, but I don't know why, or what sort
-    of lonames will be transformed.
+    The function abbreviates the 'ListOf' part of a class name to 'LO'. If
+    the argument does not start ListOf, it returns an empty string.
 
     :param loname: string to transform
     :return: transformed string
 
-    e.g.  "spaghetti" -> "LOtti"
+    e.g.  "ListOfFoo" -> "LOFoo"
+    "spaghetti" -> ""
     """
-    return 'LO' + loname[6:]
+    if loname.startswith('ListOf'):
+        return 'LO' + loname[6:]
+    else:
+        return ''
 
 
 def list_of_name(name, addPrefix=True):
