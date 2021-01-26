@@ -278,7 +278,7 @@ def get_parent_class(class_object):
     """
     Return the parent class of this class.
     If a class does not explicitly declare its parent then its parent may
-    be the outside this package i.e. a plugin object. In this case it will be
+    be outside this package i.e. a plugin object. In this case it will be
     referenced in a plugin object; which will be the parent.
 
     :param class_object: the object representing the class.
