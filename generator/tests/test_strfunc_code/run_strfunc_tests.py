@@ -6,7 +6,7 @@ import os
 import sys
 
 
-import test_functions
+from tests import test_functions
 
 from util import strFunctions as sf, global_variables as gv
 
