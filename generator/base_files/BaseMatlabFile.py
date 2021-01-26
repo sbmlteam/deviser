@@ -160,11 +160,11 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.write_get_class_values_types(sbmlclass)
             self.skip_line(2)
 
-    def write_get_plugin_values_types(self, plugin):
-        self.write_line(self.comment_line)
-        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] ='
-                                 'get{0}{1}ValueType(level, ...'.
-                                 format(self.up_pack, plugin['sbase']))
+    def write_some_common_lines(self):
+        """
+        Utility function to write some common output.
+        TODO a more descriptive name wouldn't go amiss.
+        """
         self.write_line(70 * ' ' + 'version, pkgVersion)')
         self.up_indent()
 
@@ -186,6 +186,13 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('if (pkgVersion == 1)')
         self.up_indent()
 
+    def write_get_plugin_values_types(self, plugin):
+        self.write_line(self.comment_line)
+        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] ='
+                                 'get{0}{1}ValueType(level, ...'.
+                                 format(self.up_pack, plugin['sbase']))
+
+        self.write_some_common_lines()
         num_fields = 1
         self.write_line('SBMLfieldnames = {')
         self.write_line('\'uint\', ...')
@@ -211,25 +218,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = '
                                  'get{0}ValueType(level, ...'.
                                  format(sbmlclass['name']))
-        self.write_line(70 * ' ' + 'version, pkgVersion)')
-        self.up_indent()
-
-        self.write_line('if (~isValidLevelVersionCombination(level, version))')
-        self.up_indent()
-        self.write_line('error (\'invalid level/version combination\');')
-        self.down_indent()
-        self.write_line('end;')
-        self.skip_line()
-
-        self.write_line('SBMLfieldnames = [];')
-        self.write_line('nNumberFields = 0;')
-        self.skip_line()
-        self.write_line('if (level == 3)')
-        self.up_indent()
-        self.write_line('if (version < 3)')
-        self.up_indent()
-        self.write_line('if (pkgVersion == 1)')
-        self.up_indent()
+        self.write_some_common_lines()
 
         num_fields = 9
         self.write_line('SBMLfieldnames = {')
@@ -278,25 +267,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = '
                                  'get{0}{1}DefaultValues(level, ...'.
                                  format(self.up_pack, plugin['sbase']))
-        self.write_line(70 * ' ' + 'version, pkgVersion)')
-        self.up_indent()
-
-        self.write_line('if (~isValidLevelVersionCombination(level, version))')
-        self.up_indent()
-        self.write_line('error (\'invalid level/version combination\');')
-        self.down_indent()
-        self.write_line('end;')
-        self.skip_line()
-
-        self.write_line('SBMLfieldnames = [];')
-        self.write_line('nNumberFields = 0;')
-        self.skip_line()
-        self.write_line('if (level == 3)')
-        self.up_indent()
-        self.write_line('if (version < 3)')
-        self.up_indent()
-        self.write_line('if (pkgVersion == 1)')
-        self.up_indent()
+        self.write_some_common_lines()
 
         num_fields = 1
         self.write_line('SBMLfieldnames = {')
