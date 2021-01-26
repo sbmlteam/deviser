@@ -67,8 +67,8 @@ Comments are comment nodes
 
 A common error in DOM processing is to expect an element node to contain text.
 However, the text of an element node is stored in a text node.
-In this example: <year>2005</year>, the element node <year> holds a text n
-ode with the value "2005".
+In this example: <year>2005</year>, the element node <year> holds a text node
+with the value "2005".
 "2005" is not the value of the <year> element!
 """
 
