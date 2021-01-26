@@ -131,7 +131,7 @@ class BaseFile:
         return lines
 
     @staticmethod
-    def parse_lines_broken(lines, words, max_length):
+    def parse_lines(lines, words, max_length):
         """
         TODO this is a horrendous-looking function and
         we really need some decent test code for it.
@@ -142,114 +142,6 @@ class BaseFile:
         :param max_length:
         :return: nothing
         """
-        num_words = len(words)
-        quotes_closed = True
-        reopen_quotes = False
-        temp = words[0]
-        in_quotes = True if temp.startswith('\"') else False
-        newline = words[0]
-        i = 1
-        while i < num_words:
-            if len(newline) < max_length:
-                if not in_quotes:
-                    if words[i].startswith('\"'):
-                        in_quotes = True
-                        quotes_closed = False
-                    # check we don't also end
-                    end_found = False
-                    if words[i].endswith('\"'):
-                        in_quotes = False
-                        quotes_closed = True
-                    else:
-                        for c in range(1, len(words[i])):
-                            if words[i][c] == '\"':
-                                end_found = True
-                    if end_found and in_quotes and not quotes_closed:
-                        in_quotes = False
-                        quotes_closed = True
-                else:
-                    if words[i].endswith('\"'):
-                        in_quotes = False
-                    elif words[i].endswith('\",') and not quotes_closed:
-                        in_quotes = False
-                if len(temp) > 0:
-                    temp += ' ' + words[i]
-                else:
-                    if reopen_quotes:
-                        temp = '\"' + words[i]
-                        reopen_quotes = False
-                    else:
-                        temp = words[i]
-                i += 1
-                if len(temp) <= max_length:
-                    quotes_closed = True if temp.endswith('\"') else False
-                    newline = temp
-                else:
-                    if len(newline) == 0:
-                        if in_quotes or not quotes_closed:
-                            temp += ' \"'
-                            quotes_closed = True
-                        if in_quotes and not quotes_closed:
-                            reopen_quotes = True
-                        lines.append(temp)
-                        temp = ''
-                    elif len(words[i - 1]) > (max_length - 5):
-                        newline = temp
-                        lines.append(newline)
-                        newline = ''
-                        temp = ''
-                    else:
-                        rollback = True
-                        if in_quotes:
-                            if words[i - 1] == '",':
-                                # special case for validation rule messages
-                                rollback = False
-                                newline = temp
-                            elif words[i - 1].startswith('\"'):
-                                # do not add the quotes as we are throwing
-                                # the word away
-                                in_quotes = False
-                                quotes_closed = True
-                            else:
-                                newline += ' \"'
-                                quotes_closed = True
-                                reopen_quotes = True
-                        elif not quotes_closed:
-                            newline += ' \"'
-                            quotes_closed = True
-                            reopen_quotes = True
-                        # dont break between @c and true etc
-                        # remove @c and go back a word
-                        if words[i - 2] == '@c':
-                            templine = words[0]
-                            for j in range(1, i - 2):
-                                templine = templine + ' ' + words[j]
-                            newline = templine
-                            i -= 1
-                        lines.append(newline)
-                        newline = ''
-                        temp = ''
-                        if rollback:
-                            i -= 1
-                            rollback = False
-            else:  # Here, new line is >= max_length
-                # Don't break between @c and true etc
-                # remove @c and go back a word
-                if words[i - 1] == '@c':
-                    newline = newline[0: len(newline) - 3]
-                    i -= 1
-                if in_quotes or not quotes_closed:
-                    newline += ' \"'
-                    quotes_closed = True
-                    reopen_quotes = True
-                lines.append(newline)
-                newline = ''
-                temp = ''
-        if len(newline) > 0:
-            lines.append(newline)
-
-    @staticmethod
-    def parse_lines(lines, words, max_length):
         num_words = len(words)
         in_quotes = False
         quotes_closed = True
@@ -423,10 +315,6 @@ class BaseFile:
 
         :param line: the line to write.
         """
-        #self.write_line(line, indent=False)
-        ##tabs = ''
-        ##for i in range(0, int(self.num_tabs)):
-        ##    tabs += '  '
         self.file_out.write('{0}{1}\n'.format(self.get_my_tabs(), line))
 
     def skip_line(self, num=1):
