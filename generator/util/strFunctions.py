@@ -155,18 +155,26 @@ def abbrev_lo_name(loname):
         return ''
 
 
-def list_of_name(name, addPrefix=True):
+def list_of_name(name, add_prefix=True):
     """
     Given a name, get "list of" name.
 
     :param name: the name to get "list of" name for
-    :param addPrefix: if True, prepend the global prefix to returned string
-    :return: the "list of" name string
+    :param add_prefix: if True and we are not writing code for a package
+        prepend the global prefix to returned string
+    :return: the "list of" name string e.g. ListOfName
 
-    e.g. "FooParameter" -> "ListOfFooParameters"  if no gv.prefix
+    e.g.
+    with add_prefix = False
+        "FooParameter" -> "ListOfFooParameters"
+
+    with add_prefix =True and gv.prefix = 'SBML'
+         "FooParameter" -> "ListOfFooParameters" if gv.is_package
+         "FooParameter" -> "SBMLListOfFooParameters" if not gv.is_package
+
     """
     prefix = ''
-    if addPrefix and not gv.is_package:
+    if add_prefix and not gv.is_package:
         prefix = gv.prefix  # e.g. "SBML"
     return prefix + 'ListOf' + plural_no_prefix(name)
 

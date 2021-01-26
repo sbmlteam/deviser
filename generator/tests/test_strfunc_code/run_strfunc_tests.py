@@ -170,12 +170,12 @@ def main():
     # list_of_name() tests
     gv.reset()
     data = {"FooParameter": "ListOfFooParameters"}
-    fail += execute_tests(sf.list_of_name, data, fails, addPrefix=True)
-    fail += execute_tests(sf.list_of_name, data, fails, addPrefix=False)
+    fail += execute_tests(sf.list_of_name, data, fails, add_prefix=True)
+    fail += execute_tests(sf.list_of_name, data, fails, add_prefix=False)
     # print(f"gv is package: {gv.is_package}, gv prefix: {gv.prefix}")
     gv.is_package = False
     data = {"FooParameter": "SBMLListOfFooParameters"}
-    fail += execute_tests(sf.list_of_name, data, fails, addPrefix=True)
+    fail += execute_tests(sf.list_of_name, data, fails, add_prefix=True)
 
     # lower_list_of_name_no_prefix() tests
     data = {"fox": "listOfFoxes", "cat": "listOfCats", "child": "listOfChildren"}
