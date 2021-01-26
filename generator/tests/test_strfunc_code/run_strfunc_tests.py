@@ -135,6 +135,16 @@ def check_keys(first, second, fails):
             return
 
 
+def single_then_plural(name):
+    singular = sf.singular(name)
+    return sf.plural(singular)
+
+
+def plural_then_single(name):
+    plural = sf.plural(name)
+    return sf.singular(plural)
+
+
 def main():
 
     # NOTE: the test sets below are in the same order as the functions
@@ -233,6 +243,19 @@ def main():
     data2 = swap_dictionary(data)
     data2['dogs'] = 'dog'  # Just need to tweak this one entry. Otherwise OK.
     fail += execute_tests(sf.singular, data2, fails)
+
+    # single -> plural -> single
+    data = {"cat": "cat", "dog": "dog", "child": "child",
+            "disinformation": "disinformation", "fox": "fox",
+            "party": "party", "cloud": "cloud", "something": "something",
+            "apple": "apple"}
+    fail += execute_tests(plural_then_single, data, fails)
+
+    data = {"cats": "cats", "dogs": "dogs", "children": "children",
+            "disinformation": "disinformation", "foxes": "foxes",
+            "parties": "parties", "clouds": "clouds", "somethings": "somethings",
+            "apples": "apples"}
+    fail += execute_tests(single_then_plural, data, fails)
 
     # remove_prefix() tests - this is a complicated function to test!
     gv.reset()  # gv.prefix now "SBML"
