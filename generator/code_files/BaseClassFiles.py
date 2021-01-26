@@ -37,6 +37,8 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+# NB issue 45 - consider moving this file to base_files directory.
+
 import re
 import os
 

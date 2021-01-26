@@ -5,6 +5,7 @@
 #             the expected dictionaries
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -38,32 +39,36 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 #
-# A note on XML terminology
-# =========================
-# XML Node example from https://www.w3schools.com/xml/xml_attributes.asp:
-#
-# <person gender="female">
-#   <firstname>Anna</firstname>
-#   <lastname>Smith</lastname>
-# </person>
-#
-# <person> is an element.
-# Here, gender is an attribute (aka "attribute node").
-# <firstname> is an element (aka "element node")
-#
-# Helpful info on https://www.w3schools.com/xml/dom_nodes.asp: (q.v. for examples)
-#
-# According to the XML DOM, *everything* in an XML document is a node:
-# The entire document is a document node
-# Every XML element is an element node
-# The text in the XML elements are text nodes
-# Every attribute is an attribute node
-# Comments are comment nodes
-#
-# A common error in DOM processing is to expect an element node to contain text.
-# However, the text of an element node is stored in a text node.
-# In this example: <year>2005</year>, the element node <year> holds a text node with the value "2005".
-# "2005" is not the value of the <year> element!
+"""
+A note on XML terminology
+=========================
+XML Node example from https://www.w3schools.com/xml/xml_attributes.asp:
+
+.. code-block:: xml
+
+    <person gender="female">
+      <firstname>Anna</firstname>
+      <lastname>Smith</lastname>
+    </person>
+
+<person> is an element.
+Here, gender is an attribute (aka "attribute node").
+<firstname> is an element (aka "element node")
+
+Helpful info on https://www.w3schools.com/xml/dom_nodes.asp: (q.v. for examples)
+
+According to the XML DOM, *everything* in an XML document is a node:
+The entire document is a document node
+Every XML element is an element node
+The text in the XML elements are text nodes
+Every attribute is an attribute node
+Comments are comment nodes
+
+A common error in DOM processing is to expect an element node to contain text.
+However, the text of an element node is stored in a text node.
+In this example: <year>2005</year>, the element node <year> holds a text node with the value "2005".
+"2005" is not the value of the <year> element!
+"""
 
 from xml.dom.minidom import *
 import os.path
@@ -118,9 +123,12 @@ class ParseXML():
                   Else False.
 
         i.e.
-        In  : [to_bool(x) for x in
-              ['false', 'true', '0', '1', None, 'yes', 'no', 'Yes']]
-        Out : [False, True, False, True, False, True, False, True]
+
+        .. code-block:: default
+
+           In  : [to_bool(x) for x in
+                   ['false', 'true', '0', '1', None, 'yes', 'no', 'Yes']]
+           Out : [False, True, False, True, False, True, False, True]
         '''
         if v is None:
             return False
@@ -167,16 +175,21 @@ class ParseXML():
     @staticmethod
     def get_enum_value(node, name, classname, typename, invalid=False):
         '''
-        Get the name value of an enumValue node such as
-        <enumValue name="SPATIAL_COMPRESSIONKIND_DEFLATED" value="deflated"/>
+        Get the name value of an enumValue node.
 
-        :param node: the <enumValue> node
+        :param node: the <enumValue> node representation
         :param name: the node's name attribute (e.g. the string "name")
         :param classname: class name of parent <enum> node (e.g. "BOUNDARY")
         :param typename: type name of parent <enum> node (e.g. "KIND")
-        :param invalid: Set this to True if you want to get the invalid form of the name attribute.
+        :param invalid: Set this to `True` if you want to get the invalid form of the name attribute.
         :return: returns the value of the name attribute (e.g. "SPATIAL_COMPRESSIONKIND_DEFLATED",
                  or like "SPATIAL_BOUNDARYKIND_INVALID" if `invalid` is `True`)
+
+        Example <enumValue> node:
+
+        .. code-block:: xml
+
+            <enumValue name="SPATIAL_COMPRESSIONKIND_DEFLATED" value="deflated"/>
         '''
         temp = node.getAttributeNode(name)  # Get node's "name" attribute node
         if temp is None:
@@ -204,13 +217,20 @@ class ParseXML():
     @staticmethod
     def get_bool_value(self, node, name):
         '''
-        Get the boolean value True or False from a node like
-        <attribute name="sampledVolume" required="false" type="lo_element"
-         element="SampledVolume" abstract="false"/>
+        Get the boolean value True or False from a node
 
         :node: the node
         :name: the name of the attribute desired, e.g. "abstract" or "required"
         :return: returns True or False depending on desired attribute's value.
+
+        Example node:
+
+        .. code-block:: xml
+
+           <attribute name="sampledVolume" required="false" type="lo_element"
+                      element="SampledVolume" abstract="false"/>
+
+
         '''
         temp = node.getAttributeNode(name)
         if temp is None:
@@ -229,7 +249,12 @@ class ParseXML():
         :param name: the name of the attribute node whose value we want
         :return: returns the integer which is stored in string form in the attribute node's value.
 
-        e.g. for a case like <pkgVersion level="3" version="1" pkg_version="1">
+        e.g. for a case like
+
+        .. code-block:: xml
+
+            <pkgVersion level="3" version="1" pkg_version="1">
+
         the node is pkgVersion and the name is one of 'level,' 'version' or 'pkg_version'
         In this example the int value returned would be, respectively, 3, 1 or 1
         '''
@@ -241,14 +266,20 @@ class ParseXML():
     @staticmethod
     def get_type_value(self, node):
         '''
-        Given a node like:
-        <attribute name="sampledVolume" required="false" type="lo_element"
-         element="SampledVolume" abstract="false"/>
-        get the value of the "type" node's value, in "standardized" form
+        Given a node, get the value of the "type" node's value, in
+        "standardized" form
 
         :param node: the node, e.g. <attribute>
-        :return: looks up key (e.g. "lo_element") in standardize_types()'s dictionary
-        and returns the value (in this example, "lo_element" is returned).
+        :return: looks up key (e.g. "lo_element") in standardize_types()'s
+                 dictionary and returns the value (in example below,
+                 "lo_element" is returned).
+
+        Example input node:
+
+        .. code-block:: xml
+
+           <attribute name="sampledVolume" required="false" type="lo_element"
+                      element="SampledVolume" abstract="false"/>
         '''
         temp = node.getAttributeNode('type')
         if temp is None:
@@ -265,6 +296,9 @@ class ParseXML():
            (see strFunctions.standard_element_name())
 
         Example <attribute> node:
+
+    .. code-block:: xml
+
         <attribute name="sampledVolume" required="false" type="lo_element"
          element="SampledVolume" abstract="false"/>
         '''
@@ -283,7 +317,11 @@ class ParseXML():
         :param name: the name of the value required (e.g. "elementName")
         :return: the string value required, adjusted if required (e.g. "csgNode").
 
-        Example element node:  <element ... elementName="csgNode" ...>
+        Example element node:
+
+    .. code-block:: xml
+
+         <element ... elementName="csgNode" ...>
         '''
         xml_element_name = ''
         temp = self.get_value(node, name)
@@ -302,7 +340,11 @@ class ParseXML():
                  Else returns `None`.
 
         e.g. Given a node like:
-        <element name="Geometry" typeCode="SBML_SPATIAL_GEOMETRY" ...>
+
+        .. code-block:: xml
+
+            <element name="Geometry" typeCode="SBML_SPATIAL_GEOMETRY" ...>
+
         get the value of the `name` attribute ("Geometry" in this example).
         '''
         class_name = None
@@ -337,10 +379,15 @@ class ParseXML():
     def get_mapping(self, node):
         '''
         Used to get information from a <mapping> node
-        e.g. <mapping name="DimensionDescription" package="numl"/>
 
         :param node: the <mapping> node to interrogate
         :return: returns [name, package] tuple
+
+        Example <mapping> node:
+
+        .. code-block:: xml
+
+           <mapping name="DimensionDescription" package="numl"/>
         '''
         name = ''
         package = ''  # TODO Maybe better as None?
@@ -362,16 +409,32 @@ class ParseXML():
 
 
     @staticmethod
-    def get_loclass_name_value(self, node, name):
-        '''
-        TODO: resolve issue #16 before documenting this function.
-        '''
-        xml_loclass_name = ''
-        temp = self.get_value(node, name)
-        # we expect this to be camelCase starting with lower
+    def get_loclass_name_value(self, node):
+        """
+        Get the name of the listOfClass from an <element> node
+
+        :param node: the <element> node
+        :return: returns the listOf classname, ensuring it starts in upper-case.
+                 Else returns ``.
+
+        e.g. Given a node like:
+
+        .. code-block:: xml
+
+           <element name="QualitativeSpecies"  hasListOf="true"  .../>
+
+        returns
+
+        .. code-block:: default
+
+         "ListOfQualitativeSpecies"
+        """
+        loclass_name = ''
+        temp = self.get_value(node, 'listOfClassName')
+        # we expect this to be camelCase starting with an uppercase
         if temp is not None:
-            xml_loclass_name = strFunctions.upper_first(temp)  # See issue 16
-        return xml_loclass_name
+            loclass_name = strFunctions.upper_first(temp)
+        return loclass_name
 
     @staticmethod
     def get_add_code_value(self, node, name):
@@ -383,7 +446,11 @@ class ParseXML():
                      Example name = "additionalDecls"
         :return: the filename (e.g. "spatial_geometry.h.txt")
 
-        e.g. <element name="Geometry"...additionalDecls="spatial_geometry.h.txt"...>
+        e.g.
+
+    .. code-block:: xml
+
+        <element name="Geometry"...additionalDecls="spatial_geometry.h.txt"...>
         '''
         add_code = self.get_value(node, name)
         if add_code is not None:
@@ -430,9 +497,28 @@ class ParseXML():
         :return: returns the (possibly tweaked) value.
 
         e.g. given an element like:
-        <element name="SedDocument" typeCode="SEDML_DOCUMENT" ...>
-        this will return "SEDML_DOCUMENT"
-        Whereas a typeCode value of "SBML_SOMETHING" will return "SOMETHING".
+
+        .. code-block:: xml
+
+            <element name="SedDocument" typeCode="SEDML_DOCUMENT" ...>
+
+        this will return
+
+        .. code-block:: default
+
+            "SEDML_DOCUMENT"
+
+        Whereas a typeCode value of
+
+        .. code-block:: default
+
+            "SBML_SOMETHING"
+
+        will return
+
+        .. code-block:: default
+
+         "SOMETHING".
         '''
         name = 'typeCode'
         temp = node.getAttributeNode(name)
@@ -450,6 +536,7 @@ class ParseXML():
         else:
             typecode = temptype
         return typecode
+
 
     def analyse_enumname(self, enum_name):
         """
@@ -473,18 +560,19 @@ class ParseXML():
         So you might have BOUNDARYKIND or BOUNDARY_KIND or BoundaryKind;
         which are all the classname and so we want:
 
-        typedef enum
-        {
-        SPATIAL_BOUNDARYKIND_ROBIN_VALUE_COEFFICIENT /*!< The spatial boundarykind is @c "Robin_valueCoefficient". /
-      , SPATIAL_BOUNDARYKIND_ROBIN_INWARD_NORMAL_GRADIENT_COEFFICIENT /!< The spatial boundarykind is @c "Robin_inwardNormalGradientCoefficient". /
-      , SPATIAL_BOUNDARYKIND_ROBIN_SUM /!< The spatial boundarykind is @c "Robin_sum". /
-      , SPATIAL_BOUNDARYKIND_NEUMANN /!< The spatial boundarykind is @c "Neumann". /
-      , SPATIAL_BOUNDARYKIND_DIRICHLET /!< The spatial boundarykind is @c "Dirichlet". /
-      , SPATIAL_BOUNDARYKIND_INVALID /!< Invalid BoundaryKind value. */
-      } BoundaryKind_t;
+        .. code-block:: C++
 
-    so first two parts are always the same and then the part after second _ is value - which might have underscores.
+                typedef enum
+                {
+                SPATIAL_BOUNDARYKIND_ROBIN_VALUE_COEFFICIENT /* The spatial boundarykind is @c "Robin_valueCoefficient". */
+              , SPATIAL_BOUNDARYKIND_ROBIN_INWARD_NORMAL_GRADIENT_COEFFICIENT /* The spatial boundarykind is @c "Robin_inwardNormalGradientCoefficient". */
+              , SPATIAL_BOUNDARYKIND_ROBIN_SUM /* The spatial boundarykind is @c "Robin_sum". */
+              , SPATIAL_BOUNDARYKIND_NEUMANN /* The spatial boundarykind is @c "Neumann". */
+              , SPATIAL_BOUNDARYKIND_DIRICHLET /*The spatial boundarykind is @c "Dirichlet". */
+              , SPATIAL_BOUNDARYKIND_INVALID /* Invalid BoundaryKind value. */
+              } BoundaryKind_t;
 
+        so first two parts are always the same and then the part after second _ is value - which might have underscores.
         """
         break_found = False
         for i in range(1, len(enum_name)):
@@ -541,20 +629,22 @@ class ParseXML():
         e.g. given a name of "FooParameter", and a list of "element" dictionaries
         representing a set of element nodes, including this one:
 
-        <element name="FooParameter" ... hasListOf="true" ...
-         listOfName="listOfParameters" ...
-         listOfClassName="ListOfFooParameters" ... >
+        .. code-block:: xml
+
+            <element name="FooParameter" ... hasListOf="true" ...
+                     listOfName="listOfParameters" ...
+                     listOfClassName="ListOfFooParameters" ... >
 
         iterate over the dictionaries and, for any with an entry for
         key 'isListOf' [which corresponds to a hasListOf attribute node],
-        which has the value True, then see if
+        which has the value `True`, then see if
         that dictionary has a "listOfClassName" entry with value
         "ListOfFooParameters". If so, return that dictionary object.
 
         If the dictionary has an empty entry for key "listOfClassName", update that
         entry with the value "ListOfFooParameters", and return that dictionary object.
 
-        If no element dictionaries meet the matching criteria, return None.
+        If no element dictionaries meet the matching criteria, return `None`.
         '''
         if elements is None or name is None:
             return None
@@ -586,7 +676,7 @@ class ParseXML():
 
     def standardize_types(self, attrib_type):
         '''
-        For different types, return a "standardized" form
+        For different types, return a "standardized" form.
 
         :param attrib_type: (string) value of the type (e.g. 'boolean')
         :return: returns the "standardized" type string (e.g. 'bool')
@@ -612,23 +702,14 @@ class ParseXML():
     def matches_unsigned_int(name):
         '''
         Specialist function to check that a type string
-        is (or is equivalent to) "unsigned int"
+        is (or is equivalent to) "unsigned int".
 
         :param name: the value of the type string, e.g. "positive int"
-        :return: True if this is (or equivalent to) unsigned int type;
-        False otherwise.
+        :return: `True` if this is (or equivalent to) unsigned int type;
+                 `False` otherwise.
         '''
-        if name == 'unsigned integer':
-            return True
-        elif name == 'unsigned int':
-            return True
-        elif name == 'positive integer':
-            return True
-        elif name == 'positive int':
-            return True
-        elif name == 'non-negative integer':
-            return True
-        elif name == 'non-negative int':
+        if name in ['unsigned integer', 'unsigned int', 'positive integer',
+                    'positive int', 'non-negative integer', 'non-negative int']:
             return True
         else:
             return False
@@ -646,7 +727,11 @@ class ParseXML():
              the "name" and "element" attribute value nodes in the <concrete> node(s)
 
         Example of a <concrete> node, nested under an <element> node:
-        <concrete name="csgPrimitive" element="CSGPrimitive" minNumChildren="0" maxNumChildren="0"/>
+
+        .. code-block:: xml
+
+           <concrete name="csgPrimitive" element="CSGPrimitive"
+                     minNumChildren="0" maxNumChildren="0"/>
         '''
         concrete_list = []
         for concrete in node.getElementsByTagName('concrete'):
@@ -667,8 +752,11 @@ class ParseXML():
         :return: dictionary of info about the node
 
         Example of an <attribute> node:
-        <attribute name="sampledVolume" required="false" type="lo_element"
-         element="SampledVolume" abstract="false"/>
+
+        .. code-block:: xml
+
+            <attribute name="sampledVolume" required="false" type="lo_element"
+                       element="SampledVolume" abstract="false"/>
         """
         version_info = []
         for i in range(0, self.num_versions):
@@ -734,10 +822,13 @@ class ParseXML():
 
         Example <element> node:
 
-        <element name="DynElement" typeCode="SBML_DYN_DYNELEMENT"
-         hasListOf="true" hasChildren="false" hasMath="false"
-         childrenOverwriteElementName="false" minNumListOfChildren="0"
-         maxNumListOfChildren="0" abstract="false">
+        .. code-block:: xml
+
+            <element name="DynElement" typeCode="SBML_DYN_DYNELEMENT"
+                     hasListOf="true" hasChildren="false" hasMath="false"
+                     childrenOverwriteElementName="false"
+                     minNumListOfChildren="0"
+                     maxNumListOfChildren="0" abstract="false">
         '''
         element_name = self.get_element_class_name(self, node)  # e.g. "DynElement"
         if not element_name:
@@ -791,7 +882,7 @@ class ParseXML():
                 self.get_element_name_value(self, node, 'listOfName')
             # Some element nodes have a listOfClassName attribute node:
             lo_class_name = \
-                self.get_loclass_name_value(self, node, 'listOfClassName')
+                self.get_loclass_name_value(self, node)
             min_lo_children = self.get_lo_min_children(self, node)
             add_decls = self.get_add_code_value(self, node, 'additionalDecls')
             add_defs = self.get_add_code_value(self, node, 'additionalDefs')
@@ -849,11 +940,13 @@ class ParseXML():
 
         Example <plugin> node:
 
-        <plugin extensionPoint="Model">
-          <attributes>
-            <attribute name="useFoo" required="true" type="boolean" abstract="false"/>
-          </attributes>
-        </plugin>
+        .. code-block:: xml
+
+            <plugin extensionPoint="Model">
+              <attributes>
+                <attribute name="useFoo" required="true" type="boolean" abstract="false"/>
+              </attributes>
+            </plugin>
         '''
         ext_point = self.get_value(node, 'extensionPoint')  # e.g. "Model"
         plugin = None
@@ -1005,13 +1098,15 @@ class ParseXML():
 
         e.g. given the structure (from file samples/sbgn.xml):
 
-        <element name="Point" ....>
-          <attributes>
-            <attribute name="x" required="true" type="double" abstract="false"/>
-            <attribute name="y" required="true" type="double" abstract="false"/>
-            <attribute name="point" required="false" ... element="Point" ... abstract="false"/>
-          </attributes>
-        </element>
+        .. code-block:: xml
+
+            <element name="Point" ....>
+              <attributes>
+                <attribute name="x" required="true" type="double" abstract="false"/>
+                <attribute name="y" required="true" type="double" abstract="false"/>
+                <attribute name="point" required="false" ... element="Point" ... abstract="false"/>
+              </attributes>
+            </element>
 
         the third <attribute> node is a "child" of the "Point" element.
         Actually, a grandchild to be more precise.
@@ -1020,11 +1115,10 @@ class ParseXML():
         node, as in this example. Again, its grandparent to be more precise.
 
         We are using the same terms to mean two things:
-        (1) parent and child, as here  (and grandparent, grandchild, etc)
+        (1) parent and child, as here (and grandparent, grandchild, etc)
         (2) given a node <outer>, with one or more node(s) <inner> nested
         within it, I have said in other places that <outer> is the parent
         node and <inner> the child node
-
         '''
         found = False
         parent = ''
@@ -1082,7 +1176,9 @@ class ParseXML():
 
         Example <version> node:
 
-         <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/>
+        .. code-block:: xml
+
+            <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/>
         '''
         level = self.get_int_value(self, node, 'level')
         version = self.get_int_value(self, node, 'version')
@@ -1094,10 +1190,15 @@ class ParseXML():
     def get_dependency_information(self, node):
         '''
         Get information from a <dependency> node
-        e.g. <dependency library_name="libnuml" prefix="NUML"/>
 
         :param node: the dependency node
         :return: returns a dictionary with the extracted information.
+
+        Example <dependency> node:
+
+        .. code-block:: xml
+
+            <dependency library_name="libnuml" prefix="NUML"/>
         '''
         library = self.get_value(node, 'library_name')
         prefix = self.get_value(node, 'prefix')
@@ -1112,10 +1213,13 @@ class ParseXML():
         :return: returns nothing
 
         Example of a <language> node starting element:
-        <language name="SBGN" baseClass="SbgnBase" documentClass="SbgnDocument"
-         prefix="Sbgn" libraryName="libSBGN"
-         annotationElementName="Extension" topLevelElementName="Extension"
-         isPackage="false" uses_ASTNode="true" uses_XMLNode="true">
+
+        .. code-block:: xml
+
+            <language name="SBGN" baseClass="SbgnBase" documentClass="SbgnDocument"
+             prefix="Sbgn" libraryName="libSBGN"
+             annotationElementName="Extension" topLevelElementName="Extension"
+             isPackage="false" uses_ASTNode="true" uses_XMLNode="true">
 
         The <language> node can also contain nodes of at least the following
         types: <library_version>, <language_version> and <dependencies>.
@@ -1215,7 +1319,7 @@ class ParseXML():
         Prints an error to output (probably stdout)
 
         :param code: one of the return_codes entries from global_variables
-        e.g. gv.return_codes['missing required information']
+               e.g. gv.return_codes['missing required information']
         :param message: a message to go with the code, e.g. 'A Class must have a Name'
         :return: returns nothing.
         '''
@@ -1240,12 +1344,14 @@ class ParseXML():
         <package> node.
 
         Example of <package> node:
-        <package name="dyn" fullname="Dynamic Processes" number="400"
-         offset="9000000" version="1" required="true">
+
+        .. code-block:: xml
+
+            <package name="dyn" fullname="Dynamic Processes" number="400"
+                     offset="9000000" version="1" required="true">
 
         Some names, e.g. "additionalDecls", can occur in more than one type of node,
         e.g. in <plugin> and <element> nodes (at least) in this case.
-
         """
         temp = self.get_value(self.dom.documentElement, 'name')  # e.g. "dyn"
         # we expect this to be lower case:
