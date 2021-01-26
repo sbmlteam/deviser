@@ -51,6 +51,10 @@ def upper_first(word):
     :param word: word we want to change.
     :return: changed word.
 
+    Note the SBML Level 3 Spatial Geometry package uses a set of classes
+    named CSGFoo; where the capitalised version of the name will always
+    have the 'CSG' in capitals. This case is considered within this function.
+
     e.g.
     "csgsomething" -> "CSGsomething", "cat" -> "Cat", "csgcat" -> "CSGcat",
     "cscat" -> "Cscat", "csgeometry" -> "CSGeometry",
@@ -77,16 +81,19 @@ def lower_first(word):
     :param word: word we want to change.
     :return: changed word.
 
+    Note the SBML Level 3 Spatial Geometry package uses a set of classes
+    named CSGFoo; where the capitalised version of the name will always
+    have the 'CSG' in capitals. This case is considered within this function.
+
     TODO: could perhaps have one function to replace this
     and the upper_first() function? As they are quite similar.
+    
 
     """
     # hack for spatial CSGFoo classes
     returned_word = ''
     if word is None or word == '':
         return returned_word
-    elif len(word) == 1:  # The reverse of this is not done in upper_first()
-        returned_word = word[0].lower()
     elif word.startswith('CSG'):
         if word == 'CSGeometry':
             returned_word = 'csGeometry'
