@@ -159,10 +159,6 @@ def main():
     data2 = swap_dictionary(data)
     fail += execute_tests(sf.lower_first, data2, fails)
 
-    # get_indent() tests
-    data = {'': 1, 'elephant': 9}
-    fail += execute_tests(sf.get_indent, data, fails)
-
     # abbrev_name() tests
     data = {"thisIsATest": "iat", "CAT": "cat", "cat": "c", "c": "c", "C": "c"}
     fail += execute_tests(sf.abbrev_name, data, fails)

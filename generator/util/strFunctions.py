@@ -112,20 +112,6 @@ def lower_first(word):
     return returned_word
 
 
-def get_indent(element):
-    """
-    Given a string, e.g. 'hello', work out length
-    of string 'hello('.
-
-    :param element: string to process
-    :return: length of: string plus '('
-
-    TODO when would this be used?
-    """
-    s1 = '{0}('.format(element)
-    return len(s1)
-
-
 def abbrev_name(element):
     """
     Abbreviate a name. Return in lower case.
