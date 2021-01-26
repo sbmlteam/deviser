@@ -423,7 +423,11 @@ class BaseFile:
 
         :param line: the line to write.
         """
-        self.write_line(line, indent=False)
+        #self.write_line(line, indent=False)
+        ##tabs = ''
+        ##for i in range(0, int(self.num_tabs)):
+        ##    tabs += '  '
+        self.file_out.write('{0}{1}\n'.format(self.get_my_tabs(), line))
 
     def skip_line(self, num=1):
         """
