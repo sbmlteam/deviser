@@ -106,9 +106,9 @@ class BaseFile:
         """
         Function to create lines of size specified.
 
-        :param line:
-        :param tabsize:
-        :param is_comment:
+        :param line: the input line which we wish to split into shorter lines
+        :param tabsize: number of space characters equivalent to a tab. (??)
+        :param is_comment: set to `True` if input line is a comment
         :return:
         """
         max_length = self.line_length - tabsize
@@ -259,7 +259,7 @@ class BaseFile:
         Utility function for nice formatting.
         """
         tabs = ''
-        for i in range(0, int(self.num_tabs)):
+        for _ in range(0, int(self.num_tabs)):
             tabs += '  '
         return tabs
 
@@ -284,15 +284,15 @@ class BaseFile:
 
     def write_line(self, line, space=0, indent=True):
         """
-        Functions for writing lines indenting each new line
+        Functions for writing lines, indenting each new line
 
-        :param line:
-        :param space: number of spaces
+        :param line: the single input line
+        :param space: number of spaces (of extra indentation)
         :param indent: set to `False` to stop indentation.
         """
         tabs = self.get_my_tabs()
         if indent:
-            for i in range(0, space):
+            for _ in range(0, space):
                 tabs += ' '
         lines = self.create_lines(line, len(tabs))
         for i in range(0, len(lines)):
@@ -302,7 +302,7 @@ class BaseFile:
 
     def write_line_no_indent(self, line):
         """
-        functions for writing lines without indenting each new line
+        Functions for writing line without indenting each new line
         """
         self.write_line(line, indent=False)
 
@@ -310,8 +310,6 @@ class BaseFile:
         """
         Function to write a single line, preserving the indenting
         i.e. we do not add extra indenting
-
-        TODO I don't think this is tested anywhere yet.
 
         :param line: the line to write.
         """
@@ -323,14 +321,15 @@ class BaseFile:
 
         :param num: number of blank lines to write.
         """
-        for i in range(0, num):
+        for _ in range(0, num):
             self.file_out.write('\n')
 
     def write_comment_line(self, line):
         """
         Write a line of text in the comment block.
 
-        :param line: list of what to write
+        :param line: single input line we want to write as
+              multiple comment lines.
         """
         tabs = self.get_my_tabs()
         lines = self.create_lines(line, len(tabs), True)
@@ -493,7 +492,7 @@ class BaseFile:
 
     def write_custom_copyright(self):
         """
-        Write a custom copyright text, stored in another file, to this file.
+        Write a custom copyright text, stored in another file, to the output file.
         """
         filename = gv.custom_copyright
         in_file = open(filename, 'r')
@@ -633,7 +632,7 @@ class BaseFile:
         if sum([extension, plugin, validator]) > 1:
             # raise an error and...Not sure what Deviser usually does
             print("Error in write_class_comments - too many true values.")
-            exit()  # TODO need something better than this. Which are true?
+            exit()  # TODO need something better than this. Which ones are true?
 
         fullname = gv.package_full_name
         up_package = SF.upper_first(self.package)
