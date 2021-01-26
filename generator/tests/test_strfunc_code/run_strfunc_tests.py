@@ -198,8 +198,15 @@ def main():
 
     # cap_list_of_name_no_prefix() tests
     gv.reset()
-    data = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats"}
+    data = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats",
+            "SBMLFooParameter": "ListOfSBMLFooParameters"}
     fail += execute_tests(sf.cap_list_of_name_no_prefix, data, fails)
+    gv.is_package = False
+    # this gets wrongly dealt with by the remove prefix function
+    #TODO sort
+    data = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats",
+            "SBMLFooParameter": "ListOfFooParameters"}
+#    fail += execute_tests(sf.cap_list_of_name_no_prefix, data, fails)
 
     # plural_no_prefix() tests
     # TODO this one and remove_prefix() are a bit tricky (broken?)

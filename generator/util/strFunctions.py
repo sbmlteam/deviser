@@ -205,13 +205,14 @@ def cap_list_of_name(name, add_prefix=True):
 
 def cap_list_of_name_no_prefix(name):
     """
-    Get the "list of" name for a string, without the prefix,
-    with the first letter in upper-case.
+    Get the "list of" name for a string, without the prefix if its not
+    a package, with the first letter in upper-case.
 
     :param name: the string which we want the "list of" name for.
     :return: the "list of" name.
 
     e.g. "fox" -> "ListOfFoxes"
+         "SBMLFoo" ->"ListOfFoos" if gv.is_package = False
     """
     name = upper_first(name)
     return list_of_name(name, False)
