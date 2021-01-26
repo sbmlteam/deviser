@@ -191,16 +191,16 @@ def lower_list_of_name_no_prefix(name):
     return 'listOf' + plural_no_prefix(upper_first(name))
 
 
-def cap_list_of_name(name, addPrefix=True):
+def cap_list_of_name(name, add_prefix=True):
     """
     Get the "list of" name for a string, with first letter in upper-case.
 
     :param name: the string we want the "list of" name for.
-    :param addPrefix: if True, prepend returned name with global prefix
+    :param add_prefix: if True, prepend returned name with global prefix
                       (e.g. "SBML") if not a package.
     """
     name = upper_first(name)
-    return list_of_name(name, addPrefix)
+    return list_of_name(name, add_prefix)
 
 
 def cap_list_of_name_no_prefix(name):
