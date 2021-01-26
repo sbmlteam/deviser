@@ -79,7 +79,6 @@ class BaseMatlabFile(BaseFile.BaseFile):
 
         self.filetype = filetype
 
-
     ########################################################################
 
     def write_file(self):
@@ -161,7 +160,6 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.write_get_class_values_types(sbmlclass)
             self.skip_line(2)
 
-
     def write_get_plugin_values_types(self, plugin):
         self.write_line(self.comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] ='
@@ -170,7 +168,8 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line(70 * ' ' + 'version, pkgVersion)')
         self.up_indent()
 
-        self.write_line('if (~isValidLevelVersionCombination(level, version))')
+        self.write_line('if (~isValidLevelVersionCombination(level,'
+                        ' version))')
         self.up_indent()
         self.write_line('error (\'invalid level/version combination\');')
         self.down_indent()
@@ -273,7 +272,6 @@ class BaseMatlabFile(BaseFile.BaseFile):
             return '\'double\''
         else:
             return att_type
-
 
     def write_get_plugin_default_values(self, plugin):
         self.write_line(68 * '%')
@@ -383,7 +381,6 @@ class BaseMatlabFile(BaseFile.BaseFile):
         else:
             return att_type
 
-
     def write_get_plugin_fieldname(self, plugin):
         self.write_line(self.comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = get{0}{1}Fieldnames(level, ...'.format(self.up_pack, plugin['sbase']))
@@ -411,13 +408,19 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('SBMLfieldnames = {')
         self.write_line('\'{0}_version\', ...'.format(self.package))
         for extension in plugin['extension']:
-            self.write_line('\'{0}_{1}\', ...'.format(self.package, SF.lower_first(extension['name'])))
+            self.write_line('\'{0}_{1}\', ...'.
+                            format(self.package,
+                                   SF.lower_first(extension['name'])))
             num_fields += 1
         for extension in plugin['lo_extension']:
-            self.write_line('\'{0}_{1}\', ...'.format(self.package, SF.lower_first(extension['name'])))
+            self.write_line('\'{0}_{1}\', ...'.
+                            format(self.package,
+                                   SF.lower_first(extension['name'])))
             num_fields += 1
         for attrib in plugin['attribs']:
-            self.write_line('\'{0}_{1}\', ...'.format(self.package, SF.lower_first(attrib['name'])))
+            self.write_line('\'{0}_{1}\', ...'.
+                            format(self.package,
+                                   SF.lower_first(attrib['name'])))
             num_fields += 1
         self.write_line('};')
         self.write_line('nNumberFields = {0};'.format(num_fields))
@@ -433,7 +436,8 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('                                                                      version, pkgVersion)')
         self.up_indent()
 
-        self.write_line('if (~isValidLevelVersionCombination(level, version))')
+        self.write_line('if (~isValidLevelVersionCombination(level,'
+                        ' version))')
         self.up_indent()
         self.write_line('error (\'invalid level/version combination\');')
         self.down_indent()
@@ -476,7 +480,6 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.write_line('end;')
             self.down_indent()
 
-
     def write_get_fieldname_function(self, functionType):
         length = len(functionType)
         if not functionType.endswith('s'):
@@ -491,14 +494,17 @@ class BaseMatlabFile(BaseFile.BaseFile):
                 self.open_br, sbmlclass['typecode'], sbmlclass['name'].upper(), sbmlclass['name'], SF.lower_first(sbmlclass['name']),
                 self.close_br, self.package))
             self.up_indent()
-            self.write_line('fhandle = str2func(\'get{0}{1}\');'.format(sbmlclass['name'], functionType))
+            self.write_line('fhandle = str2func(\'get{0}{1}\');'.
+                            format(sbmlclass['name'], functionType))
             self.down_indent()
         for plugin in self.plugins:
             self.write_line_verbatim('case {0}\'SBML_{1}_{2}\', \'{1}{3}\', \'SBML_{2}\', \'{3}\', \'{4}\'{5}'.format(
                 self.open_br, self.up_pack, plugin['sbase'].upper(), plugin['sbase'], plugin['sbase'].lower(),
                 self.close_br))
             self.up_indent()
-            self.write_line('fhandle = str2func(\'get{0}{1}{2}\');'.format(self.up_pack, plugin['sbase'], functionType))
+            self.write_line('fhandle = str2func(\'get{0}{1}{2}\');'.
+                            format(self.up_pack, plugin['sbase'],
+                                   functionType))
             self.down_indent()
         self.write_line('otherwise')
         self.up_indent()
@@ -509,9 +515,9 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('end;')
         self.down_indent()
 
-
     def write_is_extension(self, functionType):
-        self.write_line('function extend = is{0}Extension(typecode)'.format(self.up_pack))
+        self.write_line('function extend = is{0}Extension(typecode)'.
+                        format(self.up_pack))
         self.up_indent()
         self.write_line('extend = 0;')
         self.write_line('switch (typecode)')
@@ -526,7 +532,6 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.down_indent()
         self.write_line('end;')
         self.down_indent()
-
 
     def write_get_field(self, functionType):
         useS = ''
@@ -551,4 +556,3 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.down_indent()
         self.write_line('end;')
         self.down_indent(2)
-
