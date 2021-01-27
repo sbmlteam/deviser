@@ -204,7 +204,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
 
     def write_get_plugin_values_types(self, plugin):
         self.write_line(self.matlab_comment_line)
-        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] ='
+        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = '
                                  'get{0}{1}ValueType(level, ...'.
                                  format(self.up_pack, plugin['sbase']))
 
@@ -301,8 +301,10 @@ class BaseMatlabFile(BaseFile.BaseFile):
 
     def write_get_class_default_values(self, sbmlclass):
         self.write_line(self.matlab_comment_line)
-        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = get{0}DefaultValues(level, ...'.format(sbmlclass['name']))
-        self.write_line('                                                                      version, pkgVersion)')
+        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields]'
+                                 ' = get{0}DefaultValues(level, ...'.
+                                 format(sbmlclass['name']))
+        self.write_line(70 * ' ' + 'version, pkgVersion)')
 
         self.write_more_common_lines()
 
@@ -377,8 +379,10 @@ class BaseMatlabFile(BaseFile.BaseFile):
 
     def write_get_class_fieldname(self, sbmlclass):
         self.write_line(self.matlab_comment_line)
-        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = get{0}Fieldnames(level, ...'.format(sbmlclass['name']))
-        self.write_line('                                                                      version, pkgVersion)')
+        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields]'
+                                 ' = get{0}Fieldnames(level, ...'.
+                                 format(sbmlclass['name']))
+        self.write_line(70 * ' ' + 'version, pkgVersion)')
 
         self.write_more_common_lines()
 
@@ -409,7 +413,9 @@ class BaseMatlabFile(BaseFile.BaseFile):
         length = len(functionType)
         if not functionType.endswith('s'):
             length += 1
-        self.write_line('function [found, fhandle] = get{0}{1}Function(typecode)'.format(self.up_pack, functionType[0:length-1]))
+        self.write_line('function [found, fhandle] = '
+                        'get{0}{1}Function(typecode)'.
+                        format(self.up_pack, functionType[0:length-1]))
         self.up_indent()
         self.write_line('found = 1;')
         self.write_line('switch (typecode)')
