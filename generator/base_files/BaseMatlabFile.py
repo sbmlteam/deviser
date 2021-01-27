@@ -56,6 +56,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.matlab_comment_line = 68 * '%'
         self.long_matlab_comment_line = 78 * '%'
         self.short_matlab_comment_line = 32 * '%'
+        self.matlab_big_space = 70 * ' '
 
         self.package = object_desc['name']
         self.up_pack = self.package.upper()
@@ -165,7 +166,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         Utility function to write some common output.
         TODO a more descriptive name wouldn't go amiss.
         """
-        self.write_line(70 * ' ' + 'version, pkgVersion)')
+        self.write_line(self.matlab_big_space + 'version, pkgVersion)')
         self.write_more_common_lines()
 
     def write_more_common_lines(self):
@@ -304,9 +305,8 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields]'
                                  ' = get{0}DefaultValues(level, ...'.
                                  format(sbmlclass['name']))
-        self.write_line(70 * ' ' + 'version, pkgVersion)')
 
-        self.write_more_common_lines()
+        self.write_some_common_lines()
 
         num_fields = 9
         self.write_line('SBMLfieldnames = {')
@@ -350,9 +350,8 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields]'
                                  ' = get{0}{1}Fieldnames(level, ...'.
                                  format(self.up_pack, plugin['sbase']))
-        self.write_line(70 * ' ' + 'version, pkgVersion)')
 
-        self.write_more_common_lines()
+        self.write_some_common_lines()
 
         num_fields = 1
         self.write_line('SBMLfieldnames = {')
@@ -382,9 +381,8 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields]'
                                  ' = get{0}Fieldnames(level, ...'.
                                  format(sbmlclass['name']))
-        self.write_line(70 * ' ' + 'version, pkgVersion)')
 
-        self.write_more_common_lines()
+        self.write_some_common_lines()
 
         num_fields = 9
         self.write_line('SBMLfieldnames = {')
