@@ -81,14 +81,20 @@ class BaseXMLFile(BaseFile.BaseFile):
 
     def write_xml(self, tree, error_code=None, plugin_no=-1):
         """
-        main writing function
+        Main writing function
+
+        :param tree:
+        :param error_code:
+        :param plugin_no:
+        :return: nothing
         """
+        # Create a Document Object Model document object:
         self.create_document(error_code)
         num_plugins = len(tree)
         model_index = self.get_model_index(tree, num_plugins)
         if model_index == num_plugins:
             # need to sort this
-            print('we have hit somewhere I dont think we should be')
+            raise Exception("we have hit somewhere I don't think we should be")
         else:
             element = self.create_top_object(tree[model_index])
             self.doc.documentElement.appendChild(element)
@@ -276,11 +282,15 @@ class BaseXMLFile(BaseFile.BaseFile):
                function call.
         :param other_value: the value if get_sensible_value is `False`.
         """
+        if get_sensible_value and other_value is not None:
+            raise ValueError("You cannot have both get_sensible_value=True"
+                             "and other_value not None")
+
         attrib = dict()
         attrib['type'] = type
         if get_sensible_value:
             value = self.get_sensible_value(attrib)
-        else
+        else:
             value = other_value
         attrib_dict = dict({'name': name, 'value': value})
         attrib_list.append(attrib_dict)
