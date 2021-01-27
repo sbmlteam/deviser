@@ -43,10 +43,11 @@ def main():
     this_dir = os.path.dirname(os.path.abspath(__file__))
     global total_fail
 
-    run_test('binding', 'code')
-    run_test('cmake', 'code')
-    run_test('cpp', 'code')
-    run_test('exit', 'code')
+    #run_test('binding', 'code')
+    #run_test('cmake', 'code')
+    #run_test('cpp', 'code')
+    #run_test('exit', 'code')
+    run_test('matlab', 'code')
     ## update for latest python
     # run_test('tex', 'files')
 
