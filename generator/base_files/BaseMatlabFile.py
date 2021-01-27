@@ -295,7 +295,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('nNumberFields = {0};'.format(num_fields))
 
         self.down_indent()
-        for _ in range (0, 3):
+        for _ in range(0, 3):
             self.write_line('end;')
             self.down_indent()
 
@@ -345,8 +345,10 @@ class BaseMatlabFile(BaseFile.BaseFile):
 
     def write_get_plugin_fieldname(self, plugin):
         self.write_line(self.matlab_comment_line)
-        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = get{0}{1}Fieldnames(level, ...'.format(self.up_pack, plugin['sbase']))
-        self.write_line('                                                                      version, pkgVersion)')
+        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields]'
+                                 ' = get{0}{1}Fieldnames(level, ...'.
+                                 format(self.up_pack, plugin['sbase']))
+        self.write_line(70 * ' ' + 'version, pkgVersion)')
 
         self.write_more_common_lines()
 
@@ -413,17 +415,26 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('switch (typecode)')
         self.up_indent()
         for sbmlclass in self.sbml_classes:
-            self.write_line_verbatim('case {0}\'{1}\', \'{3}\', \'{4}\', \'{6}_{4}\'{5}'.format(
-                self.open_br, sbmlclass['typecode'], sbmlclass['name'].upper(), sbmlclass['name'], SF.lower_first(sbmlclass['name']),
-                self.close_br, self.package))
+            self.write_line_verbatim('case {0}\'{1}\', \'{3}\', \'{4}\','
+                                     ' \'{6}_{4}\'{5}'.
+                                     format(self.open_br,
+                                            sbmlclass['typecode'],
+                                            sbmlclass['name'].upper(),
+                                            sbmlclass['name'],
+                                            SF.lower_first(sbmlclass['name']),
+                                            self.close_br, self.package))
             self.up_indent()
             self.write_line('fhandle = str2func(\'get{0}{1}\');'.
                             format(sbmlclass['name'], functionType))
             self.down_indent()
         for plugin in self.plugins:
-            self.write_line_verbatim('case {0}\'SBML_{1}_{2}\', \'{1}{3}\', \'SBML_{2}\', \'{3}\', \'{4}\'{5}'.format(
-                self.open_br, self.up_pack, plugin['sbase'].upper(), plugin['sbase'], plugin['sbase'].lower(),
-                self.close_br))
+            self.write_line_verbatim('case {0}\'SBML_{1}_{2}\', \'{1}{3}\','
+                                     ' \'SBML_{2}\', \'{3}\', \'{4}\'{5}'.
+                                     format(self.open_br, self.up_pack,
+                                            plugin['sbase'].upper(),
+                                            plugin['sbase'],
+                                            plugin['sbase'].lower(),
+                                            self.close_br))
             self.up_indent()
             self.write_line('fhandle = str2func(\'get{0}{1}{2}\');'.
                             format(self.up_pack, plugin['sbase'],
@@ -446,9 +457,13 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('switch (typecode)')
         self.up_indent()
         for plugin in self.plugins:
-            self.write_line_verbatim('case {0}\'SBML_{1}_{2}\', \'{1}{3}\', \'SBML_{2}\', \'{3}\', \'{4}\'{5}'.format(
-                self.open_br, self.up_pack, plugin['sbase'].upper(), plugin['sbase'], plugin['sbase'].lower(),
-                self.close_br))
+            self.write_line_verbatim('case {0}\'SBML_{1}_{2}\', \'{1}{3}\','
+                                     ' \'SBML_{2}\', \'{3}\', \'{4}\'{5}'.
+                                     format(self.open_br, self.up_pack,
+                                            plugin['sbase'].upper(),
+                                            plugin['sbase'],
+                                            plugin['sbase'].lower(),
+                                            self.close_br))
             self.up_indent()
             self.write_line('extend = 1;')
             self.down_indent()
