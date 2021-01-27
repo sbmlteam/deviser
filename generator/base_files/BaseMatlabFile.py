@@ -168,7 +168,6 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line(70 * ' ' + 'version, pkgVersion)')
         self.write_more_common_lines()
 
-
     def write_more_common_lines(self):
         """
         Another utility function
@@ -193,6 +192,16 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('if (pkgVersion == 1)')
         self.up_indent()
 
+    def write_ends(self):
+        """
+        Another utility function, used a number of times.
+        Write the `end` characters at the end of a code block.
+        """
+        self.down_indent()
+        for _ in range(0, 3):
+            self.write_line('end;')
+            self.down_indent()
+
     def write_get_plugin_values_types(self, plugin):
         self.write_line(self.matlab_comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] ='
@@ -215,10 +224,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('};')
         self.write_line('nNumberFields = {0};'.format(num_fields))
 
-        self.down_indent()
-        for _ in range(0, 3):
-            self.write_line('end;')
-            self.down_indent()
+        self.write_ends()
 
     def write_get_class_values_types(self, sbmlclass):
         self.write_line(self.matlab_comment_line)
@@ -243,10 +249,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('};')
         self.write_line('nNumberFields = {0};'.format(num_fields))
 
-        self.down_indent()
-        for _ in range(0, 3):
-            self.write_line('end;')
-            self.down_indent()
+        self.write_ends()
 
     def get_value_type(self, attrib):
         att_type = attrib['type']
@@ -319,10 +322,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('};')
         self.write_line('nNumberFields = {0};'.format(num_fields))
 
-        self.down_indent()
-        for _ in range(0, 3):
-            self.write_line('end;')
-            self.down_indent()
+        self.write_ends()
 
     def get_type(self, attrib):
         att_type = attrib['type']
@@ -371,10 +371,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('};')
         self.write_line('nNumberFields = {0};'.format(num_fields))
 
-        self.down_indent()
-        for _ in range(0, 3):
-            self.write_line('end;')
-            self.down_indent()
+        self.write_ends()
 
     def write_get_class_fieldname(self, sbmlclass):
         self.write_line(self.matlab_comment_line)
@@ -404,10 +401,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('};')
         self.write_line('nNumberFields = {0};'.format(num_fields))
 
-        self.down_indent()
-        for _ in range(0, 3):
-            self.write_line('end;')
-            self.down_indent()
+        self.write_ends()
 
     def write_get_fieldname_function(self, functionType):
         length = len(functionType)
