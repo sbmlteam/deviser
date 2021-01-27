@@ -37,9 +37,16 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+"""
+Warning The xml.dom.minidom module is not secure against maliciously
+constructed data. If you need to parse untrusted or unauthenticated
+data see XML vulnerabilities
+(https://docs.python.org/3/library/xml.html#xml-vulnerabilities).
+"""
 
 from . import BaseFile
-from xml.dom.minidom import *
+# from xml.dom.minidom import *
+from xml.dom.minidom import getDOMImplementation
 from util import strFunctions, query
 
 
@@ -85,9 +92,9 @@ class BaseXMLFile(BaseFile.BaseFile):
 
         for i in range(0, num_plugins):
             if i == model_index:
-                continue;
+                continue
             elif plugin_no > -1 and i != plugin_no:
-                continue;
+                continue
             element = self.create_listof_object(tree[i])
             if element:
                 self.doc.documentElement.childNodes[0].appendChild(element)
@@ -104,8 +111,8 @@ class BaseXMLFile(BaseFile.BaseFile):
         top_element = self.doc.documentElement
         top_element.setAttributeNS(self.rngns, 'xmlns', self.rngns)
         top_element.setAttributeNS(self.rngns, 'ns', self.pkgns)
-        top_element.setAttributeNS(self.rngns, 'datatypeLibrary', self.xmlschema)
-
+        top_element.setAttributeNS(self.rngns,
+                                   'datatypeLibrary', self.xmlschema)
 
     def create_document(self, error_code=None):
         self.doc = self.impl.createDocument(self.corens, 'sbml', None)
@@ -115,13 +122,16 @@ class BaseXMLFile(BaseFile.BaseFile):
         top_element.setAttributeNS(self.corens, 'version', '1')
         if error_code:
             if error_code == 'incorrect_ns':
-                top_element.setAttributeNS(self.pkgns, 'xmlns:{0}'.format(self.pkg),
+                top_element.setAttributeNS(self.pkgns,
+                                           'xmlns:{0}'.format(self.pkg),
                                            'http://incorrect')
             elif error_code != 'missing_ns':
-                top_element.setAttributeNS(self.pkgns, 'xmlns:{0}'.format(self.pkg),
+                top_element.setAttributeNS(self.pkgns,
+                                           'xmlns:{0}'.format(self.pkg),
                                            self.pkgns)
         else:
-            top_element.setAttributeNS(self.pkgns, 'xmlns:{0}'.format(self.pkg),
+            top_element.setAttributeNS(self.pkgns,
+                                       'xmlns:{0}'.format(self.pkg),
                                        self.pkgns)
         if error_code:
             if error_code == 'incorrect_value_reqd':
@@ -144,25 +154,22 @@ class BaseXMLFile(BaseFile.BaseFile):
                                        '{0}:required'.format(self.pkg),
                                        self.reqd)
 
-
-
     def create_top_object(self, tree):
-        name = strFunctions.lower_first(tree['base'])
+        name = strFunctions.lower_first(tree['base'])  # TODO `name` is unused
         if tree['ext'] == 'core':
             element = self.create_object(tree)
         return element
 
-
     def create_listof_object(self, tree):
         name = strFunctions.lower_list_of_name_no_prefix(tree['base'])
-        if name == 'listOfReactions' or name == 'listOfSimpleSpeciesReferences' or name == 'listOfSpeciesReferences'\
-                or name == 'listOfInSpeciesTypeBonds' or name == 'listOfOutwardBindingSites':
+        if name in ['listOfReactions', 'listOfSimpleSpeciesReferences',
+                    'listOfSpeciesReferences', 'listOfInSpeciesTypeBonds',
+                    'listOfOutwardBindingSites']:
             return None
         lo_element = self.doc.createElement('{0}'.format(name))
         element = self.create_object(tree)
         lo_element.appendChild(element)
         return lo_element
-
 
     def create_object(self, parent):
         if 'base' in parent:
@@ -198,12 +205,12 @@ class BaseXMLFile(BaseFile.BaseFile):
 
         return self.create_element(name, attribs, parent)
 
-
     def create_element(self, name, attribs, parent):
         children = parent['children']
         element = self.doc.createElement('{0}'.format(name))
-        for i in range (0, len(attribs)):
-            element.setAttribute('{0}'.format(attribs[i]['name']), attribs[i]['value'])
+        for i in range(0, len(attribs)):
+            element.setAttribute('{0}'.format(attribs[i]['name']),
+                                 attribs[i]['value'])
         for i in range(0, len(children)):
             subelement = self.create_object(children[i])
             element.appendChild(subelement)
@@ -313,7 +320,7 @@ class BaseXMLFile(BaseFile.BaseFile):
             attrib_list.append(attrib_dict)
         return attrib_list
 
-##################################################################################
+##############################################################################
 
 # helper functions
 
@@ -352,11 +359,10 @@ class BaseXMLFile(BaseFile.BaseFile):
         return value
 
     def match_id_name(self, name):
-        for i in range(0,len(self.start_id)):
+        for i in range(0, len(self.start_id)):
             if self.start_id[i]['name'] == name:
                 return[True, i]
         return [False, -1]
-
 
     def get_model_index(self, tree, num):
         for i in range(0, num):
