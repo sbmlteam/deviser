@@ -4,6 +4,7 @@
 # @brief   base class for all XML test files to be generated
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -58,8 +59,8 @@ class BaseXMLFile(BaseFile.BaseFile):
 
         self.pkg = package
         self.corens = 'http://www.sbml.org/sbml/level3/version1/core'
-        self.pkgns = 'http://www.sbml.org/sbml/level3/version1/{0}/version1' \
-                     ''.format(self.pkg)
+        self.pkgns = 'http://www.sbml.org/sbml/level3/version1/{0}/version1'.\
+            format(self.pkg)
         self.reqd = reqd
 
         self.rngns = 'http://relaxng.org/ns/structure/1.0'
@@ -77,9 +78,11 @@ class BaseXMLFile(BaseFile.BaseFile):
         self.model_element = None
 
     #########################################################################
-    # main writing function
 
     def write_xml(self, tree, error_code=None, plugin_no=-1):
+        """
+        main writing function
+        """
         self.create_document(error_code)
         num_plugins = len(tree)
         model_index = self.get_model_index(tree, num_plugins)
@@ -120,19 +123,16 @@ class BaseXMLFile(BaseFile.BaseFile):
         top_element.setAttributeNS(self.corens, 'xmlns', self.corens)
         top_element.setAttributeNS(self.corens, 'level', '3')
         top_element.setAttributeNS(self.corens, 'version', '1')
-        if error_code:
-            if error_code == 'incorrect_ns':
-                top_element.setAttributeNS(self.pkgns,
-                                           'xmlns:{0}'.format(self.pkg),
-                                           'http://incorrect')
-            elif error_code != 'missing_ns':
-                top_element.setAttributeNS(self.pkgns,
-                                           'xmlns:{0}'.format(self.pkg),
-                                           self.pkgns)
+
+        if error_code and (error_code == 'incorrect_ns'):
+            top_element.setAttributeNS(self.pkgns,
+                                       'xmlns:{0}'.format(self.pkg),
+                                       'http://incorrect')
         else:
             top_element.setAttributeNS(self.pkgns,
                                        'xmlns:{0}'.format(self.pkg),
                                        self.pkgns)
+
         if error_code:
             if error_code == 'incorrect_value_reqd':
                 reqd = 'true'
@@ -179,10 +179,7 @@ class BaseXMLFile(BaseFile.BaseFile):
         else:
             name = 'FIXME'
 
-        if 'ext' in parent:
-            ext = parent['ext']
-        else:
-            ext = self.pkg
+        ext = parent['ext'] if 'ext' in parent else self.pkg
 
         if name == 'math':
             return self.create_math_element()
@@ -226,7 +223,7 @@ class BaseXMLFile(BaseFile.BaseFile):
     # functions to make nice sets of attributes
 
     def get_sensible_value(self, attribute):
-        value = ''
+        # value = ''  # TODO Unused
         att_type = attribute['type']
         if att_type == 'boolean' or att_type == 'bool':
             value = 'false'
@@ -267,57 +264,69 @@ class BaseXMLFile(BaseFile.BaseFile):
             attrib_list.append(attrib_dict)
         return attrib_list
 
-    def get_core_attributes(self, object):
-        attrib_list = []
+    def add_new_dictionary_to_list(self, attrib_list, name, type,
+                                   get_sensible_value=True, other_value=None):
+        """
+        Create a new attribute dictionary and add it to attrib_list.
+
+        :param attrib_list: list of dictionaries, which we add to
+        :param name: attribute name, e.g. 'id', 'constant'. TODO correct?
+        :param type: attribute type, e.g. 'SId', 'boolean'
+        :param get_sensible_value: get the value from get_sensible_value()
+               function call.
+        :param other_value: the value if get_sensible_value is `False`.
+        """
         attrib = dict()
+        attrib['type'] = type
+        if get_sensible_value:
+            value = self.get_sensible_value(attrib)
+        else
+            value = other_value
+        attrib_dict = dict({'name': name, 'value': value})
+        attrib_list.append(attrib_dict)
+
+    def get_core_attributes(self, object):
+        """
+        Create a list of attribute dictionaries, based on value of `object`.
+
+        :param object: name of the object, e.g. 'compartment', parameter',
+               or 'species'.
+        :return: the new list
+        """
+        attrib_list = []
         if object == 'compartment':
-            name = 'id'
-            attrib['type'] = 'SId'
-            value = 'compartment'
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
-            name = 'constant'
-            attrib['type'] = 'boolean'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
+
+            self.add_new_dictionary_to_list(attrib_list, 'id', 'SId',
+                                            get_sensible_value=False,
+                                            other_value='compartment')
+
+            self.add_new_dictionary_to_list(attrib_list, 'constant',
+                                            'boolean')
+
         elif object == 'parameter':
-            name = 'id'
-            attrib['type'] = 'SId'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
-            name = 'constant'
-            attrib['type'] = 'boolean'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
+
+            self.add_new_dictionary_to_list(attrib_list, 'id', 'SId')
+
+            self.add_new_dictionary_to_list(attrib_list, 'constant',
+                                            'boolean')
         elif object == 'species':
-            name = 'id'
-            attrib['type'] = 'SId'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
-            name = 'constant'
-            attrib['type'] = 'boolean'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
-            name = 'boundaryCondition'
-            attrib['type'] = 'boolean'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
-            name = 'hasOnlySubstanceUnits'
-            attrib['type'] = 'boolean'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
-            name = 'compartment'
-            attrib['type'] = 'SId'
-            value = 'compartment'
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
+
+            self.add_new_dictionary_to_list(attrib_list, 'id', 'SId')
+
+            self.add_new_dictionary_to_list(attrib_list, 'constant',
+                                            'boolean')
+
+            self.add_new_dictionary_to_list(attrib_list, 'boundaryCondition',
+                                            'boolean')
+
+            self.add_new_dictionary_to_list(attrib_list,
+                                            'hasOnlySubstanceUnits',
+                                            'boolean')
+
+            self.add_new_dictionary_to_list(attrib_list, 'compartment', 'SId',
+                                            get_sensible_value=False,
+                                            other_value='compartment')
+
         return attrib_list
 
 ##############################################################################
