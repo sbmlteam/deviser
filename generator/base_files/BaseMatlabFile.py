@@ -113,7 +113,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         filetypes = {'sf': 'Fieldnames', 'dv': 'DefaultValues',
                      'vt': 'ValueType'}  # TODO should this be plural?
                      # If it is, we can also simplify the if-block above
-                     # i.e. with (name + 's')
+                     # i.e. with (name + 's') and use dictionary
         self.write_get_fieldname_function(filetypes[self.filetype])
         self.write_line('%%%% END getFieldname')
         self.skip_line(2)
@@ -214,7 +214,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
     def write_ends(self):
         """
         Another utility function, used a number of times.
-        Write the `end` characters at the end of a code block.
+        Write the `end` keywords at the end of a code block.
         """
         self.down_indent()
         for _ in range(0, 3):
@@ -384,10 +384,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         elif att_type == 'lo_element':
             return '[]'
         elif att_type == 'element':
-            if att_name == 'math':
-                return '\'\''
-            else:
-                return '[]'
+            return '\'\'' if att_name == 'math' else '[]'
         elif att_type == 'double':
             return '0/0'
         else:
@@ -395,13 +392,12 @@ class BaseMatlabFile(BaseFile.BaseFile):
 
     def write_get_plugin_fieldname(self, plugin):
         """
-        Writes a "get__Fieldnames() Matlab function
+        Writes a "getXXXFieldnames() Matlab function for a plugin
         e.g. "getQUALModelFieldnames()" and its body
 
         :param plugin: dictionary representing the <plugin> node
         """
         self.write_line(self.matlab_comment_line)
-        #import pdb; pdb.set_trace()
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields]'
                                  ' = get{0}{1}Fieldnames(level, ...'.
                                  format(self.up_pack, plugin['sbase']))
@@ -434,6 +430,12 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_ends()
 
     def write_get_class_fieldname(self, sbmlclass):
+        """
+        Writes a "getXXXFieldnames() Matlab function for an sbml class
+        e.g. "getQUALModelFieldnames()" and its body
+
+        :param sbmlclass: dictionary representing the sbml class
+        """
         self.write_line(self.matlab_comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields]'
                                  ' = get{0}Fieldnames(level, ...'.
@@ -520,6 +522,11 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.down_indent()
 
     def write_is_extension(self, functionType):
+        """
+        Write an isXXXExtension() function in the Matlab file.
+
+        TODO the functionType argument isn't used
+        """
         self.write_line('function extend = is{0}Extension(typecode)'.
                         format(self.up_pack))
         self.up_indent()
@@ -542,6 +549,13 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.down_indent()
 
     def write_get_field(self, functionType):
+        """
+        Write a function to get a certain field
+        e.g. getQUALFieldnameFunction()
+
+        :param functionType: currently one of 'Fieldname',
+             'DefaultValue' or 'ValueType'.
+        """
         useS = ''
         self.up_indent(2)
         self.write_line('elseif strcmp(pkg, \'{0}\')'.format(self.package))
