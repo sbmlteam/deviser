@@ -96,7 +96,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.skip_line(2)
         self.write_line(self.long_matlab_comment_line)
         self.write_line('%%%% ADD isExtension')
-        self.write_line('%%%% ADD isExtension')
+        self.write_line('%%%% ADD isExtension')   # TODO necessary?
         if self.filetype == 'sf':
             self.write_is_extension('Fieldname')
         elif self.filetype == 'dv':
@@ -106,17 +106,16 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('%%%% END isExtension')
         self.skip_line(2)
         self.write_line('%%%% ADD getFieldname')
-        self.write_line('%%%% ADD getFieldname')
-        if self.filetype == 'sf':
-            self.write_get_fieldname_function('Fieldnames')
-        elif self.filetype == 'dv':
-            self.write_get_fieldname_function('DefaultValues')
-        elif self.filetype == 'vt':
-            self.write_get_fieldname_function('ValueType')
+        self.write_line('%%%% ADD getFieldname')  # TODO necessary?
+        filetypes = {'sf': 'Fieldnames', 'dv': 'DefaultValues',
+                     'vt': 'ValueType'}  # TODO should this be plural?
+                     # If it is, we can also simplify the if-block above
+                     # i.e. with (name + 's')
+        self.write_get_fieldname_function(filetypes[self.filetype])
         self.write_line('%%%% END getFieldname')
         self.skip_line(2)
         self.write_line('%%%% ADD functions')
-        self.write_line('%%%% ADD functions')
+        self.write_line('%%%% ADD functions')  # TODO necessary?
         if self.filetype == 'sf':
             self.write_fieldnames()
         elif self.filetype == 'dv':
