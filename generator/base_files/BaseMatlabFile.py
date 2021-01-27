@@ -83,6 +83,9 @@ class BaseMatlabFile(BaseFile.BaseFile):
     ########################################################################
 
     def write_file(self):
+        """
+        Write a big chunk of the Matlab file.
+        """
         self.write_line('%%%%% REMOVE END')
         self.write_line('%%%%% ADD ADDITIONAL')
         if self.filetype == 'sf':
@@ -96,7 +99,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.skip_line(2)
         self.write_line(self.long_matlab_comment_line)
         self.write_line('%%%% ADD isExtension')
-        self.write_line('%%%% ADD isExtension')   # TODO necessary?
+        self.write_line('%%%% ADD isExtension')   # TODO both necessary?
         if self.filetype == 'sf':
             self.write_is_extension('Fieldname')
         elif self.filetype == 'dv':
@@ -106,7 +109,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('%%%% END isExtension')
         self.skip_line(2)
         self.write_line('%%%% ADD getFieldname')
-        self.write_line('%%%% ADD getFieldname')  # TODO necessary?
+        self.write_line('%%%% ADD getFieldname')  # TODO both necessary?
         filetypes = {'sf': 'Fieldnames', 'dv': 'DefaultValues',
                      'vt': 'ValueType'}  # TODO should this be plural?
                      # If it is, we can also simplify the if-block above
@@ -115,7 +118,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('%%%% END getFieldname')
         self.skip_line(2)
         self.write_line('%%%% ADD functions')
-        self.write_line('%%%% ADD functions')  # TODO necessary?
+        self.write_line('%%%% ADD functions')  # TODO both necessary?
         if self.filetype == 'sf':
             self.write_fieldnames()
         elif self.filetype == 'dv':
@@ -125,37 +128,52 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('%%%% END functions')
 
     def write_fieldnames(self):
+        """
+        Write the getXXXFieldnames() functions in the Matlab file.
+        """
         self.write_line(self.short_matlab_comment_line)
         self.write_line('% Fieldnames')
         self.write_line(self.short_matlab_comment_line)
         self.skip_line()
+        # Write the getXXXFieldnames() function for each plugin:
         for plugin in self.plugins:
             self.write_get_plugin_fieldname(plugin)
             self.skip_line(2)
+        # Write a getXXXFieldnames() function for each sbml class:
         for sbmlclass in self.sbml_classes:
             self.write_get_class_fieldname(sbmlclass)
             self.skip_line(2)
 
     def write_default_values(self):
+        """
+        Write the getXXXDefaultValues() functions to the Matlab file.
+        """
         self.write_line(self.short_matlab_comment_line)
         self.write_line('% DefaultValues')
         self.write_line(self.short_matlab_comment_line)
         self.skip_line()
+        # Write a getXXXDefaultValues() function for each plugin:
         for plugin in self.plugins:
             self.write_get_plugin_default_values(plugin)
             self.skip_line(2)
+        # Write a getXXXDefaultValues() function for each sbml class:
         for sbmlclass in self.sbml_classes:
             self.write_get_class_default_values(sbmlclass)
             self.skip_line(2)
 
     def write_value_types(self):
+        """
+        Write the getXXXValueType() functions to the Matlab file
+        """
         self.write_line(self.short_matlab_comment_line)
         self.write_line('% ValueTypes')
         self.write_line(self.short_matlab_comment_line)
         self.skip_line()
+        # Write the getXXXValueType() function for each plugin:
         for plugin in self.plugins:
             self.write_get_plugin_values_types(plugin)
             self.skip_line(2)
+        # Write the getXXXValueType() function for each sbml class.
         for sbmlclass in self.sbml_classes:
             self.write_get_class_values_types(sbmlclass)
             self.skip_line(2)
@@ -164,6 +182,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         """
         Utility function to write some common output.
         TODO a more descriptive name wouldn't go amiss.
+        The first line closes a matlab function argument list.
         """
         self.write_line(self.matlab_big_space + 'version, pkgVersion)')
         self.write_more_common_lines()
@@ -203,6 +222,11 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.down_indent()
 
     def write_get_plugin_values_types(self, plugin):
+        """
+        Write the getXXXValueType() function for a plugin.
+
+        :param plugin: dictionary representing the <plugin> node.
+        """
         self.write_line(self.matlab_comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = '
                                  'get{0}{1}ValueType(level, ...'.
@@ -223,10 +247,14 @@ class BaseMatlabFile(BaseFile.BaseFile):
             num_fields += 1
         self.write_line('};')
         self.write_line('nNumberFields = {0};'.format(num_fields))
-
         self.write_ends()
 
     def write_get_class_values_types(self, sbmlclass):
+        """
+        Write info from an sbml class
+
+        :param sbmlclass: dictionary representing the sbml class.
+        """
         self.write_line(self.matlab_comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = '
                                  'get{0}ValueType(level, ...'.
@@ -248,10 +276,14 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('\'uint\', ...'.format(self.package))  # TODO Unused argument
         self.write_line('};')
         self.write_line('nNumberFields = {0};'.format(num_fields))
-
         self.write_ends()
 
     def get_value_type(self, attrib):
+        """
+        Get the Matlab value type from an attribute's value type.
+
+        :param attrib: dictionary representing an <attribute> node.
+        """
         att_type = attrib['type']
         att_name = attrib['name']
         if att_type in ['SId', 'SIdRef', 'string', 'enum']:
@@ -273,6 +305,11 @@ class BaseMatlabFile(BaseFile.BaseFile):
             return att_type
 
     def write_get_plugin_default_values(self, plugin):
+        """
+        Write default values from a plugin.
+
+        :param plugin: dictionary representing the <plugin> node.
+        """
         self.write_line(self.matlab_comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = '
                                  'get{0}{1}DefaultValues(level, ...'.
@@ -300,6 +337,11 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.down_indent()
 
     def write_get_class_default_values(self, sbmlclass):
+        """
+        Write the default values from an sbml class.
+
+        :param sbmlclass: dictionary representing the sbml class.
+        """
         self.write_line(self.matlab_comment_line)
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields]'
                                  ' = get{0}DefaultValues(level, ...'.
@@ -322,10 +364,17 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('int32(pkgVersion), ...'.format(self.package))  # TODO Unused argument
         self.write_line('};')
         self.write_line('nNumberFields = {0};'.format(num_fields))
-
         self.write_ends()
 
     def get_type(self, attrib):
+        """
+        Get the Matlab type of an attribute
+
+        :param attrib: dictionary representing an <attribute> node.
+
+        TODO I'm not sure what the difference id between a Matlab type and a
+        Matlab value type, per function get_value_type() above.
+        """
         att_type = attrib['type']
         att_name = attrib['name']
         if att_type in ['SId', 'SIdRef', 'string', 'enum']:
@@ -345,16 +394,25 @@ class BaseMatlabFile(BaseFile.BaseFile):
             return att_type
 
     def write_get_plugin_fieldname(self, plugin):
+        """
+        Writes a "get__Fieldnames() Matlab function
+        e.g. "getQUALModelFieldnames()" and its body
+
+        :param plugin: dictionary representing the <plugin> node
+        """
         self.write_line(self.matlab_comment_line)
+        #import pdb; pdb.set_trace()
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields]'
                                  ' = get{0}{1}Fieldnames(level, ...'.
                                  format(self.up_pack, plugin['sbase']))
 
-        self.write_some_common_lines()
+        self.write_some_common_lines()  # writes "nNumberFields = 0;" (etc.)
 
-        num_fields = 1
         self.write_line('SBMLfieldnames = {')
         self.write_line('\'{0}_version\', ...'.format(self.package))
+        # e.g. "'qual_version', ..."
+        num_fields = 1
+
         for extension in plugin['extension']:
             self.write_line('\'{0}_{1}\', ...'.
                             format(self.package,
@@ -407,6 +465,11 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_ends()
 
     def write_get_fieldname_function(self, functionType):
+        """
+        Write a getXXXFunction() function for the given functionType
+
+        :param functionType: e.g. 'Fieldnames'.
+        """
         length = len(functionType)
         if not functionType.endswith('s'):
             length += 1
@@ -426,6 +489,9 @@ class BaseMatlabFile(BaseFile.BaseFile):
                                             sbmlclass['name'],
                                             SF.lower_first(sbmlclass['name']),
                                             self.close_br, self.package))
+            # e.g. sbmlclass['name'] = 'QualitativeSpecies',
+            # sbmlclass['typecode'] = 'SBML_QUAL_QUALITATIVE_SPECIES',
+            # self.package = 'qual'
             self.up_indent()
             self.write_line('fhandle = str2func(\'get{0}{1}\');'.
                             format(sbmlclass['name'], functionType))
@@ -438,6 +504,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
                                             plugin['sbase'],
                                             plugin['sbase'].lower(),
                                             self.close_br))
+            # e.g. plugin['sbase'] = 'Model', self.up_pack = 'QUAL'
             self.up_indent()
             self.write_line('fhandle = str2func(\'get{0}{1}{2}\');'.
                             format(self.up_pack, plugin['sbase'],
