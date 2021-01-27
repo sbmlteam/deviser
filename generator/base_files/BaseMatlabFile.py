@@ -245,7 +245,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
             num_fields += 1
         self.write_line('\'uint\', ...')
         self.write_line('\'uint\', ...')
-        self.write_line('\'uint\', ...'.format(self.package))
+        self.write_line('\'uint\', ...'.format(self.package))  # TODO Unused argument
         self.write_line('};')
         self.write_line('nNumberFields = {0};'.format(num_fields))
 
@@ -320,7 +320,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
             num_fields += 1
         self.write_line('3, ...')
         self.write_line('int32(version), ...')
-        self.write_line('int32(pkgVersion), ...'.format(self.package))
+        self.write_line('int32(pkgVersion), ...'.format(self.package))  # TODO Unused argument
         self.write_line('};')
         self.write_line('nNumberFields = {0};'.format(num_fields))
 
@@ -420,7 +420,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('found = 1;')
         self.write_line('switch (typecode)')
         self.up_indent()
-        for sbmlclass in self.sbml_classes:
+        for sbmlclass in self.sbml_classes:  # TODO Unused argument:
             self.write_line_verbatim('case {0}\'{1}\', \'{3}\', \'{4}\','
                                      ' \'{6}_{4}\'{5}'.
                                      format(self.open_br,
