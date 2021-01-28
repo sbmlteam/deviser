@@ -48,8 +48,8 @@ class BaseFile:
         """
         Constructor
 
-        :param name:
-        :param extension:
+        :param name: name of file (before dot and extension)
+        :param extension: file extension (without dot, e.g. "xml").
         """
         self.name = name
         self.extension = extension

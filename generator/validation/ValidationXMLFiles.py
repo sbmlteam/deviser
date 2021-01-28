@@ -81,6 +81,11 @@ class ValidationXMLFiles():
 
 
     def write_file(self, filename):
+        """
+        Write an XML file.
+
+        :param filename: name of file we wish to write.
+        """
         xml = BaseXMLFile.BaseXMLFile(filename, self.package,
                                       self.reqd)
         xml.write_xml(self.tree, None, self.num_to_write )
@@ -88,6 +93,12 @@ class ValidationXMLFiles():
 
 
     def write_specific_file(self, filename, subtree):
+        """
+        Write an XML file for a specific subtree of the XML structure ???
+
+        :param filename: name of the file we wish to write
+        :param subtree: the tree structure we wish to write
+        """
         xml = BaseXMLFile.BaseXMLFile(filename, self.package,
                                       self.reqd)
         xml.write_xml(subtree, None, self.num_to_write )

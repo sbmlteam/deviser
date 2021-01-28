@@ -55,6 +55,15 @@ class BaseXMLFile(BaseFile.BaseFile):
     """Common base class for all interface files"""
 
     def __init__(self, name, package, reqd, ext='xml'):
+        """
+        Constructor
+
+        :param name: first part of file (before . and extension)
+             which we will write to.
+        :param package:
+        :param reqd:
+        :param ext: file extension (without dot, e.g. "xml").
+        """
         BaseFile.BaseFile.__init__(self, name, ext)
 
         self.pkg = package
@@ -83,18 +92,20 @@ class BaseXMLFile(BaseFile.BaseFile):
         """
         Main writing function
 
-        :param tree:
+        :param tree: tree structure, obtained from a call to
+            create_object_tree() in query.py
         :param error_code:
         :param plugin_no:
         :return: nothing
         """
-        # Create a Document Object Model document object:
+        # Create a Document Object Model document object
+        # (the root of the DOM):
         self.create_document(error_code)
         num_plugins = len(tree)
         model_index = self.get_model_index(tree, num_plugins)
         if model_index == num_plugins:
             # need to sort this
-            raise Exception("we have hit somewhere I don't think we should be")
+            raise Exception("We have hit somewhere I don't think we should be")
         else:
             element = self.create_top_object(tree[model_index])
             self.doc.documentElement.appendChild(element)
@@ -116,6 +127,9 @@ class BaseXMLFile(BaseFile.BaseFile):
     # create elements of the document
 
     def create_rng_document(self):
+        """
+        ?? RNG = Random Number Generator ??
+        """
         self.doc = self.impl.createDocument(self.rngns, 'grammar', None)
         top_element = self.doc.documentElement
         top_element.setAttributeNS(self.rngns, 'xmlns', self.rngns)
@@ -124,8 +138,14 @@ class BaseXMLFile(BaseFile.BaseFile):
                                    'datatypeLibrary', self.xmlschema)
 
     def create_document(self, error_code=None):
+        """
+        Create the XML document tree. Set the namespace values.
+
+        :param error_code:
+        """
         self.doc = self.impl.createDocument(self.corens, 'sbml', None)
         top_element = self.doc.documentElement
+        # Add some attribute values to the XML element:
         top_element.setAttributeNS(self.corens, 'xmlns', self.corens)
         top_element.setAttributeNS(self.corens, 'level', '3')
         top_element.setAttributeNS(self.corens, 'version', '1')
@@ -161,12 +181,22 @@ class BaseXMLFile(BaseFile.BaseFile):
                                        self.reqd)
 
     def create_top_object(self, tree):
+        """
+
+        :param tree:
+        :return:
+        """
         name = strFunctions.lower_first(tree['base'])  # TODO `name` is unused
         if tree['ext'] == 'core':
             element = self.create_object(tree)
         return element
 
     def create_listof_object(self, tree):
+        """
+
+        :param tree:
+        :return:
+        """
         name = strFunctions.lower_list_of_name_no_prefix(tree['base'])
         if name in ['listOfReactions', 'listOfSimpleSpeciesReferences',
                     'listOfSpeciesReferences', 'listOfInSpeciesTypeBonds',
@@ -178,6 +208,11 @@ class BaseXMLFile(BaseFile.BaseFile):
         return lo_element
 
     def create_object(self, parent):
+        """
+
+        :param parent:
+        :return:
+        """
         if 'base' in parent:
             name = strFunctions.lower_first(parent['base'])
         elif 'name' in parent:
@@ -209,6 +244,13 @@ class BaseXMLFile(BaseFile.BaseFile):
         return self.create_element(name, attribs, parent)
 
     def create_element(self, name, attribs, parent):
+        """
+
+        :param name:
+        :param attribs:
+        :param parent:
+        :return:
+        """
         children = parent['children']
         element = self.doc.createElement('{0}'.format(name))
         for i in range(0, len(attribs)):
@@ -220,6 +262,10 @@ class BaseXMLFile(BaseFile.BaseFile):
         return element
 
     def create_math_element(self):
+        """
+
+        :return:
+        """
         element = self.doc.createElement('{0}'.format('math'))
         element.setAttribute('xmlns', 'http://www.w3.org/1998/Math/MathML')
         return element
@@ -229,6 +275,11 @@ class BaseXMLFile(BaseFile.BaseFile):
     # functions to make nice sets of attributes
 
     def get_sensible_value(self, attribute):
+        """
+
+        :param attribute:
+        :return:
+        """
         # value = ''  # TODO Unused
         att_type = attribute['type']
         if att_type == 'boolean' or att_type == 'bool':
@@ -252,6 +303,12 @@ class BaseXMLFile(BaseFile.BaseFile):
         return value
 
     def get_attributes(self, attributes, pkg):
+        """
+
+        :param attributes:
+        :param pkg:
+        :return:
+        """
         attrib_list = []
         for attrib in attributes:
             att_type = attrib['type']
@@ -344,6 +401,12 @@ class BaseXMLFile(BaseFile.BaseFile):
 # helper functions
 
     def get_id(self, attrib, use_name=None):
+        """
+
+        :param attrib:
+        :param use_name:
+        :return:
+        """
         if 'parent' in attrib:
             name = strFunctions.lower_first(attrib['parent']['name'])
         elif use_name:
@@ -361,6 +424,11 @@ class BaseXMLFile(BaseFile.BaseFile):
         return value
 
     def get_id_ref(self, attrib):
+        """
+
+        :param attrib: dictionary structure representing an <attribute> node??
+        :return:
+        """
         name = attrib['name']
         [found, index] = self.match_id_name(name)
         if found:
@@ -378,12 +446,23 @@ class BaseXMLFile(BaseFile.BaseFile):
         return value
 
     def match_id_name(self, name):
+        """
+
+        :param name:
+        :return: tuple with .....
+        """
         for i in range(0, len(self.start_id)):
             if self.start_id[i]['name'] == name:
                 return[True, i]
         return [False, -1]
 
     def get_model_index(self, tree, num):
+        """
+
+        :param tree:
+        :param num:
+        :return:
+        """
         for i in range(0, num):
             if tree[i]['base'] == 'Model' and tree[i]['ext'] == 'core':
                 return i
