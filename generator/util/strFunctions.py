@@ -271,12 +271,6 @@ def singular(name):
     "cats" -> "cat", "dogs" -> "dogs", "children" -> "child",
     "disinformation" -> "disinformation", "coxes" -> "cox",
     "parties" -> "party", "clouds" -> "cloud", "somethings" -> "something".
-
-    NB issue #34
-    "foxes" -> "fox" is ok
-    but
-    "apples" -> "appl", "skates" -> "skat" is wrong
-
     """
     returned_word = name
     length = len(name)
