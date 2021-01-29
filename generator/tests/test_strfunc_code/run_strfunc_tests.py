@@ -253,12 +253,13 @@ def main():
 
     data = {"cats": "cats", "dogs": "dogs", "children": "children",
             "disinformation": "disinformation", "foxes": "foxes",
-            "parties": "parties", "clouds": "clouds", "somethings": "somethings",
-            "apples": "apples"}
+            "parties": "parties", "clouds": "clouds",
+            "somethings": "somethings", "apples": "apples"}
     fail += execute_tests(single_then_plural, data, fails)
 
     # remove_prefix() tests - this is a complicated function to test!
     gv.reset()  # gv.prefix now "SBML"
+
     # TODO This is a bit complicated to test. It may be best for Sarah
     # to write the tests and check this function is doing what it's
     # meant to. Named function arguments can be used in the tests,
