@@ -283,7 +283,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         if not doc:
             docname = 'Document'
         else:
-            docname = strFunctions.remove_prefix(doc['name'], False, False, '', True)
+            docname = strFunctions.remove_prefix(doc['name'], False, '', True)
         libname = strFunctions.get_library_suffix(global_variables.library_name)
         if not libname.endswith('ml'):
             libname = libname + 'ml'

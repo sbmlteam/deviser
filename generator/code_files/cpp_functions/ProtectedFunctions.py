@@ -234,7 +234,7 @@ class ProtectedFunctions():
             class_name = self.class_name
         # sort error names to be used
         name_in_error = class_name
-        name_in_error = strFunctions.remove_prefix(class_name, False, False, '', True)
+        name_in_error = strFunctions.remove_prefix(class_name, False, '', True)
         # hack forr render relAbsVector
         error = '{0}{1}AllowedElements'.format(self.package, name_in_error)
         error_hack = '{0}{1}AllowedAttributes'.format(self.package, name_in_error)
@@ -570,7 +570,7 @@ class ProtectedFunctions():
                 removed = False
                 # hack for fact that distrib prefixes everything
                 if name_to_use.startswith(strFunctions.upper_first(self.package)):
-                     elem_name = strFunctions.remove_prefix(element, False, True, self.package)
+                     elem_name = strFunctions.remove_prefix(element, True, self.package)
                      removed = True
                 elif element.lower() != xmlname.lower():
                     [elem_name, unused] = strFunctions.remove_hyphens(xmlname)
@@ -1211,16 +1211,16 @@ class ProtectedFunctions():
     # HELPER FUNCTIONS
 
     def get_error_from_list_of_read(self):
-        name_in_error = strFunctions.remove_prefix(self.class_name, False, False, '', True)
+        name_in_error = strFunctions.remove_prefix(self.class_name, False, '', True)
         if self.lo_name == '':
             plural = strFunctions.plural(name_in_error)
         else:
             plural = self.lo_name
         c_err = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.package,
-                                                          strFunctions.remove_prefix(self.parent_class, False, False, '', True),
+                                                          strFunctions.remove_prefix(self.parent_class, False, '', True),
                                                           plural)
         error = '{0}{1}LO{2}AllowedAttributes'.format(self.package,
-                                                      strFunctions.remove_prefix(self.parent_class, False, False, '', True),
+                                                      strFunctions.remove_prefix(self.parent_class, False, '', True),
                                                       plural)
         unknown_error_att ='UnknownCoreAttribute'
         if not global_variables.is_package:
@@ -1287,7 +1287,7 @@ class ProtectedFunctions():
                 class_name = '{0}LO{1}'.format(self.parent_class,
                                                self.class_name[6:])
             else:
-                class_name = strFunctions.remove_prefix(self.class_name, False, False, '', True)
+                class_name = strFunctions.remove_prefix(self.class_name, False, '', True)
             core_err = '{0}{1}AllowedCoreAttributes'.format(self.package,
                                                             class_name)
         error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
@@ -1777,7 +1777,7 @@ class ProtectedFunctions():
             att_error = '{0}{1}AllowedAttributes'.format(self.package,
                                                          class_name)
         else:
-            class_name = strFunctions.remove_prefix(self.class_name, False, False, '', True)
+            class_name = strFunctions.remove_prefix(self.class_name, False, '', True)
             if class_name.startswith('ListOf'):
                 temp = 'LO{0}'.format(class_name[6:])
                 class_name = temp

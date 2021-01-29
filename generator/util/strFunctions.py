@@ -285,14 +285,13 @@ def singular(name):
     return returned_word
 
 
-def remove_prefix(name, in_concrete=False, remove_package=False,
+def remove_prefix(name, remove_package=False,
                   prefix='', remove_doc_prefix=False):
     """
     Remove prefix from a string; if we are writing an SBML package where the
     package prefix has been declared this will be removed.
 
     :param name: the string which we wish to remove the prefix from.
-    :param in_concrete:
     :param remove_package: if True, and global prefix is "SBML", remove the prefix (4th function arg)
     :param prefix: the prefix to remove if global prefix is "SBML" and remove_package is True.
     :param remove_doc_prefix: if True, and name ends in 'Document', remove prefix.
@@ -308,7 +307,7 @@ def remove_prefix(name, in_concrete=False, remove_package=False,
     prefix_to_remove = ''
     if gv.prefix == 'SBML':
         # we might want to remove the name of the package
-        if not in_concrete and gv.is_package and gv.package_prefix != '':
+        if gv.is_package and gv.package_prefix != '':
             prefix_to_remove = gv.package_prefix
         elif remove_package and prefix != '':
             prefix_to_remove = prefix
