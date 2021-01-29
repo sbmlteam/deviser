@@ -258,20 +258,23 @@ def main():
     fail += execute_tests(single_then_plural, data, fails)
 
     # remove_prefix() tests - this is a complicated function to test!
+    # tests removing a package prefix
     gv.reset()  # gv.prefix now "SBML"
     gv.is_package = True
     gv.package_prefix = 'Fbc'
     data = {"FbcType": "Type", "FluxObjective": "FluxObjective"}
-    fail += execute_tests(sf.remove_prefix, data, fails, remove_package=False)
+    fail += execute_tests(sf.remove_prefix, data, fails)
     fail += execute_tests(sf.remove_prefix, data, fails, remove_package=True)
     gv.reset()  # gv.prefix now "SBML"
     gv.is_package = True
-    gv.package_prefix = '' # package prefix has not been specified
-    fail += execute_tests(sf.remove_prefix, data, fails,
-                          remove_package=True, prefix='Fbc')
+    gv.package_prefix = ''  # package prefix has not been specified
+    fail += execute_tests(sf.remove_prefix, data, fails, prefix='Fbc')
+
+    # no prefix to remove has been specified or explicitly told not to remove
     data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective"}
-    fail += execute_tests(sf.remove_prefix, data, fails,
-                          remove_package=False, prefix='Fbc')
+    fail += execute_tests(sf.remove_prefix, data, fails, prefix='')
+    fail += execute_tests(sf.remove_prefix, data, fails, prefix='Fbc',
+                          remove_package=False)
 
     # TODO This is a bit complicated to test. It may be best for Sarah
     # to write the tests and check this function is doing what it's

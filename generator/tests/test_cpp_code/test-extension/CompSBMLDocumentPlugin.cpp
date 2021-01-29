@@ -1232,7 +1232,7 @@ CompSBMLDocumentPlugin::createObject(XMLInputStream& stream)
     {
       if (getErrorLog() && mExternalModelDefinitions.size() != 0)
       {
-        getErrorLog()->logPackageError("comp", CompSBMLDocumentAllowedElements,
+        getErrorLog()->logPackageError("comp", CompDocumentAllowedElements,
           getPackageVersion(), getLevel(), getVersion(), "", getLine(),
             getColumn());
       }
@@ -1248,7 +1248,7 @@ CompSBMLDocumentPlugin::createObject(XMLInputStream& stream)
     {
       if (getErrorLog() && mModelDefinitions.size() != 0)
       {
-        getErrorLog()->logPackageError("comp", CompSBMLDocumentAllowedElements,
+        getErrorLog()->logPackageError("comp", CompDocumentAllowedElements,
           getPackageVersion(), getLevel(), getVersion(), "", getLine(),
             getColumn());
       }

@@ -285,7 +285,7 @@ def singular(name):
     return returned_word
 
 
-def remove_prefix(name, remove_package=False,
+def remove_prefix(name, remove_package=True,
                   prefix='', remove_doc_prefix=False):
     """
     Remove prefix from a string; if we are writing an SBML package where the
@@ -305,27 +305,43 @@ def remove_prefix(name, remove_package=False,
 
     """
     prefix_to_remove = ''
-    if gv.prefix == 'SBML':
+    if gv.prefix == 'SBML' and remove_package:
         # we might want to remove the name of the package
         if gv.is_package and gv.package_prefix != '':
             prefix_to_remove = gv.package_prefix
-        elif remove_package and prefix != '':
+        elif prefix != '':
             prefix_to_remove = prefix
     else:
         prefix_to_remove = gv.prefix
     length = len(prefix_to_remove)
-    if length == 0:
+
+    if length == 0 or not is_prefixed_name(name, prefix_to_remove):
         return name
-    if not name.endswith('Document') and \
-            (name.startswith(prefix_to_remove)
-             or name.startswith(upper_first(prefix_to_remove))):
-        newname = name[length:]  # Remove the prefix
+    if not is_prefixed_document_class(name, prefix_to_remove):
+        return name[length:]
+    elif remove_doc_prefix:
+        return name[length:]
     else:
-        if remove_doc_prefix and name.endswith('Document'):
-            newname = name[length:]  # Remove the prefix
-        else:
-            newname = name
-    return newname
+        return name
+
+
+def is_prefixed_name(name, prefix):
+    if name.startswith(prefix) or name.startswith(upper_first(prefix)):
+        return True
+    return False
+
+
+def is_prefixed_document_class(name, prefix):
+    """
+    Check whether this name respresents a prefixed document class name.
+
+    :param name: String name to be checked.
+    :param prefix:
+    :return:
+    """
+    if name.endswith('Document'):
+        return is_prefixed_name(name, prefix)
+    return False
 
 
 def get_indefinite(name):
