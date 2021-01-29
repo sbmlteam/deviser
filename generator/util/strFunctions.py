@@ -288,7 +288,8 @@ def singular(name):
 def remove_prefix(name, in_concrete=False, remove_package=False,
                   prefix='', remove_doc_prefix=False):
     """
-    Remove prefix from a string.
+    Remove prefix from a string; if we are writing an SBML package where the
+    package prefix has been declared this will be removed.
 
     :param name: the string which we wish to remove the prefix from.
     :param in_concrete:
@@ -296,6 +297,10 @@ def remove_prefix(name, in_concrete=False, remove_package=False,
     :param prefix: the prefix to remove if global prefix is "SBML" and remove_package is True.
     :param remove_doc_prefix: if True, and name ends in 'Document', remove prefix.
     :return: the input string, possibly with something removed at the beginning.
+
+    e.g. Writing SBML package with package_prefix 'Fbc'
+
+    remove_prefix('FbcType') returns 'Type'
 
     TODO an example or two would be helpful here. And I'm not sure about the in_concrete argument.
 

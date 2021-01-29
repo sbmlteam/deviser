@@ -259,11 +259,25 @@ def main():
 
     # remove_prefix() tests - this is a complicated function to test!
     gv.reset()  # gv.prefix now "SBML"
+    gv.is_package = True
+    gv.package_prefix = 'Fbc'
+    data = {"FbcType": "Type", "FluxObjective": "FluxObjective"}
+    fail += execute_tests(sf.remove_prefix, data, fails, remove_package=False)
+    fail += execute_tests(sf.remove_prefix, data, fails, remove_package=True)
+    gv.reset()  # gv.prefix now "SBML"
+    gv.is_package = True
+    gv.package_prefix = '' # package prefix has not been specified
+    fail += execute_tests(sf.remove_prefix, data, fails,
+                          remove_package=True, prefix='Fbc')
+    data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective"}
+    fail += execute_tests(sf.remove_prefix, data, fails,
+                          remove_package=False, prefix='Fbc')
 
     # TODO This is a bit complicated to test. It may be best for Sarah
     # to write the tests and check this function is doing what it's
     # meant to. Named function arguments can be used in the tests,
     # like those done above for testing cap_list_of_name().
+    data = {}
 
     # get_indefinite() tests
     data = {"apple": "an", "biscuit": "a", "elephant": "an", "image": "an",
