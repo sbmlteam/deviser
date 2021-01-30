@@ -262,26 +262,50 @@ def main():
     gv.reset()  # gv.prefix now "SBML"
     gv.is_package = True
     gv.package_prefix = 'Fbc'
-    data = {"FbcType": "Type", "FluxObjective": "FluxObjective"}
+    data = {"FbcType": "Type", "FluxObjective": "FluxObjective",
+            "FbcSBMLDocument": "FbcSBMLDocument"}
     fail += execute_tests(sf.remove_prefix, data, fails)
     fail += execute_tests(sf.remove_prefix, data, fails, remove_package=True)
+
+    doc_data = {"FbcSBMLDocument": "SBMLDocument"}
+    fail += execute_tests(sf.remove_prefix, doc_data, fails,
+                          remove_doc_prefix=True)
+
     gv.reset()  # gv.prefix now "SBML"
     gv.is_package = True
     gv.package_prefix = ''  # package prefix has not been specified
     fail += execute_tests(sf.remove_prefix, data, fails, prefix='Fbc')
 
     # no prefix to remove has been specified or explicitly told not to remove
-    data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective"}
+    data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
+            "FbcSBMLDocument": "FbcSBMLDocument"}
     fail += execute_tests(sf.remove_prefix, data, fails, prefix='')
     fail += execute_tests(sf.remove_prefix, data, fails, prefix='Fbc',
                           remove_package=False)
+    fail += execute_tests(sf.remove_prefix, data, fails,
+                          remove_doc_prefix=True)
+    fail += execute_tests(sf.remove_prefix, data, fails, prefix='',
+                          remove_doc_prefix=True)
+    fail += execute_tests(sf.remove_prefix, data, fails, prefix='Fbc',
+                          remove_doc_prefix=False, remove_package=False)
 
-    # TODO This is a bit complicated to test. It may be best for Sarah
-    # to write the tests and check this function is doing what it's
-    # meant to. Named function arguments can be used in the tests,
-    # like those done above for testing cap_list_of_name().
+    doc_data = {"FbcSBMLDocument": "SBMLDocument"}
+    fail += execute_tests(sf.remove_prefix, doc_data, fails, prefix='Fbc',
+                          remove_doc_prefix=True)
+
+    gv.reset()  # gv.prefix now "SBML"
+    gv.prefix="Rosie"
+    gv.is_package = False
+
+    data = {"RosieFbcType": "FbcType", "RosieDocument": "RosieDocument"}
+    fail += execute_tests(sf.remove_prefix, data, fails, prefix='Rosie')
+
+    data_doc = {"RosieFbcType": "FbcType", "RosieDocument": "Document"}
+    fail += execute_tests(sf.remove_prefix, data_doc, fails, prefix='Rosie',
+                          remove_doc_prefix=True)
+
+    gv.reset()  # gv.prefix now "SBML"
     data = {}
-
     # get_indefinite() tests
     data = {"apple": "an", "biscuit": "a", "elephant": "an", "image": "an",
             "polar bear": "a", "orangutan": "an", "under secretary": "an",

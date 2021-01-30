@@ -292,17 +292,28 @@ def remove_prefix(name, remove_package=True,
     package prefix has been declared this will be removed.
 
     :param name: the string which we wish to remove the prefix from.
-    :param remove_package: if True, and global prefix is "SBML", remove the prefix (4th function arg)
-    :param prefix: the prefix to remove if global prefix is "SBML" and remove_package is True.
-    :param remove_doc_prefix: if True, and name ends in 'Document', remove prefix.
+    :param remove_package: if True, and global prefix is "SBML",
+        remove the package prefix either gv.package_prefix
+        or 'prefix' argument given.
+        Defaults to True.
+    :param prefix: the prefix to remove if global prefix is "SBML",
+        gv. package_prefix is empty, and remove_package is True.
+        Defaults to ''.
+    :param remove_doc_prefix: if True,
+        and name ends in 'Document', remove prefix.
+        Defaults to False.
     :return: the input string, possibly with something removed at the beginning.
 
-    e.g. Writing SBML package with package_prefix 'Fbc'
+    e.g. Writing SBML package with gv.package_prefix 'Fbc'
 
     remove_prefix('FbcType') returns 'Type'
+    remove_prefix('FbcDocument', remove_doc_prefix=True) returns 'Document'
+   remove_prefix('FbcDocument', remove_doc_prefix=False) returns 'FbcDocument'
 
-    TODO an example or two would be helpful here. And I'm not sure about the in_concrete argument.
+    e.g. Writing SBML package with gv. package_prefix ''
 
+    remove_prefix('FbcType') returns 'FbcType'
+    remove_prefix('FbcType', prefix='Fbc') returns 'Type'
     """
     prefix_to_remove = ''
     if gv.prefix == 'SBML' and remove_package:
