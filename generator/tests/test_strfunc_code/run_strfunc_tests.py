@@ -225,7 +225,7 @@ def main():
     fail += execute_tests(sf.plural_no_prefix, data, fails)
     gv.is_package = False
     gv.prefix = "Rosie"
-    data = {"Rosiefox": "foxes", "Rosiechild": "children", "RosieCat": "Cats"}
+    data = {"RosieFox": "Foxes", "RosieChild": "Children", "RosieCat": "Cats"}
     fail += execute_tests(sf.plural_no_prefix, data, fails)
     gv.is_package = True
     data = {"Rosiefox": "Rosiefoxes", "Rosiechild": "Rosiechildren",
@@ -306,6 +306,19 @@ def main():
 
     gv.reset()  # gv.prefix now "SBML"
     data = {}
+
+    # is_prefixed_name_test
+    data = {"RosieFox": True, "rosieFoo": True, "rosiefoo": False,
+            "RosiFox": False, "RoSiEFoo": True, "RoSiEfoo": False}
+    fail += execute_tests(sf.is_prefixed_name, data, fails, prefix='Rosie')
+
+    # is_prefixed_document_class test
+    data = {"RosieDocument": True, "rosieDocument": True,
+            "rosiedocument": False, "RosiDocument": False,
+            "RoSiEDocument": True, "RoSiEDocment": False}
+    fail += execute_tests(sf.is_prefixed_document_class, data, fails,
+                          prefix='Rosie')
+
     # get_indefinite() tests
     data = {"apple": "an", "biscuit": "a", "elephant": "an", "image": "an",
             "polar bear": "a", "orangutan": "an", "under secretary": "an",

@@ -337,18 +337,42 @@ def remove_prefix(name, remove_package=True,
 
 
 def is_prefixed_name(name, prefix):
-    if name.startswith(prefix) or name.startswith(upper_first(prefix)):
-        return True
+    """
+    Returns true if name begins with given prefix.
+
+    :param name: name to query.
+    :param prefix: prefix to look for.
+    :return: True if name begins with prefix with first letter of name
+        being capital and prefix case insensitive, False otherwise.
+
+    e.g.
+    The following return True:
+        is_prefixed_name('fooSalt',, 'foo')
+        is_prefixed_name('FOOSalt',, 'foo')
+        is_prefixed_name('foOSalt',, 'FOo')
+
+    The following return False:
+        is_prefixed_name('fooSalt',, 'foot')
+        is_prefixed_name('FOOsalt',, 'foo')
+
+    """
+
+    uppername = name.upper()
+    upperprefix = prefix.upper()
+
+    if uppername.startswith(upperprefix):
+        first = name[len(prefix)]
+        if first == first.upper():
+            return True
     return False
 
 
 def is_prefixed_document_class(name, prefix):
     """
-    Check whether this name respresents a prefixed document class name.
-
-    :param name: String name to be checked.
-    :param prefix:
-    :return:
+    :param name: name to query.
+    :param prefix: prefix to look for.
+    :return: True if name begins with prefix and endswith 'Document'
+        and prefix is case insensitive, False otherwise.
     """
     if name.endswith('Document'):
         return is_prefixed_name(name, prefix)
