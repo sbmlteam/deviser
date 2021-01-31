@@ -404,11 +404,10 @@ def standard_element_name(name):
 
     Remove spaces, and any trailing '*', ',' or '_t'.
     If it's a list of something, convert to singular.
-
-    e.g. "ListOfApples*" should return "Apple", but TODO bug in singular()
-    needs fixing. (Currently -> "Appl").  See issue #34
+    Capitalise standard name.
 
     "listOfFoxes," -> "Fox"
+    "apple" -> "Apple"
     """
     name = remove_spaces(name)
     length = len(name)

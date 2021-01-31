@@ -325,10 +325,10 @@ def main():
             "zither": "a"}
     fail += execute_tests(sf.get_indefinite, data, fails)
 
-    # standard_element_name() tests - another tricky one!
-    # TODO - it might be best to wait until the bug in singular() is fixed
-    # (issue #34).
-    data = {"listOfFoxes,": "Fox"}
+    # standard_element_name() tests
+    data = {"listOfFoxes,": "Fox", "ListOfApples": "Apple",
+            "XMLNode*": "XMLNode", "Rosie,": "Rosie", "rosie,": "Rosie",
+            "name_t": "Name", "Name": "Name", "name": "Name"}
     fail += execute_tests(sf.standard_element_name, data, fails)
 
     # get_library_suffix() tests
