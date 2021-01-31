@@ -450,12 +450,15 @@ def get_library_suffix(name):
 
 def wrap_token(name, pkg=''):
     """
-    Returns the name wrapped as a token
-    e.g. \token{'id'} or \token{'comp:\-id'}
+    Returns the name wrapped as a token specifically for writing latex
 
     :param name: the name to wrap
     :param pkg: include this, if present
     :return: the "wrapped" name
+
+    This function is for use when writing latex so that an attribute name
+    can be wrapped with the \token command
+    e.g. \token{'id'} or \token{'comp:\-id'}
 
     """
     if pkg == '':
