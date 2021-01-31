@@ -446,7 +446,7 @@ def get_library_suffix(name):
 
 ############################################
 # The following functions are specifically for use when writing latex
-
+# TODO come back to writing tex files when fixing #53
 
 def wrap_token(name, pkg=''):
     """
@@ -467,31 +467,32 @@ def wrap_token(name, pkg=''):
         return '\\token{' + pkg + ':\\-' + name + '}'
 
 
-def wrap_type(type, element, hack=False):
+def wrap_type(given_type, element, hack=False):
     """
-    TODO Sarah, please add an explanation here!
+    Wraps the given type in a string that will be used in a latex
+    description of that type.
 
-    :param type: the type we want to wrap, e.g. 'array', 'enum',...
+    :param given_type: the type we want to wrap, e.g. 'array', 'enum',...
     :param element:
     :param hack: special case which can be used for 'element' type
     :return: string describing the type and the element
     """
-    if type == 'array':
+    if given_type == 'array':
         return 'consisting of an array of \\primtype{' + element + '}'
-    elif type == 'enum':
+    elif given_type == 'enum':
         element_name = texify(element)
         return 'of type \\primtype{' + element_name + '}'
-    elif type == 'element':
+    elif given_type == 'element':
         if hack:
             return 'of type \\' + element
         else:
             return wrap_token(element)
-    elif type == 'lo_element':
+    elif given_type == 'lo_element':
         return wrap_token(element)
-    elif type == 'inline_lo_element':
+    elif given_type == 'inline_lo_element':
         return 'TO DO: add type'
     else:
-        return 'of type \\primtype{' + type + '}'
+        return 'of type \\primtype{' + given_type + '}'
 
 
 def wrap_section(name, add_class=True, add_extended=False):
