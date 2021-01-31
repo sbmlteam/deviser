@@ -87,7 +87,7 @@ def lower_first(word):
 
     TODO: could perhaps have one function to replace this
     and the upper_first() function? As they are quite similar.
-    I think not with these - what were you thinking a single function would
+    SK answer: I think not with these - what were you thinking a single function would
     look like. I think you would have to pass a flag 'u' or 'l' and reading
     coding using the function would become less clear
     change_case_first('foo', 'u')
@@ -443,6 +443,9 @@ def get_library_suffix(name):
         ret_name = ret_name[3:]
     return upper_first(ret_name)
 
+############################################
+# The following functions are specifically for use when writing latex
+
 
 def wrap_token(name, pkg=''):
     """
@@ -539,6 +542,8 @@ def wrap_enum(name):
 #    return '\\primtype{' + lower_first(name) + '}'
     return '\\primtype{' + name + '}'
 
+# End of latex specific functions
+##################################################
 
 def get_sid_refs(refs):
     """
