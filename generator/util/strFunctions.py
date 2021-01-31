@@ -386,8 +386,8 @@ def get_indefinite(name):
     :param name: the name we want the indefinite article (and or a) for.
     :return: 'an' if name starts with a vowel, else 'a'
 
-    TODO: what about words starting with h?
-    e.g. "an hotel" and "a host of reasons" are both correct :-)
+    Note this function is not complete and makes no attempt to
+    account for anomalies in the English language
     """
     for char in ('a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U'):
         if name.startswith(char):
