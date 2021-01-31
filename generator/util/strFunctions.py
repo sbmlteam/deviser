@@ -87,7 +87,8 @@ def lower_first(word):
 
     TODO: could perhaps have one function to replace this
     and the upper_first() function? As they are quite similar.
-    SK answer: I think not with these - what were you thinking a single function would
+    SK answer:
+    I think not with these - what were you thinking a single function would
     look like. I think you would have to pass a flag 'u' or 'l' and reading
     coding using the function would become less clear
     change_case_first('foo', 'u')
