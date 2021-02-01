@@ -84,20 +84,6 @@ def lower_first(word):
     Note the SBML Level 3 Spatial Geometry package uses a set of classes
     named CSGFoo; where the capitalised version of the name will always
     have the 'CSG' in capitals. This case is considered within this function.
-
-    TODO: could perhaps have one function to replace this
-    and the upper_first() function? As they are quite similar.
-    SK answer:
-    I think not with these - what were you thinking a single function would
-    look like. I think you would have to pass a flag 'u' or 'l' and reading
-    coding using the function would become less clear
-    change_case_first('foo', 'u')
-    change case_first('foo', 'l')
-    instead of
-    upper_first('foo')
-    lower_first('foo')
-    OR did you have something cleaner in mind
-
     """
     # hack for spatial CSGFoo classes
     returned_word = ''
