@@ -219,13 +219,13 @@ def main():
 #    fail += execute_tests(sf.cap_list_of_name_no_prefix, data, fails)
 
     # plural_no_prefix() tests
-    # TODO this one and remove_prefix() are a bit tricky (broken?)
     gv.reset()
     data = {"fox": "foxes", "child": "children", "SBMLchild": "SBMLchildren"}
     fail += execute_tests(sf.plural_no_prefix, data, fails)
     gv.is_package = False
     gv.prefix = "Rosie"
-    data = {"RosieFox": "Foxes", "RosieChild": "Children", "RosieCat": "Cats"}
+    data = {"RosieFox": "Foxes", "RosieChild": "Children", "RosieCat": "Cats",
+            "Rosiefox": "Rosiefoxes"} # prefix only removed if capital after
     fail += execute_tests(sf.plural_no_prefix, data, fails)
     gv.is_package = True
     data = {"Rosiefox": "Rosiefoxes", "Rosiechild": "Rosiechildren",
