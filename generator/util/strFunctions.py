@@ -291,7 +291,7 @@ def remove_prefix(name, remove_package=True,
         Defaults to False.
     :return: the input string, possibly with something removed at the beginning.
 
-    .. code-bock:: default
+    .. code-block:: default
 
         Writing SBML package with gv.package_prefix 'Fbc'
 
@@ -336,7 +336,7 @@ def is_prefixed_name(name, prefix):
     :return: True if name begins with prefix with first letter of name
         being capital and prefix case insensitive, False otherwise.
 
-    .. code-bock:: default
+    .. code-block:: default
 
         The following return True:
             is_prefixed_name('fooSalt',, 'foo')
@@ -513,7 +513,7 @@ def make_class(name, add_extended=False):
     :param add_extended: if True, prepend result with 'extended-'
     :return: the string made as a class
 
-    .. code-bock:: default
+    .. code-block:: default
 
         make_class("Irenaeus") -> "irenaeus-class"
         make_class("Irenaeus", True) -> "extended-irenaeus-class"
