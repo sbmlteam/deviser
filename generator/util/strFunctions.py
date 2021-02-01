@@ -51,6 +51,10 @@ def upper_first(word):
     :param word: word we want to change.
     :return: changed word.
 
+    Note the SBML Level 3 Spatial Geometry package uses a set of classes
+    named CSGFoo; where the capitalised version of the name will always
+    have the 'CSG' in capitals. This case is considered within this function.
+
     e.g.
     "csgsomething" -> "CSGsomething", "cat" -> "Cat", "csgcat" -> "CSGcat",
     "cscat" -> "Cscat", "csgeometry" -> "CSGeometry",
@@ -77,16 +81,14 @@ def lower_first(word):
     :param word: word we want to change.
     :return: changed word.
 
-    TODO: could perhaps have one function to replace this
-    and the upper_first() function? As they are quite similar.
-
+    Note the SBML Level 3 Spatial Geometry package uses a set of classes
+    named CSGFoo; where the capitalised version of the name will always
+    have the 'CSG' in capitals. This case is considered within this function.
     """
     # hack for spatial CSGFoo classes
     returned_word = ''
     if word is None or word == '':
         return returned_word
-    elif len(word) == 1:  # The reverse of this is not done in upper_first()
-        returned_word = word[0].lower()
     elif word.startswith('CSG'):
         if word == 'CSGeometry':
             returned_word = 'csGeometry'
@@ -97,66 +99,69 @@ def lower_first(word):
     return returned_word
 
 
-def get_indent(element):
-    """
-    Given a string, e.g. 'hello', work out length
-    of string 'hello('.
-
-    :param element: string to process
-    :return: length of: string plus '('
-
-    TODO when would this be used?
-    """
-    s1 = '{0}('.format(element)
-    return len(s1)
-
-
-def abbrev_name(element):
+def abbrev_name(name):
     """
     Abbreviate a name. Return in lower case.
 
-    :param element: the name to abbreviate
+    :param name: the name to abbreviate
     :return: returns abbreviated form
 
+    This takes any capitals in the name and returns these as a lowercase
+    abbreviation of the name. This facilitates the use of names in functions
+    such as getFoo(Model *m), where m is the abbreviation of Model.
+    Note if the name argument contains no capitals then the first letter 
+    is returned as the abbreviation. 
     e.g.
-    "thisIsATest" -> "iat"  # TODO I'm surprised we don't want "IAT", etc.
+    "thisIsATest" -> "iat"
     "CAT" -> "cat"
-    "cat" -> "c"  # TODO is that what we want?
+    "cat" -> "c"
     """
     abbrev = ''
-    for i in range(0, len(element)):
-        if element[i].isupper():
-            abbrev = abbrev + element[i]
-    if abbrev == '' and len(element) > 0:  # element is all lower-case
-        abbrev = element[0]  # just return the first letter in element
+    for i in range(0, len(name)):
+        if name[i].isupper():
+            abbrev = abbrev + name[i]
+    if abbrev == '' and len(name) > 0:  # name is all lower-case
+        abbrev = name[0]  # just return the first letter in name
     return abbrev.lower()
 
 
 def abbrev_lo_name(loname):
     """
-    TODO I can see what it does, but I don't know why, or what sort
-    of lonames will be transformed.
+    The function abbreviates the 'ListOf' part of a class name to 'LO'. If
+    the argument does not start ListOf, it returns an empty string.
 
     :param loname: string to transform
     :return: transformed string
 
-    e.g.  "spaghetti" -> "LOtti"
+    e.g.  "ListOfFoo" -> "LOFoo"
+    "spaghetti" -> ""
     """
-    return 'LO' + loname[6:]
+    if loname.startswith('ListOf'):
+        return 'LO' + loname[6:]
+    else:
+        return ''
 
 
-def list_of_name(name, addPrefix=True):
+def list_of_name(name, add_prefix=True):
     """
     Given a name, get "list of" name.
 
     :param name: the name to get "list of" name for
-    :param addPrefix: if True, prepend the global prefix to returned string
-    :return: the "list of" name string
+    :param add_prefix: if True and we are not writing code for a package
+        prepend the global prefix to returned string
+    :return: the "list of" name string e.g. ListOfName
 
-    e.g. "FooParameter" -> "ListOfFooParameters"  if no gv.prefix
+    e.g.
+    with add_prefix = False
+        "FooParameter" -> "ListOfFooParameters"
+
+    with add_prefix =True and gv.prefix = 'SBML'
+         "FooParameter" -> "ListOfFooParameters" if gv.is_package
+         "FooParameter" -> "SBMLListOfFooParameters" if not gv.is_package
+
     """
     prefix = ''
-    if addPrefix and not gv.is_package:
+    if add_prefix and not gv.is_package:
         prefix = gv.prefix  # e.g. "SBML"
     return prefix + 'ListOf' + plural_no_prefix(name)
 
@@ -173,27 +178,28 @@ def lower_list_of_name_no_prefix(name):
     return 'listOf' + plural_no_prefix(upper_first(name))
 
 
-def cap_list_of_name(name, addPrefix=True):
+def cap_list_of_name(name, add_prefix=True):
     """
     Get the "list of" name for a string, with first letter in upper-case.
 
     :param name: the string we want the "list of" name for.
-    :param addPrefix: if True, prepend returned name with global prefix
+    :param add_prefix: if True, prepend returned name with global prefix
                       (e.g. "SBML") if not a package.
     """
     name = upper_first(name)
-    return list_of_name(name, addPrefix)
+    return list_of_name(name, add_prefix)
 
 
 def cap_list_of_name_no_prefix(name):
     """
-    Get the "list of" name for a string, without the prefix,
-    with the first letter in upper-case.
+    Get the "list of" name for a string, without the prefix if its not
+    a package, with the first letter in upper-case.
 
     :param name: the string which we want the "list of" name for.
     :return: the "list of" name.
 
     e.g. "fox" -> "ListOfFoxes"
+         "SBMLFoo" ->"ListOfFoos" if gv.is_package = False
     """
     name = upper_first(name)
     return list_of_name(name, False)
@@ -240,9 +246,6 @@ def plural(name):
     return returned_word
 
 
-# Good tests would be (e.g.) word == singular(plural(word)), etc.
-
-
 def singular(name):
     """
     Attempt to find the singular of a word
@@ -255,18 +258,12 @@ def singular(name):
     "cats" -> "cat", "dogs" -> "dogs", "children" -> "child",
     "disinformation" -> "disinformation", "coxes" -> "cox",
     "parties" -> "party", "clouds" -> "cloud", "somethings" -> "something".
-
-    NB issue #34
-    "foxes" -> "fox" is ok
-    but
-    "apples" -> "appl", "skates" -> "skat" is wrong
-
     """
     returned_word = name
     length = len(name)
     if name.endswith('ies'):
         returned_word = name[0:length-3] + 'y'
-    elif name.endswith('es'):
+    elif name.endswith('xes'):
         returned_word = name[0:length-2]
     elif name.endswith('s'):
         returned_word = name[0:length-1]
@@ -275,43 +272,103 @@ def singular(name):
     return returned_word
 
 
-def remove_prefix(name, in_concrete=False, remove_package=False,
+def remove_prefix(name, remove_package=True,
                   prefix='', remove_doc_prefix=False):
     """
-    Remove prefix from a string.
+    Remove prefix from a string; if we are writing an SBML package where the
+    package prefix has been declared this will be removed.
 
     :param name: the string which we wish to remove the prefix from.
-    :param in_concrete:
-    :param remove_package: if True, and global prefix is "SBML", remove the prefix (4th function arg)
-    :param prefix: the prefix to remove if global prefix is "SBML" and remove_package is True.
-    :param remove_doc_prefix: if True, and name ends in 'Document', remove prefix.
+    :param remove_package: if True, and global prefix is "SBML",
+        remove the package prefix either gv.package_prefix
+        or 'prefix' argument given.
+        Defaults to True.
+    :param prefix: the prefix to remove if global prefix is "SBML",
+        gv. package_prefix is empty, and remove_package is True.
+        Defaults to ''.
+    :param remove_doc_prefix: if True,
+        and name ends in 'Document', remove prefix.
+        Defaults to False.
     :return: the input string, possibly with something removed at the beginning.
 
-    TODO an example or two would be helpful here. And I'm not sure about the in_concrete argument.
+    .. code-bock:: default
+
+        Writing SBML package with gv.package_prefix 'Fbc'
+
+        remove_prefix('FbcType') returns 'Type'
+        remove_prefix('FbcDocument', remove_doc_prefix=True) returns 'Document'
+        remove_prefix('FbcDocument', remove_doc_prefix=False) returns 'FbcDocument'
+
+        Writing SBML package with gv. package_prefix ''
+
+        remove_prefix('FbcType') returns 'FbcType'
+        remove_prefix('FbcType', prefix='Fbc') returns 'Type'
+
 
     """
     prefix_to_remove = ''
-    if gv.prefix == 'SBML':
+    if gv.prefix == 'SBML' and remove_package:
         # we might want to remove the name of the package
-        if not in_concrete and gv.is_package and gv.package_prefix != '':
+        if gv.is_package and gv.package_prefix != '':
             prefix_to_remove = gv.package_prefix
-        elif remove_package and prefix != '':
+        elif prefix != '':
             prefix_to_remove = prefix
     else:
         prefix_to_remove = gv.prefix
     length = len(prefix_to_remove)
-    if length == 0:
+
+    if length == 0 or not is_prefixed_name(name, prefix_to_remove):
         return name
-    if not name.endswith('Document') and \
-            (name.startswith(prefix_to_remove)
-             or name.startswith(upper_first(prefix_to_remove))):
-        newname = name[length:]  # Remove the prefix
+    if not is_prefixed_document_class(name, prefix_to_remove):
+        return name[length:]
+    elif remove_doc_prefix:
+        return name[length:]
     else:
-        if remove_doc_prefix and name.endswith('Document'):
-            newname = name[length:]  # Remove the prefix
-        else:
-            newname = name
-    return newname
+        return name
+
+
+def is_prefixed_name(name, prefix):
+    """
+    Returns true if name begins with given prefix.
+
+    :param name: name to query.
+    :param prefix: prefix to look for.
+    :return: True if name begins with prefix with first letter of name
+        being capital and prefix case insensitive, False otherwise.
+
+    .. code-bock:: default
+
+        The following return True:
+            is_prefixed_name('fooSalt',, 'foo')
+            is_prefixed_name('FOOSalt',, 'foo')
+            is_prefixed_name('foOSalt',, 'FOo')
+
+        The following return False:
+            is_prefixed_name('fooSalt',, 'foot')
+            is_prefixed_name('FOOsalt',, 'foo')
+
+    """
+
+    uppername = name.upper()
+    upperprefix = prefix.upper()
+
+    if uppername.startswith(upperprefix):
+        first = name[len(prefix)]
+        if first == first.upper():
+            return True
+    return False
+
+
+def is_prefixed_document_class(name, prefix):
+    """
+    :param name: name to query.
+    :param prefix: prefix to look for.
+    :return: True if name begins with prefix and endswith 'Document'
+        and prefix is case insensitive, False otherwise.
+    """
+    if name.endswith('Document'):
+        return is_prefixed_name(name, prefix)
+    return False
 
 
 def get_indefinite(name):
@@ -321,8 +378,8 @@ def get_indefinite(name):
     :param name: the name we want the indefinite article (and or a) for.
     :return: 'an' if name starts with a vowel, else 'a'
 
-    TODO: what about words starting with h?
-    e.g. "an hotel" and "a host of reasons" are both correct :-)
+    Note this function is not complete and makes no attempt to
+    account for anomalies in the English language
     """
     for char in ('a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U'):
         if name.startswith(char):
@@ -339,11 +396,10 @@ def standard_element_name(name):
 
     Remove spaces, and any trailing '*', ',' or '_t'.
     If it's a list of something, convert to singular.
-
-    e.g. "ListOfApples*" should return "Apple", but TODO bug in singular()
-    needs fixing. (Currently -> "Appl").  See issue #34
+    Capitalise standard name.
 
     "listOfFoxes," -> "Fox"
+    "apple" -> "Apple"
     """
     name = remove_spaces(name)
     length = len(name)
@@ -379,15 +435,21 @@ def get_library_suffix(name):
         ret_name = ret_name[3:]
     return upper_first(ret_name)
 
+############################################
+# The following functions are specifically for use when writing latex
+# TODO come back to writing tex files when fixing #53
 
 def wrap_token(name, pkg=''):
     """
-    Returns the name wrapped as a token
-    e.g. \token{'id'} or \token{'comp:\-id'}
+    Returns the name wrapped as a token specifically for writing latex
 
     :param name: the name to wrap
     :param pkg: include this, if present
     :return: the "wrapped" name
+
+    This function is for use when writing latex so that an attribute name
+    can be wrapped with the \token command
+    e.g. \token{'id'} or \token{'comp:\-id'}
 
     """
     if pkg == '':
@@ -396,31 +458,32 @@ def wrap_token(name, pkg=''):
         return '\\token{' + pkg + ':\\-' + name + '}'
 
 
-def wrap_type(type, element, hack=False):
+def wrap_type(given_type, element, hack=False):
     """
-    TODO Sarah, please add an explanation here!
+    Wraps the given type in a string that will be used in a latex
+    description of that type.
 
-    :param type: the type we want to wrap, e.g. 'array', 'enum',...
+    :param given_type: the type we want to wrap, e.g. 'array', 'enum',...
     :param element:
     :param hack: special case which can be used for 'element' type
     :return: string describing the type and the element
     """
-    if type == 'array':
+    if given_type == 'array':
         return 'consisting of an array of \\primtype{' + element + '}'
-    elif type == 'enum':
+    elif given_type == 'enum':
         element_name = texify(element)
         return 'of type \\primtype{' + element_name + '}'
-    elif type == 'element':
+    elif given_type == 'element':
         if hack:
             return 'of type \\' + element
         else:
             return wrap_token(element)
-    elif type == 'lo_element':
+    elif given_type == 'lo_element':
         return wrap_token(element)
-    elif type == 'inline_lo_element':
+    elif given_type == 'inline_lo_element':
         return 'TO DO: add type'
     else:
-        return 'of type \\primtype{' + type + '}'
+        return 'of type \\primtype{' + given_type + '}'
 
 
 def wrap_section(name, add_class=True, add_extended=False):
@@ -450,9 +513,11 @@ def make_class(name, add_extended=False):
     :param add_extended: if True, prepend result with 'extended-'
     :return: the string made as a class
 
-    e.g.
-    make_class("Irenaeus") -> "irenaeus-class"
-    make_class("Irenaeus", True) -> "extended-irenaeus-class"
+    .. code-bock:: default
+
+        make_class("Irenaeus") -> "irenaeus-class"
+        make_class("Irenaeus", True) -> "extended-irenaeus-class"
+        
     """
     if add_extended:
         return 'extended-' + name.lower() + '-class'
@@ -475,6 +540,8 @@ def wrap_enum(name):
 #    return '\\primtype{' + lower_first(name) + '}'
     return '\\primtype{' + name + '}'
 
+# End of latex specific functions
+##################################################
 
 def get_sid_refs(refs):
     """

@@ -6,7 +6,7 @@ import os
 import sys
 
 
-import test_functions
+from tests import test_functions
 
 from util import strFunctions as sf, global_variables as gv
 
@@ -135,6 +135,16 @@ def check_keys(first, second, fails):
             return
 
 
+def single_then_plural(name):
+    singular = sf.singular(name)
+    return sf.plural(singular)
+
+
+def plural_then_single(name):
+    plural = sf.plural(name)
+    return sf.singular(plural)
+
+
 def main():
 
     # NOTE: the test sets below are in the same order as the functions
@@ -159,53 +169,63 @@ def main():
     data2 = swap_dictionary(data)
     fail += execute_tests(sf.lower_first, data2, fails)
 
-    # get_indent() tests
-    data = {'': 1, 'elephant': 9}
-    fail += execute_tests(sf.get_indent, data, fails)
-
     # abbrev_name() tests
     data = {"thisIsATest": "iat", "CAT": "cat", "cat": "c", "c": "c", "C": "c"}
     fail += execute_tests(sf.abbrev_name, data, fails)
 
     # abbrev_lo_name() tests
-    data = {"spaghetti": "LOtti", "SPAGHETTI": "LOTTI", "": "LO"}
+    data = {"spaghetti": "", "ListOfFoo": "LOFoo", "ListOfFOO": "LOFOO"}
     fail += execute_tests(sf.abbrev_lo_name, data, fails)
 
     # list_of_name() tests
     gv.reset()
     data = {"FooParameter": "ListOfFooParameters"}
-    fail += execute_tests(sf.list_of_name, data, fails, addPrefix=True)
-    fail += execute_tests(sf.list_of_name, data, fails, addPrefix=False)
+    fail += execute_tests(sf.list_of_name, data, fails, add_prefix=True)
+    fail += execute_tests(sf.list_of_name, data, fails, add_prefix=False)
     # print(f"gv is package: {gv.is_package}, gv prefix: {gv.prefix}")
     gv.is_package = False
+    fail += execute_tests(sf.list_of_name, data, fails, add_prefix=False)
     data = {"FooParameter": "SBMLListOfFooParameters"}
-    fail += execute_tests(sf.list_of_name, data, fails, addPrefix=True)
+    fail += execute_tests(sf.list_of_name, data, fails, add_prefix=True)
 
     # lower_list_of_name_no_prefix() tests
-    data = {"fox": "listOfFoxes", "cat": "listOfCats", "child": "listOfChildren"}
+    gv.reset()
+    data = {"fox": "listOfFoxes", "cat": "listOfCats",
+            "child": "listOfChildren"}
+    fail += execute_tests(sf.lower_list_of_name_no_prefix, data, fails)
+    gv.is_package = False
     fail += execute_tests(sf.lower_list_of_name_no_prefix, data, fails)
 
     # cap_list_of_name() tests
     gv.reset()
     data = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats"}
-    fail += execute_tests(sf.cap_list_of_name, data, fails, addPrefix=False)
+    fail += execute_tests(sf.cap_list_of_name, data, fails, add_prefix=False)
+    fail += execute_tests(sf.cap_list_of_name, data, fails, add_prefix=True)
     gv.is_package = False
+    fail += execute_tests(sf.cap_list_of_name, data, fails, add_prefix=False)
     data = {"FooParameter": "SBMLListOfFooParameters", "cat": "SBMLListOfCats"}
-    fail += execute_tests(sf.cap_list_of_name, data, fails, addPrefix=True)
+    fail += execute_tests(sf.cap_list_of_name, data, fails, add_prefix=True)
 
     # cap_list_of_name_no_prefix() tests
     gv.reset()
-    data = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats"}
+    data = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats",
+            "SBMLFooParameter": "ListOfSBMLFooParameters"}
     fail += execute_tests(sf.cap_list_of_name_no_prefix, data, fails)
+    gv.is_package = False
+    # this gets wrongly dealt with by the remove prefix function
+    #TODO sort
+    data = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats",
+            "SBMLFooParameter": "ListOfFooParameters"}
+#    fail += execute_tests(sf.cap_list_of_name_no_prefix, data, fails)
 
     # plural_no_prefix() tests
-    # TODO this one and remove_prefix() are a bit tricky (broken?)
     gv.reset()
     data = {"fox": "foxes", "child": "children", "SBMLchild": "SBMLchildren"}
     fail += execute_tests(sf.plural_no_prefix, data, fails)
     gv.is_package = False
     gv.prefix = "Rosie"
-    data = {"Rosiefox": "foxes", "Rosiechild": "children", "RosieCat": "Cats"}
+    data = {"RosieFox": "Foxes", "RosieChild": "Children", "RosieCat": "Cats",
+            "Rosiefox": "Rosiefoxes"} # prefix only removed if capital after
     fail += execute_tests(sf.plural_no_prefix, data, fails)
     gv.is_package = True
     data = {"Rosiefox": "Rosiefoxes", "Rosiechild": "Rosiechildren",
@@ -215,7 +235,8 @@ def main():
     # plural() tests
     data = {"cat": "cats", "dogs": "dogs", "child": "children",
             "disinformation": "disinformation", "fox": "foxes",
-            "party": "parties", "cloud": "clouds", "something": "somethings"}
+            "party": "parties", "cloud": "clouds", "something": "somethings",
+            "apple": "apples"}
     fail += execute_tests(sf.plural, data, fails)
 
     # singular() tests
@@ -223,12 +244,80 @@ def main():
     data2['dogs'] = 'dog'  # Just need to tweak this one entry. Otherwise OK.
     fail += execute_tests(sf.singular, data2, fails)
 
+    # single -> plural -> single
+    data = {"cat": "cat", "dog": "dog", "child": "child",
+            "disinformation": "disinformation", "fox": "fox",
+            "party": "party", "cloud": "cloud", "something": "something",
+            "apple": "apple"}
+    fail += execute_tests(plural_then_single, data, fails)
+
+    data = {"cats": "cats", "dogs": "dogs", "children": "children",
+            "disinformation": "disinformation", "foxes": "foxes",
+            "parties": "parties", "clouds": "clouds",
+            "somethings": "somethings", "apples": "apples"}
+    fail += execute_tests(single_then_plural, data, fails)
+
     # remove_prefix() tests - this is a complicated function to test!
+    # tests removing a package prefix
     gv.reset()  # gv.prefix now "SBML"
-    # TODO This is a bit complicated to test. It may be best for Sarah
-    # to write the tests and check this function is doing what it's
-    # meant to. Named function arguments can be used in the tests,
-    # like those done above for testing cap_list_of_name().
+    gv.is_package = True
+    gv.package_prefix = 'Fbc'
+    data = {"FbcType": "Type", "FluxObjective": "FluxObjective",
+            "FbcSBMLDocument": "FbcSBMLDocument"}
+    fail += execute_tests(sf.remove_prefix, data, fails)
+    fail += execute_tests(sf.remove_prefix, data, fails, remove_package=True)
+
+    doc_data = {"FbcSBMLDocument": "SBMLDocument"}
+    fail += execute_tests(sf.remove_prefix, doc_data, fails,
+                          remove_doc_prefix=True)
+
+    gv.reset()  # gv.prefix now "SBML"
+    gv.is_package = True
+    gv.package_prefix = ''  # package prefix has not been specified
+    fail += execute_tests(sf.remove_prefix, data, fails, prefix='Fbc')
+
+    # no prefix to remove has been specified or explicitly told not to remove
+    data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
+            "FbcSBMLDocument": "FbcSBMLDocument"}
+    fail += execute_tests(sf.remove_prefix, data, fails, prefix='')
+    fail += execute_tests(sf.remove_prefix, data, fails, prefix='Fbc',
+                          remove_package=False)
+    fail += execute_tests(sf.remove_prefix, data, fails,
+                          remove_doc_prefix=True)
+    fail += execute_tests(sf.remove_prefix, data, fails, prefix='',
+                          remove_doc_prefix=True)
+    fail += execute_tests(sf.remove_prefix, data, fails, prefix='Fbc',
+                          remove_doc_prefix=False, remove_package=False)
+
+    doc_data = {"FbcSBMLDocument": "SBMLDocument"}
+    fail += execute_tests(sf.remove_prefix, doc_data, fails, prefix='Fbc',
+                          remove_doc_prefix=True)
+
+    gv.reset()  # gv.prefix now "SBML"
+    gv.prefix="Rosie"
+    gv.is_package = False
+
+    data = {"RosieFbcType": "FbcType", "RosieDocument": "RosieDocument"}
+    fail += execute_tests(sf.remove_prefix, data, fails, prefix='Rosie')
+
+    data_doc = {"RosieFbcType": "FbcType", "RosieDocument": "Document"}
+    fail += execute_tests(sf.remove_prefix, data_doc, fails, prefix='Rosie',
+                          remove_doc_prefix=True)
+
+    gv.reset()  # gv.prefix now "SBML"
+    data = {}
+
+    # is_prefixed_name_test
+    data = {"RosieFox": True, "rosieFoo": True, "rosiefoo": False,
+            "RosiFox": False, "RoSiEFoo": True, "RoSiEfoo": False}
+    fail += execute_tests(sf.is_prefixed_name, data, fails, prefix='Rosie')
+
+    # is_prefixed_document_class test
+    data = {"RosieDocument": True, "rosieDocument": True,
+            "rosiedocument": False, "RosiDocument": False,
+            "RoSiEDocument": True, "RoSiEDocment": False}
+    fail += execute_tests(sf.is_prefixed_document_class, data, fails,
+                          prefix='Rosie')
 
     # get_indefinite() tests
     data = {"apple": "an", "biscuit": "a", "elephant": "an", "image": "an",
@@ -236,10 +325,10 @@ def main():
             "zither": "a"}
     fail += execute_tests(sf.get_indefinite, data, fails)
 
-    # standard_element_name() tests - another tricky one!
-    # TODO - it might be best to wait until the bug in singular() is fixed
-    # (issue #34).
-    data = {"listOfFoxes,": "Fox"}
+    # standard_element_name() tests
+    data = {"listOfFoxes,": "Fox", "ListOfApples": "Apple",
+            "XMLNode*": "XMLNode", "Rosie,": "Rosie", "rosie,": "Rosie",
+            "name_t": "Name", "Name": "Name", "name": "Name"}
     fail += execute_tests(sf.standard_element_name, data, fails)
 
     # get_library_suffix() tests
