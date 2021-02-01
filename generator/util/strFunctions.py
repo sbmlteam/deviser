@@ -291,16 +291,20 @@ def remove_prefix(name, remove_package=True,
         Defaults to False.
     :return: the input string, possibly with something removed at the beginning.
 
-    e.g. Writing SBML package with gv.package_prefix 'Fbc'
+    .. code-bock:: default
 
-    remove_prefix('FbcType') returns 'Type'
-    remove_prefix('FbcDocument', remove_doc_prefix=True) returns 'Document'
-   remove_prefix('FbcDocument', remove_doc_prefix=False) returns 'FbcDocument'
+        Writing SBML package with gv.package_prefix 'Fbc'
 
-    e.g. Writing SBML package with gv. package_prefix ''
+        remove_prefix('FbcType') returns 'Type'
+        remove_prefix('FbcDocument', remove_doc_prefix=True) returns 'Document'
+        remove_prefix('FbcDocument', remove_doc_prefix=False) returns 'FbcDocument'
 
-    remove_prefix('FbcType') returns 'FbcType'
-    remove_prefix('FbcType', prefix='Fbc') returns 'Type'
+        Writing SBML package with gv. package_prefix ''
+
+        remove_prefix('FbcType') returns 'FbcType'
+        remove_prefix('FbcType', prefix='Fbc') returns 'Type'
+
+
     """
     prefix_to_remove = ''
     if gv.prefix == 'SBML' and remove_package:
@@ -332,15 +336,16 @@ def is_prefixed_name(name, prefix):
     :return: True if name begins with prefix with first letter of name
         being capital and prefix case insensitive, False otherwise.
 
-    e.g.
-    The following return True:
-        is_prefixed_name('fooSalt',, 'foo')
-        is_prefixed_name('FOOSalt',, 'foo')
-        is_prefixed_name('foOSalt',, 'FOo')
+    .. code-bock:: default
 
-    The following return False:
-        is_prefixed_name('fooSalt',, 'foot')
-        is_prefixed_name('FOOsalt',, 'foo')
+        The following return True:
+            is_prefixed_name('fooSalt',, 'foo')
+            is_prefixed_name('FOOSalt',, 'foo')
+            is_prefixed_name('foOSalt',, 'FOo')
+
+        The following return False:
+            is_prefixed_name('fooSalt',, 'foot')
+            is_prefixed_name('FOOsalt',, 'foo')
 
     """
 
@@ -508,9 +513,11 @@ def make_class(name, add_extended=False):
     :param add_extended: if True, prepend result with 'extended-'
     :return: the string made as a class
 
-    e.g.
-    make_class("Irenaeus") -> "irenaeus-class"
-    make_class("Irenaeus", True) -> "extended-irenaeus-class"
+    .. code-bock:: default
+
+        make_class("Irenaeus") -> "irenaeus-class"
+        make_class("Irenaeus", True) -> "extended-irenaeus-class"
+        
     """
     if add_extended:
         return 'extended-' + name.lower() + '-class'
