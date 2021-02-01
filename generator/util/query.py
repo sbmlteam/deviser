@@ -276,14 +276,13 @@ def get_inline_parents(class_object):
 
 def get_parent_class(class_object):
     """
-    NB Open Github Issue: Revise query get_parent_class code #36
-
     Return the parent class of this class.
-    if it is not given we assume it is a child of a plugin
-    and get the base of the plugin.
+    If a class does not explicitly declare its parent then its parent may
+    be outside this package i.e. a plugin object. In this case it will be
+    referenced in a plugin object; which will be the parent.
 
     :param class_object: the object representing the class.
-    :return: parent class, if found.
+    :return: parent class, if found, or '' if not found
 
     e.g. in the following XML, the 'unit' attribute is an element of type 'Unit'
     so
@@ -300,55 +299,72 @@ def get_parent_class(class_object):
 
     .. code-block:: xml
 
-       <element name="ArrayChild" typeCode="SBML_TEST_ARRAYCHILD" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="arrayChild">
+       <element name="ArrayChild" typeCode="SBML_TEST_ARRAYCHILD"
+                hasListOf="false" ... baseClass="SBase" abstract="false"
+                elementName="arrayChild">
           <attributes>
-             <attribute name="unit" required="false" type="element" element="Unit" abstract="false"/>
+             <attribute name="unit" required="false" type="element"
+                        element="Unit" abstract="false"/>
           </attributes>
        </element>
+
+    e.g. in the following XML, the 'Def' element is referenced by the
+     'Model' plugin
+    so
+
+    .. code-block:: default
+
+       get_parent_class(class_object_for Def)
+
+    would return
+
+    .. code-block:: default
+
+       'Model'
+
+    .. code-block:: xml
+
+       <elements>
+           <element name="Def" typeCode="SBML_COPY_ABC" ... />
+       </elements>
+       <plugins>
+           <plugin extensionPoint="Model">
+                <references>
+                    <reference name="Def"/>
+                </references>
+            </plugin>
+       </plugins>
     """
-    parent = ''
+    # if class already records its parent return it
+    if 'parent' in class_object:
+        return class_object['parent']
+
+    # get the name of the class to match
     if class_object['is_list_of']:
         name = class_object['lo_child']
     else:
         name = class_object['name']
 
-    found = False
+    # look in plugins
+    plugins = class_object['root']['plugins']
+    for plugin in plugins:
+        base = plugin['sbase']
+        for extension in plugin['lo_extension']:
+            if extension['name'] == name:
+                return base
+        for extension in plugin['extension']:
+            if extension['name'] == name:
+                return base
 
-    if 'parent' in class_object:
-        parent = class_object['parent']
-    else:
-        plugins = class_object['root']['plugins']
-        for plugin in plugins:
-            base = plugin['sbase']
-            for extension in plugin['lo_extension']:
-                if extension['name'] == name:
-                    return base
-                    # parent = base
-                    # found = True
-                    # break
-            if not found:
-                for extension in plugin['extension']:
-                    if extension['name'] == name:
-                        return base
-                        # parent = base
-                        # found = True
-                        # break
-            # if found:
-            #    break
+    # look for the class as a child element
+    # if something is an inline_lo_element it may not have its parent recorded
+    for element in class_object['root']['baseElements']:
+        if element['name'] != name:
+            for attrib in element['attribs']:
+                if attrib['element'] == name:
+                    return element['name']
 
-    if not found and len(parent) == 0:
-        for element in class_object['root']['baseElements']:
-            if element['name'] != name:
-                for attrib in element['attribs']:
-                    if attrib['element'] == name:
-                        return element['name']
-                        # parent = element['name']
-                        # found = True
-                        # break
-            # if found:
-            #    break
-
-    return parent
+    return ''
 
 
 def get_concretes(root_object, concrete_list):
@@ -716,7 +732,7 @@ def has_lo_attribute(element, attribute):
     """
     if element is None:
         return False
-    elif isV2BaseAttribute(element, attribute):
+    elif is_sbml_specific_base_lo_attribute(element, attribute):
         return True
     elif element['lo_attribs'] is None:
         return False
@@ -727,20 +743,27 @@ def has_lo_attribute(element, attribute):
     return False
 
 
-def isV2BaseAttribute(element, attribute):
+def is_sbml_specific_base_lo_attribute(element, attribute):
     """
-    Is the base version of this element equal to 2 ?
+    Check whether the attribute is one of the base attributes
+    inherited by a listOf element.
 
     :param element: an element object
     :param attribute: an attribute object
-    :return: `True` if `base_version` is 2, `False` otherwise.
+    :return: `True` if the attribute is a base attribute , `False` otherwise.
+
+    In SBML Level 3 Version 2 the attributes 'id' and 'name' were added to
+    an SBase and are therefore inherited by a listOfFoo class if using
+    SBML L3V2.
     """
-    if attribute != 'id' and attribute != 'name':
-        return False
-    if 'root' in element:
-        if 'base_version' in element['root']:
-            if element['root']['base_version'] == 2:
-                return True
+    base_lo_attributes = [dict({'version': 2, 'attributes': ['id', 'name']})]
+
+    for entry in base_lo_attributes:
+        if attribute in entry['attributes']:
+            if 'root' in element:
+                if 'base_version' in element['root']:
+                    if element['root']['base_version'] == entry['version']:
+                        return True
     return False
 
 
@@ -1155,21 +1178,16 @@ def get_max_length(elements, attribute):
     .. code-block:: default
 
        ["Algebraic", "FooRate", "FooAssignment"]
-
-    TODO will this throw an exception if elements other
-    than the first one do *not* have the attribute?
-    Is that possible? <--- Issue added to Github:
-    Look at query get_max_length #38
     """
     if elements is None:
         return 0
-    if attribute not in elements[0]:
-        return 0
-    else:
-        max_len = len(elements[0][attribute])
-    for i in range(1, len(elements)):
-        if len(elements[i][attribute]) > max_len:
-            max_len = len(elements[i][attribute])
+    max_len = 0
+    for element in elements:
+        if attribute not in element:
+            return 0
+        else:
+            if len(element[attribute]) > max_len:
+                max_len = len(element[attribute])
     return max_len
 
 
