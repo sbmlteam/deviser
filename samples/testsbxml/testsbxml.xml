@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="TestSBXML" fullname="Test SB XML Library" number="100" offset="100000" version="1" required="false">
-  <language name="TSBXML" baseClass="TSBXMLBase" documentClass="TSBXMLDocument" prefix="TSB" libraryName="libTSB" annotationElementName="TestAnnotation" topLevelElementName="tsbxml" isPackage="false" uses_ASTNode="false" uses_XMLNode="true">
+<package name="tsb" fullname="Test SB XML Library" number="100" offset="100000" version="1" required="false">
+  <language name="TSB" baseClass="TSBBase" documentClass="TSBDocument" prefix="TSB" libraryName="libTSB" 
+  annotationElementName="TestAnnotation" topLevelElementName="tsb" isPackage="false" uses_ASTNode="false" 
+  uses_XMLNode="true">
     <library_version major="1" minor="0" revision="0"/>
     <language_versions>
       <version level="1" version="1" namespace="http://testsbxml.org/l1v1"/>
@@ -9,7 +11,15 @@
   <versions>
     <pkgVersion version="1" pkg_version="0">
       <elements>
-        <element name="Comment" typeCode="TSB_COMMENT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="point">
+        <element name="TSBDocument" typeCode="TSB_DOCUMENT" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="TSBBase" abstract="false" elementName="tsb">
+          <attributes>
+            <attribute name="level" required="true" type="unsigned int" abstract="false"/>
+            <attribute name="version" required="true" type="unsigned int" abstract="false"/>
+            <attribute name="comment" required="false" type="lo_element" element="Comment" abstract="false"/>
+          </attributes>
+          </element>
+        <element name="Comment" typeCode="TSB_COMMENT" hasListOf="true" hasChildren="false" hasMath="false" 
+        childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
           <attributes>
             <attribute name="contributor" required="true" type="string" abstract="false"/>
             <attribute name="number" required="true" type="double" abstract="false"/>
