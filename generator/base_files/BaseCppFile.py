@@ -924,8 +924,8 @@ class BaseCppFile(BaseFile.BaseFile):
         """
         Write a function definition with comment.
 
-        :param code:
-        :param exclude:
+        :param code: dictionary of information about the function to be written.
+        :param exclude: `True` if you want to exclude this function from Doxygen.
         :return: nothing
         """
         if code is not None:
