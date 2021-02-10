@@ -109,7 +109,7 @@ class BaseFile:
         :param line: the input line which we wish to split into shorter lines
         :param tabsize: number of space characters equivalent to a tab. (??)
         :param is_comment: set to `True` if input line is a comment
-        :return:
+        :return: the set of lines produced
         """
         max_length = self.line_length - tabsize
         if max_length <= 0:
@@ -157,7 +157,7 @@ class BaseFile:
                     if words[i].startswith('\"'):
                         in_quotes = True
                         quotes_closed = False
-                    # check we dont also end
+                    # check we don't also end
                     end_found = False
                     if words[i].endswith('\"'):
                         in_quotes = False
@@ -223,7 +223,7 @@ class BaseFile:
                             newline += ' \"'
                             quotes_closed = True
                             reopen_quotes = True
-                        # dont break between @c and true etc
+                        # don't break between @c and true etc
                         # remove @c and go back a word
                         if words[i - 2] == '@c':
                             templine = words[0]
@@ -238,7 +238,7 @@ class BaseFile:
                             i -= 1
                             rollback = False
             else:
-                # dont break between @c and true etc
+                # don't break between @c and true etc
                 # remove @c and go back a word
                 if words[i - 1] == '@c':
                     lenline = len(newline)
@@ -629,10 +629,15 @@ class BaseFile:
         All may be `False`.
         """
         # Sanity check:
-        if sum([extension, plugin, validator]) > 1:
+        options = [extension, plugin, validator]
+        if sum(options) > 1:
             # raise an error and...Not sure what Deviser usually does
-            print("Error in write_class_comments - too many true values.")
-            exit()  # TODO need something better than this. Which ones are true?
+            mystr = "Error in write_class_comments - too many true values: "
+            for opt in options:
+                if opt:
+                    mystr += "{0} ".format(opt)
+            raise ValueError(mystr)
+            #exit()  # TODO need something better than this. Which ones are true?
 
         fullname = gv.package_full_name
         up_package = SF.upper_first(self.package)
