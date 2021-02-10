@@ -4,6 +4,7 @@
 # @brief   base class for all files to be generated from templates
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -40,7 +41,7 @@
 import os
 import re
 
-from util import global_variables, strFunctions
+from util import global_variables as gv, strFunctions as SF
 
 
 class BaseTemplateFile:
@@ -48,7 +49,7 @@ class BaseTemplateFile:
 
     def __init__(self, name, filetype):
 
-        self.class_prefix = strFunctions.upper_first(name)
+        self.class_prefix = SF.upper_first(name)
         self.filetype = filetype
 
 
@@ -58,10 +59,10 @@ class BaseTemplateFile:
     def create_base_description(self, name, common=False):
         if common:
             if name.startswith('lib'):
-                if global_variables.library_name.lower().startswith('lib'):
-                    used_name = '{0}-{1}'.format(global_variables.library_name.lower(), name[4:])
+                if gv.library_name.lower().startswith('lib'):
+                    used_name = '{0}-{1}'.format(gv.library_name.lower(), name[4:])
                 else:
-                    used_name = 'lib{0}-{1}'.format(global_variables.library_name.lower(), name[4:])
+                    used_name = 'lib{0}-{1}'.format(gv.library_name.lower(), name[4:])
             else:
                 used_name = name
 
@@ -69,7 +70,7 @@ class BaseTemplateFile:
                           'attribs': None})
         elif self.filetype == 'bindings_files':
             if name == 'lib':
-                filename = global_variables.library_name.lower()
+                filename = gv.library_name.lower()
                 descr = dict({'name': filename,
                               'attribs': None})
             else:
@@ -191,56 +192,56 @@ class BaseTemplateFile:
 
     @staticmethod
     def adjust_line(line):
-        lowerlibname = global_variables.library_name.lower()
+        lowerlibname = gv.library_name.lower()
         nonlibname = lowerlibname
         if lowerlibname.startswith('lib'):
             nonlibname = lowerlibname[3:]
         line = re.sub('nonlibsbml', nonlibname, line)
-        line = re.sub('SBase', global_variables.std_base, line)
-        line = re.sub('LIBSBML', global_variables.library_name.upper(), line)
-        line = re.sub('LibSBML', strFunctions.upper_first(global_variables.library_name), line)
-        line = re.sub('libSBML', strFunctions.lower_first(global_variables.library_name), line)
+        line = re.sub('SBase', gv.std_base, line)
+        line = re.sub('LIBSBML', gv.library_name.upper(), line)
+        line = re.sub('LibSBML', SF.upper_first(gv.library_name), line)
+        line = re.sub('libSBML', SF.lower_first(gv.library_name), line)
         line = re.sub('libsbml', lowerlibname, line)
         if lowerlibname.startswith('lib'):
             line = re.sub('sbmlfwd', '{0}fwd'.format(lowerlibname[3:]), line)
         else:
             line = re.sub('sbmlfwd', '{0}fwd'.format(lowerlibname), line)
-        doctype = '{0}_DOCUMENT'.format(global_variables.language.upper())
-        # if global_variables.document_class != 'SedDocument':
-        #     doctype = 'LIB_{0}_{1}'.format(strFunctions.get_library_suffix(global_variables.library_name).upper(),
-        #                                    strFunctions.remove_prefix(global_variables.document_class).upper())
+        doctype = '{0}_DOCUMENT'.format(gv.language.upper())
+        # if gv.document_class != 'SedDocument':
+        #     doctype = 'LIB_{0}_{1}'.format(SF.get_library_suffix(gv.library_name).upper(),
+        #                                    SF.remove_prefix(gv.document_class).upper())
         line = re.sub('SBML_DOCUMENT', doctype, line)
-        line = re.sub('SBMLDocument', global_variables.document_class, line)
-        line = re.sub('toplevelname', global_variables.top_level_element_name, line)
+        line = re.sub('SBMLDocument', gv.document_class, line)
+        line = re.sub('toplevelname', gv.top_level_element_name, line)
         line = re.sub('CAT_SBML',
-                      'CAT_{0}'.format(global_variables.language.upper()), line)
+                      'CAT_{0}'.format(gv.language.upper()), line)
         line = re.sub('SBML_Lang',
-                      '{0}'.format(global_variables.language.upper()), line)
+                      '{0}'.format(gv.language.upper()), line)
         line = re.sub('SBML_',
-                      '{0}_'.format(global_variables.language.upper()), line)
+                      '{0}_'.format(gv.language.upper()), line)
         # hack for SedML
-        if global_variables.prefix == 'Sed':
-            line = re.sub('readSBML', 'read{0}ML'.format(global_variables.prefix), line)
-            line = re.sub('writeSBML', 'write{0}ML'.format(global_variables.prefix), line)
+        if gv.prefix == 'Sed':
+            line = re.sub('readSBML', 'read{0}ML'.format(gv.prefix), line)
+            line = re.sub('writeSBML', 'write{0}ML'.format(gv.prefix), line)
         else:
-            line = re.sub('readSBML', 'read{0}'.format(global_variables.language.upper()), line)
-            line = re.sub('writeSBML', 'write{0}'.format(global_variables.language.upper()), line)
-        line = re.sub('sbml', global_variables.language, line)
-        line = re.sub('SBMLSBML', '{0}{1}'.format(strFunctions.upper_first(global_variables.language), global_variables.prefix), line)
-        line = re.sub('SBML', global_variables.prefix, line)
-        line = re.sub('ListOf', '{0}ListOf'.format(global_variables.prefix), line)
-        line = re.sub('<SPEC_NAMESPACE>', '\"{0}\"'.format(global_variables.namespaces[-1]['namespace']), line)
-        line = re.sub('language_', '{0}'.format(global_variables.language.lower()), line)
-        line = re.sub('LANGUAGE', '{0}'.format(global_variables.language.upper()), line)
-        if global_variables.namespaces is not None and len(global_variables.namespaces) > 0 and 'level' in global_variables.namespaces[-1]:
-            line = re.sub('<SPEC_LEVEL>', '{0}'.format(global_variables.namespaces[-1]['level']), line)
-            line = re.sub('<SPEC_VERSION>', '{0}'.format(global_variables.namespaces[-1]['version']), line)
-        if global_variables.annot_element is not None:
-            line = re.sub('<Annotation>', global_variables.annot_element, line)
-            line = re.sub('<annotation_variable>', '\"{0}\"'.format(strFunctions.lower_first(global_variables.annot_element)), line)
-        if global_variables.notes_element is not None:
-            line = re.sub('<Notes>', global_variables.notes_element, line)
-            line = re.sub('<notes_variable>', '\"{0}\"'.format(strFunctions.lower_first(global_variables.notes_element)), line)
+            line = re.sub('readSBML', 'read{0}'.format(gv.language.upper()), line)
+            line = re.sub('writeSBML', 'write{0}'.format(gv.language.upper()), line)
+        line = re.sub('sbml', gv.language, line)
+        line = re.sub('SBMLSBML', '{0}{1}'.format(SF.upper_first(gv.language), gv.prefix), line)
+        line = re.sub('SBML', gv.prefix, line)
+        line = re.sub('ListOf', '{0}ListOf'.format(gv.prefix), line)
+        line = re.sub('<SPEC_NAMESPACE>', '\"{0}\"'.format(gv.namespaces[-1]['namespace']), line)
+        line = re.sub('language_', '{0}'.format(gv.language.lower()), line)
+        line = re.sub('LANGUAGE', '{0}'.format(gv.language.upper()), line)
+        if gv.namespaces is not None and len(gv.namespaces) > 0 and 'level' in gv.namespaces[-1]:
+            line = re.sub('<SPEC_LEVEL>', '{0}'.format(gv.namespaces[-1]['level']), line)
+            line = re.sub('<SPEC_VERSION>', '{0}'.format(gv.namespaces[-1]['version']), line)
+        if gv.annot_element is not None:
+            line = re.sub('<Annotation>', gv.annot_element, line)
+            line = re.sub('<annotation_variable>', '\"{0}\"'.format(SF.lower_first(gv.annot_element)), line)
+        if gv.notes_element is not None:
+            line = re.sub('<Notes>', gv.notes_element, line)
+            line = re.sub('<notes_variable>', '\"{0}\"'.format(SF.lower_first(gv.notes_element)), line)
         line = re.sub('<NS>', 'LIBSBML_CPP_NAMESPACE_QUALIFIER ', line)
         return line
 
@@ -260,12 +261,12 @@ class BaseTemplateFile:
         i += 1
         line = lines[i]
         other_libs = ''
-        for depend in global_variables.dependency:
+        for depend in gv.dependency:
             lib_up = depend['library'].upper()
             other_libs = other_libs + '${0}{1}_LIBRARY{2}'.format('{', lib_up, '}')
 
         while not line.startswith('</sbml>'):
-            line = re.sub('LIBREPLACE', global_variables.library_name.upper(), line)
+            line = re.sub('LIBREPLACE', gv.library_name.upper(), line)
             line = re.sub('OTHER_LIBS', other_libs, line)
             fileout.copy_line_verbatim(line)
             i += 1
@@ -295,10 +296,10 @@ class BaseTemplateFile:
         return i
 
     def write_lines(self, block):
-        if block == 'package' and not global_variables.is_package:
+        if block == 'package' and not gv.is_package:
             return False
         if block == 'has_level_version':
-            if not global_variables.has_level_version:
+            if not gv.has_level_version:
                 return False
             elif not self.doc_has_level_version():
                 return False
@@ -314,7 +315,7 @@ class BaseTemplateFile:
 
     @staticmethod
     def print_omex_hack(fileout, lines, i):
-        if global_variables.language.lower() == 'omex':
+        if gv.language.lower() == 'omex':
             fileout.copy_line_verbatim('add_subdirectory(src)')
             i += 1
             line = lines[i]
@@ -326,7 +327,7 @@ class BaseTemplateFile:
             i += 1
             line = lines[i]
             while not line.startswith('</omex_hack>'):
-                line = re.sub('sbml', global_variables.language, line)
+                line = re.sub('sbml', gv.language, line)
                 fileout.copy_line_verbatim(line)
                 i += 1
                 line = lines[i]
@@ -338,7 +339,7 @@ class BaseTemplateFile:
         i += 1
         line = lines[i]
         while not line.startswith('</replace_only_sbase>'):
-            line = re.sub('SBase', global_variables.std_base, line)
+            line = re.sub('SBase', gv.std_base, line)
             fileout.copy_line_verbatim(line)
             i += 1
             line = lines[i]
@@ -347,27 +348,27 @@ class BaseTemplateFile:
 
     @staticmethod
     def print_all_namespaces(fileout, static=False):
-        if global_variables.namespaces is None or len(global_variables.namespaces) == 0:
+        if gv.namespaces is None or len(gv.namespaces) == 0:
             return
         indent = '  '
         if static:
             indent = 'static '
-        for ns in global_variables.namespaces:
+        for ns in gv.namespaces:
             if 'level' in ns and 'version' in ns and 'namespace' in ns:
-                if global_variables.is_package:
-                    line = '{4}const char* const {0}_XMLNS_L{1}V{2}   = \"{3}\";\n'.format(global_variables.prefix.upper(),
+                if gv.is_package:
+                    line = '{4}const char* const {0}_XMLNS_L{1}V{2}   = \"{3}\";\n'.format(gv.prefix.upper(),
                                                                                      ns['level'], ns['version'],
                                                                                      ns['namespace'], indent)
                 else:
                     line = '{4}const char* const {0}_XMLNS_L{1}V{2}   = \"{3}\";\n'.format(
-                        global_variables.language.upper(),
+                        gv.language.upper(),
                         ns['level'], ns['version'],
                         ns['namespace'], indent)
                 fileout.copy_line_verbatim(line)
 
     @staticmethod
     def print_all_other_includes(fileout):
-        if global_variables.uses_ASTNode:
+        if gv.uses_ASTNode:
             line = '#include <sbml/math/FormulaFormatter.h>'
             fileout.copy_line_verbatim(line)
             fileout.copy_line_verbatim('  ')
