@@ -4,6 +4,7 @@
 # @brief   function for generating all code files
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #

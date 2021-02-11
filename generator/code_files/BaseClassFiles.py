@@ -4,6 +4,7 @@
 # @brief   class for generating base files for other library implementations
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -45,7 +46,7 @@ import os
 from . import CppHeaderFile
 from . import CppCodeFile
 from . import ValidationFiles
-from util import strFunctions, global_variables, query
+from util import strFunctions as SF, global_variables as gv, query
 from base_files import BaseFile, BaseCMakeFile, BaseTemplateFile
 
 
@@ -53,15 +54,25 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
     """Class for all Base files"""
 
     def __init__(self, name, elements, verbose=False):
+        """
+        Constructor
+
+        :param name: e.g. "Sed"
+        :param elements: list of dictionaries, each storing information
+               about a class.
+        :param verbose: set to `True` for more output.
+        """
         # members from object
-        # self.class_prefix = strFunctions.upper_first(name)
+        # self.class_prefix = SF.upper_first(name)
         BaseTemplateFile.BaseTemplateFile.__init__(self, name, 'code_files')
 
         self.elements = elements
-
         self.verbose = verbose
 
     def write_files(self):
+        """
+        Write all the files we require (a .h and .cpp file for each).
+        """
         self.write_all_files('SBase')
         self.write_all_files('ListOf')
         self.write_all_files('ConstructorException')
@@ -86,10 +97,22 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         self.write_all_files('OperationReturnValues')
 
     def write_all_files(self, name):
+        """
+        Write both the .h file and the .cpp file
+
+        :param name: name of the file, e.g. "Hello" will
+               cause Hello.h and Hello.cpp to be written.
+        """
         self.write_header(name)
         self.write_code(name)
 
     def write_header(self, name, common=False):
+        """
+        Write the header file (.h file)
+
+        :param name: e.g. "Hello", to create file "Hello.h".
+        :param common:
+        """
         base_descrip = self.create_base_description(name, common)
         fileout = CppHeaderFile.CppHeaderFile(base_descrip, False)
         filein = '{0}.h'.format(name)
@@ -101,6 +124,12 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.close_file()
 
     def write_code(self, name, common=False):
+        """
+        Write the implementation (.cpp) file.
+
+        :param name: e.g. "Hello" will create file Hello.cpp
+        :param common:
+        """
         base_descrip = self.create_base_description(name, common)
         fileout = CppCodeFile.CppCodeFile(base_descrip, False)
         filein = '{0}.cpp'.format(name)
@@ -112,14 +141,21 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.close_file()
 
     def write_cmake(self, name):
+        """
+        Copy the CMake (.cmake) file
+
+        :param name: e.g. "Hello" will cause Hello.cmake to be written.
+                A name like "libPaisley" might create libsbml-Paisley.cmake
+                (depending on value of gv.library_name)
+        """
         if name.startswith('lib'):
-            if global_variables.library_name.lower().startswith('lib'):
-                out_name = '{0}-{1}'.format(global_variables.library_name.lower(), name[4:])
+            if gv.library_name.lower().startswith('lib'):  # e.g. Libsbml
+                out_name = '{0}-{1}'.format(gv.library_name.lower(), name[4:])
             else:
-                out_name = 'lib{0}-{1}'.format(global_variables.library_name.lower(), name[4:])
+                out_name = 'lib{0}-{1}'.format(gv.library_name.lower(), name[4:])
         else:
             out_name = name
-#        out_name = 'lib{0}-{1}'.format(global_variables.language, name[4:])
+        # out_name = 'lib{0}-{1}'.format(gv.language, name[4:])
         fileout = BaseCMakeFile.BaseCMakeFile(out_name)
         filein = '{0}.cmake'.format(name)
         if self.verbose:
@@ -128,13 +164,27 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.close_file()
 
     def print_includes(self, fileout):
+        """
+        Write the #include lines to the output file
+
+        :param fileout: name of output file
+        """
         for element in self.elements:
-            name = strFunctions.prefix_name(element['name'])
+            name = SF.prefix_name(element['name'])
             fileout.copy_line_verbatim('#include <{0}/{1}.h>\n'
-                                       ''.format(global_variables.language,
+                                       ''.format(gv.language,
                                                  name))
 
     def print_typecodes(self, fileout):
+        """
+        Write the typecode lines to the file.
+
+        :param fileout: an object representing a file,
+               e.g. a CppHeaderFile.CppHeaderFile object
+               with name 'SedTypeCodes'
+
+        Example typecodes: 'MY_TEST_TYPE', 'MY_SECOND_TYPE'
+        """
         for element in self.elements:
           #  if not element['name'].endswith('Document'):
             name = element['typecode']
@@ -144,19 +194,31 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
     def print_typecode_strings(self, fileout):
         for element in self.elements:
         #   if not element['name'].endswith('Document'):
-            name = strFunctions.remove_prefix(element['name'])
+            name = SF.remove_prefix(element['name'])
             fileout.copy_line_verbatim('  , \"{0}\"\n'
                                            ''.format(name))
 
     def print_visit_header(self, fileout):
+        """
+        Cycle over all the file class dictionaries in self.elements
+        Write visitor header to file represented by fileout object
+
+        :param fileout: the object represnting the output file.
+        """
         for element in self.elements:
             if not element['name'].endswith('Document'):
                 if not 'document' in element or not element['document']:
-                    name = strFunctions.prefix_name(element['name'])
+                    name = SF.prefix_name(element['name'])
                     self.write_visit_header(fileout, name)
                     fileout.skip_line(2)
 
     def write_visit_header(self, fileout, name):
+        """
+        Write the file header for the Visitor pattern
+
+        :param fileout: file object we are using to write the output file.
+        :param name: the name of the SBase object we are visiting
+        """
         fileout.open_comment()
         fileout.write_comment_line('Interface method for using the '
                                    '<a target=\"_blank\" ')
@@ -176,7 +238,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         for element in self.elements:
             if not element['name'].endswith('Document'):
                 if not 'document' in element or not element['document']:
-                    name = strFunctions.prefix_name(element['name'])
+                    name = SF.prefix_name(element['name'])
                     fileout.skip_line(2)
                     self.write_leave_header(fileout, name)
 
@@ -200,7 +262,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         for element in self.elements:
             if not element['name'].endswith('Document'):
                 if not 'document' in element or not element['document']:
-                    name = strFunctions.prefix_name(element['name'])
+                    name = SF.prefix_name(element['name'])
                     self.write_visit_code(fileout, name)
 
     def write_visit_code(self, fileout, name):
@@ -213,7 +275,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                      'arguments': ['const {0}& x'.format(name)],
                      'constant': False,
                      'virtual': False,
-                     'object_name': '{0}Visitor'.format(global_variables.prefix),
+                     'object_name': '{0}Visitor'.format(gv.prefix),
                      'implementation': [self.create_code_block('line', [self.adjust_line('return visit(static_cast<const SBase&>(x))')])]})
         fileout.write_function_implementation(code)
 
@@ -222,7 +284,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         for element in self.elements:
             if not element['name'].endswith('Document'):
                 if not 'document' in element or not element['document']:
-                    name = strFunctions.prefix_name(element['name'])
+                    name = SF.prefix_name(element['name'])
                     self.write_leave_code(fileout, name)
 
     def write_leave_code(self, fileout, name):
@@ -235,14 +297,14 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                      'arguments': ['const {0}& x'.format(name)],
                      'constant': False,
                      'virtual': False,
-                     'object_name': '{0}Visitor'.format(global_variables.prefix),
+                     'object_name': '{0}Visitor'.format(gv.prefix),
                      'implementation': [self.create_code_block('blank', [])]})
         fileout.write_function_implementation(code)
 
     def print_visitor_forwards(self, fileout):
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                name = strFunctions.prefix_name(element['name'])
+                name = SF.prefix_name(element['name'])
                 fileout.write_line('class {0};'.format(name))
 
 
@@ -252,7 +314,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         return code
 
     def print_error_enum(self, fileout):
-        for error in global_variables.class_rules:
+        for error in gv.class_rules:
             name = error['typecode']
             if not name.endswith('Unknown'):
                 fileout.copy_line_verbatim(', {0}      = {1}\n'
@@ -272,19 +334,19 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                            'enums': None})
         valid = ValidationFiles.ValidationFiles(lib_object, True)
         valid.set_error_file(fileout)
-        for error in global_variables.class_rules:
+        for error in gv.class_rules:
             name = error['typecode']
             if not name.endswith('Unknown'):
                 valid.write_table_entry(error)
 
     def print_document_errors(self, fileout):
         root = {'baseElements': self.elements}
-        doc = query.get_class(global_variables.document_class, root)
+        doc = query.get_class(gv.document_class, root)
         if not doc:
             docname = 'Document'
         else:
-            docname = strFunctions.remove_prefix(doc['name'], False, False, '', True)
-        libname = strFunctions.get_library_suffix(global_variables.library_name)
+            docname = SF.remove_prefix(doc['name'], False, False, '', True)
+        libname = SF.get_library_suffix(gv.library_name)
         if not libname.endswith('ml'):
             libname = libname + 'ml'
         fileout.copy_line_verbatim('          if ( errorId == {0}{1}Allowed'
@@ -306,6 +368,6 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                                        'VersionMustBeNonNegativeInteger\n'
                                        ''.format(libname, docname))
         fileout.copy_line_verbatim('            || errorId == InvalidNamespace'
-                                   'On{0})\n'.format(global_variables.prefix))
+                                   'On{0})\n'.format(gv.prefix))
 
 

@@ -1,3 +1,8 @@
+"""
+This is the base file for using the templates in directory code_files/templates.
+When writing another library NOT a package for libSBML, deviser will take
+the templates (.h and .cpp files), replace various things and create new files based on the template.
+"""
 #!/usr/bin/env python
 #
 # @file    BaseTemplateFile.py
@@ -59,10 +64,12 @@ class BaseTemplateFile:
     def create_base_description(self, name, common=False):
         if common:
             if name.startswith('lib'):
-                if gv.library_name.lower().startswith('lib'):
-                    used_name = '{0}-{1}'.format(gv.library_name.lower(), name[4:])
-                else:
-                    used_name = 'lib{0}-{1}'.format(gv.library_name.lower(), name[4:])
+                used_name = "" if gv.library_name.lower().startswith('lib') else "lib"
+                used_name += "{0}-{1}".format(gv.library_name.lower(), name[4:])
+                #if gv.library_name.lower().startswith('lib'):
+                #    used_name = '{0}-{1}'.format(gv.library_name.lower(), name[4:])
+                #else:
+                #    used_name = 'lib{0}-{1}'.format(gv.library_name.lower(), name[4:])
             else:
                 used_name = name
 
@@ -195,7 +202,7 @@ class BaseTemplateFile:
         lowerlibname = gv.library_name.lower()
         nonlibname = lowerlibname
         if lowerlibname.startswith('lib'):
-            nonlibname = lowerlibname[3:]
+            nonlibname = lowerlibname[3:]  # Remove leading "lib"
         line = re.sub('nonlibsbml', nonlibname, line)
         line = re.sub('SBase', gv.std_base, line)
         line = re.sub('LIBSBML', gv.library_name.upper(), line)
