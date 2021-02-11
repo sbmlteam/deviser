@@ -1,6 +1,6 @@
 """
 This is the base file for using the templates in directory code_files/templates.
-When writing another library NOT a package for libSBML, deviser will take
+When writing another library (NOT a package) for libSBML, deviser will take
 the templates (.h and .cpp files), replace various things and create new files based on the template.
 """
 #!/usr/bin/env python
@@ -58,18 +58,14 @@ class BaseTemplateFile:
         self.filetype = filetype
 
 
-
     ########################################################################
 
     def create_base_description(self, name, common=False):
         if common:
             if name.startswith('lib'):
-                used_name = "" if gv.library_name.lower().startswith('lib') else "lib"
-                used_name += "{0}-{1}".format(gv.library_name.lower(), name[4:])
-                #if gv.library_name.lower().startswith('lib'):
-                #    used_name = '{0}-{1}'.format(gv.library_name.lower(), name[4:])
-                #else:
-                #    used_name = 'lib{0}-{1}'.format(gv.library_name.lower(), name[4:])
+                used_name = '{0}-{1}'.format(gv.library_name.lower(), name[4:])
+                if not gv.library_name.lower().startswith('lib'):
+                    used_name = "lib" + used_name
             else:
                 used_name = name
 
@@ -254,6 +250,15 @@ class BaseTemplateFile:
 
     @staticmethod
     def print_block(fileout, lines, i):
+        """
+        Print lines in the template file, between the <verbatim> anchors,
+            to the output file.
+
+        :param fileout: object representing the file we are writing to
+        :param lines: the lines we want to write out.
+        :param i: total number of lines written before executing this function
+        :return: total number of lines written AFTER executing this function
+        """
         i += 1
         line = lines[i]
         while not line.startswith('</verbatim>'):
@@ -265,12 +270,21 @@ class BaseTemplateFile:
 
     @staticmethod
     def print_sbml_block(fileout, lines, i):
+        """
+            Print lines in the template file, between the <sbml> anchors,
+                to the output file.
+
+            :param fileout: object representing the file we are writing to
+            :param lines: the lines we want to write out.
+            :param i: total number of lines written before executing this function
+            :return: total number of lines written AFTER executing this function
+            """
         i += 1
         line = lines[i]
         other_libs = ''
         for depend in gv.dependency:
             lib_up = depend['library'].upper()
-            other_libs = other_libs + '${0}{1}_LIBRARY{2}'.format('{', lib_up, '}')
+            other_libs += '${0}{1}_LIBRARY{2}'.format('{', lib_up, '}')
 
         while not line.startswith('</sbml>'):
             line = re.sub('LIBREPLACE', gv.library_name.upper(), line)
@@ -282,6 +296,15 @@ class BaseTemplateFile:
         return i
 
     def print_if_block(self, fileout, lines, i):
+        """
+            Print lines in the template file, between the <if> anchors,
+                to the output file.
+
+            :param fileout: object representing the file we are writing to
+            :param lines: the lines we want to write out.
+            :param i: total number of lines written before executing this function
+            :return: total number of lines written AFTER executing this function
+            """
         line = lines[i]
         length = len(line)
         block = line[4:length-2]
@@ -322,6 +345,16 @@ class BaseTemplateFile:
 
     @staticmethod
     def print_omex_hack(fileout, lines, i):
+        """
+            Print lines in the template file, between the <omex-hack> anchors,
+                to the output file. TODO is that correct? I can't see any such
+                lines in the template files
+
+            :param fileout: object representing the file we are writing to
+            :param lines: the lines we want to write out.
+            :param i: total number of lines written before executing this function
+            :return: total number of lines written AFTER executing this function
+            """
         if gv.language.lower() == 'omex':
             fileout.copy_line_verbatim('add_subdirectory(src)')
             i += 1
@@ -343,6 +376,13 @@ class BaseTemplateFile:
 
     @staticmethod
     def print_sbase_block(fileout, lines, i):
+        """
+
+        :param fileout: object representing the file we are writing to
+        :param lines: the lines we want to write out.
+        :param i: total number of lines written before executing this function
+        :return: total number of lines written AFTER executing this function
+        """
         i += 1
         line = lines[i]
         while not line.startswith('</replace_only_sbase>'):
@@ -362,15 +402,12 @@ class BaseTemplateFile:
             indent = 'static '
         for ns in gv.namespaces:
             if 'level' in ns and 'version' in ns and 'namespace' in ns:
-                if gv.is_package:
-                    line = '{4}const char* const {0}_XMLNS_L{1}V{2}   = \"{3}\";\n'.format(gv.prefix.upper(),
-                                                                                     ns['level'], ns['version'],
-                                                                                     ns['namespace'], indent)
-                else:
-                    line = '{4}const char* const {0}_XMLNS_L{1}V{2}   = \"{3}\";\n'.format(
-                        gv.language.upper(),
-                        ns['level'], ns['version'],
-                        ns['namespace'], indent)
+                leader = gv.prefix.upper() if gv.is_package else gv.language.upper()
+                line = \
+                    '{4}const char* const {0}_XMLNS_L{1}V{2}   = \"{3}\";\n'.\
+                        format(leader,
+                               ns['level'], ns['version'],
+                               ns['namespace'], indent)
                 fileout.copy_line_verbatim(line)
 
     @staticmethod
