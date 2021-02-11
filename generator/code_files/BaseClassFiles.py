@@ -40,14 +40,14 @@
 
 # NB issue 45 - consider moving this file to base_files directory.
 
-import re
-import os
+# import re
+# import os
 
 from . import CppHeaderFile
 from . import CppCodeFile
 from . import ValidationFiles
 from util import strFunctions as SF, global_variables as gv, query
-from base_files import BaseFile, BaseCMakeFile, BaseTemplateFile
+from base_files import BaseCMakeFile, BaseTemplateFile
 
 
 class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
@@ -157,7 +157,8 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
             if gv.library_name.lower().startswith('lib'):  # e.g. Libsbml
                 out_name = '{0}-{1}'.format(gv.library_name.lower(), name[4:])
             else:
-                out_name = 'lib{0}-{1}'.format(gv.library_name.lower(), name[4:])
+                out_name = 'lib{0}-{1}'.format(gv.library_name.lower(),
+                                               name[4:])
         else:
             out_name = name
         # out_name = 'lib{0}-{1}'.format(gv.language, name[4:])
@@ -191,10 +192,9 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         Example typecodes: 'MY_TEST_TYPE', 'MY_SECOND_TYPE'
         """
         for element in self.elements:
-          #  if not element['name'].endswith('Document'):
+            # if not element['name'].endswith('Document'):
             name = element['typecode']
-            fileout.copy_line_verbatim('  , {0}\n'
-                                           ''.format(name))
+            fileout.copy_line_verbatim('  , {0}\n'.format(name))
 
     def print_typecode_strings(self, fileout):
         """
@@ -205,10 +205,9 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         :param fileout: object representing output file we are writing.
         """
         for element in self.elements:
-        #   if not element['name'].endswith('Document'):
+            # if not element['name'].endswith('Document'):
             name = SF.remove_prefix(element['name'])
-            fileout.copy_line_verbatim('  , \"{0}\"\n'
-                                           ''.format(name))
+            fileout.copy_line_verbatim('  , \"{0}\"\n'.format(name))
 
     def print_visit_header(self, fileout):
         """
@@ -219,7 +218,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         """
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                if not 'document' in element or not element['document']:
+                if 'document' not in element or not element['document']:
                     name = SF.prefix_name(element['name'])
                     self.write_visit_header(fileout, name)
                     fileout.skip_line(2)
@@ -254,7 +253,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         """
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                if not 'document' in element or not element['document']:
+                if 'document' not in element or not element['document']:
                     name = SF.prefix_name(element['name'])
                     fileout.skip_line(2)
                     self.write_leave_header(fileout, name)
@@ -291,7 +290,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         """
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                if not 'document' in element or not element['document']:
+                if 'document' not in element or not element['document']:
                     name = SF.prefix_name(element['name'])
                     self.write_visit_code(fileout, name)
 
@@ -302,6 +301,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         :param fileout: object representing output file we are writing.
         :param name: the name of the object class we are visiting.
         """
+        impl = 'return visit(static_cast<const SBase&>(x))'
         code = dict({'title_line': 'Visit the {0}'.format(name),
                      'params': ['const {0}& x'.format(name)],
                      'return_lines': [],
@@ -312,7 +312,9 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                      'constant': False,
                      'virtual': False,
                      'object_name': '{0}Visitor'.format(gv.prefix),
-                     'implementation': [self.create_code_block('line', [self.adjust_line('return visit(static_cast<const SBase&>(x))')])]})
+                     'implementation':
+                         [self.create_code_block('line',
+                                                 [self.adjust_line(impl)])]})
         fileout.write_function_implementation(code)
 
     def print_leave_code(self, fileout):
@@ -326,7 +328,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.skip_line(2)
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                if not 'document' in element or not element['document']:
+                if 'document' not in element or not element['document']:
                     name = SF.prefix_name(element['name'])
                     self.write_leave_code(fileout, name)
 
@@ -361,7 +363,6 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
             if not element['name'].endswith('Document'):
                 name = SF.prefix_name(element['name'])
                 fileout.write_line('class {0};'.format(name))
-
 
     @staticmethod
     def create_code_block(code_type, lines):
@@ -448,5 +449,3 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                                        ''.format(libname, docname))
         fileout.copy_line_verbatim('            || errorId == InvalidNamespace'
                                    'On{0})\n'.format(gv.prefix))
-
-
