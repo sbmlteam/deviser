@@ -88,6 +88,12 @@ class BaseTemplateFile:
         return descr
 
     def copy_file_contents(self, fileout, infilename):
+        """
+
+
+        NB not all of the functions referred to in the while-loop
+        have been implemented.
+        """
         filename = '{0}{1}..{1}{3}{1}templates{1}{2}'.format(os.path.dirname(__file__),
                                                   os.sep, infilename, self.filetype)
         infile = open(filename, 'r')
@@ -195,6 +201,12 @@ class BaseTemplateFile:
 
     @staticmethod
     def adjust_line(line):
+        """
+        Replace certain items in a line of code.
+
+        :param line: the line before replacement(s)
+        :return: the line after replacement(s)
+        """
         lowerlibname = gv.library_name.lower()
         nonlibname = lowerlibname
         if lowerlibname.startswith('lib'):
@@ -271,14 +283,14 @@ class BaseTemplateFile:
     @staticmethod
     def print_sbml_block(fileout, lines, i):
         """
-            Print lines in the template file, between the <sbml> anchors,
-                to the output file.
+        Print lines in the template file, between the <sbml> anchors,
+            to the output file.
 
-            :param fileout: object representing the file we are writing to
-            :param lines: the lines we want to write out.
-            :param i: total number of lines written before executing this function
-            :return: total number of lines written AFTER executing this function
-            """
+        :param fileout: object representing the file we are writing to
+        :param lines: the lines we want to write out.
+        :param i: total number of lines written before executing this function
+        :return: total number of lines written AFTER executing this function
+        """
         i += 1
         line = lines[i]
         other_libs = ''
@@ -297,13 +309,15 @@ class BaseTemplateFile:
 
     def print_if_block(self, fileout, lines, i):
         """
-            Print lines in the template file, between the <if> anchors,
-                to the output file.
+        Print lines in the template file, between if_ anchors,
+            to the output file.
+            e.g. between line with <if_has_level_version> and
+            line with </if_has_level_version>
 
-            :param fileout: object representing the file we are writing to
-            :param lines: the lines we want to write out.
-            :param i: total number of lines written before executing this function
-            :return: total number of lines written AFTER executing this function
+        :param fileout: object representing the file we are writing to
+        :param lines: the lines we want to write out.
+        :param i: total number of lines written before executing this function
+        :return: total number of lines written AFTER executing this function
             """
         line = lines[i]
         length = len(line)
@@ -346,15 +360,14 @@ class BaseTemplateFile:
     @staticmethod
     def print_omex_hack(fileout, lines, i):
         """
-            Print lines in the template file, between the <omex-hack> anchors,
-                to the output file. TODO is that correct? I can't see any such
-                lines in the template files
+        Print lines in the template file, between the <omex-hack> anchors,
+            to the output file.
 
-            :param fileout: object representing the file we are writing to
-            :param lines: the lines we want to write out.
-            :param i: total number of lines written before executing this function
-            :return: total number of lines written AFTER executing this function
-            """
+        :param fileout: object representing the file we are writing to
+        :param lines: the lines we want to write out.
+        :param i: total number of lines written before executing this function
+        :return: total number of lines written AFTER executing this function
+        """
         if gv.language.lower() == 'omex':
             fileout.copy_line_verbatim('add_subdirectory(src)')
             i += 1
@@ -377,6 +390,10 @@ class BaseTemplateFile:
     @staticmethod
     def print_sbase_block(fileout, lines, i):
         """
+        Write lines from the template file between the <replace_only_sbase>
+           and </replace_only_sbase> anchors. Before writing each line,
+           replace any instance of 'SBase' with the value of std_base (in
+           the global variables), if different.
 
         :param fileout: object representing the file we are writing to
         :param lines: the lines we want to write out.
@@ -412,6 +429,11 @@ class BaseTemplateFile:
 
     @staticmethod
     def print_all_other_includes(fileout):
+        """
+        Write any remaining #include lines to the output file.
+
+        :param fileout: object representing the file we are writing to.
+        """
         if gv.uses_ASTNode:
             line = '#include <sbml/math/FormulaFormatter.h>'
             fileout.copy_line_verbatim(line)
