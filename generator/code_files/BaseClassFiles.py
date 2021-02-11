@@ -87,6 +87,11 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         self.write_header('ErrorTable')
 
     def write_common_files(self):
+        """
+        Write the 'common' files.
+
+        TODO Sarah, please explain. Thanks.
+        """
         self.write_header('common', True)
         self.write_header('extern', True)
         self.write_header('lib-config', True)
@@ -111,7 +116,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         Write the header file (.h file)
 
         :param name: e.g. "Hello", to create file "Hello.h".
-        :param common:
+        :param common: ???
         """
         base_descrip = self.create_base_description(name, common)
         fileout = CppHeaderFile.CppHeaderFile(base_descrip, False)
@@ -128,7 +133,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         Write the implementation (.cpp) file.
 
         :param name: e.g. "Hello" will create file Hello.cpp
-        :param common:
+        :param common: ???
         """
         base_descrip = self.create_base_description(name, common)
         fileout = CppCodeFile.CppCodeFile(base_descrip, False)
@@ -167,7 +172,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         """
         Write the #include lines to the output file
 
-        :param fileout: name of output file
+        :param fileout: object representing output file we are writing.
         """
         for element in self.elements:
             name = SF.prefix_name(element['name'])
@@ -179,7 +184,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         """
         Write the typecode lines to the file.
 
-        :param fileout: an object representing a file,
+        :param fileout: object representing output file we are writing.
                e.g. a CppHeaderFile.CppHeaderFile object
                with name 'SedTypeCodes'
 
@@ -192,6 +197,13 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                                            ''.format(name))
 
     def print_typecode_strings(self, fileout):
+        """
+        Write out the typecode strings, for each class represented
+            in self.elements
+        TODO not sure what typecode strings are
+
+        :param fileout: object representing output file we are writing.
+        """
         for element in self.elements:
         #   if not element['name'].endswith('Document'):
             name = SF.remove_prefix(element['name'])
@@ -200,10 +212,10 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
 
     def print_visit_header(self, fileout):
         """
-        Cycle over all the file class dictionaries in self.elements
+        Cycle over all the class dictionaries in self.elements
         Write visitor header to file represented by fileout object
 
-        :param fileout: the object represnting the output file.
+        ::param fileout: object representing output file we are writing.
         """
         for element in self.elements:
             if not element['name'].endswith('Document'):
@@ -216,7 +228,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         """
         Write the file header for the Visitor pattern
 
-        :param fileout: file object we are using to write the output file.
+        ::param fileout: object representing output file we are writing.
         :param name: the name of the SBase object we are visiting
         """
         fileout.open_comment()
@@ -235,6 +247,11 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.write_line('virtual bool visit (const {0} &x);'.format(name))
 
     def print_leave_header(self, fileout):
+        """
+        Print the leave() header for certain classes.
+
+        :param fileout: object representing output file we are writing.
+        """
         for element in self.elements:
             if not element['name'].endswith('Document'):
                 if not 'document' in element or not element['document']:
@@ -243,6 +260,12 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                     self.write_leave_header(fileout, name)
 
     def write_leave_header(self, fileout, name):
+        """
+        Write the part of the header concerning the leave() method.
+
+        :param fileout: object representing output file we are writing.
+        :param name: the name of the SBase object class which leave() uses.
+        """
         fileout.open_comment()
         fileout.write_comment_line('Interface method for using the '
                                    '<a target=\"_blank\" ')
@@ -259,6 +282,13 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.write_line('virtual void leave (const {0} &x);'.format(name))
 
     def print_visit_code(self, fileout):
+        """
+        Cycle through the list of dictionaries in self.elements,
+            which represent classes. Write Visitor code for those
+            which .... TODO Sarah please complete this sentence
+
+        :param fileout: object representing output file we are writing.
+        """
         for element in self.elements:
             if not element['name'].endswith('Document'):
                 if not 'document' in element or not element['document']:
@@ -266,6 +296,12 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                     self.write_visit_code(fileout, name)
 
     def write_visit_code(self, fileout, name):
+        """
+        Write out the visit() function implementation code.
+
+        :param fileout: object representing output file we are writing.
+        :param name: the name of the object class we are visiting.
+        """
         code = dict({'title_line': 'Visit the {0}'.format(name),
                      'params': ['const {0}& x'.format(name)],
                      'return_lines': [],
@@ -280,6 +316,13 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.write_function_implementation(code)
 
     def print_leave_code(self, fileout):
+        """
+        Cycle through the list of dictionaries in self.elements,
+            which represent classes. Write leave() code for those
+            which .... TODO Sarah please complete this sentence
+
+        :param fileout: object representing output file we are writing.
+        """
         fileout.skip_line(2)
         for element in self.elements:
             if not element['name'].endswith('Document'):
@@ -288,6 +331,13 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                     self.write_leave_code(fileout, name)
 
     def write_leave_code(self, fileout, name):
+        """
+        Write function implementation for leave().
+         I'm not sure how this fits in with the Visitor pattern.
+
+        :param fileout: object representing output file we are writing.
+        :param name: name of class we are leaving
+        """
         code = dict({'title_line': 'Leave the {0}'.format(name),
                      'params': ['const {0}& x'.format(name)],
                      'return_lines': [],
@@ -302,6 +352,11 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.write_function_implementation(code)
 
     def print_visitor_forwards(self, fileout):
+        """
+        Write forward declarations of classes we want to be able to visit.
+
+        :param fileout: object representing output file we are writing.
+        """
         for element in self.elements:
             if not element['name'].endswith('Document'):
                 name = SF.prefix_name(element['name'])
@@ -310,10 +365,23 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
 
     @staticmethod
     def create_code_block(code_type, lines):
+        """
+        Create a dictionary storing the code we want to write.
+
+        :param code_type: e.g. 'line' or 'blank'
+        :param lines: e.g. ['return visit(static_cast<const SedBase&>(x))']
+            or []
+        :return: dictionary containing both of the above.
+        """
         code = dict({'code_type': code_type, 'code': lines})
         return code
 
     def print_error_enum(self, fileout):
+        """
+        Write out contents of an enum for typecode errors.
+
+        :param fileout: object representing output file we are writing.
+        """
         for error in gv.class_rules:
             name = error['typecode']
             if not name.endswith('Unknown'):
@@ -321,6 +389,11 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                                            ''.format(name, error['number']))
 
     def print_error_table(self, fileout):
+        """
+        ????
+
+        :param fileout: object representing output file we are writing.
+        """
         # create a dummy object so we can use the validation files code
         lib_object = dict({'name': '',
                            'offset': 0,
@@ -340,6 +413,12 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                 valid.write_table_entry(error)
 
     def print_document_errors(self, fileout):
+        """
+        Write out the document errors to the file.
+        TODO Sorry, I don't know what these are
+
+        :param fileout: object representing output file we are writing.
+        """
         root = {'baseElements': self.elements}
         doc = query.get_class(gv.document_class, root)
         if not doc:
@@ -349,7 +428,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         libname = SF.get_library_suffix(gv.library_name)
         if not libname.endswith('ml'):
             libname = libname + 'ml'
-        fileout.copy_line_verbatim('          if ( errorId == {0}{1}Allowed'
+        fileout.copy_line_verbatim((10 * '') + 'if ( errorId == {0}{1}Allowed'
                                    'CoreAttributes\n'.format(libname, docname))
         level = False
         version = False
@@ -360,11 +439,11 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                 elif a['name'] == 'version':
                     version = True
         if level:
-            fileout.copy_line_verbatim('            || errorId == {0}{1}'
+            fileout.copy_line_verbatim((12 * ' ') + '|| errorId == {0}{1}'
                                        'LevelMustBeNonNegativeInteger\n'
                                        ''.format(libname, docname))
         if version:
-            fileout.copy_line_verbatim('            || errorId == {0}{1}'
+            fileout.copy_line_verbatim((12 * ' ') + '|| errorId == {0}{1}'
                                        'VersionMustBeNonNegativeInteger\n'
                                        ''.format(libname, docname))
         fileout.copy_line_verbatim('            || errorId == InvalidNamespace'
