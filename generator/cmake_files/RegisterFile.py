@@ -4,6 +4,7 @@
 # @brief   class for generating cmake register file
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -42,7 +43,7 @@ from util import strFunctions, global_variables
 
 
 class RegisterFile():
-    """Class for cmake package files"""
+    """Class for CMake package files"""
 
     def __init__(self, name, package, src):
 
@@ -75,20 +76,23 @@ class RegisterFile():
         self.fileout.skip_line()
         self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
         self.fileout.up_indent()
-        self.fileout.write_line_verbatim('#include <{0}/packages/{1}/extension/'
-                                         '{2}Extension.'
-                                         'h>'.format(self.language,
-                                                     self.package,
-                                                     self.up_package))
+        self.fileout.write_line_verbatim(('#include '
+                                          '<{0}/packages/{1}/extension/'
+                                          '{2}Extension.h>').
+                                         format(self.language,
+                                                self.package,
+                                                self.up_package))
         self.fileout.down_indent()
         self.fileout.write_line('#endif')
         self.fileout.skip_line()
 
     def write_src_file(self):
         self.fileout.skip_line()
-        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
+        self.fileout.write_line('#ifdef USE_{0}'.
+                                format(self.cap_package))
         self.fileout.up_indent()
-        self.fileout.write_line('{0}Extension::init();'.format(self.up_package))
+        self.fileout.write_line('{0}Extension::init();'.
+                                format(self.up_package))
         self.fileout.down_indent()
         self.fileout.write_line('#endif')
         self.fileout.skip_line()
