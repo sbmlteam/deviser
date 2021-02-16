@@ -73,6 +73,13 @@ class RegisterFile():
     # Write specific code
 
     def write_header_file(self):
+        """
+        Add code to the .h file.
+
+        NB I think that's correct? It doesn't write another file?
+        So might need renaming.
+
+        """
         self.fileout.skip_line()
         self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
         self.fileout.up_indent()
@@ -87,6 +94,11 @@ class RegisterFile():
         self.fileout.skip_line()
 
     def write_src_file(self):
+        """
+        Add lines to .cxx file.
+
+        TODO see comment on previous function; that applies here, too.
+        """
         self.fileout.skip_line()
         self.fileout.write_line('#ifdef USE_{0}'.
                                 format(self.cap_package))
@@ -101,6 +113,9 @@ class RegisterFile():
     # Write file
 
     def write_file(self):
+        """
+        Write the required file.
+        """
         self.fileout.write_file()
         if self.src:
             self.write_src_file()
@@ -108,4 +123,7 @@ class RegisterFile():
             self.write_header_file()
 
     def close_file(self):
+        """
+        Utility wrapper function to close a file.
+        """
         self.fileout.close_file()
