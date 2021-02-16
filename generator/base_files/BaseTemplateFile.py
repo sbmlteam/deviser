@@ -1,7 +1,8 @@
 """
-This is the base file for using the templates in directory code_files/templates.
-When writing another library (NOT a package) for libSBML, deviser will take
-the templates (.h and .cpp files), replace various things and create new files based on the template.
+This is the base file for using the 'templates' in directory
+code_files/templates. When writing another library (NOT a package)
+for libSBML, deviser will take the 'templates' (.h and .cpp files),
+replace various things and create new files based on the 'template'.
 """
 #!/usr/bin/env python
 #
@@ -57,10 +58,16 @@ class BaseTemplateFile:
         self.class_prefix = SF.upper_first(name)
         self.filetype = filetype
 
-
     ########################################################################
 
     def create_base_description(self, name, common=False):
+        """
+        Create a dictionary describing an object.
+
+        :param name: e.g. SBase, ListOf, ConstructorException
+        :param common: ???
+        :return: dictionary of a name and no attributes.
+        """
         if common:
             if name.startswith('lib'):
                 used_name = '{0}-{1}'.format(gv.library_name.lower(), name[4:])
@@ -89,20 +96,24 @@ class BaseTemplateFile:
 
     def copy_file_contents(self, fileout, infilename):
         """
+        Copy certain content from a template file to an output file.
 
+        :param fileout: object representing file we are writing to.
+        :param infilename: name of the file we wish to copy.
 
         NB not all of the functions referred to in the while-loop
         have been implemented.
         """
-        filename = '{0}{1}..{1}{3}{1}templates{1}{2}'.format(os.path.dirname(__file__),
-                                                  os.sep, infilename, self.filetype)
+        filename = '{0}{1}..{1}{3}{1}templates{1}{2}'.\
+            format(os.path.dirname(__file__),
+                   os.sep, infilename, self.filetype)
         infile = open(filename, 'r')
         lines = infile.readlines()
         infile.close()
         num_lines = len(lines)
         i = 0
-        while i < num_lines:
-            line = lines[i]
+        while i < num_lines:  # <- Assumes output file never has more lines
+            line = lines[i]   # than the input file. Is that always true?
             if line.startswith('<verbatim>'):
                 i = self.print_block(fileout, lines, i)
             elif line.startswith('<sbml>'):
@@ -223,8 +234,9 @@ class BaseTemplateFile:
             line = re.sub('sbmlfwd', '{0}fwd'.format(lowerlibname), line)
         doctype = '{0}_DOCUMENT'.format(gv.language.upper())
         # if gv.document_class != 'SedDocument':
-        #     doctype = 'LIB_{0}_{1}'.format(SF.get_library_suffix(gv.library_name).upper(),
-        #                                    SF.remove_prefix(gv.document_class).upper())
+        #     doctype = 'LIB_{0}_{1}'.
+        #       format(SF.get_library_suffix(gv.library_name).upper(),
+        #              SF.remove_prefix(gv.document_class).upper())
         line = re.sub('SBML_DOCUMENT', doctype, line)
         line = re.sub('SBMLDocument', gv.document_class, line)
         line = re.sub('toplevelname', gv.top_level_element_name, line)
@@ -239,24 +251,33 @@ class BaseTemplateFile:
             line = re.sub('readSBML', 'read{0}ML'.format(gv.prefix), line)
             line = re.sub('writeSBML', 'write{0}ML'.format(gv.prefix), line)
         else:
-            line = re.sub('readSBML', 'read{0}'.format(gv.language.upper()), line)
-            line = re.sub('writeSBML', 'write{0}'.format(gv.language.upper()), line)
+            line = re.sub('readSBML', 'read{0}'.
+                          format(gv.language.upper()), line)
+            line = re.sub('writeSBML', 'write{0}'.
+                          format(gv.language.upper()), line)
         line = re.sub('sbml', gv.language, line)
-        line = re.sub('SBMLSBML', '{0}{1}'.format(SF.upper_first(gv.language), gv.prefix), line)
+        line = re.sub('SBMLSBML', '{0}{1}'.
+                      format(SF.upper_first(gv.language), gv.prefix), line)
         line = re.sub('SBML', gv.prefix, line)
         line = re.sub('ListOf', '{0}ListOf'.format(gv.prefix), line)
-        line = re.sub('<SPEC_NAMESPACE>', '\"{0}\"'.format(gv.namespaces[-1]['namespace']), line)
+        line = re.sub('<SPEC_NAMESPACE>', '\"{0}\"'.
+                      format(gv.namespaces[-1]['namespace']), line)
         line = re.sub('language_', '{0}'.format(gv.language.lower()), line)
         line = re.sub('LANGUAGE', '{0}'.format(gv.language.upper()), line)
-        if gv.namespaces is not None and len(gv.namespaces) > 0 and 'level' in gv.namespaces[-1]:
-            line = re.sub('<SPEC_LEVEL>', '{0}'.format(gv.namespaces[-1]['level']), line)
-            line = re.sub('<SPEC_VERSION>', '{0}'.format(gv.namespaces[-1]['version']), line)
+        if gv.namespaces is not None and len(gv.namespaces) > 0 \
+                and 'level' in gv.namespaces[-1]:
+            line = re.sub('<SPEC_LEVEL>', '{0}'.
+                          format(gv.namespaces[-1]['level']), line)
+            line = re.sub('<SPEC_VERSION>', '{0}'.
+                          format(gv.namespaces[-1]['version']), line)
         if gv.annot_element is not None:
             line = re.sub('<Annotation>', gv.annot_element, line)
-            line = re.sub('<annotation_variable>', '\"{0}\"'.format(SF.lower_first(gv.annot_element)), line)
+            line = re.sub('<annotation_variable>', '\"{0}\"'.
+                          format(SF.lower_first(gv.annot_element)), line)
         if gv.notes_element is not None:
             line = re.sub('<Notes>', gv.notes_element, line)
-            line = re.sub('<notes_variable>', '\"{0}\"'.format(SF.lower_first(gv.notes_element)), line)
+            line = re.sub('<notes_variable>', '\"{0}\"'.
+                          format(SF.lower_first(gv.notes_element)), line)
         line = re.sub('<NS>', 'LIBSBML_CPP_NAMESPACE_QUALIFIER ', line)
         return line
 
@@ -318,7 +339,7 @@ class BaseTemplateFile:
         :param lines: the lines we want to write out.
         :param i: total number of lines written before executing this function
         :return: total number of lines written AFTER executing this function
-            """
+        """
         line = lines[i]
         length = len(line)
         block = line[4:length-2]
@@ -419,12 +440,13 @@ class BaseTemplateFile:
             indent = 'static '
         for ns in gv.namespaces:
             if 'level' in ns and 'version' in ns and 'namespace' in ns:
-                leader = gv.prefix.upper() if gv.is_package else gv.language.upper()
+                leader = gv.prefix.upper() if gv.is_package \
+                    else gv.language.upper()
                 line = \
                     '{4}const char* const {0}_XMLNS_L{1}V{2}   = \"{3}\";\n'.\
-                        format(leader,
-                               ns['level'], ns['version'],
-                               ns['namespace'], indent)
+                    format(leader,
+                           ns['level'], ns['version'],
+                           ns['namespace'], indent)
                 fileout.copy_line_verbatim(line)
 
     @staticmethod
