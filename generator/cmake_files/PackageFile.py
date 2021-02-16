@@ -242,4 +242,7 @@ class PackageFile():
             self.write_top_level_file()
 
     def close_file(self):
+        """
+        Utility wrapper function for closing a file.
+        """
         self.fileout.close_file()
