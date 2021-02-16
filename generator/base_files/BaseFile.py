@@ -492,7 +492,8 @@ class BaseFile:
 
     def write_custom_copyright(self):
         """
-        Write a custom copyright text, stored in another file, to the output file.
+        Write a custom copyright text, stored in another file,
+        to the output file.
         """
         filename = gv.custom_copyright
         in_file = open(filename, 'r')
@@ -637,7 +638,6 @@ class BaseFile:
                 if opt:
                     mystr += "{0} ".format(opt)
             raise ValueError(mystr)
-            #exit()  # TODO need something better than this. Which ones are true?
 
         fullname = gv.package_full_name
         up_package = SF.upper_first(self.package)

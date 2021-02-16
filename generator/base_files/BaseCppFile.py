@@ -775,11 +775,9 @@ class BaseCppFile(BaseFile.BaseFile):
         line = function_name + '('
         if num_arguments == 0:
             self.write_zero_or_one_function_argument(line, is_cpp, is_const),
-                                                     #add_semicolon=False)
         elif num_arguments == 1:
             self.write_zero_or_one_function_argument(line, is_cpp,
                                                      is_const, arguments[0]),
-                                                     #add_semicolon=False)
         else:
             self.write_multiple_function_arguments(line, arguments,
                                                    num_arguments, is_const,
@@ -924,8 +922,10 @@ class BaseCppFile(BaseFile.BaseFile):
         """
         Write a function definition with comment.
 
-        :param code: dictionary of information about the function to be written.
-        :param exclude: `True` if you want to exclude this function from Doxygen.
+        :param code: dictionary of information about the function
+              to be written.
+        :param exclude: `True` if you want to exclude this function
+            from Doxygen.
         :return: nothing
         """
         if code is not None:

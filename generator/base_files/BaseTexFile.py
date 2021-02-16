@@ -150,13 +150,12 @@ class BaseTexFile(BaseFile.BaseFile):
         """
         for j in range(0, len(my_list)):
             if my_list[j]['type'] in ['lo_element', 'element',
-                                         'inline_lo_element']:
+                                      'inline_lo_element']:
                 name = my_list[j]['element']
             else:
                 name = my_list[j]['name']
             texname = strFunctions.texify(name)
             my_list[j]['texname'] = texname
-
 
     @staticmethod
     def sort_enum_names(enums):

@@ -186,7 +186,7 @@ class BaseXMLFile(BaseFile.BaseFile):
         :param tree:
         :return:
         """
-        name = strFunctions.lower_first(tree['base'])  # TODO `name` is unused
+        # name = strFunctions.lower_first(tree['base'])  # TODO unused
         if tree['ext'] == 'core':
             element = self.create_object(tree)
         return element

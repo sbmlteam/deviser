@@ -1,10 +1,10 @@
+#!/usr/bin/env python
 """
 This is the base file for using the 'templates' in directory
 code_files/templates. When writing another library (NOT a package)
 for libSBML, deviser will take the 'templates' (.h and .cpp files),
 replace various things and create new files based on the 'template'.
 """
-#!/usr/bin/env python
 #
 # @file    BaseTemplateFile.py
 # @brief   base class for all files to be generated from templates
