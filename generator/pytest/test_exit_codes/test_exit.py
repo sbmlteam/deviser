@@ -11,13 +11,14 @@ import deviser
 import test_functions
 from util import global_variables as gv
 
-#@pytest.mark.parametrize("number", [1, 2, 3, 0, 42])
+
+# @pytest.mark.parametrize("number", [1, 2, 3, 0, 42])
 @pytest.mark.parametrize("name, flag, expected_return", [
     ('non-existent', '-g', 'failed to read file'),
     ('test_child', '-g', 'success'),
     ('test_child', 'missing', 'missing function argument'),
     ('test_child', 'wrong', 'invalid function arguments'),
-    # ('test_child', '-l', 'success'),
+    ('test_child', '-l', 'success'),  # Apparently problematic before?
     ('invalid', '-g', 'parsing error'),
     ('invalid', '-l', 'parsing error'),
     ('unknown_type', '-g', 'unknown type used'),
@@ -53,9 +54,7 @@ def test_deviser(name, flag, expected_return):
         raise Exception
 
     deviser.main(args)
-    #fail = test_functions.compare_return_codes(name, flag, expected_return,
+    # fail = test_functions.compare_return_codes(name, flag, expected_return,
     #                                           fails)
-    #print('')
-    #return fail
-
-
+    # print('')
+    # return fail
