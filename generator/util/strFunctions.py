@@ -622,7 +622,7 @@ def get_sid_refs(refs):
         return [ret_string, ret_type]
 
 
-def get_element_name(attribute, add_prefix=True):
+def get_element_name(attribute, add_prefix=True, leave_prefix=True):
     """
     Get the name of an element node
 
@@ -635,9 +635,20 @@ def get_element_name(attribute, add_prefix=True):
         if 'texname' in attribute:
             name = attribute['texname']
         if len(name) == 0:  # No texname
-            name = remove_prefix(attribute['name'])
+            if leave_prefix:
+                name = remove_prefix(attribute['name'])
+            else:
+                name = attribute['name']
         if attribute['type'] in ['lo_element', 'inline_lo_element']:
-            return '\{0}'.format(cap_list_of_name(name, add_prefix))
+            if leave_prefix:
+                return '\{0}'.format(cap_list_of_name(name, add_prefix))
+            else:
+                if 'listOfClassName' in attribute and \
+                        attribute['listOfClassName'] != '':
+                    return '\{0}'.format(
+                        remove_prefix(attribute['listOfClassName']))
+                else:
+                    return '\{0}'.format(cap_list_of_name_no_prefix(name))
         elif attribute['type'] == 'element':
             if attribute['element'] == 'ASTNode*':
                 return 'MathML math'
@@ -650,45 +661,6 @@ def get_element_name(attribute, add_prefix=True):
             return '\{0}'.format(cap_list_of_name(remove_prefix(attribute['name'])))
         else:
             return '\{0}'.format(upper_first(remove_prefix(attribute['name'])))
-    else:
-        return 'FIX_ME'
-
-
-def get_element_name_no_prefix(attribute):
-    """
-    Get the name of an element node without the prefix.
-
-    :param attribute: dictionary of information about the element.
-    :return: the name, if available, else 'FIX_ME'.
-
-    TODO: a lot of similarity between this function and get_element_name().
-    Maybe some scope for combining them? Although there are some differences too.
-    """
-    if 'type' in attribute:
-        name = ''
-        if 'texname' in attribute:
-            name = attribute['texname']
-        if len(name) == 0:
-            name = attribute['name']
-        if attribute['type'] == 'lo_element':
-            if 'listOfClassName' in attribute and attribute['listOfClassName'] != '':
-                return '\{0}'.format(remove_prefix(attribute['listOfClassName']))
-            else:
-                return '\{0}'.format(cap_list_of_name_no_prefix(name))
-        elif attribute['type'] == 'inline_lo_element':
-            return '\{0}'.format(cap_list_of_name_no_prefix(name))
-        elif attribute['type'] == 'element':
-            if attribute['element'] == 'ASTNode*':
-                return 'MathML math'
-            else:
-                return attribute['element']
-        else:
-            return 'FIX_ME'
-    elif 'isListOf' in attribute:
-        if attribute['isListOf']:
-            return '\{0}'.format(cap_list_of_name(attribute['name']))
-        else:
-            return '\{0}'.format(upper_first(attribute['name']))
     else:
         return 'FIX_ME'
 

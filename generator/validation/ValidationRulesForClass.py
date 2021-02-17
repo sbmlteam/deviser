@@ -357,7 +357,7 @@ class ValidationRulesForClass():
             short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
             lo = False
         else:
-            loname = strFunctions.get_element_name_no_prefix(lo_child)
+            loname = strFunctions.get_element_name(lo_child, leave_prefix=False)
             temp = strFunctions.remove_prefix(lo_child['element'])
             lo_name = loname[7:] #strFunctions.plural(temp)
             text = 'A {0} object may have the optional SBML Level~3 ' \
@@ -398,7 +398,7 @@ class ValidationRulesForClass():
             short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
             lo = False
         else:
-            loname = strFunctions.get_element_name_no_prefix(lo_child)
+            loname = strFunctions.get_element_name(lo_child, leave_prefix=False)
             temp = strFunctions.remove_prefix(lo_child['element'])
             lo_name = loname[7:] #strFunctions.plural(temp)
             text = 'Apart from the general notes and annotations subobjects ' \

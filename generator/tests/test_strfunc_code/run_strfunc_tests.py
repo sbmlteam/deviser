@@ -360,22 +360,35 @@ def main():
     fail += execute_tests(sf.get_sid_refs, data, fails)
 
     # get_element_name() tests
+    gv.reset()
+    gv.is_package = False
     attribute1 = {'something': 'something else'}
     attribute2 = {'type': 'element', 'element': 'ASTNode*', 'texname': 'tex'}
-    attribute3 = {'isListOf': 'somethingrandom', 'name': 'SBMLFoo'}
+    attribute3 = {'isListOf': True, 'name': 'Foo'}
+    attribute4 = {'type': 'element', 'element': 'Unit', 'texname': 'Unit'}
+    attribute5 = {'type': 'lo_element', 'element': 'Unit', 'texname': 'Unit'}
+    attribute6 = {'type': 'double', 'element': 'Unit', 'texname': 'Unit'}
+    attribute7 = {'isListOf': False, 'name': 'Foo'}
+    attribute8 = {'type': 'lo_element', 'element': 'Unit', 'texname': 'Unit',
+                  'listOfClassName': 'ListOfAnything'}
     fail += run_strfunc_test(sf.get_element_name, attribute1, "FIX_ME", fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute2, "MathML math", fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute3, "\ListOfSBMLFoos", fails)
-
-    # At the moment, the same tests are used for both get_element_name() and
-    # get_element_name_no_prefix(). They are quite similar functions. Ideally
-    # I guess we should add a test which gives a different result between them.
-    # Otherwise there is little point in having both functions. TODO
-
-    # get_element_name_no_prefix() tests
-    fail += run_strfunc_test(sf.get_element_name_no_prefix, attribute1, "FIX_ME", fails)
-    fail += run_strfunc_test(sf.get_element_name_no_prefix, attribute2, "MathML math", fails)
-    fail += run_strfunc_test(sf.get_element_name_no_prefix, attribute3, "\ListOfSBMLFoos", fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute2, "MathML math",
+                             fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute3,
+                             "\SBMLListOfFoos", fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute4, "Unit", fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute5,
+                             "\SBMLListOfUnits", fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute5,
+                             "\ListOfUnits", fails, add_prefix=False)
+    fail += run_strfunc_test(sf.get_element_name, attribute5,
+                             "\ListOfUnits", fails, leave_prefix=False)
+    fail += run_strfunc_test(sf.get_element_name, attribute6, "FIX_ME", fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute7, "\Foo", fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute8,
+                             "\SBMLListOfUnits", fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute8,
+                             "\ListOfAnything", fails, leave_prefix=False)
 
     # replace_digits() tests
     fail += run_strfunc_test(sf.replace_digits, "John 3:16", "John Three:OneSix", fails)
@@ -434,10 +447,12 @@ def main():
     changing_dict = {'name': 'Colin', 'baseClass': gv.baseClass}
     expected_dict = {'name': 'SBMLColin', 'baseClass': gv.baseClass,
                      'elementName': 'colin'}
-    run_strfunc_test(sf.prefix_classes, changing_dict, None, fails)  # Do not consume return value
+    # Do not consume return value
+    run_strfunc_test(sf.prefix_classes, changing_dict, None, fails)
     fail += compare_dictionaries(changing_dict, expected_dict, fails)
 
-    # Now a test of the same function, this time with a list of attribute dictionaries
+    # Now a test of the same function,
+    # this time with a list of attribute dictionaries
     # as a value in `changing_dict` and `expected_dict`:
     attrib1_before = {'type': 'lo_element', 'element': 'Dabs'}
     attrib1_after = {'type': 'lo_element', 'element': 'SBMLDabs'}
@@ -452,8 +467,10 @@ def main():
     changing_dict = {'name': 'Colin', 'baseClass': gv.baseClass,
                      'lo_class_name': 'Dabs', 'attribs': attribs_before}
     expected_dict = {'name': 'SBMLColin', 'baseClass': gv.baseClass,
-                     'elementName': 'colin', 'lo_class_name': 'SBMLDabs', 'attribs': attribs_after}
-    run_strfunc_test(sf.prefix_classes, changing_dict, None, fails)  # Do not consume return value
+                     'elementName': 'colin', 'lo_class_name': 'SBMLDabs',
+                     'attribs': attribs_after}
+    # Do not consume return value
+    run_strfunc_test(sf.prefix_classes, changing_dict, None, fails)
     fail += compare_dictionaries(changing_dict, expected_dict, fails)
 
 
