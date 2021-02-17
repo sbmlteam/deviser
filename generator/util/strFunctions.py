@@ -543,15 +543,21 @@ def wrap_enum(name):
 # End of latex specific functions
 ##################################################
 
+
 def get_sid_refs(refs):
     """
+    This function is specifically designed for when an attribute can point to
+    one or more element types and formatting lines in text referring to the
+    element(s).
 
-    :param refs: a string which is a comma-separated sequence of ...
-    :return: a tuple of ...
+    :param refs: a string which is a comma-separated sequence of element names
+    :return: a tuple where the first is a string representing a textual list
+    of the elements and the second is a string representing a combined type.
 
-    TODO complete the above and add description! Why/how/where is this used?
+    .. code-block:: default
 
-    get_sid_refs('cat,dog') = ["Cat or \Dog", "CatOrDog"]
+        get_sid_refs('cat,dog') = ["Cat or \Dog", "CatOrDog"]
+
     """
     if refs == '':
         return['', 'SId']
