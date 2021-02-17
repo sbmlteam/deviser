@@ -622,12 +622,12 @@ def get_sid_refs(refs):
         return [ret_string, ret_type]
 
 
-def get_element_name(attribute, addPrefix=True):
+def get_element_name(attribute, add_prefix=True):
     """
     Get the name of an element node
 
     :param attribute: dictionary of information about the element.
-    :param addPrefix: should the prefix be prepended to the name?
+    :param add_prefix: should the prefix be prepended to the name?
     :return: the name, if available, else 'FIX_ME'.
     """
     if 'type' in attribute:
@@ -637,7 +637,7 @@ def get_element_name(attribute, addPrefix=True):
         if len(name) == 0:  # No texname
             name = remove_prefix(attribute['name'])
         if attribute['type'] in ['lo_element', 'inline_lo_element']:
-            return '\{0}'.format(cap_list_of_name(name, addPrefix))
+            return '\{0}'.format(cap_list_of_name(name, add_prefix))
         elif attribute['type'] == 'element':
             if attribute['element'] == 'ASTNode*':
                 return 'MathML math'
@@ -893,7 +893,6 @@ def prefix_classes(working_class):
         #         conc['element'] = prefix_name(conc['element'])
 
 
-
 def is_camel_case(name):
     """
     Is this word in camel case?
@@ -905,8 +904,8 @@ def is_camel_case(name):
     
         is_camel_case('FooParameter') -> True
         is_camel_case('fooParameter') -> True
-    'fooparameter' -> False
-    'Fooparameter' -> False
+        is_camel_case('fooparameter') -> False
+        is_camel_case('Fooparameter') -> False
     """
     camel_case = False
     adjust_name = lower_first(remove_prefix(name))
