@@ -55,10 +55,15 @@ def upper_first(word):
     named CSGFoo; where the capitalised version of the name will always
     have the 'CSG' in capitals. This case is considered within this function.
 
-    e.g.
-    "csgsomething" -> "CSGsomething", "cat" -> "Cat", "csgcat" -> "CSGcat",
-    "cscat" -> "Cscat", "csgeometry" -> "CSGeometry",
-    "csGeometry" -> "CSGeometry", "a" -> "A"
+    .. code-block:: default
+
+        upper_first("csgsomething") -> "CSGsomething"
+        upper_first("cat") -> "Cat"
+        upper_first("csgcat") -> "CSGcat"
+        upper_first("cscat") -> "Cscat"
+        upper_first("csgeometry") -> "CSGeometry"
+        upper_first("csGeometry") -> "CSGeometry"
+        upper_first("a") -> "A"
     """
     if len(word) == 0:
         return word
@@ -111,10 +116,13 @@ def abbrev_name(name):
     such as getFoo(Model *m), where m is the abbreviation of Model.
     Note if the name argument contains no capitals then the first letter 
     is returned as the abbreviation. 
-    e.g.
-    "thisIsATest" -> "iat"
-    "CAT" -> "cat"
-    "cat" -> "c"
+
+    .. code-block:: default
+
+        abbrev_name("thisIsATest") -> "iat"
+        abbrev_name("CAT") -> "cat"
+        abbrev_name("cat") -> "c"
+
     """
     abbrev = ''
     for i in range(0, len(name)):
@@ -133,8 +141,11 @@ def abbrev_lo_name(loname):
     :param loname: string to transform
     :return: transformed string
 
-    e.g.  "ListOfFoo" -> "LOFoo"
-    "spaghetti" -> ""
+    .. code-block:: default
+
+        abbrev_lo_name("ListOfFoo") -> "LOFoo"
+        abbrev_lo_name("spaghetti") -> ""
+
     """
     if loname.startswith('ListOf'):
         return 'LO' + loname[6:]
@@ -151,13 +162,17 @@ def list_of_name(name, add_prefix=True):
         prepend the global prefix to returned string
     :return: the "list of" name string e.g. ListOfName
 
-    e.g.
-    with add_prefix = False
-        "FooParameter" -> "ListOfFooParameters"
+    .. code-block:: default
 
-    with add_prefix =True and gv.prefix = 'SBML'
-         "FooParameter" -> "ListOfFooParameters" if gv.is_package
-         "FooParameter" -> "SBMLListOfFooParameters" if not gv.is_package
+         list_of_name("FooParameter", False) -> "ListOfFooParameters"
+
+         gv.prefix = 'SBML'
+         gv.is_package = True
+         list_of_name("FooParameter") -> "ListOfFooParameters"
+
+         gv.prefix = 'SBML'
+         gv.is_package = False
+         list_of_name("FooParameter") -> "SBMLListOfFooParameters"
 
     """
     prefix = ''
@@ -173,7 +188,10 @@ def lower_list_of_name_no_prefix(name):
     :param name: string we want the "list of" name for
     :return: the "list of" name, possibly without prefix.
 
-    e.g. "fox" -> "listOfFoxes"
+    .. code-block:: default
+
+         lower_list_of_name_no_prefix("fox") -> "listOfFoxes"
+
     """
     return 'listOf' + plural_no_prefix(upper_first(name))
 
@@ -198,8 +216,12 @@ def cap_list_of_name_no_prefix(name):
     :param name: the string which we want the "list of" name for.
     :return: the "list of" name.
 
-    e.g. "fox" -> "ListOfFoxes"
-         "SBMLFoo" ->"ListOfFoos" if gv.is_package = False
+    .. code-block:: default
+
+         cap_list_of_name_no_prefix("fox") -> "ListOfFoxes"
+
+         gv.is_package = False
+         cap_list_of_name_no_prefix("SBMLFoo") ->"ListOfFoos"
     """
     name = upper_first(name)
     return list_of_name(name, False)
@@ -226,10 +248,17 @@ def plural(name):
     :param name: the word, probably in singular form.
     :return: the plural of the word, or the word itself if no plural found.
 
-    e.g.
-    "cat" -> "cats", "dogs" -> "dogs", "child" -> "children",
-    "disinformation" -> "disinformation", "fox" -> "foxes",
-    "party" -> "parties", "cloud" -> "clouds", "something" -> "somethings".
+    .. code-block:: default
+
+        plural("cat") -> "cats"
+        plural("dogs") -> "dogs"
+        plural("child") -> "children"
+        plural("disinformation") -> "disinformation"
+        plural("fox") -> "foxes"
+        plural("party") -> "parties"
+        plural("cloud") -> "clouds"
+        plural("something") -> "somethings"
+
     """
     if name.endswith('s'):
         returned_word = name
@@ -254,10 +283,17 @@ def singular(name):
     :return: the singular of the word, or the word itself
              if no singular found.
 
-    e.g.
-    "cats" -> "cat", "dogs" -> "dogs", "children" -> "child",
-    "disinformation" -> "disinformation", "coxes" -> "cox",
-    "parties" -> "party", "clouds" -> "cloud", "somethings" -> "something".
+    .. code-block:: default
+
+         singular("cats") -> "cat"
+         singular("dogs") -> "dogs"
+         singular("children") -> "child"
+         singular("disinformation") -> "disinformation"
+         singular("coxes") -> "cox"
+         singular("parties") -> "party"
+         singular("clouds") -> "cloud"
+         singular("somethings") -> "something"
+
     """
     returned_word = name
     length = len(name)
@@ -398,8 +434,12 @@ def standard_element_name(name):
     If it's a list of something, convert to singular.
     Capitalise standard name.
 
-    "listOfFoxes," -> "Fox"
-    "apple" -> "Apple"
+    .. code-block:: default
+
+        standard_element_name("listOfFoxes,)" -> "Fox"
+        standard_element_name("apple") -> "Apple"
+        standard_element_name("foo_t") -> "Foo"
+
     """
     name = remove_spaces(name)
     length = len(name)
@@ -427,8 +467,13 @@ def get_library_suffix(name):
     :param name: the word
     :return: library suffix, with all but first character in lower-case.
 
-    e.g.
-    "library" -> "Rary", "libSBML" -> "Sbml", "cat" -> "Cat", "lib" -> ""
+    .. code-block:: default
+
+         get_library_suffix("library") -> "Rary"
+         get_library_suffix("libSBML") -> "Sbml"
+         get_library_suffix("cat") -> "Cat"
+         get_library_suffix("lib") -> ""
+
     """
     ret_name = name.lower()
     if ret_name.startswith('lib'):
