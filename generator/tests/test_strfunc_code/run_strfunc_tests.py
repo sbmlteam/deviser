@@ -400,9 +400,23 @@ def main():
     # compare_no_case() tests
     fail += run_strfunc_test(sf.compare_no_case, "This iS a TEST", True, fails,
                              reference="this is a test")
+    fail += run_strfunc_test(sf.compare_no_case, "This iS a bad TEST", False,
+                             fails,
+                             reference="this is a test")
 
     # get_class_from_plugin() tests
-    # TODO we need a meaningful example for that function.
+    fail += run_strfunc_test(sf.get_class_from_plugin, "CompModelPlugin",
+                             "Model",
+                             fails,
+                             package="Comp")
+    fail += run_strfunc_test(sf.get_class_from_plugin, "CompModelPlug",
+                             "",
+                             fails,
+                             package="Comp")
+    fail += run_strfunc_test(sf.get_class_from_plugin, "Plugin",
+                             "",
+                             fails,
+                             package="Comp")
 
     # prefix_name() tests
     gv.reset()

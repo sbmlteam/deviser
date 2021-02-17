@@ -700,7 +700,10 @@ def replace_digits(name):
     :param name: the input string, possibly containing digits
     :return: the same string, but with digits replaced by words
 
-    e.g. replace_digits("John 3:16") -> "John Three:OneSix"
+    .. code-block:: default
+
+         replace_digits("John 3:16") -> "John Three:OneSix"
+
     """
     mydict = {'0': 'Zero', '1': 'One', '2': 'Two', '3': 'Three', '4': 'Four',
               '5': 'Five', '6': 'Six', '7': 'Seven', '8': 'Eight', '9': 'Nine'}
@@ -729,7 +732,10 @@ def remove_spaces(name):
     :param name: input string, possibly containing spaces
     :return: the input string, but with space characters removed.
 
-    e.g. remove_spaces("   hello   world  ") -> "helloworld"
+    .. code-block:: default
+
+         remove_spaces("   hello   world  ") -> "helloworld"
+
     """
     newname = name.replace(' ', '')
     return newname
@@ -737,14 +743,18 @@ def remove_spaces(name):
 
 def remove_hyphens(name):
     """
-    Remove hyphens and capitalise each word (after first) in a string.
-    A bit different if there is only one word (see examples below).
+    Remove hyphens and capitalise each word (after first hyphen) in a string.
 
     :param name: input string
-    :return: [newstring, removed?]
+    :return: [newstring, boolean indicating if hyphen was removed]
 
-    e.g. remove_hyphens("this-is-a-test") -> ["thisIsATest", True]
-    "cat-" -> ["cat", True], "-cat" -> ["Cat", True]
+    .. code-block:: default
+
+        remove_hyphens("this-is-a-test") -> ["thisIsATest", True]
+        remove_hyphens("cat-") -> ["cat", True]
+        remove_hyphens("-cat") -> ["Cat", True]
+        remove_hyphens("NoHyphens") -> ["NoHyphens", False]
+
     """
     removed_hyphen = False
     if '-' not in name:
@@ -769,8 +779,14 @@ def texify(name):
     """
     Replace digits with number words, escape underscores, and remove spaces.
 
-    :param name: input string, e.g. "012_27 44_8 "
-    :return: transformed string, e.g. "ZeroOneTwo\_TwoSevenFourFour\_Eight"
+    :param name: input string
+    :return: transformed string
+
+    .. code-block:: default
+
+         texify("  phase_1: part_2  ") -> "phase\_One:part\_Two")
+         texify("012_27 44_8 ") -> "ZeroOneTwo\_TwoSevenFourFour\_Eight"
+
     """
     name = replace_digits(name)
     name = replace_underscore(name)
@@ -782,33 +798,46 @@ def compare_no_case(test, reference):
     """
     Are these two strings the same, when both are in lower case?
 
-    :param test: first string to compare, e.g. "this is a test"
-    :param reference: second word to compare, e.g. "This iS a TEST"
+    :param test: first string to compare
+    :param reference: second word to compare
     :return: True if both strings identical when converted to lower case.
+
+    .. code-block:: default
+
+        compare_no_case("this is a test", "This iS a TEST") -> True
+
     """
     return test.lower() == reference.lower()
 
 
 def get_class_from_plugin(plugin, package):
     """
-    Get the name of a class from a plugin
+    Get the name of a class from a plugin. A plugin class will
+    have a name such as PkgFooPlugin. This function will
+    return 'Foo'.
 
-    :param plugin:
-    :param package:
+    :param plugin: the full name of the plugin class
+    :param package: the name of the package
     :return: the name of the class
 
-    TODO: need example here, and document the function parameters.
+    .. code-block:: default
+
+        get_class_from_plugin("CompModelPlugin", "comp") -> "Model"
+
     """
-    num = len(package)
-    length = len(plugin)
-    name = plugin[num:length-6]
-    return name
+    len_pkg = len(package)
+    len_plugin = len(plugin)
+    # we are expecting PkgFooPlugin
+    if len_plugin < len_pkg or len_pkg > len_plugin - 6 \
+            or not plugin.endswith('Plugin'):
+        return ''
+    return plugin[len_pkg:len_plugin-6]
 
 
 def prefix_name(name):
     """
     Prepend the global variables' prefix to a word, if not already present.
-    Except for certain cases.
+    Except for XMLNode and ASTNode.
 
     :param name: the word
     :return: the prefixed word
@@ -818,10 +847,8 @@ def prefix_name(name):
     elif name == 'XMLNode' or name == 'ASTNode':
         return name
     elif name == 'SBase':
-        # return '{0}Base'.format(gv.prefix)
         return gv.prefix + "Base"
     else:
-        # return '{0}{1}'.format(gv.prefix, name)
         return gv.prefix + name
 
 
