@@ -13,7 +13,7 @@
 # Institutes of Health (USA) under grant R01GM070923.  All rights reserved.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
-# copy of this software and associated documentation files (the "Software"),
+# copy of this software and associated documentation files (the "Software'),
 # to deal in the Software without restriction, including without limitation
 # the rights to use, copy, modify, merge, publish, distribute, sublicense,
 # and/or sell copies of the Software, and to permit persons to whom the
@@ -57,13 +57,13 @@ def upper_first(word):
 
     .. code-block:: default
 
-        upper_first("csgsomething") -> "CSGsomething"
-        upper_first("cat") -> "Cat"
-        upper_first("csgcat") -> "CSGcat"
-        upper_first("cscat") -> "Cscat"
-        upper_first("csgeometry") -> "CSGeometry"
-        upper_first("csGeometry") -> "CSGeometry"
-        upper_first("a") -> "A"
+        upper_first('csgsomething') -> "CSGsomething"
+        upper_first('cat') -> "Cat"
+        upper_first('csgcat') -> "CSGcat"
+        upper_first('cscat') -> "Cscat"
+        upper_first('csgeometry') -> "CSGeometry"
+        upper_first('csGeometry') -> "CSGeometry"
+        upper_first('a') -> "A"
     """
     if len(word) == 0:
         return word
@@ -119,9 +119,9 @@ def abbrev_name(name):
 
     .. code-block:: default
 
-        abbrev_name("thisIsATest") -> "iat"
-        abbrev_name("CAT") -> "cat"
-        abbrev_name("cat") -> "c"
+        abbrev_name('thisIsATest') -> "iat"
+        abbrev_name('CAT') -> "cat"
+        abbrev_name('cat') -> "c"
 
     """
     abbrev = ''
@@ -143,8 +143,8 @@ def abbrev_lo_name(loname):
 
     .. code-block:: default
 
-        abbrev_lo_name("ListOfFoo") -> "LOFoo"
-        abbrev_lo_name("spaghetti") -> ""
+        abbrev_lo_name('ListOfFoo') -> "LOFoo"
+        abbrev_lo_name('spaghetti') -> ""
 
     """
     if loname.startswith('ListOf'):
@@ -164,15 +164,15 @@ def list_of_name(name, add_prefix=True):
 
     .. code-block:: default
 
-         list_of_name("FooParameter", False) -> "ListOfFooParameters"
+         list_of_name('FooParameter", False) -> "ListOfFooParameters"
 
          gv.prefix = 'SBML'
          gv.is_package = True
-         list_of_name("FooParameter") -> "ListOfFooParameters"
+         list_of_name('FooParameter') -> "ListOfFooParameters"
 
          gv.prefix = 'SBML'
          gv.is_package = False
-         list_of_name("FooParameter") -> "SBMLListOfFooParameters"
+         list_of_name('FooParameter') -> "SBMLListOfFooParameters"
 
     """
     prefix = ''
@@ -190,7 +190,7 @@ def lower_list_of_name_no_prefix(name):
 
     .. code-block:: default
 
-         lower_list_of_name_no_prefix("fox") -> "listOfFoxes"
+         lower_list_of_name_no_prefix('fox') -> "listOfFoxes"
 
     """
     return 'listOf' + plural_no_prefix(upper_first(name))
@@ -202,7 +202,7 @@ def cap_list_of_name(name, add_prefix=True):
 
     :param name: the string we want the "list of" name for.
     :param add_prefix: if True, prepend returned name with global prefix
-                      (e.g. "SBML") if not a package.
+                      (e.g. "SBML') if not a package.
     """
     name = upper_first(name)
     return list_of_name(name, add_prefix)
@@ -218,10 +218,10 @@ def cap_list_of_name_no_prefix(name):
 
     .. code-block:: default
 
-         cap_list_of_name_no_prefix("fox") -> "ListOfFoxes"
+         cap_list_of_name_no_prefix('fox') -> "ListOfFoxes"
 
          gv.is_package = False
-         cap_list_of_name_no_prefix("SBMLFoo") ->"ListOfFoos"
+         cap_list_of_name_no_prefix('SBMLFoo') ->"ListOfFoos"
     """
     name = upper_first(name)
     return list_of_name(name, False)
@@ -250,14 +250,14 @@ def plural(name):
 
     .. code-block:: default
 
-        plural("cat") -> "cats"
-        plural("dogs") -> "dogs"
-        plural("child") -> "children"
-        plural("disinformation") -> "disinformation"
-        plural("fox") -> "foxes"
-        plural("party") -> "parties"
-        plural("cloud") -> "clouds"
-        plural("something") -> "somethings"
+        plural('cat') -> "cats"
+        plural('dogs') -> "dogs"
+        plural('child') -> "children"
+        plural('disinformation') -> "disinformation"
+        plural('fox') -> "foxes"
+        plural('party') -> "parties"
+        plural('cloud') -> "clouds"
+        plural('something') -> "somethings"
 
     """
     if name.endswith('s'):
@@ -285,14 +285,14 @@ def singular(name):
 
     .. code-block:: default
 
-         singular("cats") -> "cat"
-         singular("dogs") -> "dogs"
-         singular("children") -> "child"
-         singular("disinformation") -> "disinformation"
-         singular("coxes") -> "cox"
-         singular("parties") -> "party"
-         singular("clouds") -> "cloud"
-         singular("somethings") -> "something"
+         singular('cats') -> "cat"
+         singular('dogs') -> "dogs"
+         singular('children') -> "child"
+         singular('disinformation') -> "disinformation"
+         singular('coxes') -> "cox"
+         singular('parties') -> "party"
+         singular('clouds') -> "cloud"
+         singular('somethings') -> "something"
 
     """
     returned_word = name
@@ -436,9 +436,9 @@ def standard_element_name(name):
 
     .. code-block:: default
 
-        standard_element_name("listOfFoxes,)" -> "Fox"
-        standard_element_name("apple") -> "Apple"
-        standard_element_name("foo_t") -> "Foo"
+        standard_element_name('listOfFoxes') -> "Fox"
+        standard_element_name('apple') -> "Apple"
+        standard_element_name('foo_t') -> "Foo"
 
     """
     name = remove_spaces(name)
@@ -469,10 +469,10 @@ def get_library_suffix(name):
 
     .. code-block:: default
 
-         get_library_suffix("library") -> "Rary"
-         get_library_suffix("libSBML") -> "Sbml"
-         get_library_suffix("cat") -> "Cat"
-         get_library_suffix("lib") -> ""
+         get_library_suffix('library') -> "Rary"
+         get_library_suffix('libSBML') -> "Sbml"
+         get_library_suffix('cat') -> "Cat"
+         get_library_suffix('lib') -> ""
 
     """
     ret_name = name.lower()
@@ -560,8 +560,8 @@ def make_class(name, add_extended=False):
 
     .. code-block:: default
 
-        make_class("Irenaeus") -> "irenaeus-class"
-        make_class("Irenaeus", True) -> "extended-irenaeus-class"
+        make_class('Irenaeus') -> "irenaeus-class"
+        make_class('Irenaeus", True) -> "extended-irenaeus-class"
         
     """
     if add_extended:
@@ -702,7 +702,7 @@ def replace_digits(name):
 
     .. code-block:: default
 
-         replace_digits("John 3:16") -> "John Three:OneSix"
+         replace_digits('John 3:16') -> "John Three:OneSix"
 
     """
     mydict = {'0': 'Zero', '1': 'One', '2': 'Two', '3': 'Three', '4': 'Four',
@@ -734,7 +734,7 @@ def remove_spaces(name):
 
     .. code-block:: default
 
-         remove_spaces("   hello   world  ") -> "helloworld"
+         remove_spaces('   hello   world  ') -> "helloworld"
 
     """
     newname = name.replace(' ', '')
@@ -750,10 +750,10 @@ def remove_hyphens(name):
 
     .. code-block:: default
 
-        remove_hyphens("this-is-a-test") -> ["thisIsATest", True]
-        remove_hyphens("cat-") -> ["cat", True]
-        remove_hyphens("-cat") -> ["Cat", True]
-        remove_hyphens("NoHyphens") -> ["NoHyphens", False]
+        remove_hyphens('this-is-a-test') -> ["thisIsATest", True]
+        remove_hyphens('cat-') -> ["cat", True]
+        remove_hyphens('-cat') -> ["Cat", True]
+        remove_hyphens('NoHyphens') -> ["NoHyphens", False]
 
     """
     removed_hyphen = False
@@ -784,8 +784,8 @@ def texify(name):
 
     .. code-block:: default
 
-         texify("  phase_1: part_2  ") -> "phase\_One:part\_Two")
-         texify("012_27 44_8 ") -> "ZeroOneTwo\_TwoSevenFourFour\_Eight"
+         texify('  phase_1: part_2  ') -> "phase\_One:part\_Two')
+         texify('012_27 44_8 ') -> "ZeroOneTwo\_TwoSevenFourFour\_Eight"
 
     """
     name = replace_digits(name)
@@ -804,7 +804,7 @@ def compare_no_case(test, reference):
 
     .. code-block:: default
 
-        compare_no_case("this is a test", "This iS a TEST") -> True
+        compare_no_case('this is a test", "This iS a TEST') -> True
 
     """
     return test.lower() == reference.lower()
@@ -822,7 +822,7 @@ def get_class_from_plugin(plugin, package):
 
     .. code-block:: default
 
-        get_class_from_plugin("CompModelPlugin", "comp") -> "Model"
+        get_class_from_plugin('CompModelPlugin", "comp') -> "Model"
 
     """
     len_pkg = len(package)
@@ -901,9 +901,10 @@ def is_camel_case(name):
     :param name: the word we are interested in
     :return: True if word is in camel case, False if not
 
-    e.g.
-    'FooParameter' -> True
-    'fooParameter' -> True
+    .. code-block:: default
+    
+        is_camel_case('FooParameter') -> True
+        is_camel_case('fooParameter') -> True
     'fooparameter' -> False
     'Fooparameter' -> False
     """
