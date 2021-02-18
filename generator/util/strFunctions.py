@@ -622,12 +622,16 @@ def get_sid_refs(refs):
         return [ret_string, ret_type]
 
 
-def get_element_name(attribute, add_prefix=True, leave_prefix=True):
+def get_element_name(attribute, add_prefix_if_not_pkg=True,
+                     leave_pkg_prefix=True):
     """
-    Get the name of an element node
+    Get the name of an element node for use in text (specifications or
+    validation rules).
 
     :param attribute: dictionary of information about the element.
-    :param add_prefix: should the prefix be prepended to the name?
+    :param add_prefix_if_not_pkg: boolean indicating whether the global prefix should
+        be prepended to the name if this is not a package
+    :param leave_pkg_prefix: boolean indication whether to leave a prefix in place
     :return: the name, if available, else 'FIX_ME'.
     """
     if 'type' in attribute:
@@ -635,13 +639,14 @@ def get_element_name(attribute, add_prefix=True, leave_prefix=True):
         if 'texname' in attribute:
             name = attribute['texname']
         if len(name) == 0:  # No texname
-            if leave_prefix:
+            if leave_pkg_prefix:
                 name = remove_prefix(attribute['name'])
             else:
                 name = attribute['name']
         if attribute['type'] in ['lo_element', 'inline_lo_element']:
-            if leave_prefix:
-                return '\{0}'.format(cap_list_of_name(name, add_prefix))
+            if leave_pkg_prefix:
+                return '\{0}'.format(cap_list_of_name
+                                     (name, add_prefix_if_not_pkg))
             else:
                 if 'listOfClassName' in attribute and \
                         attribute['listOfClassName'] != '':

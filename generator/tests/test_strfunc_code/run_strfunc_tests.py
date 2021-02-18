@@ -361,6 +361,7 @@ def main():
 
     # get_element_name() tests
     gv.reset()
+    gv.prefix = 'Bar'
     gv.is_package = False
     attribute1 = {'something': 'something else'}
     attribute2 = {'type': 'element', 'element': 'ASTNode*', 'texname': 'tex'}
@@ -369,26 +370,50 @@ def main():
     attribute5 = {'type': 'lo_element', 'element': 'Unit', 'texname': 'Unit'}
     attribute6 = {'type': 'double', 'element': 'Unit', 'texname': 'Unit'}
     attribute7 = {'isListOf': False, 'name': 'Foo'}
-    attribute8 = {'type': 'lo_element', 'element': 'Unit', 'texname': 'Unit',
+    attribute8 = {'type': 'lo_element', 'element': 'Unit', 'name': 'Unit',
                   'listOfClassName': 'ListOfAnything'}
     fail += run_strfunc_test(sf.get_element_name, attribute1, "FIX_ME", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute2, "MathML math",
                              fails)
     fail += run_strfunc_test(sf.get_element_name, attribute3,
-                             "\SBMLListOfFoos", fails)
+                             "\BarListOfFoos", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute4, "Unit", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute5,
-                             "\SBMLListOfUnits", fails)
+                             "\BarListOfUnits", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute5,
-                             "\ListOfUnits", fails, add_prefix=False)
+                             "\ListOfUnits", fails, add_prefix_if_not_pkg=False)
     fail += run_strfunc_test(sf.get_element_name, attribute5,
-                             "\ListOfUnits", fails, leave_prefix=False)
+                             "\ListOfUnits", fails, leave_pkg_prefix=False)
     fail += run_strfunc_test(sf.get_element_name, attribute6, "FIX_ME", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute7, "\Foo", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute8,
-                             "\SBMLListOfUnits", fails)
+                             "\BarListOfUnits", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute8,
-                             "\ListOfAnything", fails, leave_prefix=False)
+                             "\ListOfAnything", fails, leave_pkg_prefix=False)
+
+    gv.reset()
+    gv.prefix = 'Bar'
+    gv.is_package = True
+    gv.package_prefix = 'Foo'
+    attribute1 = {'type': 'lo_element', 'element': 'Unit',
+                  'name': 'FooUnit',
+                  'isListOf': True}
+    attribute2 = {'type': 'lo_element', 'element': 'Unit',
+                  'name': 'Unit',
+                  'isListOf': True, 'listOfClassName': 'ListOfUnits'}
+    fail += run_strfunc_test(sf.get_element_name, attribute1,
+                             "\ListOfFooUnits", fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute1,
+                             "\ListOfFooUnits", fails, leave_pkg_prefix=False)
+    fail += run_strfunc_test(sf.get_element_name, attribute1,
+                             "\ListOfFooUnits", fails, add_prefix_if_not_pkg=False)
+    fail += run_strfunc_test(sf.get_element_name, attribute2,
+                             "\ListOfUnits", fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute2,
+                             "\ListOfUnits", fails, leave_pkg_prefix=False)
+    fail += run_strfunc_test(sf.get_element_name, attribute2,
+                             "\ListOfUnits", fails, add_prefix_if_not_pkg=False)
+
 
     # replace_digits() tests
     fail += run_strfunc_test(sf.replace_digits, "John 3:16", "John Three:OneSix", fails)
