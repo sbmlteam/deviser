@@ -622,6 +622,7 @@ def get_sid_refs(refs):
         return [ret_string, ret_type]
 
 
+# TODO come back to writing tex files when fixing #53
 def get_element_name(attribute, add_prefix_if_not_pkg=True,
                      leave_pkg_prefix=True):
     """
@@ -831,6 +832,7 @@ def prefix_name(name):
 
 def prefix_classes(working_class):
     """
+    TODO: sort this function
     Prefix the names of items in a dictionary of information about
     an element node.
 
