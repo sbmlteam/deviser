@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
-# @file    generateXML.py
-# @brief   function for generating XML examples
+# @file    __init__.py
+# @brief   init for a test directory
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #
@@ -37,67 +37,4 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import sys
-import os
-
-from parseXML import ParseXML
-from util import global_variables as gv
-from validation import ValidationXMLFiles
-
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
-
-
-def generate_xml_for(filename):  # , overwrite=True):
-    """
-    Parse XML input file, then write XML output file.
-
-    :param filename: the XML input file
-    :return: returns nothing
-    """
-    gv.running_tests = False
-    parser = ParseXML.ParseXML(filename)
-    ob = dict()
-    if gv.code_returned == gv.return_codes['success']:
-        # catch a problem in the parsing
-        try:
-            ob = parser.parse_deviser_xml()
-        except Exception:
-            gv.code_returned = gv.return_codes['parsing error']
-    if gv.code_returned == gv.return_codes['success']:
-        # try:
-        if gv.is_package:
-            generate_example_xml(ob)
-        # except Exception:
-        #  gv.code_returned = gv.return_codes['unknown error - please report']
-
-
-def generate_example_xml(ob):
-    """
-    Wrapper function to invoke the main XML Validation constructor.
-
-    :param ob: big dictionary object structure obtained from input XML file.
-    :returns: returns nothing.
-    """
-    ex = ValidationXMLFiles.ValidationXMLFiles(ob)
-    ex.write_all_files()
-
-
-def main(args):
-    """
-    Checks correct number of arguments and then invokes XML code.
-    """
-    if len(args) != 2:
-        gv.code_returned = gv.return_codes['missing function argument']
-        print('Usage: generateXML.py xmlfile')
-    else:
-        generate_xml_for(args[1])
-    if gv.code_returned == gv.return_codes['success']:
-        print('code successfully written')
-    else:
-        print('writing code failed')
-
-    return gv.code_returned
-
-
-if __name__ == '__main__':
-    main(sys.argv)
+from . import run_strfunc_tests

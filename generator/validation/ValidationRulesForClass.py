@@ -46,7 +46,8 @@ class ValidationRulesForClass():
 
     def __init__(self, object_desc, spec_name, number, package, pkg_ref):
         # members from object
-        self.name = strFunctions.remove_prefix(object_desc['name'], False, False, '', True)
+        self.name = strFunctions.remove_prefix(object_desc['name'],
+                                               remove_doc_prefix=True)
         self.fullname = spec_name
         self.number = number
         self.package = package.lower() 
@@ -356,7 +357,7 @@ class ValidationRulesForClass():
             short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
             lo = False
         else:
-            loname = strFunctions.get_element_name_no_prefix(lo_child)
+            loname = strFunctions.get_element_name(lo_child, leave_pkg_prefix=False)
             temp = strFunctions.remove_prefix(lo_child['element'])
             lo_name = loname[7:] #strFunctions.plural(temp)
             text = 'A {0} object may have the optional SBML Level~3 ' \
@@ -397,7 +398,7 @@ class ValidationRulesForClass():
             short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
             lo = False
         else:
-            loname = strFunctions.get_element_name_no_prefix(lo_child)
+            loname = strFunctions.get_element_name(lo_child, leave_pkg_prefix=False)
             temp = strFunctions.remove_prefix(lo_child['element'])
             lo_name = loname[7:] #strFunctions.plural(temp)
             text = 'Apart from the general notes and annotations subobjects ' \

@@ -12,6 +12,7 @@ function_table = {'binding': 'run_bindings_tests',
                   'cmake': 'run_cmake_tests',
                   'cpp': 'run_cpp_tests',
                   'exit': 'run_exit_tests',
+                  'strfunc': 'run_strfunc_tests',
                   'matlab': 'run_matlab_tests',
                   'tex': 'run_tex_tests'}
 
@@ -144,6 +145,7 @@ def run_tests(test_name, name, fails):
     import test_cmake_code
     import test_cpp_code
     import test_exit_code
+    import test_strfunc_code
     import test_tex_files
     import test_matlab_code
     fail = eval(module)
