@@ -155,7 +155,8 @@ def main():
     not_tested = []
     fail = 0
 
-    ########################## Start of tests. ##############################
+    #######################################################
+    # Start of tests
 
     # upper_first() tests
     fail += run_strfunc_test(sf.upper_first, 'cat', 'Cat', fails)
@@ -213,7 +214,7 @@ def main():
     fail += execute_tests(sf.cap_list_of_name_no_prefix, data, fails)
     gv.is_package = False
     # this gets wrongly dealt with by the remove prefix function
-    #TODO sort
+    # TODO sort
     data = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats",
             "SBMLFooParameter": "ListOfFooParameters"}
 #    fail += execute_tests(sf.cap_list_of_name_no_prefix, data, fails)
@@ -225,7 +226,7 @@ def main():
     gv.is_package = False
     gv.prefix = "Rosie"
     data = {"RosieFox": "Foxes", "RosieChild": "Children", "RosieCat": "Cats",
-            "Rosiefox": "Rosiefoxes"} # prefix only removed if capital after
+            "Rosiefox": "Rosiefoxes"}  # prefix only removed if capital after
     fail += execute_tests(sf.plural_no_prefix, data, fails)
     gv.is_package = True
     data = {"Rosiefox": "Rosiefoxes", "Rosiechild": "Rosiechildren",
@@ -294,7 +295,7 @@ def main():
                           remove_doc_prefix=True)
 
     gv.reset()  # gv.prefix now "SBML"
-    gv.prefix="Rosie"
+    gv.prefix = "Rosie"
     gv.is_package = False
 
     data = {"RosieFbcType": "FbcType", "RosieDocument": "RosieDocument"}
@@ -346,8 +347,10 @@ def main():
     # wrap_section() tests - or this one!
 
     # make_class() tests
-    fail += run_strfunc_test(sf.make_class, 'Irenaeus', 'irenaeus-class', fails)
-    fail += run_strfunc_test(sf.make_class, 'Irenaeus', 'extended-irenaeus-class',
+    fail += run_strfunc_test(sf.make_class, 'Irenaeus',
+                             'irenaeus-class', fails)
+    fail += run_strfunc_test(sf.make_class, 'Irenaeus',
+                             'extended-irenaeus-class',
                              fails, add_extended=True)
 
     # wrap_enum() tests
@@ -356,7 +359,7 @@ def main():
     # get_sid_refs() tests 'cat': 'Cat', 'csgsomething': 'CSGsomething',
     data = {'': ['', 'SId'], 'cat': ['Cat', 'Cat'],
             'csgsomething': ['CSGsomething', 'CSGsomething'],
-            'cat,dog': ["Cat or \Dog", "CatOrDog"]}
+            'cat,dog': ["Cat or \\Dog", "CatOrDog"]}
     fail += execute_tests(sf.get_sid_refs, data, fails)
 
     # get_element_name() tests
@@ -376,20 +379,21 @@ def main():
     fail += run_strfunc_test(sf.get_element_name, attribute2, "MathML math",
                              fails)
     fail += run_strfunc_test(sf.get_element_name, attribute3,
-                             "\BarListOfFoos", fails)
+                             "\\BarListOfFoos", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute4, "Unit", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute5,
-                             "\BarListOfUnits", fails)
+                             "\\BarListOfUnits", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute5,
-                             "\ListOfUnits", fails, add_prefix_if_not_pkg=False)
+                             "\\ListOfUnits", fails,
+                             add_prefix_if_not_pkg=False)
     fail += run_strfunc_test(sf.get_element_name, attribute5,
-                             "\ListOfUnits", fails, leave_pkg_prefix=False)
+                             "\\ListOfUnits", fails, leave_pkg_prefix=False)
     fail += run_strfunc_test(sf.get_element_name, attribute6, "FIX_ME", fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute7, "\Foo", fails)
+    fail += run_strfunc_test(sf.get_element_name, attribute7, "\\Foo", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute8,
-                             "\BarListOfUnits", fails)
+                             "\\BarListOfUnits", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute8,
-                             "\ListOfAnything", fails, leave_pkg_prefix=False)
+                             "\\ListOfAnything", fails, leave_pkg_prefix=False)
 
     gv.reset()
     gv.prefix = 'Bar'
@@ -402,24 +406,24 @@ def main():
                   'name': 'Unit',
                   'isListOf': True, 'listOfClassName': 'ListOfUnits'}
     fail += run_strfunc_test(sf.get_element_name, attribute1,
-                             "\ListOfFooUnits", fails)
+                             "\\ListOfFooUnits", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute1,
-                             "\ListOfFooUnits", fails, leave_pkg_prefix=False)
-    fail += run_strfunc_test(sf.get_element_name, attribute1,
-                             "\ListOfFooUnits", fails, add_prefix_if_not_pkg=False)
+                             "\\ListOfFooUnits", fails,
+                             add_prefix_if_not_pkg=False)
     fail += run_strfunc_test(sf.get_element_name, attribute2,
-                             "\ListOfUnits", fails)
+                             "\\ListOfUnits", fails)
     fail += run_strfunc_test(sf.get_element_name, attribute2,
-                             "\ListOfUnits", fails, leave_pkg_prefix=False)
+                             "\\ListOfUnits", fails, leave_pkg_prefix=False)
     fail += run_strfunc_test(sf.get_element_name, attribute2,
-                             "\ListOfUnits", fails, add_prefix_if_not_pkg=False)
-
+                             "\\ListOfUnits", fails,
+                             add_prefix_if_not_pkg=False)
 
     # replace_digits() tests
-    fail += run_strfunc_test(sf.replace_digits, "John 3:16", "John Three:OneSix", fails)
+    fail += run_strfunc_test(sf.replace_digits, "John 3:16",
+                             "John Three:OneSix", fails)
 
     # replace_underscore() tests
-    data = {"this_is_a_test": "this\_is\_a\_test", "cat": "cat", "_": "\_"}
+    data = {"this_is_a_test": "this\\_is\\_a\\_test", "cat": "cat", "_": "\\_"}
     fail += execute_tests(sf.replace_underscore, data, fails)
 
     # remove_spaces() tests
@@ -433,7 +437,7 @@ def main():
 
     # texify() tests
     fail += run_strfunc_test(sf.texify, "012_27 cat44_8 ",
-                             "ZeroOneTwo\_TwoSevencatFourFour\_Eight", fails)
+                             "ZeroOneTwo\\_TwoSevencatFourFour\\_Eight", fails)
 
     # compare_no_case() tests
     fail += run_strfunc_test(sf.compare_no_case, "This iS a TEST", True, fails,
@@ -498,13 +502,13 @@ def main():
     run_strfunc_test(sf.prefix_classes, changing_dict, None, fails)
     fail += compare_dictionaries(changing_dict, expected_dict, fails)
 
-
     # is_camel_case() tests
     data = {'FooParameter': True, 'fooParameter': True, 'fooparameter': False,
             'Fooparameter': False}
     fail += execute_tests(sf.is_camel_case, data, fails)
 
-    ####################### Tests completed. #########################
+    # Tests completed
+    #############################################
 
     test_functions.report('strfunc', fail, fails, not_tested)
     return fail
