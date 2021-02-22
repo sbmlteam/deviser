@@ -4,6 +4,7 @@
 # @brief   class for generating cmake register file
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -42,7 +43,7 @@ from util import strFunctions, global_variables
 
 
 class RegisterFile():
-    """Class for cmake package files"""
+    """Class for CMake package files"""
 
     def __init__(self, name, package, src):
 
@@ -72,23 +73,38 @@ class RegisterFile():
     # Write specific code
 
     def write_header_file(self):
+        """
+        Add code to the .h file.
+
+        NB I think that's correct? It doesn't write another file?
+        So might need renaming.
+
+        """
         self.fileout.skip_line()
         self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
         self.fileout.up_indent()
-        self.fileout.write_line_verbatim('#include <{0}/packages/{1}/extension/'
-                                         '{2}Extension.'
-                                         'h>'.format(self.language,
-                                                     self.package,
-                                                     self.up_package))
+        self.fileout.write_line_verbatim(('#include '
+                                          '<{0}/packages/{1}/extension/'
+                                          '{2}Extension.h>').
+                                         format(self.language,
+                                                self.package,
+                                                self.up_package))
         self.fileout.down_indent()
         self.fileout.write_line('#endif')
         self.fileout.skip_line()
 
     def write_src_file(self):
+        """
+        Add lines to .cxx file.
+
+        TODO see comment on previous function; that applies here, too.
+        """
         self.fileout.skip_line()
-        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
+        self.fileout.write_line('#ifdef USE_{0}'.
+                                format(self.cap_package))
         self.fileout.up_indent()
-        self.fileout.write_line('{0}Extension::init();'.format(self.up_package))
+        self.fileout.write_line('{0}Extension::init();'.
+                                format(self.up_package))
         self.fileout.down_indent()
         self.fileout.write_line('#endif')
         self.fileout.skip_line()
@@ -97,6 +113,9 @@ class RegisterFile():
     # Write file
 
     def write_file(self):
+        """
+        Write the required file.
+        """
         self.fileout.write_file()
         if self.src:
             self.write_src_file()
@@ -104,4 +123,7 @@ class RegisterFile():
             self.write_header_file()
 
     def close_file(self):
+        """
+        Utility wrapper function to close a file.
+        """
         self.fileout.close_file()

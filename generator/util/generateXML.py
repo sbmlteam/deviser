@@ -38,6 +38,8 @@
 # ------------------------------------------------------------------------ -->
 
 import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
 
 from parseXML import ParseXML
 from util import global_variables as gv

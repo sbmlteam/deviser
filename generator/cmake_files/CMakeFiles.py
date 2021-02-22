@@ -4,6 +4,7 @@
 # @brief   class for generating the cmake files
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -44,11 +45,11 @@ from . import PackageFile
 from . import RegisterFile
 from . import BaseCMakeFiles
 from . import CMakeListsFile
-from base_files import BaseCppFile
 from code_files import CppExampleFile
 
+
 class CMakeFiles():
-    """Class for all cmake files"""
+    """Class for all CMake files"""
 
     def __init__(self, pkg_object, this_dir, verbose=False):
         self.verbose = verbose
@@ -65,12 +66,18 @@ class CMakeFiles():
     #########################################################################
 
     def write_package_files(self):
+        """
+        Write 'package' files, e.g. spatial-package.cmake,
+        both 'top level' and 'example' instances.
+        """
         name = '{0}-package'.format(self.package)
+
         ext = PackageFile.PackageFile(name, self.package, False)
         if self.verbose:
             print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
+
         os.chdir('src')
         ext = PackageFile.PackageFile(name, self.package, True)
         if self.verbose:
@@ -80,6 +87,10 @@ class CMakeFiles():
         os.chdir(self.this_dir)
 
     def write_register_files(self):
+        """
+        Create the 'register' files, e.g. 'spatial-register.h' and
+        'spatial-register.cxx'.
+        """
         name = '{0}-register'.format(self.package)
         ext = RegisterFile.RegisterFile(name, self.package, False)
         if self.verbose:
@@ -93,18 +104,23 @@ class CMakeFiles():
         ext.close_file()
 
     def write_example_files(self):
+        """
+        Write example files. I think this is only used by the test code.
+        """
         name = '{0}-package'.format(self.package)
         ext = PackageFile.PackageFile(name, self.package, False, True)
         if self.verbose:
             print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_example_file()
         ext.close_file()
+
         os.chdir('c++/{0}'.format(self.package))
         txt = CMakeListsFile.CMakeListsFile('CMakeLists', self.package)
         if self.verbose:
             print('Writing file {0}'.format(txt.fileout.filename))
         txt.write_file()
         txt.close_file()
+
         ex = CppExampleFile.CppExampleFile(self.pkg_object)
         if self.verbose:
             print('Writing file {0}'.format(ex.filename))
@@ -114,12 +130,18 @@ class CMakeFiles():
     ########################################################################
 
     def write_files(self):
+        """
+        Write 'package' and 'register' files.
+        """
         self.write_package_files()
         os.chdir('src/{0}/packages'.format(self.language))
         self.write_register_files()
         os.chdir(self.this_dir)
 
     def write_other_library_files(self):
+        """
+        Write CMakeLists.txt files in different directories.
+        """
         os.chdir(self.this_dir)
         cmake = BaseCMakeFiles.BaseCMakeFiles(self.verbose)
         cmake.write_files()

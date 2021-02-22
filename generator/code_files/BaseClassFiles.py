@@ -4,6 +4,7 @@
 # @brief   class for generating base files for other library implementations
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -39,29 +40,39 @@
 
 # NB issue 45 - consider moving this file to base_files directory.
 
-import re
-import os
+# import re
+# import os
 
 from . import CppHeaderFile
 from . import CppCodeFile
 from . import ValidationFiles
-from util import strFunctions, global_variables, query
-from base_files import BaseFile, BaseCMakeFile, BaseTemplateFile
+from util import strFunctions as SF, global_variables as gv, query
+from base_files import BaseCMakeFile, BaseTemplateFile
 
 
 class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
     """Class for all Base files"""
 
     def __init__(self, name, elements, verbose=False):
+        """
+        Constructor
+
+        :param name: e.g. "Sed"
+        :param elements: list of dictionaries, each storing information
+               about a class.
+        :param verbose: set to `True` for more output.
+        """
         # members from object
-        # self.class_prefix = strFunctions.upper_first(name)
+        # self.class_prefix = SF.upper_first(name)
         BaseTemplateFile.BaseTemplateFile.__init__(self, name, 'code_files')
 
         self.elements = elements
-
         self.verbose = verbose
 
     def write_files(self):
+        """
+        Write all the files we require (a .h and .cpp file for each).
+        """
         self.write_all_files('SBase')
         self.write_all_files('ListOf')
         self.write_all_files('ConstructorException')
@@ -76,6 +87,11 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         self.write_header('ErrorTable')
 
     def write_common_files(self):
+        """
+        Write the 'common' files.
+
+        TODO Sarah, please explain. Thanks.
+        """
         self.write_header('common', True)
         self.write_header('extern', True)
         self.write_header('lib-config', True)
@@ -86,10 +102,22 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         self.write_all_files('OperationReturnValues')
 
     def write_all_files(self, name):
+        """
+        Write both the .h file and the .cpp file
+
+        :param name: name of the file, e.g. "Hello" will
+               cause Hello.h and Hello.cpp to be written.
+        """
         self.write_header(name)
         self.write_code(name)
 
     def write_header(self, name, common=False):
+        """
+        Write the header file (.h file)
+
+        :param name: e.g. "Hello", to create file "Hello.h".
+        :param common: ???
+        """
         base_descrip = self.create_base_description(name, common)
         fileout = CppHeaderFile.CppHeaderFile(base_descrip, False)
         filein = '{0}.h'.format(name)
@@ -101,6 +129,12 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.close_file()
 
     def write_code(self, name, common=False):
+        """
+        Write the implementation (.cpp) file.
+
+        :param name: e.g. "Hello" will create file Hello.cpp
+        :param common: ???
+        """
         base_descrip = self.create_base_description(name, common)
         fileout = CppCodeFile.CppCodeFile(base_descrip, False)
         filein = '{0}.cpp'.format(name)
@@ -112,14 +146,22 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.close_file()
 
     def write_cmake(self, name):
+        """
+        Copy the CMake (.cmake) file
+
+        :param name: e.g. "Hello" will cause Hello.cmake to be written.
+                A name like "libPaisley" might create libsbml-Paisley.cmake
+                (depending on value of gv.library_name)
+        """
         if name.startswith('lib'):
-            if global_variables.library_name.lower().startswith('lib'):
-                out_name = '{0}-{1}'.format(global_variables.library_name.lower(), name[4:])
+            if gv.library_name.lower().startswith('lib'):  # e.g. Libsbml
+                out_name = '{0}-{1}'.format(gv.library_name.lower(), name[4:])
             else:
-                out_name = 'lib{0}-{1}'.format(global_variables.library_name.lower(), name[4:])
+                out_name = 'lib{0}-{1}'.format(gv.library_name.lower(),
+                                               name[4:])
         else:
             out_name = name
-#        out_name = 'lib{0}-{1}'.format(global_variables.language, name[4:])
+        # out_name = 'lib{0}-{1}'.format(gv.language, name[4:])
         fileout = BaseCMakeFile.BaseCMakeFile(out_name)
         filein = '{0}.cmake'.format(name)
         if self.verbose:
@@ -128,35 +170,66 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.close_file()
 
     def print_includes(self, fileout):
+        """
+        Write the #include lines to the output file
+
+        :param fileout: object representing output file we are writing.
+        """
         for element in self.elements:
-            name = strFunctions.prefix_name(element['name'])
+            name = SF.prefix_name(element['name'])
             fileout.copy_line_verbatim('#include <{0}/{1}.h>\n'
-                                       ''.format(global_variables.language,
+                                       ''.format(gv.language,
                                                  name))
 
     def print_typecodes(self, fileout):
+        """
+        Write the typecode lines to the file.
+
+        :param fileout: object representing output file we are writing.
+               e.g. a CppHeaderFile.CppHeaderFile object
+               with name 'SedTypeCodes'
+
+        Example typecodes: 'MY_TEST_TYPE', 'MY_SECOND_TYPE'
+        """
         for element in self.elements:
-          #  if not element['name'].endswith('Document'):
+            # if not element['name'].endswith('Document'):
             name = element['typecode']
-            fileout.copy_line_verbatim('  , {0}\n'
-                                           ''.format(name))
+            fileout.copy_line_verbatim('  , {0}\n'.format(name))
 
     def print_typecode_strings(self, fileout):
+        """
+        Write out the typecode strings, for each class represented
+            in self.elements
+        TODO not sure what typecode strings are
+
+        :param fileout: object representing output file we are writing.
+        """
         for element in self.elements:
-        #   if not element['name'].endswith('Document'):
-            name = strFunctions.remove_prefix(element['name'])
-            fileout.copy_line_verbatim('  , \"{0}\"\n'
-                                           ''.format(name))
+            # if not element['name'].endswith('Document'):
+            name = SF.remove_prefix(element['name'])
+            fileout.copy_line_verbatim('  , \"{0}\"\n'.format(name))
 
     def print_visit_header(self, fileout):
+        """
+        Cycle over all the class dictionaries in self.elements
+        Write visitor header to file represented by fileout object
+
+        ::param fileout: object representing output file we are writing.
+        """
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                if not 'document' in element or not element['document']:
-                    name = strFunctions.prefix_name(element['name'])
+                if 'document' not in element or not element['document']:
+                    name = SF.prefix_name(element['name'])
                     self.write_visit_header(fileout, name)
                     fileout.skip_line(2)
 
     def write_visit_header(self, fileout, name):
+        """
+        Write the file header for the Visitor pattern
+
+        ::param fileout: object representing output file we are writing.
+        :param name: the name of the SBase object we are visiting
+        """
         fileout.open_comment()
         fileout.write_comment_line('Interface method for using the '
                                    '<a target=\"_blank\" ')
@@ -173,14 +246,25 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.write_line('virtual bool visit (const {0} &x);'.format(name))
 
     def print_leave_header(self, fileout):
+        """
+        Print the leave() header for certain classes.
+
+        :param fileout: object representing output file we are writing.
+        """
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                if not 'document' in element or not element['document']:
-                    name = strFunctions.prefix_name(element['name'])
+                if 'document' not in element or not element['document']:
+                    name = SF.prefix_name(element['name'])
                     fileout.skip_line(2)
                     self.write_leave_header(fileout, name)
 
     def write_leave_header(self, fileout, name):
+        """
+        Write the part of the header concerning the leave() method.
+
+        :param fileout: object representing output file we are writing.
+        :param name: the name of the SBase object class which leave() uses.
+        """
         fileout.open_comment()
         fileout.write_comment_line('Interface method for using the '
                                    '<a target=\"_blank\" ')
@@ -197,13 +281,27 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.write_line('virtual void leave (const {0} &x);'.format(name))
 
     def print_visit_code(self, fileout):
+        """
+        Cycle through the list of dictionaries in self.elements,
+            which represent classes. Write Visitor code for those
+            which .... TODO Sarah please complete this sentence
+
+        :param fileout: object representing output file we are writing.
+        """
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                if not 'document' in element or not element['document']:
-                    name = strFunctions.prefix_name(element['name'])
+                if 'document' not in element or not element['document']:
+                    name = SF.prefix_name(element['name'])
                     self.write_visit_code(fileout, name)
 
     def write_visit_code(self, fileout, name):
+        """
+        Write out the visit() function implementation code.
+
+        :param fileout: object representing output file we are writing.
+        :param name: the name of the object class we are visiting.
+        """
+        impl = 'return visit(static_cast<const SBase&>(x))'
         code = dict({'title_line': 'Visit the {0}'.format(name),
                      'params': ['const {0}& x'.format(name)],
                      'return_lines': [],
@@ -213,19 +311,35 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                      'arguments': ['const {0}& x'.format(name)],
                      'constant': False,
                      'virtual': False,
-                     'object_name': '{0}Visitor'.format(global_variables.prefix),
-                     'implementation': [self.create_code_block('line', [self.adjust_line('return visit(static_cast<const SBase&>(x))')])]})
+                     'object_name': '{0}Visitor'.format(gv.prefix),
+                     'implementation':
+                         [self.create_code_block('line',
+                                                 [self.adjust_line(impl)])]})
         fileout.write_function_implementation(code)
 
     def print_leave_code(self, fileout):
+        """
+        Cycle through the list of dictionaries in self.elements,
+            which represent classes. Write leave() code for those
+            which .... TODO Sarah please complete this sentence
+
+        :param fileout: object representing output file we are writing.
+        """
         fileout.skip_line(2)
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                if not 'document' in element or not element['document']:
-                    name = strFunctions.prefix_name(element['name'])
+                if 'document' not in element or not element['document']:
+                    name = SF.prefix_name(element['name'])
                     self.write_leave_code(fileout, name)
 
     def write_leave_code(self, fileout, name):
+        """
+        Write function implementation for leave().
+         I'm not sure how this fits in with the Visitor pattern.
+
+        :param fileout: object representing output file we are writing.
+        :param name: name of class we are leaving
+        """
         code = dict({'title_line': 'Leave the {0}'.format(name),
                      'params': ['const {0}& x'.format(name)],
                      'return_lines': [],
@@ -235,30 +349,52 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                      'arguments': ['const {0}& x'.format(name)],
                      'constant': False,
                      'virtual': False,
-                     'object_name': '{0}Visitor'.format(global_variables.prefix),
+                     'object_name': '{0}Visitor'.format(gv.prefix),
                      'implementation': [self.create_code_block('blank', [])]})
         fileout.write_function_implementation(code)
 
     def print_visitor_forwards(self, fileout):
+        """
+        Write forward declarations of classes we want to be able to visit.
+
+        :param fileout: object representing output file we are writing.
+        """
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                name = strFunctions.prefix_name(element['name'])
+                name = SF.prefix_name(element['name'])
                 fileout.write_line('class {0};'.format(name))
-
 
     @staticmethod
     def create_code_block(code_type, lines):
+        """
+        Create a dictionary storing the code we want to write.
+
+        :param code_type: e.g. 'line' or 'blank'
+        :param lines: e.g. ['return visit(static_cast<const SedBase&>(x))']
+            or []
+        :return: dictionary containing both of the above.
+        """
         code = dict({'code_type': code_type, 'code': lines})
         return code
 
     def print_error_enum(self, fileout):
-        for error in global_variables.class_rules:
+        """
+        Write out contents of an enum for typecode errors.
+
+        :param fileout: object representing output file we are writing.
+        """
+        for error in gv.class_rules:
             name = error['typecode']
             if not name.endswith('Unknown'):
                 fileout.copy_line_verbatim(', {0}      = {1}\n'
                                            ''.format(name, error['number']))
 
     def print_error_table(self, fileout):
+        """
+        ????
+
+        :param fileout: object representing output file we are writing.
+        """
         # create a dummy object so we can use the validation files code
         lib_object = dict({'name': '',
                            'offset': 0,
@@ -272,22 +408,28 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                            'enums': None})
         valid = ValidationFiles.ValidationFiles(lib_object, True)
         valid.set_error_file(fileout)
-        for error in global_variables.class_rules:
+        for error in gv.class_rules:
             name = error['typecode']
             if not name.endswith('Unknown'):
                 valid.write_table_entry(error)
 
     def print_document_errors(self, fileout):
+        """
+        Write out the document errors to the file.
+        TODO Sorry, I don't know what these are
+
+        :param fileout: object representing output file we are writing.
+        """
         root = {'baseElements': self.elements}
-        doc = query.get_class(global_variables.document_class, root)
+        doc = query.get_class(gv.document_class, root)
         if not doc:
             docname = 'Document'
         else:
-            docname = strFunctions.remove_prefix(doc['name'], False, False, '', True)
-        libname = strFunctions.get_library_suffix(global_variables.library_name)
+            docname = SF.remove_prefix(doc['name'], False, False, '', True)
+        libname = SF.get_library_suffix(gv.library_name)
         if not libname.endswith('ml'):
             libname = libname + 'ml'
-        fileout.copy_line_verbatim('          if ( errorId == {0}{1}Allowed'
+        fileout.copy_line_verbatim((10 * '') + 'if ( errorId == {0}{1}Allowed'
                                    'CoreAttributes\n'.format(libname, docname))
         level = False
         version = False
@@ -298,14 +440,12 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                 elif a['name'] == 'version':
                     version = True
         if level:
-            fileout.copy_line_verbatim('            || errorId == {0}{1}'
+            fileout.copy_line_verbatim((12 * ' ') + '|| errorId == {0}{1}'
                                        'LevelMustBeNonNegativeInteger\n'
                                        ''.format(libname, docname))
         if version:
-            fileout.copy_line_verbatim('            || errorId == {0}{1}'
+            fileout.copy_line_verbatim((12 * ' ') + '|| errorId == {0}{1}'
                                        'VersionMustBeNonNegativeInteger\n'
                                        ''.format(libname, docname))
         fileout.copy_line_verbatim('            || errorId == InvalidNamespace'
-                                   'On{0})\n'.format(global_variables.prefix))
-
-
+                                   'On{0})\n'.format(gv.prefix))
