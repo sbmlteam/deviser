@@ -114,8 +114,8 @@ def abbrev_name(name):
     This takes any capitals in the name and returns these as a lowercase
     abbreviation of the name. This facilitates the use of names in functions
     such as getFoo(Model *m), where m is the abbreviation of Model.
-    Note if the name argument contains no capitals then the first letter 
-    is returned as the abbreviation. 
+    Note if the name argument contains no capitals then the first letter
+    is returned as the abbreviation.
 
     .. code-block:: default
 
@@ -210,7 +210,7 @@ def cap_list_of_name(name, add_prefix=True):
 
 def cap_list_of_name_no_prefix(name):
     """
-    Get the "list of" name for a string, without the prefix if its not
+    Get the "list of" name for a string, without the prefix if it is not
     a package, with the first letter in upper-case.
 
     :param name: the string which we want the "list of" name for.
@@ -325,7 +325,8 @@ def remove_prefix(name, remove_package=True,
     :param remove_doc_prefix: if True,
         and name ends in 'Document', remove prefix.
         Defaults to False.
-    :return: the input string, possibly with something removed at the beginning.
+    :return: the input string, possibly with something
+        removed at the beginning.
 
     .. code-block:: default
 
@@ -333,7 +334,8 @@ def remove_prefix(name, remove_package=True,
 
         remove_prefix('FbcType') returns 'Type'
         remove_prefix('FbcDocument', remove_doc_prefix=True) returns 'Document'
-        remove_prefix('FbcDocument', remove_doc_prefix=False) returns 'FbcDocument'
+        remove_prefix('FbcDocument', remove_doc_prefix=False)
+                      returns 'FbcDocument'
 
         Writing SBML package with gv. package_prefix ''
 
@@ -455,7 +457,8 @@ def standard_element_name(name):
     returned_word = temp
 
     # Also don't want ListOf
-    if returned_word.startswith('ListOf') or returned_word.startswith('listOf'):
+    if returned_word.startswith('ListOf') or \
+            returned_word.startswith('listOf'):
         temp = singular(returned_word[6:length])
     return upper_first(temp)
 
@@ -484,6 +487,7 @@ def get_library_suffix(name):
 # The following functions are specifically for use when writing latex
 # TODO come back to writing tex files when fixing #53
 
+
 def wrap_token(name, pkg=''):
     """
     Returns the name wrapped as a token specifically for writing latex
@@ -493,8 +497,8 @@ def wrap_token(name, pkg=''):
     :return: the "wrapped" name
 
     This function is for use when writing latex so that an attribute name
-    can be wrapped with the \token command
-    e.g. \token{'id'} or \token{'comp:\-id'}
+    can be wrapped with the \\token command
+    e.g. \\token{'id'} or \\token{'comp:\\-id'}
 
     """
     if pkg == '':
@@ -542,7 +546,7 @@ def wrap_section(name, add_class=True, add_extended=False):
     :param add_extended:
     :return:
 
-    e.g. "Cat" -> "\sec{cat-class}"
+    e.g. "Cat" -> "\\sec{cat-class}"
     """
     if add_class:
         return '\\sec{' + make_class(name, add_extended) + '}'
@@ -562,7 +566,7 @@ def make_class(name, add_extended=False):
 
         make_class('Irenaeus') -> "irenaeus-class"
         make_class('Irenaeus", True) -> "extended-irenaeus-class"
-        
+
     """
     if add_extended:
         return 'extended-' + name.lower() + '-class'
@@ -597,11 +601,12 @@ def get_sid_refs(refs):
 
     :param refs: a string which is a comma-separated sequence of element names
     :return: a tuple where the first is a string representing a textual list
-    of the elements and the second is a string representing a combined type.
+        of the elements and the second is a string
+        representing a combined type.
 
     .. code-block:: default
 
-        get_sid_refs('cat,dog') = ["Cat or \Dog", "CatOrDog"]
+        get_sid_refs('cat,dog') = ["Cat or \\Dog", "CatOrDog"]
 
     """
     if refs == '':
@@ -617,7 +622,7 @@ def get_sid_refs(refs):
             ret_string = upper_first(str_refs[0])
             ret_type = upper_first(str_refs[0])
             for i in range(1, length):
-                ret_string += ' or \{0}'.format(upper_first(str_refs[i]))
+                ret_string += ' or \\{0}'.format(upper_first(str_refs[i]))
                 ret_type += 'Or{0}'.format(upper_first(str_refs[i]))
         return [ret_string, ret_type]
 
@@ -630,9 +635,10 @@ def get_element_name(attribute, add_prefix_if_not_pkg=True,
     validation rules).
 
     :param attribute: dictionary of information about the element.
-    :param add_prefix_if_not_pkg: boolean indicating whether the global prefix should
-        be prepended to the name if this is not a package
-    :param leave_pkg_prefix: boolean indication whether to leave a prefix in place
+    :param add_prefix_if_not_pkg: boolean indicating whether the
+        global prefix should be prepended to the name if this is not a package
+    :param leave_pkg_prefix:
+        boolean indication whether to leave a prefix in place
     :return: the name, if available, else 'FIX_ME'.
     """
     if 'type' in attribute:
@@ -646,15 +652,15 @@ def get_element_name(attribute, add_prefix_if_not_pkg=True,
                 name = attribute['name']
         if attribute['type'] in ['lo_element', 'inline_lo_element']:
             if leave_pkg_prefix:
-                return '\{0}'.format(cap_list_of_name
-                                     (name, add_prefix_if_not_pkg))
+                return '\\{0}'.\
+                    format(cap_list_of_name(name, add_prefix_if_not_pkg))
             else:
                 if 'listOfClassName' in attribute and \
                         attribute['listOfClassName'] != '':
-                    return '\{0}'.format(
+                    return '\\{0}'.format(
                         remove_prefix(attribute['listOfClassName']))
                 else:
-                    return '\{0}'.format(cap_list_of_name_no_prefix(name))
+                    return '\\{0}'.format(cap_list_of_name_no_prefix(name))
         elif attribute['type'] == 'element':
             if attribute['element'] == 'ASTNode*':
                 return 'MathML math'
@@ -664,9 +670,11 @@ def get_element_name(attribute, add_prefix_if_not_pkg=True,
             return 'FIX_ME'
     elif 'isListOf' in attribute:
         if attribute['isListOf']:
-            return '\{0}'.format(cap_list_of_name(remove_prefix(attribute['name'])))
+            return '\\{0}'.format(cap_list_of_name(
+                remove_prefix(attribute['name'])))
         else:
-            return '\{0}'.format(upper_first(remove_prefix(attribute['name'])))
+            return '\\{0}'.format(upper_first(
+                remove_prefix(attribute['name'])))
     else:
         return 'FIX_ME'
 
@@ -697,9 +705,9 @@ def replace_underscore(name):
     Replace underscore characters in a string with escaped underscores.
 
     :param name: string to process
-    :return: string with every '_' changed to '\_'.
+    :return: string with every '_' changed to '\\_'.
     """
-    name = re.sub('_', '\_', name)
+    name = re.sub('_', '\\_', name)
     return name
 
 
@@ -762,8 +770,8 @@ def texify(name):
 
     .. code-block:: default
 
-         texify('  phase_1: part_2  ') -> "phase\_One:part\_Two')
-         texify('012_27 44_8 ') -> "ZeroOneTwo\_TwoSevenFourFour\_Eight"
+         texify('  phase_1: part_2  ') -> "phase\\_One:part\\_Two')
+         texify('012_27 44_8 ') -> "ZeroOneTwo\\_TwoSevenFourFour\\_Eight"
 
     """
     name = replace_digits(name)
@@ -846,11 +854,12 @@ def prefix_classes(working_class):
     working_class['name'] = prefix_name(existing_name)
     if working_class['baseClass'] != gv.baseClass:
         working_class['baseClass'] = prefix_name(working_class['baseClass'])
-    if 'elementName' not in working_class or len(working_class['elementName']) == 0:
+    if 'elementName' not in working_class or \
+            len(working_class['elementName']) == 0:
         working_class['elementName'] = lower_first(existing_name)
 
-    if 'lo_class_name' in working_class \
-            and len(working_class['lo_class_name']) > 0:
+    if 'lo_class_name' in working_class and \
+            len(working_class['lo_class_name']) > 0:
         name = working_class['lo_class_name']
         working_class['lo_class_name'] = prefix_name(name)
 
@@ -861,8 +870,8 @@ def prefix_classes(working_class):
         return
 
     for attrib in working_class['attribs']:
-        if attrib['type'] == 'lo_element' or attrib['type'] == 'element' or \
-                        attrib['type'] == 'inline_lo_element':
+        if attrib['type'] == 'lo_element' or attrib['type'] == 'element' or\
+                attrib['type'] == 'inline_lo_element':
             attrib['element'] = prefix_name(attrib['element'])
         if 'concrete' in attrib:
             for conc in attrib['concrete']:
@@ -880,7 +889,7 @@ def is_camel_case(name):
     :return: True if word is in camel case, False if not
 
     .. code-block:: default
-    
+
         is_camel_case('FooParameter') -> True
         is_camel_case('fooParameter') -> True
         is_camel_case('fooparameter') -> False
