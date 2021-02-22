@@ -284,8 +284,8 @@ def get_parent_class(class_object):
     :param class_object: the object representing the class.
     :return: parent class, if found, or '' if not found
 
-    e.g. in the following XML, the 'unit' attribute is an element of type 'Unit'
-    so
+    e.g. in the following XML, the 'unit' attribute is an element of
+    type 'Unit'
 
     .. code-block:: default
 
@@ -728,7 +728,8 @@ def has_lo_attribute(element, attribute):
 
     :param element: an element object
     :param attribute: an attribute object
-    :return: Return `True` if `listOf` class for element has attribute specified
+    :return: Return `True` if `listOf` class for element
+        that has attribute specified
     """
     if element is None:
         return False
@@ -767,20 +768,21 @@ def is_sbml_specific_base_lo_attribute(element, attribute):
     return False
 
 
-def overwrites_name(root, name):
+def overwrites_name(root_object, name):
     """
     Works out if the xml name used for this attribute is different from the
     name used in the dict objects.
 
     :param root_object: dict of all elements
     :param name: the name of the attribute to check
-    :return: `True` if the attribute has a different xml name, `False` otherwise
+    :return: `True` if the attribute has a different xml name,
+        `False` otherwise
     """
-    if root is None:
+    if root_object is None:
         return False
     overwrites = False
     unprefixed_name = strFunctions.remove_prefix(name)
-    for element in root['baseElements']:
+    for element in root_object['baseElements']:
         for attrib in element['attribs']:
             if attrib['element'] == unprefixed_name and \
                     attrib['type'] != 'SIdRef':
@@ -954,8 +956,8 @@ def get_default_enum_value(attribute):
 
     :param attribute: attribute dict for required
     :return: string representing the invalid enum value or 'INVALID' if
-             the attribute dict does not have an element name corresponding to a
-             listed enumeration.
+             the attribute dict does not have an element name corresponding
+             to a listed enumeration.
 
     e.g. An attribute
 
@@ -1015,8 +1017,8 @@ def get_first_enum_value(attribute):
 
     :param attribute: attribute dict for required
     :return: string representing the first enum value or '' if
-             the attribute dict does not have an element name corresponding to a
-             listed enumeration.
+             the attribute dict does not have an element name corresponding
+             to a listed enumeration.
 
     e.g. An attribute
 
@@ -1198,8 +1200,8 @@ def get_other_element_children(this_object, element):
 
     :param this_object: object dict to be queried
     :param element: dict of element (e.g. `Foo`) for which we wish to discover
-        whether the corresponding `listOfFoo` element contains children of a type
-        other than `Foo`
+        whether the corresponding `listOfFoo` element contains children
+        of a type other than `Foo`
     :return: list of names of any children of a `listOfFoo` that are not of
         type `Foo`
 
@@ -1244,6 +1246,7 @@ def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
         that are required
     :param base_attributes: list of attributes that are on the base class of
         the concrete classes
+    :param name
 
     TODO an example would be helpful.
     """
@@ -1398,7 +1401,7 @@ def get_child_elements(elements, lo_elements, root=None):
             name = strFunctions.remove_prefix(elem['name'])
             # if 'xml_name' in elem and elem['xml_name'] != '':
             #     name = elem['xml_name']
-            [used_child_name, unused] = \
+            [used_child_name, _] = \
                 strFunctions.remove_hyphens(elem['capAttName'])
             # if 'used_child_name' in elem and elem['used_child_name'] != '':
             #     used_child_name = elem['used_child_name']
@@ -1479,7 +1482,6 @@ def create_object_tree(pkg_object, reqd_only=True):
     tree = []
     root = None
     for i in range(0, len(pkg_object['plugins'])):
-        branch = None
         plugin = pkg_object['plugins'][i]
         children = []
         if len(plugin['extension']) > 0:

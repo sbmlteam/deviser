@@ -95,47 +95,47 @@ global uses_XMLNode
 uses_XMLNode = False
 
 global return_codes
-return_codes= dict({'success': 0,
-                    'failed to read file': 1,
-                    'missing function argument': 2,
-                    'invalid function arguments': 3,
-                    'parsing error': 4,
-                    'unknown type used': 5,
-                    'unknown error - please report': 6,
-                    'missing required information': 7})
+return_codes = dict({'success': 0,
+                     'failed to read file': 1,
+                     'missing function argument': 2,
+                     'invalid function arguments': 3,
+                     'parsing error': 4,
+                     'unknown type used': 5,
+                     'unknown error - please report': 6,
+                     'missing required information': 7})
 
 global code_returned
 code_returned = return_codes['success']
 
 global ret_success
-#ret_success = '{0}_OPERATION_SUCCESS'.format(library_name.upper())
+# ret_success = '{0}_OPERATION_SUCCESS'.format(library_name.upper())
 
 global ret_failed
-#ret_failed = '{0}_OPERATION_FAILED'.format(library_name.upper())
+# ret_failed = '{0}_OPERATION_FAILED'.format(library_name.upper())
 
 global ret_invalid_obj
-#ret_invalid_obj = '{0}_INVALID_OBJECT'.format(library_name.upper())
+# ret_invalid_obj = '{0}_INVALID_OBJECT'.format(library_name.upper())
 
 global ret_invalid_att
-#ret_invalid_att = '{0}_INVALID_ATTRIBUTE_VALUE'.format(library_name.upper())
+# ret_invalid_att = '{0}_INVALID_ATTRIBUTE_VALUE'.format(library_name.upper())
 
 global ret_level_mis
-#ret_level_mis = '{0}_LEVEL_MISMATCH'.format(library_name.upper())
+# ret_level_mis = '{0}_LEVEL_MISMATCH'.format(library_name.upper())
 
 global ret_vers_mis
-#ret_vers_mis = '{0}_VERSION_MISMATCH'.format(library_name.upper())
+# ret_vers_mis = '{0}_VERSION_MISMATCH'.format(library_name.upper())
 
 global ret_pkgv_mis
-#ret_pkgv_mis = '{0}_PKG_VERSION_MISMATCH'.format(library_name.upper())
+# ret_pkgv_mis = '{0}_PKG_VERSION_MISMATCH'.format(library_name.upper())
 
 global ret_ns_mis
-#ret_ns_mis = '{0}_NAMESPACES_MISMATCH'.format(library_name.upper())
+# ret_ns_mis = '{0}_NAMESPACES_MISMATCH'.format(library_name.upper())
 
 global ret_dup_id
-#ret_dup_id = '{0}_DUPLICATE_OBJECT_ID'.format(library_name.upper())
+# ret_dup_id = '{0}_DUPLICATE_OBJECT_ID'.format(library_name.upper())
 
 global ret_att_unex
-#ret_att_unex = '{0}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
+# ret_att_unex = '{0}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
 
 global namespaces
 global dependency
@@ -151,23 +151,28 @@ add_implementation = []
 global add_declaration
 add_declaration = []
 
+
 def add_additional_implementation(filename):
     if filename is not None:
         global add_implementation
         add_implementation.append(filename)
+
 
 def add_additional_declaration(filename):
     if filename is not None:
         global add_declaration
         add_declaration.append(filename)
 
+
 def set_custom_copyright(copyright):
     global custom_copyright
     custom_copyright = copyright
 
+
 def set_global_fullname(fullname):
     global package_full_name
     package_full_name = fullname
+
 
 def set_unknown_error(pkg):
     global unknown_error
@@ -176,8 +181,9 @@ def set_unknown_error(pkg):
 
 
 def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
-                specifications=[], depend=[], library_vers=[], copyright='', annot_elem='',
-                notes_elem='', use_id_1=True, use_name_1=True, ast=False, xml=False, top_name=''):
+                specifications=[], depend=[], library_vers=[],
+                my_copyright='', annot_elem='', notes_elem='', use_id_1=True,
+                use_name_1=True, ast=False, xml=False, top_name=''):
     global language
     language = lang
 
@@ -186,7 +192,8 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
     namespaces = []
     if len(specifications) > 0:
         namespaces = specifications
-        if not 'level' in namespaces[0] or (not namespaces[0]['level'] and not namespaces[0]['version']):
+        if 'level' not in namespaces[0] or (not namespaces[0]['level']
+                                            and not namespaces[0]['version']):
             has_level_version = False
     else:
         namespaces.append(dict({'namespace': 'not defined'}))
@@ -202,7 +209,7 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
         library_version = library_vers
 
     global custom_copyright
-    custom_copyright = copyright
+    custom_copyright = my_copyright
 
     if base:
         global baseClass
@@ -291,7 +298,8 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
     ret_invalid_obj = '{0}_INVALID_OBJECT'.format(library_name.upper())
 
     global ret_invalid_att
-    ret_invalid_att = '{0}_INVALID_ATTRIBUTE_VALUE'.format(library_name.upper())
+    ret_invalid_att = \
+        '{0}_INVALID_ATTRIBUTE_VALUE'.format(library_name.upper())
 
     global ret_level_mis
     ret_level_mis = '{0}_LEVEL_MISMATCH'.format(library_name.upper())

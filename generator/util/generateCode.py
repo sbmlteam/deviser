@@ -82,8 +82,7 @@ def generate_code_for(filename, overwrite=True):
             else:
                 generate_other_library_code(name, language, overwrite, ob)
         except Exception:
-             gv.code_returned \
-                 = gv.return_codes['unknown error - please report']
+            gv.code_returned = gv.return_codes['unknown error - please report']
 
 
 def generate_other_library_code(name, language, overwrite, ob):
