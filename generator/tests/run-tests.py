@@ -48,8 +48,9 @@ def main():
     run_test('cpp', 'code')
     run_test('exit', 'code')
     run_test('strfunc', 'code')
+    run_test('matlab', 'code')
     ## update for latest python
-    # run_test('tex', 'files')
+    #run_test('tex', 'files')
 
     print('')
 

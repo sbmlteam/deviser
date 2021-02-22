@@ -187,4 +187,5 @@ def has_sid_ref(attributes):
 Note that the beginning of the code is aligned with the 'c' in 'code-block'.
 And the blank line between the `code-block` directive and the XML code is also required.
 Some docstrings have multiple blocks of XML. separated by explanatory text. In such
-cases multiple `code-block` directives are required, one per XML code block.   
+cases multiple `code-block` directives are required, one per XML code block.  
+ 
