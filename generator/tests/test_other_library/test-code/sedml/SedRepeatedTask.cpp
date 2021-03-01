@@ -1473,7 +1473,7 @@ SedRepeatedTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   if (name == "listOfRanges")
   {
-    if (mRanges.size() != 0)
+    if (getErrorLog() && mRanges.size() != 0)
     {
       getErrorLog()->logError(SedmlRepeatedTaskAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1483,7 +1483,7 @@ SedRepeatedTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   }
   else if (name == "listOfTaskChanges")
   {
-    if (mSetValues.size() != 0)
+    if (getErrorLog() && mSetValues.size() != 0)
     {
       getErrorLog()->logError(SedmlRepeatedTaskAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1493,7 +1493,7 @@ SedRepeatedTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   }
   else if (name == "listOfSubTasks")
   {
-    if (mSubTasks.size() != 0)
+    if (getErrorLog() && mSubTasks.size() != 0)
     {
       getErrorLog()->logError(SedmlRepeatedTaskAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1598,12 +1598,12 @@ SedRepeatedTask::readAttributes(
   // resetModel bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetResetModel = attributes.readInto("resetModel", mResetModel);
 
   if (mIsSetResetModel == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

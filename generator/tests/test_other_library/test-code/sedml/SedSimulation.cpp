@@ -814,8 +814,8 @@ SedSimulation::removeChildObject(const std::string& elementName,
 {
   if (elementName == "algorithm")
   {
-    SedAlgorithm * obj = getAlgorithm();
-    if (unsetAlgorithm() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedAlgorithm * obj = mAlgorithm;
+    mAlgorithm = NULL; return obj;
   }
 
   return NULL;
@@ -919,7 +919,7 @@ SedSimulation::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   if (name == "algorithm")
   {
-    if (isSetAlgorithm())
+    if (getErrorLog() && isSetAlgorithm())
     {
       getErrorLog()->logError(SedmlSimulationAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1032,10 +1032,13 @@ SedSimulation::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the "
-      "<SedSimulation> element.";
-    log->logError(SedmlSimulationAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedSimulation> element.";
+      log->logError(SedmlSimulationAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 

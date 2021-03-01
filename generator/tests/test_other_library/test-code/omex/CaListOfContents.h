@@ -376,18 +376,6 @@ protected:
 
 
   friend class CaOmexManifest;
-
-  /** @cond doxygenlibCombineInternal */
-
-  /**
-   * Writes the namespace for the Combine package
-   */
-  virtual void writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-    stream) const;
-
-  /** @endcond */
-
-
 };
 
 

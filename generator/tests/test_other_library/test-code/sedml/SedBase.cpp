@@ -2174,7 +2174,7 @@ SedBase::read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
         {
           unsigned int errorId =
                              this->getErrorLog()->getError(n)->getErrorId();
-          if ( errorId == SedmlDocumentAllowedCoreAttributes
+if ( errorId == SedmlDocumentAllowedCoreAttributes
             || errorId == SedmlDocumentLevelMustBeNonNegativeInteger
             || errorId == SedmlDocumentVersionMustBeNonNegativeInteger
             || errorId == InvalidNamespaceOnSed)

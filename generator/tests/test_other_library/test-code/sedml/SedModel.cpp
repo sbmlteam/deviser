@@ -1190,7 +1190,7 @@ SedModel::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   if (name == "listOfChanges")
   {
-    if (mChanges.size() != 0)
+    if (getErrorLog() && mChanges.size() != 0)
     {
       getErrorLog()->logError(SedmlModelAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1305,10 +1305,13 @@ SedModel::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the <SedModel> "
-      "element.";
-    log->logError(SedmlModelAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedModel> element.";
+      log->logError(SedmlModelAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -1354,10 +1357,13 @@ SedModel::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'source' is missing from the "
-      "<SedModel> element.";
-    log->logError(SedmlModelAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sedml attribute 'source' is missing from the "
+        "<SedModel> element.";
+      log->logError(SedmlModelAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 }
 

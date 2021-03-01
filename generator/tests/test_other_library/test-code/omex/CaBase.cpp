@@ -2173,7 +2173,7 @@ CaBase::read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
         {
           unsigned int errorId =
                              this->getErrorLog()->getError(n)->getErrorId();
-          if ( errorId == CombinemlOmexManifestAllowedCoreAttributes
+if ( errorId == CombinemlOmexManifestAllowedCoreAttributes
             || errorId == InvalidNamespaceOnCa)
           {
             errorLoggedAlready = true;

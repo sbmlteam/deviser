@@ -296,7 +296,7 @@ def compare_cmake_file(this_dir):
     :param this_dir: lowest subdir containing the reference version of the file.
     :return: 0 on success, or file not present; 1 on failure.
     """
-    correct_file = os.path.normpath('./test-code/{0}/cmake/CMakeLists.txt'.format(gv.language))
+    correct_file = os.path.normpath('./test-code/{1}/cmake/{0}CMakeLists.txt'.format(this_dir, gv.language))
     temp_file = os.path.normpath('./temp/{1}/cmake/{0}/CMakeLists.txt'.format(this_dir, gv.language))
     return compare_files(correct_file, temp_file)
 
