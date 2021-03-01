@@ -471,7 +471,7 @@ class ParseXML():
         if add_code is not None:
             # Do we have the full path or not?
             if not os.path.exists(add_code):
-                temp = self.temp_dir + '//' + add_code
+                temp = os.path.join(self.temp_dir, add_code)
                 if os.path.exists(temp):
                     add_code = os.path.abspath(temp)
                 else:
