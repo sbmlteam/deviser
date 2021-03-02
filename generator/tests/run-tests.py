@@ -49,6 +49,7 @@ def main():
     run_test('exit', 'code')
     run_test('strfunc', 'code')
     run_test('matlab', 'code')
+    run_test('other', 'library')
     ## update for latest python
     #run_test('tex', 'files')
 
