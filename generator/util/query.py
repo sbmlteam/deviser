@@ -181,10 +181,9 @@ def get_class(name, root_object):
             return root_object['baseElements'][i]
 
 
-def is_inline_child(class_object):
+def get_inline_parents(class_object):
     """
-    If this object is an 'inline child', get list of inline parents.
-    See issue # 35
+    If this object is an 'inline child', get list of parents.
 
     :param class_object: structure representing a class
     :return: list of parents objects for which this class is an inline child
@@ -231,12 +230,9 @@ def is_inline_child(class_object):
        <container>
            <parameter attributes= . . . />
        </container>
-
-    This function is called from ../code_files/CppHeaderFile.py,
-    which iterates over the list returned.
     """
     inline_parents = []
-    parents = get_inline_parents(class_object)
+    parents = get_parents(class_object)
     for parent in parents:
         inline_child = False
         parent_class = get_class(parent, class_object['root'])
@@ -250,17 +246,34 @@ def is_inline_child(class_object):
     return inline_parents
 
 
-# Sarah added issue: Sort out is_inline_child and get_inline_parents #35
-
-
-def get_inline_parents(class_object):
+def get_parents(class_object):
     """
-    An inline parent is the node enclosing
-    a set of inline children, as in is_inline_child()
-    See issue # 35
+    Get a list of objects that are a parent to the
+    object
 
-    :param class_object:
-    :return:
+    :param class_object: structure representing a class
+    :return: list of parents objects for which this class is a child
+
+    e.g. in this sample
+
+    .. code-block:: xml
+    
+        <element name="DrawFromDistribution" hasChildren="true">
+          <attributes>
+            <attribute name="distribInput"
+                       type="lo_element" element="DistribInput"/>
+            <attribute name="UncertML"
+                       type="element" element="UncertMLNode"/>
+            <attribute name="number" type="double"/>
+          </attributes>
+        </element>
+
+    the function produces
+
+    .. code-block:: default
+
+        get_parents(DrawFromDistribution_class_object) -> ['DistribInput',
+                                                           'UncertMLNode']
     """
     parents = []
     if class_object['is_list_of']:
