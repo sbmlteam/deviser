@@ -602,7 +602,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     # Retrieve element functions
 
     def write_functions_to_retrieve(self):
-        if not query.has_children(self.attributes):
+        if not query.has_child_elements(self.attributes):
             return
 
         gen_functions = \

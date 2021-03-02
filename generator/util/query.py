@@ -100,7 +100,7 @@ def get_sid_refs_for_class(working_class):
     return sid_refs
 
 
-def has_children(attributes):
+def has_child_elements(attributes):
     """
     Return True if any of the attributes refer to elements
     (i.e. `type` is 'element', 'lo_element' or 'inline_lo_element')
@@ -1297,7 +1297,7 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
             return dict({'name': name, 'children': []})
     children = []
     num_attribs = len(child_class['attribs'])
-    if has_children(child_class['attribs']):
+    if has_child_elements(child_class['attribs']):
         for i in range(0, num_attribs):
             att_type = child_class['attribs'][i]['type']
             if att_type == 'element':
