@@ -1289,49 +1289,49 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
 
     TODO lots of explanation needed!
     """
-    child = get_class(name, root)
-    if not child:
+    child_class = get_class(name, root)
+    if not child_class:
         if name == 'ASTNode':
             return dict({'name': 'math', 'children': []})
         else:
             return dict({'name': name, 'children': []})
     children = []
-    num_attribs = len(child['attribs'])
-    if (has_children(child['attribs'])):
+    num_attribs = len(child_class['attribs'])
+    if has_children(child_class['attribs']):
         for i in range(0, num_attribs):
-            att_type = child['attribs'][i]['type']
+            att_type = child_class['attribs'][i]['type']
             if att_type == 'element':
                 # for distrib we have a child that is a list of
                 # children of itself
                 # this will cause recursion
-                if name != child['attribs'][i]['element']:
+                if name != child_class['attribs'][i]['element']:
                     grandchildren = \
-                        get_children(child['attribs'][i]['element'],
+                        get_children(child_class['attribs'][i]['element'],
                                      root, reqd_only,
-                                     child['attribs'][i]['xml_name'])
+                                     child_class['attribs'][i]['xml_name'])
                     children.append(grandchildren)
             elif att_type == 'lo_element':
-                if 'concrete' in child['attribs'][i]:
-                    num = len(child['attribs'][i]['concrete'])
+                if 'concrete' in child_class['attribs'][i]:
+                    num = len(child_class['attribs'][i]['concrete'])
                     if num == 0:
                         continue
                     elif name == 'MixedGeometry' and num > 0:
                         continue
                     else:
-                        base = get_class(child['attribs'][i]['element'], root)
+                        base = get_class(child_class['attribs'][i]['element'], root)
                         grandchildren = \
                             get_concrete_children(
-                                child['attribs'][i]['concrete'],
+                                child_class['attribs'][i]['concrete'],
                                 root, reqd_only, base['attribs'],
-                                child['attribs'][i]['element'])
+                                child_class['attribs'][i]['element'])
 
                         # for j in range(0, num):
                         #     grandchildren = get_concrete_children(
-                        #         child['attribs'][i]['concrete'],
+                        #         child_class['attribs'][i]['concrete'],
                         #         root, reqd_only, '', base['attribs'])
                         #     grandchildren =
                         #        get_children(
-                        #          child['attribs'][i]['concrete']\
+                        #          child_class['attribs'][i]['concrete']\
                         #                 [j]['element'],
                         #                 root, reqd_only, '',
                         #                 base['attribs'])
@@ -1340,29 +1340,29 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
 
                         # if not reqd_only:
                         #   grandchildren = insert_list_of(grandchildren,
-                        #   child['attribs'][i]['element'], root)
+                        #   child_class['attribs'][i]['element'], root)
 
                 else:
                     # for distrib we have a child that is a list
                     # of children of itself
                     # this will cause recursion
-                    if name != child['attribs'][i]['element']:
+                    if name != child_class['attribs'][i]['element']:
                         grandchildren = \
-                            get_children(child['attribs'][i]['element'],
+                            get_children(child_class['attribs'][i]['element'],
                                          root, reqd_only)
                         if not reqd_only:
                             grandchildren = \
                                 insert_list_of(grandchildren,
-                                               child['attribs'][i]['element'],
+                                               child_class['attribs'][i]['element'],
                                                root)
                         children.append(grandchildren)
             elif att_type == 'inline_lo_element':
                 # for distrib we have a child that is a list of children
                 # of itself
                 # this will cause recursion
-                if name != child['attribs'][i]['element']:
+                if name != child_class['attribs'][i]['element']:
                     grandchildren = \
-                        get_children(child['attribs'][i]['element'],
+                        get_children(child_class['attribs'][i]['element'],
                                      root, reqd_only)
                     children.append(grandchildren)
             else:
@@ -1370,7 +1370,7 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
     # need attributes from base class
     reqd_attribs = []
     for i in range(0, num_attribs):
-        attrib = child['attribs'][i]
+        attrib = child_class['attribs'][i]
         if reqd_only:
             if attrib['reqd']:
                 reqd_attribs.append(attrib)
