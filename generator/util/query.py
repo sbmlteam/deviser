@@ -257,7 +257,7 @@ def get_parents(class_object):
     e.g. in this sample
 
     .. code-block:: xml
-    
+
         <element name="DrawFromDistribution" hasChildren="true">
           <attributes>
             <attribute name="distribInput"
