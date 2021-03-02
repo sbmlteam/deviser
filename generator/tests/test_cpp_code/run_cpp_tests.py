@@ -314,8 +314,6 @@ def main():
     fail = 0
 
     # Run the next couple of tests always:
-
-    # TODO This test is currently failing.
     name = 'copy'
     num = 0
     class_name = 'Def'
@@ -323,13 +321,12 @@ def main():
     test_case = 'class with XMLNode'
     fail += run_test(name, num, class_name, test_case, list_of)
 
-    # This one isn't working either.
-    # name = 'copy_add'
-    # num = 0
-    # class_name = 'Abc'
-    # list_of = ''
-    # test_case = 'class with additional code'
-    # fail += run_test(name, num, class_name, test_case, list_of)
+    name = 'copy_add'
+    num = 0
+    class_name = 'Abc'
+    list_of = ''
+    test_case = 'class with additional code'
+    fail += run_test(name, num, class_name, test_case, list_of)
 
     if runall:
         # run the individual tests
