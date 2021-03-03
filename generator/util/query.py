@@ -1536,6 +1536,7 @@ def create_object_tree(pkg_object, reqd_only=True):
     return tree
 #######################################################################
 
+
 def is_number(att_type):
     """
     Does this attribute type represent a number?
