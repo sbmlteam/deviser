@@ -1249,6 +1249,70 @@ def get_other_element_children(this_object, element):
     return other_children
 
 
+def get_child_elements(elements, lo_elements, root=None):
+    """
+    Get a list of names (and other info) of child elements.
+
+    :param elements:
+    :param lo_elements:
+    :param root:
+    :return: list of child element dictionaries
+    """
+    child_elements = []
+    typecode = 'TO_DO'
+    for elem in elements:
+        if elem['element'] != 'ASTNode' and elem['element'] != 'XMLNode':
+            if root:
+                thisclass = get_class(elem['element'], root)
+                if thisclass and 'typecode' in thisclass:
+                    typecode = thisclass['typecode']
+            if 'concrete' in elem:
+                conc = elem['concrete']
+                concs = get_concretes(root, conc)
+            else:
+                concs = None
+            name = strFunctions.remove_prefix(elem['name'])
+            # if 'xml_name' in elem and elem['xml_name'] != '':
+            #     name = elem['xml_name']
+            [used_child_name, _] = \
+                strFunctions.remove_hyphens(elem['capAttName'])
+            # if 'used_child_name' in elem and elem['used_child_name'] != '':
+            #     used_child_name = elem['used_child_name']
+            child_elements.append(dict({'name': name, 'typecode': typecode,
+                                        'concrete': concs,
+                                        'element': elem['element'],
+                                        'used_name': used_child_name}))
+    for elem in lo_elements:
+        if elem['element'] != 'ASTNode*' and elem['element'] != 'XMLNode*':
+            if root:
+                thisclass = \
+                    get_class(strFunctions.lower_first(elem['element']), root)
+                if thisclass and 'typecode' in thisclass:
+                    typecode = thisclass['typecode']
+            if 'concrete' in elem:
+                conc = elem['concrete']
+                concs = get_concretes(root, conc)
+            else:
+                concs = None
+            xmlname = strFunctions.\
+                singular(strFunctions.remove_prefix(elem['name']))
+            name = strFunctions.\
+                lower_first(strFunctions.remove_prefix(elem['element']))
+            if not elem['is_plugin'] and (xmlname != name):
+                name = xmlname
+            used_child_name = name
+            if 'used_child_name' in elem and elem['used_child_name'] != '':
+                used_child_name = elem['used_child_name']
+            child_elements.append(dict({'name': name, 'typecode': typecode,
+                                        'concrete': concs,
+                                        'element': elem['element'],
+                                        'used_name': used_child_name}))
+    return child_elements
+
+########################################################################
+# Functions for create tree
+
+
 def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
     """
     Get children that are concrete instantiations
@@ -1261,6 +1325,8 @@ def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
         the concrete classes
     :param name
 
+    Note: this function is under development to facilitate future functionality;
+    it is not fully tested
     TODO an example would be helpful.
     """
     children = []
@@ -1288,6 +1354,8 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
     :return:
 
     TODO lots of explanation needed!
+    Note: this function is under development to facilitate future functionality;
+    it is not fully tested
     """
     child_class = get_class(name, root)
     if not child_class:
@@ -1389,67 +1457,6 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
     return dict({'name': name, 'children': children, 'attribs': reqd_attribs})
 
 
-def get_child_elements(elements, lo_elements, root=None):
-    """
-    Get a list of names (and other info) of child elements.
-
-    :param elements:
-    :param lo_elements:
-    :param root:
-    :return: list of child element dictionaries
-    """
-    child_elements = []
-    typecode = 'TO_DO'
-    for elem in elements:
-        if elem['element'] != 'ASTNode' and elem['element'] != 'XMLNode':
-            if root:
-                thisclass = get_class(elem['element'], root)
-                if thisclass and 'typecode' in thisclass:
-                    typecode = thisclass['typecode']
-            if 'concrete' in elem:
-                conc = elem['concrete']
-                concs = get_concretes(root, conc)
-            else:
-                concs = None
-            name = strFunctions.remove_prefix(elem['name'])
-            # if 'xml_name' in elem and elem['xml_name'] != '':
-            #     name = elem['xml_name']
-            [used_child_name, _] = \
-                strFunctions.remove_hyphens(elem['capAttName'])
-            # if 'used_child_name' in elem and elem['used_child_name'] != '':
-            #     used_child_name = elem['used_child_name']
-            child_elements.append(dict({'name': name, 'typecode': typecode,
-                                        'concrete': concs,
-                                        'element': elem['element'],
-                                        'used_name': used_child_name}))
-    for elem in lo_elements:
-        if elem['element'] != 'ASTNode*' and elem['element'] != 'XMLNode*':
-            if root:
-                thisclass = \
-                    get_class(strFunctions.lower_first(elem['element']), root)
-                if thisclass and 'typecode' in thisclass:
-                    typecode = thisclass['typecode']
-            if 'concrete' in elem:
-                conc = elem['concrete']
-                concs = get_concretes(root, conc)
-            else:
-                concs = None
-            xmlname = strFunctions.\
-                singular(strFunctions.remove_prefix(elem['name']))
-            name = strFunctions.\
-                lower_first(strFunctions.remove_prefix(elem['element']))
-            if not elem['is_plugin'] and (xmlname != name):
-                name = xmlname
-            used_child_name = name
-            if 'used_child_name' in elem and elem['used_child_name'] != '':
-                used_child_name = elem['used_child_name']
-            child_elements.append(dict({'name': name, 'typecode': typecode,
-                                        'concrete': concs,
-                                        'element': elem['element'],
-                                        'used_name': used_child_name}))
-    return child_elements
-
-
 # NOT USED - Investigate
 def insert_list_of(original, child_name, root):
     """
@@ -1460,6 +1467,9 @@ def insert_list_of(original, child_name, root):
     :param root:
     :return: either a list of dictionaries, or a single dictionary,
              depending on context
+
+    Note: this function is under development to facilitate future functionality;
+    it is not fully tested
     """
     child = get_class(child_name, root)
     lo_name = strFunctions.list_of_name(child['name'])
@@ -1488,30 +1498,35 @@ def create_object_tree(pkg_object, reqd_only=True):
     and each class listing its direct children.
     If `reqd_only` is `False` it will add the `listOf` elements as well.
 
-    :param pkg_object:
-    :param reqd_only:
-    :return: list of dictionaries
+    :param pkg_object: the object dictionary
+    :param reqd_only: boolean to specify whether to include optional attributes
+        or child elements
+    :return: list of dictionaries representing the tree structure of the object
+
+    Note: this function is under development to facilitate future functionality;
+    it is not fully tested
     """
     tree = []
     root = None
-    for i in range(0, len(pkg_object['plugins'])):
-        plugin = pkg_object['plugins'][i]
+    for plugin in pkg_object['plugins']:
         children = []
+        # get root object
         if len(plugin['extension']) > 0:
             root = plugin['extension'][0]['root']
-        for j in range(0, len(plugin['extension'])):
-            children.append(get_children(plugin['extension'][j]['name'],
-                                         root, reqd_only))
         if not root and len(plugin['lo_extension']) > 0:
             root = plugin['lo_extension'][0]['root']
-        for j in range(0, len(plugin['lo_extension'])):
-            grandchildren = get_children(plugin['lo_extension'][j]['name'],
+
+        for extension in plugin['extension']:
+            children.append(get_children(extension['name'],
+                                         root, reqd_only))
+        for lo_extension in plugin['lo_extension']:
+            grandchildren = get_children(lo_extension['name'],
                                          root, reqd_only,
-                                         plugin['lo_extension'][j]['xml_name'])
+                                         lo_extension['xml_name'])
             if not reqd_only:
                 grandchildren = insert_list_of(
                     grandchildren,
-                    plugin['lo_extension'][j]['name'], root)
+                    lo_extension['name'], root)
             children.append(grandchildren)
         branch = dict({'base': plugin['sbase'],
                        'ext': 'core',
@@ -1519,7 +1534,7 @@ def create_object_tree(pkg_object, reqd_only=True):
                        'attribs': plugin['attribs']})
         tree.append(branch)
     return tree
-
+#######################################################################
 
 def is_number(att_type):
     """
