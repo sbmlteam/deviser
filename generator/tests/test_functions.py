@@ -14,7 +14,8 @@ function_table = {'binding': 'run_bindings_tests',
                   'exit': 'run_exit_tests',
                   'strfunc': 'run_strfunc_tests',
                   'matlab': 'run_matlab_tests',
-                  'tex': 'run_tex_tests'}
+                  'tex': 'run_tex_tests',
+                  'other': 'run_other_library_tests'}
 
 
 def set_path_to_tests(dirname):
@@ -148,6 +149,7 @@ def run_tests(test_name, name, fails):
     import test_strfunc_code
     import test_tex_files
     import test_matlab_code
+    import test_other_library
     fail = eval(module)
     if fail > 0:
         ret = 1

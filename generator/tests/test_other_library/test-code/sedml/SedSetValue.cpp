@@ -959,10 +959,13 @@ SedSetValue::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'modelReference' is missing from the "
-      "<SedSetValue> element.";
-    log->logError(SedmlSetValueAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sedml attribute 'modelReference' is missing from "
+        "the <SedSetValue> element.";
+      log->logError(SedmlSetValueAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 

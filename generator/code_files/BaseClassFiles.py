@@ -425,7 +425,8 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         if not doc:
             docname = 'Document'
         else:
-            docname = SF.remove_prefix(doc['name'], False, False, '', True)
+            docname = SF.remove_prefix(doc['name'], remove_package=False,
+                                       remove_doc_prefix=True)
         libname = SF.get_library_suffix(gv.library_name)
         if not libname.endswith('ml'):
             libname = libname + 'ml'
