@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions
+from ...util import strFunctions
 
 
 class ConcreteClassFunctions():

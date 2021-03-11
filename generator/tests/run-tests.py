@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-import test_functions
+from . import test_functions
 
 ##############################################################################
 # Set up variables

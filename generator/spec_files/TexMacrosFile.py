@@ -40,8 +40,8 @@
 
 import re
 
-from base_files import BaseTexFile
-from util import strFunctions
+from ..base_files import BaseTexFile
+from ..util import strFunctions
 
 
 class TexMacrosFile(BaseTexFile.BaseTexFile):

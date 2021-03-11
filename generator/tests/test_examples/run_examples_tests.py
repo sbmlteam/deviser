@@ -7,14 +7,14 @@
 import os
 
 import sys
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
-from code_files import CppExampleFile
-from validation import ValidationXMLFiles
-from parseXML import ParseXML
 
-from tests import test_functions
+
+from ...code_files import CppExampleFile
+from ..validation import ValidationXMLFiles
+from ...parseXML import ParseXML
+
+from .. import test_functions
 
 ##############################################################################
 # Set up variables

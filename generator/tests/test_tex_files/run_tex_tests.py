@@ -1,15 +1,11 @@
 #!/usr/bin/env python
 
 import os
-
 import sys
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
-from spec_files import TexValidationRulesFile, TexMacrosFile, TexBodySyntaxFile
-from parseXML import ParseXML
-
-import test_functions
+from ...spec_files import TexValidationRulesFile, TexMacrosFile, TexBodySyntaxFile
+from ...parseXML import ParseXML
+from .. import test_functions
 
 
 ##############################################################################

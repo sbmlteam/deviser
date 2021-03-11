@@ -2,13 +2,11 @@
 
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
-from code_files import CppFiles, ExtensionFiles, ValidationFiles
-from parseXML import ParseXML
+from ...code_files import CppFiles, ExtensionFiles, ValidationFiles
+from ...parseXML import ParseXML
 
-from tests import test_functions
+from .. import test_functions
 
 
 ##############################################################################

@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions, query, global_variables
+from ...util import strFunctions, query, global_variables
 
 
 class ListOfQueryFunctions():
