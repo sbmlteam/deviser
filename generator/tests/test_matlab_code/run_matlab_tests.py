@@ -75,7 +75,7 @@ def compare_matlab(name, filetype):
 # Specific test functions
 
 
-def run_matlab_test(name):
+def run_matlab_tests(name):
     """
     Run the Matlab test; generate files and compare with reference versions.
 
@@ -108,7 +108,7 @@ def main():
 
     # Run the individual tests.
     name = 'qual'
-    fail += run_matlab_test(name)
+    fail += run_matlab_tests(name)
 
     test_functions.report('matlab', fail, fails, not_tested)
     return fail
