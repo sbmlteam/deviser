@@ -41,7 +41,7 @@
 
 import sys
 
-from parseXML import ParseXML
+from ..parseXML import ParseXML
 from ..util import global_variables as gv
 from ..validation import RNGSchemaFiles
 

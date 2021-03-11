@@ -2,16 +2,14 @@
 
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
 from ...code_files import CppFiles, BaseClassFiles, ValidationFiles, ExtensionFiles
-from cmake_files import CMakeFiles
-from bindings_files import BindingsFiles
-from parseXML import ParseXML
+from ...cmake_files import CMakeFiles
+from ...bindings_files import BindingsFiles
+from ...parseXML import ParseXML
 from ...util import strFunctions, global_variables as gv, generateCode
 
-from tests import test_functions
+from .. import test_functions
 
 ##############################################################################
 # Set up variables

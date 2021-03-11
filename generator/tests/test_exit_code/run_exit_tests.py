@@ -3,11 +3,11 @@
 import os
 import sys
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
-import deviser
-import test_functions
-from ..util import global_variables as gv
+
+
+from ... import deviser
+from .. import test_functions
+from ...util import global_variables as gv
 
 ##############################################################################
 # Set up variables
