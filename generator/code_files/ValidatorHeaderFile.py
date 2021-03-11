@@ -37,8 +37,8 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from base_files import BaseCppFile
-from util import strFunctions, global_variables
+from ..base_files import BaseCppFile
+from ..util import strFunctions, global_variables
 from . cpp_functions import *
 
 

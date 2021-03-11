@@ -46,9 +46,8 @@ data see XML vulnerabilities
 """
 
 from . import BaseFile
-# from xml.dom.minidom import *
 from xml.dom.minidom import getDOMImplementation
-from util import strFunctions, query
+from ..util import strFunctions, query
 
 
 class BaseXMLFile(BaseFile.BaseFile):

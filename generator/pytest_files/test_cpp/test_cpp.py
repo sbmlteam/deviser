@@ -9,4 +9,4 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../tests')
 import deviser
 import test_functions
-from util import global_variables as gv
+from ..util import global_variables as gv

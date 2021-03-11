@@ -40,7 +40,7 @@
 import copy
 from . import CppHeaderFile
 from . import CppCodeFile
-from util import strFunctions, query, global_variables
+from ..util import strFunctions, query, global_variables
 
 
 class CppFiles():
