@@ -6,12 +6,9 @@ import os
 import sys
 
 
-from tests import test_functions
+from .. import test_functions
 
-from util import strFunctions as sf, global_variables as gv
-
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
+from ...util import strFunctions as sf, global_variables as gv
 
 
 ##############################################################################

@@ -6,7 +6,7 @@
 import os
 import sys
 
-from ..base_files import BaseMatlabFile
+from ...base_files import BaseMatlabFile
 from ...parseXML import ParseXML
 from .. import test_functions
 
