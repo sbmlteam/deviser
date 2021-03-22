@@ -5,5 +5,8 @@ import sys
 import pytest
 # If we can restructure it ok, we might not need this...
 from ... import deviser
-from ... import test_functions
-from ..util import global_variables as gv
+from ...tests import test_functions
+from ...util import global_variables as gv
+
+def test_something():
+    assert (1 == 1)
