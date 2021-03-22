@@ -36,3 +36,4 @@
 # or promote products derived from this software without specific prior
 # written permission.
 # ------------------------------------------------------------------------ -->
+from . import test_functions

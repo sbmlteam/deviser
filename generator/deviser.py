@@ -42,6 +42,8 @@
 
  python ../generator/deviser.py -g ../samples/dyn.xml
 
+ python -m generator.deviser
+
 """
 
 import sys

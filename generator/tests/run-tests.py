@@ -3,6 +3,9 @@
 import os
 from . import test_functions
 
+# In grandfather directory (.../Deviser/deviser):
+# python -m generator.tests.run-tests
+
 ##############################################################################
 # Set up variables
 fails = []
