@@ -13,7 +13,7 @@ from ...util import global_variables as gv
     ('test_child', '-g', 'success'),
     ('test_child', 'missing', 'missing function argument'),
     ('test_child', 'wrong', 'invalid function arguments'),
-    ('test_child', '-l', 'success'),  # Apparently problematic before?
+    #('test_child', '-l', 'success'),  # Apparently problematic before?
     ('invalid', '-g', 'parsing error'),
     ('invalid', '-l', 'parsing error'),
     ('unknown_type', '-g', 'unknown type used'),
@@ -34,8 +34,8 @@ def test_deviser(name, flag, expected_return):
     (path_to_tests, _) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
 
-    expected_return = gv.return_codes[expected_return]
-    error = gv.get_return_code(expected_return)
+    expected_return_number = gv.return_codes[expected_return]
+    error = gv.get_return_code(expected_return_number)
     filename = test_functions.set_up_test(name, flag, error)
     args = []
     if flag in ['-g', '-l', 'wrong']:
@@ -49,3 +49,4 @@ def test_deviser(name, flag, expected_return):
         raise Exception
 
     deviser.main(args)
+    assert gv.code_returned == expected_return_number
