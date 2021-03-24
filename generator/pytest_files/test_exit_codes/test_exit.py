@@ -1,18 +1,13 @@
 # Trying out pytest with Deviser generator tests
 # Matthew Gillman, UCL, 16th December 2020
 import os
-import sys
 import pytest
-# If we can restructure it ok, we might not need this...
-#sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
-#sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
-#sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../tests')
+
 from ... import deviser
 from ...tests import test_functions
 from ...util import global_variables as gv
 
 
-# @pytest.mark.parametrize("number", [1, 2, 3, 0, 42])
 @pytest.mark.parametrize("name, flag, expected_return", [
     ('non-existent', '-g', 'failed to read file'),
     ('test_child', '-g', 'success'),
@@ -36,7 +31,7 @@ def test_deviser(name, flag, expected_return):
     :return: 0 on success, 1 on failure
     """
     this_dir = os.path.dirname(os.path.abspath(__file__))
-    (path_to_tests, other) = os.path.split(this_dir)
+    (path_to_tests, _) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
 
     expected_return = gv.return_codes[expected_return]
@@ -54,7 +49,3 @@ def test_deviser(name, flag, expected_return):
         raise Exception
 
     deviser.main(args)
-    # fail = test_functions.compare_return_codes(name, flag, expected_return,
-    #                                           fails)
-    # print('')
-    # return fail
