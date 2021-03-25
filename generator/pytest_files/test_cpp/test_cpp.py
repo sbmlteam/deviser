@@ -110,10 +110,28 @@ from ...util import global_variables as gv
 ])
 def test_cpp(name, num, class_name, list_of, test_case):
     assert rct.run_test(name, num, class_name, test_case, list_of) == 0
+    #pass
 
-
-def test_cpp_plugin():
-    pass
+@pytest.mark.parametrize("name, class_name, test_case, num", [
+    ('qual', 'QualModelPlugin', 'basic plugin', 0),
+    ('qual', 'QualSBMLDocumentPlugin', 'document plugin', 1),
+    ('spatial', 'SpatialCompartmentPlugin', 'plugin with child element', 1),
+    ('spatial', 'SpatialParameterPlugin', 'plugin with additional code', 3),
+    ('spatial', 'SpatialReactionPlugin', 'plugin only attributes', 4),
+    ('spatial', 'SpatialSBMLDocumentPlugin', 'include line over extends', 5),
+    ('groups', 'GroupsModelPlugin', 'plugin with additional code', 0),
+    ('groups', 'GroupsSBMLDocumentPlugin', 'basic plugin', 1),
+    ('test_vers', 'VersModelPlugin', 'versions of plugins - attributes', 0),
+    ('test_vers', 'VersSpeciesPlugin', 'versions of plugins - elements', 1),
+    ('fbc_v2', 'FbcModelPlugin', 'plugin with attributes', 0),
+    ('test_core_vers_multipkg', 'CoreversMultiPkgModelPlugin', 'versions of plugins - elements', 0),
+    ('twoAtOnce', 'TwoatonceSBasePlugin', 'an SBase plugin', 0),
+    ('plugin_id', 'PluginidSBasePlugin', 'an SBase plugin', 0),
+    ('comp', 'CompSBMLDocumentPlugin', 'document plugin with additional items', 3),
+])
+def test_cpp_plugin(name, class_name, test_case, num):
+    assert rct.run_plug_test(name, class_name, test_case, num) == 0
+    #pass
 
 # test_cpp_
 
