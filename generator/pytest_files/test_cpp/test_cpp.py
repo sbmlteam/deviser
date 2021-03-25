@@ -1,22 +1,23 @@
 # Trying out pytest with Deviser cpp tests
 # Matthew S. Gillman, UCL, 17th February 2021
+
 import os
-import sys
 import pytest
 
-from ... import deviser
 from ...tests import test_functions
 from ...tests.test_cpp_code import run_cpp_tests as rct  # For now.
-from ...util import global_variables as gv
 
 
-# used mytests.py "conversion" script
+# used mytests.py "conversion" script to extract the tests from the
+# old file and get into right format for this one.
+
+
 @pytest.mark.parametrize("name, num, class_name, list_of, test_case", [
-    #('copy', 0, 'Def', '', 'class with XMLNode'),
 
     # TODO: A test with garbage input like this will still succeed with things
     # as they currently are:
-    #('copy', 0, 'Defggggggggg', '', 'class with XMLNode'),
+    # ('copy', 0, 'Defggggggggg', '', 'class with XMLNode'),
+    # Need to get it to fail. See Github issue #69.
 
     ('copy', 0, 'Def', '', 'class with XMLNode'),
     ('copy_add', 0, 'Abc', '', 'class with additional code'),
@@ -104,6 +105,10 @@ from ...util import global_variables as gv
     # ('arrays', 1, 'Index', 'ListOfIndices', 'list of with attribute'),
 ])
 def test_cpp(name, num, class_name, list_of, test_case):
+    """
+    This is just a wrapper function - see run_cpp_test.py for the
+    documentation of the function it calls here.
+    """
     assert rct.run_test(name, num, class_name, test_case, list_of) == 0
 
 
@@ -125,6 +130,10 @@ def test_cpp(name, num, class_name, list_of, test_case):
     # ('arrays', 'ArraysExtension', 'basic extension file', 0),
 ])
 def test_cpp_ext(name, class_name, test_case, test):
+    """
+    This is just a wrapper function - see run_cpp_test.py for the
+    documentation of the function it calls here.
+    """
     assert rct.run_ext_test(name, class_name, test_case, test) == 0
 
 
@@ -146,7 +155,12 @@ def test_cpp_ext(name, class_name, test_case, test):
     ('comp', 'CompSBMLDocumentPlugin', 'document plugin with additional items', 3),
 ])
 def test_cpp_plugin(name, class_name, test_case, num):
+    """
+    This is just a wrapper function - see run_cpp_test.py for the
+    documentation of the function it calls here.
+    """
     assert rct.run_plug_test(name, class_name, test_case, num) == 0
+
 
 @pytest.mark.parametrize("name, class_name, test_case, generate_error_files", [
     ('test_att', 'TestSBMLError', 'error enumeration', True),
@@ -178,7 +192,11 @@ def test_cpp_plugin(name, class_name, test_case, num):
 
     # ('arrays', 'ArraysValidator', 'validator', False),
 ])
-def test_cpp_valid(name, class_name, test_case, generate_error_files): # =True):
+def test_cpp_valid(name, class_name, test_case, generate_error_files):
+    """
+    This is just a wrapper function - see run_cpp_test.py for the
+    documentation of the function it calls here.
+    """
     assert rct.run_valid_test(name, class_name, test_case, generate_error_files) == 0
 
 
@@ -186,9 +204,17 @@ def test_cpp_valid(name, class_name, test_case, generate_error_files): # =True):
     ('spatial', 'SpatialConsistencyConstraints', 'constraints'),
 ])
 def test_cpp_constraints(name, class_name, test_case):
+    """
+    This is just a wrapper function - see run_cpp_test.py for the
+    documentation of the function it calls here.
+    """
     assert rct.run_constraints_test(name, class_name, test_case) == 0
 
+
 def setup():
+    """
+    This gets called before each test case.
+    """
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, _) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
