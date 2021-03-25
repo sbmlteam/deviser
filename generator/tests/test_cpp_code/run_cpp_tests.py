@@ -294,6 +294,8 @@ def run_constraints_test(name, class_name, test_case):
 #########################################################################
 # Main function
 
+# Kept here for backward-compatibility, but the following can all be safely
+# erased as the tests are no running in the pytest directory.
 def main():
 
     # NB the reference files in test-code/ and test-extension/ were
