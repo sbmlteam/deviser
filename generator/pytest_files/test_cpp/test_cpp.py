@@ -10,9 +10,6 @@ from ...tests.test_cpp_code import run_cpp_tests as rct  # For now.
 from ...util import global_variables as gv
 
 
-
-#def test_something():
-#    assert (1 == 1)
 # used mytests.py "conversion" script
 @pytest.mark.parametrize("name, num, class_name, list_of, test_case", [
     #('copy', 0, 'Def', '', 'class with XMLNode'),
@@ -86,10 +83,10 @@ from ...util import global_variables as gv
     ('twoAtOnce', 1, 'ClassWithRequiredID', '', 'concrete class'),
     ('twoAtOnce', 3, 'MultipleChild', '', 'multiple versions with child elements'),
 
-#*** MANUAL ADD HERE
-    #('new_distrib_test', 36, 'DistribUncertainty', '', 'concrete class'),
-    #('new_distrib_test', 16, 'DistribBernoulliDistribution', '', 'concrete class'),
-    #('new_distrib_test', 14, 'DistribCategoricalDistribution', '', 'concrete class'),
+    # leave out as need to work on automatically adding prefix:
+    # ('new_distrib_test', 36, 'DistribUncertainty', '', 'concrete class'),
+    # ('new_distrib_test', 16, 'DistribBernoulliDistribution', '', 'concrete class'),
+    # ('new_distrib_test', 14, 'DistribCategoricalDistribution', '', 'concrete class'),
 
     ('render', 5, 'GradientStop', '', 'hyphenated attribute'),
     ('render', 12, 'Polygon', '', 'list of with different types elements'),
@@ -104,7 +101,7 @@ from ...util import global_variables as gv
     ('sbgn', 0, 'Point', 'SbgnListOfPoints', 'contains list of itself but with other listof used elsewhere'),
 
     # To be sorted:
-    #('arrays', 1, 'Index', 'ListOfIndices', 'list of with attribute'),
+    # ('arrays', 1, 'Index', 'ListOfIndices', 'list of with attribute'),
 ])
 def test_cpp(name, num, class_name, list_of, test_case):
     assert rct.run_test(name, num, class_name, test_case, list_of) == 0
@@ -150,16 +147,46 @@ def test_cpp_ext(name, class_name, test_case, test):
 ])
 def test_cpp_plugin(name, class_name, test_case, num):
     assert rct.run_plug_test(name, class_name, test_case, num) == 0
-    #pass
 
-# test_cpp_
+@pytest.mark.parametrize("name, class_name, test_case, generate_error_files", [
+    ('test_att', 'TestSBMLError', 'error enumeration', True),
+    ('qual', 'QualSBMLError', 'error enumeration', True),
+    ('qual', 'QualConsistencyValidator', 'validator', False),
+    ('qual', 'QualValidator', 'validator', False),
+    ('spatial', 'SpatialValidator', 'validator', False),
+    ('groups', 'GroupsSBMLError', 'error enumeration', True),
+    ('fbc_v2', 'FbcSBMLError', 'error enumeration', True),
+    ('test_sidrefs', 'RefsSBMLError', 'sidref with multiple targets', True),
 
-def run_valid_test(name, class_name, test_case, generate_error_files=True):
-    pass
+    # These next tests are testing the spacing of the element content
+    # eg.
+    # element="ThingA, ThingB"
+    # element=" ThingA, ThingB"
+    # element="ThingA,ThingB"
+    ('test_sidrefs_1', 'RefsSBMLError', 'sidref with multiple targets - diff spacing', True),
+    ('test_sidrefs_2', 'RefsSBMLError', 'sidref with multiple targets - diff spacing', True),
+    ('test_sidrefs_3', 'RefsSBMLError', 'sidref with multiple targets - diff spacing', True),
+    ('test_sidrefs_4', 'RefsSBMLError', 'sidref with multiple targets - diff spacing', True),
+
+    ('test_lists', 'FooSBMLError', 'error enumeration', True),
+    ('new_distrib', 'DistribSBMLError', 'error enumeration', True),
+
+    # leave out for now as all validation needs reviewing for multiple
+    # ('twoAtOnce', 'TwoAtOnceSBMLError', 'error enumeration')
+
+    ('render', 'RenderSBMLError', 'error enumeration', True),
+
+    # ('arrays', 'ArraysValidator', 'validator', False),
+])
+def test_cpp_valid(name, class_name, test_case, generate_error_files): # =True):
+    assert rct.run_valid_test(name, class_name, test_case, generate_error_files) == 0
 
 
-def run_constraints_test(name, class_name, test_case):
-    pass
+@pytest.mark.parametrize("name, class_name, test_case", [
+    ('spatial', 'SpatialConsistencyConstraints', 'constraints'),
+])
+def test_cpp_constraints(name, class_name, test_case):
+    assert rct.run_constraints_test(name, class_name, test_case) == 0
 
 def setup():
     this_dir = os.path.dirname(os.path.abspath(__file__))
