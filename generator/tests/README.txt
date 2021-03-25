@@ -22,5 +22,5 @@ To run tests in this directory, you may need to copy
 
 into this current directory (Deviser/deviser/generator/tests/)
 
-
+Unfortunately, these old tests don't seem to run right now with Python 2. Sorry.
 
