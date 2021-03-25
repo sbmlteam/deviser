@@ -1,19 +1,19 @@
 # Just uncomment the print() output for the one type of test you wish to "run"
 
 def run_test(name, num, class_name, test_case, list_of):
-    print(f"    ('{name}', {num}, '{class_name}', '{list_of}', '{test_case}'),")
+    #print(f"    ('{name}', {num}, '{class_name}', '{list_of}', '{test_case}'),")
     return 0
 
 def run_ext_test(name, class_name, test_case, test):
-    #print(f"    ('{name}', '{class_name}', '{test_case}' {test}),")
+    #print(f"    ('{name}', '{class_name}', '{test_case}', {test}),")
     return 0
 
 def run_plug_test(name, class_name, test_case, num):
-    # print(f"    ('{name}', '{class_name}', '{test_case}' {num}),")
+    print(f"    ('{name}', '{class_name}', '{test_case}', {num}),")
     return 0
 
 def run_valid_test(name, class_name, test_case, generate_error_files=True):
-    # print(f"    ('{name}', '{class_name}', '{test_case}' {generate_error_files}),")
+    # print(f"    ('{name}', '{class_name}', '{test_case}', {generate_error_files}),")
     return 0
 
 def run_constraints_test(name, class_name, test_case):
