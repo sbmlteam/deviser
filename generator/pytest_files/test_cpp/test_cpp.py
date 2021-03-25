@@ -103,14 +103,33 @@ from ...util import global_variables as gv
     ('sbgn', 2, 'Label', '', 'element with different xml name'),
     ('sbgn', 0, 'Point', 'SbgnListOfPoints', 'contains list of itself but with other listof used elsewhere'),
 
-    #*** MANUAL ADD HERE
+    # To be sorted:
     #('arrays', 1, 'Index', 'ListOfIndices', 'list of with attribute'),
-
-
 ])
 def test_cpp(name, num, class_name, list_of, test_case):
     assert rct.run_test(name, num, class_name, test_case, list_of) == 0
-    #pass
+
+
+@pytest.mark.parametrize("name, class_name, test_case, test", [
+    ('qual', 'QualExtension', 'basic extension file', 0),
+    ('qual', 'QualExtensionTypes', 'the types ', 1),
+    ('qual', 'qualfwd', 'forward declarations', 2),
+    ('groups', 'GroupsExtension', 'basic extension file', 0),
+    ('test_vers', 'VersExtension', 'multi version extension file', 0),
+    ('base_class', 'TestExtension', 'default typecodes extension file', 0),
+    ('test_core_vers', 'CoreversExtension', 'core version extension file', 0),
+    ('test_core_vers_pkg', 'CoreversPkgExtension', 'core version and package version not 1 extension file', 0),
+    ('test_core_vers_multipkg', 'CoreversMultiPkgExtension', 'multiple core version and package version not 1 extension file', 0),
+    ('twoAtOnce', 'TwoatonceExtension', 'basic extension file with SBasePlugin', 0),
+    ('multi', 'MultiExtension', 'basic extension file', 0),
+
+    # not yet sorted:
+    # ('arrays', 'ArraysExtensionTypes', 'the types ', 1),
+    # ('arrays', 'ArraysExtension', 'basic extension file', 0),
+])
+def test_cpp_ext(name, class_name, test_case, test):
+    assert rct.run_ext_test(name, class_name, test_case, test) == 0
+
 
 @pytest.mark.parametrize("name, class_name, test_case, num", [
     ('qual', 'QualModelPlugin', 'basic plugin', 0),
@@ -134,6 +153,13 @@ def test_cpp_plugin(name, class_name, test_case, num):
     #pass
 
 # test_cpp_
+
+def run_valid_test(name, class_name, test_case, generate_error_files=True):
+    pass
+
+
+def run_constraints_test(name, class_name, test_case):
+    pass
 
 def setup():
     this_dir = os.path.dirname(os.path.abspath(__file__))
