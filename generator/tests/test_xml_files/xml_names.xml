@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="x" fullname="a" number="100" offset="100000" version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1">
+      <elements>
+        <element name="Fred" typeCode="SBML_X_FRED" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" xmlName="identifier" abstract="false"/>
+            <attribute name="bol" required="false" type="bool" xmlName="myBoolean" abstract="false"/>
+            <attribute name="num" required="true" type="integer" xmlName="myNumber" abstract="false"/>
+            <attribute name="str" required="false" type="string" xmlName="myString" abstract="false"/>
+            <attribute name="kind" required="false" type="enum" element="Kind" xmlName="myEnum" abstract="false"/>
+            <attribute name="other" required="false" type="element" element="Other" abstract="false"/>
+            <attribute name="other1" required="false" type="element" element="Other" abstract="false"/>
+            <attribute name="other2" required="false" type="element" element="Other" xmlName="myOther" abstract="false"/>
+<!--            <attribute name="other3" required="false" type="lo_element" element="OtherLO" xmlName="listOfProducts" abstract="false"/>
+            <attribute name="other4" required="false" type="lo_element" element="OtherLO" xmlName="listOfReactants" abstract="false"/>
+-->          </attributes>
+        </element>
+        <element name="Other" typeCode="SBML_X_OTHER" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false"/>
+        <element name="OtherLO" typeCode="SBML_X_OTHERLO" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false"/>
+      </elements>
+      <plugins>
+        <plugin extensionPoint="Model">
+          <references>
+            <reference name="Fred"/>
+          </references>
+        </plugin>
+      </plugins>
+      <enums>
+        <enum name="Kind">
+          <enumValues>
+            <enumValue name="X_KIND_FIRST" value="first"/>
+          </enumValues>
+        </enum>
+      </enums>
+    </pkgVersion>
+  </versions>
+</package>

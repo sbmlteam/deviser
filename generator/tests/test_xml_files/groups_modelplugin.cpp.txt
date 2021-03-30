@@ -1,0 +1,67 @@
+void 
+GroupsModelPlugin::copyInformationToNestedLists()
+{
+  bool change = true;
+  while (change) 
+  {
+    change = false;
+    
+    for (unsigned int lnum = 0; lnum < getNumGroups(); lnum++) 
+    {
+      Group* group = getGroup(lnum);
+      ListOf* listofmembers = group->getListOfMembers();
+      
+      for (unsigned int mnum = 0; mnum < group->getNumMembers(); mnum++) 
+      {
+        Member* member = group->getMember(mnum);
+        SBase* referent = NULL;
+        
+        if (member->isSetIdRef()) 
+        {
+          referent = getElementBySId(member->getIdRef());
+        }
+        
+        if (referent == NULL && member->isSetMetaIdRef()) 
+        {
+          referent = getElementByMetaId(member->getMetaIdRef());
+        }
+        
+        if (referent != NULL && referent->getTypeCode() == SBML_LIST_OF) 
+        {
+          ListOf* list = static_cast<ListOf*>(referent);
+          
+          if (list->getItemTypeCode() == SBML_GROUPS_MEMBER) 
+          {
+            if (!referent->isSetSBOTerm()) 
+            {
+              if (listofmembers->isSetSBOTerm()) 
+              {
+                referent->setSBOTerm(listofmembers->getSBOTerm());
+                change = true;
+              }
+            }
+            
+            if (!referent->isSetNotes()) 
+            {
+              if (listofmembers->isSetNotes()) 
+              {
+                referent->setNotes(listofmembers->getNotes());
+                change = true;
+              }
+            }
+            
+            if (!referent->isSetAnnotation()) 
+            {
+              if (listofmembers->isSetAnnotation()) 
+              {
+                referent->setAnnotation(listofmembers->getAnnotation());
+                change = true;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
