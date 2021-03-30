@@ -15,10 +15,6 @@ def setup():
         os.mkdir('temp')
 
 
-def test_something():
-    assert (1 == 1)
-
-
 @pytest.mark.parametrize("name, test_type", [
     ('spatial', 'body'),
     ('qual', 'apdx-validation'),
