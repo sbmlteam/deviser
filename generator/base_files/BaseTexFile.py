@@ -189,4 +189,6 @@ class BaseTexFile(BaseFile.BaseFile):
         :param space: not used; just here to override the version of this
             function in parent class (BaseFile)
         """
-        self.write_line_no_indent(line)
+        # self.write_line_no_indent(line)
+        super().write_line(line, indent=False)  # Python 2 doesn't like this
+        #super(type(BaseTexFile), type(self)).write_line(line, indent=False)
