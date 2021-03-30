@@ -13,7 +13,7 @@ from ...util import global_variables as gv
     ('test_child', '-g', 'success'),
     ('test_child', 'missing', 'missing function argument'),
     ('test_child', 'wrong', 'invalid function arguments'),
-    #('test_child', '-l', 'success'),  # Apparently problematic before?
+    # ('test_child', '-l', 'success'),  # Apparently problematic before?
     ('invalid', '-g', 'parsing error'),
     ('invalid', '-l', 'parsing error'),
     ('unknown_type', '-g', 'unknown type used'),

@@ -26,11 +26,11 @@ def test_all(name, funcname):
     """
     Get the appropriate function, then execute it with 'name' argument.
     """
-    #assert rct.func(name) == 0
-    #funcstr = f"rct.{func}({name})"
-    #assert rct.run_cmake_test(name) == 0
-    #assert exec(funcstr) == 0
-    #print(f"function str is: *{funcstr}*")
+    # assert rct.func(name) == 0
+    # funcstr = f"rct.{func}({name})"
+    # assert rct.run_cmake_test(name) == 0
+    # assert exec(funcstr) == 0
+    # print(f"function str is: *{funcstr}*")
     mydict = {
               'run_cmake_test': rct.run_cmake_test,
               'run_register_test': rct.run_register_test,
