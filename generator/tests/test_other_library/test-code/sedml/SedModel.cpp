@@ -1174,6 +1174,24 @@ SedModel::getElementBySId(const std::string& id)
   return obj;
 }
 
+/*
+* Returns a List of all child SBase objects, including those nested to an
+* arbitrary depth.
+*/
+List*
+SedModel::getAllElements(ElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+
+  ADD_FILTERED_LIST(ret, sublist, mChanges, filter);
+
+  return ret;
+}
+
+
+
 
 
 /** @cond doxygenLibSEDMLInternal */
