@@ -30,7 +30,9 @@ def test_one_thing(func, input, expected_output, kwargs):
     actual_output = func(input, **kwargs)
     assert actual_output == expected_output
 
-
+# I am placing these here, rather than in the fixture, so they can be easily
+# re-used where required (and reduce unnecessary typing!).
+# Each key is an input, and the corresponding value is the expected output.
 catdat = {'cat': 'Cat', 'csgsomething': 'CSGsomething', 'csgcat': 'CSGcat',
             'cscat': 'Cscat', 'csgeometry': 'CSGeometry',
             'csGeometry': 'CSGeometry', 'a': 'A'}
@@ -39,6 +41,19 @@ foxcatchild = {"fox": "listOfFoxes", "cat": "listOfCats",
              "child": "listOfChildren"}
 foocat = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats"}
 foosbmlcat = {"FooParameter": "SBMLListOfFooParameters", "cat": "SBMLListOfCats"}
+foolistcat = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats",
+            "SBMLFooParameter": "ListOfSBMLFooParameters"}
+foolistcat2 = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats",
+               "SBMLFooParameter": "ListOfFooParameters"}
+plurals = {"fox": "foxes", "child": "children", "SBMLchild": "SBMLchildren"}
+rosieplurals = {"RosieFox": "Foxes", "RosieChild": "Children",
+                "RosieCat": "Cats", "Rosiefox": "Rosiefoxes"}
+rosieplurals2 = {"Rosiefox": "Rosiefoxes", "Rosiechild": "Rosiechildren",
+                 "RosieCat": "RosieCats"}
+lots_of_plurals = {"cat": "cats", "dogs": "dogs", "child": "children",
+                   "disinformation": "disinformation", "fox": "foxes",
+                   "party": "parties", "cloud": "clouds",
+                   "something": "somethings", "apple": "apples"}
 
 # Please try and keep functions in same order as in the strFunctions.py file
 # for ease of reference (and to see what is missing).
@@ -62,7 +77,17 @@ foosbmlcat = {"FooParameter": "SBMLListOfFooParameters", "cat": "SBMLListOfCats"
     (sf.cap_list_of_name, foocat, {'add_prefix': False}, 'gv.is_package = False'),
     (sf.cap_list_of_name, foosbmlcat, {'add_prefix': True}, ''),
 
+    (sf.cap_list_of_name_no_prefix, foolistcat, {}, 'gv.reset()'),
+    # The next one this wrongly dealt with by the remove prefix function: TODO FIXIT
+    # (sf.cap_list_of_name_no_prefix, foolistcat2, {}, 'gv.is_package = False'),
 
+    (sf.plural_no_prefix, plurals, {}, 'gv.reset()'),
+    (sf.plural_no_prefix, rosieplurals, {}, 'gv.is_package = False; gv.prefix = "Rosie"'),
+    (sf.plural_no_prefix, rosieplurals2, {}, 'gv.is_package = True'),
+
+    (sf.plural, lots_of_plurals, {}, ''),
+
+    (sf.singular, rst.swap_dictionary(lots_of_plurals), {}, 'test_data["dogs"] = "dog"'),
 
 ])
 def test_many_things(func, test_data, kwargs, do_first):
