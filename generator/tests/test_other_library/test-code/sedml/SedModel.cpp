@@ -1174,10 +1174,11 @@ SedModel::getElementBySId(const std::string& id)
   return obj;
 }
 
+
 /*
-* Returns a List of all child SBase objects, including those nested to an
-* arbitrary depth.
-*/
+ * Returns a List of all child SedBase objects, including those nested to an
+ * arbitrary depth.
+ */
 List*
 SedModel::getAllElements(ElementFilter* filter)
 {
@@ -1189,8 +1190,6 @@ SedModel::getAllElements(ElementFilter* filter)
 
   return ret;
 }
-
-
 
 
 

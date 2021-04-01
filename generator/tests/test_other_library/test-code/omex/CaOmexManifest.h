@@ -703,6 +703,19 @@ public:
 
 
   /**
+   * Returns a List of all child CaBase objects, including those nested to an
+   * arbitrary depth.
+   *
+   * @param filter an ElementFilter that may impose restrictions on the objects
+   * to be retrieved.
+   *
+   * @return a List pointer of pointers to all CaBase child objects with any
+   * restriction imposed.
+   */
+  virtual List* getAllElements(ElementFilter * filter = NULL);
+
+
+  /**
    * Returns the value of the "Namespaces" element of this CaOmexManifest.
    *
    * @return the value of the "Namespaces" element of this CaOmexManifest as a

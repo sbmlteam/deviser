@@ -1234,6 +1234,25 @@ SedDataGenerator::getElementBySId(const std::string& id)
 }
 
 
+/*
+ * Returns a List of all child SedBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+SedDataGenerator::getAllElements(ElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+  ADD_FILTERED_POINTER(ret, sublist, mMath, filter);
+
+  ADD_FILTERED_LIST(ret, sublist, mVariables, filter);
+  ADD_FILTERED_LIST(ret, sublist, mParameters, filter);
+
+  return ret;
+}
+
+
 
 /** @cond doxygenLibSEDMLInternal */
 

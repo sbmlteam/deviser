@@ -692,6 +692,23 @@ CaOmexManifest::getElementBySId(const std::string& id)
 
 
 /*
+ * Returns a List of all child CaBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+CaOmexManifest::getAllElements(ElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+
+  ADD_FILTERED_LIST(ret, sublist, mContents, filter);
+
+  return ret;
+}
+
+
+/*
  * Returns the value of the "Namespaces" element of this CaOmexManifest.
  */
 const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*
