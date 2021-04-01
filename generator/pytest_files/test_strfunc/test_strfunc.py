@@ -97,7 +97,16 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
 
     (sf.singular, rst.swap_dictionary(lots_of_plurals), {}, 'test_data["dogs"] = "dog"'),
 
-    # TODO plural_then_single and vice versa here
+    # plural_then_single and vice versa here.
+    # Keys = Values (inputs = expected outputs)
+    # Dictionary comprehension: data = {k: k for k in ['cat', 'dog', 'bike']}
+    (rst.plural_then_single,
+       {k: k for k in ["cat", "dog", "child", "disinformation", "fox",
+                       "party", "cloud", "something", "apple"]}, {}, ''),
+    (rst.single_then_plural,
+       {k: k for k in ["cats", "dogs", "children", "disinformation", "foxes",
+                       "parties", "clouds", "somethings", "apples"]}, {}, ''),
+
 
     # Lots of remove_prefix() tests - this is a complicated function to test!
     # tests removing a package prefix. gv.reset() sets gv.prefix to "SBML"
