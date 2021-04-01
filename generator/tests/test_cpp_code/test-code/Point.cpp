@@ -917,6 +917,23 @@ Point::getElementBySId(const std::string& id)
 }
 
 
+/*
+ * Returns a List of all child SbgnBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+Point::getAllElements(ElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+
+  ADD_FILTERED_POINTER(ret, sublist, mPoints, filter);
+
+  return ret;
+}
+
+
 
 /** @cond doxygenlibSBGNInternal */
 

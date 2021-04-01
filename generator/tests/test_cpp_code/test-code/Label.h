@@ -701,6 +701,19 @@ public:
   virtual SbgnBase* getElementBySId(const std::string& id);
 
 
+  /**
+   * Returns a List of all child SbgnBase objects, including those nested to an
+   * arbitrary depth.
+   *
+   * @param filter an ElementFilter that may impose restrictions on the objects
+   * to be retrieved.
+   *
+   * @return a List pointer of pointers to all SbgnBase child objects with any
+   * restriction imposed.
+   */
+  virtual List* getAllElements(ElementFilter * filter = NULL);
+
+
 protected:
 
 

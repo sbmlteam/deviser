@@ -329,7 +329,7 @@ class GlobalQueryFunctions():
                                       'filter)'.format(name, elementType))
             code.append(self.create_code_block('line', implementation))
             # only write get elements from plugin if this is an SBML plugin
-            if not self.is_plugin and self.cap_language == 'SBML':
+            if self.cap_language == 'SBML' and not self.is_plugin:
                 code.append(self.create_code_block('line',
                                                    ['ADD_FILTERED_FROM_PLUGIN'
                                                     '(ret, sublist, filter)']))
