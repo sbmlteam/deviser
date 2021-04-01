@@ -273,8 +273,14 @@ class GlobalQueryFunctions():
 
     # function to write get all elements
     def write_get_all_elements(self):
-        if not global_variables.is_package:
-            return
+        """
+        This writes the 'getAllElements(ElementFilter*) function.
+
+
+        :return:
+        """
+#        if not global_variables.is_package:
+#            return
         # only write for elements with  base derived children in cpp
         if not self.is_cpp_api or self.num_children == 0:
                 return
