@@ -59,6 +59,9 @@ lots_of_plurals = {"cat": "cats", "dogs": "dogs", "child": "children",
                    "something": "somethings", "apple": "apples"}
 fbc = {"FbcType": "Type", "FluxObjective": "FluxObjective",
        "FbcSBMLDocument": "FbcSBMLDocument"}
+prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
+               "FbcSBMLDocument": "FbcSBMLDocument"}
+
 
 # Please try and keep functions in same order as in the strFunctions.py file
 # for ease of reference (and to see what is missing).
@@ -96,7 +99,7 @@ fbc = {"FbcType": "Type", "FluxObjective": "FluxObjective",
 
     # TODO plural_then_single and vice versa here
 
-    # remove_prefix() tests - this is a complicated function to test!
+    # Lots of remove_prefix() tests - this is a complicated function to test!
     # tests removing a package prefix. gv.reset() sets gv.prefix to "SBML"
     (sf.remove_prefix, fbc, {},
             'gv.reset(); gv.is_package = True; gv.package_prefix = "Fbc"'),
@@ -105,6 +108,20 @@ fbc = {"FbcType": "Type", "FluxObjective": "FluxObjective",
          {'remove_doc_prefix': True}, ''),
     (sf.remove_prefix, fbc, {'prefix': 'Fbc'},
         'gv.reset(); gv.is_package = True; gv.package_prefix = ""'),
+    # No prefix to remove has been specified or explicitly told not to remove:
+    (sf.remove_prefix, prefix_data, {'prefix': ''}, ''),
+    (sf.remove_prefix, prefix_data, {'prefix': 'Fbc', 'remove_package': False}, ''),
+    (sf.remove_prefix, prefix_data, {'remove_doc_prefix': True}, ''),
+    (sf.remove_prefix, prefix_data, {'prefix': '', 'remove_doc_prefix': True, }, ''),
+    (sf.remove_prefix, prefix_data, {'prefix': 'Fbc', 'remove_doc_prefix': False, 'remove_package': False}, ''),
+    (sf.remove_prefix, {"FbcSBMLDocument": "SBMLDocument"}, {'prefix': 'Fbc', 'remove_doc_prefix': True}, ''),
+    (sf.remove_prefix, {"RosieFbcType": "FbcType", "RosieDocument": "RosieDocument"},
+             {'prefix': 'Rosie'}, 'gv.reset(); gv.prefix = "Rosie"; gv.is_package = False'),
+    (sf.remove_prefix, {"RosieFbcType": "FbcType", "RosieDocument": "Document"},
+             {'prefix': 'Rosie', 'remove_doc_prefix': True}, ''),
+
+
+
 
 ])
 def test_many_things(func, test_data, kwargs, do_first):
