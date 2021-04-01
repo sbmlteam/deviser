@@ -30,9 +30,12 @@ def test_one_thing(func, input, expected_output, kwargs):
     actual_output = func(input, **kwargs)
     assert actual_output == expected_output
 
+
 # I am placing these here, rather than in the fixture, so they can be easily
 # re-used where required (and reduce unnecessary typing!).
 # Each key is an input, and the corresponding value is the expected output.
+# NB Those dictionaries which are only used once I have (mainly?) placed
+# in the fixture itself.
 catdat = {'cat': 'Cat', 'csgsomething': 'CSGsomething', 'csgcat': 'CSGcat',
             'cscat': 'Cscat', 'csgeometry': 'CSGeometry',
             'csGeometry': 'CSGeometry', 'a': 'A'}
@@ -54,6 +57,8 @@ lots_of_plurals = {"cat": "cats", "dogs": "dogs", "child": "children",
                    "disinformation": "disinformation", "fox": "foxes",
                    "party": "parties", "cloud": "clouds",
                    "something": "somethings", "apple": "apples"}
+fbc = {"FbcType": "Type", "FluxObjective": "FluxObjective",
+       "FbcSBMLDocument": "FbcSBMLDocument"}
 
 # Please try and keep functions in same order as in the strFunctions.py file
 # for ease of reference (and to see what is missing).
@@ -88,6 +93,18 @@ lots_of_plurals = {"cat": "cats", "dogs": "dogs", "child": "children",
     (sf.plural, lots_of_plurals, {}, ''),
 
     (sf.singular, rst.swap_dictionary(lots_of_plurals), {}, 'test_data["dogs"] = "dog"'),
+
+    # TODO plural_then_single and vice versa here
+
+    # remove_prefix() tests - this is a complicated function to test!
+    # tests removing a package prefix. gv.reset() sets gv.prefix to "SBML"
+    (sf.remove_prefix, fbc, {},
+            'gv.reset(); gv.is_package = True; gv.package_prefix = "Fbc"'),
+    (sf.remove_prefix, fbc, {'remove_package': True}, ''),
+    (sf.remove_prefix, {"FbcSBMLDocument": "SBMLDocument"},
+         {'remove_doc_prefix': True}, ''),
+    (sf.remove_prefix, fbc, {'prefix': 'Fbc'},
+        'gv.reset(); gv.is_package = True; gv.package_prefix = ""'),
 
 ])
 def test_many_things(func, test_data, kwargs, do_first):
