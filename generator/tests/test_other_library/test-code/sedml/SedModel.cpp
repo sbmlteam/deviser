@@ -1180,13 +1180,13 @@ SedModel::getElementBySId(const std::string& id)
  * arbitrary depth.
  */
 List*
-SedModel::getAllElements(ElementFilter* filter)
+SedModel::getAllElements(SedElementFilter* element_filter)
 {
   List* ret = new List();
   List* sublist = NULL;
 
 
-  ADD_FILTERED_LIST(ret, sublist, mChanges, filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mChanges, element_filter);
 
   return ret;
 }

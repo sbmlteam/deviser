@@ -2454,19 +2454,19 @@ SedDocument::getElementBySId(const std::string& id)
  * arbitrary depth.
  */
 List*
-SedDocument::getAllElements(ElementFilter* filter)
+SedDocument::getAllElements(SedElementFilter* element_filter)
 {
   List* ret = new List();
   List* sublist = NULL;
 
 
-  ADD_FILTERED_LIST(ret, sublist, mDataDescriptions, filter);
-  ADD_FILTERED_LIST(ret, sublist, mModels, filter);
-  ADD_FILTERED_LIST(ret, sublist, mSimulations, filter);
-  ADD_FILTERED_LIST(ret, sublist, mAbstractTasks, filter);
-  ADD_FILTERED_LIST(ret, sublist, mDataGenerators, filter);
-  ADD_FILTERED_LIST(ret, sublist, mOutputs, filter);
-  ADD_FILTERED_LIST(ret, sublist, mStyles, filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mDataDescriptions, element_filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mModels, element_filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mSimulations, element_filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mAbstractTasks, element_filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mDataGenerators, element_filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mOutputs, element_filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mStyles, element_filter);
 
   return ret;
 }
