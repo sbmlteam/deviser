@@ -711,7 +711,7 @@ public:
    * @return a List pointer of pointers to all SbgnBase child objects with any
    * restriction imposed.
    */
-  virtual List* getAllElements(ElementFilter * filter = NULL);
+  virtual List* getAllElements(SbgnElementFilter * filter = NULL);
 
 
 protected:

@@ -867,12 +867,12 @@ Label::getElementBySId(const std::string& id)
  * arbitrary depth.
  */
 List*
-Label::getAllElements(ElementFilter* filter)
+Label::getAllElements(SbgnElementFilter* filter)
 {
   List* ret = new List();
   List* sublist = NULL;
 
-  ADD_FILTERED_POINTER(ret, sublist, mBBox, filter);
+  ADD_SBGN_FILTERED_POINTER(ret, sublist, mBBox, filter);
 
 
   return ret;

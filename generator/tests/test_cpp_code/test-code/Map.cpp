@@ -1458,16 +1458,16 @@ Map::getElementBySId(const std::string& id)
  * arbitrary depth.
  */
 List*
-Map::getAllElements(ElementFilter* filter)
+Map::getAllElements(SbgnElementFilter* filter)
 {
   List* ret = new List();
   List* sublist = NULL;
 
-  ADD_FILTERED_POINTER(ret, sublist, mBBox, filter);
+  ADD_SBGN_FILTERED_POINTER(ret, sublist, mBBox, filter);
 
-  ADD_FILTERED_LIST(ret, sublist, mGlyphs, filter);
-  ADD_FILTERED_LIST(ret, sublist, mArcs, filter);
-  ADD_FILTERED_LIST(ret, sublist, mArcGroups, filter);
+  ADD_SBGN_FILTERED_LIST(ret, sublist, mGlyphs, filter);
+  ADD_SBGN_FILTERED_LIST(ret, sublist, mArcs, filter);
+  ADD_SBGN_FILTERED_LIST(ret, sublist, mArcGroups, filter);
 
   return ret;
 }

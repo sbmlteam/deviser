@@ -922,13 +922,13 @@ Point::getElementBySId(const std::string& id)
  * arbitrary depth.
  */
 List*
-Point::getAllElements(ElementFilter* filter)
+Point::getAllElements(SbgnElementFilter* filter)
 {
   List* ret = new List();
   List* sublist = NULL;
 
 
-  ADD_FILTERED_POINTER(ret, sublist, mPoints, filter);
+  ADD_SBGN_FILTERED_POINTER(ret, sublist, mPoints, filter);
 
   return ret;
 }
