@@ -1244,7 +1244,6 @@ SedDataGenerator::getAllElements(SedElementFilter* filter)
   List* ret = new List();
   List* sublist = NULL;
 
-  ADD_SED_FILTERED_POINTER(ret, sublist, mMath, filter);
 
   ADD_SED_FILTERED_LIST(ret, sublist, mVariables, filter);
   ADD_SED_FILTERED_LIST(ret, sublist, mParameters, filter);

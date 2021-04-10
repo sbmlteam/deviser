@@ -335,6 +335,9 @@ class GlobalQueryFunctions():
             code = [self.create_code_block('line', implementation)]
             implementation = []
             for child_element in self.child_elements:
+                # do not write for an ASTNode
+                if child_element['element'] == 'ASTNode':
+                    continue
                 name = child_element['memberName']
                 implementation.append('{1}_POINTER(ret, sublist, {0}, '
                                       'filter)'.format(name, add_filtered))
@@ -350,7 +353,7 @@ class GlobalQueryFunctions():
                                       'filter)'.format(name, elementType,
                                                        add_filtered))
             code.append(self.create_code_block('line', implementation))
-            
+
             # only write get elements from plugin if this is an SBML plugin
             if self.cap_language == 'SBML' and not self.is_plugin:
                 code.append(self.create_code_block('line',
