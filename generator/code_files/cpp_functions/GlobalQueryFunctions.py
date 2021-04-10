@@ -275,6 +275,12 @@ class GlobalQueryFunctions():
     def write_get_all_elements(self):
         """
         This writes the 'getAllElements(ElementFilter*) function.
+        The function uses macros to loop through ant child elements and return
+        objects to the list to be returned.
+        The optional ElementFilter argument allows users to define a filter
+        to allow/disallow objects from being added to the list.
+        For example, this would allow users to return all elements that have a
+        particular attribute set.
 
         For libSBML the ElementFilter is defined in sbml/util/ElementFilter.h.
         For other libraries, it is prefixed wth the library prefix e.g.
@@ -284,9 +290,7 @@ class GlobalQueryFunctions():
 
         :return: dictionary of parts of function
         """
-#        if not global_variables.is_package:
-#            return
-        # only write for elements with  base derived children in cpp
+        # create appropriate names
         if self.cap_language == 'SBML':
             element_filter = 'ElementFilter'
             add_filtered = 'ADD_FILTERED'
@@ -296,8 +300,10 @@ class GlobalQueryFunctions():
             add_filtered = 'ADD_{0}_FILTERED'\
                 .format(global_variables.prefix.upper())
 
+        # only write for this function for elements with base derived
+        # children in cpp code
         if not self.is_cpp_api or self.num_children == 0:
-                return
+            return
         elif self.num_children == self.num_non_std_children:
             return
 
@@ -328,22 +334,23 @@ class GlobalQueryFunctions():
                               'List* sublist = {0}'.format(sublist)]
             code = [self.create_code_block('line', implementation)]
             implementation = []
-            for i in range(0, len(self.child_elements)):
-                name = self.child_elements[i]['memberName']
+            for child_element in self.child_elements:
+                name = child_element['memberName']
                 implementation.append('{1}_POINTER(ret, sublist, {0}, '
                                       'filter)'.format(name, add_filtered))
             code.append(self.create_code_block('line', implementation))
             implementation = []
-            for i in range(0, len(self.child_lo_elements)):
-                name = self.child_lo_elements[i]['memberName']
+            for child_lo_element in self.child_lo_elements:
+                name = child_lo_element['memberName']
                 elementType = 'LIST'
-                if 'recursive_child' in self.child_lo_elements[i] and \
-                        self.child_lo_elements[i]['recursive_child']:
+                if 'recursive_child' in child_lo_element and \
+                        child_lo_element['recursive_child']:
                     elementType = 'POINTER'
                 implementation.append('{2}_{1}(ret, sublist, {0}, '
                                       'filter)'.format(name, elementType,
                                                        add_filtered))
             code.append(self.create_code_block('line', implementation))
+            
             # only write get elements from plugin if this is an SBML plugin
             if self.cap_language == 'SBML' and not self.is_plugin:
                 code.append(self.create_code_block('line',
