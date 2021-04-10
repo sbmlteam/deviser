@@ -1239,15 +1239,15 @@ SedDataGenerator::getElementBySId(const std::string& id)
  * arbitrary depth.
  */
 List*
-SedDataGenerator::getAllElements(SedElementFilter* element_filter)
+SedDataGenerator::getAllElements(SedElementFilter* filter)
 {
   List* ret = new List();
   List* sublist = NULL;
 
-  ADD_SED_FILTERED_POINTER(ret, sublist, mMath, element_filter);
+  ADD_SED_FILTERED_POINTER(ret, sublist, mMath, filter);
 
-  ADD_SED_FILTERED_LIST(ret, sublist, mVariables, element_filter);
-  ADD_SED_FILTERED_LIST(ret, sublist, mParameters, element_filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mVariables, filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mParameters, filter);
 
   return ret;
 }

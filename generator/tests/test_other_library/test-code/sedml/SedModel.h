@@ -954,13 +954,13 @@ public:
    * Returns a List of all child SedBase objects, including those nested to an
    * arbitrary depth.
    *
-   * @param element_filter an ElementFilter that may impose restrictions on the
-   * objects to be retrieved.
+   * @param filter an ElementFilter that may impose restrictions on the objects
+   * to be retrieved.
    *
    * @return a List pointer of pointers to all SedBase child objects with any
    * restriction imposed.
    */
-  virtual List* getAllElements(SedElementFilter * element_filter = NULL);
+  virtual List* getAllElements(SedElementFilter * filter = NULL);
 
 
 protected:

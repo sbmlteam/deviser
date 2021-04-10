@@ -304,7 +304,7 @@ class GlobalQueryFunctions():
         # create comment parts
         title_line = 'Returns a List of all child {0} objects, including ' \
                      'those nested to an arbitrary depth.'.format(self.std_base)
-        params = ['@param element_filter an ElementFilter that may impose '
+        params = ['@param filter an ElementFilter that may impose '
                   'restrictions on the objects to be retrieved.']
         return_lines = ['@return  a List pointer of pointers to all '
                         '{0} child objects with any restriction '
@@ -315,15 +315,15 @@ class GlobalQueryFunctions():
         function = 'getAllElements'
         return_type = 'List*'
         if self.is_header:
-            arguments = ['{0} * element_filter = NULL'.format(element_filter)]
+            arguments = ['{0} * filter = NULL'.format(element_filter)]
         else:
-            arguments = ['{0}* element_filter'.format(element_filter)]
+            arguments = ['{0}* filter'.format(element_filter)]
 
         code = []
         if not self.is_header:
             sublist = 'NULL'
             if self.is_list_of:
-                sublist = 'ListOf::getAllElements(element_filter)'
+                sublist = 'ListOf::getAllElements(filter)'
             implementation = ['List* ret = new List()',
                               'List* sublist = {0}'.format(sublist)]
             code = [self.create_code_block('line', implementation)]
@@ -331,8 +331,7 @@ class GlobalQueryFunctions():
             for i in range(0, len(self.child_elements)):
                 name = self.child_elements[i]['memberName']
                 implementation.append('{1}_POINTER(ret, sublist, {0}, '
-                                      'element_filter)'.format(name,
-                                                               add_filtered))
+                                      'filter)'.format(name, add_filtered))
             code.append(self.create_code_block('line', implementation))
             implementation = []
             for i in range(0, len(self.child_lo_elements)):
@@ -342,16 +341,15 @@ class GlobalQueryFunctions():
                         self.child_lo_elements[i]['recursive_child']:
                     elementType = 'POINTER'
                 implementation.append('{2}_{1}(ret, sublist, {0}, '
-                                      'element_filter)'.format(name,
-                                                               elementType,
-                                                               add_filtered))
+                                      'filter)'.format(name, elementType,
+                                                       add_filtered))
             code.append(self.create_code_block('line', implementation))
             # only write get elements from plugin if this is an SBML plugin
             if self.cap_language == 'SBML' and not self.is_plugin:
                 code.append(self.create_code_block('line',
                                                    ['ADD_FILTERED_FROM_PLUGIN'
                                                     '(ret, sublist, '
-                                                    'element_filter)']))
+                                                    'filter)']))
             code.append(self.create_code_block('line', ['return ret']))
 
         # return the parts

@@ -1462,15 +1462,15 @@ SedRepeatedTask::getElementBySId(const std::string& id)
  * arbitrary depth.
  */
 List*
-SedRepeatedTask::getAllElements(SedElementFilter* element_filter)
+SedRepeatedTask::getAllElements(SedElementFilter* filter)
 {
   List* ret = new List();
   List* sublist = NULL;
 
 
-  ADD_SED_FILTERED_LIST(ret, sublist, mRanges, element_filter);
-  ADD_SED_FILTERED_LIST(ret, sublist, mSetValues, element_filter);
-  ADD_SED_FILTERED_LIST(ret, sublist, mSubTasks, element_filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mRanges, filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mSetValues, filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mSubTasks, filter);
 
   return ret;
 }

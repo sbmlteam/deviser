@@ -696,13 +696,13 @@ CaOmexManifest::getElementBySId(const std::string& id)
  * arbitrary depth.
  */
 List*
-CaOmexManifest::getAllElements(CaElementFilter* element_filter)
+CaOmexManifest::getAllElements(CaElementFilter* filter)
 {
   List* ret = new List();
   List* sublist = NULL;
 
 
-  ADD_CA_FILTERED_LIST(ret, sublist, mContents, element_filter);
+  ADD_CA_FILTERED_LIST(ret, sublist, mContents, filter);
 
   return ret;
 }

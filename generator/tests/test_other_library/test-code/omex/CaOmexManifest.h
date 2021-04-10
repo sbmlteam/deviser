@@ -706,13 +706,13 @@ public:
    * Returns a List of all child CaBase objects, including those nested to an
    * arbitrary depth.
    *
-   * @param element_filter an ElementFilter that may impose restrictions on the
-   * objects to be retrieved.
+   * @param filter an ElementFilter that may impose restrictions on the objects
+   * to be retrieved.
    *
    * @return a List pointer of pointers to all CaBase child objects with any
    * restriction imposed.
    */
-  virtual List* getAllElements(CaElementFilter * element_filter = NULL);
+  virtual List* getAllElements(CaElementFilter * filter = NULL);
 
 
   /**

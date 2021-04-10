@@ -908,12 +908,12 @@ SedSimulation::getElementBySId(const std::string& id)
  * arbitrary depth.
  */
 List*
-SedSimulation::getAllElements(SedElementFilter* element_filter)
+SedSimulation::getAllElements(SedElementFilter* filter)
 {
   List* ret = new List();
   List* sublist = NULL;
 
-  ADD_SED_FILTERED_POINTER(ret, sublist, mAlgorithm, element_filter);
+  ADD_SED_FILTERED_POINTER(ret, sublist, mAlgorithm, filter);
 
 
   return ret;
