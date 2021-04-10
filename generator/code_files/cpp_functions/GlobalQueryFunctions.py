@@ -275,7 +275,7 @@ class GlobalQueryFunctions():
     def write_get_all_elements(self):
         """
         This writes the 'getAllElements(ElementFilter*) function.
-        The function uses macros to loop through ant child elements and return
+        The function uses macros to loop through any child elements and return
         objects to the list to be returned.
         The optional ElementFilter argument allows users to define a filter
         to allow/disallow objects from being added to the list.
