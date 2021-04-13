@@ -25,6 +25,22 @@ from ...util import strFunctions as sf, global_variables as gv
 
     (sf.wrap_enum, 'cat', '\\primtype{cat}', {}),
 
+    # get_element_name() tests
+
+
+
+
+    (sf.replace_digits, "John 3:16", "John Three:OneSix", {}),
+
+    (sf.texify, "012_27 cat44_8 ", "ZeroOneTwo\\_TwoSevencatFourFour\\_Eight", {}),
+
+    (sf.compare_no_case, "This iS a TEST", True, {"reference": "this is a test"}),
+    (sf.compare_no_case, "This iS a bad TEST", False, {"reference": "this is a test"}),
+
+    (sf.get_class_from_plugin, "CompModelPlugin", "Model", {"package": "Comp"}),
+    (sf.get_class_from_plugin, "CompModelPlug", "", {"package": "Comp"}),
+    (sf.get_class_from_plugin, "Plugin", "", {"package": "Comp"}),
+
 ])
 def test_one_thing(func, input, expected_output, kwargs):
     """
@@ -143,7 +159,6 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
     (sf.remove_prefix, {"RosieFbcType": "FbcType", "RosieDocument": "Document"},
              {'prefix': 'Rosie', 'remove_doc_prefix': True}, ''),
 
-
     (sf.is_prefixed_name, {"RosieFox": True, "rosieFoo": True, "rosiefoo": False,
             "RosiFox": False, "RoSiEFoo": True, "RoSiEfoo": False},
             {'prefix': 'Rosie'}, 'gv.reset()'),  # gv.reset() means gv.prefix is now "SBML"
@@ -168,6 +183,30 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
         {"library": "Rary", "libSBML": "Sbml", "cat": "Cat", "lib": ""},
         {}, ''),
 
+    (sf.get_sid_refs,
+        {'': ['', 'SId'], 'cat': ['Cat', 'Cat'],
+         'csgsomething': ['CSGsomething', 'CSGsomething'],
+         'cat,dog': ["Cat or \\Dog", "CatOrDog"]},
+        {}, ''),
+
+    (sf.replace_underscore,
+        {"this_is_a_test": "this\\_is\\_a\\_test", "cat": "cat", "_": "\\_"},
+        {}, ''),
+
+    (sf.remove_spaces,
+        {"   hello   world  ": "helloworld", "dogfish": "dogfish"},
+        {}, ''),
+
+    (sf.remove_hyphens,
+        {"this-is-a-test": ["thisIsATest", True], "cat": ["cat", False],
+         "cat-": ["cat", True], "-cat": ["Cat", True]},
+        {}, ''),
+
+    (sf.prefix_name,
+        {"DABS": "DABS", "DABSCAT": "DABSCAT", "dabs": "DABSdabs",
+         "SBase": "DABSBase", "XMLNode": "XMLNode",
+         "XMLNodeAgain": "DABSXMLNodeAgain", "ASTNode": "ASTNode"},
+        {}, 'gv.reset(); gv.prefix = "DABS"'),
 
 ])
 def test_many_things(func, test_data, kwargs, do_first):
