@@ -208,6 +208,15 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
          "XMLNodeAgain": "DABSXMLNodeAgain", "ASTNode": "ASTNode"},
         {}, 'gv.reset(); gv.prefix = "DABS"'),
 
+    # TODO add tests for sf.prefix_classes
+
+
+    (sf.is_camel_case,
+        {'FooParameter': True, 'fooParameter': True, 'fooparameter': False,
+         'Fooparameter': False},
+        {}, ''),
+
+
 ])
 def test_many_things(func, test_data, kwargs, do_first):
     """
