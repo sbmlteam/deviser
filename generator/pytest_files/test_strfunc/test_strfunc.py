@@ -130,6 +130,15 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
              {'prefix': 'Rosie', 'remove_doc_prefix': True}, ''),
 
 
+    (sf.is_prefixed_name, {"RosieFox": True, "rosieFoo": True, "rosiefoo": False,
+            "RosiFox": False, "RoSiEFoo": True, "RoSiEfoo": False},
+            {'prefix': 'Rosie'}, 'gv.reset()'),  # gv.reset() means gv.prefix is now "SBML"
+
+    (sf.is_prefixed_document_class,
+        {"RosieDocument": True, "rosieDocument": True,
+         "rosiedocument": False, "RosiDocument": False,
+         "RoSiEDocument": True, "RoSiEDocment": False},
+        {'prefix': 'Rosie'}, '')
 
 
 ])
