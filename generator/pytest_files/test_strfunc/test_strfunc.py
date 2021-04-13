@@ -138,9 +138,21 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
         {"RosieDocument": True, "rosieDocument": True,
          "rosiedocument": False, "RosiDocument": False,
          "RoSiEDocument": True, "RoSiEDocment": False},
-        {'prefix': 'Rosie'}, '')
+        {'prefix': 'Rosie'}, ''),
 
+    (sf.get_indefinite,
+        {"apple": "an", "biscuit": "a", "elephant": "an", "image": "an",
+         "polar bear": "a", "orangutan": "an", "under secretary": "an",
+         "zither": "a"}, {}, ''),
 
+    (sf.standard_element_name,
+        {"listOfFoxes,": "Fox", "ListOfApples": "Apple",
+         "XMLNode*": "XMLNode", "Rosie,": "Rosie", "rosie,": "Rosie",
+         "name_t": "Name", "Name": "Name", "name": "Name"}, {}, ''),
+
+    (sf.get_library_suffix,
+        {"library": "Rary", "libSBML": "Sbml", "cat": "Cat", "lib": ""},
+        {}, ''),
 ])
 def test_many_things(func, test_data, kwargs, do_first):
     """
