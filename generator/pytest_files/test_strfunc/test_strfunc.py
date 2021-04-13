@@ -11,8 +11,20 @@ from ...util import strFunctions as sf, global_variables as gv
 # for ease of reference (and to see what is missing).
 @pytest.mark.parametrize('func, input, expected_output, kwargs', [
     (sf.upper_first, 'cat', 'Cat', {}),
+
     (sf.wrap_token, 'fred', '\\token{cat:\\-fred}', {'pkg': 'cat'}),
     (sf.wrap_token, 'fred', '\\token{fred}', {}),
+
+    # TODO add test(s) for wrap_type()
+
+    # TODO add test(s) for wrap_section()
+
+    (sf.make_class, 'Irenaeus', 'irenaeus-class', {}),
+    (sf.make_class, 'Irenaeus', 'extended-irenaeus-class',
+        {'add_extended': 'True'}),
+
+    (sf.wrap_enum, 'cat', '\\primtype{cat}', {}),
+
 ])
 def test_one_thing(func, input, expected_output, kwargs):
     """
