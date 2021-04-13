@@ -6,43 +6,53 @@ from ...tests import test_functions
 from ...tests.test_strfunc_code import run_strfunc_tests as rst
 from ...util import strFunctions as sf, global_variables as gv
 
+# The following are used in test_one_thing()
+attribute1 = {'something': 'something else'}
+attribute2 = {'type': 'element', 'element': 'ASTNode*', 'texname': 'tex'}
+attribute3 = {'isListOf': True, 'name': 'Foo'}
+attribute4 = {'type': 'element', 'element': 'Unit', 'texname': 'Unit'}
+attribute5 = {'type': 'lo_element', 'element': 'Unit', 'texname': 'Unit'}
+attribute6 = {'type': 'double', 'element': 'Unit', 'texname': 'Unit'}
+attribute7 = {'isListOf': False, 'name': 'Foo'}
+attribute8 = {'type': 'lo_element', 'element': 'Unit', 'name': 'Unit',
+              'listOfClassName': 'ListOfAnything'}
 
 # Please try and keep functions in same order as in the strFunctions.py file
 # for ease of reference (and to see what is missing).
-@pytest.mark.parametrize('func, input, expected_output, kwargs', [
-    (sf.upper_first, 'cat', 'Cat', {}),
+@pytest.mark.parametrize('func, input, expected_output, kwargs, do_first', [
+    (sf.upper_first, 'cat', 'Cat', {}, ''),
 
-    (sf.wrap_token, 'fred', '\\token{cat:\\-fred}', {'pkg': 'cat'}),
-    (sf.wrap_token, 'fred', '\\token{fred}', {}),
+    (sf.wrap_token, 'fred', '\\token{cat:\\-fred}', {'pkg': 'cat'}, ''),
+    (sf.wrap_token, 'fred', '\\token{fred}', {}, ''),
 
     # TODO add test(s) for wrap_type()
 
     # TODO add test(s) for wrap_section()
 
-    (sf.make_class, 'Irenaeus', 'irenaeus-class', {}),
+    (sf.make_class, 'Irenaeus', 'irenaeus-class', {}, ''),
     (sf.make_class, 'Irenaeus', 'extended-irenaeus-class',
-        {'add_extended': 'True'}),
+        {'add_extended': 'True'}, ''),
 
-    (sf.wrap_enum, 'cat', '\\primtype{cat}', {}),
+    (sf.wrap_enum, 'cat', '\\primtype{cat}', {}, ''),
 
     # get_element_name() tests
 
 
 
 
-    (sf.replace_digits, "John 3:16", "John Three:OneSix", {}),
+    (sf.replace_digits, "John 3:16", "John Three:OneSix", {}, ''),
 
-    (sf.texify, "012_27 cat44_8 ", "ZeroOneTwo\\_TwoSevencatFourFour\\_Eight", {}),
+    (sf.texify, "012_27 cat44_8 ", "ZeroOneTwo\\_TwoSevencatFourFour\\_Eight", {}, ''),
 
-    (sf.compare_no_case, "This iS a TEST", True, {"reference": "this is a test"}),
-    (sf.compare_no_case, "This iS a bad TEST", False, {"reference": "this is a test"}),
+    (sf.compare_no_case, "This iS a TEST", True, {"reference": "this is a test"}, ''),
+    (sf.compare_no_case, "This iS a bad TEST", False, {"reference": "this is a test"}, ''),
 
-    (sf.get_class_from_plugin, "CompModelPlugin", "Model", {"package": "Comp"}),
-    (sf.get_class_from_plugin, "CompModelPlug", "", {"package": "Comp"}),
-    (sf.get_class_from_plugin, "Plugin", "", {"package": "Comp"}),
+    (sf.get_class_from_plugin, "CompModelPlugin", "Model", {"package": "Comp"}, ''),
+    (sf.get_class_from_plugin, "CompModelPlug", "", {"package": "Comp"}, ''),
+    (sf.get_class_from_plugin, "Plugin", "", {"package": "Comp"}, ''),
 
 ])
-def test_one_thing(func, input, expected_output, kwargs):
+def test_one_thing(func, input, expected_output, kwargs, do_first):
     """
     Run a single test case on a strFunc function, and check that
     the actual output returned is the same as that expected.
@@ -51,12 +61,17 @@ def test_one_thing(func, input, expected_output, kwargs):
     :param input: input to function
     :param expected_output: what we expect the function to return. Can be None.
     :param kwargs: dictionary of keyword arguments, if any, for the function
-               under test.
+           under test.
+    :param do_first: string of command(s) (separated by semi-colons)
+           to be executed before running the test.
+           Example: do_first = 'ans = 2 + 2; print(ans)'
     """
     #if kwargs:
     #    actual_output = func(input, **kwargs)
     #else:
     #    actual_output = func(input)
+    if do_first:
+        exec(do_first)
     actual_output = func(input, **kwargs)
     assert actual_output == expected_output
 
@@ -208,7 +223,9 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
          "XMLNodeAgain": "DABSXMLNodeAgain", "ASTNode": "ASTNode"},
         {}, 'gv.reset(); gv.prefix = "DABS"'),
 
-    # TODO add tests for sf.prefix_classes
+
+
+    # TODO add tests for sf.prefix_classes - uses compare_dictionaries()
 
 
     (sf.is_camel_case,
@@ -236,3 +253,5 @@ def test_many_things(func, test_data, kwargs, do_first):
         actual_output = func(input, **kwargs)
         assert actual_output == expected
 
+
+# TODO add tests which use compare_dictionaries()
