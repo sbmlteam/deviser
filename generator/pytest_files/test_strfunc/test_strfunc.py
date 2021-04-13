@@ -11,6 +11,8 @@ from ...util import strFunctions as sf, global_variables as gv
 # for ease of reference (and to see what is missing).
 @pytest.mark.parametrize('func, input, expected_output, kwargs', [
     (sf.upper_first, 'cat', 'Cat', {}),
+    (sf.wrap_token, 'fred', '\\token{cat:\\-fred}', {'pkg': 'cat'}),
+    (sf.wrap_token, 'fred', '\\token{fred}', {}),
 ])
 def test_one_thing(func, input, expected_output, kwargs):
     """
@@ -153,6 +155,8 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
     (sf.get_library_suffix,
         {"library": "Rary", "libSBML": "Sbml", "cat": "Cat", "lib": ""},
         {}, ''),
+
+
 ])
 def test_many_things(func, test_data, kwargs, do_first):
     """
