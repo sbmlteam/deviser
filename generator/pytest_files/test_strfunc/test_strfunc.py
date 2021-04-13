@@ -16,6 +16,10 @@ attribute6 = {'type': 'double', 'element': 'Unit', 'texname': 'Unit'}
 attribute7 = {'isListOf': False, 'name': 'Foo'}
 attribute8 = {'type': 'lo_element', 'element': 'Unit', 'name': 'Unit',
               'listOfClassName': 'ListOfAnything'}
+attribute9 = {'type': 'lo_element', 'element': 'Unit',
+              'name': 'FooUnit', 'isListOf': True}
+attribute10 = {'type': 'lo_element', 'element': 'Unit', 'name': 'Unit',
+               'isListOf': True, 'listOfClassName': 'ListOfUnits'}
 
 # Please try and keep functions in same order as in the strFunctions.py file
 # for ease of reference (and to see what is missing).
@@ -36,8 +40,25 @@ attribute8 = {'type': 'lo_element', 'element': 'Unit', 'name': 'Unit',
     (sf.wrap_enum, 'cat', '\\primtype{cat}', {}, ''),
 
     # get_element_name() tests
-
-
+    (sf.get_element_name, attribute1, "FIX_ME", {},
+        'gv.reset(); gv.prefix = "Bar"; gv.is_package = False'),
+    (sf.get_element_name, attribute2, "MathML math", {}, ''),
+    (sf.get_element_name, attribute3, "\\BarListOfFoos", {}, ''),
+    (sf.get_element_name, attribute4, "Unit", {}, ''),
+    (sf.get_element_name, attribute5, "\\BarListOfUnits", {}, ''),
+    # (sf.get_element_name, attribute5, "\\ListOfUnits", {'add_prefix_if_not_pkg': 'False'}, ''),
+    # (sf.get_element_name, attribute5, "\\ListOfUnits", {'leave_pkg_prefix': 'False'}, ''),
+    (sf.get_element_name, attribute6, "FIX_ME", {}, ''),
+    (sf.get_element_name, attribute7, "\\Foo", {}, ''),
+    (sf.get_element_name, attribute8, "\\BarListOfUnits", {}, ''),
+    # (sf.get_element_name, attribute8, "\\ListOfAnything", {'leave_pkg_prefix': 'False'}, ''),
+    (sf.get_element_name, attribute9, "\\ListOfFooUnits", {},
+        'gv.reset(); gv.prefix = "Bar"; gv.is_package = True; gv.package_prefix = "Foo"'),
+    (sf.get_element_name, attribute9, "\\ListOfFooUnits",
+        {'add_prefix_if_not_pkg': 'False'}, ''),
+    (sf.get_element_name, attribute10, "\\ListOfUnits", {}, ''),
+    (sf.get_element_name, attribute10, "\\ListOfUnits", {'leave_pkg_prefix': 'False'}, ''),
+    (sf.get_element_name, attribute10, "\\ListOfUnits", {'add_prefix_if_not_pkg': 'False'}, ''),
 
 
     (sf.replace_digits, "John 3:16", "John Three:OneSix", {}, ''),
