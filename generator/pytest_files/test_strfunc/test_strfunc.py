@@ -6,6 +6,9 @@ from ...tests import test_functions
 from ...tests.test_strfunc_code import run_strfunc_tests as rst
 from ...util import strFunctions as sf, global_variables as gv
 
+# NB In all the test dictionaries used, check that the expected return
+# value is of the correct type, e.g. False rather than 'False', etc.
+
 # The following are used in test_one_thing()
 attribute1 = {'something': 'something else'}
 attribute2 = {'type': 'element', 'element': 'ASTNode*', 'texname': 'tex'}
@@ -46,19 +49,20 @@ attribute10 = {'type': 'lo_element', 'element': 'Unit', 'name': 'Unit',
     (sf.get_element_name, attribute3, "\\BarListOfFoos", {}, ''),
     (sf.get_element_name, attribute4, "Unit", {}, ''),
     (sf.get_element_name, attribute5, "\\BarListOfUnits", {}, ''),
-    # (sf.get_element_name, attribute5, "\\ListOfUnits", {'add_prefix_if_not_pkg': 'False'}, ''),
-    # (sf.get_element_name, attribute5, "\\ListOfUnits", {'leave_pkg_prefix': 'False'}, ''),
+    # (sf.cap_list_of_name, 'Unit', 'ListOfUnits', {'add_prefix': False}, ''),
+    (sf.get_element_name, attribute5, "\\ListOfUnits", {'add_prefix_if_not_pkg': False}, ''),
+    (sf.get_element_name, attribute5, "\\ListOfUnits", {'leave_pkg_prefix': False}, ''),
     (sf.get_element_name, attribute6, "FIX_ME", {}, ''),
     (sf.get_element_name, attribute7, "\\Foo", {}, ''),
     (sf.get_element_name, attribute8, "\\BarListOfUnits", {}, ''),
-    # (sf.get_element_name, attribute8, "\\ListOfAnything", {'leave_pkg_prefix': 'False'}, ''),
+    (sf.get_element_name, attribute8, "\\ListOfAnything", {'leave_pkg_prefix': False}, ''),
     (sf.get_element_name, attribute9, "\\ListOfFooUnits", {},
         'gv.reset(); gv.prefix = "Bar"; gv.is_package = True; gv.package_prefix = "Foo"'),
     (sf.get_element_name, attribute9, "\\ListOfFooUnits",
         {'add_prefix_if_not_pkg': 'False'}, ''),
     (sf.get_element_name, attribute10, "\\ListOfUnits", {}, ''),
-    (sf.get_element_name, attribute10, "\\ListOfUnits", {'leave_pkg_prefix': 'False'}, ''),
-    (sf.get_element_name, attribute10, "\\ListOfUnits", {'add_prefix_if_not_pkg': 'False'}, ''),
+    (sf.get_element_name, attribute10, "\\ListOfUnits", {'leave_pkg_prefix': False}, ''),
+    (sf.get_element_name, attribute10, "\\ListOfUnits", {'add_prefix_if_not_pkg': False}, ''),
 
 
     (sf.replace_digits, "John 3:16", "John Three:OneSix", {}, ''),
@@ -150,6 +154,8 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
     (sf.cap_list_of_name, foocat, {'add_prefix': True}, ''),
     (sf.cap_list_of_name, foocat, {'add_prefix': False}, 'gv.is_package = False'),
     (sf.cap_list_of_name, foosbmlcat, {'add_prefix': True}, ''),
+    (sf.cap_list_of_name, {'Unit': 'ListOfUnits'}, {'add_prefix': False}, ''),  ##
+    (sf.cap_list_of_name, {'Unit': 'SBMLListOfUnits'}, {'add_prefix': True}, ''),  ##
 
     (sf.cap_list_of_name_no_prefix, foolistcat, {}, 'gv.reset()'),
     # The next one this wrongly dealt with by the remove prefix function: TODO FIXIT
