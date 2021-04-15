@@ -145,9 +145,8 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
     (sf.list_of_name, foodat, {'add_prefix': False}, ''),
     (sf.list_of_name, foodat, {'add_prefix': False}, 'gv.is_package = False'),
     (sf.list_of_name, {"FooParameter": "ListOfFooParameters"}, {'add_prefix': False}, ''),
-    # For some reason, the next test fails. The gv.is_package is not updated, and possibly the gv.prefix as well?
-    #(sf.list_of_name, {"FooParameter": "ListOfFooParameters"}, {'add_prefix': True}, 'gv.is_package = True'),
-    (sf.list_of_name, {"FooParameter": "SBMLListOfFooParameters"}, {'add_prefix': True}, ''),
+    (sf.list_of_name, {"FooParameter": "ListOfFooParameters"}, {'add_prefix': True}, 'gv.is_package = True'),
+    (sf.list_of_name, {"FooParameter": "SBMLListOfFooParameters"}, {'add_prefix': True}, 'gv.is_package = False'),
 
     (sf.lower_list_of_name_no_prefix, foxcatchild, {}, 'gv.reset()'),
     (sf.lower_list_of_name_no_prefix, foxcatchild, {}, 'gv.is_package = False'),
