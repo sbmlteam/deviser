@@ -64,7 +64,6 @@ attribute10 = {'type': 'lo_element', 'element': 'Unit', 'name': 'Unit',
     (sf.get_element_name, attribute10, "\\ListOfUnits", {'leave_pkg_prefix': False}, ''),
     (sf.get_element_name, attribute10, "\\ListOfUnits", {'add_prefix_if_not_pkg': False}, ''),
 
-
     (sf.replace_digits, "John 3:16", "John Three:OneSix", {}, ''),
 
     (sf.texify, "012_27 cat44_8 ", "ZeroOneTwo\\_TwoSevencatFourFour\\_Eight", {}, ''),
@@ -145,6 +144,9 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
     (sf.list_of_name, foodat, {'add_prefix': True}, 'gv.reset()'),
     (sf.list_of_name, foodat, {'add_prefix': False}, ''),
     (sf.list_of_name, foodat, {'add_prefix': False}, 'gv.is_package = False'),
+    (sf.list_of_name, {"FooParameter": "ListOfFooParameters"}, {'add_prefix': False}, ''),
+    # For some reason, the next test fails. The gv.is_package is not updated, and possibly the gv.prefix as well?
+    #(sf.list_of_name, {"FooParameter": "ListOfFooParameters"}, {'add_prefix': True}, 'gv.is_package = True'),
     (sf.list_of_name, {"FooParameter": "SBMLListOfFooParameters"}, {'add_prefix': True}, ''),
 
     (sf.lower_list_of_name_no_prefix, foxcatchild, {}, 'gv.reset()'),
@@ -160,6 +162,8 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
     (sf.cap_list_of_name_no_prefix, foolistcat, {}, 'gv.reset()'),
     # The next one this wrongly dealt with by the remove prefix function: TODO FIXIT
     # (sf.cap_list_of_name_no_prefix, foolistcat2, {}, 'gv.is_package = False'),
+    (sf.cap_list_of_name_no_prefix, {'fox': 'ListOfFoxes'}, {}, ''),
+    # (sf.cap_list_of_name_no_prefix, {'SBMLFoo': 'ListOfFoos'}, {}, ''),
 
     (sf.plural_no_prefix, plurals, {}, 'gv.reset()'),
     (sf.plural_no_prefix, rosieplurals, {}, 'gv.is_package = False; gv.prefix = "Rosie"'),
@@ -197,9 +201,12 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
     (sf.remove_prefix, prefix_data, {'prefix': 'Fbc', 'remove_doc_prefix': False, 'remove_package': False}, ''),
     (sf.remove_prefix, {"FbcSBMLDocument": "SBMLDocument"}, {'prefix': 'Fbc', 'remove_doc_prefix': True}, ''),
     (sf.remove_prefix, {"RosieFbcType": "FbcType", "RosieDocument": "RosieDocument"},
-             {'prefix': 'Rosie'}, 'gv.reset(); gv.prefix = "Rosie"; gv.is_package = False'),
+             {'prefix': 'this can be anything!!!'}, 'gv.reset(); gv.prefix = "Rosie"; gv.is_package = False'),
     (sf.remove_prefix, {"RosieFbcType": "FbcType", "RosieDocument": "Document"},
-             {'prefix': 'Rosie', 'remove_doc_prefix': True}, ''),
+             {'prefix': 'this can be anything!!!', 'remove_doc_prefix': True}, ''),
+    (sf.remove_prefix, {"PAZZFbcType": "FbcType", }, {}, 'gv.prefix = "PAZZ" '),
+    (sf.remove_prefix, {"PAZZDocument": "PAZZDocument", }, {}, 'gv.prefix = "PAZZ" '),
+    (sf.remove_prefix, {"PAZZMatt": "Matt"}, {}, 'gv.prefix = "PAZZ" '),
 
     (sf.is_prefixed_name, {"RosieFox": True, "rosieFoo": True, "rosiefoo": False,
             "RosiFox": False, "RoSiEFoo": True, "RoSiEfoo": False},
@@ -282,3 +289,35 @@ def test_many_things(func, test_data, kwargs, do_first):
 
 
 # TODO add tests which use compare_dictionaries()
+
+
+
+def test_list_of_name():
+    # The first tests here are taken directly from the function docstring
+    # and they work fine in this function.
+
+    assert sf.list_of_name('FooParameter', False) == "ListOfFooParameters"
+
+    gv.prefix = 'SBML'
+    gv.is_package = True
+    assert sf.list_of_name('FooParameter', True) == "ListOfFooParameters"
+    assert sf.list_of_name('FooParameter', False) == "ListOfFooParameters"
+
+    gv.prefix = 'SBML'
+    gv.is_package = False
+    assert sf.list_of_name('FooParameter', True) == "SBMLListOfFooParameters"
+    assert sf.list_of_name('FooParameter', False) == "ListOfFooParameters"
+
+    gv.reset()  # not really needed
+    gv.prefix = "PAZZ"
+    gv.is_package = False
+    assert sf.list_of_name('FooParameter', True) == "PAZZListOfFooParameters"
+    assert sf.list_of_name('FooParameter', False) == "ListOfFooParameters"
+
+    gv.reset()
+    gv.prefix = "this can be anything"
+    gv.is_package = True
+    assert sf.list_of_name('FooParameter', True) == "ListOfFooParameters"
+    assert sf.list_of_name('FooParameter', False) == "ListOfFooParameters"
+    # (sf.list_of_name, {"FooParameter": "ListOfFooParameters"}, {'add_prefix': True},
+    # 'gv.prefix = "PAZZ"; gv.is_package = True'),

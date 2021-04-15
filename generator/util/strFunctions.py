@@ -168,11 +168,13 @@ def list_of_name(name, add_prefix=True):
 
          gv.prefix = 'SBML'
          gv.is_package = True
-         list_of_name('FooParameter') -> "ListOfFooParameters"
+         list_of_name('FooParameter', True) -> "ListOfFooParameters"
+         list_of_name('FooParameter', False) -> "ListOfFooParameters"
 
          gv.prefix = 'SBML'
          gv.is_package = False
-         list_of_name('FooParameter') -> "SBMLListOfFooParameters"
+         list_of_name('FooParameter', True) -> "SBMLListOfFooParameters"
+         list_of_name('FooParameter', False) -> "ListOfFooParameters"
 
     """
     prefix = ''
