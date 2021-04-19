@@ -155,8 +155,8 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
     (sf.cap_list_of_name, foocat, {'add_prefix': True}, ''),
     (sf.cap_list_of_name, foocat, {'add_prefix': False}, 'gv.is_package = False'),
     (sf.cap_list_of_name, foosbmlcat, {'add_prefix': True}, ''),
-    (sf.cap_list_of_name, {'Unit': 'ListOfUnits'}, {'add_prefix': False}, ''),  ##
-    (sf.cap_list_of_name, {'Unit': 'SBMLListOfUnits'}, {'add_prefix': True}, ''),  ##
+    (sf.cap_list_of_name, {'Unit': 'ListOfUnits'}, {'add_prefix': False}, ''),
+    (sf.cap_list_of_name, {'Unit': 'SBMLListOfUnits'}, {'add_prefix': True}, ''),
 
     (sf.cap_list_of_name_no_prefix, foolistcat, {}, 'gv.reset()'),
     # The next one this wrongly dealt with by the remove prefix function: TODO FIXIT
@@ -256,16 +256,10 @@ prefix_data = {"FbcType": "FbcType", "FluxObjective": "FluxObjective",
          "XMLNodeAgain": "DABSXMLNodeAgain", "ASTNode": "ASTNode"},
         {}, 'gv.reset(); gv.prefix = "DABS"'),
 
-
-
-    # TODO add tests for sf.prefix_classes - uses compare_dictionaries()
-
-
     (sf.is_camel_case,
         {'FooParameter': True, 'fooParameter': True, 'fooparameter': False,
          'Fooparameter': False},
         {}, ''),
-
 
 ])
 def test_many_things(func, test_data, kwargs, do_first):
@@ -287,8 +281,37 @@ def test_many_things(func, test_data, kwargs, do_first):
         assert actual_output == expected
 
 
-# TODO add tests which use compare_dictionaries()
+def test_prefix_classes():
+    '''
+    Tests the prefix_classes function
+    '''
+    gv.reset()  # gv.prefix is now "SBML"
+    changing_dict = {'name': 'Colin', 'baseClass': gv.baseClass}
+    expected_dict = {'name': 'SBMLColin', 'baseClass': gv.baseClass,
+                     'elementName': 'colin'}
+    sf.prefix_classes(changing_dict)  # Updates changing_dict in situ
+    assert changing_dict == expected_dict
 
+    # Now a test of the same function,
+    # this time with a list of attribute dictionaries
+    # as a value in `changing_dict` and `expected_dict`:
+    attrib1_before = {'type': 'lo_element', 'element': 'Dabs'}
+    attrib1_after = {'type': 'lo_element', 'element': 'SBMLDabs'}
+    attrib2_before = {'type': 'inline_lo_element', 'element': 'ASTNode'}
+    attrib2_after = {'type': 'inline_lo_element', 'element': 'ASTNode'}
+    concrete_before = [{'element': 'test'}]
+    concrete_after = [{'element': 'SBMLtest'}]
+    attrib2_before['concrete'] = concrete_before
+    attrib2_after['concrete'] = concrete_after
+    attribs_before = [attrib1_before, attrib2_before]
+    attribs_after = [attrib1_after, attrib2_after]
+    changing_dict_2 = {'name': 'Colin', 'baseClass': gv.baseClass,
+                     'lo_class_name': 'Dabs', 'attribs': attribs_before}
+    expected_dict_2 = {'name': 'SBMLColin', 'baseClass': gv.baseClass,
+                     'elementName': 'colin', 'lo_class_name': 'SBMLDabs',
+                     'attribs': attribs_after}
+    sf.prefix_classes(changing_dict_2)
+    assert changing_dict_2 == expected_dict_2
 
 
 def test_list_of_name():
