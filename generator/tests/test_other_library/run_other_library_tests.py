@@ -28,7 +28,11 @@ def common_set_up(filename):
     :return: big dictionary structure obtained from the parsing.
     """
     parser = ParseXML.ParseXML(filename)
+    if parser is None:
+        return None
     ob = parser.parse_deviser_xml()
+    if ob is None:
+        return None
     for wc in ob['baseElements']:
         strFunctions.prefix_classes(wc)
     for working_class in ob['baseElements']:
@@ -62,6 +66,7 @@ def generate_new_cpp_header(filename, num):
     :return: nothing
     """
     ob = common_set_up(filename)
+    assert ob is not None, "file not found: %s" % filename
     working_class = ob['baseElements'][num]
     if working_class['name'] == gv.document_class:
         working_class['document'] = True

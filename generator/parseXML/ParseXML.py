@@ -92,10 +92,11 @@ class ParseXML():
         if not os.path.isfile(filename):
             gv.code_returned = gv.return_codes['failed to read file']
             print('{0} not found'.format(filename))
-
         if gv.code_returned == gv.return_codes['success']:
             self.dom = parse(filename)
             # A Document Object Model (i.e. a Document) instance.
+        else:
+            return None
 
         self.temp_dir = os.path.dirname(filename)
         self.abs_dir = os.path.abspath(filename)
@@ -1461,6 +1462,8 @@ class ParseXML():
         type of node,
         e.g. in <plugin> and <element> nodes (at least) in this case.
         """
+        if not hasattr(self, "dom"):
+            return None
         temp = self.get_value(self.dom.documentElement, 'name')  # e.g. "dyn"
         # we expect this to be lower case:
         self.package_name = temp.lower()
