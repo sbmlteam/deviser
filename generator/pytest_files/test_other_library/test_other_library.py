@@ -189,18 +189,37 @@ def test_cmake(name, class_name):
     assert 0 == rolt.compare_cmake_file('src/{0}'.format(gv.language))
 
 
-# tests waiting to be done
-"""
-    name = 'test_sedml'
-    class_name = 'sedmlfwd'
-    test_case = 'forward declarations'
-    fail += run_forward(name, class_name, test_case)
-
-    name = 'test_sedml'
-    class_name = 'libsedml'
-    test_case = 'global files'
-    fail += test_global(name, class_name, test_case)
-
-    return fail
+@pytest.mark.parametrize('name, class_name, test_case', [
+    ('test_sedml', 'libsedml', 'global files'),
+])
+def test_global(name, class_name, test_case):
     """
+    Based on old rolt.test_global() function.
+    Generate and compare 'global' files, e.g. VERSION.txt, README.md.
 
+    :param name: test file stub, e.g. 'test_sedml' for test_sedml.xml
+    :param class_name: test class e.g. 'libsedml'
+    :param test_case: brief description of test, e.g. 'global files'
+    """
+    filename = test_functions.set_up_test(name, class_name, test_case)
+    rolt.generate_global(filename)
+    assert 0 == rolt.compare_code_txt('VERSION')
+    assert 0 == rolt.compare_code_txt('README', '.md')
+
+
+@pytest.mark.parametrize('name, class_name, test_case', [
+    ('test_sedml', 'sedmlfwd', 'forward declarations'),
+])
+def test_forward(name, class_name, test_case):
+    """
+    Based on old run_forward() function.
+    Run 'forward declaration' tests.
+
+    :param name: stub of XML filename, e.g. 'test_sedml' for file test_sedml.xml.
+    :param class_name: test class, e.g. 'sedmlfwd'
+    :param test_case: brief test description, e.g. 'forward declarations'
+    """
+    gv.reset()
+    filename = test_functions.set_up_test(name, class_name, test_case)
+    rolt.generate_forward(filename)
+    assert 0 == rolt.compare_code_headers(class_name)
