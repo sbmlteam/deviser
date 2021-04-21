@@ -45,7 +45,6 @@ def test_cpp(name, num, class_name, test_case, list_of):
     :param list_of: class name (and thus filenames) of any corresponding "list of" class, e.g. 'CaListOfContents'
     """
     gv.reset()  # NB do we need to do this for every test? Will it break anything?
-    #import pdb; pdb.set_trace()
     filename = test_functions.set_up_test(name, class_name, test_case)  # XML library file.
     assert filename is not None and filename != ""
     rolt.generate_new_cpp_header(filename, num)
@@ -84,7 +83,6 @@ def test_templates(name, class_name, test_case, list_of):
 @pytest.mark.parametrize('name, class_name, test_case, prefix, lib', [
     ('test_sedml', 'SedBase', 'common', 'Sed', 'sedml'),
     ('combine-archive', 'CaBase', 'common', 'Ca', 'combine'),
-
 ])
 def test_common_templates(name, class_name, test_case, prefix, lib):
     """
@@ -98,6 +96,7 @@ def test_common_templates(name, class_name, test_case, prefix, lib):
     :param lib: used for comparing lib files, e.g. 'sedml' for 'libsedml-*'.
     :return: number of failed tests.
     """
+    gv.reset()
     filename = test_functions.set_up_test(name, class_name, test_case)
     rolt.generate_common_templates(filename)
     assert 0 == rolt.compare_code_headers('common')
@@ -123,6 +122,7 @@ def test_enum(name, class_name, test_case):
     :param class_name: test class, e.g. 'SedmlEnumerations'
     :param test_case: brief description of tests, e.g. 'enumerations'.
     """
+    gv.reset()
     filename = test_functions.set_up_test(name, class_name, test_case)
     rolt.generate_enum(filename)
     assert 0 == rolt.compare_code_headers(class_name)
@@ -146,6 +146,7 @@ def test_bindings(name, class_name, test_case, binding, prefix):
     :param binding: the binding type, e.g. 'swig'
     :param prefix: used to match library files, e.g. 'combine' matches libcombine-*.*
     """
+    gv.reset()
     filename = test_functions.set_up_test(name, class_name, test_case)
     rolt.generate_binding(filename, binding)
     if binding == 'swig':
@@ -164,6 +165,30 @@ def test_bindings(name, class_name, test_case, binding, prefix):
         assert 0 == rolt.compare_binding_file('compile-native-files.cmake', binding, "")
         assert 0 == rolt.compare_binding_file('AssemblyInfo.cs.in', binding, "")
 
+
+@pytest.mark.parametrize('name, class_name', [
+    ('test_sedml', 'libsedml'),
+    ('combine-archive', 'libcombine')
+])
+def test_cmake(name, class_name):
+    """
+    Based on old test_cmake() function in run_other_library_tests.py
+    Generate and compare CMake files.
+
+    TODO the following need more details:
+
+    :param name: name of test, e.g. 'test_sedml' or 'combine-archive'.
+    :param class_name:   e.g. 'libsedml' or 'libcombine'
+    """
+    gv.reset()
+    filename = test_functions.set_up_test(name, class_name, "cmake")
+    rolt.generate_cmake(filename, "cmake")
+    assert 0 == rolt.compare_cmake_file("")
+    assert 0 == rolt.compare_cmake_file('src')
+    assert 0 == rolt.compare_cmake_file('src/bindings')
+    assert 0 == rolt.compare_cmake_file('src/{0}'.format(gv.language))
+
+
 # tests waiting to be done
 """
     name = 'test_sedml'
@@ -173,27 +198,9 @@ def test_bindings(name, class_name, test_case, binding, prefix):
 
     name = 'test_sedml'
     class_name = 'libsedml'
-    # test_case = 'cmake'
-    # binding = 'cmake'
-    fail += test_cmake(name, class_name)  # , test_case, binding)  # , 'sedml')
-
-    name = 'test_sedml'
-    class_name = 'libsedml'
     test_case = 'global files'
     fail += test_global(name, class_name, test_case)
 
     return fail
     """
 
-# tests from old testCombine() function
-"""
-gv.reset()
-
-name = 'combine-archive'
-class_name = 'libcombine'
-# test_case = 'cmake'
-# binding = 'cmake'
-fail += test_cmake(name, class_name)  # , test_case, binding)  # , 'combine')
-
-return fail
-"""
