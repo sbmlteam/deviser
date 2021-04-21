@@ -81,8 +81,12 @@ def test_templates(name, class_name, test_case, list_of):
     assert 0 == rolt.compare_code_impl(list_of)
 
 
+@pytest.mark.parametrize('name, class_name, test_case, prefix, lib', [
+    ('test_sedml', 'SedBase', 'common', 'Sed', 'sedml'),
+    ('combine-archive', 'CaBase', 'common', 'Ca', 'combine'),
 
-def test_commone_templates():
+])
+def test_common_templates(name, class_name, test_case, prefix, lib):
     """
     Based on rolt.test_common_templates() function.
     Compare 'common' template files.
@@ -94,36 +98,78 @@ def test_commone_templates():
     :param lib: used for comparing lib files, e.g. 'sedml' for 'libsedml-*'.
     :return: number of failed tests.
     """
+    filename = test_functions.set_up_test(name, class_name, test_case)
+    rolt.generate_common_templates(filename)
+    assert 0 == rolt.compare_code_headers('common')
+    assert 0 == rolt.compare_code_headers('extern')
+    assert 0 == rolt.compare_code_headers('lib{0}-config'.format(lib))
+    assert 0 == rolt.compare_code_impl('lib{0}-version'.format(lib))
+    assert 0 == rolt.compare_code_headers('{0}OperationReturnValues'.format(prefix))
+    assert 0 == rolt.compare_code_impl('{0}OperationReturnValues'.format(prefix))
+    assert 0 == rolt.compare_code_cmake('lib{0}-version.h'.format(lib))
+    assert 0 == rolt.compare_code_cmake('lib{0}-config-common.h'.format(lib))
+    assert 0 == rolt.compare_code_cmake('lib{0}-namespace.h'.format(lib))
 
+
+@pytest.mark.parametrize('name, class_name, test_case', [
+    ('test_sedml', 'SedmlEnumerations', 'enumerations'),
+])
+def test_enum(name, class_name, test_case):
+    """
+    Based on old run_enum() function.
+    Run extension types file tests.
+
+    :param name: stub of XML file name, e.g. 'test_sedml' for file test_sedml.xml.
+    :param class_name: test class, e.g. 'SedmlEnumerations'
+    :param test_case: brief description of tests, e.g. 'enumerations'.
+    """
+    filename = test_functions.set_up_test(name, class_name, test_case)
+    rolt.generate_enum(filename)
+    assert 0 == rolt.compare_code_headers(class_name)
+    assert 0 == rolt.compare_code_impl(class_name)
+
+
+@pytest.mark.parametrize('name, class_name, test_case, binding, prefix', [
+    ('test_sedml', 'libsedml', 'swig dir', 'swig', 'sedml'),
+    ('test_sedml', 'libsedml', 'csharp dir', 'csharp', 'sedml'),
+    ('combine-archive', 'libcombine', 'csharp dir', 'csharp', 'combine'),
+    ('combine-archive', 'libcombine', 'swig dir', 'swig', 'combine'),
+])
+def test_bindings(name, class_name, test_case, binding, prefix):
+    """
+    Based on old test_bindings() function.
+    Compare the 'bindings' files.
+
+    :param name: stub of XML filename, e.g. 'test_sedml' for file test_sedml.xml.
+    :param class_name: the test class, e.g. 'libsedml'
+    :param test_case: brief description of tests, e.g. 'swig dir'
+    :param binding: the binding type, e.g. 'swig'
+    :param prefix: used to match library files, e.g. 'combine' matches libcombine-*.*
+    """
+    filename = test_functions.set_up_test(name, class_name, test_case)
+    rolt.generate_binding(filename, binding)
+    if binding == 'swig':
+        assert 0 == rolt.compare_binding_headers('ListWrapper', binding, "")
+        assert 0 == rolt.compare_binding_headers('OStream', binding, "")
+        assert 0 == rolt.compare_binding_impl('OStream', binding, "")
+        assert 0 == rolt.compare_binding_interface('std_set', binding, "")
+        assert 0 == rolt.compare_binding_headers('lib{0}'.format(prefix), binding, "")
+        assert 0 == rolt.compare_binding_interface('lib{0}'.format(prefix), binding, "")
+        assert 0 == rolt.compare_binding_interface('ASTNodes', binding, "")
+    elif binding == 'csharp':
+        assert 0 == rolt.compare_binding_impl('local', binding, "")
+        assert 0 == rolt.compare_binding_interface('local', binding, "")
+        assert 0 == rolt.compare_binding_interface('lib{0}'.format(prefix), binding, "")
+        assert 0 == rolt.compare_binding_file('CMakeLists.txt', binding, "")
+        assert 0 == rolt.compare_binding_file('compile-native-files.cmake', binding, "")
+        assert 0 == rolt.compare_binding_file('AssemblyInfo.cs.in', binding, "")
 
 # tests waiting to be done
 """
     name = 'test_sedml'
-    class_name = 'SedBase'
-    test_case = 'common'
-    fail += test_common_templates(name, class_name, test_case, 'Sed', 'sedml')
-
-    name = 'test_sedml'
-    class_name = 'SedmlEnumerations'
-    test_case = 'enumerations'
-    fail += run_enum(name, class_name, test_case)
-
-    name = 'test_sedml'
     class_name = 'sedmlfwd'
     test_case = 'forward declarations'
     fail += run_forward(name, class_name, test_case)
-
-    name = 'test_sedml'
-    class_name = 'libsedml'
-    test_case = 'swig dir'
-    binding = 'swig'
-    fail += test_bindings(name, class_name, test_case, binding, 'sedml')
-
-    name = 'test_sedml'
-    class_name = 'libsedml'
-    test_case = 'csharp dir'
-    binding = 'csharp'
-    fail += test_bindings(name, class_name, test_case, binding, 'sedml')
 
     name = 'test_sedml'
     class_name = 'libsedml'
@@ -142,23 +188,6 @@ def test_commone_templates():
 # tests from old testCombine() function
 """
 gv.reset()
-
-name = 'combine-archive'
-class_name = 'CaBase'
-test_case = 'common'
-fail += test_common_templates(name, class_name, test_case, 'Ca', 'combine')
-
-name = 'combine-archive'
-class_name = 'libcombine'
-test_case = 'csharp dir'
-binding = 'csharp'
-fail += test_bindings(name, class_name, test_case, binding, 'combine')
-
-name = 'combine-archive'
-class_name = 'libcombine'
-test_case = 'swig dir'
-binding = 'swig'
-fail += test_bindings(name, class_name, test_case, binding, 'combine')
 
 name = 'combine-archive'
 class_name = 'libcombine'
