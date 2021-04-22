@@ -4,7 +4,6 @@ import pytest
 
 from ...tests import test_functions
 from ...tests.test_examples import run_examples_tests as ret
-from ...util import global_variables as gv
 
 
 def setup():
@@ -54,7 +53,6 @@ def test_specific_xml_fail(name, start, stop, number):
     assert 0 == ret.run_specific_xml_fail_tests(name, start, stop, number)
 
 
-
 @pytest.mark.parametrize('name', [
     ('base_class'),
     ('groups'),  # This one was commented-out in run_examples_tests.py
@@ -69,5 +67,3 @@ def test_xml_fail(name):
 ])
 def test_cpp(name):
     assert 0 == ret.run_test(name)
-
-
