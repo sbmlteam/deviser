@@ -25,7 +25,7 @@ attribute10 = {'type': 'lo_element', 'element': 'Unit', 'name': 'Unit',
 
 # Please try and keep functions in same order as in the strFunctions.py file
 # for ease of reference (and to see what is missing).
-@pytest.mark.parametrize('func, test_input, expected_output, kwargs, do_first', [
+@pytest.mark.parametrize('func, test_input, exp_output, kwargs, do_first', [
     (sf.upper_first, 'cat', 'Cat', {}, ''),
 
     (sf.wrap_token, 'fred', '\\token{cat:\\-fred}', {'pkg': 'cat'}, ''),
@@ -85,14 +85,14 @@ attribute10 = {'type': 'lo_element', 'element': 'Unit', 'name': 'Unit',
     (sf.get_class_from_plugin, "Plugin", "", {"package": "Comp"}, ''),
 
 ])
-def test_one_thing(func, test_input, expected_output, kwargs, do_first):
+def test_one_thing(func, test_input, exp_output, kwargs, do_first):
     """
     Run a single test case on a strFunc function, and check that
     the actual output returned is the same as that expected.
 
     :param func: the strFunc function under test
     :param test_input: input to function
-    :param expected_output: what we expect the function to return.
+    :param exp_output: what we expect the function to return.
            Can be None.
     :param kwargs: dictionary of keyword arguments, if any, for the function
            under test.
@@ -107,7 +107,7 @@ def test_one_thing(func, test_input, expected_output, kwargs, do_first):
     if do_first:
         exec(do_first)
     actual_output = func(test_input, **kwargs)
-    assert actual_output == expected_output
+    assert actual_output == exp_output
 
 
 # I am placing these here, rather than in the fixture, so they can be easily
