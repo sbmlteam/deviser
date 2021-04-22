@@ -20,6 +20,17 @@ def setup():
         os.mkdir('temp')
 
 
+@pytest.mark.parametrize('name', [
+    ('lo_children'),
+    ('base_class'),
+    ('qual'),
+    ('spatial'),
+    ('groups'),  # This one was commented-out in run_examples_tests.py
+])
+def test_xml(name):
+    assert 0 == ret.run_xml_test(name)
+
+
 @pytest.mark.parametrize('name, start, stop', [
     ("spatial", 8, 13),
     ("spatial", 15, 19),
@@ -39,3 +50,22 @@ def test_specific_xml_fail(name, start, stop):
     :param stop:
     """
     assert 0 == ret.run_specific_xml_fail_tests(name, start, stop)
+
+
+@pytest.mark.parametrize('name', [
+    ('base_class'),
+    ('groups'),  # This one was commented-out in run_examples_tests.py
+])
+def test_xml_fail(name):
+    assert 0 == ret.run_xml_fail_tests(name)
+
+
+    # run the individual tests
+    # name = 'qual'
+    # fail += run_test(name)
+    #
+    # name = 'lo_children'
+    # fail += run_test(name)
+    #
+
+
