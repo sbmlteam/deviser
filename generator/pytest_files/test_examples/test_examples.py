@@ -31,25 +31,28 @@ def test_xml(name):
     assert 0 == ret.run_xml_test(name)
 
 
-@pytest.mark.parametrize('name, start, stop', [
-    ("spatial", 8, 13),
-    ("spatial", 15, 19),
-    ("spatial", 22, 26),
-    ("spatial", 32, 36),
-    ("spatial", 41, 45),
-    ("spatial", 53, 54),
-    ("spatial", 60, 61),
-    ("spatial", 65, 66),
+@pytest.mark.parametrize('name, start, stop, number', [
+    ("spatial", 8, 13, -1),
+    ("spatial", 15, 19, -1),
+    ("spatial", 22, 26, -1),
+    ("spatial", 32, 36, -1),
+    ("spatial", 41, 45, -1),
+    ("spatial", 53, 54, -1),
+    ("spatial", 60, 61, -1),
+    ("spatial", 65, 66, -1),
+    ("multi", 1, 2, 0),  # This one was commented-out in run_examples_tests.py
 ])
-def test_specific_xml_fail(name, start, stop):
+def test_specific_xml_fail(name, start, stop, number):
     """
     TODO: explanation needed.
 
     :param name: XML file to parse
     :param start:
     :param stop:
+    :param number:
     """
-    assert 0 == ret.run_specific_xml_fail_tests(name, start, stop)
+    assert 0 == ret.run_specific_xml_fail_tests(name, start, stop, number)
+
 
 
 @pytest.mark.parametrize('name', [
@@ -60,12 +63,11 @@ def test_xml_fail(name):
     assert 0 == ret.run_xml_fail_tests(name)
 
 
-    # run the individual tests
-    # name = 'qual'
-    # fail += run_test(name)
-    #
-    # name = 'lo_children'
-    # fail += run_test(name)
-    #
+@pytest.mark.parametrize('name', [
+    ('qual'),  # This one was commented-out in run_examples_tests.py
+    ('lo_children'),  # This one was commented-out in run_examples_tests.py
+])
+def test_cpp(name):
+    assert 0 == ret.run_test(name)
 
 
