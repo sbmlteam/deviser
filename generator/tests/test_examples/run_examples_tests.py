@@ -224,7 +224,7 @@ def run_specific_xml_fail_tests(name, start, stop, number=-1):
     :param start:
     :param stop:
     :param number: number of files to write? TODO not sure.
-    :return: 0 on success or file mising, 1 on failure.
+    :return: 0 on success or file missing, 1 on failure.
 
     TODO Sorry Sarah I'm a bit confused by this one as well!
     """
