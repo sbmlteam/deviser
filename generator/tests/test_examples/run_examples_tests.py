@@ -11,7 +11,7 @@ import sys
 
 
 from ...code_files import CppExampleFile
-from ..validation import ValidationXMLFiles
+from ...validation import ValidationXMLFiles
 from ...parseXML import ParseXML
 
 from .. import test_functions
