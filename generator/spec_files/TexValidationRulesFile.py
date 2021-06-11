@@ -147,11 +147,13 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         file_in = open(os.path.dirname(__file__) + '/' + filename, 'r')
         intro = file_in.read()
         file_in.close()
-        intro = re.sub('SHORTNAME', self.brief_pkg_command, intro)
-        intro = re.sub('PACKAGENAME', self.full_pkg_command, intro)
-        intro = re.sub('LEVELNUM', str(self.level), intro)
-        intro = re.sub('VERSIONNUM', str(self.version), intro)
-        intro = re.sub('PKGNAME', self.package, intro)
+        intro = re.sub(r'SHORTNAME', r'\\{0}'.format(self.upper_package),
+                       intro)
+        intro = re.sub(r'PACKAGENAME', r'\\{0}Package'.format(self.fulltexname),
+                       intro)
+        intro = re.sub(r'LEVELNUM', r'{0}'.format(self.level), intro)
+        intro = re.sub(r'VERSIONNUM', r'{0}'.format(self.version), intro)
+        intro = re.sub(r'PKGNAME', r'{0}'.format(self.package), intro)
         return intro
 
     def write_introduction(self):
