@@ -711,10 +711,13 @@ SedOutput::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the <SedOutput> "
-      "element.";
-    log->logError(SedmlOutputAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedOutput> element.";
+      log->logError(SedmlOutputAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 

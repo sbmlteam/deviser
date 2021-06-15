@@ -4,6 +4,7 @@
 # @brief   function for generating all code files
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -81,8 +82,7 @@ def generate_code_for(filename, overwrite=True):
             else:
                 generate_other_library_code(name, language, overwrite, ob)
         except Exception:
-             gv.code_returned \
-                 = gv.return_codes['unknown error - please report']
+            gv.code_returned = gv.return_codes['unknown error - please report']
 
 
 def generate_other_library_code(name, language, overwrite, ob):

@@ -4,6 +4,7 @@
 # @brief   base class for all XML test files to be generated
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author  Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -37,9 +38,16 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+"""
+Warning The xml.dom.minidom module is not secure against maliciously
+constructed data. If you need to parse untrusted or unauthenticated
+data see XML vulnerabilities
+(https://docs.python.org/3/library/xml.html#xml-vulnerabilities).
+"""
 
 from . import BaseFile
-from xml.dom.minidom import *
+# from xml.dom.minidom import *
+from xml.dom.minidom import getDOMImplementation
 from util import strFunctions, query
 
 
@@ -47,12 +55,21 @@ class BaseXMLFile(BaseFile.BaseFile):
     """Common base class for all interface files"""
 
     def __init__(self, name, package, reqd, ext='xml'):
+        """
+        Constructor
+
+        :param name: first part of file (before . and extension)
+             which we will write to.
+        :param package:
+        :param reqd:
+        :param ext: file extension (without dot, e.g. "xml").
+        """
         BaseFile.BaseFile.__init__(self, name, ext)
 
         self.pkg = package
         self.corens = 'http://www.sbml.org/sbml/level3/version1/core'
-        self.pkgns = 'http://www.sbml.org/sbml/level3/version1/{0}/version1' \
-                     ''.format(self.pkg)
+        self.pkgns = 'http://www.sbml.org/sbml/level3/version1/{0}/version1'.\
+            format(self.pkg)
         self.reqd = reqd
 
         self.rngns = 'http://relaxng.org/ns/structure/1.0'
@@ -70,24 +87,34 @@ class BaseXMLFile(BaseFile.BaseFile):
         self.model_element = None
 
     #########################################################################
-    # main writing function
 
     def write_xml(self, tree, error_code=None, plugin_no=-1):
+        """
+        Main writing function
+
+        :param tree: tree structure, obtained from a call to
+            create_object_tree() in query.py
+        :param error_code:
+        :param plugin_no:
+        :return: nothing
+        """
+        # Create a Document Object Model document object
+        # (the root of the DOM):
         self.create_document(error_code)
         num_plugins = len(tree)
         model_index = self.get_model_index(tree, num_plugins)
         if model_index == num_plugins:
             # need to sort this
-            print('we have hit somewhere I dont think we should be')
+            raise Exception("We have hit somewhere I don't think we should be")
         else:
             element = self.create_top_object(tree[model_index])
             self.doc.documentElement.appendChild(element)
 
         for i in range(0, num_plugins):
             if i == model_index:
-                continue;
+                continue
             elif plugin_no > -1 and i != plugin_no:
-                continue;
+                continue
             element = self.create_listof_object(tree[i])
             if element:
                 self.doc.documentElement.childNodes[0].appendChild(element)
@@ -100,29 +127,38 @@ class BaseXMLFile(BaseFile.BaseFile):
     # create elements of the document
 
     def create_rng_document(self):
+        """
+        ?? RNG = Random Number Generator ??
+        """
         self.doc = self.impl.createDocument(self.rngns, 'grammar', None)
         top_element = self.doc.documentElement
         top_element.setAttributeNS(self.rngns, 'xmlns', self.rngns)
         top_element.setAttributeNS(self.rngns, 'ns', self.pkgns)
-        top_element.setAttributeNS(self.rngns, 'datatypeLibrary', self.xmlschema)
-
+        top_element.setAttributeNS(self.rngns,
+                                   'datatypeLibrary', self.xmlschema)
 
     def create_document(self, error_code=None):
+        """
+        Create the XML document tree. Set the namespace values.
+
+        :param error_code:
+        """
         self.doc = self.impl.createDocument(self.corens, 'sbml', None)
         top_element = self.doc.documentElement
+        # Add some attribute values to the XML element:
         top_element.setAttributeNS(self.corens, 'xmlns', self.corens)
         top_element.setAttributeNS(self.corens, 'level', '3')
         top_element.setAttributeNS(self.corens, 'version', '1')
-        if error_code:
-            if error_code == 'incorrect_ns':
-                top_element.setAttributeNS(self.pkgns, 'xmlns:{0}'.format(self.pkg),
-                                           'http://incorrect')
-            elif error_code != 'missing_ns':
-                top_element.setAttributeNS(self.pkgns, 'xmlns:{0}'.format(self.pkg),
-                                           self.pkgns)
+
+        if error_code and (error_code == 'incorrect_ns'):
+            top_element.setAttributeNS(self.pkgns,
+                                       'xmlns:{0}'.format(self.pkg),
+                                       'http://incorrect')
         else:
-            top_element.setAttributeNS(self.pkgns, 'xmlns:{0}'.format(self.pkg),
+            top_element.setAttributeNS(self.pkgns,
+                                       'xmlns:{0}'.format(self.pkg),
                                        self.pkgns)
+
         if error_code:
             if error_code == 'incorrect_value_reqd':
                 reqd = 'true'
@@ -144,27 +180,39 @@ class BaseXMLFile(BaseFile.BaseFile):
                                        '{0}:required'.format(self.pkg),
                                        self.reqd)
 
-
-
     def create_top_object(self, tree):
-        name = strFunctions.lower_first(tree['base'])
+        """
+
+        :param tree:
+        :return:
+        """
+        # name = strFunctions.lower_first(tree['base'])  # TODO unused
         if tree['ext'] == 'core':
             element = self.create_object(tree)
         return element
 
-
     def create_listof_object(self, tree):
+        """
+
+        :param tree:
+        :return:
+        """
         name = strFunctions.lower_list_of_name_no_prefix(tree['base'])
-        if name == 'listOfReactions' or name == 'listOfSimpleSpeciesReferences' or name == 'listOfSpeciesReferences'\
-                or name == 'listOfInSpeciesTypeBonds' or name == 'listOfOutwardBindingSites':
+        if name in ['listOfReactions', 'listOfSimpleSpeciesReferences',
+                    'listOfSpeciesReferences', 'listOfInSpeciesTypeBonds',
+                    'listOfOutwardBindingSites']:
             return None
         lo_element = self.doc.createElement('{0}'.format(name))
         element = self.create_object(tree)
         lo_element.appendChild(element)
         return lo_element
 
-
     def create_object(self, parent):
+        """
+
+        :param parent:
+        :return:
+        """
         if 'base' in parent:
             name = strFunctions.lower_first(parent['base'])
         elif 'name' in parent:
@@ -172,10 +220,7 @@ class BaseXMLFile(BaseFile.BaseFile):
         else:
             name = 'FIXME'
 
-        if 'ext' in parent:
-            ext = parent['ext']
-        else:
-            ext = self.pkg
+        ext = parent['ext'] if 'ext' in parent else self.pkg
 
         if name == 'math':
             return self.create_math_element()
@@ -198,18 +243,29 @@ class BaseXMLFile(BaseFile.BaseFile):
 
         return self.create_element(name, attribs, parent)
 
-
     def create_element(self, name, attribs, parent):
+        """
+
+        :param name:
+        :param attribs:
+        :param parent:
+        :return:
+        """
         children = parent['children']
         element = self.doc.createElement('{0}'.format(name))
-        for i in range (0, len(attribs)):
-            element.setAttribute('{0}'.format(attribs[i]['name']), attribs[i]['value'])
+        for i in range(0, len(attribs)):
+            element.setAttribute('{0}'.format(attribs[i]['name']),
+                                 attribs[i]['value'])
         for i in range(0, len(children)):
             subelement = self.create_object(children[i])
             element.appendChild(subelement)
         return element
 
     def create_math_element(self):
+        """
+
+        :return:
+        """
         element = self.doc.createElement('{0}'.format('math'))
         element.setAttribute('xmlns', 'http://www.w3.org/1998/Math/MathML')
         return element
@@ -219,7 +275,12 @@ class BaseXMLFile(BaseFile.BaseFile):
     # functions to make nice sets of attributes
 
     def get_sensible_value(self, attribute):
-        value = ''
+        """
+
+        :param attribute:
+        :return:
+        """
+        # value = ''  # TODO Unused
         att_type = attribute['type']
         if att_type == 'boolean' or att_type == 'bool':
             value = 'false'
@@ -242,6 +303,12 @@ class BaseXMLFile(BaseFile.BaseFile):
         return value
 
     def get_attributes(self, attributes, pkg):
+        """
+
+        :param attributes:
+        :param pkg:
+        :return:
+        """
         attrib_list = []
         for attrib in attributes:
             att_type = attrib['type']
@@ -260,64 +327,86 @@ class BaseXMLFile(BaseFile.BaseFile):
             attrib_list.append(attrib_dict)
         return attrib_list
 
-    def get_core_attributes(self, object):
-        attrib_list = []
+    def add_new_dictionary_to_list(self, attrib_list, name, type,
+                                   get_sensible_value=True, other_value=None):
+        """
+        Create a new attribute dictionary and add it to attrib_list.
+
+        :param attrib_list: list of dictionaries, which we add to
+        :param name: attribute name, e.g. 'id', 'constant'. TODO correct?
+        :param type: attribute type, e.g. 'SId', 'boolean'
+        :param get_sensible_value: get the value from get_sensible_value()
+               function call.
+        :param other_value: the value if get_sensible_value is `False`.
+        """
+        if get_sensible_value and other_value is not None:
+            raise ValueError("You cannot have both get_sensible_value=True"
+                             "and other_value not None")
+
         attrib = dict()
+        attrib['type'] = type
+        if get_sensible_value:
+            value = self.get_sensible_value(attrib)
+        else:
+            value = other_value
+        attrib_dict = dict({'name': name, 'value': value})
+        attrib_list.append(attrib_dict)
+
+    def get_core_attributes(self, object):
+        """
+        Create a list of attribute dictionaries, based on value of `object`.
+
+        :param object: name of the object, e.g. 'compartment', parameter',
+               or 'species'.
+        :return: the new list
+        """
+        attrib_list = []
         if object == 'compartment':
-            name = 'id'
-            attrib['type'] = 'SId'
-            value = 'compartment'
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
-            name = 'constant'
-            attrib['type'] = 'boolean'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
+
+            self.add_new_dictionary_to_list(attrib_list, 'id', 'SId',
+                                            get_sensible_value=False,
+                                            other_value='compartment')
+
+            self.add_new_dictionary_to_list(attrib_list, 'constant',
+                                            'boolean')
+
         elif object == 'parameter':
-            name = 'id'
-            attrib['type'] = 'SId'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
-            name = 'constant'
-            attrib['type'] = 'boolean'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
+
+            self.add_new_dictionary_to_list(attrib_list, 'id', 'SId')
+
+            self.add_new_dictionary_to_list(attrib_list, 'constant',
+                                            'boolean')
         elif object == 'species':
-            name = 'id'
-            attrib['type'] = 'SId'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
-            name = 'constant'
-            attrib['type'] = 'boolean'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
-            name = 'boundaryCondition'
-            attrib['type'] = 'boolean'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
-            name = 'hasOnlySubstanceUnits'
-            attrib['type'] = 'boolean'
-            value = self.get_sensible_value(attrib)
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
-            name = 'compartment'
-            attrib['type'] = 'SId'
-            value = 'compartment'
-            attrib_dict = dict({'name': name, 'value': value})
-            attrib_list.append(attrib_dict)
+
+            self.add_new_dictionary_to_list(attrib_list, 'id', 'SId')
+
+            self.add_new_dictionary_to_list(attrib_list, 'constant',
+                                            'boolean')
+
+            self.add_new_dictionary_to_list(attrib_list, 'boundaryCondition',
+                                            'boolean')
+
+            self.add_new_dictionary_to_list(attrib_list,
+                                            'hasOnlySubstanceUnits',
+                                            'boolean')
+
+            self.add_new_dictionary_to_list(attrib_list, 'compartment', 'SId',
+                                            get_sensible_value=False,
+                                            other_value='compartment')
+
         return attrib_list
 
-##################################################################################
+##############################################################################
 
 # helper functions
 
     def get_id(self, attrib, use_name=None):
+        """
+
+        :param attrib:
+        :param use_name:
+        :return:
+        """
         if 'parent' in attrib:
             name = strFunctions.lower_first(attrib['parent']['name'])
         elif use_name:
@@ -335,6 +424,11 @@ class BaseXMLFile(BaseFile.BaseFile):
         return value
 
     def get_id_ref(self, attrib):
+        """
+
+        :param attrib: dictionary structure representing an <attribute> node??
+        :return:
+        """
         name = attrib['name']
         [found, index] = self.match_id_name(name)
         if found:
@@ -352,13 +446,23 @@ class BaseXMLFile(BaseFile.BaseFile):
         return value
 
     def match_id_name(self, name):
-        for i in range(0,len(self.start_id)):
+        """
+
+        :param name:
+        :return: tuple with .....
+        """
+        for i in range(0, len(self.start_id)):
             if self.start_id[i]['name'] == name:
                 return[True, i]
         return [False, -1]
 
-
     def get_model_index(self, tree, num):
+        """
+
+        :param tree:
+        :param num:
+        :return:
+        """
         for i in range(0, num):
             if tree[i]['base'] == 'Model' and tree[i]['ext'] == 'core':
                 return i

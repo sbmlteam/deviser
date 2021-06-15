@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # @file    __init__.py
-# @brief   init for base_files directory
+# @brief   init for a test directory
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #
@@ -36,3 +36,5 @@
 # or promote products derived from this software without specific prior
 # written permission.
 # ------------------------------------------------------------------------ -->
+
+from . import run_strfunc_tests

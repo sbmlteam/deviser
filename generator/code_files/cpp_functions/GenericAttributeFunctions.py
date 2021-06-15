@@ -495,7 +495,7 @@ class GenericAttributeFunctions():
                             if self.package == 'Render' or self.package == 'render':
                                 remove_prefix = True
                                 prefix_to_remove = strFunctions.upper_first(self.package)
-                                concelem = strFunctions.remove_prefix(conc['element'], False, remove_prefix, prefix_to_remove)
+                                concelem = strFunctions.remove_prefix(conc['element'], remove_prefix, prefix_to_remove)
 
                         block.append('elementName == \"{0}\"'.format(concname))
                         block.append('return create{0}()'.format(strFunctions.upper_first(concelem)))

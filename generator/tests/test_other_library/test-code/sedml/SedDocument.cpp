@@ -2546,7 +2546,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   if (name == "listOfDataDescriptions")
   {
-    if (mDataDescriptions.size() != 0)
+    if (getErrorLog() && mDataDescriptions.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -2556,7 +2556,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   }
   else if (name == "listOfModels")
   {
-    if (mModels.size() != 0)
+    if (getErrorLog() && mModels.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -2566,7 +2566,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   }
   else if (name == "listOfSimulations")
   {
-    if (mSimulations.size() != 0)
+    if (getErrorLog() && mSimulations.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -2576,7 +2576,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   }
   else if (name == "listOfTasks")
   {
-    if (mAbstractTasks.size() != 0)
+    if (getErrorLog() && mAbstractTasks.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -2586,7 +2586,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   }
   else if (name == "listOfDataGenerators")
   {
-    if (mDataGenerators.size() != 0)
+    if (getErrorLog() && mDataGenerators.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -2596,7 +2596,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   }
   else if (name == "listOfOutputs")
   {
-    if (mOutputs.size() != 0)
+    if (getErrorLog() && mOutputs.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -2606,7 +2606,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   }
   else if (name == "listOfStyles")
   {
-    if (mStyles.size() != 0)
+    if (getErrorLog() && mStyles.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -2684,12 +2684,12 @@ SedDocument::readAttributes(
   // level uint (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetLevel = attributes.readInto("level", mLevel);
 
-  if ( mIsSetLevel == false)
+  if ( mIsSetLevel == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -2711,12 +2711,12 @@ SedDocument::readAttributes(
   // version uint (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetVersion = attributes.readInto("version", mVersion);
 
-  if ( mIsSetVersion == false)
+  if ( mIsSetVersion == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

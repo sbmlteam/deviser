@@ -1250,7 +1250,7 @@ SedDataGenerator::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   if (name == "listOfVariables")
   {
-    if (mVariables.size() != 0)
+    if (getErrorLog() && mVariables.size() != 0)
     {
       getErrorLog()->logError(SedmlDataGeneratorAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1260,7 +1260,7 @@ SedDataGenerator::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   }
   else if (name == "listOfParameters")
   {
-    if (mParameters.size() != 0)
+    if (getErrorLog() && mParameters.size() != 0)
     {
       getErrorLog()->logError(SedmlDataGeneratorAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1371,10 +1371,13 @@ SedDataGenerator::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the "
-      "<SedDataGenerator> element.";
-    log->logError(SedmlDataGeneratorAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedDataGenerator> element.";
+      log->logError(SedmlDataGeneratorAllowedAttributes, level, version,
+        message, getLine(), getColumn());
+    }
   }
 
   // 

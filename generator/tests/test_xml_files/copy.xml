@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="Copy" fullname="Copy Additional" number="100" offset="100000" version="1" required="false" additionalDecls="C:/Development/SBML/deviser/generator/tests/test_xml_files/ElementFilter.h" additionalDefs="C:/Development/SBML/deviser/generator/tests/test_xml_files/ElementFilter.cpp" customCopyright="C:/Development/SBML/deviser/generator/tests/test_xml_files/copyright.txt">
+<package name="Copy" fullname="Copy Additional" number="100" offset="100000" version="1" required="false"
+         additionalDecls="ElementFilter.h.txt"
+         additionalDefs="ElementFilter.cpp.txt"
+         customCopyright="copyright.txt">
   <versions>
     <pkgVersion level="3" version="1" pkg_version="1">
       <elements>

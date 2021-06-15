@@ -37,18 +37,18 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-
 from . import BaseFile
 
 
 class BaseCMakeFile(BaseFile.BaseFile):
-    """Common base class for all cmake files"""
+    """Common base class for all CMake files"""
 
     def __init__(self, name):
 
         BaseFile.BaseFile.__init__(self, name, 'cmake')
 
-        self.comment_start = '#################################################'
+        self.comment_start = \
+            '#################################################'
         self.comment = ' #'
         self.comment_end = '#'
 

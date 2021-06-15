@@ -4,6 +4,7 @@
 # @brief   base class for all tex files to be generated
 # @author  Frank Bergmann
 # @author  Sarah Keating
+# @author Matthew S. Gillman
 #
 # <!--------------------------------------------------------------------------
 #
@@ -46,6 +47,13 @@ class BaseTexFile(BaseFile.BaseFile):
     """Common base class for all LaTeX files"""
 
     def __init__(self, name, extension, object_desc):
+        """
+        Constructor
+
+        :param name: name of file (before dot and extension)
+        :param extension: file extension (without dot, e.g. "tex").
+        :param object_desc:
+        """
         BaseFile.BaseFile.__init__(self, name, extension)
 
         # change the comment delimiter and line length
@@ -83,8 +91,12 @@ class BaseTexFile(BaseFile.BaseFile):
 
     ########################################################################
 
-    # function to create texnames for classes
     def sort_class_names(self, classes):
+        """
+        Function to create texnames for classes.
+
+        :param classes: list of objects (dictionaries) representing classes.
+        """
         if classes is not None:
             for i in range(0, len(classes)):
                 name = classes[i]['name']
@@ -97,45 +109,82 @@ class BaseTexFile(BaseFile.BaseFile):
                 if name == 'RelAbsVector':
                     self.prim_class.append(classes[i])
 
-    # function to create texnames for attributes
     @staticmethod
     def sort_attribute_names(classes):
+        """
+        Function to create texnames for attributes.
+
+        :param classes:
+        """
         if classes is not None:
             for i in range(0, len(classes)):
                 attribs = classes[i]['attribs']
-                for j in range(0, len(attribs)):
-                    if attribs[j]['type'] == 'lo_element' or attribs[j]['type'] == 'element' or attribs[j]['type'] == 'inline_lo_element':
-                        name = attribs[j]['element']
-                    else:
-                        name = attribs[j]['name']
-                    texname = strFunctions.texify(name)
-                    attribs[j]['texname'] = texname
+                BaseTexFile.update_attrib_dicts(attribs)
+                # for j in range(0, len(attribs)):
+                #     if attribs[j]['type'] in ['lo_element', 'element',
+                #                               'inline_lo_element']:
+                #         name = attribs[j]['element']
+                #     else:
+                #         name = attribs[j]['name']
+                #     texname = strFunctions.texify(name)
+                #     attribs[j]['texname'] = texname
             for i in range(0, len(classes)):
                 if 'lo_attribs' in classes[i]:
                     lo_attribs = classes[i]['lo_attribs']
-                    for j in range(0, len(lo_attribs)):
-                        if lo_attribs[j]['type'] == 'lo_element' or lo_attribs[j]['type'] == 'element' or lo_attribs[j]['type'] == 'inline_lo_element' :
-                            name = lo_attribs[j]['element']
-                        else:
-                            name = lo_attribs[j]['name']
-                        texname = strFunctions.texify(name)
-                        lo_attribs[j]['texname'] = texname
+                    BaseTexFile.update_attrib_dicts(lo_attribs)
+                    # for j in range(0, len(lo_attribs)):
+                    #     if lo_attribs[j]['type'] in ['lo_element', 'element',
+                    #                                  'inline_lo_element']:
+                    #         name = lo_attribs[j]['element']
+                    #     else:
+                    #         name = lo_attribs[j]['name']
+                    #     texname = strFunctions.texify(name)
+                    #     lo_attribs[j]['texname'] = texname
 
-    # function to create texnames for enums
+    @staticmethod
+    def update_attrib_dicts(my_list):
+        """
+        Update a list of attribute dictionaries.
+
+        :param my_list: the list which we update.
+        """
+        for j in range(0, len(my_list)):
+            if my_list[j]['type'] in ['lo_element', 'element',
+                                      'inline_lo_element']:
+                name = my_list[j]['element']
+            else:
+                name = my_list[j]['name']
+            texname = strFunctions.texify(name)
+            my_list[j]['texname'] = texname
+
     @staticmethod
     def sort_enum_names(enums):
+        """
+        Function to create texnames for enums
+
+        :param enums:
+        """
         if enums is not None:
             for i in range(0, len(enums)):
                 name = enums[i]['name']
                 texname = strFunctions.texify(name)
                 enums[i]['texname'] = texname
 
-    # function to write a to do into text
     def write_to_do(self, text):
-        self.write_line('\\TODO{0}{1}{2}'.format(self.start_b, text,
-                                                 self.end_b))
+        """
+        Function to write a to do into text
+        i.e. \todo{text goes here}
+
+        :param text: the text describing the TODO.
+        """
+        self.write_text_line('\\TODO{0}{1}{2}'.format(self.start_b, text,
+                                                      self.end_b))
         self.skip_line()
 
-    # need to overwrite the write_line function to not add indents
-    def write_line(self, line, space=0):
+    def write_text_line(self, line):
+        """
+        Need to overwrite the write_text_line function to not add indents
+
+        :param line: the line of text to write
+        """
         self.write_line_no_indent(line)
