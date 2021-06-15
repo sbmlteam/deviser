@@ -108,7 +108,9 @@ class ParseXML():
         # list have more keys than those in the self.elements list.
         self.elements = []
         self.sbml_elements = []
-
+        self.sbml_level = 3
+        self.sbml_version = 1
+        self.pkg_version = 1
         self.num_versions = 1
         self.plugins = []
 
@@ -484,21 +486,22 @@ class ParseXML():
         Gets the integer value of a <element> node's
         minNumListOfChildren attribute node.
 
+        In SBML Level 3 Version 1 a 'listOf' element could not
+        be empty so minimum number of children in a listOf defaults to 1.
+        In SBML Level 3 Version 2 a 'listOf' element is allowed to
+        be empty so minimum number of children in a listOf defaults to 0.
+
         :param node: the <element> node in question
-        :return: returns this value, if present, else returns 1.
+        :return: returns this value, if present, else returns default.
 
-        TODO: does this return value of 1 matter? Some of the sample XML files
-        e.g. sbgn.xml have existing minNumListOfChildren attribute values of 1
-        Sarah: "SBML did have the rule that a ListOf element could not be
-        empty so the minNumListOfChildren was '1' by default - hence the code.
-        This does need revisiting - I've added an issue"
-
-        See issue 23.
         '''
         name = 'minNumListOfChildren'
         temp = node.getAttributeNode(name)
         if temp is None:
-            return 1
+            if self.sbml_version == 1:
+                return 1
+            elif self.sbml_version == 2:
+                return 0
         return self.to_int(temp.nodeValue)
 
     @staticmethod
@@ -1504,9 +1507,6 @@ class ParseXML():
         gv.add_additional_declaration(add_declarations)
 
         # get package information - see issue 17
-        sbml_level = 3
-        sbml_version = 1
-        pkg_version = 1
         self.num_versions = len(self.dom.getElementsByTagName('pkgVersion'))
         self.version_count = 0  # Number of pkgVersion nodes in the document.
 
@@ -1518,16 +1518,16 @@ class ParseXML():
         #     <plugins...>
         # </pkgVersion>
         for node in self.dom.getElementsByTagName('pkgVersion'):
-            sbml_level = self.get_int_value(self, node, 'level')
-            sbml_version = self.get_int_value(self, node, 'version')
-            pkg_version = self.get_int_value(self, node, 'pkg_version')
+            self.sbml_level = self.get_int_value(self, node, 'level')
+            self.sbml_version = self.get_int_value(self, node, 'version')
+            self.pkg_version = self.get_int_value(self, node, 'pkg_version')
             # <elements> and <plugins> are nodes nested within the
             # <pkgVersion> node
             self.populate_elements_for_version(node)
             self.populate_plugins_for_version(node)
-            lv_info.append(dict({'core_level': sbml_level,
-                                 'core_version': sbml_version,
-                                 'pkg_version': pkg_version}))
+            lv_info.append(dict({'core_level': self.sbml_level,
+                                 'core_version': self.sbml_version,
+                                 'pkg_version': self.pkg_version}))
             self.version_count = self.version_count + 1
 
         # Now iterate over <enum> nodes (if any).
@@ -1588,9 +1588,9 @@ class ParseXML():
                         'enums': enums,
                         'offset': offset,
                         'fullname': fullname,
-                        'base_level': sbml_level,
-                        'base_version': sbml_version,
-                        'pkg_version': pkg_version,
+                        'base_level': self.sbml_level,
+                        'base_version': self.sbml_version,
+                        'pkg_version': self.pkg_version,
                         'required': required,
                         'num_versions': self.num_versions,
                         'lv_info': lv_info
