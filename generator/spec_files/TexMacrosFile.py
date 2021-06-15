@@ -67,9 +67,9 @@ class TexMacrosFile(BaseTexFile.BaseTexFile):
 
     # Write the command for each class
     def write_macro_for_class(self, sbml_class):
-        self.write_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{4}{2}'
+        self.write_text_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{4}{2}'
                         '{0}{3}{2}{2}'
-                        .format(self.start_b, sbml_class['texname'],
+                             .format(self.start_b, sbml_class['texname'],
                                 self.end_b,
                                 strFunctions.make_class(sbml_class['texname']),
                                 sbml_class['name']))
@@ -83,21 +83,21 @@ class TexMacrosFile(BaseTexFile.BaseTexFile):
                     sbml_class['lo_elementName'])
             else:
                 lo_name = strFunctions.cap_list_of_name(sbml_class['name'])
-            self.write_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{1}{2}'
+            self.write_text_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{1}{2}'
                             '{0}{3}{2}{2}'
-                            .format(self.start_b, lo_name, self.end_b,
+                                 .format(self.start_b, lo_name, self.end_b,
                                     strFunctions.make_class(lo_name)))
             # hack for render
             if sbml_class['name'] == 'GradientBase':
-                self.write_line('\\newcommand{0}\\{4}{2}{0}\\defRef{0}{1}{2}'
+                self.write_text_line('\\newcommand{0}\\{4}{2}{0}\\defRef{0}{1}{2}'
                                 '{0}{3}{2}{2}'
-                                .format(self.start_b, lo_name, self.end_b,
+                                     .format(self.start_b, lo_name, self.end_b,
                                         strFunctions.make_class(lo_name),
                                         'ListOfGradientBases'))
             elif sbml_class['name'] == 'RenderPoint':
-                self.write_line('\\newcommand{0}\\{4}{2}{0}\\defRef{0}{1}{2}'
+                self.write_text_line('\\newcommand{0}\\{4}{2}{0}\\defRef{0}{1}{2}'
                                 '{0}{3}{2}{2}'
-                                .format(self.start_b, lo_name, self.end_b,
+                                     .format(self.start_b, lo_name, self.end_b,
                                         strFunctions.make_class(lo_name),
                                         'ListOfRenderPoints'))
 
@@ -105,18 +105,18 @@ class TexMacrosFile(BaseTexFile.BaseTexFile):
     def write_macro_for_enum(self, enum):
         # check for underscores
         cmd_name = re.sub('_t', 't', enum['name'])
-        self.write_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{3}{2}'
+        self.write_text_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{3}{2}'
                         '{0}{4}{2}{2}'
-                        .format(self.start_b, cmd_name,
+                             .format(self.start_b, cmd_name,
                                 self.end_b, enum['name'],
                                 'primitive-types'))
 
     # Write commands for each plugin
     def write_macro_for_plugin(self, plugin):
         if plugin['sbase'] not in self.core_classes:
-            self.write_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{4}{2}'
+            self.write_text_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{4}{2}'
                             '{0}{3}{2}{2}'
-                            .format(self.start_b, plugin['sbase'],
+                                 .format(self.start_b, plugin['sbase'],
                                     self.end_b,
                                     strFunctions.make_class(plugin['sbase']),
                                     plugin['sbase']))
@@ -125,29 +125,29 @@ class TexMacrosFile(BaseTexFile.BaseTexFile):
     def write_general_commands(self):
         self.write_comment_line('\\newcommand{\\fixttspace}{\\hspace*{1pt}}')
 
-        self.write_line('\\newcommand{0}\\const{1}[1]{0}\\texttt{0} #1{1}{1}'
-                        .format(self.start_b, self.end_b))
+        self.write_text_line('\\newcommand{0}\\const{1}[1]{0}\\texttt{0} #1{1}{1}'
+                             .format(self.start_b, self.end_b))
         self.skip_line()
-        self.write_line('\\newcommand{0}\\sbmlthreecore{1}{0}SBML Level~{2} '
+        self.write_text_line('\\newcommand{0}\\sbmlthreecore{1}{0}SBML Level~{2} '
                         'Version~{3} Core\\xspace{1}'.format(self.start_b,
                                                              self.end_b,
                                                              self.level,
                                                              self.version))
-        self.write_line('\\newcommand{0}{1}{2}{0}\\textsf{0}{3}'
+        self.write_text_line('\\newcommand{0}{1}{2}{0}\\textsf{0}{3}'
                         '{2} package\\xspace{2}'.format(self.start_b,
                                                         self.full_pkg_command,
                                                         self.end_b,
                                                         self.fullname))
-        self.write_line('\\newcommand{0}{1}{2}{0}\\textsf{0}{3}{2}'
+        self.write_text_line('\\newcommand{0}{1}{2}{0}\\textsf{0}{3}{2}'
                         '\\xspace{2}'
-                        .format(self.start_b,
+                             .format(self.start_b,
                                 self.brief_pkg_command,
                                 self.end_b,
                                 self.fullname))
         self.skip_line()
-        self.write_line('\\newcommand{0}\\TODO{1}[1]{0}\\colorbox{0}blue{1}'
+        self.write_text_line('\\newcommand{0}\\TODO{1}[1]{0}\\colorbox{0}blue{1}'
                         '{0}\\textcolor{0}white{1}{0}TODO: #1{1}{1}{1}'
-                        .format(self.start_b, self.end_b))
+                             .format(self.start_b, self.end_b))
         self.skip_line()
 
     #########################################################################

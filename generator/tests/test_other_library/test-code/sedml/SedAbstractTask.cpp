@@ -718,10 +718,13 @@ SedAbstractTask::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the "
-      "<SedAbstractTask> element.";
-    log->logError(SedmlAbstractTaskAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedAbstractTask> element.";
+      log->logError(SedmlAbstractTaskAllowedAttributes, level, version,
+        message, getLine(), getColumn());
+    }
   }
 
   // 

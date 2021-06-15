@@ -319,35 +319,6 @@ CaListOfContents::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
 
 
-/** @cond doxygenlibCombineInternal */
-
-/*
- * Writes the namespace for the Combine package
- */
-void
-CaListOfContents::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
-{
-  LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces xmlns;
-  std::string prefix = getPrefix();
-
-  if (prefix.empty())
-  {
-    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* thisxmlns =
-      getNamespaces();
-    if (thisxmlns && thisxmlns->hasURI(OMEX_XMLNS_L1V1))
-    {
-      xmlns.add(OMEX_XMLNS_L1V1, prefix);
-    }
-  }
-
-  stream << xmlns;
-}
-
-/** @endcond */
-
-
-
 
 #endif /* __cplusplus */
 

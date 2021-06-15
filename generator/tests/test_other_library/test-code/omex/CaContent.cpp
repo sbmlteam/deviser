@@ -736,10 +736,13 @@ CaContent::readAttributes(
   }
   else
   {
-    std::string message = "Combine attribute 'location' is missing from the "
-      "<CaContent> element.";
-    log->logError(CombineContentAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Combine attribute 'location' is missing from the "
+        "<CaContent> element.";
+      log->logError(CombineContentAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -757,22 +760,25 @@ CaContent::readAttributes(
   }
   else
   {
-    std::string message = "Combine attribute 'format' is missing from the "
-      "<CaContent> element.";
-    log->logError(CombineContentAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Combine attribute 'format' is missing from the "
+        "<CaContent> element.";
+      log->logError(CombineContentAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
   // master bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetMaster = attributes.readInto("master", mMaster);
 
   if (mIsSetMaster == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

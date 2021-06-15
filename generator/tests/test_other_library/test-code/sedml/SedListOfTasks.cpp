@@ -472,35 +472,6 @@ SedListOfTasks::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Writes the namespace for the Sedml package
- */
-void
-SedListOfTasks::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
-{
-  LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces xmlns;
-  std::string prefix = getPrefix();
-
-  if (prefix.empty())
-  {
-    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* thisxmlns =
-      getNamespaces();
-    if (thisxmlns && thisxmlns->hasURI(SEDML_XMLNS_L1V1))
-    {
-      xmlns.add(SEDML_XMLNS_L1V1, prefix);
-    }
-  }
-
-  stream << xmlns;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
  * checks concrete types
  */
 bool
