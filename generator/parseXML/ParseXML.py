@@ -387,7 +387,7 @@ class ParseXML():
         if temp is not None:
             last = len(temp)
             # strip _t if it is there; since we add it later
-            # TODO why? and where?
+            # when we standardise names
             if temp.endswith('_t'):
                 last -= 2
             enum_name = strFunctions.upper_first(temp[0:last])
