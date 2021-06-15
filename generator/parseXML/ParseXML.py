@@ -148,10 +148,8 @@ class ParseXML():
         :param v: the string value to convert to an int, e.g. "2.6"
         :return: returns an int (0 if v is None), e.g. 2
 
-        Just using int(v) doesn't work.
-
-        TODO: Is float(v) ever likely to not be an int?
-        If so, do we want to always round it down as is done here?
+        Note v should always represent an int but
+        just using int(v) doesn't work in python 3.5 !
         '''
         if v is None:
             return 0
