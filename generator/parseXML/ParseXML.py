@@ -204,7 +204,9 @@ class ParseXML():
         else:
             tempname = temp.nodeValue.upper()
             # e.g. "SPATIAL_COMPRESSIONKIND_DEFLATED"
-        parts = tempname.split('_')  # TODO what if tempname is "" or None?
+        if tempname is None or tempname == '':
+            return None
+        parts = tempname.split('_')
         if not invalid:
             if len(parts) > 2:
                 return tempname
