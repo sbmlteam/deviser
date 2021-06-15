@@ -407,8 +407,10 @@ class ParseXML():
 
            <mapping name="DimensionDescription" package="numl"/>
         '''
+        # create empty strings in case there are no values
+        # subsequent functions expect strings
         name = ''
-        package = ''  # TODO Maybe better as None?
+        package = '' 
 
         # Example values for `name`:
         # "Transition", "QualitativeSpecies"
