@@ -643,33 +643,31 @@ class ParseXML():
         # return None
 
     @staticmethod
-    def find_lo_element(elements, name):
+    def find_lo_element_within_plugin(elements, name):
         '''
-        TODO: Sarah, please check if this description is correct!
-
         Does a dictionary in `elements` list have a "listOf" entry for `name`?
 
         :param elements: list of "element" dictionaries
-        :param name: value of name concerned.:
+        :param name: value of name concerned. This will always be a "listOf..."
         :return: returns matching dictionary, if there is one in the list.
 
-        e.g. given a name of "FooParameter", and a list of "element"
+        e.g. given a name of "ListOfParameter", and a list of "element"
         dictionaries representing a set of element nodes, including this one:
 
         .. code-block:: xml
 
-            <element name="FooParameter" ... hasListOf="true" ...
+            <element name="Parameter" ... hasListOf="true" ...
                      listOfName="listOfParameters" ...
-                     listOfClassName="ListOfFooParameters" ... >
+                     listOfClassName="ListOfParameters" ... >
 
         iterate over the dictionaries and, for any with an entry for
         key 'isListOf' [which corresponds to a hasListOf attribute node],
         which has the value `True`, then see if
         that dictionary has a "listOfClassName" entry with value
-        "ListOfFooParameters". If so, return that dictionary object.
+        "ListOfParameters". If so, return that dictionary object.
 
         If the dictionary has an empty entry for key "listOfClassName",
-        update that entry with the value "ListOfFooParameters",
+        update that entry with the value "ListOfParameters",
         and return that dictionary object.
 
         If no element dictionaries meet the matching criteria, return `None`.
@@ -687,15 +685,12 @@ class ParseXML():
                 name_to_match = strFunctions.list_of_name(element['name'])
                 if 'listOfClassName' in element:
                     if element['listOfClassName'] != '':
+                        # if element already has a listOfClassName
+                        # use this to match
                         name_to_match = element['listOfClassName']
                     else:
                         element['listOfClassName'] = name_to_match
-
-                # TODO have I explained the above correctly,
-                #  given this next line?
-                # I'm confused because isn't name_to_match.lower()
-                # "listoffooparameters"
-                # and name.lower() "fooparameter"? If so, they won't match!
+                # name passed to function will be a 'listOf...' name
                 if name_to_match.lower() == name.lower():
                     return element
         return None
@@ -1000,8 +995,8 @@ class ParseXML():
 
         # look for references to ListOf elements
         for reference in node.getElementsByTagName('reference'):
-            temp = self.find_lo_element(self.elements,
-                                        self.get_value(reference, 'name'))
+            temp = self.find_lo_element_within_plugin(
+                self.elements, self.get_value(reference, 'name'))
             if temp is not None and temp not in plugin['lo_extension']:
                 plugin['lo_extension'].append(temp)
 
@@ -1064,8 +1059,8 @@ class ParseXML():
 
             # look for references to ListOf elements
             for reference in node.getElementsByTagName('reference'):
-                temp = self.find_lo_element(self.elements,
-                                            self.get_value(reference, 'name'))
+                temp = self.find_lo_element_within_plugin(
+                    self.elements, self.get_value(reference, 'name'))
                 if temp is not None:
                     plug_lo_elements.append(temp)
 
