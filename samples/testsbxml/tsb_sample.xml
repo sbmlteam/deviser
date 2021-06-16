@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsb xmlns="http://testsbxml.org/l1v1" level="1" version="1">
+  <listOfComments>
+    <comment contributor="Joe Bloggs" number="1.34" point="This is irrelevant"/>
+  </listOfComments>
+</tsb>
