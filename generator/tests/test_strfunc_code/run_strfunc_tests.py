@@ -346,10 +346,10 @@ def main():
 
     # wrap_section() tests - or this one!
 
-    # make_class() tests
-    fail += run_strfunc_test(sf.make_class, 'Irenaeus',
+    # make_tex_class() tests
+    fail += run_strfunc_test(sf.make_tex_class, 'Irenaeus',
                              'irenaeus-class', fails)
-    fail += run_strfunc_test(sf.make_class, 'Irenaeus',
+    fail += run_strfunc_test(sf.make_tex_class, 'Irenaeus',
                              'extended-irenaeus-class',
                              fails, add_extended=True)
 

@@ -485,7 +485,6 @@ def get_library_suffix(name):
 
 ############################################
 # The following functions are specifically for use when writing latex
-# TODO come back to writing tex files when fixing #53
 
 
 def wrap_token(name, pkg=''):
@@ -496,9 +495,10 @@ def wrap_token(name, pkg=''):
     :param pkg: include this, if present
     :return: the "wrapped" name
 
-    This function is for use when writing latex so that an attribute name
-    can be wrapped with the \\token command
-    e.g. \\token{'id'} or \\token{'comp:\\-id'}
+    .. code-block:: default
+
+        wrap_token('id') -> "\\token{'id'}"
+        wrap_token('id', 'comp') -> "\\token{'comp:\\-id'}"
 
     """
     if pkg == '':
@@ -507,15 +507,25 @@ def wrap_token(name, pkg=''):
         return '\\token{' + pkg + ':\\-' + name + '}'
 
 
-def wrap_type(given_type, element, hack=False):
+def wrap_type(given_type, element='', hack=False):
     """
     Wraps the given type in a string that will be used in a latex
     description of that type.
 
     :param given_type: the type we want to wrap, e.g. 'array', 'enum',...
-    :param element:
+    :param element: where given_type is a collection this gives the
+        name of the element in the collection
+        OR
+        if we want the type of this element directly (hack = True)
     :param hack: special case which can be used for 'element' type
     :return: string describing the type and the element
+
+    .. code-block:: default
+
+        wrap_type('array', 'double') -> "consisting of an array of \\primtype{'double'}"
+        wrap_type('SId') -> "of type \\primtype{'SId'}"
+        wrap_type('', 'Unit', True) -> "of type \\Unit"
+
     """
     if given_type == 'array':
         return 'consisting of an array of \\primtype{' + element + '}'
@@ -537,24 +547,30 @@ def wrap_type(given_type, element, hack=False):
 
 def wrap_section(name, add_class=True, add_extended=False):
     """
-    'Wrap' a section
+    'Wrap' a section name. Section names are given to each section within latex
+    this is used to wrap the section name so that the text creates a link.
 
-    TODO - a section of what???
+    :param name: name of the text section
+    :param add_class: if True add '-class'  to wrapped name
+    :param add_extended: if True prepend name with 'extended-'
+        (add_class must be True or 'extended' will not be prepended'
+    :return: the wrapped section name
 
-    :param name:
-    :param add_class:
-    :param add_extended:
-    :return:
+    .. code-block:: default
 
-    e.g. "Cat" -> "\\sec{cat-class}"
+        wrap_section('Cat') -> "\\sec{cat-class}"
+        wrap-section('Cat', add_class=False) -> "\\sec{cat}
+        wrap_section('Cat', add_extended=True) -> "\\sec{extended-cat-class}"
+        wrap-section('Cat', add_class=False, add_extended=True) -> "\\sec{cat}
+
     """
     if add_class:
-        return '\\sec{' + make_class(name, add_extended) + '}'
+        return '\\sec{' + make_tex_class(name, add_extended) + '}'
     else:
         return '\\sec{' + name + '}'
 
 
-def make_class(name, add_extended=False):
+def make_tex_class(name, add_extended=False):
     """
     Add '-class' to end of a lower-case string
 
@@ -564,8 +580,8 @@ def make_class(name, add_extended=False):
 
     .. code-block:: default
 
-        make_class('Irenaeus') -> "irenaeus-class"
-        make_class('Irenaeus", True) -> "extended-irenaeus-class"
+        make_tex_class('Irenaeus') -> "irenaeus-class"
+        make_tex_class('Irenaeus", True) -> "extended-irenaeus-class"
 
     """
     if add_extended:
@@ -576,17 +592,19 @@ def make_class(name, add_extended=False):
 
 def wrap_enum(name):
     """
-    'Wrap' an enum
+    'Wrap' an enum name
 
     :param name: the enum to wrap
     :return: the wrapped form of the enum
 
-    e.g. 'cat' -> '\\primtype{cat}'
+    Note enums are declared as a data type in the documentation and thus need
+    to be wrapped with the primitive type identifier ('\\primtype')
 
-    TODO when, how and why would this be used? It's used in the
-    validation rules code, but at the moment I don't understand that.
+    .. code-block:: default
+
+        wrap_enum('Cat') -> '\\primtype{Cat}'
+
     """
-#    return '\\primtype{' + lower_first(name) + '}'
     return '\\primtype{' + name + '}'
 
 # End of latex specific functions
