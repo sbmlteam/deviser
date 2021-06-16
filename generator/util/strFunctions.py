@@ -497,8 +497,8 @@ def wrap_token(name, pkg=''):
 
     .. code-block:: default
 
-        wrap_token('id') -> "\\token{'id'}"
-        wrap_token('id', 'comp') -> "\\token{'comp:\\-id'}"
+        wrap_token('id') -> "\\\\token{'id'}"
+        wrap_token('id', 'comp') -> "\\\\token{'comp:\\\\-id'}"
 
     """
     if pkg == '':
@@ -522,9 +522,9 @@ def wrap_type(given_type, element='', hack=False):
 
     .. code-block:: default
 
-        wrap_type('array', 'double') -> "consisting of an array of \\primtype{'double'}"
-        wrap_type('SId') -> "of type \\primtype{'SId'}"
-        wrap_type('', 'Unit', True) -> "of type \\Unit"
+        wrap_type('array', 'double') -> "consisting of an array of \\\\primtype{'double'}"
+        wrap_type('SId') -> "of type \\\\primtype{'SId'}"
+        wrap_type('', 'Unit', True) -> "of type \\\\Unit"
 
     """
     if given_type == 'array':
@@ -558,10 +558,10 @@ def wrap_section(name, add_class=True, add_extended=False):
 
     .. code-block:: default
 
-        wrap_section('Cat') -> "\\sec{cat-class}"
-        wrap-section('Cat', add_class=False) -> "\\sec{cat}
-        wrap_section('Cat', add_extended=True) -> "\\sec{extended-cat-class}"
-        wrap-section('Cat', add_class=False, add_extended=True) -> "\\sec{cat}
+        wrap_section('Cat') -> "\\\\sec{cat-class}"
+        wrap-section('Cat', add_class=False) -> "\\\\sec{cat}
+        wrap_section('Cat', add_extended=True) -> "\\\\sec{extended-cat-class}"
+        wrap-section('Cat', add_class=False, add_extended=True) -> "\\\\sec{cat}
 
     """
     if add_class:
@@ -598,11 +598,11 @@ def wrap_enum(name):
     :return: the wrapped form of the enum
 
     Note enums are declared as a data type in the documentation and thus need
-    to be wrapped with the primitive type identifier ('\\primtype')
+    to be wrapped with the primitive type identifier ('primtype')
 
     .. code-block:: default
 
-        wrap_enum('Cat') -> '\\primtype{Cat}'
+        wrap_enum('Cat') -> '\\\\primtype{Cat}'
 
     """
     return '\\primtype{' + name + '}'
