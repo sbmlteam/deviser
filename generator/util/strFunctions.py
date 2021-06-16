@@ -607,47 +607,9 @@ def wrap_enum(name):
     """
     return '\\primtype{' + name + '}'
 
-# End of latex specific functions
-##################################################
-
-
-def get_sid_refs(refs):
-    """
-    This function is specifically designed for when an attribute can point to
-    one or more element types and formatting lines in text referring to the
-    element(s).
-
-    :param refs: a string which is a comma-separated sequence of element names
-    :return: a tuple where the first is a string representing a textual list
-        of the elements and the second is a string
-        representing a combined type.
-
-    .. code-block:: default
-
-        get_sid_refs('cat,dog') = ["Cat or \\Dog", "CatOrDog"]
-
-    """
-    if refs == '':
-        return['', 'SId']
-    elif ',' not in refs:
-        return [upper_first(refs), upper_first(refs)]
-    else:
-        ret_string = ''
-        ret_type = ''
-        str_refs = refs.split(',')
-        length = len(str_refs)
-        if length > 0:
-            ret_string = upper_first(str_refs[0])
-            ret_type = upper_first(str_refs[0])
-            for i in range(1, length):
-                ret_string += ' or \\{0}'.format(upper_first(str_refs[i]))
-                ret_type += 'Or{0}'.format(upper_first(str_refs[i]))
-        return [ret_string, ret_type]
-
-
 # TODO come back to writing tex files when fixing #53
-def get_element_name(attribute, add_prefix_if_not_pkg=True,
-                     leave_pkg_prefix=True):
+def get_tex_element_name(attribute, add_prefix_if_not_pkg=True,
+                         leave_pkg_prefix=True):
     """
     Get the name of an element node for use in text (specifications or
     validation rules).
@@ -658,7 +620,11 @@ def get_element_name(attribute, add_prefix_if_not_pkg=True,
     :param leave_pkg_prefix:
         boolean indication whether to leave a prefix in place
     :return: the name, if available, else 'FIX_ME'.
-    """
+
+     .. code-block:: default
+
+        wrap_enum('Cat') -> '\\\\primtype{Cat}'
+   """
     if 'type' in attribute:
         name = ''
         if 'texname' in attribute:
@@ -695,6 +661,43 @@ def get_element_name(attribute, add_prefix_if_not_pkg=True,
                 remove_prefix(attribute['name'])))
     else:
         return 'FIX_ME'
+
+# End of latex specific functions
+##################################################
+
+
+def get_sid_refs(refs):
+    """
+    This function is specifically designed for when an attribute can point to
+    one or more element types and formatting lines in text referring to the
+    element(s).
+
+    :param refs: a string which is a comma-separated sequence of element names
+    :return: a tuple where the first is a string representing a textual list
+        of the elements and the second is a string
+        representing a combined type.
+
+    .. code-block:: default
+
+        get_sid_refs('cat,dog') = ["Cat or \\Dog", "CatOrDog"]
+
+    """
+    if refs == '':
+        return['', 'SId']
+    elif ',' not in refs:
+        return [upper_first(refs), upper_first(refs)]
+    else:
+        ret_string = ''
+        ret_type = ''
+        str_refs = refs.split(',')
+        length = len(str_refs)
+        if length > 0:
+            ret_string = upper_first(str_refs[0])
+            ret_type = upper_first(str_refs[0])
+            for i in range(1, length):
+                ret_string += ' or \\{0}'.format(upper_first(str_refs[i]))
+                ret_type += 'Or{0}'.format(upper_first(str_refs[i]))
+        return [ret_string, ret_type]
 
 
 def replace_digits(name):
