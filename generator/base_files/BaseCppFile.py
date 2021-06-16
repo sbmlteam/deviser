@@ -181,7 +181,7 @@ class BaseCppFile(BaseFile.BaseFile):
 
         # child elements
         self.has_math = class_object['hasMath']
-        self.has_children = query.has_children(class_object['attribs'])
+        self.has_children = query.has_child_elements(class_object['attribs'])
         if self.has_math and \
                 not query.has_children_not_math(class_object['attribs']):
             self.has_only_math = True

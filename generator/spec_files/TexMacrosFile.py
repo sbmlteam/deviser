@@ -70,9 +70,9 @@ class TexMacrosFile(BaseTexFile.BaseTexFile):
         self.write_text_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{4}{2}'
                         '{0}{3}{2}{2}'
                              .format(self.start_b, sbml_class['texname'],
-                                self.end_b,
-                                strFunctions.make_class(sbml_class['texname']),
-                                sbml_class['name']))
+                                     self.end_b,
+                                     strFunctions.make_tex_class(sbml_class['texname']),
+                                     sbml_class['name']))
 
     # Write commands for each ListOf class
     def write_macro_for_listof(self, sbml_class):
@@ -86,19 +86,19 @@ class TexMacrosFile(BaseTexFile.BaseTexFile):
             self.write_text_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{1}{2}'
                             '{0}{3}{2}{2}'
                                  .format(self.start_b, lo_name, self.end_b,
-                                    strFunctions.make_class(lo_name)))
+                                         strFunctions.make_tex_class(lo_name)))
             # hack for render
             if sbml_class['name'] == 'GradientBase':
                 self.write_text_line('\\newcommand{0}\\{4}{2}{0}\\defRef{0}{1}{2}'
                                 '{0}{3}{2}{2}'
                                      .format(self.start_b, lo_name, self.end_b,
-                                        strFunctions.make_class(lo_name),
+                                             strFunctions.make_tex_class(lo_name),
                                         'ListOfGradientBases'))
             elif sbml_class['name'] == 'RenderPoint':
                 self.write_text_line('\\newcommand{0}\\{4}{2}{0}\\defRef{0}{1}{2}'
                                 '{0}{3}{2}{2}'
                                      .format(self.start_b, lo_name, self.end_b,
-                                        strFunctions.make_class(lo_name),
+                                             strFunctions.make_tex_class(lo_name),
                                         'ListOfRenderPoints'))
 
     # Write commands for each primitive type
@@ -117,9 +117,9 @@ class TexMacrosFile(BaseTexFile.BaseTexFile):
             self.write_text_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{4}{2}'
                             '{0}{3}{2}{2}'
                                  .format(self.start_b, plugin['sbase'],
-                                    self.end_b,
-                                    strFunctions.make_class(plugin['sbase']),
-                                    plugin['sbase']))
+                                         self.end_b,
+                                         strFunctions.make_tex_class(plugin['sbase']),
+                                         plugin['sbase']))
 
     # Write general commands
     def write_general_commands(self):

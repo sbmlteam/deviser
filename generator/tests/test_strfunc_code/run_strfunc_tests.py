@@ -346,10 +346,10 @@ def main():
 
     # wrap_section() tests - or this one!
 
-    # make_class() tests
-    fail += run_strfunc_test(sf.make_class, 'Irenaeus',
+    # make_tex_class() tests
+    fail += run_strfunc_test(sf.make_tex_class, 'Irenaeus',
                              'irenaeus-class', fails)
-    fail += run_strfunc_test(sf.make_class, 'Irenaeus',
+    fail += run_strfunc_test(sf.make_tex_class, 'Irenaeus',
                              'extended-irenaeus-class',
                              fails, add_extended=True)
 
@@ -362,7 +362,7 @@ def main():
             'cat,dog': ["Cat or \\Dog", "CatOrDog"]}
     fail += execute_tests(sf.get_sid_refs, data, fails)
 
-    # get_element_name() tests
+    # get_tex_element_name() tests
     gv.reset()
     gv.prefix = 'Bar'
     gv.is_package = False
@@ -375,24 +375,24 @@ def main():
     attribute7 = {'isListOf': False, 'name': 'Foo'}
     attribute8 = {'type': 'lo_element', 'element': 'Unit', 'name': 'Unit',
                   'listOfClassName': 'ListOfAnything'}
-    fail += run_strfunc_test(sf.get_element_name, attribute1, "FIX_ME", fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute2, "MathML math",
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute1, "FIX_ME", fails)
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute2, "MathML math",
                              fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute3,
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute3,
                              "\\BarListOfFoos", fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute4, "Unit", fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute5,
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute4, "Unit", fails)
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute5,
                              "\\BarListOfUnits", fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute5,
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute5,
                              "\\ListOfUnits", fails,
                              add_prefix_if_not_pkg=False)
-    fail += run_strfunc_test(sf.get_element_name, attribute5,
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute5,
                              "\\ListOfUnits", fails, leave_pkg_prefix=False)
-    fail += run_strfunc_test(sf.get_element_name, attribute6, "FIX_ME", fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute7, "\\Foo", fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute8,
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute6, "FIX_ME", fails)
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute7, "\\Foo", fails)
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute8,
                              "\\BarListOfUnits", fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute8,
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute8,
                              "\\ListOfAnything", fails, leave_pkg_prefix=False)
 
     gv.reset()
@@ -405,16 +405,16 @@ def main():
     attribute2 = {'type': 'lo_element', 'element': 'Unit',
                   'name': 'Unit',
                   'isListOf': True, 'listOfClassName': 'ListOfUnits'}
-    fail += run_strfunc_test(sf.get_element_name, attribute1,
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute1,
                              "\\ListOfFooUnits", fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute1,
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute1,
                              "\\ListOfFooUnits", fails,
                              add_prefix_if_not_pkg=False)
-    fail += run_strfunc_test(sf.get_element_name, attribute2,
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute2,
                              "\\ListOfUnits", fails)
-    fail += run_strfunc_test(sf.get_element_name, attribute2,
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute2,
                              "\\ListOfUnits", fails, leave_pkg_prefix=False)
-    fail += run_strfunc_test(sf.get_element_name, attribute2,
+    fail += run_strfunc_test(sf.get_tex_element_name, attribute2,
                              "\\ListOfUnits", fails,
                              add_prefix_if_not_pkg=False)
 
