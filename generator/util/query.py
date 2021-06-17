@@ -100,7 +100,7 @@ def get_sid_refs_for_class(working_class):
     return sid_refs
 
 
-def has_children(attributes):
+def has_child_elements(attributes):
     """
     Return True if any of the attributes refer to elements
     (i.e. `type` is 'element', 'lo_element' or 'inline_lo_element')
@@ -181,10 +181,9 @@ def get_class(name, root_object):
             return root_object['baseElements'][i]
 
 
-def is_inline_child(class_object):
+def get_inline_parents(class_object):
     """
-    If this object is an 'inline child', get list of inline parents.
-    See issue # 35
+    If this object is an 'inline child', get list of parents.
 
     :param class_object: structure representing a class
     :return: list of parents objects for which this class is an inline child
@@ -231,12 +230,9 @@ def is_inline_child(class_object):
        <container>
            <parameter attributes= . . . />
        </container>
-
-    This function is called from ../code_files/CppHeaderFile.py,
-    which iterates over the list returned.
     """
     inline_parents = []
-    parents = get_inline_parents(class_object)
+    parents = get_parents(class_object)
     for parent in parents:
         inline_child = False
         parent_class = get_class(parent, class_object['root'])
@@ -250,17 +246,34 @@ def is_inline_child(class_object):
     return inline_parents
 
 
-# Sarah added issue: Sort out is_inline_child and get_inline_parents #35
-
-
-def get_inline_parents(class_object):
+def get_parents(class_object):
     """
-    An inline parent is the node enclosing
-    a set of inline children, as in is_inline_child()
-    See issue # 35
+    Get a list of objects that are a parent to the
+    object
 
-    :param class_object:
-    :return:
+    :param class_object: structure representing a class
+    :return: list of parents objects for which this class is a child
+
+    e.g. in this sample
+
+    .. code-block:: xml
+
+        <element name="DrawFromDistribution" hasChildren="true">
+          <attributes>
+            <attribute name="distribInput"
+                       type="lo_element" element="DistribInput"/>
+            <attribute name="UncertML"
+                       type="element" element="UncertMLNode"/>
+            <attribute name="number" type="double"/>
+          </attributes>
+        </element>
+
+    the function produces
+
+    .. code-block:: default
+
+        get_parents(DrawFromDistribution_class_object) -> ['DistribInput',
+                                                           'UncertMLNode']
     """
     parents = []
     if class_object['is_list_of']:
@@ -1236,146 +1249,6 @@ def get_other_element_children(this_object, element):
     return other_children
 
 
-def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
-    """
-    Get children that are concrete instantiations
-
-    :param concretes: list of the class_objects identified as concrete classes
-    :param root: dict of all elements
-    :param reqd_only: boolean to allow list to be filtered on attributes
-        that are required
-    :param base_attributes: list of attributes that are on the base class of
-        the concrete classes
-    :param name
-
-    TODO an example would be helpful.
-    """
-    children = []
-    for j in range(0, len(concretes)):
-        if concretes[j]['element'] == 'CSGeometry':
-            continue
-        grandchildren = get_children(concretes[j]['element'],
-                                     root, reqd_only, '', base_attributes)
-        children.append(grandchildren)
-    if not reqd_only:
-        children = insert_list_of(children, name, root)
-    return children
-
-
-def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
-    """
-    Get the child elements of the class name
-
-    :param name:
-    :param root: dict of all elements
-    :param reqd_only: boolean to allow list to be filtered on attributes
-        that are required
-    :param xml_name:
-    :param base_attribs:
-    :return:
-
-    TODO lots of explanation needed!
-    """
-    child = get_class(name, root)
-    if not child:
-        if name == 'ASTNode':
-            return dict({'name': 'math', 'children': []})
-        else:
-            return dict({'name': name, 'children': []})
-    children = []
-    num_attribs = len(child['attribs'])
-    if (has_children(child['attribs'])):
-        for i in range(0, num_attribs):
-            att_type = child['attribs'][i]['type']
-            if att_type == 'element':
-                # for distrib we have a child that is a list of
-                # children of itself
-                # this will cause recursion
-                if name != child['attribs'][i]['element']:
-                    grandchildren = \
-                        get_children(child['attribs'][i]['element'],
-                                     root, reqd_only,
-                                     child['attribs'][i]['xml_name'])
-                    children.append(grandchildren)
-            elif att_type == 'lo_element':
-                if 'concrete' in child['attribs'][i]:
-                    num = len(child['attribs'][i]['concrete'])
-                    if num == 0:
-                        continue
-                    elif name == 'MixedGeometry' and num > 0:
-                        continue
-                    else:
-                        base = get_class(child['attribs'][i]['element'], root)
-                        grandchildren = \
-                            get_concrete_children(
-                                child['attribs'][i]['concrete'],
-                                root, reqd_only, base['attribs'],
-                                child['attribs'][i]['element'])
-
-                        # for j in range(0, num):
-                        #     grandchildren = get_concrete_children(
-                        #         child['attribs'][i]['concrete'],
-                        #         root, reqd_only, '', base['attribs'])
-                        #     grandchildren =
-                        #        get_children(
-                        #          child['attribs'][i]['concrete']\
-                        #                 [j]['element'],
-                        #                 root, reqd_only, '',
-                        #                 base['attribs'])
-
-                        children.append(grandchildren[0])
-
-                        # if not reqd_only:
-                        #   grandchildren = insert_list_of(grandchildren,
-                        #   child['attribs'][i]['element'], root)
-
-                else:
-                    # for distrib we have a child that is a list
-                    # of children of itself
-                    # this will cause recursion
-                    if name != child['attribs'][i]['element']:
-                        grandchildren = \
-                            get_children(child['attribs'][i]['element'],
-                                         root, reqd_only)
-                        if not reqd_only:
-                            grandchildren = \
-                                insert_list_of(grandchildren,
-                                               child['attribs'][i]['element'],
-                                               root)
-                        children.append(grandchildren)
-            elif att_type == 'inline_lo_element':
-                # for distrib we have a child that is a list of children
-                # of itself
-                # this will cause recursion
-                if name != child['attribs'][i]['element']:
-                    grandchildren = \
-                        get_children(child['attribs'][i]['element'],
-                                     root, reqd_only)
-                    children.append(grandchildren)
-            else:
-                continue
-    # need attributes from base class
-    reqd_attribs = []
-    for i in range(0, num_attribs):
-        attrib = child['attribs'][i]
-        if reqd_only:
-            if attrib['reqd']:
-                reqd_attribs.append(attrib)
-        else:
-            reqd_attribs.append(attrib)
-
-    for i in range(0, len(base_attribs)):
-        attrib = base_attribs[i]
-        if reqd_only:
-            if attrib['reqd']:
-                reqd_attribs.append(attrib)
-        else:
-            reqd_attribs.append(attrib)
-    if len(xml_name) > 0:
-        name = xml_name
-    return dict({'name': name, 'children': children, 'attribs': reqd_attribs})
-
-
 def get_child_elements(elements, lo_elements, root=None):
     """
     Get a list of names (and other info) of child elements.
@@ -1436,6 +1309,153 @@ def get_child_elements(elements, lo_elements, root=None):
                                         'used_name': used_child_name}))
     return child_elements
 
+########################################################################
+# Functions for create tree
+
+
+def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
+    """
+    Get children that are concrete instantiations
+
+    :param concretes: list of the class_objects identified as concrete classes
+    :param root: dict of all elements
+    :param reqd_only: boolean to allow list to be filtered on attributes
+        that are required
+    :param base_attributes: list of attributes that are on the base class of
+        the concrete classes
+    :param name
+
+    Note: this function is under development to facilitate future functionality;
+    it is not fully tested
+    TODO an example would be helpful.
+    """
+    children = []
+    for j in range(0, len(concretes)):
+        if concretes[j]['element'] == 'CSGeometry':
+            continue
+        grandchildren = get_children(concretes[j]['element'],
+                                     root, reqd_only, '', base_attributes)
+        children.append(grandchildren)
+    if not reqd_only:
+        children = insert_list_of(children, name, root)
+    return children
+
+
+def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
+    """
+    Get the child elements of the class name
+
+    :param name:
+    :param root: dict of all elements
+    :param reqd_only: boolean to allow list to be filtered on attributes
+        that are required
+    :param xml_name:
+    :param base_attribs:
+    :return:
+
+    TODO lots of explanation needed!
+    Note: this function is under development to facilitate future functionality;
+    it is not fully tested
+    """
+    child_class = get_class(name, root)
+    if not child_class:
+        if name == 'ASTNode':
+            return dict({'name': 'math', 'children': []})
+        else:
+            return dict({'name': name, 'children': []})
+    children = []
+    num_attribs = len(child_class['attribs'])
+    if has_child_elements(child_class['attribs']):
+        for i in range(0, num_attribs):
+            att_type = child_class['attribs'][i]['type']
+            if att_type == 'element':
+                # for distrib we have a child that is a list of
+                # children of itself
+                # this will cause recursion
+                if name != child_class['attribs'][i]['element']:
+                    grandchildren = \
+                        get_children(child_class['attribs'][i]['element'],
+                                     root, reqd_only,
+                                     child_class['attribs'][i]['xml_name'])
+                    children.append(grandchildren)
+            elif att_type == 'lo_element':
+                if 'concrete' in child_class['attribs'][i]:
+                    num = len(child_class['attribs'][i]['concrete'])
+                    if num == 0:
+                        continue
+                    elif name == 'MixedGeometry' and num > 0:
+                        continue
+                    else:
+                        base = get_class(child_class['attribs'][i]['element'], root)
+                        grandchildren = \
+                            get_concrete_children(
+                                child_class['attribs'][i]['concrete'],
+                                root, reqd_only, base['attribs'],
+                                child_class['attribs'][i]['element'])
+
+                        # for j in range(0, num):
+                        #     grandchildren = get_concrete_children(
+                        #         child_class['attribs'][i]['concrete'],
+                        #         root, reqd_only, '', base['attribs'])
+                        #     grandchildren =
+                        #        get_children(
+                        #          child_class['attribs'][i]['concrete']\
+                        #                 [j]['element'],
+                        #                 root, reqd_only, '',
+                        #                 base['attribs'])
+
+                        children.append(grandchildren[0])
+
+                        # if not reqd_only:
+                        #   grandchildren = insert_list_of(grandchildren,
+                        #   child_class['attribs'][i]['element'], root)
+
+                else:
+                    # for distrib we have a child that is a list
+                    # of children of itself
+                    # this will cause recursion
+                    if name != child_class['attribs'][i]['element']:
+                        grandchildren = \
+                            get_children(child_class['attribs'][i]['element'],
+                                         root, reqd_only)
+                        if not reqd_only:
+                            grandchildren = \
+                                insert_list_of(grandchildren,
+                                               child_class['attribs'][i]['element'],
+                                               root)
+                        children.append(grandchildren)
+            elif att_type == 'inline_lo_element':
+                # for distrib we have a child that is a list of children
+                # of itself
+                # this will cause recursion
+                if name != child_class['attribs'][i]['element']:
+                    grandchildren = \
+                        get_children(child_class['attribs'][i]['element'],
+                                     root, reqd_only)
+                    children.append(grandchildren)
+            else:
+                continue
+    # need attributes from base class
+    reqd_attribs = []
+    for i in range(0, num_attribs):
+        attrib = child_class['attribs'][i]
+        if reqd_only:
+            if attrib['reqd']:
+                reqd_attribs.append(attrib)
+        else:
+            reqd_attribs.append(attrib)
+
+    for i in range(0, len(base_attribs)):
+        attrib = base_attribs[i]
+        if reqd_only:
+            if attrib['reqd']:
+                reqd_attribs.append(attrib)
+        else:
+            reqd_attribs.append(attrib)
+    if len(xml_name) > 0:
+        name = xml_name
+    return dict({'name': name, 'children': children, 'attribs': reqd_attribs})
+
 
 # NOT USED - Investigate
 def insert_list_of(original, child_name, root):
@@ -1447,6 +1467,9 @@ def insert_list_of(original, child_name, root):
     :param root:
     :return: either a list of dictionaries, or a single dictionary,
              depending on context
+
+    Note: this function is under development to facilitate future functionality;
+    it is not fully tested
     """
     child = get_class(child_name, root)
     lo_name = strFunctions.list_of_name(child['name'])
@@ -1475,30 +1498,35 @@ def create_object_tree(pkg_object, reqd_only=True):
     and each class listing its direct children.
     If `reqd_only` is `False` it will add the `listOf` elements as well.
 
-    :param pkg_object:
-    :param reqd_only:
-    :return: list of dictionaries
+    :param pkg_object: the object dictionary
+    :param reqd_only: boolean to specify whether to include optional attributes
+        or child elements
+    :return: list of dictionaries representing the tree structure of the object
+
+    Note: this function is under development to facilitate future functionality;
+    it is not fully tested
     """
     tree = []
     root = None
-    for i in range(0, len(pkg_object['plugins'])):
-        plugin = pkg_object['plugins'][i]
+    for plugin in pkg_object['plugins']:
         children = []
+        # get root object
         if len(plugin['extension']) > 0:
             root = plugin['extension'][0]['root']
-        for j in range(0, len(plugin['extension'])):
-            children.append(get_children(plugin['extension'][j]['name'],
-                                         root, reqd_only))
         if not root and len(plugin['lo_extension']) > 0:
             root = plugin['lo_extension'][0]['root']
-        for j in range(0, len(plugin['lo_extension'])):
-            grandchildren = get_children(plugin['lo_extension'][j]['name'],
+
+        for extension in plugin['extension']:
+            children.append(get_children(extension['name'],
+                                         root, reqd_only))
+        for lo_extension in plugin['lo_extension']:
+            grandchildren = get_children(lo_extension['name'],
                                          root, reqd_only,
-                                         plugin['lo_extension'][j]['xml_name'])
+                                         lo_extension['xml_name'])
             if not reqd_only:
                 grandchildren = insert_list_of(
                     grandchildren,
-                    plugin['lo_extension'][j]['name'], root)
+                    lo_extension['name'], root)
             children.append(grandchildren)
         branch = dict({'base': plugin['sbase'],
                        'ext': 'core',
@@ -1506,6 +1534,7 @@ def create_object_tree(pkg_object, reqd_only=True):
                        'attribs': plugin['attribs']})
         tree.append(branch)
     return tree
+#######################################################################
 
 
 def is_number(att_type):

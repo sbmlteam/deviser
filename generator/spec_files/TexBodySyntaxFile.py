@@ -84,8 +84,8 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                              .format(self.start_b, plugin['sbase'], self.end_b))
         self.write_text_line('\\label{0}{1}{2}'
                              .format(self.start_b,
-                                strFunctions.make_class(plugin['sbase'], True),
-                                self.end_b))
+                                     strFunctions.make_tex_class(plugin['sbase'], True),
+                                     self.end_b))
         self.skip_line()
         self.write_figure('extended', plugin['sbase'])
         self.skip_line()

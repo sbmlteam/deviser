@@ -108,7 +108,9 @@ class ParseXML():
         # list have more keys than those in the self.elements list.
         self.elements = []
         self.sbml_elements = []
-
+        self.sbml_level = 3
+        self.sbml_version = 1
+        self.pkg_version = 1
         self.num_versions = 1
         self.plugins = []
 
@@ -146,10 +148,8 @@ class ParseXML():
         :param v: the string value to convert to an int, e.g. "2.6"
         :return: returns an int (0 if v is None), e.g. 2
 
-        Just using int(v) doesn't work.
-
-        TODO: Is float(v) ever likely to not be an int?
-        If so, do we want to always round it down as is done here?
+        Note v should always represent an int but
+        just using int(v) doesn't work in python 3.5 !
         '''
         if v is None:
             return 0
@@ -204,7 +204,9 @@ class ParseXML():
         else:
             tempname = temp.nodeValue.upper()
             # e.g. "SPATIAL_COMPRESSIONKIND_DEFLATED"
-        parts = tempname.split('_')  # TODO what if tempname is "" or None?
+        if tempname is None or tempname == '':
+            return None
+        parts = tempname.split('_')
         if not invalid:
             if len(parts) > 2:
                 return tempname
@@ -385,7 +387,7 @@ class ParseXML():
         if temp is not None:
             last = len(temp)
             # strip _t if it is there; since we add it later
-            # TODO why? and where?
+            # when we standardise names
             if temp.endswith('_t'):
                 last -= 2
             enum_name = strFunctions.upper_first(temp[0:last])
@@ -405,8 +407,10 @@ class ParseXML():
 
            <mapping name="DimensionDescription" package="numl"/>
         '''
+        # create empty strings in case there are no values
+        # subsequent functions expect strings
         name = ''
-        package = ''  # TODO Maybe better as None?
+        package = '' 
 
         # Example values for `name`:
         # "Transition", "QualitativeSpecies"
@@ -484,21 +488,22 @@ class ParseXML():
         Gets the integer value of a <element> node's
         minNumListOfChildren attribute node.
 
+        In SBML Level 3 Version 1 a 'listOf' element could not
+        be empty so minimum number of children in a listOf defaults to 1.
+        In SBML Level 3 Version 2 a 'listOf' element is allowed to
+        be empty so minimum number of children in a listOf defaults to 0.
+
         :param node: the <element> node in question
-        :return: returns this value, if present, else returns 1.
+        :return: returns this value, if present, else returns default.
 
-        TODO: does this return value of 1 matter? Some of the sample XML files
-        e.g. sbgn.xml have existing minNumListOfChildren attribute values of 1
-        Sarah: "SBML did have the rule that a ListOf element could not be
-        empty so the minNumListOfChildren was '1' by default - hence the code.
-        This does need revisiting - I've added an issue"
-
-        See issue 23.
         '''
         name = 'minNumListOfChildren'
         temp = node.getAttributeNode(name)
         if temp is None:
-            return 1
+            if self.sbml_version == 1:
+                return 1
+            elif self.sbml_version == 2:
+                return 0
         return self.to_int(temp.nodeValue)
 
     @staticmethod
@@ -638,33 +643,31 @@ class ParseXML():
         # return None
 
     @staticmethod
-    def find_lo_element(elements, name):
+    def find_lo_element_within_plugin(elements, name):
         '''
-        TODO: Sarah, please check if this description is correct!
-
         Does a dictionary in `elements` list have a "listOf" entry for `name`?
 
         :param elements: list of "element" dictionaries
-        :param name: value of name concerned.:
+        :param name: value of name concerned. This will always be a "listOf..."
         :return: returns matching dictionary, if there is one in the list.
 
-        e.g. given a name of "FooParameter", and a list of "element"
+        e.g. given a name of "ListOfParameter", and a list of "element"
         dictionaries representing a set of element nodes, including this one:
 
         .. code-block:: xml
 
-            <element name="FooParameter" ... hasListOf="true" ...
+            <element name="Parameter" ... hasListOf="true" ...
                      listOfName="listOfParameters" ...
-                     listOfClassName="ListOfFooParameters" ... >
+                     listOfClassName="ListOfParameters" ... >
 
         iterate over the dictionaries and, for any with an entry for
         key 'isListOf' [which corresponds to a hasListOf attribute node],
         which has the value `True`, then see if
         that dictionary has a "listOfClassName" entry with value
-        "ListOfFooParameters". If so, return that dictionary object.
+        "ListOfParameters". If so, return that dictionary object.
 
         If the dictionary has an empty entry for key "listOfClassName",
-        update that entry with the value "ListOfFooParameters",
+        update that entry with the value "ListOfParameters",
         and return that dictionary object.
 
         If no element dictionaries meet the matching criteria, return `None`.
@@ -682,15 +685,12 @@ class ParseXML():
                 name_to_match = strFunctions.list_of_name(element['name'])
                 if 'listOfClassName' in element:
                     if element['listOfClassName'] != '':
+                        # if element already has a listOfClassName
+                        # use this to match
                         name_to_match = element['listOfClassName']
                     else:
                         element['listOfClassName'] = name_to_match
-
-                # TODO have I explained the above correctly,
-                #  given this next line?
-                # I'm confused because isn't name_to_match.lower()
-                # "listoffooparameters"
-                # and name.lower() "fooparameter"? If so, they won't match!
+                # name passed to function will be a 'listOf...' name
                 if name_to_match.lower() == name.lower():
                     return element
         return None
@@ -995,8 +995,8 @@ class ParseXML():
 
         # look for references to ListOf elements
         for reference in node.getElementsByTagName('reference'):
-            temp = self.find_lo_element(self.elements,
-                                        self.get_value(reference, 'name'))
+            temp = self.find_lo_element_within_plugin(
+                self.elements, self.get_value(reference, 'name'))
             if temp is not None and temp not in plugin['lo_extension']:
                 plugin['lo_extension'].append(temp)
 
@@ -1059,8 +1059,8 @@ class ParseXML():
 
             # look for references to ListOf elements
             for reference in node.getElementsByTagName('reference'):
-                temp = self.find_lo_element(self.elements,
-                                            self.get_value(reference, 'name'))
+                temp = self.find_lo_element_within_plugin(
+                    self.elements, self.get_value(reference, 'name'))
                 if temp is not None:
                     plug_lo_elements.append(temp)
 
@@ -1504,9 +1504,6 @@ class ParseXML():
         gv.add_additional_declaration(add_declarations)
 
         # get package information - see issue 17
-        sbml_level = 3
-        sbml_version = 1
-        pkg_version = 1
         self.num_versions = len(self.dom.getElementsByTagName('pkgVersion'))
         self.version_count = 0  # Number of pkgVersion nodes in the document.
 
@@ -1518,16 +1515,16 @@ class ParseXML():
         #     <plugins...>
         # </pkgVersion>
         for node in self.dom.getElementsByTagName('pkgVersion'):
-            sbml_level = self.get_int_value(self, node, 'level')
-            sbml_version = self.get_int_value(self, node, 'version')
-            pkg_version = self.get_int_value(self, node, 'pkg_version')
+            self.sbml_level = self.get_int_value(self, node, 'level')
+            self.sbml_version = self.get_int_value(self, node, 'version')
+            self.pkg_version = self.get_int_value(self, node, 'pkg_version')
             # <elements> and <plugins> are nodes nested within the
             # <pkgVersion> node
             self.populate_elements_for_version(node)
             self.populate_plugins_for_version(node)
-            lv_info.append(dict({'core_level': sbml_level,
-                                 'core_version': sbml_version,
-                                 'pkg_version': pkg_version}))
+            lv_info.append(dict({'core_level': self.sbml_level,
+                                 'core_version': self.sbml_version,
+                                 'pkg_version': self.pkg_version}))
             self.version_count = self.version_count + 1
 
         # Now iterate over <enum> nodes (if any).
@@ -1588,9 +1585,9 @@ class ParseXML():
                         'enums': enums,
                         'offset': offset,
                         'fullname': fullname,
-                        'base_level': sbml_level,
-                        'base_version': sbml_version,
-                        'pkg_version': pkg_version,
+                        'base_level': self.sbml_level,
+                        'base_version': self.sbml_version,
+                        'pkg_version': self.pkg_version,
                         'required': required,
                         'num_versions': self.num_versions,
                         'lv_info': lv_info
