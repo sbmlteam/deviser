@@ -357,13 +357,13 @@ class ValidationRulesForClass():
             short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
             lo = False
         else:
-            loname = strFunctions.get_element_name(lo_child, leave_pkg_prefix=False)
+            loname = strFunctions.get_tex_element_name(lo_child, leave_pkg_prefix=False)
             temp = strFunctions.remove_prefix(lo_child['element'])
             lo_name = loname[7:] #strFunctions.plural(temp)
             text = 'A {0} object may have the optional SBML Level~3 ' \
                    'Core attributes {1} and {2}. No other attributes from the ' \
                    'SBML Level~3 Core namespaces are permitted on a {0} object.'\
-                .format(strFunctions.get_element_name(lo_child, False),
+                .format(strFunctions.get_tex_element_name(lo_child, False),
                         strFunctions.wrap_token('metaid'),
                         strFunctions.wrap_token('sboTerm'))
             sec_name = 'listof' + lo_name.lower()
@@ -398,7 +398,7 @@ class ValidationRulesForClass():
             short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
             lo = False
         else:
-            loname = strFunctions.get_element_name(lo_child, leave_pkg_prefix=False)
+            loname = strFunctions.get_tex_element_name(lo_child, leave_pkg_prefix=False)
             temp = strFunctions.remove_prefix(lo_child['element'])
             lo_name = loname[7:] #strFunctions.plural(temp)
             text = r'Apart from the general notes and annotations subobjects ' \
@@ -573,18 +573,18 @@ class ValidationRulesForClass():
             pred = 'these'
             verb = 'are'
             i = 0
-            elements = '{0}'.format(strFunctions.get_element_name(
+            elements = '{0}'.format(strFunctions.get_tex_element_name(
                 self.opt_child_lo_elem[i]))
             for i in range(1, number-1):
-                elements += ', {0}'.format(strFunctions.get_element_name(
+                elements += ', {0}'.format(strFunctions.get_tex_element_name(
                     self.opt_child_lo_elem[i]))
-            elements += ' and {0}'.format(strFunctions.get_element_name(
+            elements += ' and {0}'.format(strFunctions.get_tex_element_name(
                 self.opt_child_lo_elem[i+1]))
         else:
             obj = 'object'
             pred = 'this'
             verb = 'is'
-            elements = '{0}'.format(strFunctions.get_element_name(
+            elements = '{0}'.format(strFunctions.get_tex_element_name(
                 self.opt_child_lo_elem[0]))
 
         text = 'The {0} sub{1} on {2} {3} object {5} optional, but if ' \
@@ -594,9 +594,9 @@ class ValidationRulesForClass():
             for i in range(0, number):
                 num = strFunctions.replace_digits(str(
                     self.opt_child_lo_elem[i]['min_lo_children'])).lower()
-                name = strFunctions.get_element_name(self.opt_child_lo_elem[i])
-                text += r'The {0} must contain at least {1} instances of the ' \
-                        r'\{2} object.'.format(name, num,
+                name = strFunctions.get_tex_element_name(self.opt_child_lo_elem[i])
+                text += 'The {0} must contain at least {1} instances of the ' \
+                        '\{2} object.'.format(name, num,
                                               self.opt_child_lo_elem[i]['name'])
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
@@ -635,16 +635,16 @@ class ValidationRulesForClass():
         if number > 1:
             obj = 'objects'
             i = 0
-            elements = '{0}'.format(strFunctions.get_element_name(
+            elements = '{0}'.format(strFunctions.get_tex_element_name(
                 self.reqd_child_lo_elem[i]))
             for i in range(1, number-1):
-                elements += ', {0}'.format(strFunctions.get_element_name(
+                elements += ', {0}'.format(strFunctions.get_tex_element_name(
                     self.reqd_child_lo_elem[i]))
-            elements += ' and {0}'.format(strFunctions.get_element_name(
+            elements += ' and {0}'.format(strFunctions.get_tex_element_name(
                 self.reqd_child_lo_elem[i+1]))
         else:
             obj = 'object'
-            elements = '{0}'.format(strFunctions.get_element_name(
+            elements = '{0}'.format(strFunctions.get_tex_element_name(
                 self.reqd_child_lo_elem[0]))
 
         text = 'The {0} sub{1} on {2} {3} object must not be empty.'\
@@ -653,10 +653,10 @@ class ValidationRulesForClass():
             for i in range(0, number):
                 num = strFunctions.replace_digits(str(
                     self.reqd_child_lo_elem[i]['min_lo_children'])).lower()
-                name = strFunctions.get_element_name(self.reqd_child_lo_elem[i])
-                text += r'The {0} must contain at least {1} instances of the ' \
-                        r'\{2} object.' \
-                        r''.format(name, num,
+                name = strFunctions.get_tex_element_name(self.reqd_child_lo_elem[i])
+                text += 'The {0} must contain at least {1} instances of the ' \
+                        '\{2} object.' \
+                        ''.format(name, num,
                                   self.reqd_child_lo_elem[i]['name'])
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
@@ -743,17 +743,17 @@ class ValidationRulesForClass():
             return ''
         elif num == 1:
             return 'one and only one instance of the {0} element'\
-                .format(strFunctions.get_element_name(attributes[0], False))
+                .format(strFunctions.get_tex_element_name(attributes[0], False))
         else:
             required_statement = 'one and only one instance of each of the {0}'\
-                .format(strFunctions.get_element_name(attributes[0], False))
+                .format(strFunctions.get_tex_element_name(attributes[0], False))
             i = 1
             while i < num - 1:
                 required_statement += ', {0}'\
-                    .format(strFunctions.get_element_name(attributes[i], False))
+                    .format(strFunctions.get_tex_element_name(attributes[i], False))
                 i += 1
-            required_statement += r' and \{0} elements'\
-                .format(strFunctions.get_element_name(attributes[i], False))
+            required_statement += ' and \{0} elements'\
+                .format(strFunctions.get_tex_element_name(attributes[i], False))
             return required_statement
 
     # parse the optional attribute sentence
@@ -764,17 +764,17 @@ class ValidationRulesForClass():
             return ''
         elif num == 1:
             return 'one and only one instance of the {0} element' \
-                .format(strFunctions.get_element_name(attributes[0], False))
+                .format(strFunctions.get_tex_element_name(attributes[0], False))
         else:
             optional_statement = 'one and only one instance of each of the {0}' \
-                .format(strFunctions.get_element_name(attributes[0], False))
+                .format(strFunctions.get_tex_element_name(attributes[0], False))
             i = 1
             while i < num - 1:
                 optional_statement += ', {0}' \
-                    .format(strFunctions.get_element_name(attributes[i], False))
+                    .format(strFunctions.get_tex_element_name(attributes[i], False))
                 i += 1
             optional_statement += ' and {0} elements'\
-                .format(strFunctions.get_element_name(attributes[i], False))
+                .format(strFunctions.get_tex_element_name(attributes[i], False))
             return optional_statement
 
     ########################################################################

@@ -67,7 +67,7 @@ def upper_first(word):
     """
     if len(word) == 0:
         return word
-    # hack for spatial CSGFoo classes
+    # use_element_name_directly for spatial CSGFoo classes
     if word.startswith('csg') or word.startswith('csG'):
         if word == 'csgeometry' or word == 'csGeometry':
             returned_word = 'CSGeometry'
@@ -90,7 +90,7 @@ def lower_first(word):
     named CSGFoo; where the capitalised version of the name will always
     have the 'CSG' in capitals. This case is considered within this function.
     """
-    # hack for spatial CSGFoo classes
+    # use_element_name_directly for spatial CSGFoo classes
     returned_word = ''
     if word is None or word == '':
         return returned_word
@@ -487,7 +487,6 @@ def get_library_suffix(name):
 
 ############################################
 # The following functions are specifically for use when writing latex
-# TODO come back to writing tex files when fixing #53
 
 
 def wrap_token(name, pkg=''):
@@ -498,9 +497,10 @@ def wrap_token(name, pkg=''):
     :param pkg: include this, if present
     :return: the "wrapped" name
 
-    This function is for use when writing latex so that an attribute name
-    can be wrapped with the \\token command
-    e.g. \\token{'id'} or \\token{'comp:\\-id'}
+    .. code-block:: default
+
+        wrap_token('id') -> "\\\\token{'id'}"
+        wrap_token('id', 'comp') -> "\\\\token{'comp:\\\\-id'}"
 
     """
     if pkg == '':
@@ -509,15 +509,26 @@ def wrap_token(name, pkg=''):
         return '\\token{' + pkg + ':\\-' + name + '}'
 
 
-def wrap_type(given_type, element, hack=False):
+def wrap_type(given_type, element='', use_element_name_directly=False):
     """
     Wraps the given type in a string that will be used in a latex
     description of that type.
 
     :param given_type: the type we want to wrap, e.g. 'array', 'enum',...
-    :param element:
-    :param hack: special case which can be used for 'element' type
+    :param element: where given_type is a collection this gives the
+        name of the element in the collection
+        OR
+        if we want the type of this element directly (hack = True)
+    :param use_element_name_directly: special case which can
+           be used for 'element' type
     :return: string describing the type and the element
+
+    .. code-block:: default
+
+        wrap_type('array', 'double') -> "consisting of an array of \\\\primtype{'double'}"
+        wrap_type('SId') -> "of type \\\\primtype{'SId'}"
+        wrap_type('', 'Unit', True) -> "of type \\\\Unit"
+
     """
     if given_type == 'array':
         return 'consisting of an array of \\primtype{' + element + '}'
@@ -525,7 +536,7 @@ def wrap_type(given_type, element, hack=False):
         element_name = texify(element)
         return 'of type \\primtype{' + element_name + '}'
     elif given_type == 'element':
-        if hack:
+        if use_element_name_directly:
             return 'of type \\' + element
         else:
             return wrap_token(element)
@@ -539,24 +550,30 @@ def wrap_type(given_type, element, hack=False):
 
 def wrap_section(name, add_class=True, add_extended=False):
     """
-    'Wrap' a section
+    'Wrap' a section name. Section names are given to each section within latex
+    this is used to wrap the section name so that the text creates a link.
 
-    TODO - a section of what???
+    :param name: name of the text section
+    :param add_class: if True add '-class'  to wrapped name
+    :param add_extended: if True prepend name with 'extended-'
+        (add_class must be True or 'extended' will not be prepended'
+    :return: the wrapped section name
 
-    :param name:
-    :param add_class:
-    :param add_extended:
-    :return:
+    .. code-block:: default
 
-    e.g. "Cat" -> "\\sec{cat-class}"
+        wrap_section('Cat') -> "\\\\sec{cat-class}"
+        wrap-section('Cat', add_class=False) -> "\\\\sec{cat}
+        wrap_section('Cat', add_extended=True) -> "\\\\sec{extended-cat-class}"
+        wrap-section('Cat', add_class=False, add_extended=True) -> "\\\\sec{cat}
+
     """
     if add_class:
-        return '\\sec{' + make_class(name, add_extended) + '}'
+        return '\\sec{' + make_tex_class(name, add_extended) + '}'
     else:
         return '\\sec{' + name + '}'
 
 
-def make_class(name, add_extended=False):
+def make_tex_class(name, add_extended=False):
     """
     Add '-class' to end of a lower-case string
 
@@ -566,8 +583,8 @@ def make_class(name, add_extended=False):
 
     .. code-block:: default
 
-        make_class('Irenaeus') -> "irenaeus-class"
-        make_class('Irenaeus", True) -> "extended-irenaeus-class"
+        make_tex_class('Irenaeus') -> "irenaeus-class"
+        make_tex_class('Irenaeus", True) -> "extended-irenaeus-class"
 
     """
     if add_extended:
@@ -578,18 +595,75 @@ def make_class(name, add_extended=False):
 
 def wrap_enum(name):
     """
-    'Wrap' an enum
+    'Wrap' an enum name
 
     :param name: the enum to wrap
     :return: the wrapped form of the enum
 
-    e.g. 'cat' -> '\\primtype{cat}'
+    Note enums are declared as a data type in the documentation and thus need
+    to be wrapped with the primitive type identifier ('primtype')
 
-    TODO when, how and why would this be used? It's used in the
-    validation rules code, but at the moment I don't understand that.
+    .. code-block:: default
+
+        wrap_enum('Cat') -> '\\\\primtype{Cat}'
+
     """
-#    return '\\primtype{' + lower_first(name) + '}'
     return '\\primtype{' + name + '}'
+
+# TODO come back to writing tex files when fixing #53
+def get_tex_element_name(attribute, add_prefix_if_not_pkg=True,
+                         leave_pkg_prefix=True):
+    """
+    Get the name of an element node for use in text (specifications or
+    validation rules).
+
+    :param attribute: dictionary of information about the element.
+    :param add_prefix_if_not_pkg: boolean indicating whether the
+        global prefix should be prepended to the name if this is not a package
+    :param leave_pkg_prefix:
+        boolean indication whether to leave a prefix in place
+    :return: the name, if available, else 'FIX_ME'.
+
+     .. code-block:: default
+
+        wrap_enum('Cat') -> '\\\\primtype{Cat}'
+   """
+    if 'type' in attribute:
+        name = ''
+        if 'texname' in attribute:
+            name = attribute['texname']
+        if len(name) == 0:  # No texname
+            if leave_pkg_prefix:
+                name = remove_prefix(attribute['name'])
+            else:
+                name = attribute['name']
+        if attribute['type'] in ['lo_element', 'inline_lo_element']:
+            if leave_pkg_prefix:
+                return '\\{0}'.\
+                    format(cap_list_of_name(name, add_prefix_if_not_pkg))
+            else:
+                if 'listOfClassName' in attribute and \
+                        attribute['listOfClassName'] != '':
+                    return '\\{0}'.format(
+                        remove_prefix(attribute['listOfClassName']))
+                else:
+                    return '\\{0}'.format(cap_list_of_name_no_prefix(name))
+        elif attribute['type'] == 'element':
+            if attribute['element'] == 'ASTNode*':
+                return 'MathML math'
+            else:
+                return attribute['element']
+        else:
+            return 'FIX_ME'
+    elif 'isListOf' in attribute:
+        if attribute['isListOf']:
+            return '\\{0}'.format(cap_list_of_name(
+                remove_prefix(attribute['name'])))
+        else:
+            return '\\{0}'.format(upper_first(
+                remove_prefix(attribute['name'])))
+    else:
+        return 'FIX_ME'
 
 # End of latex specific functions
 ##################################################
@@ -627,58 +701,6 @@ def get_sid_refs(refs):
                 ret_string += ' or \\{0}'.format(upper_first(str_refs[i]))
                 ret_type += 'Or{0}'.format(upper_first(str_refs[i]))
         return [ret_string, ret_type]
-
-
-# TODO come back to writing tex files when fixing #53
-def get_element_name(attribute, add_prefix_if_not_pkg=True,
-                     leave_pkg_prefix=True):
-    """
-    Get the name of an element node for use in text (specifications or
-    validation rules).
-
-    :param attribute: dictionary of information about the element.
-    :param add_prefix_if_not_pkg: boolean indicating whether the
-        global prefix should be prepended to the name if this is not a package
-    :param leave_pkg_prefix:
-        boolean indication whether to leave a prefix in place
-    :return: the name, if available, else 'FIX_ME'.
-    """
-    if 'type' in attribute:
-        name = ''
-        if 'texname' in attribute:
-            name = attribute['texname']
-        if len(name) == 0:  # No texname
-            if leave_pkg_prefix:
-                name = remove_prefix(attribute['name'])
-            else:
-                name = attribute['name']
-        if attribute['type'] in ['lo_element', 'inline_lo_element']:
-            if leave_pkg_prefix:
-                return '\\{0}'.\
-                    format(cap_list_of_name(name, add_prefix_if_not_pkg))
-            else:
-                if 'listOfClassName' in attribute and \
-                        attribute['listOfClassName'] != '':
-                    return '\\{0}'.format(
-                        remove_prefix(attribute['listOfClassName']))
-                else:
-                    return '\\{0}'.format(cap_list_of_name_no_prefix(name))
-        elif attribute['type'] == 'element':
-            if attribute['element'] == 'ASTNode*':
-                return 'MathML math'
-            else:
-                return attribute['element']
-        else:
-            return 'FIX_ME'
-    elif 'isListOf' in attribute:
-        if attribute['isListOf']:
-            return '\\{0}'.format(cap_list_of_name(
-                remove_prefix(attribute['name'])))
-        else:
-            return '\\{0}'.format(upper_first(
-                remove_prefix(attribute['name'])))
-    else:
-        return 'FIX_ME'
 
 
 def replace_digits(name):

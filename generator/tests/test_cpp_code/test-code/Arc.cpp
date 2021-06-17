@@ -1781,6 +1781,27 @@ Arc::getElementBySId(const std::string& id)
 }
 
 
+/*
+ * Returns a List of all child SbgnBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+Arc::getAllElements(SbgnElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+  ADD_SBGN_FILTERED_POINTER(ret, sublist, mStart, filter);
+  ADD_SBGN_FILTERED_POINTER(ret, sublist, mEnd, filter);
+
+  ADD_SBGN_FILTERED_LIST(ret, sublist, mGlyphs, filter);
+  ADD_SBGN_FILTERED_LIST(ret, sublist, mPoints, filter);
+  ADD_SBGN_FILTERED_LIST(ret, sublist, mPorts, filter);
+
+  return ret;
+}
+
+
 
 /** @cond doxygenlibSBGNInternal */
 

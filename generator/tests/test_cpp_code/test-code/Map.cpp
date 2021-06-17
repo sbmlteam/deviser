@@ -1453,6 +1453,26 @@ Map::getElementBySId(const std::string& id)
 }
 
 
+/*
+ * Returns a List of all child SbgnBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+Map::getAllElements(SbgnElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+  ADD_SBGN_FILTERED_POINTER(ret, sublist, mBBox, filter);
+
+  ADD_SBGN_FILTERED_LIST(ret, sublist, mGlyphs, filter);
+  ADD_SBGN_FILTERED_LIST(ret, sublist, mArcs, filter);
+  ADD_SBGN_FILTERED_LIST(ret, sublist, mArcGroups, filter);
+
+  return ret;
+}
+
+
 
 /** @cond doxygenlibSBGNInternal */
 

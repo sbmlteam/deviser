@@ -602,7 +602,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     # Retrieve element functions
 
     def write_functions_to_retrieve(self):
-        if not query.has_children(self.attributes):
+        if not query.has_child_elements(self.attributes):
             return
 
         gen_functions = \
@@ -728,7 +728,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         # need to be friends with our parent to allow this
         # function to be called
         if self.is_list_of and self.is_cpp_api:
-            inline_parent = query.is_inline_child(self.class_object)
+            inline_parent = query.get_inline_parents(self.class_object)
             for parent in inline_parent:
                 self.write_line('friend class {0};'.format(parent))
 

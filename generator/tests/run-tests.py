@@ -54,7 +54,7 @@ def main():
     run_test('matlab', 'code')
     run_test('other', 'library')
     ## update for latest python
-    #run_test('tex', 'files')
+    run_test('tex', 'files')
 
     print('')
 

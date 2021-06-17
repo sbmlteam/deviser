@@ -86,8 +86,8 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         else:
             severity = self.consist
 
-        self.write_line('{0}{1}-{2}{3}{4}{5} (Reference: {6}){7}'
-                        .format(severity, self.package,
+        self.write_text_line('{0}{1}-{2}{3}{4}{5} (Reference: {6}){7}'
+                             .format(severity, self.package,
                                 rule['number']-self.offset,
                                 self.end_b, self.start_b, text,
                                 ref, self.end_b))
@@ -95,14 +95,14 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
     ####################################################################
 
     def write_general_rules(self, rules):
-        self.write_line('\subsubsection*{General rules about this package}')
+        self.write_text_line('\subsubsection*{General rules about this package}')
         self.skip_line()
         for i in range(1, 3):
             self.write_rule(rules[i])
             self.skip_line()
 
     def write_identifier_rules(self, rules):
-        self.write_line(
+        self.write_text_line(
             '\subsubsection*{General rules about identifiers}')
         self.skip_line()
         for i in range(3, 5):
@@ -110,7 +110,7 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
             self.skip_line()
 
     def write_extended_sbml_rules(self, rules):
-        self.write_line('\subsubsection*{Rules for the '
+        self.write_text_line('\subsubsection*{Rules for the '
                         'extended \\class{SBML} class}')
         self.skip_line()
         for i in range(5, 8):
@@ -120,8 +120,8 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
     # Write rules for a plugin
     def write_rules_for_plugin(self, name, rules):
         # section heading
-        self.write_line('\subsubsection*{Rules for extended \class{'
-                        + '{0}'.format(name) + '} object}')
+        self.write_text_line('\subsubsection*{Rules for extended \class{'
+                             + '{0}'.format(name) + '} object}')
         self.skip_line()
 
         for i in range(0, len(rules)):
@@ -131,8 +131,8 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
     # Write rules for a class
     def write_rules_for_class(self, name, texname, rules):
         # section heading
-        self.write_line('\subsubsection*{Rules for \class{'
-                        + '{0}'.format(name) + '} object}')
+        self.write_text_line('\subsubsection*{Rules for \class{'
+                             + '{0}'.format(name) + '} object}')
         self.skip_line()
 
         for i in range(0, len(rules)):
@@ -147,35 +147,37 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         file_in = open(os.path.dirname(__file__) + '/' + filename, 'r')
         intro = file_in.read()
         file_in.close()
-        intro = re.sub('SHORTNAME', self.brief_pkg_command, intro)
-        intro = re.sub('PACKAGENAME', self.full_pkg_command, intro)
-        intro = re.sub('LEVELNUM', str(self.level), intro)
-        intro = re.sub('VERSIONNUM', str(self.version), intro)
-        intro = re.sub('PKGNAME', self.package, intro)
+        intro = re.sub(r'SHORTNAME', r'\\{0}'.format(self.upper_package),
+                       intro)
+        intro = re.sub(r'PACKAGENAME', r'\\{0}Package'.format(self.fulltexname),
+                       intro)
+        intro = re.sub(r'LEVELNUM', r'{0}'.format(self.level), intro)
+        intro = re.sub(r'VERSIONNUM', r'{0}'.format(self.version), intro)
+        intro = re.sub(r'PKGNAME', r'{0}'.format(self.package), intro)
         return intro
 
     def write_introduction(self):
-        self.write_line('\section{Validation of SBML documents}')
-        self.write_line('\label{apdx-validation}')
+        self.write_text_line('\section{Validation of SBML documents}')
+        self.write_text_line('\label{apdx-validation}')
         self.skip_line()
-        self.write_line('\subsection{Validation and consistency rules}')
-        self.write_line('\label{validation-rules}')
+        self.write_text_line('\subsection{Validation and consistency rules}')
+        self.write_text_line('\label{validation-rules}')
         self.skip_line()
-        self.write_line(self.get_text('valid_intro_para1.txt'))
+        self.write_text_line(self.get_text('valid_intro_para1.txt'))
         self.skip_line()
-        self.write_line('\\begin{description}')
+        self.write_text_line('\\begin{description}')
         self.skip_line()
-        self.write_line(self.get_text('valid_intro_para2.txt'))
+        self.write_text_line(self.get_text('valid_intro_para2.txt'))
         self.skip_line()
-        self.write_line(self.get_text('valid_intro_para3.txt'))
+        self.write_text_line(self.get_text('valid_intro_para3.txt'))
         self.skip_line()
-        self.write_line(self.get_text('valid_intro_para4.txt'))
+        self.write_text_line(self.get_text('valid_intro_para4.txt'))
         self.skip_line()
-        self.write_line('\\end{description}')
+        self.write_text_line('\\end{description}')
         self.skip_line()
-        self.write_line(self.get_text('valid_intro_para5.txt'))
+        self.write_text_line(self.get_text('valid_intro_para5.txt'))
         self.skip_line()
-        self.write_line(self.get_text('valid_intro_para6.txt'))
+        self.write_text_line(self.get_text('valid_intro_para6.txt'))
         self.skip_line()
 
     ########################################################################

@@ -2386,6 +2386,19 @@ public:
 
 
   /**
+   * Returns a List of all child SedBase objects, including those nested to an
+   * arbitrary depth.
+   *
+   * @param filter an ElementFilter that may impose restrictions on the objects
+   * to be retrieved.
+   *
+   * @return a List pointer of pointers to all SedBase child objects with any
+   * restriction imposed.
+   */
+  virtual List* getAllElements(SedElementFilter * filter = NULL);
+
+
+  /**
    * Returns the value of the "Namespaces" element of this SedDocument.
    *
    * @return the value of the "Namespaces" element of this SedDocument as a

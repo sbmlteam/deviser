@@ -177,17 +177,15 @@ class BaseTexFile(BaseFile.BaseFile):
 
         :param text: the text describing the TODO.
         """
-        self.write_line('\\TODO{0}{1}{2}'.format(self.start_b, text,
-                                                 self.end_b))
+        self.write_text_line('\\TODO{0}{1}{2}'.format(self.start_b, text,
+                                                      self.end_b))
         self.skip_line()
 
-    def write_line(self, line, space=0):
+    def write_text_line(self, line):
         """
-        Need to overwrite the write_line function to not add indents
+        Need to overwrite the write_text_line function to not add indents
 
         :param line: the line of text to write
-        :param space: not used; just here to override the version of this
-            function in parent class (BaseFile)
         """
         #self.write_line_no_indent(line)
         super().write_line(line, space=0, indent=False)
