@@ -1522,7 +1522,8 @@ class SetGetFunctions():
                               'delete {0}'.format(member)]
             code = [self.create_code_block('if', implementation)]
             if global_variables.is_package:
-                if 'other_package' in attribute and attribute['other_package'] != this_low_pack:
+                if 'other_package' in attribute and \
+                        attribute['other_package'] != low_pack:
                     up_pack = attribute['other_package'].upper()
                     low_pack = attribute['other_package']
                 implementation = ['{0}_CREATE_NS({1}ns, '
