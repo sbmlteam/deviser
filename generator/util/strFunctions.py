@@ -40,7 +40,7 @@
 """Functions that adjust strings in some way"""
 
 import re
-from util import global_variables as gv
+from ..util import global_variables as gv
 
 
 def upper_first(word):
@@ -168,11 +168,13 @@ def list_of_name(name, add_prefix=True):
 
          gv.prefix = 'SBML'
          gv.is_package = True
-         list_of_name('FooParameter') -> "ListOfFooParameters"
+         list_of_name('FooParameter', True) -> "ListOfFooParameters"
+         list_of_name('FooParameter', False) -> "ListOfFooParameters"
 
          gv.prefix = 'SBML'
          gv.is_package = False
-         list_of_name('FooParameter') -> "SBMLListOfFooParameters"
+         list_of_name('FooParameter', True) -> "SBMLListOfFooParameters"
+         list_of_name('FooParameter', False) -> "ListOfFooParameters"
 
     """
     prefix = ''

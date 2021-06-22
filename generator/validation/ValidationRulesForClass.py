@@ -38,7 +38,7 @@
 # ------------------------------------------------------------------------ -->
 
 
-from util import strFunctions, query, global_variables
+from ..util import strFunctions, query, global_variables
 
 
 class ValidationRulesForClass():
@@ -60,7 +60,7 @@ class ValidationRulesForClass():
         self.end_b = '}'
 
         self.lower_name = strFunctions.lower_first(strFunctions.remove_prefix(self.name))
-        self.formatted_name = '\{0}'.format(strFunctions.remove_prefix(self.name))
+        self.formatted_name = r'\{0}'.format(strFunctions.remove_prefix(self.name))
         self.indef = strFunctions.get_indefinite(self.lower_name)
         self.indef_u = strFunctions.upper_first(self.indef)
 
@@ -228,14 +228,14 @@ class ValidationRulesForClass():
             if ref_name == 'StartHead' or ref_name == 'EndHead':
                 ref_name = 'LineEnding'
             if ref_name == 'SBase':
-                text = 'The value of the attribute {0} of {1} {2} object must be ' \
-                       'the identifier of an existing object derived from the \SBase class and defined in the ' \
-                       'enclosing \Model object.'\
+                text = r'The value of the attribute {0} of {1} {2} object must be ' \
+                       r'the identifier of an existing object derived from the \SBase class and defined in the ' \
+                       r'enclosing \Model object.'\
                     .format(name, self.indef, formatted_name, ref_name)
             else:
-                text = 'The value of the attribute {0} of {1} {2} object must be ' \
-                       'the identifier of an existing \{3} object defined in the ' \
-                       'enclosing \Model object.'\
+                text = r'The value of the attribute {0} of {1} {2} object must be ' \
+                       r'the identifier of an existing \{3} object defined in the ' \
+                       r'enclosing \Model object.'\
                     .format(name, self.indef, formatted_name, ref_name)
             rule_type = ref_type
         elif att_type == 'string':
@@ -249,9 +249,9 @@ class ValidationRulesForClass():
                 .format(name, self.indef, formatted_name,
                         strFunctions.wrap_token('ID'))
         elif att_type == 'IDREF':
-            text = 'The value of the attribute {0} of {1} {2} object must be ' \
-                   'the \'metaid\' of an existing \SBase object defined in the ' \
-                   'enclosing \Model object.'\
+            text = "The value of the attribute {0} of {1} {2} object must be " \
+                   "the 'metaid' of an existing \SBase object defined in the " \
+                   "enclosing \Model object."\
                 .format(name, self.indef, formatted_name)
             rule_type = 'SBase'
         elif att_type == 'int' or att_type == 'uint':
@@ -274,10 +274,10 @@ class ValidationRulesForClass():
                         strFunctions.wrap_token('boolean'))
             rule_type = 'Boolean'
         elif att_type == 'UnitSId' or att_type == 'UnitSIdRef':
-            text = 'The value of the attribute {0} on {1} {2} must have a ' \
-                   'taken from the following: the identifier of a ' \
+            text = r'The value of the attribute {0} on {1} {2} must have a ' \
+                   r'taken from the following: the identifier of a ' \
                    '\\UnitDefinition object in the enclosing \Model, or one ' \
-                   'of the base units in SBML.'.format(name,
+                   r'of the base units in SBML.'.format(name,
                                                        self.indef,
                                                        formatted_name)
             rule_type = 'UnitSId'
@@ -401,9 +401,9 @@ class ValidationRulesForClass():
             loname = strFunctions.get_tex_element_name(lo_child, leave_pkg_prefix=False)
             temp = strFunctions.remove_prefix(lo_child['element'])
             lo_name = loname[7:] #strFunctions.plural(temp)
-            text = 'Apart from the general notes and annotations subobjects ' \
-                   'permitted on all SBML objects, a {0} container object ' \
-                   'may only contain \{1} objects.'\
+            text = r'Apart from the general notes and annotations subobjects ' \
+                   r'permitted on all SBML objects, a {0} container object ' \
+                   r'may only contain \{1} objects.'\
                 .format(loname, temp)
             sec_name = 'listof' + lo_name.lower()
             ref = '{0}, {1}.'\

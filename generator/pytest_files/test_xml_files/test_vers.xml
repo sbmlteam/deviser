@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="Vers" fullname="Versioning" number="1400" offset="10000000" version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1">
+      <elements>
+        <element name="ClassOne" typeCode="CLASS_ONE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="att1" required="false" type="bool" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Another" typeCode="CLASS_A" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="BBB" typeCode="CLASS_B" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="another" required="false" type="lo_element" element="Another" abstract="false"/>
+          </attributes>
+        </element>
+      </elements>
+      <plugins>
+        <plugin extensionPoint="Model">
+          <references>
+            <reference name="ClassOne"/>
+          </references>
+          <attributes>
+            <attribute name="version1" required="false" type="unsigned int" abstract="false"/>
+          </attributes>
+        </plugin>
+        <plugin extensionPoint="Species">
+          <references>
+            <reference name="ClassOne"/>
+            <reference name="ListOfAnothers"/>
+          </references>
+          <attributes>
+            <attribute name="species_att_v1" required="false" type="SIdRef" abstract="false" element="ClassOne"/>
+            <attribute name="string_plugin_att" required="false" type="string" abstract="false"/>
+          </attributes>
+        </plugin>
+      </plugins>
+      <enums>
+        <enum name="FbcType">
+          <enumValues>
+            <enumValue name="OBJECTIVE_TYPE_MAXIMIZE" value="maximize"/>
+            <enumValue name="OBJECTIVE_TYPE_MINIMIZE" value="minimize"/>
+          </enumValues>
+        </enum>
+      </enums>
+    </pkgVersion>
+    <pkgVersion level="3" version="1" pkg_version="2">
+      <elements>
+        <element name="ClassOne" typeCode="CLASS_ONE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="att2" required="false" type="bool" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="ClassTwo" typeCode="CLASS_TWO" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="att1" required="false" type="bool" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="ClassThree" typeCode="CLASS_THREE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Another" typeCode="CLASS_A" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="BBB" typeCode="CLASS_B" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="another" required="false" type="lo_element" element="Another" abstract="false"/>
+          </attributes>
+        </element>
+      </elements>
+      <plugins>
+        <plugin extensionPoint="Model">
+          <references>
+            <reference name="ClassOne"/>
+          </references>
+          <attributes>
+            <attribute name="version2" required="false" type="unsigned int" abstract="false"/>
+          </attributes>
+        </plugin>
+        <plugin extensionPoint="Species">
+          <references>
+            <reference name="ClassTwo"/>
+            <reference name="ListOfAnothers"/>
+          </references>
+          <attributes>
+            <attribute name="species_att_v2" required="false" type="SIdRef" abstract="false" element="Another"/>
+          </attributes>
+        </plugin>
+        <plugin extensionPoint="Reaction">
+          <references>
+            <reference name="ListOfClassThrees"/>
+          </references>
+        </plugin>
+      </plugins>
+      <enums>
+        <enum name="FbcType">
+          <enumValues>
+            <enumValue name="OBJECTIVE_TYPE_MAXIMIZE" value="maximize"/>
+            <enumValue name="OBJECTIVE_TYPE_MINIMIZE" value="minimize"/>
+          </enumValues>
+        </enum>
+      </enums>
+    </pkgVersion>
+  </versions>
+</package>

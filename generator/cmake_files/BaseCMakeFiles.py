@@ -40,8 +40,8 @@
 
 import os
 
-from base_files import BaseFile, BaseTemplateFile
-from util import global_variables as gv
+from ..base_files import BaseFile, BaseTemplateFile
+from ..util import global_variables as gv
 
 
 class BaseCMakeFiles(BaseTemplateFile.BaseTemplateFile):
