@@ -610,6 +610,7 @@ def wrap_enum(name):
     """
     return '\\primtype{' + name + '}'
 
+
 # TODO come back to writing tex files when fixing #53
 def get_tex_element_name(attribute, add_prefix_if_not_pkg=True,
                          leave_pkg_prefix=True):
@@ -626,7 +627,16 @@ def get_tex_element_name(attribute, add_prefix_if_not_pkg=True,
 
      .. code-block:: default
 
-        wrap_enum('Cat') -> '\\\\primtype{Cat}'
+        attribute['type'] = 'element'
+        attribute['element'] = 'Unit'
+
+        get_tex_element_name(attribute) -> 'Unit'
+
+        attribute['type'] = 'lo_element'
+        attribute['name'] = 'myLoTest'
+
+        get_tex_element_name(attribute, add_prefix_if_not_pkg=False)
+                            -> '\\\\ListOfMyLoTests'
    """
     if 'type' in attribute:
         name = ''

@@ -9,7 +9,7 @@ def run_ext_test(name, class_name, test_case, test):
     return 0
 
 def run_plug_test(name, class_name, test_case, num):
-    print(f"    ('{name}', '{class_name}', '{test_case}', {num}),")
+    #print(f"    ('{name}', '{class_name}', '{test_case}', {num}),")
     return 0
 
 def run_valid_test(name, class_name, test_case, generate_error_files=True):
