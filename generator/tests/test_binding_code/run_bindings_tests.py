@@ -26,13 +26,13 @@ compare the files.
 
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
-from bindings_files import BindingsFiles
-from parseXML import ParseXML
 
-import test_functions
+
+from ...bindings_files import BindingsFiles
+from ...parseXML import ParseXML
+
+from .. import test_functions
 
 
 ##############################################################################

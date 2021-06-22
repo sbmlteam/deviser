@@ -2,13 +2,11 @@
 
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
-from code_files import CppFiles, ExtensionFiles, ValidationFiles
-from parseXML import ParseXML
+from ...code_files import CppFiles, ExtensionFiles, ValidationFiles
+from ...parseXML import ParseXML
 
-from tests import test_functions
+from .. import test_functions
 
 
 ##############################################################################
@@ -296,6 +294,8 @@ def run_constraints_test(name, class_name, test_case):
 #########################################################################
 # Main function
 
+# Kept here for backward-compatibility, but the following can all be safely
+# erased as the tests are no running in the pytest directory.
 def main():
 
     # NB the reference files in test-code/ and test-extension/ were

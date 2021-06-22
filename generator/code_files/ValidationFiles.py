@@ -38,10 +38,10 @@
 # ------------------------------------------------------------------------ -->
 
 from . import CppHeaderFile
-from base_files import BaseCppFile, BaseTexFile
-from util import strFunctions, global_variables
-from validation import ValidationRulesForPlugin, ValidationRulesForClass
-from validation import ValidationRulesGeneral
+from ..base_files import BaseCppFile, BaseTexFile
+from ..util import strFunctions, global_variables
+from ..validation import ValidationRulesForPlugin, ValidationRulesForClass
+from ..validation import ValidationRulesGeneral
 from . import ValidatorHeaderFile
 from . import ValidatorCodeFile
 

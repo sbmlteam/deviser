@@ -40,7 +40,7 @@
 
 
 from . import BaseFile
-from util import strFunctions
+from ..util import strFunctions
 
 
 class BaseTexFile(BaseFile.BaseFile):
@@ -187,4 +187,5 @@ class BaseTexFile(BaseFile.BaseFile):
 
         :param line: the line of text to write
         """
-        self.write_line_no_indent(line)
+        #self.write_line_no_indent(line)
+        super().write_line(line, space=0, indent=False)

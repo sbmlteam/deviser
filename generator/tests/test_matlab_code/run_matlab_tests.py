@@ -4,15 +4,11 @@
 ## NOTE this file is a work in progress and not part of testing as yet
 
 import os
-
 import sys
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
-from base_files import BaseMatlabFile
-from parseXML import ParseXML
-
-import test_functions
+from ...base_files import BaseMatlabFile
+from ...parseXML import ParseXML
+from .. import test_functions
 
 
 ##############################################################################
@@ -79,7 +75,7 @@ def compare_matlab(name, filetype):
 # Specific test functions
 
 
-def run_matlab_test(name):
+def run_matlab_tests(name):
     """
     Run the Matlab test; generate files and compare with reference versions.
 
@@ -112,7 +108,7 @@ def main():
 
     # Run the individual tests.
     name = 'qual'
-    fail += run_matlab_test(name)
+    fail += run_matlab_tests(name)
 
     test_functions.report('matlab', fail, fails, not_tested)
     return fail

@@ -1,0 +1,45 @@
+protected:
+  int* mUncompressedSamples;
+  int mUncompressedLength;
+
+  static void copySampleArrays(int* &target, int& targetLength, int* source, int sourceLength);
+  static void uncompress_data(void *data, size_t length, int*& result, int& outLength);
+
+public:
+
+ /**
+   * Returns the "samplesLength" attribute of this ImageData.
+   *
+   * @return the "samplesLength" attribute of this ImageData.
+   */
+  unsigned int getUncompressedLength();
+
+ /**
+   * The "samples" attribute of this ImageData is returned in an int array (pointer) 
+   * that is passed as argument to the method (this is needed while using SWIG to
+   * convert int[] from C++ to Java). This method returns the uncompressed sample field.
+   *
+   * @return void.
+   */
+  void getUncompressed(int* outputSamples);
+
+  /** 
+   * utility function freeing the uncompressed data. 
+   */
+  void freeUncompressed();
+  
+  /** 
+   * utility function uncompressing samples
+   */
+  void uncompress();
+
+  /**  
+   *  Returns the data of this image as uncompressed array of integers
+   * 
+   * @param data the output array of integers (it will be allocated using
+   *             malloc and will have to be freed using free)
+   * @param length the output lenght of the array
+   *
+   */
+  void getUncompressedData(int* &data, int& length);
+

@@ -40,9 +40,9 @@
 import sys
 import os
 
-from parseXML import ParseXML
-from util import global_variables as gv
-from validation import ValidationXMLFiles
+from ..parseXML import ParseXML
+from ..util import global_variables as gv
+from ..validation import ValidationXMLFiles
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
 

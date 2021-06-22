@@ -1,0 +1,5 @@
+This file is part of SOMETHING. 
+
+Copyright (C) 2013-2016 jointly by the following organizations:
+1. Abcdefg
+2. Hijklmonp

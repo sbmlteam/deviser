@@ -40,7 +40,7 @@
 """Functions that adjust strings in some way"""
 
 import re
-from util import global_variables as gv
+from ..util import global_variables as gv
 
 
 def upper_first(word):
@@ -67,7 +67,7 @@ def upper_first(word):
     """
     if len(word) == 0:
         return word
-    # hack for spatial CSGFoo classes
+    # use_element_name_directly for spatial CSGFoo classes
     if word.startswith('csg') or word.startswith('csG'):
         if word == 'csgeometry' or word == 'csGeometry':
             returned_word = 'CSGeometry'
@@ -90,7 +90,7 @@ def lower_first(word):
     named CSGFoo; where the capitalised version of the name will always
     have the 'CSG' in capitals. This case is considered within this function.
     """
-    # hack for spatial CSGFoo classes
+    # use_element_name_directly for spatial CSGFoo classes
     returned_word = ''
     if word is None or word == '':
         return returned_word
@@ -168,11 +168,13 @@ def list_of_name(name, add_prefix=True):
 
          gv.prefix = 'SBML'
          gv.is_package = True
-         list_of_name('FooParameter') -> "ListOfFooParameters"
+         list_of_name('FooParameter', True) -> "ListOfFooParameters"
+         list_of_name('FooParameter', False) -> "ListOfFooParameters"
 
          gv.prefix = 'SBML'
          gv.is_package = False
-         list_of_name('FooParameter') -> "SBMLListOfFooParameters"
+         list_of_name('FooParameter', True) -> "SBMLListOfFooParameters"
+         list_of_name('FooParameter', False) -> "ListOfFooParameters"
 
     """
     prefix = ''
@@ -507,7 +509,7 @@ def wrap_token(name, pkg=''):
         return '\\token{' + pkg + ':\\-' + name + '}'
 
 
-def wrap_type(given_type, element='', hack=False):
+def wrap_type(given_type, element='', use_element_name_directly=False):
     """
     Wraps the given type in a string that will be used in a latex
     description of that type.
@@ -517,7 +519,8 @@ def wrap_type(given_type, element='', hack=False):
         name of the element in the collection
         OR
         if we want the type of this element directly (hack = True)
-    :param hack: special case which can be used for 'element' type
+    :param use_element_name_directly: special case which can
+           be used for 'element' type
     :return: string describing the type and the element
 
     .. code-block:: default
@@ -533,7 +536,7 @@ def wrap_type(given_type, element='', hack=False):
         element_name = texify(element)
         return 'of type \\primtype{' + element_name + '}'
     elif given_type == 'element':
-        if hack:
+        if use_element_name_directly:
             return 'of type \\' + element
         else:
             return wrap_token(element)

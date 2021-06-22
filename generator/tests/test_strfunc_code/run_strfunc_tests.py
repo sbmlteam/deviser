@@ -6,12 +6,9 @@ import os
 import sys
 
 
-from tests import test_functions
+from .. import test_functions
 
-from util import strFunctions as sf, global_variables as gv
-
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
+from ...util import strFunctions as sf, global_variables as gv
 
 
 ##############################################################################
@@ -214,7 +211,7 @@ def main():
     fail += execute_tests(sf.cap_list_of_name_no_prefix, data, fails)
     gv.is_package = False
     # this gets wrongly dealt with by the remove prefix function
-    # TODO sort
+    # TODO sort - actually i think the test harness is misbehaving
     data = {"FooParameter": "ListOfFooParameters", "cat": "ListOfCats",
             "SBMLFooParameter": "ListOfFooParameters"}
 #    fail += execute_tests(sf.cap_list_of_name_no_prefix, data, fails)

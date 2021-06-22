@@ -1401,6 +1401,28 @@ Event::getElementBySId(const std::string& id)
 }
 
 
+/*
+ * Returns a List of all child SBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+Event::getAllElements(ElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+  ADD_FILTERED_POINTER(ret, sublist, mTrigger, filter);
+  ADD_FILTERED_POINTER(ret, sublist, mPriority, filter);
+  ADD_FILTERED_POINTER(ret, sublist, mDelay, filter);
+
+  ADD_FILTERED_LIST(ret, sublist, mEventAssignments, filter);
+
+  ADD_FILTERED_FROM_PLUGIN(ret, sublist, filter);
+
+  return ret;
+}
+
+
 
 /** @cond doxygenLibsbmlInternal */
 

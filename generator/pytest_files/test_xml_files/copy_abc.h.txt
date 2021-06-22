@@ -1,0 +1,15 @@
+public:
+
+  /**
+   * For nested groups (Member objects that reference a ListOfMembers 
+   * object), SBO terms, Notes, and Annotation from the
+   * parent ListOfMembers applies to the child.  This function
+   * copies any information from any of those three things to all 
+   * child ListOfMembers, and if that information is not already 
+   * set.  After calling
+   * this function, it is sufficient to check any ListOfMembers
+   * to see if its SBO term, Notes, or Annotation is set, without
+   * further checking to see if that element was nested in another
+   * Group.
+   */
+  virtual void copyInformationToNestedLists();

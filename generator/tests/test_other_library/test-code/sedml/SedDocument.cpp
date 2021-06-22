@@ -2450,6 +2450,29 @@ SedDocument::getElementBySId(const std::string& id)
 
 
 /*
+ * Returns a List of all child SedBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+SedDocument::getAllElements(SedElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+
+  ADD_SED_FILTERED_LIST(ret, sublist, mDataDescriptions, filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mModels, filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mSimulations, filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mAbstractTasks, filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mDataGenerators, filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mOutputs, filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mStyles, filter);
+
+  return ret;
+}
+
+
+/*
  * Returns the value of the "Namespaces" element of this SedDocument.
  */
 const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*
