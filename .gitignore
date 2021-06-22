@@ -68,6 +68,7 @@ testOutput/
 .DS_Store
 .vs
 .vscode
+test/
 
 # Ignore Sphinx-generated .rst files:
 sphinx-docs/*.rst
