@@ -1,4 +1,5 @@
 import os
+import sys
 import pytest
 
 from ...tests import test_functions
@@ -14,7 +15,8 @@ def setup():
     if not os.path.isdir('temp'):
         os.mkdir('temp')
 
-
+@pytest.mark.skipif(sys.version_info < (3,6),
+                    reason="requires python3.6")
 @pytest.mark.parametrize("name, test_type", [
     ('spatial', 'body'),
     ('qual', 'apdx-validation'),
