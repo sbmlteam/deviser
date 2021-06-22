@@ -187,4 +187,4 @@ class BaseTexFile(BaseFile.BaseFile):
 
         :param line: the line of text to write
         """
-        self.write_text_no_indent(line)
+        self.write_line_no_indent(line)
