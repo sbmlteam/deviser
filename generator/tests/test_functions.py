@@ -85,7 +85,8 @@ def compare_files(infile, outfile, fails, not_tested):
     if not os.path.isfile(infile):
         # we have not added a file to compare to
         not_tested.append(infile)
-        return ret
+        print('{0}=================>> NOT TESTED'.format(infile))
+        return 1
     elif not os.path.isfile(outfile):
         print(outfile)
         fails.append(infile)
