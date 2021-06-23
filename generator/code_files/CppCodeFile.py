@@ -822,7 +822,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
 
     def write_defn_begin(self):
         self.skip_line(2)
-        self.write_line('#ifndef {0}_H__'.format(self.name))
+        self.write_line('#ifndef vvvv {0}_H__'.format(self.name))
         self.write_line('#define {0}_H__'.format(self.name))
         self.skip_line(2)
 

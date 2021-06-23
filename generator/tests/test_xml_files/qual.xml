@@ -5,7 +5,7 @@
       <elements>
         <element name="QualitativeSpecies" typeCode="SBML_QUAL_QUALITATIVE_SPECIES" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="id" required="true" type="SId" abstract="false" />
+            <attribute name="idapytest" required="true" type="SId" abstract="false" />
             <attribute name="name" required="false" type="string" abstract="false" />
             <attribute name="compartment" required="true" type="SIdRef" element="Compartment" abstract="false" />
             <attribute name="constant" required="true" type="boolean" abstract="false" />
