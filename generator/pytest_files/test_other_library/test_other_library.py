@@ -2,18 +2,23 @@
 import os
 import pytest
 
-from ...tests import test_functions
-from ...tests.test_other_library import run_other_library_tests as rolt
+from ...pytest_files import test_functions
+from . import run_other_library_tests as rolt
 from ...util import global_variables as gv
 
 
 def setup():
     # Set up the environment.
     this_dir = os.path.dirname(os.path.abspath(__file__))
-    (path_to_tests, other) = os.path.split(this_dir)
+
+    (path_to_tests, _) = os.path.split(this_dir)
+    temp_dir = os.path.join(this_dir, 'temp')
     test_functions.set_path_to_tests(path_to_tests)
-    if not os.path.isdir('temp'):
-        os.mkdir('temp')
+    if not os.path.isdir(temp_dir):
+        os.mkdir(temp_dir)
+    # print(f"this_dir is {this_dir}")
+    # print(f"path_to_tests is {path_to_tests}")
+    os.chdir(this_dir)
 
 
 @pytest.mark.parametrize('name, num, class_name, test_case, list_of', [

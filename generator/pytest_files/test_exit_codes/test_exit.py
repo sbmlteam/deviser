@@ -4,7 +4,7 @@ import os
 import pytest
 
 from ... import deviser
-from ...tests import test_functions
+from ...pytest_files import test_functions
 from ...util import global_variables as gv
 
 

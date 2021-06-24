@@ -2,8 +2,8 @@ import os
 import sys
 import pytest
 
-from ...tests import test_functions
-from ...tests.test_tex_files import run_tex_tests as rtt
+from ...pytest_files import test_functions
+from . import run_tex_tests as rtt
 
 
 def setup():
