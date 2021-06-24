@@ -7,6 +7,7 @@ import pytest
 from ...pytest_files import test_functions
 from . import run_cpp_tests as rct  # For now.
 
+
 def setup():
 
     # Set up the environment.
@@ -17,9 +18,8 @@ def setup():
     test_functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir(temp_dir):
         os.mkdir(temp_dir)
-    # print(f"this_dir is {this_dir}")
-    # print(f"path_to_tests is {path_to_tests}")
     os.chdir(this_dir)
+
 
 # used mytests.py "conversion" script to extract the tests from the
 # old file and get into right format for this one.

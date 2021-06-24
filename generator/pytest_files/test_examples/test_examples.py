@@ -10,7 +10,7 @@ def setup():
     """
     NB Not to be confused with set_up() in run_examples_tests.py!
     """
-    # Set up the environment
+    # Set up the environment.
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
     (path_to_tests, _) = os.path.split(this_dir)
@@ -18,8 +18,6 @@ def setup():
     test_functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir(temp_dir):
         os.mkdir(temp_dir)
-    # print(f"this_dir is {this_dir}")
-    # print(f"path_to_tests is {path_to_tests}")
     os.chdir(this_dir)
 
 

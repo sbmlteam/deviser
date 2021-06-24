@@ -16,8 +16,6 @@ def setup():
     test_functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir(temp_dir):
         os.mkdir(temp_dir)
-    # print(f"this_dir is {this_dir}")
-    # print(f"path_to_tests is {path_to_tests}")
     os.chdir(this_dir)
 
 
