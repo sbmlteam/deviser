@@ -5,6 +5,7 @@
 
 
 import os
+from xml.dom.minidom import parse
 
 
 from ...code_files import CppExampleFile
@@ -144,7 +145,7 @@ def compare_xml(pkg):
     """
     correct_file = os.path.normpath('./test-examples/{0}/test_xml.xml'.format(pkg))
     temp_file = os.path.normpath('./temp/{0}/test_xml.xml'.format(pkg))
-    return compare_files(correct_file, temp_file)
+    return compare_xml_files(correct_file, temp_file)
 
 
 def compare_xml_fails(pkg):
@@ -162,8 +163,19 @@ def compare_xml_fails(pkg):
         if f.endswith('xml'):
             correct_file = os.path.normpath('{0}/{1}'.format(correct_file_dir, f))
             temp_file = os.path.normpath('{0}/{1}'.format(temp_file_dir, f))
-            fail += compare_files(correct_file, temp_file)
+            fail += compare_xml_files(correct_file, temp_file)
     return fail
+
+
+def compare_xml_files(correct_file, temp_file):
+    """
+    """
+    if os.path.isfile(correct_file) and os.path.isfile(temp_file):
+        dom = parse(correct_file)
+        dom_temp = parse(temp_file)
+        if dom.toxml() == dom_temp.toxml():
+            return 0
+    return 1
 
 
 #############################################################################
