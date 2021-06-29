@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml level="3" version="1" xmlns="http://www.sbml.org/sbml/level3/version1/core" xmlns:test="http://www.sbml.org/sbml/level3/version1/test/version1">
+    <model>
+        <test:myBase test:id="someString"/>
+        <test:listOfClassTwos>
+            <test:classTwo/>
+        </test:listOfClassTwos>
+    </model>
+</sbml>
+
