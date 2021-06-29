@@ -1,7 +1,6 @@
 # Matthew S. Gillman, UCL, 22nd April 2021.
 import os
 import pytest
-import sys
 
 from ...pytest_files import test_functions
 from . import run_examples_tests as ret
@@ -21,8 +20,7 @@ def setup():
         os.mkdir(temp_dir)
     os.chdir(this_dir)
 
-@pytest.mark.skipif(sys.version_info >(3,8),
-                    reason="not working in 3.9")
+
 @pytest.mark.parametrize('name', [
     ('lo_children'),
     ('base_class'),
@@ -34,8 +32,6 @@ def test_xml(name):
     assert 0 == ret.run_xml_test(name)
 
 
-@pytest.mark.skipif(sys.version_info > (3,8),
-                    reason="not working in 3.9")
 @pytest.mark.parametrize('name, start, stop, number', [
     ("spatial", 8, 13, -1),
     ("spatial", 15, 19, -1),
