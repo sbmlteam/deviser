@@ -84,4 +84,4 @@ sphinx-docs/_templates
 gendocs.bat
 
 # don't ignore the test example
-!test_examples/test-examples/test
+!/generator/pytest_files/test_examples/test-examples/test
