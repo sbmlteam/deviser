@@ -86,12 +86,15 @@ def compare_files(infile, outfile, fails, not_tested):
         # we have not added a file to compare to
         not_tested.append(infile)
         print('{0}=================>> NOT TESTED'.format(infile))
+        print('{0}=================>> {1}'.format(infile, os.path.abspath(infile)))
         return 1
     elif not os.path.isfile(outfile):
         print(outfile)
         fails.append(infile)
         print('{0}=================>> MISSING'.format(outfile))
+        print('{0}=================>> {1}'.format(outfile, os.path.abspath(outfile)))
         return 1
+
     indata = read_file(infile)
     out = read_file(outfile)
     if indata.strip() == out.strip():
