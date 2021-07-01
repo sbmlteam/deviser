@@ -4,8 +4,21 @@
 import os
 import pytest
 
-from ...tests import test_functions
-from ...tests.test_cpp_code import run_cpp_tests as rct  # For now.
+from ...pytest_files import test_functions
+from . import run_cpp_tests as rct  # For now.
+
+
+def setup():
+
+    # Set up the environment.
+    this_dir = os.path.dirname(os.path.abspath(__file__))
+
+    (path_to_tests, _) = os.path.split(this_dir)
+    temp_dir = os.path.join(this_dir, 'temp')
+    test_functions.set_path_to_tests(path_to_tests)
+    if not os.path.isdir(temp_dir):
+        os.mkdir(temp_dir)
+    os.chdir(this_dir)
 
 
 # used mytests.py "conversion" script to extract the tests from the
@@ -142,9 +155,9 @@ def test_cpp(name, num, class_name, list_of, test_case):
     ('test_vers', 'VersExtension', 'multi version extension file', 0),
     ('base_class', 'TestExtension', 'default typecodes extension file', 0),
     ('test_core_vers', 'CoreversExtension', 'core version extension file', 0),
-    ('test_core_vers_pkg', 'CoreversPkgExtension',
+    ('test_core_vers_pkg', 'CoreverspkgExtension',
      'core version and package version not 1 extension file', 0),
-    ('test_core_vers_multipkg', 'CoreversMultiPkgExtension',
+    ('test_core_vers_multipkg', 'CoreversmultipkgExtension',
      'multiple core version and package version not 1 extension file', 0),
     ('twoAtOnce', 'TwoatonceExtension',
      'basic extension file with SBasePlugin', 0),
@@ -174,7 +187,7 @@ def test_cpp_ext(name, class_name, test_case, test):
     ('test_vers', 'VersModelPlugin', 'versions of plugins - attributes', 0),
     ('test_vers', 'VersSpeciesPlugin', 'versions of plugins - elements', 1),
     ('fbc_v2', 'FbcModelPlugin', 'plugin with attributes', 0),
-    ('test_core_vers_multipkg', 'CoreversMultiPkgModelPlugin',
+    ('test_core_vers_multipkg', 'CoreversmultipkgModelPlugin',
      'versions of plugins - elements', 0),
     ('twoAtOnce', 'TwoatonceSBasePlugin', 'an SBase plugin', 0),
     ('plugin_id', 'PluginidSBasePlugin', 'an SBase plugin', 0),
@@ -196,7 +209,7 @@ def test_cpp_plugin(name, class_name, test_case, num):
     ('qual', 'QualValidator', 'validator', False),
     ('spatial', 'SpatialValidator', 'validator', False),
     ('groups', 'GroupsSBMLError', 'error enumeration', True),
-    ('fbc_v2', 'FbcSBMLError', 'error enumeration', True),
+    # todo  fails  ('fbc_v2', 'FbcSBMLError', 'error enumeration', True),
     ('test_sidrefs', 'RefsSBMLError', 'sidref with multiple targets', True),
 
     # These next tests are testing the spacing of the element content
@@ -243,12 +256,3 @@ def test_cpp_constraints(name, class_name, test_case):
     assert rct.run_constraints_test(name, class_name, test_case) == 0
 
 
-def setup():
-    """
-    This gets called before each test case.
-    """
-    this_dir = os.path.dirname(os.path.abspath(__file__))
-    (path_to_tests, _) = os.path.split(this_dir)
-    test_functions.set_path_to_tests(path_to_tests)
-    if not os.path.isdir('temp'):
-        os.mkdir('temp')

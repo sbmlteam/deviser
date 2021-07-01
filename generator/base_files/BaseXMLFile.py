@@ -145,39 +145,41 @@ class BaseXMLFile(BaseFile.BaseFile):
         self.doc = self.impl.createDocument(self.corens, 'sbml', None)
         top_element = self.doc.documentElement
         # Add some attribute values to the XML element:
-        top_element.setAttributeNS(self.corens, 'xmlns', self.corens)
-        top_element.setAttributeNS(self.corens, 'level', '3')
-        top_element.setAttributeNS(self.corens, 'version', '1')
-
+        attributes = {
+            'xmlns': [self.corens, self.corens],
+            'level': ['3', self.corens],
+            'version': ['1', self.corens]
+        }
         if error_code and (error_code == 'incorrect_ns'):
-            top_element.setAttributeNS(self.pkgns,
-                                       'xmlns:{0}'.format(self.pkg),
-                                       'http://incorrect')
+            attributes.update(
+                {'xmlns:{0}'.format(self.pkg): ['http://incorrect',
+                                                self.pkgns]})
         else:
-            top_element.setAttributeNS(self.pkgns,
-                                       'xmlns:{0}'.format(self.pkg),
-                                       self.pkgns)
-
+            attributes.update(
+                {'xmlns:{0}'.format(self.pkg): [self.pkgns, self.pkgns]})
         if error_code:
             if error_code == 'incorrect_value_reqd':
                 reqd = 'true'
                 if self.reqd == 'true':
                     reqd = 'false'
-                top_element.setAttributeNS(self.pkgns,
-                                           '{0}:required'.format(self.pkg),
-                                           reqd)
+                attributes.update(
+                    {'{0}:required'.format(self.pkg): [reqd, self.pkgns]})
             elif error_code == 'incorrect_type_reqd':
-                top_element.setAttributeNS(self.pkgns,
-                                           '{0}:required'.format(self.pkg),
-                                           '-3.4')
+                attributes.update(
+                    {'{0}:required'.format(self.pkg): ['-3.4', self.pkgns]})
             elif error_code != 'missing_reqd':
-                top_element.setAttributeNS(self.pkgns,
-                                           '{0}:required'.format(self.pkg),
-                                           self.reqd)
+                attributes.update(
+                    {'{0}:required'.format(self.pkg): [self.reqd, self.pkgns]})
         else:
-            top_element.setAttributeNS(self.pkgns,
-                                       '{0}:required'.format(self.pkg),
-                                       self.reqd)
+            attributes.update(
+                {'{0}:required'.format(self.pkg): [self.reqd, self.pkgns]})
+
+        # These need to be in alphabetical order as python up to 3.7 sorts xml
+        sorted_att = sorted(attributes)
+
+        for name in sorted_att:
+            top_element.setAttributeNS(attributes[name][1],
+                                       name, attributes[name][0])
 
     def create_top_object(self, tree):
         """
@@ -252,13 +254,22 @@ class BaseXMLFile(BaseFile.BaseFile):
         """
         children = parent['children']
         element = self.doc.createElement('{0}'.format(name))
-        for i in range(0, len(attribs)):
-            element.setAttribute('{0}'.format(attribs[i]['name']),
-                                 attribs[i]['value'])
+        # need to sort attributes alphabetically because python up to 3.7
+        # does this but later dont and we want to do comparisons
+        self.sort_and_write_attributes(attribs, element)
         for i in range(0, len(children)):
             subelement = self.create_object(children[i])
             element.appendChild(subelement)
         return element
+
+    def sort_and_write_attributes(self, attribs, element):
+        att_dict = {}
+        for att in attribs:
+            att_dict[att['name']] = att['value']
+        sorted_att = sorted(att_dict)
+
+        for att in sorted_att:
+            element.setAttribute('{0}'.format(att), att_dict[att])
 
     def create_math_element(self):
         """

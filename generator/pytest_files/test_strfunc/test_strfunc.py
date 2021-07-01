@@ -1,7 +1,7 @@
 # Matthew S. Gillman, UCL, 31st March 2021.
 import pytest
 
-from ...tests.test_strfunc_code import run_strfunc_tests as rst
+from . import run_strfunc_tests as rst
 from ...util import strFunctions as sf, global_variables as gv
 
 # NB In all the test dictionaries used, check that the expected return

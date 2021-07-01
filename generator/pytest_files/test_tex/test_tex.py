@@ -2,8 +2,8 @@ import os
 import sys
 import pytest
 
-from ...tests import test_functions
-from ...tests.test_tex_files import run_tex_tests as rtt
+from ...pytest_files import test_functions
+from . import run_tex_tests as rtt
 
 
 def setup():
@@ -11,9 +11,11 @@ def setup():
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
     (path_to_tests, _) = os.path.split(this_dir)
+    temp_dir = os.path.join(this_dir, 'temp')
     test_functions.set_path_to_tests(path_to_tests)
-    if not os.path.isdir('temp'):
-        os.mkdir('temp')
+    if not os.path.isdir(temp_dir):
+        os.mkdir(temp_dir)
+    os.chdir(this_dir)
 
 # @pytest.mark.skipif(sys.version_info < (3,6),
 #                    reason="requires python3.6")

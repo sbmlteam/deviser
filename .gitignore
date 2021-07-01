@@ -83,3 +83,5 @@ sphinx-docs/_templates
 # ignore Sarah's batch file to create docs
 gendocs.bat
 
+# don't ignore the test example
+!/generator/pytest_files/test_examples/test-examples/test

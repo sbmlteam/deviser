@@ -1,18 +1,20 @@
 import os
 import pytest
 
-from ...tests import test_functions
-from ...tests.test_matlab_code import run_matlab_tests as rmt
+from ...pytest_files import test_functions
+from . import run_matlab_tests as rmt
 
 
 def setup():
-    # set up the environment
+    # Set up the environment.
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
-    (path_to_tests, other) = os.path.split(this_dir)
+    (path_to_tests, _) = os.path.split(this_dir)
+    temp_dir = os.path.join(this_dir, 'temp')
     test_functions.set_path_to_tests(path_to_tests)
-    if not os.path.isdir('temp'):
-        os.mkdir('temp')
+    if not os.path.isdir(temp_dir):
+        os.mkdir(temp_dir)
+    os.chdir(this_dir)
 
 
 @pytest.mark.parametrize('name, filetype', [
