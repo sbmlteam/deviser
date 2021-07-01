@@ -187,7 +187,7 @@ def test_cpp_ext(name, class_name, test_case, test):
     ('test_vers', 'VersModelPlugin', 'versions of plugins - attributes', 0),
     ('test_vers', 'VersSpeciesPlugin', 'versions of plugins - elements', 1),
     ('fbc_v2', 'FbcModelPlugin', 'plugin with attributes', 0),
-    ('test_core_vers_multipkg', 'CoreversMultipkgModelPlugin',
+    ('test_core_vers_multipkg', 'CoreversmultipkgModelPlugin',
      'versions of plugins - elements', 0),
     ('twoAtOnce', 'TwoatonceSBasePlugin', 'an SBase plugin', 0),
     ('plugin_id', 'PluginidSBasePlugin', 'an SBase plugin', 0),
