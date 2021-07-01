@@ -48,16 +48,16 @@ def generate_new_cpp_header(filename, num):
     os.chdir('../.')
 
 
-def generate_generic_header(filename, package):
+def generate_generic_header(filename, ext_type):
     """
     Generate Extension files with specified package.
 
     :param filename: XML file to parse.
-    :param package: required package, e.g. 'types', 'fwd' or ''
+    :param ext_type: required extension file, e.g. 'types', 'fwd' or ''
     :return: nothing.
     """
     ob = common_setup(filename)
-    all_files = ExtensionFiles.ExtensionFiles(ob, package, True)
+    all_files = ExtensionFiles.ExtensionFiles(ob, ext_type, True)
     all_files.write_files()
     os.chdir('../.')
 
