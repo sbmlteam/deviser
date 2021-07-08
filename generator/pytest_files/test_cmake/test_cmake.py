@@ -1,7 +1,7 @@
 import os
 import pytest
 
-from .pytest_files import test_functions
+from ...pytest_files import test_functions
 from . import run_cmake_tests as rct
 
 

@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import global_variables
+from ..util import global_variables
 from . import DowncastExtensionFile
 from . import DowncastNamespaceFile
 from . import DowncastPackagesFile

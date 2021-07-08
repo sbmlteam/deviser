@@ -3,10 +3,10 @@
 import os
 
 
-from .spec_files import TexValidationRulesFile, TexMacrosFile, TexBodySyntaxFile
-from .parseXML import ParseXML
+from ...spec_files import TexValidationRulesFile, TexMacrosFile, TexBodySyntaxFile
+from ...parseXML import ParseXML
 
-from  import test_functions
+from .. import test_functions
 
 
 ##############################################################################

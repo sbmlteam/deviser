@@ -4,7 +4,7 @@ import os
 import shutil
 import sys
 
-from util import global_variables as gv
+from ..util import global_variables as gv
 
 
 path_to_tests = ''

@@ -2,7 +2,7 @@
 import pytest
 
 from . import run_strfunc_tests as rst
-from util import strFunctions as sf, global_variables as gv
+from ...util import strFunctions as sf, global_variables as gv
 
 # NB In all the test dictionaries used, check that the expected return
 # value is of the correct type, e.g. False rather than 'False', etc.

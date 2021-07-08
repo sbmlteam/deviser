@@ -40,10 +40,10 @@
 import os
 import re
 
-from base_files import BaseTexFile
-from validation import ValidationRulesForClass
-from validation import ValidationRulesForPlugin
-from validation import ValidationRulesGeneral
+from ..base_files import BaseTexFile
+from ..validation import ValidationRulesForClass
+from ..validation import ValidationRulesForPlugin
+from ..validation import ValidationRulesGeneral
 
 
 class TexValidationRulesFile(BaseTexFile.BaseTexFile):

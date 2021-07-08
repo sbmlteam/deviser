@@ -6,9 +6,9 @@ import os
 import sys
 
 
-from  import test_functions
+from .. import test_functions
 
-from util import strFunctions as sf, global_variables as gv
+from ...util import strFunctions as sf, global_variables as gv
 
 
 ##############################################################################

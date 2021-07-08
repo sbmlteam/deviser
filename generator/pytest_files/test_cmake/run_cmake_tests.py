@@ -3,10 +3,10 @@
 import os
 
 
-from .cmake_files import CMakeFiles
-from .parseXML import ParseXML
+from ...cmake_files import CMakeFiles
+from ...parseXML import ParseXML
 
-from  import test_functions
+from .. import test_functions
 
 
 ##############################################################################

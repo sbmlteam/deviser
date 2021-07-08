@@ -40,7 +40,7 @@
 
 
 from . import BaseFile
-from util import strFunctions as SF
+from ..util import strFunctions as SF
 
 
 class BaseMatlabFile(BaseFile.BaseFile):

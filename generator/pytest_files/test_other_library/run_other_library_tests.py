@@ -2,13 +2,13 @@
 
 import os
 
-from .code_files import CppFiles, BaseClassFiles, ValidationFiles, ExtensionFiles
-from .cmake_files import CMakeFiles
-from .bindings_files import BindingsFiles
-from .parseXML import ParseXML
-from util import strFunctions, global_variables as gv, generateCode
+from ...code_files import CppFiles, BaseClassFiles, ValidationFiles, ExtensionFiles
+from ...cmake_files import CMakeFiles
+from ...bindings_files import BindingsFiles
+from ...parseXML import ParseXML
+from ...util import strFunctions, global_variables as gv, generateCode
 
-from  import test_functions
+from .. import test_functions
 
 ##############################################################################
 # Set up variables

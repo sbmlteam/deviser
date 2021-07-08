@@ -8,11 +8,11 @@ import os
 from xml.dom.minidom import parse
 
 
-from .code_files import CppExampleFile
-from .validation import ValidationXMLFiles
-from .parseXML import ParseXML
+from ...code_files import CppExampleFile
+from ...validation import ValidationXMLFiles
+from ...parseXML import ParseXML
 
-from  import test_functions
+from .. import test_functions
 
 ##############################################################################
 # Set up variables

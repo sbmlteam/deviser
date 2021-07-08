@@ -2,9 +2,9 @@
 import os
 import pytest
 
-from .pytest_files import test_functions
+from ...pytest_files import test_functions
 from . import run_other_library_tests as rolt
-from util import global_variables as gv
+from ...util import global_variables as gv
 
 
 def setup():

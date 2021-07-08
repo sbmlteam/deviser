@@ -2,7 +2,7 @@ import os
 import pytest
 
 
-from .pytest_files import test_functions
+from ...pytest_files import test_functions
 from . import run_bindings_tests as rbt
 
 
