@@ -38,7 +38,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from ...util import strFunctions, query
+from util import strFunctions, query
 
 
 class ExtensionInitFunctions():

@@ -42,8 +42,8 @@
 import os
 import sys
 
-from .. import spec_files
-from ..parseXML import ParseXML
+import spec_files
+from parseXML import ParseXML
 from . import global_variables as gv
 
 

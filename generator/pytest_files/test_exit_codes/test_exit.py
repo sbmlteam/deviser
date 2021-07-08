@@ -5,7 +5,7 @@ import pytest
 
 from ... import deviser
 from ...pytest_files import test_functions
-from ...util import global_variables as gv
+from util import global_variables as gv
 
 
 @pytest.mark.parametrize("name, flag, expected_return", [

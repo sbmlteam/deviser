@@ -48,11 +48,11 @@
 
 import sys
 
-try:
-    from .util import generateLatex, generateCode, global_variables as gv
-except:
-    from .util import global_variables as gv
-    gv.code_returned = gv.return_codes['unknown error - please report']
+#try:
+from util import generateLatex, generateCode, global_variables as gv
+#except:
+#    from util import global_variables as gv
+#    gv.code_returned = gv.return_codes['unknown error - please report']
 #from legacy import run
 
 def generatePackageFor(filename):

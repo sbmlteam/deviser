@@ -42,15 +42,15 @@ import os
 import shutil
 import sys
 
-from ..base_files import BaseFile, BaseTemplateFile
-from ..bindings_files import BindingsFiles
-from ..cmake_files import CMakeFiles
-from ..code_files import (BaseClassFiles, CppFiles, ExtensionFiles,
+from base_files import BaseFile, BaseTemplateFile
+from bindings_files import BindingsFiles
+from cmake_files import CMakeFiles
+from code_files import (BaseClassFiles, CppFiles, ExtensionFiles,
                         ValidationFiles)
-from ..parseXML import ParseXML
+from parseXML import ParseXML
 
-from ..util import global_variables as gv
-from ..util import strFunctions
+from util import global_variables as gv
+from util import strFunctions
 
 
 def generate_code_for(filename, overwrite=True):

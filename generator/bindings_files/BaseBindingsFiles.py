@@ -40,10 +40,10 @@
 import re
 import os
 
-from ..base_files import BaseInterfaceFile, BaseFile, BaseCMakeFile, BaseTemplateFile
-from ..code_files import CppHeaderFile
-from ..code_files import CppCodeFile
-from ..util import strFunctions, global_variables
+from base_files import BaseInterfaceFile, BaseFile, BaseCMakeFile, BaseTemplateFile
+from code_files import CppHeaderFile
+from code_files import CppCodeFile
+from util import strFunctions, global_variables
 
 
 class BaseBindingsFiles(BaseTemplateFile.BaseTemplateFile):

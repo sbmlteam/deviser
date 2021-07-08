@@ -74,7 +74,7 @@ with the value "2005".
 
 from xml.dom.minidom import parse
 import os.path
-from ..util import query, strFunctions, global_variables as gv
+from util import query, strFunctions, global_variables as gv
 # get_matching_element is defined in util/query.py
 
 

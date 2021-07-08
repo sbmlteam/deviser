@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from ..util import strFunctions, global_variables
+from util import strFunctions, global_variables
 
 
 class ValidationRulesGeneral():
