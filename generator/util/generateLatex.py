@@ -42,7 +42,7 @@
 import os
 import sys
 
-import spec_files
+from spec_files import TexBodySyntaxFile, TexValidationRulesFile, TexMacrosFile
 from parseXML import ParseXML
 from . import global_variables as gv
 
@@ -69,13 +69,13 @@ def generateLatexFor(filename):
     if gv.code_returned == gv.return_codes['success']:
         # File writing:
         try:
-            ff = spec_files.TexValidationRulesFile.TexValidationRulesFile(ob)
+            ff = TexValidationRulesFile.TexValidationRulesFile(ob)
             ff.write_file()
             ff.close_file()
-            body = spec_files.TexBodySyntaxFile.TexBodySyntaxFile(ob)
+            body = TexBodySyntaxFile.TexBodySyntaxFile(ob)
             body.write_file()
             body.close_file()
-            macros = spec_files.TexMacrosFile.TexMacrosFile(ob)
+            macros = TexMacrosFile.TexMacrosFile(ob)
             macros.write_file()
             macros.close_file()
         except Exception:
