@@ -11,6 +11,7 @@ from ...util import global_variables as gv
 @pytest.mark.parametrize("name, flag, expected_return", [
     ('non-existent', '-g', 'failed to read file'),
     ('test_child', '-g', 'success'),
+    ('test_child', '-l', 'success'),
     ('test_child', 'missing', 'missing function argument'),
     ('test_child', 'wrong', 'invalid function arguments'),
     # ('test_child', '-l', 'success'),  # Apparently problematic before?
