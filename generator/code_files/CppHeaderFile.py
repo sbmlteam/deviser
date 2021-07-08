@@ -37,9 +37,9 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from ..base_files import BaseCppFile
+from base_files import BaseCppFile
 from . cpp_functions import *
-from ..util import query, global_variables, strFunctions
+from util import query, global_variables, strFunctions
 
 
 class CppHeaderFile(BaseCppFile.BaseCppFile):

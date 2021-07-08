@@ -38,8 +38,8 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from ..base_files import BaseTxtFile
-from ..util import strFunctions, global_variables
+from base_files import BaseTxtFile
+from util import strFunctions, global_variables
 
 
 class CMakeListsFile():

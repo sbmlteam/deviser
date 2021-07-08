@@ -47,7 +47,7 @@ replace various things and create new files based on the 'template'.
 import os
 import re
 
-from ..util import global_variables as gv, strFunctions as SF
+from util import global_variables as gv, strFunctions as SF
 
 
 class BaseTemplateFile:
