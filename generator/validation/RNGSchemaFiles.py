@@ -38,8 +38,8 @@
 # ------------------------------------------------------------------------ -->
 
 
-from ..base_files import BaseXMLFile
-from ..util import strFunctions, query, global_variables
+from base_files import BaseXMLFile
+from util import strFunctions, query, global_variables
 
 
 class RNGSchemaFiles(BaseXMLFile.BaseXMLFile):

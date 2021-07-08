@@ -2,10 +2,10 @@
 
 import os
 
-from ...code_files import CppFiles, ExtensionFiles, ValidationFiles
-from ...parseXML import ParseXML
+from .code_files import CppFiles, ExtensionFiles, ValidationFiles
+from .parseXML import ParseXML
 
-from .. import test_functions
+from  import test_functions
 
 
 ##############################################################################

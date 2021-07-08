@@ -5,10 +5,10 @@
 
 import os
 
-from ...base_files import BaseMatlabFile
-from ...parseXML import ParseXML
+from .base_files import BaseMatlabFile
+from .parseXML import ParseXML
 
-from .. import test_functions
+from  import test_functions
 
 
 ##############################################################################

@@ -41,9 +41,9 @@
 
 import sys
 
-from ..parseXML import ParseXML
-from ..util import global_variables as gv
-from ..validation import RNGSchemaFiles
+from parseXML import ParseXML
+from util import global_variables as gv
+from validation import RNGSchemaFiles
 
 
 def generate_rng_for(filename):  # , overwrite=True):

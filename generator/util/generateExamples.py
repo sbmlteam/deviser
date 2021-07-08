@@ -39,9 +39,9 @@
 
 import sys
 
-from ..code_files import CppExampleFile
-from ..parseXML import ParseXML
-from ..util import global_variables as gv
+from code_files import CppExampleFile
+from parseXML import ParseXML
+from util import global_variables as gv
 
 """Code used to generate the examples."""
 

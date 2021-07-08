@@ -40,12 +40,12 @@
 
 import os
 
-from ..util import global_variables
+from util import global_variables
 from . import PackageFile
 from . import RegisterFile
 from . import BaseCMakeFiles
 from . import CMakeListsFile
-from ..code_files import CppExampleFile
+from code_files import CppExampleFile
 
 
 class CMakeFiles():
