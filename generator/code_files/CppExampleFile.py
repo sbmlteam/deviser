@@ -37,9 +37,9 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from ..base_files import BaseCppFile
+from base_files import BaseCppFile
 
-from ..util import query, strFunctions
+from util import query, strFunctions
 
 
 class CppExampleFile(BaseCppFile.BaseCppFile):

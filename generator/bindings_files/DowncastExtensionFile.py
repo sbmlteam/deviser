@@ -37,8 +37,8 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from ..base_files import BaseCppFile, BaseInterfaceFile
-from ..util import strFunctions
+from base_files import BaseCppFile, BaseInterfaceFile
+from util import strFunctions
 
 
 class DowncastExtensionFile():

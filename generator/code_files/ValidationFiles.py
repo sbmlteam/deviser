@@ -40,10 +40,10 @@
 from . import CppHeaderFile
 from . import ValidatorCodeFile
 from . import ValidatorHeaderFile
-from ..base_files import BaseCppFile, BaseTexFile
-from ..util import strFunctions, global_variables
-from ..validation import ValidationRulesForPlugin, ValidationRulesForClass
-from ..validation import ValidationRulesGeneral
+from base_files import BaseCppFile, BaseTexFile
+from util import strFunctions, global_variables
+from validation import ValidationRulesForPlugin, ValidationRulesForClass
+from validation import ValidationRulesGeneral
 
 
 class ValidationFiles():

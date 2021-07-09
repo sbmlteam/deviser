@@ -44,8 +44,8 @@ from . import BaseCMakeFiles
 from . import CMakeListsFile
 from . import PackageFile
 from . import RegisterFile
-from ..code_files import CppExampleFile
-from ..util import global_variables
+from code_files import CppExampleFile
+from util import global_variables
 
 
 class CMakeFiles():

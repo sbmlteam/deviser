@@ -40,9 +40,9 @@
 # used for list deepcopy
 import copy
 
-from .cpp_functions import *
-from ..base_files import BaseCppFile
-from ..util import query, strFunctions, global_variables
+from code_files.cpp_functions import *
+from base_files import BaseCppFile
+from util import query, strFunctions, global_variables
 
 
 class ExtensionHeaderFile(BaseCppFile.BaseCppFile):

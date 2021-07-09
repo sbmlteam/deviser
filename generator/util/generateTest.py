@@ -41,8 +41,8 @@ import sys
 
 from generateExamples import generate_example_for  # As almost identical anyway
 
-from ..code_files import CppTestFile
-from ..util import global_variables as gv
+from code_files import CppTestFile
+from util import global_variables as gv
 
 """Code to generate tests"""
 

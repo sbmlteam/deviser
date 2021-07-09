@@ -43,7 +43,7 @@ from . import DowncastNamespaceFile
 from . import DowncastPackagesFile
 from . import DowncastPluginsFile
 from . import NativeSwigFile
-from ..util import global_variables
+from util import global_variables
 
 
 class BindingFiles():

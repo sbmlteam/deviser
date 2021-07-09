@@ -42,9 +42,9 @@
 import os
 import sys
 
-from . import global_variables as gv
+from util import global_variables as gv
 from spec_files import TexBodySyntaxFile, TexValidationRulesFile, TexMacrosFile
-from ..parseXML import ParseXML
+from parseXML import ParseXML
 
 
 def generateLatexFor(filename):

@@ -37,9 +37,9 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from .cpp_functions import *
-from ..base_files import BaseCppFile
-from ..util import strFunctions, global_variables
+from code_files.cpp_functions import *
+from base_files import BaseCppFile
+from util import strFunctions, global_variables
 
 
 class ValidatorHeaderFile(BaseCppFile.BaseCppFile):

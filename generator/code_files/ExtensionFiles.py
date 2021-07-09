@@ -41,7 +41,7 @@ from . import CppCodeFile
 from . import CppHeaderFile
 from . import ExtensionCodeFile
 from . import ExtensionHeaderFile
-from ..util import strFunctions, global_variables
+from util import strFunctions, global_variables
 
 
 class ExtensionFiles():

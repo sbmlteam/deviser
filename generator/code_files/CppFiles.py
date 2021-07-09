@@ -41,7 +41,7 @@ import copy
 
 from . import CppCodeFile
 from . import CppHeaderFile
-from ..util import strFunctions, query, global_variables
+from util import strFunctions, query, global_variables
 
 
 class CppFiles():

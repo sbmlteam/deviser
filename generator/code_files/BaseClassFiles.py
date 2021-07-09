@@ -46,8 +46,8 @@
 from . import CppCodeFile
 from . import CppHeaderFile
 from . import ValidationFiles
-from ..base_files import BaseCMakeFile, BaseTemplateFile
-from ..util import strFunctions as SF, global_variables as gv, query
+from base_files import BaseCMakeFile, BaseTemplateFile
+from util import strFunctions as SF, global_variables as gv, query
 
 
 class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):

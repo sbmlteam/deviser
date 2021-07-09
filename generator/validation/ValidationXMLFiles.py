@@ -42,8 +42,8 @@ import copy
 
 from . import ValidationRulesForPlugin
 from . import ValidationRulesGeneral, ValidationRulesForClass
-from ..base_files import BaseXMLFile
-from ..util import strFunctions, query
+from base_files import BaseXMLFile
+from util import strFunctions, query
 
 
 class ValidationXMLFiles():

@@ -41,7 +41,7 @@
 
 import re
 
-from ..util import global_variables as gv
+from util import global_variables as gv
 
 
 def upper_first(word):

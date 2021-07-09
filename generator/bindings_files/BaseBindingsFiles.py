@@ -39,11 +39,11 @@
 
 import os
 
-from ..base_files import BaseInterfaceFile, BaseFile, BaseCMakeFile, \
+from base_files import BaseInterfaceFile, BaseFile, BaseCMakeFile, \
     BaseTemplateFile
-from ..code_files import CppCodeFile
-from ..code_files import CppHeaderFile
-from ..util import strFunctions, global_variables
+from code_files import CppCodeFile
+from code_files import CppHeaderFile
+from util import strFunctions, global_variables
 
 
 class BaseBindingsFiles(BaseTemplateFile.BaseTemplateFile):
