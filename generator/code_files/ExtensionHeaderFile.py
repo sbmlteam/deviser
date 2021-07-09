@@ -37,11 +37,13 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from ..base_files import BaseCppFile
-from . cpp_functions import *
-from ..util import query, strFunctions, global_variables
 # used for list deepcopy
 import copy
+
+from .cpp_functions import *
+from ..base_files import BaseCppFile
+from ..util import query, strFunctions, global_variables
+
 
 class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     """Class for all Extension Header files"""

@@ -37,8 +37,8 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+from .cpp_functions import *
 from ..base_files import BaseCppFile
-from . cpp_functions import *
 from ..util import query, strFunctions, global_variables
 
 

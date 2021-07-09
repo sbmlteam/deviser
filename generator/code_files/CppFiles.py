@@ -38,8 +38,9 @@
 # ------------------------------------------------------------------------ -->
 
 import copy
-from . import CppHeaderFile
+
 from . import CppCodeFile
+from . import CppHeaderFile
 from ..util import strFunctions, query, global_variables
 
 

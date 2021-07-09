@@ -45,8 +45,9 @@ data see XML vulnerabilities
 (https://docs.python.org/3/library/xml.html#xml-vulnerabilities).
 """
 
-from . import BaseFile
 from xml.dom.minidom import getDOMImplementation
+
+from . import BaseFile
 from ..util import strFunctions, query
 
 

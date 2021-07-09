@@ -39,7 +39,7 @@
 
 
 from ..base_files import BaseXMLFile
-from ..util import strFunctions, query, global_variables
+from ..util import strFunctions, query
 
 
 class RNGSchemaFiles(BaseXMLFile.BaseXMLFile):

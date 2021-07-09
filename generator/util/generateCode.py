@@ -46,9 +46,8 @@ from ..base_files import BaseFile, BaseTemplateFile
 from ..bindings_files import BindingsFiles
 from ..cmake_files import CMakeFiles
 from ..code_files import (BaseClassFiles, CppFiles, ExtensionFiles,
-                        ValidationFiles)
+                          ValidationFiles)
 from ..parseXML import ParseXML
-
 from ..util import global_variables as gv
 from ..util import strFunctions
 

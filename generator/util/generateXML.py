@@ -37,8 +37,8 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import sys
 import os
+import sys
 
 from ..parseXML import ParseXML
 from ..util import global_variables as gv

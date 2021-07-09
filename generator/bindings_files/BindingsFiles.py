@@ -37,13 +37,13 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from ..util import global_variables
+from . import BaseBindingsFiles
 from . import DowncastExtensionFile
 from . import DowncastNamespaceFile
 from . import DowncastPackagesFile
 from . import DowncastPluginsFile
 from . import NativeSwigFile
-from . import BaseBindingsFiles
+from ..util import global_variables
 
 
 class BindingFiles():

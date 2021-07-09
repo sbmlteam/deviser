@@ -40,10 +40,10 @@
 
 import copy
 
-from . import ValidationRulesGeneral, ValidationRulesForClass
 from . import ValidationRulesForPlugin
+from . import ValidationRulesGeneral, ValidationRulesForClass
 from ..base_files import BaseXMLFile
-from ..util import strFunctions, query, global_variables
+from ..util import strFunctions, query
 
 
 class ValidationXMLFiles():
