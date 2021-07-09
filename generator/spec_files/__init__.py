@@ -36,7 +36,3 @@
 # or promote products derived from this software without specific prior
 # written permission.
 # ------------------------------------------------------------------------ -->
-
-from . import TexBodySyntaxFile
-from . import TexMacrosFile
-from . import TexValidationRulesFile
