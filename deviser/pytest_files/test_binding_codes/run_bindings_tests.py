@@ -29,7 +29,7 @@ import os
 from ...bindings_files import BindingsFiles
 from ...parseXML import ParseXML
 
-from .. import test_functions
+from .. import functions
 
 ##############################################################################
 # Set up variables
@@ -124,8 +124,8 @@ def compare_code(name, binding, ext):
     """
     correct_file = os.path.normpath('./test-binding/{0}/{1}.{2}'.format(binding, name, ext))
     temp_file = os.path.normpath('./temp/{0}/{1}.{2}'.format(binding, name, ext))
-    return test_functions.compare_files(correct_file, temp_file, fails,
-                                        not_tested)
+    return functions.compare_files(correct_file, temp_file, fails,
+                                   not_tested)
 
 
 #############################################################################
@@ -140,7 +140,7 @@ def run_ns_test(name, binding, ext):
     :param ext: the file extension
     :return: 0 on success or missing file, 1 on failure.
     """
-    filename = test_functions.set_up_test(name, 'downcast-ns', binding)
+    filename = functions.set_up_test(name, 'downcast-ns', binding)
     generate_bindings_downcast_ns(filename, binding)
     if name == 'test_vers':
         name = 'vers'
@@ -159,7 +159,7 @@ def run_test(name, binding, ext):
     :param ext: the file extension
     :return: 0 on success or missing file, 1 on failure.
     """
-    filename = test_functions.set_up_test(name, 'downcast-ext', binding)
+    filename = functions.set_up_test(name, 'downcast-ext', binding)
     generate_bindings_downcast_ext(filename, binding)
     if name == 'test_vers':
         name = 'vers'
@@ -178,7 +178,7 @@ def run_pkgs_test(name, binding, ext):
     :param ext: the file extension
     :return: 0 on success or missing file, 1 on failure.
     """
-    filename = test_functions.set_up_test(name, 'downcast-packages', binding)
+    filename = functions.set_up_test(name, 'downcast-packages', binding)
     generate_bindings_downcast_pkgs(filename, binding, False)
     if name == 'test_vers':
         name = 'vers'
@@ -201,7 +201,7 @@ def run_local_test(name, binding, ext, local):
     :param local:
     :return: 0 on success or missing file, 1 on failure.
     """
-    filename = test_functions.set_up_test(name, 'local', binding)
+    filename = functions.set_up_test(name, 'local', binding)
     generate_bindings_downcast_pkgs(filename, binding, local)
     if binding == 'csharp' or binding == 'java':
         this_name = 'local-packages-{0}'.format(name)
@@ -221,7 +221,7 @@ def run_plugin_test(name, binding, ext):
     :param ext: the file extension
     :return: 0 on success or missing file, 1 on failure.
     """
-    filename = test_functions.set_up_test(name, 'downcast-plugins', binding)
+    filename = functions.set_up_test(name, 'downcast-plugins', binding)
     generate_bindings_downcast_plugins(filename, binding)
     fail = compare_code('local-downcast-plugins-{0}'.format(name),
                         binding, ext)
@@ -238,7 +238,7 @@ def run_swig_test(name, binding, ext):
     :param ext: the file extension
     :return: 0 on success or missing file, 1 on failure.
     """
-    filename = test_functions.set_up_test(name, 'native', binding)
+    filename = functions.set_up_test(name, 'native', binding)
     generate_bindings_downcast_pkgs(filename, binding, True)
     fail = compare_code('{0}-package'.format(name), binding, ext)
     print('')

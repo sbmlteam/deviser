@@ -2,7 +2,7 @@
 import os
 import pytest
 
-from ...pytest_files import test_functions
+from ...pytest_files import functions
 from . import run_examples_tests as ret
 
 
@@ -15,7 +15,7 @@ def setup():
 
     (path_to_tests, _) = os.path.split(this_dir)
     temp_dir = os.path.join(this_dir, 'temp')
-    test_functions.set_path_to_tests(path_to_tests)
+    functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir(temp_dir):
         os.mkdir(temp_dir)
     os.chdir(this_dir)

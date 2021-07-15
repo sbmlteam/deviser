@@ -12,7 +12,7 @@ from ...code_files import CppExampleFile
 from ...validation import ValidationXMLFiles
 from ...parseXML import ParseXML
 
-from .. import test_functions
+from .. import functions
 
 ##############################################################################
 # Set up variables
@@ -120,8 +120,8 @@ def compare_files(correct_file, temp_file):
     TODO I don't think we really need this wrapper function;
     test code could just call test_functions.compare_files() directly.
     """
-    return test_functions.compare_files(correct_file, temp_file, fails,
-                                        not_tested)
+    return functions.compare_files(correct_file, temp_file, fails,
+                                   not_tested)
 
 
 def compare_examples(pkg):
@@ -179,7 +179,7 @@ def run_test(name):
     :param name: XML package name, e.g. 'dyn'
     :return 0 on success (or file not present), 1 on failure.
     """
-    filename = test_functions.set_up_test(name, 'Examples')
+    filename = functions.set_up_test(name, 'Examples')
     pkg = generate_example(filename)
     fail = compare_examples(pkg)
     print('')
@@ -193,7 +193,7 @@ def run_xml_test(name):
     :param name: XML package name, e.g. 'dyn'
     :return 0 on success (or file not present), 1 on failure.
     """
-    filename = test_functions.set_up_test(name, 'Examples')
+    filename = functions.set_up_test(name, 'Examples')
     pkg = generate_xml(filename)
     fail = compare_xml(pkg)
     print('')
@@ -207,7 +207,7 @@ def run_xml_fail_tests(name):
     :param name: XML package name, e.g. 'dyn'
     :return 0 on success (or file not present), 1 on failure.
     """
-    filename = test_functions.set_up_test(name, 'Examples')
+    filename = functions.set_up_test(name, 'Examples')
     pkg = generate_xml_fails(filename)
     fail = compare_xml_fails(pkg)
     print('')
@@ -226,7 +226,7 @@ def run_specific_xml_fail_tests(name, start, stop, number=-1):
 
     TODO Sorry Sarah I'm a bit confused by this one as well!
     """
-    filename = test_functions.set_up_test(name, 'Examples')
+    filename = functions.set_up_test(name, 'Examples')
     pkg = generate_some_xml_fails(filename, start, stop, number)
     fail = compare_xml_fails(pkg)
     print('')

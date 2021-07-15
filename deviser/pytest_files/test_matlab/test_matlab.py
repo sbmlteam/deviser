@@ -1,7 +1,7 @@
 import os
 import pytest
 
-from ...pytest_files import test_functions
+from ...pytest_files import functions
 from . import run_matlab_tests as rmt
 
 
@@ -11,7 +11,7 @@ def setup():
 
     (path_to_tests, _) = os.path.split(this_dir)
     temp_dir = os.path.join(this_dir, 'temp')
-    test_functions.set_path_to_tests(path_to_tests)
+    functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir(temp_dir):
         os.mkdir(temp_dir)
     os.chdir(this_dir)
@@ -23,7 +23,7 @@ def setup():
     ('qual', 'vt'),
 ])
 def test_matlab(name, filetype):
-    filename = test_functions.set_up_test(name, 'MATLAB')
+    filename = functions.set_up_test(name, 'MATLAB')
     rmt.generate_matlab_files(filename, name)
     # for filetype in rmt.filetypes:
     assert rmt.compare_matlab(name, filetype) == 0

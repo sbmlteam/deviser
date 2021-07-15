@@ -6,7 +6,7 @@ import os
 from ...cmake_files import CMakeFiles
 from ...parseXML import ParseXML
 
-from .. import test_functions
+from .. import functions
 
 
 ##############################################################################
@@ -89,8 +89,8 @@ def compare_files(correct_file, temp_file):
     :param temp_file: file generated during tests
     :return: 0 on success, or file not present; 1 on failure.
     """
-    return test_functions.compare_files(correct_file, temp_file, fails,
-                                        not_tested)
+    return functions.compare_files(correct_file, temp_file, fails,
+                                   not_tested)
 
 
 def compare_cmake(name):  # , is_src=False):
@@ -165,7 +165,7 @@ def run_cmake_test(name):
     :param name: stub of XML filename, e.g. 'dyn' for filename 'dyn.xml'
     :return: 0 if all comparisons succeed, else number of failures.
     """
-    filename = test_functions.set_up_test(name, 'CMake')
+    filename = functions.set_up_test(name, 'CMake')
     generate_cmake_files(filename)
     fail = compare_cmake(name)
     # fail += compare_cmake(name, True)
@@ -180,7 +180,7 @@ def run_register_test(name):
     :param name: stub of XML filename, e.g. 'dyn' for filename 'dyn.xml'
     :return: 0 if all comparisons succeed, else number of failures.
     """
-    filename = test_functions.set_up_test(name, 'CMake', 'register')
+    filename = functions.set_up_test(name, 'CMake', 'register')
     generate_cmake_register_files(filename)
     fail = compare_cmake_register(name)
     fail += compare_cmake_register(name, True)
@@ -195,7 +195,7 @@ def run_example_test(name):
     :param name: stub of XML filename, e.g. 'dyn' for filename 'dyn.xml'
     :return: 0 if all comparisons succeed, else number of failures.
     """
-    filename = test_functions.set_up_test(name, 'CMake', 'example')
+    filename = functions.set_up_test(name, 'CMake', 'example')
     generate_cmake_example_files(filename, name)
     fail = compare_cmake_example(name)
     fail += compare_cmake_example(name, True)

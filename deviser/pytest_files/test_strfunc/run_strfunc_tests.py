@@ -6,7 +6,7 @@ import os
 import sys
 
 
-from .. import test_functions
+from .. import functions
 
 from ...util import strFunctions as sf, global_variables as gv
 
@@ -50,7 +50,7 @@ def execute_tests(func, test_data, fails, **kwargs):
     :param **kwargs: any named arguments for the function
     :return: number of failed tests for this set.
 
-    TODO should we move this to test_functions.py? The test function to run
+    TODO should we move this to functions.py? The test function to run
     one test (here, `run_str_func`) could be a new func2 argument above,
     to make this more generic.
     """
@@ -68,7 +68,7 @@ def swap_dictionary(old_dict):
     :param old_dict: the old (i.e. input) dictionary
     :return: the newly-created dictionary
 
-    TODO should we move this to test_functions.py?
+    TODO should we move this to functions.py?
     """
     new_dict = {}
     for (key, value) in old_dict.items():
@@ -86,7 +86,7 @@ def compare_dictionaries(input, expected, fails):
     :param fails: the list of failure cases' strings
     :return 0 on success, 1 on failure.
 
-    TODO should we move this to test_functions.py?
+    TODO should we move this to functions.py?
     """
     if input == expected:
         return 0
@@ -117,7 +117,7 @@ def check_keys(first, second, fails):
     :fails: the list of failure cases we are keeping
     :return: nothing
 
-    TODO should we move this to test_functions.py?
+    TODO should we move this to functions.py?
     """
     first_keys = list(first.keys())
     for k in first_keys:

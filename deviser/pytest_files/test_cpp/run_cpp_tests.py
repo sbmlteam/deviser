@@ -5,7 +5,7 @@ import os
 from ...code_files import CppFiles, ExtensionFiles, ValidationFiles
 from ...parseXML import ParseXML
 
-from .. import test_functions
+from .. import functions
 
 
 ##############################################################################
@@ -142,8 +142,8 @@ def compare_files(folder, class_name, file_ending):
     """
     correct_file = os.path.normpath('./{0}/{1}{2}'.format(folder, class_name, file_ending))
     temp_file = os.path.normpath('./temp/{0}{1}'.format(class_name, file_ending))
-    return test_functions.compare_files(correct_file, temp_file, fails,
-                                        not_tested)
+    return functions.compare_files(correct_file, temp_file, fails,
+                                   not_tested)
 
 
 def compare_code_headers(class_name):
@@ -193,7 +193,7 @@ def run_test(name, num, class_name, test_case, list_of):
     :param list_of: e.g. 'ListOfFunctionTerms'. Can be ''.
     :return: number of test failures.
     """
-    filename = test_functions.set_up_test(name, class_name, test_case)
+    filename = functions.set_up_test(name, class_name, test_case)
     generate_new_cpp_header(filename, num)
     fail = compare_code_headers(class_name)
     fail += compare_code_impl(class_name)
@@ -215,7 +215,7 @@ def run_ext_test(name, class_name, test_case, test):
     :param test: integer specifying which type of header file to generate.
     :return: number of failed tests
     """
-    filename = test_functions.set_up_test(name, class_name, test_case)
+    filename = functions.set_up_test(name, class_name, test_case)
     if test == 0:
         generate_extension_header(filename)
     elif test == 1:
@@ -240,7 +240,7 @@ def run_plug_test(name, class_name, test_case, num):
                  part of large dict object form ParseXML
     :return: number of failed tests.
     """
-    filename = test_functions.set_up_test(name, class_name, test_case)
+    filename = functions.set_up_test(name, class_name, test_case)
     generate_plugin_header(filename, num)
     fail = compare_ext_headers(class_name)
     fail += compare_ext_impl(class_name)
@@ -260,7 +260,7 @@ def run_valid_test(name, class_name, test_case, generate_error_files=True):
         ErrorTable.h if True, otherwise Validator files
     :return: number of failed tests.
     """
-    filename = test_functions.set_up_test(name, class_name, test_case)
+    filename = functions.set_up_test(name, class_name, test_case)
     if generate_error_files:
         generate_error_header(filename)
         fail = compare_ext_headers(class_name)
@@ -282,7 +282,7 @@ def run_constraints_test(name, class_name, test_case):
     :param test_case: brief description, e.g. 'constraints'
     :return: number of failed tests
     """
-    filename = test_functions.set_up_test(name, class_name, test_case)
+    filename = functions.set_up_test(name, class_name, test_case)
     generate_constraints(filename)
     fail = compare_ext_impl(class_name)
     fail += compare_ext_impl(class_name, declared=True)

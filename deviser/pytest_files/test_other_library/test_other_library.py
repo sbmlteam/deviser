@@ -2,7 +2,7 @@
 import os
 import pytest
 
-from ...pytest_files import test_functions
+from ...pytest_files import functions
 from . import run_other_library_tests as rolt
 from ...util import global_variables as gv
 
@@ -13,7 +13,7 @@ def setup():
 
     (path_to_tests, _) = os.path.split(this_dir)
     temp_dir = os.path.join(this_dir, 'temp')
-    test_functions.set_path_to_tests(path_to_tests)
+    functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir(temp_dir):
         os.mkdir(temp_dir)
     os.chdir(this_dir)
@@ -56,7 +56,7 @@ def test_cpp(name, num, class_name, test_case, list_of):
                 "list of" class, e.g. 'CaListOfContents'
     """
     gv.reset()
-    xml_filename = test_functions.set_up_test(name, class_name, test_case)
+    xml_filename = functions.set_up_test(name, class_name, test_case)
     assert xml_filename is not None and xml_filename != ""
     rolt.generate_new_cpp_header(xml_filename, num)
     assert 0 == rolt.compare_code_headers(class_name)
@@ -84,7 +84,7 @@ def test_templates(name, class_name, test_case, list_of):
                  "list of" class, e.g. 'SedListOf'
     """
     gv.reset()
-    xml_filename = test_functions.set_up_test(name, class_name, test_case)
+    xml_filename = functions.set_up_test(name, class_name, test_case)
     assert xml_filename is not None and xml_filename != ""
     rolt.generate_templates(xml_filename)
     assert 0 == rolt.compare_code_headers(class_name)
@@ -110,7 +110,7 @@ def test_common_templates(name, class_name, test_case, prefix, lib):
     :return: number of failed tests.
     """
     gv.reset()
-    xml_filename = test_functions.set_up_test(name, class_name, test_case)
+    xml_filename = functions.set_up_test(name, class_name, test_case)
     rolt.generate_common_templates(xml_filename)
     assert 0 == rolt.compare_code_headers('common')
     assert 0 == rolt.compare_code_headers('extern')
@@ -139,7 +139,7 @@ def test_enum(name, class_name, test_case):
     :param test_case: brief description of tests, e.g. 'enumerations'.
     """
     gv.reset()
-    xml_filename = test_functions.set_up_test(name, class_name, test_case)
+    xml_filename = functions.set_up_test(name, class_name, test_case)
     rolt.generate_enum(xml_filename)
     assert 0 == rolt.compare_code_headers(class_name)
     assert 0 == rolt.compare_code_impl(class_name)
@@ -165,7 +165,7 @@ def test_bindings(name, class_name, test_case, binding, prefix):
               libcombine-*.*
     """
     gv.reset()
-    xml_filename = test_functions.set_up_test(name, class_name, test_case)
+    xml_filename = functions.set_up_test(name, class_name, test_case)
     rolt.generate_binding(xml_filename, binding)
     if binding == 'swig':
         assert 0 == rolt.compare_binding_headers('ListWrapper', binding, "")
@@ -204,7 +204,7 @@ def test_cmake(name, class_name):
     :param class_name:   e.g. 'libsedml' or 'libcombine'
     """
     gv.reset()
-    xml_filename = test_functions.set_up_test(name, class_name, "cmake")
+    xml_filename = functions.set_up_test(name, class_name, "cmake")
     rolt.generate_cmake(xml_filename, "cmake")
     assert 0 == rolt.compare_cmake_file("")
     assert 0 == rolt.compare_cmake_file('src')
@@ -224,7 +224,7 @@ def test_global(name, class_name, test_case):
     :param class_name: test class e.g. 'libsedml'
     :param test_case: brief description of test, e.g. 'global files'
     """
-    xml_filename = test_functions.set_up_test(name, class_name, test_case)
+    xml_filename = functions.set_up_test(name, class_name, test_case)
     rolt.generate_global(xml_filename)
     assert 0 == rolt.compare_code_txt('VERSION')
     assert 0 == rolt.compare_code_txt('README', '.md')
@@ -244,6 +244,6 @@ def test_forward(name, class_name, test_case):
     :param test_case: brief test description, e.g. 'forward declarations'
     """
     gv.reset()
-    xml_filename = test_functions.set_up_test(name, class_name, test_case)
+    xml_filename = functions.set_up_test(name, class_name, test_case)
     rolt.generate_forward(xml_filename)
     assert 0 == rolt.compare_code_headers(class_name)

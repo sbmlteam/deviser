@@ -6,7 +6,7 @@ import os
 from ...spec_files import TexValidationRulesFile, TexMacrosFile, TexBodySyntaxFile
 from ...parseXML import ParseXML
 
-from .. import test_functions
+from .. import functions
 
 
 ##############################################################################
@@ -65,8 +65,8 @@ def compare_items(name, type):
     assert type in ['apdx-validation', 'macros', 'body']
     correct_file = os.path.normpath('./test-tex/{0}/{1}.tex'.format(name, type))
     temp_file = os.path.normpath('./temp/{0}/{1}.tex'.format(name, type))
-    return test_functions.compare_files(correct_file, temp_file, fails,
-                                        not_tested)
+    return functions.compare_files(correct_file, temp_file, fails,
+                                   not_tested)
 
 
 def run_test(name, test_type):
@@ -77,7 +77,7 @@ def run_test(name, test_type):
     :param test_type: a valid test type e.g. 'macros'
     :returns: 0 if success or file missing, 1 if failure.
     """
-    filename = test_functions.set_up_test(name, 'Tex', test_type)
+    filename = functions.set_up_test(name, 'Tex', test_type)
     generate_files(filename, name, test_type)
     fail = compare_items(name, test_type)
     print('')

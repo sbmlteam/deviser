@@ -8,7 +8,7 @@ import os
 from ...base_files import BaseMatlabFile
 from ...parseXML import ParseXML
 
-from .. import test_functions
+from .. import functions
 
 
 ##############################################################################
@@ -52,8 +52,8 @@ def compare_files(correct_file, temp_file):
     :param temp_file: the generated file
     :return: 0 if files identical, 1 otherwise.
     """
-    return test_functions.compare_files(correct_file, temp_file, fails,
-                                        not_tested)
+    return functions.compare_files(correct_file, temp_file, fails,
+                                   not_tested)
 
 
 def compare_matlab(name, filetype):
@@ -82,7 +82,7 @@ def run_matlab_test(name):
     :param name: stub  of name e.g. 'qual'
     :returns: number of failures
     """
-    filename = test_functions.set_up_test(name, 'MATLAB')
+    filename = functions.set_up_test(name, 'MATLAB')
     generate_matlab_files(filename, name)
     fails_here = 0
     for filetype in filetypes:

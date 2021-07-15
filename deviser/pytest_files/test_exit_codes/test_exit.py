@@ -4,7 +4,7 @@ import os
 import pytest
 
 from ... import deviser
-from ...pytest_files import test_functions
+from ...pytest_files import functions
 from ...util import global_variables as gv
 
 
@@ -32,11 +32,11 @@ def test_deviser(name, flag, expected_return):
     """
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, _) = os.path.split(this_dir)
-    test_functions.set_path_to_tests(path_to_tests)
+    functions.set_path_to_tests(path_to_tests)
 
     expected_return_number = gv.return_codes[expected_return]
     error = gv.get_return_code(expected_return_number)
-    filename = test_functions.set_up_test(name, flag, error)
+    filename = functions.set_up_test(name, flag, error)
     args = []
     if flag in ['-g', '-l', 'wrong']:
         args.append('deviser')
