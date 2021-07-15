@@ -54,7 +54,7 @@ def set_up_test(name, class_name, test_case=''):
     print('Testing {0}:{1} {2}'.format(name, class_name, test_case))
     print('====================================================')
     fname = '{0}.xml'.format(name)
-    filename = os.path.join(path_to_tests, 'test_xml_files', fname)
+    filename = os.path.join(path_to_tests, 'xml_files', fname)
     return filename
 
 
