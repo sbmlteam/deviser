@@ -1,6 +1,6 @@
 /**
- * @file TestExtension.h
- * @brief Definition of TestExtension.
+ * @file TestcaseExtension.h
+ * @brief Definition of TestcaseExtension.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
@@ -34,24 +34,24 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class TestExtension
- * @sbmlbrief{test} Base extension class for the package.
+ * @class TestcaseExtension
+ * @sbmlbrief{testcase} Base extension class for the package.
  *
  * @htmlinclude not-sbml-warning.html
  *
- * This is the Test package extension of the SBMLExtension class that is used
- * to facilitate libSBML plug-ins in the implementation of an SBMLLevel&nbsp;3
- * package.
+ * This is the Testcase package extension of the SBMLExtension class that is
+ * used to facilitate libSBML plug-ins in the implementation of an
+ * SBMLLevel&nbsp;3 package.
  *
- * @class TestPkgNamespaces
- * @sbmlbrief{test} SBMLNamespaces extension.
+ * @class TestcasePkgNamespaces
+ * @sbmlbrief{testcase} SBMLNamespaces extension.
  *
  * @htmlinclude not-sbml-warning.html
  */
 
 
-#ifndef TestExtension_H__
-#define TestExtension_H__
+#ifndef TestcaseExtension_H__
+#define TestcaseExtension_H__
 
 
 #include <sbml/common/extern.h>
@@ -65,9 +65,9 @@
 #include <sbml/extension/SBMLExtensionNamespaces.h>
 #include <sbml/extension/SBMLExtensionRegister.h>
 
-#ifndef TEST_CREATE_NS
-#define TEST_CREATE_NS(variable, sbmlns)\
-EXTENSION_CREATE_NS(TestPkgNamespaces, variable, sbmlns);
+#ifndef TESTCASE_CREATE_NS
+#define TESTCASE_CREATE_NS(variable, sbmlns)\
+EXTENSION_CREATE_NS(TestcasePkgNamespaces, variable, sbmlns);
 #endif
 
 #include <vector>
@@ -76,7 +76,7 @@ EXTENSION_CREATE_NS(TestPkgNamespaces, variable, sbmlns);
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 
-class LIBSBML_EXTERN TestExtension : public SBMLExtension
+class LIBSBML_EXTERN TestcaseExtension : public SBMLExtension
 {
 public:
 
@@ -135,46 +135,46 @@ public:
 
 
   /**
-   * Creates a new TestExtension instance.
+   * Creates a new TestcaseExtension instance.
    */
-  TestExtension();
+  TestcaseExtension();
 
 
   /**
-   * Copy constructor for TestExtension.
+   * Copy constructor for TestcaseExtension.
    *
-   * @param orig the TestExtension instance to copy.
+   * @param orig the TestcaseExtension instance to copy.
    */
-  TestExtension(const TestExtension& orig);
+  TestcaseExtension(const TestcaseExtension& orig);
 
 
   /**
-   * Assignment operator for TestExtension.
+   * Assignment operator for TestcaseExtension.
    *
-   * @param rhs the TestExtension object whose values are to be used as the
+   * @param rhs the TestcaseExtension object whose values are to be used as the
    * basis of the assignment.
    */
-  TestExtension& operator=(const TestExtension& rhs);
+  TestcaseExtension& operator=(const TestcaseExtension& rhs);
 
 
   /**
-   * Creates and returns a deep copy of this TestExtension object.
+   * Creates and returns a deep copy of this TestcaseExtension object.
    *
-   * @return a (deep) copy of this TestExtension object.
+   * @return a (deep) copy of this TestcaseExtension object.
    */
-  virtual TestExtension* clone() const;
+  virtual TestcaseExtension* clone() const;
 
 
   /**
-   * Destructor for TestExtension.
+   * Destructor for TestcaseExtension.
    */
-  virtual ~TestExtension();
+  virtual ~TestcaseExtension();
 
 
   /**
-   * Returns the name of this SBML Level&nbsp;3 package ("test").
+   * Returns the name of this SBML Level&nbsp;3 package ("testcase").
    *
-   * @return a string representing the name of this package ("test").
+   * @return a string representing the name of this package ("testcase").
    */
   virtual const std::string& getName() const;
 
@@ -189,7 +189,7 @@ public:
    *
    * @param pkgVersion the version of this package.
    *
-   * @return a string representing the name of this package ("test").
+   * @return a string representing the name of this package ("testcase").
    *
    * The namespace URI constructed by this method corresponds to the
    * combination of the Level and Version of SBML, and the Version of the SBML
@@ -206,7 +206,7 @@ public:
    * Returns the SBML Level for the given URI of this package.
    *
    * @param uri the string of the URI that represents one of the versions of
-   * the "test" package.
+   * the "testcase" package.
    *
    * @return the SBML Level for the given URI of this package, or @c 0 if the
    * given URI is invalid, or for a different package.
@@ -219,7 +219,7 @@ public:
    * package.
    *
    * @param uri the string of the URI that represents one of the versions of
-   * the "test" package.
+   * the "testcase" package.
    *
    * @return the SBML Version within the SBML Level for the given URI of this
    * package, or @c 0 if the given URI is invalid, or for a different package.
@@ -232,7 +232,7 @@ public:
    * package.
    *
    * @param uri the string of the URI that represents one of the versions of
-   * the "test" package.
+   * the "testcase" package.
    *
    * @return the version of the SBML Level&nbsp;3 package for the given URI of
    * this package, or @c 0 if the given URI is invalid, or for a different
@@ -242,29 +242,31 @@ public:
 
 
   /**
-   * Returns a TestPkgNamespaces object.
+   * Returns a TestcasePkgNamespaces object.
    *
    * @param uri the string of the URI that represents one of the versions of
-   * the "test" package.
+   * the "testcase" package.
    *
-   * @return TestPkgNamespaces object corresponding to the given URI of this
-   * package, or @c NULL if the given URI is not defined in the "test" package.
+   * @return TestcasePkgNamespaces object corresponding to the given URI of
+   * this package, or @c NULL if the given URI is not defined in the "testcase"
+   * package.
    */
   virtual SBMLNamespaces* getSBMLExtensionNamespaces(const std::string& uri)
     const;
 
 
   /**
-   * Takes a type code of the &ldquo;test&rdquo; package and returns a string
-   * describing the code.
+   * Takes a type code of the &ldquo;testcase&rdquo; package and returns a
+   * string describing the code.
    *
    * @param typeCode a libSBML type code defined by the libSBML extension
-   * implementing support for the SBML Level&nbsp;3 &ldquo;test&rdquo; package.
+   * implementing support for the SBML Level&nbsp;3 &ldquo;testcase&rdquo;
+   * package.
    *
    * @return a text string representing the type code given by @p typeCode. If
    * the type code is unrecognized for this implementation of the libSBML
-   * &ldquo;test&rdquo; package, the string returned will be <code>"(Unknown
-   * SBML Test Type)"</code>.
+   * &ldquo;testcase&rdquo; package, the string returned will be
+   * <code>"(Unknown SBML Testcase Type)"</code>.
    */
   virtual const char* getStringFromTypeCode(int typeCode) const;
 
@@ -277,7 +279,7 @@ public:
    *
    * @param index an unsigned integer representing the index of the error.
    *
-   * @return packageErrorTableEntry object in the TestSBMLErrorTable.
+   * @return packageErrorTableEntry object in the TestcaseSBMLErrorTable.
    */
   virtual packageErrorTableEntry getErrorTable(unsigned int index) const;
 
@@ -292,7 +294,7 @@ public:
    *
    * @param errorId an unsigned integer representing the errorId of the error.
    *
-   * @return unsigned int representing the index in the TestSBMLErrorTable
+   * @return unsigned int representing the index in the TestcaseSBMLErrorTable
    * corresponding to the errorId given.
    */
   virtual unsigned int getErrorTableIndex(unsigned int errorId) const;
@@ -304,10 +306,10 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Returns the offset for the errorId range for the "test" package.
+   * Returns the offset for the errorId range for the "testcase" package.
    *
    * @return unsigned int representing the offset for errors in the
-   * TestSBMLErrorTable.
+   * TestcaseSBMLErrorTable.
    */
   virtual unsigned int getErrorIdOffset() const;
 
@@ -318,14 +320,14 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Initializes test extension by creating an object of this class with the
-   * required SBasePlugin derived objects and registering the object to the
+   * Initializes testcase extension by creating an object of this class with
+   * the required SBasePlugin derived objects and registering the object to the
    * SBMLExtensionRegistry class
    *
    * This function is automatically invoked when creatingthe following global
-   * object in TestExtension.cpp
+   * object in TestcaseExtension.cpp
    *
-   * static SBMLExtensionRegister<TestExtension> testExtensionRegistry;
+   * static SBMLExtensionRegister<TestcaseExtension> testcaseExtensionRegistry;
    */
   static void init();
 
@@ -338,14 +340,14 @@ public:
  *
  * Required typedef definitions
  *
- * TestPkgNamespace is derived from SBMLNamespaces class and used when creating
- * an object of SBase derived classes defined in the test package
+ * TestcasePkgNamespace is derived from SBMLNamespaces class and used when
+ * creating an object of SBase derived classes defined in the testcase package
  *
- * SBMLExtensionNamespaces<TestExtension> must be instantiated in
- * TestExtension.cpp for DLL
+ * SBMLExtensionNamespaces<TestcaseExtension> must be instantiated in
+ * TestcaseExtension.cpp for DLL
  *
  */
-typedef SBMLExtensionNamespaces<TestExtension> TestPkgNamespaces;
+typedef SBMLExtensionNamespaces<TestcaseExtension> TestcasePkgNamespaces;
 
 
 LIBSBML_CPP_NAMESPACE_END
@@ -362,20 +364,36 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /**
- * @enum SBMLTestTypeCode_t
- * @brief SBMLTestTypeCode_t Enumeration of possible types in the libSBML
- * &ldquo;test&rdquo; package implementation.
+ * @enum SBMLTestcaseTypeCode_t
+ * @brief SBMLTestcaseTypeCode_t Enumeration of possible types in the libSBML
+ * &ldquo;testcase&rdquo; package implementation.
  *
  * @copydetails doc_what_are_typecodes
  *
  * @copydetails doc_additional_typecode_details
  */
+/**
+ * @enum SBMLTestcaseTypeCode_t
+ * @brief Enumeration of values permitted as the value of the "test" attribute
+ * on Sbml objects.
+ *
+ * @if conly
+ * @see Sbml_getTest()
+ * @see Sbml_setTest()
+ * @elseif java
+ * @see Sbml::getTest()
+ * @see Sbml::setTest(long)
+ * @else
+ * @see Sbml::getTest()
+ * @see Sbml::setTest()
+ * @endif
+ */
 typedef enum
 {
-  SBML_TEST_MYBASE         =   100  /*!<MyBase */
-, SBML_TEST_CLASSTWO       =   101  /*!<ClassTwo */
-, SBML_TEST_CLASSTHREE     =   102  /*!<ClassThree */
-} SBMLTestTypeCode_t;
+  SBML_TEST_MYBASE         =   100  /*!< The sbml test is @c "MyBase". */
+, SBML_TEST_CLASSTWO       =   101  /*!< The sbml test is @c "ClassTwo". */
+, SBML_TEST_CLASSTHREE     =   102  /*!< The sbml test is @c "ClassThree". */
+} SBMLTestcaseTypeCode_t;
 
 
 /**
@@ -728,6 +746,4 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
-#endif /* !TestExtension_H__ */
-
-
+#endif /* !TestcaseExtension_H__ */

@@ -35,7 +35,7 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class MyBase
- * @sbmlbrief{test} TODO:Definition of the MyBase class.
+ * @sbmlbrief{testcase} TODO:Definition of the MyBase class.
  */
 
 
@@ -45,7 +45,7 @@
 
 #include <sbml/common/extern.h>
 #include <sbml/common/sbmlfwd.h>
-#include <sbml/packages/test/common/testfwd.h>
+#include <sbml/packages/testcase/common/testcasefwd.h>
 
 
 #ifdef __cplusplus
@@ -55,7 +55,7 @@
 
 
 #include <sbml/SBase.h>
-#include <sbml/packages/test/extension/TestExtension.h>
+#include <sbml/packages/testcase/extension/TestcaseExtension.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
@@ -74,32 +74,33 @@ public:
 
   /**
    * Creates a new MyBase using the given SBML Level, Version and
-   * &ldquo;test&rdquo; package version.
+   * &ldquo;testcase&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this MyBase.
    *
    * @param version an unsigned int, the SBML Version to assign to this MyBase.
    *
-   * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * MyBase.
+   * @param pkgVersion an unsigned int, the SBML Testcase Version to assign to
+   * this MyBase.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  MyBase(unsigned int level = TestExtension::getDefaultLevel(),
-         unsigned int version = TestExtension::getDefaultVersion(),
-         unsigned int pkgVersion = TestExtension::getDefaultPackageVersion());
+  MyBase(unsigned int level = TestcaseExtension::getDefaultLevel(),
+         unsigned int version = TestcaseExtension::getDefaultVersion(),
+         unsigned int pkgVersion =
+           TestcaseExtension::getDefaultPackageVersion());
 
 
   /**
-   * Creates a new MyBase using the given TestPkgNamespaces object.
+   * Creates a new MyBase using the given TestcasePkgNamespaces object.
    *
    * @copydetails doc_what_are_sbml_package_namespaces
    *
-   * @param testns the TestPkgNamespaces object.
+   * @param testcasens the TestcasePkgNamespaces object.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  MyBase(TestPkgNamespaces *testns);
+  MyBase(TestcasePkgNamespaces *testcasens);
 
 
   /**
@@ -190,7 +191,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
-   * @sbmlconstant{SBML_TEST_MYBASE, SBMLTestTypeCode_t}.
+   * @sbmlconstant{SBML_TEST_MYBASE, SBMLTestcaseTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -561,14 +562,14 @@ BEGIN_C_DECLS
 
 /**
  * Creates a new MyBase_t using the given SBML Level, Version and
- * &ldquo;test&rdquo; package version.
+ * &ldquo;testcase&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this MyBase_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this MyBase_t.
  *
- * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
- * MyBase_t.
+ * @param pkgVersion an unsigned int, the SBML Testcase Version to assign to
+ * this MyBase_t.
  *
  * @copydetails doc_note_setting_lv_pkg
  *
@@ -715,5 +716,4 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 #endif /* !MyBase_H__ */
-
 

@@ -34,8 +34,8 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  */
-#include <sbml/packages/test/sbml/MyBase.h>
-#include <sbml/packages/test/validator/TestSBMLError.h>
+#include <sbml/packages/testcase/sbml/MyBase.h>
+#include <sbml/packages/testcase/validator/TestcaseSBMLError.h>
 
 
 using namespace std;
@@ -52,25 +52,26 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 /*
  * Creates a new MyBase using the given SBML Level, Version and
- * &ldquo;test&rdquo; package version.
+ * &ldquo;testcase&rdquo; package version.
  */
 MyBase::MyBase(unsigned int level,
                unsigned int version,
                unsigned int pkgVersion)
   : SBase(level, version)
 {
-  setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
+  setSBMLNamespacesAndOwn(new TestcasePkgNamespaces(level, version,
+    pkgVersion));
 }
 
 
 /*
- * Creates a new MyBase using the given TestPkgNamespaces object.
+ * Creates a new MyBase using the given TestcasePkgNamespaces object.
  */
-MyBase::MyBase(TestPkgNamespaces *testns)
-  : SBase(testns)
+MyBase::MyBase(TestcasePkgNamespaces *testcasens)
+  : SBase(testcasens)
 {
-  setElementNamespace(testns->getURI());
-  loadPlugins(testns);
+  setElementNamespace(testcasens->getURI());
+  loadPlugins(testcasens);
 }
 
 
@@ -544,14 +545,14 @@ MyBase::readAttributes(const XMLAttributes& attributes,
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
-        log->logPackageError("test", TestMyBaseAllowedAttributes, pkgVersion,
-          level, version, details, getLine(), getColumn());
+        log->logPackageError("testcase", TestcaseMyBaseAllowedAttributes,
+          pkgVersion, level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logPackageError("test", TestMyBaseAllowedCoreAttributes,
+        log->logPackageError("testcase", TestcaseMyBaseAllowedCoreAttributes,
           pkgVersion, level, version, details, getLine(), getColumn());
       }
     }
@@ -604,7 +605,7 @@ MyBase::writeAttributes(XMLOutputStream& stream) const
 
 /*
  * Creates a new MyBase_t using the given SBML Level, Version and
- * &ldquo;test&rdquo; package version.
+ * &ldquo;testcase&rdquo; package version.
  */
 LIBSBML_EXTERN
 MyBase_t *
@@ -712,5 +713,3 @@ MyBase_hasRequiredAttributes(const MyBase_t * mb)
 
 
 LIBSBML_CPP_NAMESPACE_END
-
-

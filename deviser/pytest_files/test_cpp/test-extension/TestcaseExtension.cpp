@@ -1,6 +1,6 @@
 /**
- * @file TestExtension.cpp
- * @brief Implementation of TestExtension.
+ * @file TestcaseExtension.cpp
+ * @brief Implementation of TestcaseExtension.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
@@ -39,10 +39,10 @@
 #include <sbml/extension/SBasePluginCreator.h>
 #include <sbml/extension/SBMLDocumentPlugin.h>
 
-#include <sbml/packages/test/extension/TestExtension.h>
-#include <sbml/packages/test/extension/TestSBMLDocumentPlugin.h>
-#include <sbml/packages/test/validator/TestSBMLErrorTable.h>
-#include <sbml/packages/test/extension/TestModelPlugin.h>
+#include <sbml/packages/testcase/extension/TestcaseExtension.h>
+#include <sbml/packages/testcase/extension/TestcaseSBMLDocumentPlugin.h>
+#include <sbml/packages/testcase/validator/TestcaseSBMLErrorTable.h>
+#include <sbml/packages/testcase/extension/TestcaseModelPlugin.h>
 
 
 using namespace std;
@@ -62,9 +62,9 @@ LIBSBML_CPP_NAMESPACE_BEGIN
  * libSBML extension.
  */
 const std::string&
-TestExtension::getPackageName()
+TestcaseExtension::getPackageName()
 {
-  static const std::string pkgName = "test";
+  static const std::string pkgName = "testcase";
   return pkgName;
 }
 
@@ -73,7 +73,7 @@ TestExtension::getPackageName()
  * Returns the default SBML Level implemented by this libSBML extension.
  */
 unsigned int
-TestExtension::getDefaultLevel()
+TestcaseExtension::getDefaultLevel()
 {
   return 3;
 }
@@ -83,7 +83,7 @@ TestExtension::getDefaultLevel()
  * Returns the default SBML Version implemented by this libSBML extension.
  */
 unsigned int
-TestExtension::getDefaultVersion()
+TestcaseExtension::getDefaultVersion()
 {
   return 1;
 }
@@ -94,7 +94,7 @@ TestExtension::getDefaultVersion()
  * this libSBML extension.
  */
 unsigned int
-TestExtension::getDefaultPackageVersion()
+TestcaseExtension::getDefaultPackageVersion()
 {
   return 1;
 }
@@ -105,23 +105,23 @@ TestExtension::getDefaultPackageVersion()
  * by this libSBML extension.
  */
 const std::string&
-TestExtension::getXmlnsL3V1V1()
+TestcaseExtension::getXmlnsL3V1V1()
 {
   static const std::string xmlns =
-    "http://www.sbml.org/sbml/level3/version1/test/version1";
+    "http://www.sbml.org/sbml/level3/version1/testcase/version1";
   return xmlns;
 }
 
 
 /**
  *
- * Adds this TestExtension to the SBMLExtensionRegistry class
+ * Adds this TestcaseExtension to the SBMLExtensionRegistry class
  *
  */
-static SBMLExtensionRegister<TestExtension> testExtensionRegistry;
+static SBMLExtensionRegister<TestcaseExtension> testcaseExtensionRegistry;
 
 static
-const char* SBML_TEST_TYPECODE_STRINGS[] =
+const char* SBML_TESTCASE_TYPECODE_STRINGS[] =
 {
     "MyBase"
   , "ClassTwo"
@@ -131,33 +131,33 @@ const char* SBML_TEST_TYPECODE_STRINGS[] =
 
 /**
  *
- * Instantiate SBMLExtensionNamespaces<TestExtension> for DLL
+ * Instantiate SBMLExtensionNamespaces<TestcaseExtension> for DLL
  *
  */
-template class LIBSBML_EXTERN SBMLExtensionNamespaces<TestExtension>;
+template class LIBSBML_EXTERN SBMLExtensionNamespaces<TestcaseExtension>;
 
 /*
- * Creates a new TestExtension instance.
+ * Creates a new TestcaseExtension instance.
  */
-TestExtension::TestExtension()
+TestcaseExtension::TestcaseExtension()
 {
 }
 
 
 /*
- * Copy constructor for TestExtension.
+ * Copy constructor for TestcaseExtension.
  */
-TestExtension::TestExtension(const TestExtension& orig)
+TestcaseExtension::TestcaseExtension(const TestcaseExtension& orig)
   : SBMLExtension( orig )
 {
 }
 
 
 /*
- * Assignment operator for TestExtension.
+ * Assignment operator for TestcaseExtension.
  */
-TestExtension&
-TestExtension::operator=(const TestExtension& rhs)
+TestcaseExtension&
+TestcaseExtension::operator=(const TestcaseExtension& rhs)
 {
   if (&rhs != this)
   {
@@ -169,28 +169,28 @@ TestExtension::operator=(const TestExtension& rhs)
 
 
 /*
- * Creates and returns a deep copy of this TestExtension object.
+ * Creates and returns a deep copy of this TestcaseExtension object.
  */
-TestExtension*
-TestExtension::clone() const
+TestcaseExtension*
+TestcaseExtension::clone() const
 {
-  return new TestExtension(*this);
+  return new TestcaseExtension(*this);
 }
 
 
 /*
- * Destructor for TestExtension.
+ * Destructor for TestcaseExtension.
  */
-TestExtension::~TestExtension()
+TestcaseExtension::~TestcaseExtension()
 {
 }
 
 
 /*
- * Returns the name of this SBML Level&nbsp;3 package ("test").
+ * Returns the name of this SBML Level&nbsp;3 package ("testcase").
  */
 const std::string&
-TestExtension::getName() const
+TestcaseExtension::getName() const
 {
   return getPackageName();
 }
@@ -201,9 +201,9 @@ TestExtension::getName() const
  * Level&nbsp;3 package.
  */
 const std::string&
-TestExtension::getURI(unsigned int sbmlLevel,
-                      unsigned int sbmlVersion,
-                      unsigned int pkgVersion) const
+TestcaseExtension::getURI(unsigned int sbmlLevel,
+                          unsigned int sbmlVersion,
+                          unsigned int pkgVersion) const
 {
   if (sbmlLevel == 3)
   {
@@ -225,7 +225,7 @@ TestExtension::getURI(unsigned int sbmlLevel,
  * Returns the SBML Level for the given URI of this package.
  */
 unsigned int
-TestExtension::getLevel(const std::string& uri) const
+TestcaseExtension::getLevel(const std::string& uri) const
 {
   if (uri == getXmlnsL3V1V1())
   {
@@ -240,7 +240,7 @@ TestExtension::getLevel(const std::string& uri) const
  * Returns the Version within the SBML Level for the given URI of this package.
  */
 unsigned int
-TestExtension::getVersion(const std::string& uri) const
+TestcaseExtension::getVersion(const std::string& uri) const
 {
   if (uri == getXmlnsL3V1V1())
   {
@@ -256,7 +256,7 @@ TestExtension::getVersion(const std::string& uri) const
  * package.
  */
 unsigned int
-TestExtension::getPackageVersion(const std::string& uri) const
+TestcaseExtension::getPackageVersion(const std::string& uri) const
 {
   if (uri == getXmlnsL3V1V1())
   {
@@ -268,16 +268,16 @@ TestExtension::getPackageVersion(const std::string& uri) const
 
 
 /*
- * Returns a TestPkgNamespaces object.
+ * Returns a TestcasePkgNamespaces object.
  */
 SBMLNamespaces*
-TestExtension::getSBMLExtensionNamespaces(const std::string& uri) const
+TestcaseExtension::getSBMLExtensionNamespaces(const std::string& uri) const
 {
-  TestPkgNamespaces* pkgns = NULL;
+  TestcasePkgNamespaces* pkgns = NULL;
 
   if (uri == getXmlnsL3V1V1())
   {
-    pkgns = new TestPkgNamespaces(3, 1, 1);
+    pkgns = new TestcasePkgNamespaces(3, 1, 1);
   }
 
   return pkgns;
@@ -285,21 +285,21 @@ TestExtension::getSBMLExtensionNamespaces(const std::string& uri) const
 
 
 /*
- * Takes a type code of the &ldquo;test&rdquo; package and returns a string
+ * Takes a type code of the &ldquo;testcase&rdquo; package and returns a string
  * describing the code.
  */
 const char*
-TestExtension::getStringFromTypeCode(int typeCode) const
+TestcaseExtension::getStringFromTypeCode(int typeCode) const
 {
   int min = SBML_TEST_MYBASE;
   int max = SBML_TEST_CLASSTHREE;
 
   if (typeCode < min || typeCode > max)
   {
-    return "(Unknown SBML Test Type)";
+    return "(Unknown SBML Testcase Type)";
   }
 
-  return SBML_TEST_TYPECODE_STRINGS[typeCode - min];
+  return SBML_TESTCASE_TYPECODE_STRINGS[typeCode - min];
 }
 
 
@@ -310,9 +310,9 @@ TestExtension::getStringFromTypeCode(int typeCode) const
  * Returns the entry in the error table at this index.
  */
 packageErrorTableEntry
-TestExtension::getErrorTable(unsigned int index) const
+TestcaseExtension::getErrorTable(unsigned int index) const
 {
-  return testErrorTable[index];
+  return testcaseErrorTable[index];
 }
 
 /** @endcond */
@@ -325,14 +325,15 @@ TestExtension::getErrorTable(unsigned int index) const
  * Return the index in the error table with the given errorId.
  */
 unsigned int
-TestExtension::getErrorTableIndex(unsigned int errorId) const
+TestcaseExtension::getErrorTableIndex(unsigned int errorId) const
 {
-  unsigned int tableSize = sizeof(testErrorTable)/sizeof(testErrorTable[0]);
+  unsigned int tableSize =
+    sizeof(testcaseErrorTable)/sizeof(testcaseErrorTable[0]);
   unsigned int index = 0;
 
   for (unsigned int i = 0; i < tableSize; i++)
   {
-    if (errorId == testErrorTable[i].code)
+    if (errorId == testcaseErrorTable[i].code)
     {
       index = i;
       break;
@@ -349,10 +350,10 @@ TestExtension::getErrorTableIndex(unsigned int errorId) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Returns the offset for the errorId range for the "test" package.
+ * Returns the offset for the errorId range for the "testcase" package.
  */
 unsigned int
-TestExtension::getErrorIdOffset() const
+TestcaseExtension::getErrorIdOffset() const
 {
   return 10000000;
 }
@@ -364,19 +365,19 @@ TestExtension::getErrorIdOffset() const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Initializes test extension by creating an object of this class with the
+ * Initializes testcase extension by creating an object of this class with the
  * required SBasePlugin derived objects and registering the object to the
  * SBMLExtensionRegistry class
  */
 void
-TestExtension::init()
+TestcaseExtension::init()
 {
   if (SBMLExtensionRegistry::getInstance().isRegistered(getPackageName()))
   {
     return;
   }
 
-  TestExtension testExtension;
+  TestcaseExtension testcaseExtension;
 
 
   std::vector<std::string> packageURIs;
@@ -386,15 +387,15 @@ TestExtension::init()
   SBaseExtensionPoint sbmldocExtPoint("core", SBML_DOCUMENT);
   SBaseExtensionPoint modelExtPoint("core", SBML_MODEL);
 
-  SBasePluginCreator<TestSBMLDocumentPlugin, TestExtension>
+  SBasePluginCreator<TestcaseSBMLDocumentPlugin, TestcaseExtension>
     sbmldocPluginCreator(sbmldocExtPoint, packageURIs);
-  SBasePluginCreator<TestModelPlugin, TestExtension>
+  SBasePluginCreator<TestcaseModelPlugin, TestcaseExtension>
     modelPluginCreator(modelExtPoint, packageURIs);
 
-  testExtension.addSBasePluginCreator(&sbmldocPluginCreator);
-  testExtension.addSBasePluginCreator(&modelPluginCreator);
+  testcaseExtension.addSBasePluginCreator(&sbmldocPluginCreator);
+  testcaseExtension.addSBasePluginCreator(&modelPluginCreator);
 
-  SBMLExtensionRegistry::getInstance().addExtension(&testExtension);
+  SBMLExtensionRegistry::getInstance().addExtension(&testcaseExtension);
 }
 
 /** @endcond */
@@ -665,5 +666,3 @@ ExtraLong_isValidString(const char* code)
 
 
 LIBSBML_CPP_NAMESPACE_END
-
-

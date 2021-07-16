@@ -35,7 +35,7 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class ListOfClassTwos
- * @sbmlbrief{test} TODO:Definition of the ListOfClassTwos class.
+ * @sbmlbrief{testcase} TODO:Definition of the ListOfClassTwos class.
  */
 
 
@@ -45,7 +45,7 @@
 
 #include <sbml/common/extern.h>
 #include <sbml/common/sbmlfwd.h>
-#include <sbml/packages/test/common/testfwd.h>
+#include <sbml/packages/testcase/common/testcasefwd.h>
 
 
 #ifdef __cplusplus
@@ -55,8 +55,8 @@
 
 
 #include <sbml/ListOf.h>
-#include <sbml/packages/test/extension/TestExtension.h>
-#include <sbml/packages/test/sbml/ClassTwo.h>
+#include <sbml/packages/testcase/extension/TestcaseExtension.h>
+#include <sbml/packages/testcase/sbml/ClassTwo.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
@@ -69,7 +69,7 @@ public:
 
   /**
    * Creates a new ListOfClassTwos using the given SBML Level, Version and
-   * &ldquo;test&rdquo; package version.
+   * &ldquo;testcase&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
    * ListOfClassTwos.
@@ -77,27 +77,29 @@ public:
    * @param version an unsigned int, the SBML Version to assign to this
    * ListOfClassTwos.
    *
-   * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * ListOfClassTwos.
+   * @param pkgVersion an unsigned int, the SBML Testcase Version to assign to
+   * this ListOfClassTwos.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  ListOfClassTwos(unsigned int level = TestExtension::getDefaultLevel(),
-                  unsigned int version = TestExtension::getDefaultVersion(),
+  ListOfClassTwos(unsigned int level = TestcaseExtension::getDefaultLevel(),
+                  unsigned int version =
+                    TestcaseExtension::getDefaultVersion(),
                   unsigned int pkgVersion =
-                    TestExtension::getDefaultPackageVersion());
+                    TestcaseExtension::getDefaultPackageVersion());
 
 
   /**
-   * Creates a new ListOfClassTwos using the given TestPkgNamespaces object.
+   * Creates a new ListOfClassTwos using the given TestcasePkgNamespaces
+   * object.
    *
    * @copydetails doc_what_are_sbml_package_namespaces
    *
-   * @param testns the TestPkgNamespaces object.
+   * @param testcasens the TestcasePkgNamespaces object.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  ListOfClassTwos(TestPkgNamespaces *testns);
+  ListOfClassTwos(TestcasePkgNamespaces *testcasens);
 
 
   /**
@@ -346,7 +348,7 @@ public:
    *
    * @return the SBML typecode for the objects contained in this
    * ListOfClassTwos:
-   * @sbmlconstant{SBML_TEST_CLASSTWO, SBMLTestTypeCode_t}.
+   * @sbmlconstant{SBML_TEST_CLASSTWO, SBMLTestcaseTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -502,5 +504,3 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 #endif /* !ListOfClassTwos_H__ */
-
-

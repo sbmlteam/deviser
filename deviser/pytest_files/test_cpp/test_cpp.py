@@ -153,7 +153,7 @@ def test_cpp(name, num, class_name, list_of, test_case):
     ('qual', 'qualfwd', 'forward declarations', 2),
     ('groups', 'GroupsExtension', 'basic extension file', 0),
     ('test_vers', 'VersExtension', 'multi version extension file', 0),
-    ('base_class', 'TestExtension', 'default typecodes extension file', 0),
+    ('base_class', 'TestcaseExtension', 'default typecodes extension file', 0),
     ('test_core_vers', 'CoreversExtension', 'core version extension file', 0),
     ('test_core_vers_pkg', 'CoreverspkgExtension',
      'core version and package version not 1 extension file', 0),

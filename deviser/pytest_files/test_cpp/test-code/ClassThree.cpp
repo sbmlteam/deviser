@@ -34,8 +34,8 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  */
-#include <sbml/packages/test/sbml/ClassThree.h>
-#include <sbml/packages/test/validator/TestSBMLError.h>
+#include <sbml/packages/testcase/sbml/ClassThree.h>
+#include <sbml/packages/testcase/validator/TestcaseSBMLError.h>
 
 
 using namespace std;
@@ -52,7 +52,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 /*
  * Creates a new ClassThree using the given SBML Level, Version and
- * &ldquo;test&rdquo; package version.
+ * &ldquo;testcase&rdquo; package version.
  */
 ClassThree::ClassThree(unsigned int level,
                        unsigned int version,
@@ -63,22 +63,23 @@ ClassThree::ClassThree(unsigned int level,
   , mOtherNum (TEST_ENUM_INVALID)
   , mLongEnum (TEST_EXTRALONG_INVALID)
 {
-  setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
+  setSBMLNamespacesAndOwn(new TestcasePkgNamespaces(level, version,
+    pkgVersion));
 }
 
 
 /*
- * Creates a new ClassThree using the given TestPkgNamespaces object.
+ * Creates a new ClassThree using the given TestcasePkgNamespaces object.
  */
-ClassThree::ClassThree(TestPkgNamespaces *testns)
-  : SBase(testns)
+ClassThree::ClassThree(TestcasePkgNamespaces *testcasens)
+  : SBase(testcasens)
   , mNumber (TEST_ENUM_INVALID)
   , mBadName (TEST_FRED_INVALID)
   , mOtherNum (TEST_ENUM_INVALID)
   , mLongEnum (TEST_EXTRALONG_INVALID)
 {
-  setElementNamespace(testns->getURI());
-  loadPlugins(testns);
+  setElementNamespace(testcasens->getURI());
+  loadPlugins(testcasens);
 }
 
 
@@ -989,15 +990,16 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
-        log->logPackageError("test", TestClassThreeAllowedAttributes,
+        log->logPackageError("testcase", TestcaseClassThreeAllowedAttributes,
           pkgVersion, level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logPackageError("test", TestClassThreeAllowedCoreAttributes,
-          pkgVersion, level, version, details, getLine(), getColumn());
+        log->logPackageError("testcase",
+          TestcaseClassThreeAllowedCoreAttributes, pkgVersion, level, version,
+            details, getLine(), getColumn());
       }
     }
   }
@@ -1030,8 +1032,9 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
 
         msg += "is '" + number + "', which is not a valid option.";
 
-        log->logPackageError("test", TestClassThreeNumberMustBeEnumEnum,
-          pkgVersion, level, version, msg, getLine(), getColumn());
+        log->logPackageError("testcase",
+          TestcaseClassThreeNumberMustBeEnumEnum, pkgVersion, level, version,
+            msg, getLine(), getColumn());
       }
     }
   }
@@ -1039,9 +1042,9 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
   {
     if (log)
     {
-      std::string message = "Test attribute 'number' is missing.";
-      log->logPackageError("test", TestClassThreeAllowedAttributes, pkgVersion,
-        level, version, message, getLine(), getColumn());
+      std::string message = "Testcase attribute 'number' is missing.";
+      log->logPackageError("testcase", TestcaseClassThreeAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -1073,7 +1076,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
 
         msg += "is '" + name + "', which is not a valid option.";
 
-        log->logPackageError("test", TestClassThreeNameMustBeFredEnum,
+        log->logPackageError("testcase", TestcaseClassThreeNameMustBeFredEnum,
           pkgVersion, level, version, msg, getLine(), getColumn());
       }
     }
@@ -1082,9 +1085,9 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
   {
     if (log)
     {
-      std::string message = "Test attribute 'name' is missing.";
-      log->logPackageError("test", TestClassThreeAllowedAttributes, pkgVersion,
-        level, version, message, getLine(), getColumn());
+      std::string message = "Testcase attribute 'name' is missing.";
+      log->logPackageError("testcase", TestcaseClassThreeAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -1116,8 +1119,9 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
 
         msg += "is '" + badName + "', which is not a valid option.";
 
-        log->logPackageError("test", TestClassThreeBadNameMustBeFredEnum,
-          pkgVersion, level, version, msg, getLine(), getColumn());
+        log->logPackageError("testcase",
+          TestcaseClassThreeBadNameMustBeFredEnum, pkgVersion, level, version,
+            msg, getLine(), getColumn());
       }
     }
   }
@@ -1150,8 +1154,9 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
 
         msg += "is '" + otherNum + "', which is not a valid option.";
 
-        log->logPackageError("test", TestClassThreeOtherNumMustBeEnumEnum,
-          pkgVersion, level, version, msg, getLine(), getColumn());
+        log->logPackageError("testcase",
+          TestcaseClassThreeOtherNumMustBeEnumEnum, pkgVersion, level, version,
+            msg, getLine(), getColumn());
       }
     }
   }
@@ -1184,8 +1189,9 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
 
         msg += "is '" + longEnum + "', which is not a valid option.";
 
-        log->logPackageError("test", TestClassThreeLongEnumMustBeExtraLongEnum,
-          pkgVersion, level, version, msg, getLine(), getColumn());
+        log->logPackageError("testcase",
+          TestcaseClassThreeLongEnumMustBeExtraLongEnum, pkgVersion, level,
+            version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1244,7 +1250,7 @@ ClassThree::writeAttributes(XMLOutputStream& stream) const
 
 /*
  * Creates a new ClassThree_t using the given SBML Level, Version and
- * &ldquo;test&rdquo; package version.
+ * &ldquo;testcase&rdquo; package version.
  */
 LIBSBML_EXTERN
 ClassThree_t *
@@ -1663,5 +1669,3 @@ ClassThree_hasRequiredAttributes(const ClassThree_t * ct)
 
 
 LIBSBML_CPP_NAMESPACE_END
-
-

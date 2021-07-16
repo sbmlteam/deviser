@@ -35,7 +35,7 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class ClassThree
- * @sbmlbrief{test} TODO:Definition of the ClassThree class.
+ * @sbmlbrief{testcase} TODO:Definition of the ClassThree class.
  */
 
 /**
@@ -54,7 +54,7 @@
  * explanation
  *
  * In the SBML
- * Level&nbsp;3 Version&nbsp;1 Test specification, the following are the
+ * Level&nbsp;3 Version&nbsp;1 Testcase specification, the following are the
  * allowable values for "number":
  * <ul>
  * <li> @c "One", TODO:add description
@@ -69,7 +69,7 @@
  * The attribute "name" on a ClassThree object is used to TODO:add explanation
  *
  * In the SBML
- * Level&nbsp;3 Version&nbsp;1 Test specification, the following are the
+ * Level&nbsp;3 Version&nbsp;1 Testcase specification, the following are the
  * allowable values for "name":
  * <ul>
  * <li> @c "tom", TODO:add description
@@ -85,7 +85,7 @@
  * explanation
  *
  * In the SBML
- * Level&nbsp;3 Version&nbsp;1 Test specification, the following are the
+ * Level&nbsp;3 Version&nbsp;1 Testcase specification, the following are the
  * allowable values for "badName":
  * <ul>
  * <li> @c "tom", TODO:add description
@@ -101,7 +101,7 @@
  * explanation
  *
  * In the SBML
- * Level&nbsp;3 Version&nbsp;1 Test specification, the following are the
+ * Level&nbsp;3 Version&nbsp;1 Testcase specification, the following are the
  * allowable values for "otherNum":
  * <ul>
  * <li> @c "One", TODO:add description
@@ -117,7 +117,7 @@
  * explanation
  *
  * In the SBML
- * Level&nbsp;3 Version&nbsp;1 Test specification, the following are the
+ * Level&nbsp;3 Version&nbsp;1 Testcase specification, the following are the
  * allowable values for "longEnum":
  * <ul>
  * <li> @c "http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3", TODO:add description
@@ -134,7 +134,7 @@
 
 #include <sbml/common/extern.h>
 #include <sbml/common/sbmlfwd.h>
-#include <sbml/packages/test/common/testfwd.h>
+#include <sbml/packages/testcase/common/testcasefwd.h>
 
 
 #ifdef __cplusplus
@@ -144,7 +144,7 @@
 
 
 #include <sbml/SBase.h>
-#include <sbml/packages/test/extension/TestExtension.h>
+#include <sbml/packages/testcase/extension/TestcaseExtension.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
@@ -167,34 +167,34 @@ public:
 
   /**
    * Creates a new ClassThree using the given SBML Level, Version and
-   * &ldquo;test&rdquo; package version.
+   * &ldquo;testcase&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this ClassThree.
    *
    * @param version an unsigned int, the SBML Version to assign to this
    * ClassThree.
    *
-   * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * ClassThree.
+   * @param pkgVersion an unsigned int, the SBML Testcase Version to assign to
+   * this ClassThree.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  ClassThree(unsigned int level = TestExtension::getDefaultLevel(),
-             unsigned int version = TestExtension::getDefaultVersion(),
+  ClassThree(unsigned int level = TestcaseExtension::getDefaultLevel(),
+             unsigned int version = TestcaseExtension::getDefaultVersion(),
              unsigned int pkgVersion =
-               TestExtension::getDefaultPackageVersion());
+               TestcaseExtension::getDefaultPackageVersion());
 
 
   /**
-   * Creates a new ClassThree using the given TestPkgNamespaces object.
+   * Creates a new ClassThree using the given TestcasePkgNamespaces object.
    *
    * @copydetails doc_what_are_sbml_package_namespaces
    *
-   * @param testns the TestPkgNamespaces object.
+   * @param testcasens the TestcasePkgNamespaces object.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  ClassThree(TestPkgNamespaces *testns);
+  ClassThree(TestcasePkgNamespaces *testcasens);
 
 
   /**
@@ -666,7 +666,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
-   * @sbmlconstant{SBML_TEST_CLASSTHREE, SBMLTestTypeCode_t}.
+   * @sbmlconstant{SBML_TEST_CLASSTHREE, SBMLTestcaseTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -1042,15 +1042,15 @@ BEGIN_C_DECLS
 
 /**
  * Creates a new ClassThree_t using the given SBML Level, Version and
- * &ldquo;test&rdquo; package version.
+ * &ldquo;testcase&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this ClassThree_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
  * ClassThree_t.
  *
- * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
- * ClassThree_t.
+ * @param pkgVersion an unsigned int, the SBML Testcase Version to assign to
+ * this ClassThree_t.
  *
  * @copydetails doc_note_setting_lv_pkg
  *

@@ -34,8 +34,8 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  */
-#include <sbml/packages/test/sbml/ListOfClassTwos.h>
-#include <sbml/packages/test/validator/TestSBMLError.h>
+#include <sbml/packages/testcase/sbml/ListOfClassTwos.h>
+#include <sbml/packages/testcase/validator/TestcaseSBMLError.h>
 
 
 using namespace std;
@@ -52,24 +52,25 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 /*
  * Creates a new ListOfClassTwos using the given SBML Level, Version and
- * &ldquo;test&rdquo; package version.
+ * &ldquo;testcase&rdquo; package version.
  */
 ListOfClassTwos::ListOfClassTwos(unsigned int level,
                                  unsigned int version,
                                  unsigned int pkgVersion)
   : ListOf(level, version)
 {
-  setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
+  setSBMLNamespacesAndOwn(new TestcasePkgNamespaces(level, version,
+    pkgVersion));
 }
 
 
 /*
- * Creates a new ListOfClassTwos using the given TestPkgNamespaces object.
+ * Creates a new ListOfClassTwos using the given TestcasePkgNamespaces object.
  */
-ListOfClassTwos::ListOfClassTwos(TestPkgNamespaces *testns)
-  : ListOf(testns)
+ListOfClassTwos::ListOfClassTwos(TestcasePkgNamespaces *testcasens)
+  : ListOf(testcasens)
 {
-  setElementNamespace(testns->getURI());
+  setElementNamespace(testcasens->getURI());
 }
 
 
@@ -247,9 +248,9 @@ ListOfClassTwos::createClassTwo()
 
   try
   {
-    TEST_CREATE_NS(testns, getSBMLNamespaces());
-    ct = new ClassTwo(testns);
-    delete testns;
+    TESTCASE_CREATE_NS(testcasens, getSBMLNamespaces());
+    ct = new ClassTwo(testcasens);
+    delete testcasens;
   }
   catch (...)
   {
@@ -307,15 +308,15 @@ ListOfClassTwos::createObject(XMLInputStream& stream)
 {
   const std::string& name = stream.peek().getName();
   SBase* object = NULL;
-  TEST_CREATE_NS(testns, getSBMLNamespaces());
+  TESTCASE_CREATE_NS(testcasens, getSBMLNamespaces());
 
   if (name == "classTwo")
   {
-    object = new ClassTwo(testns);
+    object = new ClassTwo(testcasens);
     appendAndOwn(object);
   }
 
-  delete testns;
+  delete testcasens;
   return object;
 }
 
@@ -396,5 +397,3 @@ ListOfClassTwos_removeById(ListOf_t* lo, const char* sid)
 
 
 LIBSBML_CPP_NAMESPACE_END
-
-

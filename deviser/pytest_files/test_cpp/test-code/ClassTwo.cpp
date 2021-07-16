@@ -34,9 +34,9 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  */
-#include <sbml/packages/test/sbml/ClassTwo.h>
-#include <sbml/packages/test/sbml/ListOfClassTwos.h>
-#include <sbml/packages/test/validator/TestSBMLError.h>
+#include <sbml/packages/testcase/sbml/ClassTwo.h>
+#include <sbml/packages/testcase/sbml/ListOfClassTwos.h>
+#include <sbml/packages/testcase/validator/TestcaseSBMLError.h>
 
 
 using namespace std;
@@ -53,25 +53,26 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 /*
  * Creates a new ClassTwo using the given SBML Level, Version and
- * &ldquo;test&rdquo; package version.
+ * &ldquo;testcase&rdquo; package version.
  */
 ClassTwo::ClassTwo(unsigned int level,
                    unsigned int version,
                    unsigned int pkgVersion)
   : SBase(level, version)
 {
-  setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
+  setSBMLNamespacesAndOwn(new TestcasePkgNamespaces(level, version,
+    pkgVersion));
 }
 
 
 /*
- * Creates a new ClassTwo using the given TestPkgNamespaces object.
+ * Creates a new ClassTwo using the given TestcasePkgNamespaces object.
  */
-ClassTwo::ClassTwo(TestPkgNamespaces *testns)
-  : SBase(testns)
+ClassTwo::ClassTwo(TestcasePkgNamespaces *testcasens)
+  : SBase(testcasens)
 {
-  setElementNamespace(testns->getURI());
-  loadPlugins(testns);
+  setElementNamespace(testcasens->getURI());
+  loadPlugins(testcasens);
 }
 
 
@@ -417,7 +418,7 @@ ClassTwo::unsetAttribute(const std::string& attributeName)
 
 /*
  * Creates a new ClassTwo_t using the given SBML Level, Version and
- * &ldquo;test&rdquo; package version.
+ * &ldquo;testcase&rdquo; package version.
  */
 LIBSBML_EXTERN
 ClassTwo_t *
@@ -464,5 +465,3 @@ ClassTwo_free(ClassTwo_t* ct)
 
 
 LIBSBML_CPP_NAMESPACE_END
-
-
