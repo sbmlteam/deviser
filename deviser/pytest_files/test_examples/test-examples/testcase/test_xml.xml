@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml level="3" testcase:required="false" version="1" xmlns="http://www.sbml.org/sbml/level3/version1/core" xmlns:testcase="http://www.sbml.org/sbml/level3/version1/testcase/version1">
+    <model>
+        <testcase:myBase testcase:id="someString"/>
+        <testcase:listOfClassTwos>
+            <testcase:classTwo/>
+        </testcase:listOfClassTwos>
+    </model>
+</sbml>
+

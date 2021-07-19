@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="testcase" fullname="testAttributes" number="100" offset="10000000" version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1">
+      <elements>
+        <element name="MyBase" typeCode="SBML_TEST_MYBASE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+          <attributes>
+            <attribute name="id" required="false" type="string" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="classTwo" typeCode="SBML_TEST_CLASSTWO" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false"/>
+        <element name="ClassThree" typeCode="SBML_TEST_CLASSTHREE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+          <attributes>
+            <attribute name="number" required="true" type="enum" element="enum" abstract="false"/>
+            <attribute name="name" required="true" type="enum" element="Fred_t" abstract="false"/>
+            <attribute name="badName" required="false" type="enum" element="fred" abstract="false"/>
+            <attribute name="otherNum" required="false" type="enum" element="Enum_t" abstract="false"/>
+            <attribute name="longEnum" required="false" type="enum" element="ExtraLong_t" abstract="false"/>
+          </attributes>
+        </element>
+      </elements>
+      <plugins>
+        <plugin extensionPoint="Model">
+          <references>
+            <reference name="ListOfclassTwos"/>
+            <reference name="MyBase"/>
+          </references>
+        </plugin>
+      </plugins>
+      <enums>
+        <enum name="enum">
+          <enumValues>
+            <enumValue name="TEST_ENUM_ONE" value="One"/>
+            <enumValue name="TEST_ENUM_TWO" value="Two"/>
+          </enumValues>
+        </enum>
+        <enum name="Fred_t">
+          <enumValues>
+            <enumValue name="TEST_FRED_T_TOM" value="tom"/>
+            <enumValue name="TEST_FRED_T_DICK" value="dick"/>
+          </enumValues>
+        </enum>
+        <enum name="ExtraLong_t">
+          <enumValues>
+            <enumValue name="TEST_EXTRALONG_FRANK" value="http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3"/>
+            <enumValue name="TEST_EXTRALONG_SARAH" value="sarahasdfghjklkjhgfdsasdfghjhjklqwertyqwrtyhgfdssfghkjakakalkalklpoiutytrewhhhhhhhsshshshshshhshshhshhshhsssssssssssaaevenlongerlongerlongeraZ"/>
+          </enumValues>
+        </enum>
+      </enums>
+    </pkgVersion>
+  </versions>
+</package>
