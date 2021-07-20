@@ -48,12 +48,9 @@
 
 import sys
 
-try:
-    from .util import generateLatex, generateCode, global_variables as gv
-except:
-    from .util import global_variables as gv
-    gv.code_returned = gv.return_codes['unknown error - please report']
-#from legacy import run
+
+from deviser.util import generateLatex, generateCode, global_variables as gv
+
 
 def generatePackageFor(filename):
     """This function generates a libSBML extension for the given filename
@@ -64,12 +61,6 @@ def generatePackageFor(filename):
     to add libSBML support for the package.
     """
     generateCode.generate_code_for(filename, True)
-
-
-#def generateLegacyPackageFor(filename):
-#    """This function generates a libSBML extension for the given filename
-#       using the legacy code"""
-#    run.generatePackageForFile(filename)
 
 
 def generateLaTeXFor(filename):
