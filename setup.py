@@ -7,7 +7,7 @@ setup(
     packages=find_packages(),
     entry_points={  # Optional
         'console_scripts': [
-            'deviser=deviser:main',
+            'deviser=deviser.deviser:main',
         ],
     },
     url='',

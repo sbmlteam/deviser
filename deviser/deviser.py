@@ -74,14 +74,14 @@ def generateLaTeXFor(filename):
     generateLatex.generateLatexFor(filename)
 
 
-def main(args):
+def main():
     """Usage: deviser  [--generate | --latex ] input-filename
 
        This program will use a Deviser xml file, and generate either a C++
        libSBML extension for it, or generate a LaTeX scaffold for its
        specification.
     """
-
+    args = sys.argv
     # reset the global return code as this is a new call to deviser
     gv.code_returned = gv.return_codes['success']
 
@@ -109,7 +109,7 @@ def main(args):
 if __name__ == '__main__':
     if gv.code_returned == gv.return_codes['success']:
         try:
-            main(sys.argv)
+            main()
             sys.exit(gv.code_returned)
         except Exception as ex:
             print('\nAn exception was raised while running deviser: \"{}\"'.format(ex))
