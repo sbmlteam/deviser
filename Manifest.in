@@ -1,0 +1,9 @@
+include MANIFEST.in
+include setup.py
+include *.h
+include *.cpp
+include *.txt
+include *.md
+include *.cmake
+
+recursive-include deviser *.h *.cpp *.txt *.md *.cmake

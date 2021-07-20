@@ -5,6 +5,7 @@ setup(
     name='deviser',
     version='2.0',
     packages=find_packages(),
+    include_package_data=True,
     entry_points={  # Optional
         'console_scripts': [
             'deviser=deviser.deviser:main',
