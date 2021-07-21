@@ -49,6 +49,9 @@
 import sys
 
 
+from deviser.util import generateLatex, generateCode, global_variables as gv
+
+
 def generatePackageFor(filename):
     """This function generates a libSBML extension for the given filename
 
@@ -57,7 +60,6 @@ def generatePackageFor(filename):
     libSBML code that can be integrated with the existing libSBML source tree
     to add libSBML support for the package.
     """
-    from deviser.util import generateCode
     generateCode.generate_code_for(filename, True)
 
 
@@ -69,7 +71,6 @@ def generateLaTeXFor(filename):
     files for the package based on the LaTeX style SBMLPkgSpec for
     SBML Level 3 package documentation.
     """
-    from deviser.util import generateLatex
     generateLatex.generateLatexFor(filename)
 
 
@@ -83,37 +84,36 @@ def main(args=None):
     if args is None:
       args = sys.argv
     # reset the global return code as this is a new call to deviser
-#    gv.code_returned = gv.return_codes['success']
+    gv.code_returned = gv.return_codes['success']
 
     if len(args) != 3:  # TODO: there could also be too many args (>3)!
-#        gv.code_returned = gv.return_codes['missing function argument']
+        gv.code_returned = gv.return_codes['missing function argument']
         print(main.__doc__)
 
-#     if gv.code_returned == gv.return_codes['success']:
-#
-#         operation = args[1].lower()
-#         filename = args[2]
-#
-# #        if operation == '--legacy' or operation == '-gl':
-# #            generateLegacyPackageFor(filename)
-#         if operation == '--generate' or operation == '-g':
-#             generatePackageFor(filename)
-#         elif operation == '--latex' or operation == '-l':
-#             generateLaTeXFor(filename)
-#         else:
-#             gv.code_returned = gv.return_codes['invalid function arguments']
-#             print(main.__doc__)
-#
-#     return gv.code_returned
+    if gv.code_returned == gv.return_codes['success']:
+
+        operation = args[1].lower()
+        filename = args[2]
+
+#        if operation == '--legacy' or operation == '-gl':
+#            generateLegacyPackageFor(filename)
+        if operation == '--generate' or operation == '-g':
+            generatePackageFor(filename)
+        elif operation == '--latex' or operation == '-l':
+            generateLaTeXFor(filename)
+        else:
+            gv.code_returned = gv.return_codes['invalid function arguments']
+            print(main.__doc__)
+
+    return gv.code_returned
 
 if __name__ == '__main__':
-    main()
-    # if gv.code_returned == gv.return_codes['success']:
-    #     try:
-    #         main()
-    #         sys.exit(gv.code_returned)
-    #     except Exception as ex:
-    #         print('\nAn exception was raised while running deviser: \"{}\"'.format(ex))
-    #         sys.exit(gv.code_returned)
-    # else:
-    #     sys.exit(gv.code_returned)
+    if gv.code_returned == gv.return_codes['success']:
+        try:
+            main()
+            sys.exit(gv.code_returned)
+        except Exception as ex:
+            print('\nAn exception was raised while running deviser: \"{}\"'.format(ex))
+            sys.exit(gv.code_returned)
+    else:
+        sys.exit(gv.code_returned)
