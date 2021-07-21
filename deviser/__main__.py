@@ -2,6 +2,8 @@ import sys
 
 from deviser.util import global_variables as gv
 from deviser import generateLaTeXFor, generatePackageFor
+
+
 def main(args):
     """Usage: deviser  [--generate | --latex ] input-filename
 
@@ -31,6 +33,7 @@ def main(args):
             print(main.__doc__)
 
     return gv.code_returned
+
 
 if __name__ == '__main__':
     if gv.code_returned == gv.return_codes['success']:
