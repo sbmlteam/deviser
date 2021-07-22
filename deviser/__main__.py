@@ -24,7 +24,7 @@ def generateLaTeXFor(filename):
     generateLatex.generateLatexFor(filename)
 
 
-def main(args):
+def run_generation(args):
     """Usage: deviser  [--generate | --latex ] input-filename
 
        This program will use a Deviser xml file, and generate either a C++
@@ -37,7 +37,7 @@ def main(args):
 
     if len(args) != 3:  # TODO: there could also be too many args (>3)!
         gv.code_returned = gv.return_codes['missing function argument']
-        print(main.__doc__)
+        print(run_generation.__doc__)
 
     if gv.code_returned == gv.return_codes['success']:
 
@@ -50,10 +50,13 @@ def main(args):
             generateLaTeXFor(filename)
         else:
             gv.code_returned = gv.return_codes['invalid function arguments']
-            print(main.__doc__)
+            print(run_generation.__doc__)
 
     return gv.code_returned
 
+
+def main(args):
+    return run_generation(args)
 
 if __name__ == '__main__':
     if gv.code_returned == gv.return_codes['success']:

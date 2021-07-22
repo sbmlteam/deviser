@@ -53,7 +53,6 @@ from deviser.util import global_variables as gv
 from deviser.__main__ import generateLaTeXFor, generatePackageFor
 
 
-
 def main(args=None):
     """Usage: deviser  [--generate | --latex ] input-filename
 
@@ -75,8 +74,6 @@ def main(args=None):
         operation = args[1].lower()
         filename = args[2]
 
-#        if operation == '--legacy' or operation == '-gl':
-#            generateLegacyPackageFor(filename)
         if operation == '--generate' or operation == '-g':
             generatePackageFor(filename)
         elif operation == '--latex' or operation == '-l':
@@ -86,6 +83,7 @@ def main(args=None):
             print(main.__doc__)
 
     return gv.code_returned
+
 
 if __name__ == '__main__':
     if gv.code_returned == gv.return_codes['success']:

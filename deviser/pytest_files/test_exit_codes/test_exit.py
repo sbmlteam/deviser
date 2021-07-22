@@ -3,9 +3,9 @@
 import os
 import pytest
 
-from ... import deviser
 from ...pytest_files import functions
 from ...util import global_variables as gv
+from deviser.__main__ import run_generation
 
 
 @pytest.mark.parametrize("name, flag, expected_return", [
@@ -47,6 +47,6 @@ def test_deviser(name, flag, expected_return):
         args.append(filename)
     else:
         raise Exception
+    run_generation(args)
 
-    deviser.main(args)
     assert gv.code_returned == expected_return_number
