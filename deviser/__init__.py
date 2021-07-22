@@ -37,4 +37,4 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from .deviser import *
+from deviser import *

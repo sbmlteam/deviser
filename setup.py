@@ -8,7 +8,8 @@ setup(
     include_package_data=True,
     entry_points={  # Optional
         'console_scripts': [
-            'deviser=deviser.deviser:main',
+            'deviser=deviser.exit()'
+            'deviser:main',
         ],
     },
     url='',

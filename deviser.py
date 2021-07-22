@@ -49,29 +49,9 @@
 import sys
 
 
-from deviser.util import generateLatex, generateCode, global_variables as gv
+from deviser.util import global_variables as gv
+from deviser.__main__ import generateLaTeXFor, generatePackageFor
 
-
-def generatePackageFor(filename):
-    """This function generates a libSBML extension for the given filename
-
-    From the manual:
-    Deviser allows a user to define an SBML Level 3 (L3) package and produce
-    libSBML code that can be integrated with the existing libSBML source tree
-    to add libSBML support for the package.
-    """
-    generateCode.generate_code_for(filename, True)
-
-
-def generateLaTeXFor(filename):
-    """This function generates a LaTeX scaffold for the given filename
-
-    From the manual:
-    Deviser can also use the package description to create basic specification
-    files for the package based on the LaTeX style SBMLPkgSpec for
-    SBML Level 3 package documentation.
-    """
-    generateLatex.generateLatexFor(filename)
 
 
 def main(args=None):
