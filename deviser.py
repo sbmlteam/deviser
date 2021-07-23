@@ -50,7 +50,7 @@ import sys
 
 
 from deviser.util import global_variables as gv
-from deviser.__main__ import generateLaTeXFor, generatePackageFor
+from deviser.__main__ import generateLaTeXFor, generatePackageFor, run_generation
 
 
 def main(args=None):
@@ -62,27 +62,8 @@ def main(args=None):
     """
     if args is None:
       args = sys.argv
-    # reset the global return code as this is a new call to deviser
-    gv.code_returned = gv.return_codes['success']
 
-    if len(args) != 3:  # TODO: there could also be too many args (>3)!
-        gv.code_returned = gv.return_codes['missing function argument']
-        print(main.__doc__)
-
-    if gv.code_returned == gv.return_codes['success']:
-
-        operation = args[1].lower()
-        filename = args[2]
-
-        if operation == '--generate' or operation == '-g':
-            generatePackageFor(filename)
-        elif operation == '--latex' or operation == '-l':
-            generateLaTeXFor(filename)
-        else:
-            gv.code_returned = gv.return_codes['invalid function arguments']
-            print(main.__doc__)
-
-    return gv.code_returned
+    return run_generation((args))
 
 
 if __name__ == '__main__':
