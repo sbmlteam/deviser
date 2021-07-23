@@ -97,7 +97,7 @@ uses_XMLNode = False
 global return_codes
 return_codes = dict({'success': 0,
                      'failed to read file': 1,
-                     'missing function argument': 2,
+                     'incorrect number function arguments': 2,
                      'invalid function arguments': 3,
                      'parsing error': 4,
                      'unknown type used': 5,

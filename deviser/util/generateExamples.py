@@ -100,7 +100,7 @@ def main(args):
     :returns: the `global_variable.code_returned` value
     """
     if len(args) != 2:
-        gv.code_returned = gv.return_codes['missing function argument']
+        gv.code_returned = gv.return_codes['incorrect number function arguments']
         print('Usage: generateExamples.py xmlfile')
     else:
         generate_example_for(args[1], generate_example_code)

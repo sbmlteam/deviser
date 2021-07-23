@@ -25,7 +25,7 @@ def generateLaTeXFor(filename):
 
 
 def run_generation(args):
-    """Usage: deviser  [--generate | --latex ] input-filename
+    """Usage: deviser  [--generate | --latex ] input-filename output-dir
 
        This program will use a Deviser xml file, and generate either a C++
        libSBML extension for it, or generate a LaTeX scaffold for its
@@ -35,9 +35,12 @@ def run_generation(args):
     # reset the global return code as this is a new call to deviser
     gv.code_returned = gv.return_codes['success']
 
-    if len(args) != 3:  # TODO: there could also be too many args (>3)!
-        gv.code_returned = gv.return_codes['missing function argument']
+    num_args = len(args)
+
+    if num_args < 3 or  num_args > 4:
+        gv.code_returned = gv.return_codes['incorrect number function arguments']
         print(run_generation.__doc__)
+
 
     if gv.code_returned == gv.return_codes['success']:
 
