@@ -12,6 +12,7 @@ from deviser.__main__ import run_generation
     ('non-existent', '-g', 'failed to read file'),
     ('test_child', '-g', 'success'),
     ('test_child', 'missing', 'incorrect number function arguments'),
+    ('test_child', 'added', 'incorrect number function arguments'),
     ('test_child', 'wrong', 'invalid function arguments'),
     # ('test_child', '-l', 'success'),  # Apparently problematic before?
     ('invalid', '-g', 'parsing error'),
@@ -45,6 +46,12 @@ def test_deviser(name, flag, expected_return):
     elif flag == 'missing':
         args.append('deviser')
         args.append(filename)
+    elif flag == 'added':
+        args.append('deviser')
+        args.append('-g')
+        args.append(filename)
+        args.append('outdir')
+        args.append('extra')
     else:
         raise Exception
     run_generation(args)

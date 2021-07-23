@@ -1,4 +1,4 @@
-import sys
+import sys, os
 
 from deviser.util import  generateCode, generateLatex, global_variables as gv
 
@@ -35,16 +35,10 @@ def run_generation(args):
     # reset the global return code as this is a new call to deviser
     gv.code_returned = gv.return_codes['success']
 
-    num_args = len(args)
-
-    if num_args < 3 or  num_args > 4:
-        gv.code_returned = gv.return_codes['incorrect number function arguments']
-        print(run_generation.__doc__)
-
-
+    operation = check_args(args)
     if gv.code_returned == gv.return_codes['success']:
 
-        operation = args[1].lower()
+#        operation = args[1].lower()
         filename = args[2]
 
         if operation == '--generate' or operation == '-g':
@@ -56,6 +50,32 @@ def run_generation(args):
             print(run_generation.__doc__)
 
     return gv.code_returned
+
+
+def check_args(args):
+    num_args = len(args)
+
+    if num_args < 3 or  num_args > 4:
+        gv.code_returned = gv.return_codes['incorrect number function arguments']
+        print(run_generation.__doc__)
+        return
+
+    operation = args[1].lower()
+    possible_operations = ['-g', '--generate', '-l', '--latex']
+    if operation not in possible_operations:
+        gv.code_returned = gv.return_codes['invalid function arguments']
+        print(run_generation.__doc__)
+        return
+
+    filename = args[1]
+    # if not os.path.isfile(filename):
+    #     gv.code_returned = gv.return_codes['failed to read file']
+    #     print('{0} not found'.format(filename))
+    #     return
+
+    outdir = ''
+
+    return operation
 
 
 def main(args):
