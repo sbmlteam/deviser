@@ -35,47 +35,51 @@ def run_generation(args):
     # reset the global return code as this is a new call to deviser
     gv.code_returned = gv.return_codes['success']
 
-    operation = check_args(args)
+    operation, filename, output_dir = check_args(args)
+
     if gv.code_returned == gv.return_codes['success']:
-
-#        operation = args[1].lower()
-        filename = args[2]
-
+        if output_dir != '':
+            os.chdir(output_dir)
         if operation == '--generate' or operation == '-g':
             generatePackageFor(filename)
         elif operation == '--latex' or operation == '-l':
             generateLaTeXFor(filename)
-        else:
-            gv.code_returned = gv.return_codes['invalid function arguments']
-            print(run_generation.__doc__)
 
     return gv.code_returned
 
 
 def check_args(args):
     num_args = len(args)
+    operation = ''
+    filename = ''
+    outdir = ''
 
     if num_args < 3 or  num_args > 4:
         gv.code_returned = gv.return_codes['incorrect number function arguments']
         print(run_generation.__doc__)
-        return
+        return operation, filename, outdir
 
     operation = args[1].lower()
     possible_operations = ['-g', '--generate', '-l', '--latex']
     if operation not in possible_operations:
         gv.code_returned = gv.return_codes['invalid function arguments']
         print(run_generation.__doc__)
-        return
+        return operation, filename, outdir
 
-    filename = args[1]
-    # if not os.path.isfile(filename):
-    #     gv.code_returned = gv.return_codes['failed to read file']
-    #     print('{0} not found'.format(filename))
-    #     return
+    filename = args[2]
+    if not os.path.isfile(filename):
+        gv.code_returned = gv.return_codes['failed to read file']
+        print('{0} not found'.format(filename))
+        return operation, filename, outdir
 
-    outdir = ''
+    if num_args == 4:
+        outdir = args[3]
+        if not os.path.isdir(outdir):
+            gv.code_returned = gv.return_codes['invalid function arguments']
+            print('{0} not found'.format(outdir))
+            return operation, filename, outdir
 
-    return operation
+    return operation, filename, outdir
 
 
 def main(args):

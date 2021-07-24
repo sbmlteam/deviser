@@ -89,14 +89,8 @@ class ParseXML():
 
         :param filename: The (path to the) XML file to parse
         '''
-        if not os.path.isfile(filename):
-            gv.code_returned = gv.return_codes['failed to read file']
-            print('{0} not found'.format(filename))
-        if gv.code_returned == gv.return_codes['success']:
-            self.dom = parse(filename)
-            # A Document Object Model (i.e. a Document) instance.
-        else:
-            return None
+        self.dom = parse(filename)
+        # A Document Object Model (i.e. a Document) instance.
 
         self.temp_dir = os.path.dirname(filename)
         self.abs_dir = os.path.abspath(filename)

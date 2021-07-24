@@ -14,6 +14,7 @@ from deviser.__main__ import run_generation
     ('test_child', 'missing', 'incorrect number function arguments'),
     ('test_child', 'added', 'incorrect number function arguments'),
     ('test_child', 'wrong', 'invalid function arguments'),
+    ('test_child', 'outdirwrong', 'invalid function arguments'),
     # ('test_child', '-l', 'success'),  # Apparently problematic before?
     ('invalid', '-g', 'parsing error'),
     ('invalid', '-l', 'parsing error'),
@@ -52,6 +53,11 @@ def test_deviser(name, flag, expected_return):
         args.append(filename)
         args.append('outdir')
         args.append('extra')
+    elif flag == 'outdirwrong':
+        args.append('deviser')
+        args.append('-g')
+        args.append(filename)
+        args.append('outdir')
     else:
         raise Exception
     run_generation(args)
