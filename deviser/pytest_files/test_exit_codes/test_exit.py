@@ -9,13 +9,19 @@ from ...pytest_files import functions
 from ...util import global_variables as gv
 from deviser.__main__ import run_generation
 
+global output_test_dir
 
 def setup():
     # Set up the environment.
     this_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(this_dir)
     os.chdir('..')
-    os.mkdir('testingout')
+    upper_dr = os.getcwd()
+    test_dir = os.path.join(upper_dr, 'testingout')
+    if not os.path.isdir(test_dir):
+        os.mkdir(test_dir)
+    global output_test_dir
+    output_test_dir = test_dir
     os.chdir(this_dir)
 
 
@@ -39,7 +45,7 @@ def teardown():
     ('test_child', 'added', 'None', 'incorrect number function arguments'),
     ('test_child', 'wrong', 'None', 'invalid function arguments'),
     ('test_child', '-g', 'outdir', 'invalid function arguments'),
-    ('test_child', '-g',  '..\\testingout', 'success'),
+    ('test_child', '-g',  'global', 'success'),
     # ('test_child', '-l', 'None', 'success'),  # Apparently problematic before?
     ('invalid', '-g', 'None', 'parsing error'),
     ('invalid', '-l', 'None', 'parsing error'),
@@ -71,7 +77,10 @@ def test_deviser(name, flag, outdir, expected_return):
         args.append(flag)
         args.append(filename)
         if outdir != 'None':
-            args.append(outdir)
+            if outdir == 'global':
+                args.append(output_test_dir)
+            else:
+                args.append(outdir)
     elif flag == 'missing':
         args.append('deviser')
         args.append(filename)
