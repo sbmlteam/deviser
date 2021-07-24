@@ -1,4 +1,4 @@
-import os
+import os, shutil
 import pytest
 
 from ...pytest_files import functions
@@ -15,6 +15,14 @@ def setup():
     if not os.path.isdir(temp_dir):
         os.mkdir(temp_dir)
     os.chdir(this_dir)
+
+
+def teardown():
+    # delete temp dir
+    this_dir = os.path.dirname(os.path.abspath(__file__))
+    temp_dir = os.path.join(this_dir, 'temp')
+    if os.path.isdir(temp_dir):
+        shutil.rmtree(temp_dir)
 
 
 @pytest.mark.parametrize('name, filetype', [

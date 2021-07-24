@@ -16,5 +16,5 @@ setup(
     license='',
     author='Sarah Keating',
     author_email='',
-    description=''
+    description='', install_requires=['pytest']
 )
