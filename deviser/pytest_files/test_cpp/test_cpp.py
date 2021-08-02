@@ -2,6 +2,8 @@
 # Matthew S. Gillman, UCL, 17th February 2021
 
 import os
+import shutil
+
 import pytest
 
 from ...pytest_files import functions
@@ -9,7 +11,6 @@ from . import run_cpp_tests as rct  # For now.
 
 
 def setup():
-
     # Set up the environment.
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -20,6 +21,13 @@ def setup():
         os.mkdir(temp_dir)
     os.chdir(this_dir)
 
+
+def teardown():
+    # delete temp dir
+    this_dir = os.path.dirname(os.path.abspath(__file__))
+    temp_dir = os.path.join(this_dir, 'temp')
+    if os.path.isdir(temp_dir):
+        shutil.rmtree(temp_dir)
 
 # used mytests.py "conversion" script to extract the tests from the
 # old file and get into right format for this one.

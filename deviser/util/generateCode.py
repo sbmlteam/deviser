@@ -514,7 +514,7 @@ def create_dir(name, overwrite):
 
 def main(args):
     if len(args) < 2:
-        gv.code_returned = gv.return_codes['missing function argument']
+        gv.code_returned = gv.return_codes['incorrect number function arguments']
         print('Usage: generateCode.py xmlfile')
     elif len(args) > 2:
         gv.code_returned = gv.return_codes['invalid function arguments']

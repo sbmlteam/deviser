@@ -87,7 +87,7 @@ def main(args):
     Checks correct number of arguments and then invokes XML code.
     """
     if len(args) != 2:
-        gv.code_returned = gv.return_codes['missing function argument']
+        gv.code_returned = gv.return_codes['incorrect number function arguments']
         print('Usage: generateXML.py xmlfile')
     else:
         generate_xml_for(args[1])

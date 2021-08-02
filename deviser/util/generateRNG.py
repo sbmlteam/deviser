@@ -86,7 +86,7 @@ def main(args):
     Checks correct number of arguments and then invokes RNG code.
     """
     if len(args) != 2:
-        gv.code_returned = gv.return_codes['missing function argument']
+        gv.code_returned = gv.return_codes['incorrect number function arguments']
         print('Usage: generateRNG.py xmlfile')
     else:
         generate_rng_for(args[1])
