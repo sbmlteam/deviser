@@ -2,20 +2,20 @@
 #define SBase_h
 
 
-#include <sbml/common/extern.h>
-#include <sbml/common/libsbml-namespace.h>
+#include <common/extern.h>
+#include <common/libsbml-namespace.h>
 <verbatim>
-#include <sbml/common/libsbml-namespace.h>
+#include <common/libsbml-namespace.h>
 </verbatim>
-#include <sbml/common/sbmlfwd.h>
+#include <common/sbmlfwd.h>
 #include <sbml/SBMLTypeCodes.h>
 #include <sbml/SBMLNamespaces.h>
 #include <sbml/SBMLConstructorException.h>
 <verbatim>
-#include <sbml/util/List.h>
+#include <util/List.h>
 #include <sbml/SyntaxChecker.h>
 #include <sbml/ExpectedAttributes.h>
-#include <sbml/xml/XMLNode.h>
+#include <xml/XMLNode.h>
 </verbatim>
 
 #ifdef __cplusplus

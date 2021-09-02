@@ -1,7 +1,7 @@
 <verbatim>
-#include <sbml/xml/XMLError.h>
-#include <sbml/xml/XMLErrorLog.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLError.h>
+#include <xml/XMLErrorLog.h>
+#include <xml/XMLInputStream.h>
 </verbatim>
 
 #include <sbml/SBMLErrorLog.h>
@@ -11,8 +11,8 @@
 #include <sbml/SBMLReader.h>
 
 <verbatim>
-#include <sbml/compress/CompressCommon.h>
-#include <sbml/compress/InputDecompressor.h>
+#include <compress/CompressCommon.h>
+#include <compress/InputDecompressor.h>
 </verbatim>
 
 /** @cond doxygenIgnored */

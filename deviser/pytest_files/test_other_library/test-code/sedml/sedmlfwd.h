@@ -131,7 +131,7 @@ LIBSEDML_CPP_NAMESPACE_END
 
 
 
-#include <sbml/common/libsbml-namespace.h>
+#include <common/libsbml-namespace.h>
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 

@@ -59,7 +59,7 @@
 #include <sedml/SedListOfOutputs.h>
 #include <sedml/SedListOfStyles.h>
 #include <sedml/SedErrorLog.h>
-#include <sbml/common/libsbml-namespace.h>
+#include <common/libsbml-namespace.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN

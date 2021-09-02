@@ -9,7 +9,7 @@
 
 <verbatim>
 #ifndef SWIG
-#include <sbml/common/libsbml-namespace.h>
+#include <common/libsbml-namespace.h>
 
 LIBSBML_CPP_NAMESPACE_USE
 

@@ -1,6 +1,6 @@
 #include <sbml/SBMLNamespaces.h>
 #include <sstream>
-#include <sbml/common/common.h>
+#include <common/common.h>
 #include <iostream>
 
 /** @cond doxygenIgnored */

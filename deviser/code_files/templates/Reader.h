@@ -2,10 +2,10 @@
 #define SBMLReader_h
 
 
-#include <sbml/common/extern.h>
-#include <sbml/common/sbmlfwd.h>
+#include <common/extern.h>
+#include <common/sbmlfwd.h>
 <verbatim>
-#include <sbml/util/util.h>
+#include <util/util.h>
 </verbatim>
 
 #ifdef __cplusplus
