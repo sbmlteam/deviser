@@ -11,7 +11,7 @@ Viewer for Iterative SBML Enhancement of Representations"*.  It is a code genera
 
 _**Authors**_:      [Sarah M. Keating](https://www.ucl.ac.uk/research-it-services/about-rits/people) and [Frank T. Bergmann](http://www.cos.uni-heidelberg.de/index.php/f.bergmann?l=_e)
 
-_**Contributors**_: Matthew S. Gillman, [Brett Olivier](https://github.com/bgoli), [Orod Razeghi](https://www.ucl.ac.uk/research-it-services/about-rits/people),
+_**Contributors**_: [Matthew S. Gillman](https://www.ucl.ac.uk/research-it-services/about-rits/people), [Brett Olivier](https://github.com/bgoli), [Orod Razeghi](https://www.ucl.ac.uk/research-it-services/about-rits/people),
 [Lucian Smith](https://github.com/luciansmith) &amp; [Mike Hucka](https://github/mhucka)<br>
 _**Repository**_:   https://github.com/sbmlteam/deviser<br>
 _**Repository for GUI**_:   https://github.com/sbmlteam/QtDeviser<br>
