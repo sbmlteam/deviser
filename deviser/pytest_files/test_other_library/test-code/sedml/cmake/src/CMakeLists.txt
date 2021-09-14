@@ -43,7 +43,6 @@ endmacro(copy_if_different_and_remove)
 # create libsedml-config-common.h
 #
 include(CheckIncludeFiles)
-check_include_files (check.h HAVE_CHECK_H)
 check_include_files (expat.h HAVE_EXPAT_H)
 check_include_files (errno.h HAVE_ERRNO_H)
 check_include_files (ieeefp.h HAVE_IEEEFP_H)
@@ -73,10 +72,6 @@ if (MSVC)
   set(HAVE_MATH_H TRUE)
   set(HAVE_SYS_TYPES_H TRUE)
 endif()
-
-
-include(CheckLibraryExists)
-check_library_exists(m sqrt "" HAVE_LIBM)
 
 # generate configuration for this system
 configure_file(
@@ -155,7 +150,9 @@ macro(ADD_FUNCTION directory)
             ${prefix}${directory}/*.cpp
             ${prefix}${directory}/*.cxx
             ${prefix}${directory}/*.c
-            ${prefix}${directory}/*.h)
+            ${prefix}${directory}/*.h
+            ${CMAKE_CURRENT_BINARY_DIR}/src/${prefix}${directory}/*.h
+            )
 
     # Set the constraint files to be 'headers' as they don't have to be compiled
     # since they don't contain symbols but rather are included directly.  Could

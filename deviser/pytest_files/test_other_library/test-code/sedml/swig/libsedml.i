@@ -68,8 +68,8 @@ LIBSEDML_CPP_NAMESPACE_USE
 %import  sedml/common/libsedml-namespace.h
 %import  sedml/common/extern.h
 %import  sedml/common/sedmlfwd.h
-%import  sbml/common/extern.h
-%import  sbml/xml/XMLExtern.h
+%import  common/extern.h
+%import  xml/XMLExtern.h
 
 /**
  * Wraps List class by ListWrapper<TYPENAME> template class.
@@ -319,8 +319,8 @@ typedef std::vector<SedError> SedErrorStdVector;
 
 %include sedml/common/libsedml-version.h
 %include sedml/common/SedOperationReturnValues.h
-%include sbml/common/libsbml-version.h
-%include sbml/common/operationReturnValues.h
+%include common/libsbml-version.h
+%include common/operationReturnValues.h
 
 %include sbml/SyntaxChecker.h
 %include sbml/ExpectedAttributes.h

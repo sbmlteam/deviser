@@ -47,10 +47,10 @@
 #include <sedml/SedTypeCodes.h>
 #include <sedml/SedNamespaces.h>
 #include <sedml/SedConstructorException.h>
-#include <sbml/util/List.h>
+#include <util/List.h>
 #include <sbml/SyntaxChecker.h>
 #include <sbml/ExpectedAttributes.h>
-#include <sbml/xml/XMLNode.h>
+#include <xml/XMLNode.h>
 
 #ifdef __cplusplus
 

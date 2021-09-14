@@ -39,7 +39,7 @@
 #include <iomanip>
 #include <sstream>
 
-#include <sbml/xml/XMLError.h>
+#include <xml/XMLError.h>
 
 #include <sedml/SedError.h>
 #include <sedml/SedErrorTable.h>

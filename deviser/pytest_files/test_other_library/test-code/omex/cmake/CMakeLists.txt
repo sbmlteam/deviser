@@ -1,5 +1,13 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.12)
 project(libcombine)
+if(POLICY CMP0054)
+    cmake_policy(SET CMP0054 NEW)
+endif()
+
+set(LIBCOMBINE_ROOT_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" CACHE PATH
+    "Path to the libCombine root source directory")
+set(LIBCOMBINE_ROOT_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}" CACHE PATH
+    "Path to the libCombine root build directory")
 
 include (CMakeTestCCompiler)
 include (CheckCSourceCompiles)
@@ -11,6 +19,7 @@ include (CheckCCompilerFlag)
 include (CheckCSourceRuns)
 include (CheckSymbolExists)
 include (CheckTypeSize)
+include (GNUInstallDirs)
 
 ###############################################################################
 #
@@ -46,6 +55,7 @@ set(PACKAGE_NAME "libCombine")
 # add make dist and make check target as they are already familiar for
 # everyone using the gnumake build
 add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
+add_custom_target(check COMMAND ${CMAKE_MAKE_PROGRAM} test)
 
 ###############################################################################
 #
@@ -98,15 +108,15 @@ include(CPack)
 # Whether to compile examples
 option(WITH_EXAMPLES "Compile the libCombine example programs."  OFF)
 
+#############
+# LATER TO DO
 # Which language bindings should be built
-option(WITH_CSHARP   "Generate C# language bindings."     OFF)
-option(WITH_JAVA     "Generate Java language bindings."   OFF)
-option(WITH_PYTHON   "Generate Python language bindings." OFF)
-option(WITH_PERL     "Generate Perl language bindings."   OFF)
-option(WITH_RUBY     "Generate Ruby language bindings"    OFF)
-option(WITH_R        "Generate R language bindings"       OFF)
-option(WITH_OCTAVE   "Generate Octave language bindings." OFF)
-option(WITH_MATLAB   "Generate MATLAB language bindings." OFF)
+# option(WITH_CSHARP   "Generate C# language bindings."     OFF)
+# option(WITH_JAVA     "Generate Java language bindings."   OFF)
+# option(WITH_PYTHON   "Generate Python language bindings." OFF)
+# option(WITH_PERL     "Generate Perl language bindings."   OFF)
+# option(WITH_RUBY     "Generate Ruby language bindings"    OFF)
+# option(WITH_R        "Generate R language bindings"       OFF)
 
 # Add an option to compile with all warnings shown
 option(WITH_WALL     "Compile with -Wall, so that the compiler will display all warnings." OFF)
@@ -148,15 +158,19 @@ endif()
 # Use C++ namespace.
 option(WITH_CPP_NAMESPACE "Use a C++ namespace for libCombine."   OFF)
 
+#############
+# LATER TO DO
 # Generate documentation.
-option(WITH_DOXYGEN  "Generate documentation for libCombine using Doxygen."  OFF )
+# option(WITH_DOXYGEN  "Generate documentation for libCombine using Doxygen."  OFF )
 # marks as advanced, so as to hide documentation generation
-mark_as_advanced(WITH_DOXYGEN)
+# mark_as_advanced(WITH_DOXYGEN)
 
+#############
+# LATER TO DO
 # Re-generate the swig bindings? This really should be on by default
 # otherwise one might have the wrong wrapper code without support for
 # the libcombine packages one wants.
-option(WITH_SWIG     "Regenerate SWIG-based language bindings."  ON )
+# option(WITH_SWIG     "Regenerate SWIG-based language bindings."  ON )
 
 # Set build type default.
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING
@@ -218,43 +232,119 @@ endif(WITH_SWIG)
 
 ###############################################################################
 #
-# Locate libsbml
+# Choose which library to link to.
 #
-find_library(LIBSBML_LIBRARY
-    NAMES libsbml-static.lib sbml-static libsbml.lib sbml
-    PATHS ${LIBCOMBINE_DEPENDENCY_DIR}/lib
-    /usr/local/lib          
-          /usr/lib 
-    DOC "The file name of the sbml library."
-)
 
-find_path(LIBSBML_INCLUDE_DIR
-    NAMES sbml/SBase.h
-    PATHS 
-          ${LIBCOMBINE_DEPENDENCY_DIR}/include
-    /usr/local/include
-          /usr/include 
-    DOC "The directory containing the sbml include files."
-)
+option (WITH_LIBLX "Build linked to libLX" ON)
+option (WITH_LIBSBML "Build linked to libSBML" OFF)
 
-set(LIBSBML_STATIC OFF CACHE BOOL "is libsbml statically compiled")
-if (WIN32 AND NOT CYGWIN)
-  if (LIBSBML_LIBRARY AND LIBSBML_LIBRARY MATCHES ".*-static*$")
-    set(LIBSBML_STATIC ON CACHE BOOL "is libsbml statically compiled")
-  else()
-    option(LIBSBML_STATIC "The LibSBML library was statically compiled" ON)
-  endif()
+if (WITH_LIBLX)
+
+    # locate liblx
+    find_library(LIBLX_LIBRARY
+        NAMES liblx.lib liblx-static.lib
+        PATHS ${LIBCOMBINE_DEPENDENCY_DIR}/lib
+        /usr/local/lib          
+        /usr/lib 
+        DOC "The file name of the libLX library."
+    )
+
+    find_path(LIBLX_INCLUDE_DIR
+        NAMES liblx/common/liblx-version.h
+        PATHS ${LIBCOMBINE_DEPENDENCY_DIR}/include
+        /usr/local/include
+        /usr/include 
+        DOC "The directory containing the libLX include files."
+    )
+
+    # to make seamless use of libsbml/liblx we want include dir to have sbml or liblax already included
+    set(XTRA_INC "${LIBLX_INCLUDE_DIR}/liblx")
+    set(LIBLX_INCLUDE_DIR "${LIBLX_INCLUDE_DIR}")
+    set(LINKED_LIBRARY ${LIBLX_LIBRARY})
+    set(LINKED_INCLUDE_DIR ${LIBLX_INCLUDE_DIR})
+    set(LINKED_NAME "libLX")
+
+    set(LIBLX_STATIC OFF CACHE BOOL "is libLX statically compiled")
+
+    if (WIN32 AND NOT CYGWIN)
+        if (LINKED_LIBRARY AND LINKED_LIBRARY MATCHES ".*-static*$")
+            set(LIBLX_STATIC ON CACHE BOOL "is libLX statically compiled")
+        else()
+            option(LIBLX_STATIC "The libLX library was statically compiled" ON)
+        endif()
+    endif()
+
+    if (NOT EXISTS "${LIBLX_INCLUDE_DIR}/liblx/common/liblx-version.h")
+        message(FATAL_ERROR 
+        "The include directory ${LIBLX_INCLUDE_DIR} specified for libLX appears to be invalid. 
+        It should contain the file common/liblx-version.h, but it does not. 
+        Please specify the LIBLX_INCLUDE_DIR variable.")
+    endif()
 endif()
 
-if(NOT EXISTS "${LIBSBML_INCLUDE_DIR}/sbml/SBase.h")
+if (WITH_LIBSBML)
+
+    # Locate libsbml
+    find_library(LIBSBML_LIBRARY
+        NAMES libsbml-static.lib sbml-static libsbml.lib sbml
+        PATHS ${LIBCOMBINE_DEPENDENCY_DIR}/lib
+        /usr/local/lib          
+        /usr/lib 
+        DOC "The file name of the sbml library."
+    )
+
+    find_path(LIBSBML_INCLUDE_DIR
+        NAMES sbml/SBase.h
+        PATHS ${LIBCOMBINE_DEPENDENCY_DIR}/include
+        /usr/local/include
+        /usr/include 
+        DOC "The directory containing the sbml include files."
+    )
+
+    # to make seamless use of libsbml/liblx we want include dir to have sbml or liblax already included
+    set(LIBSBML_INCLUDE_DIR "${LIBSBML_INCLUDE_DIR}")
+    set(XTRA_INC "${LIBSBML_INCLUDE_DIR}/sbml")
+    set(LINKED_LIBRARY ${LIBSBML_LIBRARY})
+    set(LINKED_INCLUDE_DIR ${LIBSBML_INCLUDE_DIR})
+    set(LINKED_NAME "libSBML")
+
+    set(LIBSBML_STATIC OFF CACHE BOOL "is libsbml statically compiled")
+
+    if (WIN32 AND NOT CYGWIN)
+        if (LIBSBML_LIBRARY AND LIBSBML_LIBRARY MATCHES ".*-static*$")
+            set(LIBSBML_STATIC ON CACHE BOOL "is libsbml statically compiled")
+        else()
+            option(LIBSBML_STATIC "The LibSBML library was statically compiled" ON)
+        endif()
+    endif()
+
+    if(NOT EXISTS "${LIBSBML_INCLUDE_DIR}/sbml/SBase.h")
+        message(FATAL_ERROR 
+        "The include directory ${LIBSBML_INCLUDE_DIR} specified for sbml appears to be invalid. 
+        It should contain the file sbml/SBase.h, but it does not. 
+        Please specify the LIBSBML_INCLUDE_DIR variable.")
+    endif()
+endif()
+
+# check only one option is selected
+set(LIBRARY_COUNT 0)
+
+if(WITH_LIBLX)
+    math(EXPR LIBRARY_COUNT "${LIBRARY_COUNT} + 1")
+endif()
+if(WITH_LIBCOMBINE)
+    math(EXPR LIBRARY_COUNT "${LIBRARY_COUNT} + 1")
+endif()
+
+if(LIBRARY_COUNT GREATER 1)
+    message(FATAL_ERROR
+    "Only one linked library should be chosen. Please select only one of the following options: WITH_LIBCOMBINE or WITH_LIBLX.")
+elseif(LIBRARY_COUNT EQUAL 0)
     message(FATAL_ERROR 
-"The include directory specified for sbml appears to be invalid.  It should contain the 
-file sbml/SBase.h, but it does not. Please specify the LIBSBML_INCLUDE_DIR variable."
-)
+    "The ${LIBCOMBINE_LIBRARY} must be linked against either libLX or libCombine. Neither can be found.")
 endif()
 
-
-
+set (LIBCOMBINE_LIBS ${LIBCOMBINE_LIBS} ${LINKED_LIBRARY})
 
 ###############################################################################
 #
@@ -268,59 +358,11 @@ set(EXTRA_DEFS "" CACHE STRING "List of additional flag to add." )
 
 ###############################################################################
 #
-# Locate zlib
-#
-
-set(ZLIB_INITIAL_VALUE)
-find_library(LIBZ_LIBRARY
-    NAMES zdll.lib z zlib.lib
-    PATHS /usr/lib /usr/local/lib
-          ${LIBCOMBINE_DEPENDENCY_DIR}/lib
-    DOC "The file name of the zip compression library."
-    )
-
-if(EXISTS ${LIBZ_LIBRARY})
-    set(ZLIB_INITIAL_VALUE ON)
-else()
-    set(ZLIB_INITIAL_VALUE OFF)
-endif()
-option(WITH_ZLIB     "Enable the use of zip compression."    ${ZLIB_INITIAL_VALUE} )
-
-if(WITH_ZLIB)
-
-    find_path(LIBZ_INCLUDE_DIR
-        NAMES zlib.h zlib/zlib.h
-        PATHS /usr/include /usr/local/include
-              ${LIBCOMBINE_DEPENDENCY_DIR}/include
-        DOC "The directory containing the zlib include files."
-              )
-
-    add_definitions( -DUSE_ZLIB )
-
-    # make sure that we have a valid zip library
-    check_library_exists("${LIBZ_LIBRARY}" "gzopen" "" LIBZ_FOUND_SYMBOL)
-    if(NOT LIBZ_FOUND_SYMBOL)
-        # this is odd, but on windows this check always fails! must be a
-        # bug in the current cmake version so for now only issue this
-        # warning on linux
-        if(UNIX)
-            message(WARNING "The zlib library does not appear to be valid because it is missing certain required symbols. Please check that ${LIBZ_LIBRARY} is the zlib library. For details about the error, please see ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeError.log")
-        endif()
-    endif()
-
-    if(NOT EXISTS "${LIBZ_INCLUDE_DIR}/zlib.h")
-        message(FATAL_ERROR "The zlib include directory does not appear to be valid. It should contain the file zlib.h, but it does not.")
-    endif()
-
-endif(WITH_ZLIB)
-
-
-###############################################################################
-#
 # Find the C# compiler to use and set name for resulting library
 #
 
 if(WITH_CSHARP)
+
     find_program(CSHARP_COMPILER
         NAMES gmcs csc
         PATHS C:/Windows/Microsoft.NET/Framework/v2.0.50727/ /usr/bin /usr/local/bin
@@ -346,32 +388,11 @@ endif(WITH_CSHARP)
 # or make test
 #
 
-if(WITH_CHECK)
+if (WITH_CHECK)
 
     # we do use tests, that require 2.8.4
     cmake_minimum_required(VERSION 2.8.4)
-
     enable_testing()
-
-    find_library(LIBCHECK_LIBRARY
-        NAMES check libcheck
-        PATHS /usr/lib /usr/local/lib ${LIBCOMBINE_DEPENDENCY_DIR}/lib
-        DOC "The file name of the libcheck library."
-    )
-
-    find_path(LIBCHECK_INCLUDE_DIR
-        NAMES check.h
-        PATHS /usr/include /usr/local/include  ${LIBCOMBINE_DEPENDENCY_DIR}/include
-        DOC "The directory containing the libcheck include files."
-              )
-
-    if(NOT EXISTS "${LIBCHECK_INCLUDE_DIR}/check.h")
-        message(FATAL_ERROR "The 'check' include directory appears to be invalid. It should contain the file check.h, but it does not.")
-    endif()
-
-    if(${CMAKE_GENERATOR} MATCHES "Visual Studio 6" OR ${CMAKE_GENERATOR} MATCHES "Visual Studio 7")
-        message(WARNING "Libcheck is not compatible with Visual Studio 2003 (or earlier versions).")
-    endif()
 
 endif(WITH_CHECK)
 
@@ -384,7 +405,12 @@ endif(WITH_CHECK)
 # documentation to be installed in PREFIX/${MISC_PREFIX}.
 #
 
+if (APPLE)
+    set(CMAKE_MACOSX_RPATH ON)
+endif (APPLE)
+
 set( MISC_PREFIX )
+
 if(UNIX OR CYGWIN)
     set(PATH_SEP "/")
     set(FILE_SEP ":")
@@ -407,6 +433,7 @@ endif()
 set(CMAKE_INSTALL_LIBDIR lib CACHE PATH "Full path to the library output directory")
 mark_as_advanced(CMAKE_INSTALL_LIBDIR)
 
+
 ###############################################################################
 #
 # Set up remaining variables, add option for universal binaries
@@ -414,21 +441,22 @@ mark_as_advanced(CMAKE_INSTALL_LIBDIR)
 
 set(USING_INTEL)
 if (WIN32 AND CMAKE_C_COMPILER AND ${CMAKE_C_COMPILER} MATCHES ".*icl.*$")
-  message(STATUS "Detected Intel Compiler")
-  set(USING_INTEL TRUE)
+    message(STATUS "Detected Intel Compiler")
+    set(USING_INTEL TRUE)
 endif ()
 
-
 set(BUILD_DEFINITIONS)
+
 if(UNIX)
     if(APPLE)
+
         # on osx starting with xcode 4.3 the system root is in
         # the app bundle, however cmake (up to 2.8.8) does not seem
         # to update the path, so lets try it here
         if (CMAKE_OSX_SYSROOT AND NOT EXISTS ${CMAKE_OSX_SYSROOT})
-          if (EXISTS "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/${CMAKE_OSX_SYSROOT}")
-            set(CMAKE_OSX_SYSROOT "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/${CMAKE_OSX_SYSROOT}" CACHE STRING "The SDK root to be used" FORCE)
-          endif()
+            if (EXISTS "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/${CMAKE_OSX_SYSROOT}")
+                set(CMAKE_OSX_SYSROOT "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/${CMAKE_OSX_SYSROOT}" CACHE STRING "The SDK root to be used" FORCE)
+            endif()
         endif()
         add_definitions(-DMACOSX)
         set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DMACOSX")
@@ -436,10 +464,10 @@ if(UNIX)
         # Since we are encountering errors with the use of libc++ on OSX
         # this option allows to override which stdlib to use
         if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-          option(CLANG_USE_STDLIB "Use libstdc++ rather than libc++" OFF)
-          if (CLANG_USE_STDLIB)
-            SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libstdc++" )
-          endif()
+            option(CLANG_USE_STDLIB "Use libstdc++ rather than libc++" OFF)
+            if (CLANG_USE_STDLIB)
+                SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libstdc++" )
+            endif()
         endif()
         
         # On OSX it is common to build universal binaries to support multiple
@@ -457,16 +485,18 @@ if(UNIX)
                 STRING(REGEX REPLACE "^.*MacOSX([0-9]*\\.[0-9]*)\\.sdk$" "\\1"
                        OSX_SDK_VERSION "${CMAKE_OSX_SYSROOT}")
                 if(OSX_SDK_VERSION  VERSION_EQUAL "10.7" OR OSX_SDK_VERSION  VERSION_EQUAL "10.8")
-                   # OSX Lion no longer supports ppc architecture
-                   set(CMAKE_OSX_ARCHITECTURES "i386;x86_64" CACHE STRING
-                      "A semicolon-separated list of build architectures to be used." FORCE)
+                    # OSX Lion no longer supports ppc architecture
+                    set(CMAKE_OSX_ARCHITECTURES "i386;x86_64" CACHE STRING
+                    "A semicolon-separated list of build architectures to be used." FORCE)
                 else()
-                   set(CMAKE_OSX_ARCHITECTURES "i386;ppc;x86_64" CACHE STRING
-                       "A semicolon-separated list of build architectures to be used." FORCE)
+                    set(CMAKE_OSX_ARCHITECTURES "i386;ppc;x86_64" CACHE STRING
+                    "A semicolon-separated list of build architectures to be used." FORCE)
                 endif()
             endif()
         endif(ENABLE_UNIVERSAL)
+
     else(APPLE)
+
         add_definitions(-DLINUX)
 
         if(NOT CYGWIN)
@@ -476,25 +506,37 @@ if(UNIX)
         endif()
 
         set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLINUX")
+
     endif(APPLE)
 
     add_definitions( -DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\")
     set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\"")
 
 else(UNIX)
+
     add_definitions(-DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\")
     
     add_definitions(-DWIN32)
     set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DWIN32")
 
-  if (LIBSBML_STATIC)
-      add_definitions(-DLIBSBML_STATIC -DLIBLAX_STATIC)
-      set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_STATIC -DLIBLAX_STATIC")
-  else()
-      add_definitions(-DLIBSBML_EXPORTS -DLIBLAX_EXPORTS)
-      set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_EXPORTS -DLIBLAX_EXPORTS")
-  endif()
-
+    if(WITH_LIBLX)
+        if (LIBLX_STATIC)
+            add_definitions(-DLIBLX_STATIC -DLIBLAX_STATIC)
+            set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBLX_STATIC -DLIBLAX_STATIC")
+        else()
+            add_definitions(-DLIBLX_EXPORTS -DLIBLAX_EXPORTS)
+            set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBLX_EXPORTS -DLIBLAX_EXPORTS")
+        endif()
+    endif()
+    if(WITH_LIBSBML)
+        if (LIBSBML_STATIC)
+            add_definitions(-DLIBSBML_STATIC -DLIBLAX_STATIC)
+            set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_STATIC -DLIBLAX_STATIC")
+        else()
+            add_definitions(-DLIBSBML_EXPORTS -DLIBLAX_EXPORTS)
+            set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_EXPORTS -DLIBLAX_EXPORTS")
+        endif()
+    endif()
   
     if(MSVC OR USING_INTEL)
       add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_DEPRECATE)
@@ -659,15 +701,7 @@ endif()
 #
 # create library
 # 
-add_subdirectory(src/omex)
-
-##############################################################################
-#
-# create language bindings
-# 
-add_subdirectory(src/bindings)
-
-
+add_subdirectory(src)
 
 
 ###############################################################################
@@ -735,14 +769,14 @@ libCombine version ${PACKAGE_VERSION}
      CXXFLAGS                      = ${CMAKE_CXX_FLAGS}
      LDFLAGS                       = ${CMAKE_EXE_LINKER_FLAGS}
 
-   SBML library configuration:
-     SBML library                  = ${LIBSBML_LIBRARY}
-     SBML include                  = -I${LIBSBML_INCLUDE_DIR}
+   ${LINKED_NAME} library configuration:
+     ${LINKED_NAME} library        = ${LINKED_LIBRARY}
+     ${LINKED_NAME} include        = -I${LINKED_INCLUDE_DIR}
+     EXTRA INCLUDES                = -I${EXTRA_INCLUDE_DIRS}
 
 
   Other libCombine configuration settings:
      Installation $prefix          = ${CMAKE_INSTALL_PREFIX}")
-
 
 
 if(UNIX)
@@ -778,14 +812,6 @@ if(WITH_RUBY)
     message(STATUS "  Using Ruby                    = ${RUBY_EXECUTABLE}")
 endif()
 
-if(WITH_OCTAVE)
-    message(STATUS "  Using Octave                  = ${MKOCTFILE_EXECUTABLE}")
-endif()
-
-if(WITH_MATLAB)
-    message(STATUS "  Using Matlab                  = ${MATLAB_ROOT_PATH}")
-endif()
-
 if(WITH_CHECK)
     message(STATUS "  Using libcheck                = ${LIBCHECK_LIBRARY}")
 endif()
@@ -815,51 +841,9 @@ if(APPLE)
 endif()
 
 
-# print selected packages if configured previously
-if(EXISTS ${CMAKE_BINARY_DIR}/CMakeCache.txt)
-
-    file(STRINGS  ${CMAKE_BINARY_DIR}/CMakeCache.txt cache)
-    set(last_line)
-    foreach(line ${cache})
-        string(LENGTH "${line}" length)
-        if(${length} GREATER 7)
-            string(SUBSTRING "${line}" 0 7 start)
-            if("${start}" STREQUAL  "ENABLE_")
-                if("${line}" MATCHES "^.*ON")
-                    message(STATUS "  ${last_line} = yes")
-                else()
-                    message(STATUS "  ${last_line} = no")
-                endif()
-            endif()
-
-            math(EXPR length_minus_two "${length} - 2")
-            if(${length_minus_two} GREATER 3)
-          math(EXPR length_minus_one "${length} - 1")
-                string(SUBSTRING "${line}" ${length_minus_one} 1 last_char)
-    if("x${last_char}" STREQUAL "x.")
-              math(EXPR length_minus_three "${length} - 3")
-                    string(SUBSTRING "${line}" 2 ${length_minus_three} last_line)
-                else()
-                    string(SUBSTRING "${line}" 2 ${length_minus_two} last_line)
-                endif()
-            endif()
-        else()
-            set(last_line "")
-            message("")
-        endif()
-    endforeach()
-
-endif()
-
 message(STATUS "
 ----------------------------------------------------------------------")
 
-
-if(WITH_CHECK)
-
-    add_subdirectory(tests)
-
-endif(WITH_CHECK)
 
 
 ## To compile a test program simply comment out the lines below ...
