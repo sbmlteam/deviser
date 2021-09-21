@@ -102,9 +102,6 @@ include(CPack)
 # Here we have the main configuration options for libtsb.
 #
 
-# Build static / shared library
-# option(BUILD_SHARED_LIBS  "Build shared library. (Set to OFF to build static libraries.)" OFF)
-
 # Whether to compile examples
 option(WITH_EXAMPLES "Compile the libTSB example programs."  OFF)
 
@@ -826,12 +823,6 @@ endif()
 message(STATUS "
 ----------------------------------------------------------------------")
 
-
-if(WITH_CHECK)
-
-    add_subdirectory(tests)
-
-endif(WITH_CHECK)
 
 
 ## To compile a test program simply comment out the lines below ...
