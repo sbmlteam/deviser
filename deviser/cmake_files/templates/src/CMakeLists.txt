@@ -43,7 +43,6 @@ endmacro(copy_if_different_and_remove)
 # create libsbml-config-common.h
 #
 include(CheckIncludeFiles)
-check_include_files (check.h HAVE_CHECK_H)
 check_include_files (expat.h HAVE_EXPAT_H)
 check_include_files (errno.h HAVE_ERRNO_H)
 check_include_files (ieeefp.h HAVE_IEEEFP_H)
@@ -68,15 +67,12 @@ endif()
 # so we encode these values here
 if (MSVC)
   set(HAVE_ERRNO_H TRUE)
-  set(HAVE_IEEEFP_H TRUE)
   set(STDC_HEADERS TRUE)
   set(HAVE_MATH_H TRUE)
   set(HAVE_SYS_TYPES_H TRUE)
 endif()
 
 
-include(CheckLibraryExists)
-check_library_exists(m sqrt "" HAVE_LIBM)
 
 # generate configuration for this system
 configure_file(
@@ -95,19 +91,13 @@ configure_file (
   "${CMAKE_CURRENT_BINARY_DIR}/sbml/common/libsbml-namespace.h"
 )
 
-<if_package>
-configure_file (
-  "${CMAKE_CURRENT_SOURCE_DIR}/sbml/common/libsbml-package.h.cmake"
-  "${CMAKE_CURRENT_BINARY_DIR}/sbml/common/libsbml-package.h"
-)
-</if_package>
   
 ###############################################################################
 #
 # mark header files for installation
 #
 
-foreach(dir annotation common compress conversion extension units util validator xml  )
+foreach(dir common util )
 
     file(GLOB header_files "${CMAKE_CURRENT_SOURCE_DIR}/sbml/${dir}/*.h")
     install(FILES ${header_files} DESTINATION include/sbml/${dir})
@@ -133,11 +123,11 @@ install(FILES ${additional_common} DESTINATION include/sbml/common)
 # specify include directories
 #
 
+include_directories(${LINKED_INCLUDE_DIR})
 include_directories(BEFORE ${LIBSBML_ROOT_SOURCE_DIR}/src/sbml)
-include_directories(BEFORE ${LIBSBML_ROOT_SOURCE_DIR}/src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR})
-include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/src)
-include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/src/sbml)
+include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/sbml)
 if (EXTRA_INCLUDE_DIRS) 
  include_directories(${EXTRA_INCLUDE_DIRS})
 endif(EXTRA_INCLUDE_DIRS)
@@ -161,7 +151,10 @@ macro(ADD_FUNCTION directory)
             ${prefix}${directory}/*.cpp
             ${prefix}${directory}/*.cxx
             ${prefix}${directory}/*.c
-            ${prefix}${directory}/*.h)
+            ${prefix}${directory}/*.h
+            ${CMAKE_CURRENT_BINARY_DIR}/src/${prefix}${directory}/*.h
+            )
+
 
     # Set the constraint files to be 'headers' as they don't have to be compiled
     # since they don't contain symbols but rather are included directly.  Could
@@ -193,7 +186,7 @@ macro(ADD_FUNCTION directory)
 
 endmacro(ADD_FUNCTION)
 
-foreach (directory common sbml)
+foreach (directory common sbml util)
 
 	ADD_FUNCTION(${directory})
 				       
@@ -231,6 +224,7 @@ if (NOT LIBSBML_SKIP_SHARED_LIBRARY)
 add_library (${LIBSBML_LIBRARY} SHARED ${LIBSBML_SOURCES} )
 
 if (LIBSBML_SHARED_VERSION)
+  set_target_properties(${LIBSBML_LIBRARY} PROPERTIES COMPILE_DEFINITIONS "LIBSBML_EXPORTS=1")
   SET_TARGET_PROPERTIES(${LIBSBML_LIBRARY} PROPERTIES
                         SOVERSION ${LIBSBML_VERSION_MAJOR}
                         VERSION ${LIBSBML_VERSION_MAJOR}.${LIBSBML_VERSION_MINOR}.${LIBSBML_VERSION_PATCH})
@@ -250,7 +244,7 @@ add_library (${LIBSBML_LIBRARY}-static STATIC ${LIBSBML_SOURCES} )
 
 if (WIN32 AND NOT CYGWIN)
     # don't decorate static library 
-    set_target_properties(${LIBSBML_LIBRARY}-static PROPERTIES COMPILE_DEFINITIONS "LIBLAX_STATIC=1;LIBSBML_STATIC=1")
+    set_target_properties(${LIBSBML_LIBRARY}-static PROPERTIES COMPILE_DEFINITIONS "LIBLX_STATIC=1;;LIBLAX_STAIC=1;LIBTSB_STATIC=1")
 endif(WIN32 AND NOT CYGWIN)
 
 target_link_libraries(${LIBSBML_LIBRARY}-static ${LIBSBML_LIBS} ${EXTRA_LIBS})
@@ -261,12 +255,12 @@ INSTALL(TARGETS ${LIBSBML_LIBRARY}-static
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 
+
 ##############################################################################
 #
 # add native tests
 #
 add_subdirectory(sbml)
-
 ##############################################################################
 #
 # construct list of all header files to create dependency list for 
