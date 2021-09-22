@@ -40,7 +40,11 @@ def go_into_new_directory():
     """
     Create the new ./temp directory if required. Go into it.
     """
-    os.chdir('./temp')
+    this_dir = os.getcwd()
+    temp_dir = os.path.join(this_dir, 'temp')
+    if not os.path.isdir(temp_dir):
+        os.mkdir(temp_dir)
+    os.chdir(temp_dir)
     new_dir = gv.language
     if not os.path.isdir(new_dir):
         os.mkdir(new_dir)
