@@ -43,10 +43,6 @@ MATH(EXPR LIBCOMBINE_VERSION_NUMERIC "${LIBCOMBINE_VERSION_MAJOR} * 10000 + ${LI
 set(PACKAGE_VERSION "${LIBCOMBINE_VERSION_MAJOR}.${LIBCOMBINE_VERSION_MINOR}.${LIBCOMBINE_VERSION_PATCH}${LIBCOMBINE_VERSION_RELEASE}")
 set(PACKAGE_NAME "libCombine")
 
-# add make dist and make check target as they are already familiar for
-# everyone using the gnumake build
-add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
-
 ###############################################################################
 #
 # The next lines configure the parameters for packaging the binaries.

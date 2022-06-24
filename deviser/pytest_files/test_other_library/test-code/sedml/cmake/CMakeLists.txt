@@ -43,10 +43,6 @@ MATH(EXPR LIBSEDML_VERSION_NUMERIC "${LIBSEDML_VERSION_MAJOR} * 10000 + ${LIBSED
 set(PACKAGE_VERSION "${LIBSEDML_VERSION_MAJOR}.${LIBSEDML_VERSION_MINOR}.${LIBSEDML_VERSION_PATCH}${LIBSEDML_VERSION_RELEASE}")
 set(PACKAGE_NAME "libSEDML")
 
-# add make dist and make check target as they are already familiar for
-# everyone using the gnumake build
-add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
-
 ###############################################################################
 #
 # The next lines configure the parameters for packaging the binaries.
