@@ -75,7 +75,6 @@ def generate_matlab_code(name, ob):
         ex.close_file()
 
 
-
 def main(args):
     if len(args) != 2:
         global_variables.code_returned = \
