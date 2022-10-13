@@ -198,7 +198,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.up_indent()
         self.write_line('error (\'invalid level/version combination\');')
         self.down_indent()
-        self.write_line('end;')
+        self.write_line('end')
         self.skip_line()
 
         self.write_line('SBMLfieldnames = [];')
@@ -216,9 +216,8 @@ class BaseMatlabFile(BaseFile.BaseFile):
         Another utility function, used a number of times.
         Write the `end` keywords at the end of a code block.
         """
-        self.down_indent()
         for _ in range(0, 3):
-            self.write_line('end;')
+            self.write_line('end')
             self.down_indent()
 
     def write_get_plugin_values_types(self, plugin):
@@ -305,7 +304,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.down_indent()
             v = v + 1
             if v <= self.num_versions:
-                self.write_line('else if (pkgVersion == {0})'.format(v))
+                self.write_line('elseif (pkgVersion == {0})'.format(v))
                 self.up_indent()
         self.write_ends()
 
@@ -422,7 +421,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.down_indent()
             v = v + 1
             if v <= self.num_versions:
-                self.write_line('else if (pkgVersion == {0})'.format(v))
+                self.write_line('elseif (pkgVersion == {0})'.format(v))
                 self.up_indent()
         self.write_ends()
 
@@ -586,7 +585,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.down_indent()
             v = v + 1
             if v <= self.num_versions:
-                self.write_line('else if (pkgVersion == {0})'.format(v))
+                self.write_line('elseif (pkgVersion == {0})'.format(v))
                 self.up_indent()
         self.write_ends()
 
