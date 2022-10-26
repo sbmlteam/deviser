@@ -485,8 +485,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
                 self.write_structure_cell(attrib['name'], self.package)
             num_fields += 1
             if self.get_type(attrib) == 'int32(0)' or self.get_type(attrib) == '0/0':
-                self.write_structure_cell('isSet{0}_{1}'.format(self.package, SF.lower_first(attrib['name'])),
-                                          '', 0, 7)
+                self.write_structure_cell(attrib['name'], self.package, 0, 7)
                 num_fields += 1
         return num_fields
 
@@ -500,8 +499,14 @@ class BaseMatlabFile(BaseFile.BaseFile):
                                          .format(self.open_br, self.close_br, attrib, is_sbml, sbml_type))
 
         else:
-            self.write_line_verbatim('{0}\'{2}_{3}\', \'{3}\', \'{2}\', {4}, {5}{1}, ...'
-                                     .format(self.open_br, self.close_br, plugin, attrib, is_sbml, sbml_type))
+            if sbml_type == 7:
+                sbmlname = 'isSet{0}_{1}'.format(self.package, SF.lower_first(attrib))
+                self.write_line_verbatim('{0}\'{6}\', \'{3}\', \'{2}\', {4}, {5}{1}, ...'
+                                         .format(self.open_br, self.close_br, plugin, attrib, is_sbml, sbml_type,
+                                                 sbmlname))
+            else:
+                self.write_line_verbatim('{0}\'{2}_{3}\', \'{3}\', \'{2}\', {4}, {5}{1}, ...'
+                                         .format(self.open_br, self.close_br, plugin, attrib, is_sbml, sbml_type))
 
     def write_get_plugin_fieldname(self, plugin):
         """
