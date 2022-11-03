@@ -96,6 +96,8 @@ Not all of the following are necessary as what is necessary depends on which ope
 
 The development of Deviser was supported in part by funding from the National Institute of General Medical Sciences (USA) under grant R01&nbsp;GM070923 (principal investigator: Michael Hucka).
 
+Fuether enhancement of Deviser was funded by [Chan Zuckerberg Initiative](https://chanzuckerberg.com/) under grant 2020-218578 (5022) (principal investigator: Sarah M Keating).
+
 
 ## Copyright and license ##
 
