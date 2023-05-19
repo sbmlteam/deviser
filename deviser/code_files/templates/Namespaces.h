@@ -2,12 +2,12 @@
 #define SBMLNamespaces_h
 
 <verbatim>
-#include <sbml/xml/XMLNamespaces.h>
-#include <sbml/util/List.h>
+#include <xml/XMLNamespaces.h>
+#include <util/List.h>
 </verbatim>
 
-#include <sbml/common/common.h>
-#include <sbml/common/sbmlfwd.h>
+#include <common/common.h>
+#include <common/sbmlfwd.h>
 
 #ifdef __cplusplus
 namespace LIBSBML_CPP_NAMESPACE 

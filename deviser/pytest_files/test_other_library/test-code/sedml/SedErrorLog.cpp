@@ -38,8 +38,8 @@
 #include <string>
 #include <list>
 
-#include <sbml/xml/XMLToken.h>
-#include <sbml/xml/XMLParser.h>
+#include <xml/XMLToken.h>
+#include <xml/XMLParser.h>
 
 #include <sedml/SedError.h>
 #include <sedml/SedErrorLog.h>

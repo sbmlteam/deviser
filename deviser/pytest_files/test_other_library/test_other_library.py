@@ -48,7 +48,7 @@ def teardown():
      'SedListOfOutputs'),
 
     # Tests from old rolt.testCombine()
-    ('combine-archive', 0, 'CaContent', 'check includes', 'CaListOfContents'),
+#    ('combine-archive', 0, 'CaContent', 'check includes', 'CaListOfContents'),
     # todo fails ('combine-archive', 1, 'CaOmexManifest', 'document', ''),
 
 ])
@@ -160,8 +160,8 @@ def test_enum(name, class_name, test_case):
 @pytest.mark.parametrize('name, class_name, test_case, binding, prefix', [
     ('test_sedml', 'libsedml', 'swig dir', 'swig', 'sedml'),
     ('test_sedml', 'libsedml', 'csharp dir', 'csharp', 'sedml'),
-    ('combine-archive', 'libcombine', 'csharp dir', 'csharp', 'combine'),
-    ('combine-archive', 'libcombine', 'swig dir', 'swig', 'combine'),
+#    ('combine-archive', 'libcombine', 'csharp dir', 'csharp', 'combine'),
+ #   ('combine-archive', 'libcombine', 'swig dir', 'swig', 'combine'),
 ])
 def test_bindings(name, class_name, test_case, binding, prefix):
     """

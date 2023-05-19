@@ -2,8 +2,8 @@
 
 #include <sbml/SBMLNamespaces.h>
 <verbatim>
-#include <sbml/xml/XMLNamespaces.h>
-#include <sbml/xml/XMLOutputStream.h>
+#include <xml/XMLNamespaces.h>
+#include <xml/XMLOutputStream.h>
 </verbatim>
 
 #include <string>

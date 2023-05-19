@@ -4,10 +4,10 @@ if(POLICY CMP0054)
     cmake_policy(SET CMP0054 NEW)
 endif()
 
-set(LIBTSB_ROOT_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" CACHE PATH
-    "Path to the libTSB root source directory")
-set(LIBTSB_ROOT_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}" CACHE PATH
-    "Path to the libTSB root build directory")
+set(LIBSEDML_ROOT_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" CACHE PATH
+    "Path to the libSEDML root source directory")
+set(LIBSEDML_ROOT_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}" CACHE PATH
+    "Path to the libSEDML root build directory")
 
 include (CMakeTestCCompiler)
 include (CheckCSourceCompiles)
@@ -19,7 +19,7 @@ include (CheckCCompilerFlag)
 include (CheckCSourceRuns)
 include (CheckSymbolExists)
 include (CheckTypeSize)
-include(GNUInstallDirs)
+include (GNUInstallDirs)
 
 ###############################################################################
 #
@@ -105,15 +105,15 @@ include(CPack)
 # Whether to compile examples
 option(WITH_EXAMPLES "Compile the libSEDML example programs."  OFF)
 
-##############
-## LATER TO DO
+#############
+# LATER TO DO
 # Which language bindings should be built
-#option(WITH_CSHARP   "Generate C# language bindings."     OFF)
-#option(WITH_JAVA     "Generate Java language bindings."   OFF)
-#option(WITH_PYTHON   "Generate Python language bindings." OFF)
-#option(WITH_PERL     "Generate Perl language bindings."   OFF)
-#option(WITH_RUBY     "Generate Ruby language bindings"    OFF)
-#option(WITH_R        "Generate R language bindings"       OFF)
+# option(WITH_CSHARP   "Generate C# language bindings."     OFF)
+# option(WITH_JAVA     "Generate Java language bindings."   OFF)
+# option(WITH_PYTHON   "Generate Python language bindings." OFF)
+# option(WITH_PERL     "Generate Perl language bindings."   OFF)
+# option(WITH_RUBY     "Generate Ruby language bindings"    OFF)
+# option(WITH_R        "Generate R language bindings"       OFF)
 
 # Add an option to compile with all warnings shown
 option(WITH_WALL     "Compile with -Wall, so that the compiler will display all warnings." OFF)
@@ -155,19 +155,19 @@ endif()
 # Use C++ namespace.
 option(WITH_CPP_NAMESPACE "Use a C++ namespace for libSEDML."   OFF)
 
-##############
-## LATER TO DO
+#############
+# LATER TO DO
 # Generate documentation.
-#option(WITH_DOXYGEN  "Generate documentation for libSEDML using Doxygen."  OFF )
+# option(WITH_DOXYGEN  "Generate documentation for libSEDML using Doxygen."  OFF )
 # marks as advanced, so as to hide documentation generation
-#mark_as_advanced(WITH_DOXYGEN)
+# mark_as_advanced(WITH_DOXYGEN)
 
-##############
-## LATER TO DO
+#############
+# LATER TO DO
 # Re-generate the swig bindings? This really should be on by default
 # otherwise one might have the wrong wrapper code without support for
 # the libsedml packages one wants.
-#option(WITH_SWIG     "Regenerate SWIG-based language bindings."  ON )
+# option(WITH_SWIG     "Regenerate SWIG-based language bindings."  ON )
 
 # Set build type default.
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING
@@ -228,18 +228,21 @@ if(WITH_SWIG)
 endif(WITH_SWIG)
 
 ###############################################################################
+#
 # Choose which library to link to.
+#
 
-option (WITH_LIBLX "Build the libraries linked to libLX" ON)
-option (WITH_LIBSBML "Build the libraries linked to libSBML" OFF)
+option (WITH_LIBLX "Build linked to libLX" ON)
+option (WITH_LIBSBML "Build linked to libSBML" OFF)
 
 if (WITH_LIBLX)
+
     # locate liblx
     find_library(LIBLX_LIBRARY
         NAMES liblx.lib liblx-static.lib
         PATHS ${LIBSEDML_DEPENDENCY_DIR}/lib
-        /usr/local/lib
-            /usr/lib
+        /usr/local/lib          
+        /usr/lib 
         DOC "The file name of the libLX library."
     )
 
@@ -247,14 +250,98 @@ if (WITH_LIBLX)
         NAMES liblx/common/liblx-version.h
         PATHS ${LIBSEDML_DEPENDENCY_DIR}/include
         /usr/local/include
-            /usr/include 
+        /usr/include 
         DOC "The directory containing the libLX include files."
     )
 
-    # to make seamless use of libsbml/liblx we want include dir to
-    # have sbml or liblax already included
+    # to make seamless use of libsbml/liblx we want include dir to have sbml or liblax already included
     set(XTRA_INC "${LIBLX_INCLUDE_DIR}/liblx")
     set(LIBLX_INCLUDE_DIR "${LIBLX_INCLUDE_DIR}")
+    set(LINKED_LIBRARY ${LIBLX_LIBRARY})
+    set(LINKED_INCLUDE_DIR ${LIBLX_INCLUDE_DIR})
+    set(LINKED_NAME "libLX")
+
+    set(LIBLX_STATIC OFF CACHE BOOL "is libLX statically compiled")
+
+    if (WIN32 AND NOT CYGWIN)
+        if (LINKED_LIBRARY AND LINKED_LIBRARY MATCHES ".*-static*$")
+            set(LIBLX_STATIC ON CACHE BOOL "is libLX statically compiled")
+        else()
+            option(LIBLX_STATIC "The libLX library was statically compiled" ON)
+        endif()
+    endif()
+
+    if (NOT EXISTS "${LIBLX_INCLUDE_DIR}/liblx/common/liblx-version.h")
+        message(FATAL_ERROR 
+        "The include directory ${LIBLX_INCLUDE_DIR} specified for libLX appears to be invalid. 
+        It should contain the file common/liblx-version.h, but it does not. 
+        Please specify the LIBLX_INCLUDE_DIR variable.")
+    endif()
+endif()
+
+if (WITH_LIBSBML)
+
+    # Locate libsbml
+    find_library(LIBSBML_LIBRARY
+        NAMES libsbml-static.lib sbml-static libsbml.lib sbml
+        PATHS ${LIBSEDML_DEPENDENCY_DIR}/lib
+        /usr/local/lib          
+        /usr/lib 
+        DOC "The file name of the sbml library."
+    )
+
+    find_path(LIBSBML_INCLUDE_DIR
+        NAMES sbml/SBase.h
+        PATHS ${LIBSEDML_DEPENDENCY_DIR}/include
+        /usr/local/include
+        /usr/include 
+        DOC "The directory containing the sbml include files."
+    )
+
+    # to make seamless use of libsbml/liblx we want include dir to have sbml or liblax already included
+    set(LIBSBML_INCLUDE_DIR "${LIBSBML_INCLUDE_DIR}")
+    set(XTRA_INC "${LIBSBML_INCLUDE_DIR}/sbml")
+    set(LINKED_LIBRARY ${LIBSBML_LIBRARY})
+    set(LINKED_INCLUDE_DIR ${LIBSBML_INCLUDE_DIR})
+    set(LINKED_NAME "libSBML")
+
+    set(LIBSBML_STATIC OFF CACHE BOOL "is libsbml statically compiled")
+
+    if (WIN32 AND NOT CYGWIN)
+        if (LIBSBML_LIBRARY AND LIBSBML_LIBRARY MATCHES ".*-static*$")
+            set(LIBSBML_STATIC ON CACHE BOOL "is libsbml statically compiled")
+        else()
+            option(LIBSBML_STATIC "The LibSBML library was statically compiled" ON)
+        endif()
+    endif()
+
+    if(NOT EXISTS "${LIBSBML_INCLUDE_DIR}/sbml/SBase.h")
+        message(FATAL_ERROR 
+        "The include directory ${LIBSBML_INCLUDE_DIR} specified for sbml appears to be invalid. 
+        It should contain the file sbml/SBase.h, but it does not. 
+        Please specify the LIBSBML_INCLUDE_DIR variable.")
+    endif()
+endif()
+
+# check only one option is selected
+set(LIBRARY_COUNT 0)
+
+if(WITH_LIBLX)
+    math(EXPR LIBRARY_COUNT "${LIBRARY_COUNT} + 1")
+endif()
+if(WITH_LIBSBML)
+    math(EXPR LIBRARY_COUNT "${LIBRARY_COUNT} + 1")
+endif()
+
+if(LIBRARY_COUNT GREATER 1)
+    message(FATAL_ERROR
+    "Only one linked library should be chosen. Please select only one of the following options: WITH_LIBSBML or WITH_LIBLX.")
+elseif(LIBRARY_COUNT EQUAL 0)
+    message(FATAL_ERROR 
+    "The ${LIBSEDML_LIBRARY} must be linked against either libLX or libSBML. Neither can be found.")
+endif()
+
+set (LIBSEDML_LIBS ${LIBSEDML_LIBS} ${LINKED_LIBRARY})
 
     set(LINKED_LIBRARY ${LIBLX_LIBRARY})
     set (LINKED_INCLUDE_DIR ${LIBLX_INCLUDE_DIR})
@@ -306,60 +393,13 @@ if (WITH_LIBSBML)
     set (LINKED_INCLUDE_DIR ${LIBSBML_INCLUDE_DIR})
     set(LINKED_NAME "libSBML")
 
-    set(LIBSBML_STATIC OFF CACHE BOOL "is libsbml statically compiled")
-    if (WIN32 AND NOT CYGWIN)
-        if (LIBSBML_LIBRARY AND LIBSBML_LIBRARY MATCHES ".*-static*$")
-            set(LIBSBML_STATIC ON CACHE BOOL "is libsbml statically compiled")
-        else()
-            option(LIBSBML_STATIC "The LibSBML library was statically compiled" ON)
-        endif()
-    endif()
-
-    if(NOT EXISTS "${LIBSBML_INCLUDE_DIR}/sbml/SBase.h")
-        message(FATAL_ERROR 
-    "The include directory ${LIBSBML_INCLUDE_DIR} specified for sbml appears to be invalid.  It should contain the 
-    file sbml/SBase.h, but it does not. Please specify the LIBSBML_INCLUDE_DIR variable."
-    )
-    endif()
-endif()
-
-# check only one option is selected
-set(LIBRARY_COUNT 0)
-if(WITH_LIBLX)
-    math(EXPR LIBRARY_COUNT "${LIBRARY_COUNT} + 1")
-endif()
-if(WITH_LIBSBML)
-    math(EXPR LIBRARY_COUNT "${LIBRARY_COUNT} + 1")
-endif()
-
-if(LIBRARY_COUNT GREATER 1)
-    message(FATAL_ERROR
-    "Only one linked library should be chosen. Please select only one of the
-    following options: WITH_LIBSBML or WITH_LIBLX.")
-elseif(LIBRARY_COUNT EQUAL 0)
-    message(FATAL_ERROR "The ${LIBTSB_LIBRARY} must be linked against either libLX or libSBML.
-    Neither can be found.")
-endif()
-
-set (LIBSEDML_LIBS ${LIBSEDML_LIBS} ${LINKED_LIBRARY})
-
-###############################################################################
-#
-# list of additional files to link against.
-#
-
-set(EXTRA_LIBS "" CACHE STRING "List of additional libraries to link against." )
-set(EXTRA_INCLUDE_DIRS "${XTRA_INC}" CACHE STRING "List of additional include directories to add." FORCE)
-set(EXTRA_DEFS "" CACHE STRING "List of additional flag to add." )
-
-
-
 ###############################################################################
 #
 # Find the C# compiler to use and set name for resulting library
 #
 
 if(WITH_CSHARP)
+
     find_program(CSHARP_COMPILER
         NAMES gmcs csc
         PATHS C:/Windows/Microsoft.NET/Framework/v2.0.50727/ /usr/bin /usr/local/bin
@@ -385,12 +425,12 @@ endif(WITH_CSHARP)
 # or make test
 #
 
-if(WITH_CHECK)
+if (WITH_CHECK)
 
-# we do use tests, that require 2.8.4 
-    cmake_minimum_required(VERSION 2.8.4) 
- 
-    enable_testing() 
+    # we do use tests, that require 2.8.4
+    cmake_minimum_required(VERSION 2.8.4)
+    enable_testing()
+
 endif(WITH_CHECK)
 
 ###############################################################################
@@ -406,6 +446,7 @@ if (APPLE)
 endif (APPLE)
 
 set( MISC_PREFIX )
+
 if(UNIX OR CYGWIN)
     set(PATH_SEP "/")
     set(FILE_SEP ":")
@@ -428,6 +469,7 @@ endif()
 set(CMAKE_INSTALL_LIBDIR lib CACHE PATH "Full path to the library output directory")
 mark_as_advanced(CMAKE_INSTALL_LIBDIR)
 
+
 ###############################################################################
 #
 # Set up remaining variables, add option for universal binaries
@@ -435,21 +477,22 @@ mark_as_advanced(CMAKE_INSTALL_LIBDIR)
 
 set(USING_INTEL)
 if (WIN32 AND CMAKE_C_COMPILER AND ${CMAKE_C_COMPILER} MATCHES ".*icl.*$")
-  message(STATUS "Detected Intel Compiler")
-  set(USING_INTEL TRUE)
+    message(STATUS "Detected Intel Compiler")
+    set(USING_INTEL TRUE)
 endif ()
 
-
 set(BUILD_DEFINITIONS)
+
 if(UNIX)
     if(APPLE)
+
         # on osx starting with xcode 4.3 the system root is in
         # the app bundle, however cmake (up to 2.8.8) does not seem
         # to update the path, so lets try it here
         if (CMAKE_OSX_SYSROOT AND NOT EXISTS ${CMAKE_OSX_SYSROOT})
-          if (EXISTS "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/${CMAKE_OSX_SYSROOT}")
-            set(CMAKE_OSX_SYSROOT "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/${CMAKE_OSX_SYSROOT}" CACHE STRING "The SDK root to be used" FORCE)
-          endif()
+            if (EXISTS "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/${CMAKE_OSX_SYSROOT}")
+                set(CMAKE_OSX_SYSROOT "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/${CMAKE_OSX_SYSROOT}" CACHE STRING "The SDK root to be used" FORCE)
+            endif()
         endif()
         add_definitions(-DMACOSX)
         set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DMACOSX")
@@ -457,10 +500,10 @@ if(UNIX)
         # Since we are encountering errors with the use of libc++ on OSX
         # this option allows to override which stdlib to use
         if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-          option(CLANG_USE_STDLIB "Use libstdc++ rather than libc++" OFF)
-          if (CLANG_USE_STDLIB)
-            SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libstdc++" )
-          endif()
+            option(CLANG_USE_STDLIB "Use libstdc++ rather than libc++" OFF)
+            if (CLANG_USE_STDLIB)
+                SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libstdc++" )
+            endif()
         endif()
         
         # On OSX it is common to build universal binaries to support multiple
@@ -478,16 +521,18 @@ if(UNIX)
                 STRING(REGEX REPLACE "^.*MacOSX([0-9]*\\.[0-9]*)\\.sdk$" "\\1"
                        OSX_SDK_VERSION "${CMAKE_OSX_SYSROOT}")
                 if(OSX_SDK_VERSION  VERSION_EQUAL "10.7" OR OSX_SDK_VERSION  VERSION_EQUAL "10.8")
-                   # OSX Lion no longer supports ppc architecture
-                   set(CMAKE_OSX_ARCHITECTURES "i386;x86_64" CACHE STRING
-                      "A semicolon-separated list of build architectures to be used." FORCE)
+                    # OSX Lion no longer supports ppc architecture
+                    set(CMAKE_OSX_ARCHITECTURES "i386;x86_64" CACHE STRING
+                    "A semicolon-separated list of build architectures to be used." FORCE)
                 else()
-                   set(CMAKE_OSX_ARCHITECTURES "i386;ppc;x86_64" CACHE STRING
-                       "A semicolon-separated list of build architectures to be used." FORCE)
+                    set(CMAKE_OSX_ARCHITECTURES "i386;ppc;x86_64" CACHE STRING
+                    "A semicolon-separated list of build architectures to be used." FORCE)
                 endif()
             endif()
         endif(ENABLE_UNIVERSAL)
+
     else(APPLE)
+
         add_definitions(-DLINUX)
 
         if(NOT CYGWIN)
@@ -497,25 +542,27 @@ if(UNIX)
         endif()
 
         set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLINUX")
+
     endif(APPLE)
 
     add_definitions( -DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\")
     set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\"")
 
 else(UNIX)
+
     add_definitions(-DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\")
     
     add_definitions(-DWIN32)
     set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DWIN32")
 
     if(WITH_LIBLX)
-      if (LIBLX_STATIC)
-          add_definitions(-DLIBLX_STATIC -DLIBLAX_STATIC)
-          set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBLX_STATIC -DLIBLAX_STATIC")
-      else()
-          add_definitions(-DLIBLX_EXPORTS -DLIBLAX_EXPORTS)
-          set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBLX_EXPORTS -DLIBLAX_EXPORTS")
-      endif()
+        if (LIBLX_STATIC)
+            add_definitions(-DLIBLX_STATIC -DLIBLAX_STATIC)
+            set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBLX_STATIC -DLIBLAX_STATIC")
+        else()
+            add_definitions(-DLIBLX_EXPORTS -DLIBLAX_EXPORTS)
+            set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBLX_EXPORTS -DLIBLAX_EXPORTS")
+        endif()
     endif()
     if(WITH_LIBSBML)
         if (LIBSBML_STATIC)
@@ -526,14 +573,6 @@ else(UNIX)
             set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_EXPORTS -DLIBLAX_EXPORTS")
         endif()
     endif()
-
-  if (LIBNUML_STATIC)
-      add_definitions(-DLIBNUML_STATIC)
-      set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBNUML_STATIC")
-  else()
-      add_definitions(-DLIBNUML_EXPORTS)
-      set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBNUML_EXPORTS")
-  endif()
   
     if(MSVC OR USING_INTEL)
       add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_DEPRECATE)
@@ -690,6 +729,7 @@ endif()
 # 
 add_subdirectory(src)
 
+
 ###############################################################################
 #
 # Build examples if specified
@@ -756,9 +796,9 @@ libSEDML version ${PACKAGE_VERSION}
      LDFLAGS                       = ${CMAKE_EXE_LINKER_FLAGS}
 
    ${LINKED_NAME} library configuration:
-     ${LINKED_NAME} library                  = ${LINKED_LIBRARY}
-     ${LINKED_NAME} include                  = -I${LINKED_INCLUDE_DIR}
-     EXTRA INCLUDES                          = -I${EXTRA_INCLUDE_DIRS}
+     ${LINKED_NAME} library        = ${LINKED_LIBRARY}
+     ${LINKED_NAME} include        = -I${LINKED_INCLUDE_DIR}
+     EXTRA INCLUDES                = -I${EXTRA_INCLUDE_DIRS}
 
    NUML library configuration:
      NUML library                  = ${LIBNUML_LIBRARY}
@@ -766,7 +806,6 @@ libSEDML version ${PACKAGE_VERSION}
 
   Other libSEDML configuration settings:
      Installation $prefix          = ${CMAKE_INSTALL_PREFIX}")
-
 
 
 if(UNIX)
@@ -829,6 +868,7 @@ if(APPLE)
         endif()
     endif()
 endif()
+
 
 message(STATUS "
 ----------------------------------------------------------------------")

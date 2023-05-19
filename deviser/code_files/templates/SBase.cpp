@@ -2,14 +2,13 @@
 #include <vector>
 
 <verbatim>
-#include <sbml/xml/XMLError.h>
-#include <sbml/xml/XMLErrorLog.h>
-#include <sbml/xml/XMLOutputStream.h>
-#include <sbml/xml/XMLInputStream.h>
-#include <sbml/xml/XMLToken.h>
-#include <sbml/xml/XMLNode.h>
-
-#include <sbml/util/util.h>
+#include <xml/XMLError.h>
+#include <xml/XMLErrorLog.h>
+#include <xml/XMLOutputStream.h>
+#include <xml/XMLInputStream.h>
+#include <xml/XMLToken.h>
+#include <xml/XMLNode.h>
+#include <util/util.h>
 </verbatim>
 
 #include <sbml/SBMLError.h>

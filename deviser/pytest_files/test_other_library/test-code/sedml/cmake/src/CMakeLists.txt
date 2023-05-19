@@ -72,8 +72,6 @@ if (MSVC)
   set(HAVE_SYS_TYPES_H TRUE)
 endif()
 
-
-
 # generate configuration for this system
 configure_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/sedml/common/libsedml-config-common.h.cmake

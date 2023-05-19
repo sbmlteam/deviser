@@ -3,9 +3,9 @@
 #include <fstream>
 #include <sstream>
 
-#include <sbml/common/common.h>
+#include <common/common.h>
 <verbatim>
-#include <sbml/xml/XMLOutputStream.h>
+#include <xml/XMLOutputStream.h>
 </verbatim>
 
 #include <sbml/SBMLError.h>
@@ -14,8 +14,8 @@
 #include <sbml/SBMLWriter.h>
 
 <verbatim>
-#include <sbml/compress/CompressCommon.h>
-#include <sbml/compress/OutputCompressor.h>
+#include <compress/CompressCommon.h>
+#include <compress/OutputCompressor.h>
 </verbatim>
 
 /** @cond doxygenIgnored */

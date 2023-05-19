@@ -39,15 +39,15 @@
 #include <sstream>
 
 #include <sedml/common/common.h>
-#include <sbml/xml/XMLOutputStream.h>
+#include <xml/XMLOutputStream.h>
 
 #include <sedml/SedError.h>
 #include <sedml/SedErrorLog.h>
 #include <sedml/SedDocument.h>
 #include <sedml/SedWriter.h>
 
-#include <sbml/compress/CompressCommon.h>
-#include <sbml/compress/OutputCompressor.h>
+#include <compress/CompressCommon.h>
+#include <compress/OutputCompressor.h>
 
 /** @cond doxygenIgnored */
 

@@ -37,7 +37,7 @@
 #define SedError_h
 
 #include <sedml/common/extern.h>
-#include <sbml/xml/XMLError.h>
+#include <xml/XMLError.h>
 #include <sedml/SedNamespaces.h>
 
 
@@ -464,9 +464,9 @@ typedef enum
  */
 typedef enum
 {
-    LIBSEDML_CAT_INTERNAL = LIBSBML_CAT_INTERNAL,
-    LIBSEDML_CAT_SYSTEM = LIBSBML_CAT_SYSTEM,
-    LIBSEDML_CAT_XML = LIBSBML_CAT_XML,
+    LIBSEDML_CAT_INTERNAL = 1,
+    LIBSEDML_CAT_SYSTEM = 2,
+    LIBSEDML_CAT_XML = 3,
 
     LIBSEDML_CAT_SEDML = (LIBSEDML_CAT_XML + 1)
     /*!< General SEDML error  not falling into another category below. */
@@ -513,9 +513,9 @@ typedef enum
    * we only report one of the 4 XMLError_Severity values.  Translation
    * of the codes is done in SedError.cpp.
    */
-    LIBSEDML_SEV_WARNING = LIBSBML_SEV_WARNING,
-    LIBSEDML_SEV_ERROR = LIBSBML_SEV_ERROR,
-    LIBSEDML_SEV_FATAL = LIBSBML_SEV_FATAL,
+    LIBSEDML_SEV_WARNING = 1,
+    LIBSEDML_SEV_ERROR = 2,
+    LIBSEDML_SEV_FATAL = 3,
 
     LIBSEDML_SEV_SCHEMA_ERROR    = (LIBSEDML_SEV_FATAL + 1)
     /*!< The XML content does not conform to

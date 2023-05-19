@@ -5,7 +5,7 @@
 #include <sstream>
 
 <verbatim>
-#include <sbml/xml/XMLError.h>
+#include <xml/XMLError.h>
 </verbatim>
 
 #include <sbml/SBMLError.h>

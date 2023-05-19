@@ -42,7 +42,7 @@
 #ifndef ListWrapper_h
 #define ListWrapper_h
 
-#include <sbml/util/List.h>
+#include <util/List.h>
 #include <omex/common/extern.h>
 
 LIBCOMBINE_CPP_NAMESPACE_USE

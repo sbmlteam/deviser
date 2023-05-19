@@ -32,7 +32,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sedml/SedDocument.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 #include <sedml/SedUniformTimeCourse.h>
 #include <sedml/SedOneStep.h>

@@ -39,8 +39,8 @@
 #ifndef SedNamespaces_h
 #define SedNamespaces_h
 
-#include <sbml/xml/XMLNamespaces.h>
-#include <sbml/util/List.h>
+#include <xml/XMLNamespaces.h>
+#include <util/List.h>
 
 #include <sedml/common/common.h>
 #include <sedml/common/sedmlfwd.h>
