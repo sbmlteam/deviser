@@ -43,17 +43,17 @@
 #define CaBase_h
 
 
-#include <omex/common/extern.h>
-#include <omex/common/libcombine-namespace.h>
-#include <sbml/common/libsbml-namespace.h>
-#include <omex/common/combinefwd.h>
+#include <common/extern.h>
+#include <common/libcombine-namespace.h>
+#include <common/libsbml-namespace.h>
+#include <common/combinefwd.h>
 #include <omex/CaTypeCodes.h>
 #include <omex/CaNamespaces.h>
 #include <omex/CaConstructorException.h>
-#include <sbml/util/List.h>
+#include <util/List.h>
 #include <sbml/SyntaxChecker.h>
 #include <sbml/ExpectedAttributes.h>
-#include <sbml/xml/XMLNode.h>
+#include <xml/XMLNode.h>
 
 #ifdef __cplusplus
 

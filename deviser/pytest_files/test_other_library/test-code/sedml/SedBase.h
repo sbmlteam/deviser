@@ -40,10 +40,10 @@
 #define SedBase_h
 
 
-#include <sedml/common/extern.h>
-#include <sedml/common/libsedml-namespace.h>
-#include <sbml/common/libsbml-namespace.h>
-#include <sedml/common/sedmlfwd.h>
+#include <common/extern.h>
+#include <common/libsedml-namespace.h>
+#include <common/libsbml-namespace.h>
+#include <common/sedmlfwd.h>
 #include <sedml/SedTypeCodes.h>
 #include <sedml/SedNamespaces.h>
 #include <sedml/SedConstructorException.h>

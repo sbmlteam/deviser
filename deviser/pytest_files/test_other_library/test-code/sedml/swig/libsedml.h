@@ -34,8 +34,8 @@
 
 
 
-#include <sedml/common/libsedml-version.h>
-#include <sedml/common/SedOperationReturnValues.h>
+#include <common/libsedml-version.h>
+#include <common/SedOperationReturnValues.h>
 
 #include <sedml/SedTypes.h>
 

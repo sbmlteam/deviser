@@ -40,8 +40,8 @@
 #define SedReader_h
 
 
-#include <sedml/common/extern.h>
-#include <sedml/common/sedmlfwd.h>
+#include <common/extern.h>
+#include <common/sedmlfwd.h>
 #include <util/util.h>
 
 #ifdef __cplusplus

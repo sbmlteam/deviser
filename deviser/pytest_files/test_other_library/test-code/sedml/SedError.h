@@ -36,7 +36,7 @@
 #ifndef SedError_h
 #define SedError_h
 
-#include <sedml/common/extern.h>
+#include <common/extern.h>
 #include <xml/XMLError.h>
 #include <sedml/SedNamespaces.h>
 

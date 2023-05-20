@@ -39,7 +39,7 @@
 #ifndef SEDML_CONSTRUCTOR_EXCEPTION_H
 #define SEDML_CONSTRUCTOR_EXCEPTION_H
 
-#include <sedml/common/extern.h>
+#include <common/extern.h>
 #include <sedml/SedNamespaces.h>
 
 #ifdef __cplusplus

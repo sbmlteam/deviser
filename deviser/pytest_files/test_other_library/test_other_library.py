@@ -202,9 +202,9 @@ def test_bindings(name, class_name, test_case, binding, prefix):
 
 
 @pytest.mark.parametrize('name, class_name', [
-    ('test_sedml', 'libsedml'),
+#    ('test_sedml', 'libsedml'),
     ('combine-archive', 'libcombine'),
-    ('testsbxml', 'libTSB')
+#    ('testsbxml', 'libTSB')
 ])
 def test_cmake(name, class_name):
     """

@@ -35,7 +35,7 @@
 
 #include <sedml/SedNamespaces.h>
 #include <sstream>
-#include <sedml/common/common.h>
+#include <common/common.h>
 #include <iostream>
 
 /** @cond doxygenIgnored */

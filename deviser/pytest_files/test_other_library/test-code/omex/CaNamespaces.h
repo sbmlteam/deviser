@@ -42,11 +42,11 @@
 #ifndef CaNamespaces_h
 #define CaNamespaces_h
 
-#include <sbml/xml/XMLNamespaces.h>
-#include <sbml/util/List.h>
+#include <xml/XMLNamespaces.h>
+#include <util/List.h>
 
-#include <omex/common/common.h>
-#include <omex/common/combinefwd.h>
+#include <common/common.h>
+#include <common/combinefwd.h>
 
 #ifdef __cplusplus
 namespace LIBCOMBINE_CPP_NAMESPACE 
