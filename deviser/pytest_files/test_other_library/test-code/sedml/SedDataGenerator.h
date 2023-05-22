@@ -54,7 +54,7 @@
 #include <sbml/math/ASTNode.h>
 #include <sedml/SedListOfVariables.h>
 #include <sedml/SedListOfParameters.h>
-#include <sbml/common/libsbml-namespace.h>
+#include <common/libsbml-namespace.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
@@ -1211,6 +1211,19 @@ public:
    * object is found, this method returns @c NULL.
    */
   virtual SedBase* getElementBySId(const std::string& id);
+
+
+  /**
+   * Returns a List of all child SedBase objects, including those nested to an
+   * arbitrary depth.
+   *
+   * @param filter an ElementFilter that may impose restrictions on the objects
+   * to be retrieved.
+   *
+   * @return a List pointer of pointers to all SedBase child objects with any
+   * restriction imposed.
+   */
+  virtual List* getAllElements(SedElementFilter * filter = NULL);
 
 
 protected:

@@ -33,7 +33,7 @@
  */
 #include <sedml/SedModel.h>
 #include <sedml/SedListOfModels.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 #include <sedml/SedAddXML.h>
 #include <sedml/SedChangeXML.h>

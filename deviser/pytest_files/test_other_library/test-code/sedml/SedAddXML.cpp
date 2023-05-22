@@ -32,7 +32,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sedml/SedAddXML.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 
 using namespace std;
