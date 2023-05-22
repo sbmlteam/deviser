@@ -36,7 +36,7 @@
  */
 #include <omex/CaContent.h>
 #include <omex/CaListOfContents.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 
 using namespace std;

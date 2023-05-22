@@ -54,7 +54,7 @@
 
 
 #include <omex/CaBase.h>
-#include <sbml/common/libsbml-namespace.h>
+#include <common/libsbml-namespace.h>
 
 
 LIBCOMBINE_CPP_NAMESPACE_BEGIN
