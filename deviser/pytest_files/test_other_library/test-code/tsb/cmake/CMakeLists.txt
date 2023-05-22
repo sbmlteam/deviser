@@ -52,11 +52,6 @@ MATH(EXPR LIBTSB_VERSION_NUMERIC "${LIBTSB_VERSION_MAJOR} * 10000 + ${LIBTSB_VER
 set(PACKAGE_VERSION "${LIBTSB_VERSION_MAJOR}.${LIBTSB_VERSION_MINOR}.${LIBTSB_VERSION_PATCH}${LIBTSB_VERSION_RELEASE}")
 set(PACKAGE_NAME "libTSB")
 
-# add make dist and make check target as they are already familiar for
-# everyone using the gnumake build
-add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
-add_custom_target(check COMMAND ${CMAKE_MAKE_PROGRAM} test)
-
 ###############################################################################
 #
 # The next lines configure the parameters for packaging the binaries.
@@ -360,6 +355,7 @@ set(EXTRA_DEFS "" CACHE STRING "List of additional flag to add." )
 #
 
 if(WITH_CSHARP)
+
     find_program(CSHARP_COMPILER
         NAMES gmcs csc
         PATHS C:/Windows/Microsoft.NET/Framework/v2.0.50727/ /usr/bin /usr/local/bin
@@ -385,7 +381,7 @@ endif(WITH_CSHARP)
 # or make test
 #
 
-if(WITH_CHECK)
+if (WITH_CHECK)
 
 # we do use tests, that require 2.8.4 
     cmake_minimum_required(VERSION 2.8.4) 
@@ -406,6 +402,7 @@ if (APPLE)
 endif (APPLE)
 
 set( MISC_PREFIX )
+
 if(UNIX OR CYGWIN)
     set(PATH_SEP "/")
     set(FILE_SEP ":")
@@ -428,6 +425,7 @@ endif()
 set(CMAKE_INSTALL_LIBDIR lib CACHE PATH "Full path to the library output directory")
 mark_as_advanced(CMAKE_INSTALL_LIBDIR)
 
+
 ###############################################################################
 #
 # Set up remaining variables, add option for universal binaries
@@ -435,21 +433,22 @@ mark_as_advanced(CMAKE_INSTALL_LIBDIR)
 
 set(USING_INTEL)
 if (WIN32 AND CMAKE_C_COMPILER AND ${CMAKE_C_COMPILER} MATCHES ".*icl.*$")
-  message(STATUS "Detected Intel Compiler")
-  set(USING_INTEL TRUE)
+    message(STATUS "Detected Intel Compiler")
+    set(USING_INTEL TRUE)
 endif ()
 
-
 set(BUILD_DEFINITIONS)
+
 if(UNIX)
     if(APPLE)
+
         # on osx starting with xcode 4.3 the system root is in
         # the app bundle, however cmake (up to 2.8.8) does not seem
         # to update the path, so lets try it here
         if (CMAKE_OSX_SYSROOT AND NOT EXISTS ${CMAKE_OSX_SYSROOT})
-          if (EXISTS "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/${CMAKE_OSX_SYSROOT}")
-            set(CMAKE_OSX_SYSROOT "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/${CMAKE_OSX_SYSROOT}" CACHE STRING "The SDK root to be used" FORCE)
-          endif()
+            if (EXISTS "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/${CMAKE_OSX_SYSROOT}")
+                set(CMAKE_OSX_SYSROOT "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/${CMAKE_OSX_SYSROOT}" CACHE STRING "The SDK root to be used" FORCE)
+            endif()
         endif()
         add_definitions(-DMACOSX)
         set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DMACOSX")
@@ -457,10 +456,10 @@ if(UNIX)
         # Since we are encountering errors with the use of libc++ on OSX
         # this option allows to override which stdlib to use
         if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-          option(CLANG_USE_STDLIB "Use libstdc++ rather than libc++" OFF)
-          if (CLANG_USE_STDLIB)
-            SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libstdc++" )
-          endif()
+            option(CLANG_USE_STDLIB "Use libstdc++ rather than libc++" OFF)
+            if (CLANG_USE_STDLIB)
+                SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libstdc++" )
+            endif()
         endif()
         
         # On OSX it is common to build universal binaries to support multiple
@@ -478,16 +477,18 @@ if(UNIX)
                 STRING(REGEX REPLACE "^.*MacOSX([0-9]*\\.[0-9]*)\\.sdk$" "\\1"
                        OSX_SDK_VERSION "${CMAKE_OSX_SYSROOT}")
                 if(OSX_SDK_VERSION  VERSION_EQUAL "10.7" OR OSX_SDK_VERSION  VERSION_EQUAL "10.8")
-                   # OSX Lion no longer supports ppc architecture
-                   set(CMAKE_OSX_ARCHITECTURES "i386;x86_64" CACHE STRING
-                      "A semicolon-separated list of build architectures to be used." FORCE)
+                    # OSX Lion no longer supports ppc architecture
+                    set(CMAKE_OSX_ARCHITECTURES "i386;x86_64" CACHE STRING
+                    "A semicolon-separated list of build architectures to be used." FORCE)
                 else()
-                   set(CMAKE_OSX_ARCHITECTURES "i386;ppc;x86_64" CACHE STRING
-                       "A semicolon-separated list of build architectures to be used." FORCE)
+                    set(CMAKE_OSX_ARCHITECTURES "i386;ppc;x86_64" CACHE STRING
+                    "A semicolon-separated list of build architectures to be used." FORCE)
                 endif()
             endif()
         endif(ENABLE_UNIVERSAL)
+
     else(APPLE)
+
         add_definitions(-DLINUX)
 
         if(NOT CYGWIN)
@@ -497,12 +498,14 @@ if(UNIX)
         endif()
 
         set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLINUX")
+
     endif(APPLE)
 
     add_definitions( -DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\")
     set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\"")
 
 else(UNIX)
+
     add_definitions(-DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\")
     
     add_definitions(-DWIN32)
@@ -526,7 +529,6 @@ else(UNIX)
             set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_EXPORTS -DLIBLAX_EXPORTS")
         endif()
     endif()
-
   
     if(MSVC OR USING_INTEL)
       add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_DEPRECATE)
@@ -756,7 +758,6 @@ libTSB version ${PACKAGE_VERSION}
 
   Other libTSB configuration settings:
      Installation $prefix          = ${CMAKE_INSTALL_PREFIX}")
-
 
 
 if(UNIX)
