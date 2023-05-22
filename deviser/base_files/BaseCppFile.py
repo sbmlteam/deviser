@@ -306,7 +306,7 @@ class BaseCppFile(BaseFile.BaseFile):
         elif att_type == 'double':
             mydict.update({'attType': 'double', 'attTypeCode': 'double',
                            'CType': 'double', 'isNumber': True,
-                           'default': 'util_NaN()'})
+                           'default': '{0}_util_NaN()'.format(self.language)})
 
         elif att_type == 'int':
             mydict.update({'attType': 'integer', 'attTypeCode': 'int',
