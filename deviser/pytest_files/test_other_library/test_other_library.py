@@ -29,48 +29,48 @@ def teardown():
         shutil.rmtree(temp_dir)
 
 
-@pytest.mark.parametrize('name, num, class_name, test_case, list_of', [
-    ('test_sedml', 1, 'SedModel', 'model', 'SedListOfModels'),
-    ('test_sedml', 0, 'SedDocument', 'document', ''),
-    ('test_sedml', 3, 'SedAddXML', 'xmlnode used', ''),
-    ('test_sedml', 26, 'SedSetValue', 'astnode used', ''),
-    ('test_sedml', 12, 'SedDataGenerator', 'astnode in getElementBySId bug', ''),
-    ('test_sedml', 33, 'SedRepeatedTask', 'attribute with different xml name', ''),
-    ('test_sedml', 7, 'SedSimulation', 'child element', ''),
-    ('test_sedml', 28, 'SedVectorRange', 'deal with vectors', ''),
-    ('test_sedml', 10, 'SedAbstractTask', 'catch different abstract types',
-     'SedListOfTasks'),
-    ('test_sedml', 13, 'SedOutput', 'catch different abstract types',
-     'SedListOfOutputs'),
-    ('combine-archive', 0, 'CaContent', 'check includes', 'CaListOfContents'),
-    ('combine-archive', 1, 'CaOmexManifest', 'document', ''),
-
-])
-def test_cpp(name, num, class_name, test_case, list_of):
-    """
-    Based on test_utils.run_test(). Run the C++ file tests.
-
-    :param name: name of test group e.g. 'test_sedml', 'combine-archive'.
-    :param num: list index, so we only generate a
-                particular class, not all of them
-    :param class_name: name of C++ class (and thus .cpp/.h filenames),
-                e.g. 'CaContent'
-    :param test_case: brief test description
-    :param list_of: class name (and thus filenames) of any corresponding
-                "list of" class, e.g. 'CaListOfContents'
-    """
-    gv.reset()
-    xml_filename = functions.set_up_test(name, class_name, test_case)
-    assert xml_filename is not None and xml_filename != ""
-    test_utils.generate_new_cpp_header(xml_filename, num)
-    assert 0 == test_utils.compare_code_headers(class_name)
-    assert 0 == test_utils.compare_code_impl(class_name)
-    if len(list_of) > 0:
-        class_name = list_of
-        assert 0 == test_utils.compare_code_headers(class_name)
-        assert 0 == test_utils.compare_code_impl(class_name)
-
-
+# @pytest.mark.parametrize('name, num, class_name, test_case, list_of', [
+#     ('test_sedml', 1, 'SedModel', 'model', 'SedListOfModels'),
+#     ('test_sedml', 0, 'SedDocument', 'document', ''),
+#     ('test_sedml', 3, 'SedAddXML', 'xmlnode used', ''),
+#     ('test_sedml', 26, 'SedSetValue', 'astnode used', ''),
+#     ('test_sedml', 12, 'SedDataGenerator', 'astnode in getElementBySId bug', ''),
+#     ('test_sedml', 33, 'SedRepeatedTask', 'attribute with different xml name', ''),
+#     ('test_sedml', 7, 'SedSimulation', 'child element', ''),
+#     ('test_sedml', 28, 'SedVectorRange', 'deal with vectors', ''),
+#     ('test_sedml', 10, 'SedAbstractTask', 'catch different abstract types',
+#      'SedListOfTasks'),
+#     ('test_sedml', 13, 'SedOutput', 'catch different abstract types',
+#      'SedListOfOutputs'),
+#     ('combine-archive', 0, 'CaContent', 'check includes', 'CaListOfContents'),
+#     ('combine-archive', 1, 'CaOmexManifest', 'document', ''),
+#
+# ])
+# def test_cpp(name, num, class_name, test_case, list_of):
+#     """
+#     Based on test_utils.run_test(). Run the C++ file tests.
+#
+#     :param name: name of test group e.g. 'test_sedml', 'combine-archive'.
+#     :param num: list index, so we only generate a
+#                 particular class, not all of them
+#     :param class_name: name of C++ class (and thus .cpp/.h filenames),
+#                 e.g. 'CaContent'
+#     :param test_case: brief test description
+#     :param list_of: class name (and thus filenames) of any corresponding
+#                 "list of" class, e.g. 'CaListOfContents'
+#     """
+#     gv.reset()
+#     xml_filename = functions.set_up_test(name, class_name, test_case)
+#     assert xml_filename is not None and xml_filename != ""
+#     test_utils.generate_new_cpp_header(xml_filename, num)
+#     assert 0 == test_utils.compare_code_headers(class_name)
+#     assert 0 == test_utils.compare_code_impl(class_name)
+#     if len(list_of) > 0:
+#         class_name = list_of
+#         assert 0 == test_utils.compare_code_headers(class_name)
+#         assert 0 == test_utils.compare_code_impl(class_name)
+#
+#
 # @pytest.mark.parametrize('name, class_name, test_case, list_of', [
 #     # Tests from old test_utils.testCombine()
 #     ('test_sedml', 'SedBase', 'templates', 'SedListOf'),
@@ -151,50 +151,50 @@ def test_cpp(name, num, class_name, test_case, list_of):
 #     assert 0 == test_utils.compare_code_impl(class_name)
 #
 #
-# @pytest.mark.parametrize('name, class_name, test_case, binding, prefix', [
-#     ('test_sedml', 'libsedml', 'swig dir', 'swig', 'sedml'),
-#     ('test_sedml', 'libsedml', 'csharp dir', 'csharp', 'sedml'),
-# #    ('combine-archive', 'libcombine', 'csharp dir', 'csharp', 'combine'),
-#  #   ('combine-archive', 'libcombine', 'swig dir', 'swig', 'combine'),
-# ])
-# def test_bindings(name, class_name, test_case, binding, prefix):
-#     """
-#     Based on old test_bindings() function.
-#     Compare the 'bindings' files.
-#
-#     :param name: stub of XML filename, e.g. 'test_sedml' for
-#               file test_sedml.xml.
-#     :param class_name: the test class, e.g. 'libsedml'
-#     :param test_case: brief description of tests, e.g. 'swig dir'
-#     :param binding: the binding type, e.g. 'swig'
-#     :param prefix: used to match library files, e.g. 'combine' matches
-#               libcombine-*.*
-#     """
-#     gv.reset()
-#     xml_filename = functions.set_up_test(name, class_name, test_case)
-#     test_utils.generate_binding(xml_filename, binding)
-#     if binding == 'swig':
-#         assert 0 == test_utils.compare_binding_headers('ListWrapper', binding, "")
-#         assert 0 == test_utils.compare_binding_headers('OStream', binding, "")
-#         assert 0 == test_utils.compare_binding_impl('OStream', binding, "")
-#         assert 0 == test_utils.compare_binding_interface('std_set', binding, "")
-#         assert 0 == test_utils.compare_binding_headers('lib{0}'.format(prefix),
-#                                                        binding, "")
-#         assert 0 == test_utils.compare_binding_interface('lib{0}'.format(prefix),
-#                                                          binding, "")
-#         assert 0 == test_utils.compare_binding_interface('ASTNodes', binding, "")
-#     elif binding == 'csharp':
-#         assert 0 == test_utils.compare_binding_impl('local', binding, "")
-#         assert 0 == test_utils.compare_binding_interface('local', binding, "")
-#         assert 0 == test_utils.compare_binding_interface('lib{0}'.format(prefix),
-#                                                          binding, "")
-#         assert 0 == test_utils.compare_binding_file('CMakeLists.txt', binding, "")
-#         assert 0 == test_utils.compare_binding_file('compile-native-files.cmake',
-#                                                     binding, "")
-#         assert 0 == test_utils.compare_binding_file('AssemblyInfo.cs.in',
-#                                                     binding, "")
-#
-#
+@pytest.mark.parametrize('name, class_name, test_case, binding, prefix', [
+    ('test_sedml', 'libsedml', 'swig dir', 'swig', 'sedml'),
+    ('test_sedml', 'libsedml', 'csharp dir', 'csharp', 'sedml'),
+    ('combine-archive', 'libcombine', 'csharp dir', 'csharp', 'combine'),
+    ('combine-archive', 'libcombine', 'swig dir', 'swig', 'combine'),
+])
+def test_bindings(name, class_name, test_case, binding, prefix):
+    """
+    Based on old test_bindings() function.
+    Compare the 'bindings' files.
+
+    :param name: stub of XML filename, e.g. 'test_sedml' for
+              file test_sedml.xml.
+    :param class_name: the test class, e.g. 'libsedml'
+    :param test_case: brief description of tests, e.g. 'swig dir'
+    :param binding: the binding type, e.g. 'swig'
+    :param prefix: used to match library files, e.g. 'combine' matches
+              libcombine-*.*
+    """
+    gv.reset()
+    xml_filename = functions.set_up_test(name, class_name, test_case)
+    test_utils.generate_binding(xml_filename, binding)
+    if binding == 'swig':
+        assert 0 == test_utils.compare_binding_headers('ListWrapper', binding, "")
+        assert 0 == test_utils.compare_binding_headers('OStream', binding, "")
+        assert 0 == test_utils.compare_binding_impl('OStream', binding, "")
+        assert 0 == test_utils.compare_binding_interface('std_set', binding, "")
+        assert 0 == test_utils.compare_binding_headers('lib{0}'.format(prefix),
+                                                       binding, "")
+        assert 0 == test_utils.compare_binding_interface('lib{0}'.format(prefix),
+                                                         binding, "")
+        assert 0 == test_utils.compare_binding_interface('ASTNodes', binding, "")
+    elif binding == 'csharp':
+        assert 0 == test_utils.compare_binding_impl('local', binding, "")
+        assert 0 == test_utils.compare_binding_interface('local', binding, "")
+        assert 0 == test_utils.compare_binding_interface('lib{0}'.format(prefix),
+                                                         binding, "")
+        assert 0 == test_utils.compare_binding_file('CMakeLists.txt', binding, "")
+        assert 0 == test_utils.compare_binding_file('compile-native-files.cmake',
+                                                    binding, "")
+        assert 0 == test_utils.compare_binding_file('AssemblyInfo.cs.in',
+                                                    binding, "")
+
+
 # @pytest.mark.parametrize('name, class_name', [
 # #    ('test_sedml', 'libsedml'),
 #     ('combine-archive', 'libcombine'),

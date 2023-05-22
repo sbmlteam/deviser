@@ -68,11 +68,11 @@ LIBCOMBINE_CPP_NAMESPACE_USE
 #include "local.cpp"
 %}
 
-%import  omex/common/libcombine-namespace.h
-%import  omex/common/extern.h
-%import  omex/common/combinefwd.h
-%import  sbml/common/extern.h
-%import  sbml/xml/XMLExtern.h
+%import  common/libcombine-namespace.h
+%import  common/extern.h
+%import  common/combinefwd.h
+%import  common/extern.h
+%import  xml/XMLExtern.h
 
 /**
  * Wraps List class by ListWrapper<TYPENAME> template class.
@@ -320,24 +320,24 @@ typedef std::vector<XMLError*> XmlErrorStdVector;
 %template(CaErrorStdVector) std::vector<CaError>;
 typedef std::vector<CaError> CaErrorStdVector;
 
-%include omex/common/libcombine-version.h
-%include omex/common/CaOperationReturnValues.h
-%include sbml/common/libsbml-version.h
-%include sbml/common/operationReturnValues.h
+%include common/libcombine-version.h
+%include common/CaOperationReturnValues.h
+%include common/libsbml-version.h
+%include common/operationReturnValues.h
 
 %include sbml/SyntaxChecker.h
 %include sbml/ExpectedAttributes.h
 
-%include sbml/xml/XMLAttributes.h
-%include sbml/xml/XMLConstructorException.h
-%include sbml/xml/XMLNamespaces.h
-%include sbml/xml/XMLToken.h
-%include sbml/xml/XMLNode.h
-%include sbml/xml/XMLTriple.h
-%include sbml/xml/XMLOutputStream.h
-%include sbml/xml/XMLInputStream.h
-%include sbml/xml/XMLError.h
-%include sbml/xml/XMLErrorLog.h
+%include xml/XMLAttributes.h
+%include xml/XMLConstructorException.h
+%include xml/XMLNamespaces.h
+%include xml/XMLToken.h
+%include xml/XMLNode.h
+%include xml/XMLTriple.h
+%include xml/XMLOutputStream.h
+%include xml/XMLInputStream.h
+%include xml/XMLError.h
+%include xml/XMLErrorLog.h
 
 %include ASTNodes.i
 

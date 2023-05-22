@@ -37,8 +37,8 @@
 
 
 
-#include <omex/common/libcombine-version.h>
-#include <omex/common/CaOperationReturnValues.h>
+#include <common/libcombine-version.h>
+#include <common/CaOperationReturnValues.h>
 
 #include <omex/CaTypes.h>
 
@@ -55,15 +55,15 @@
 #include <sbml/math/L3Parser.h>
 #include <sbml/math/L3ParserSettings.h>
 
-#include <sbml/xml/XMLAttributes.h>
-#include <sbml/xml/XMLNamespaces.h>
-#include <sbml/xml/XMLConstructorException.h>
-#include <sbml/xml/XMLToken.h>
-#include <sbml/xml/XMLNode.h>
-#include <sbml/xml/XMLTriple.h>
-#include <sbml/xml/XMLInputStream.h>
-#include <sbml/xml/XMLOutputStream.h>
-#include <sbml/xml/XMLError.h>
-#include <sbml/xml/XMLErrorLog.h>
+#include <xml/XMLAttributes.h>
+#include <xml/XMLNamespaces.h>
+#include <xml/XMLConstructorException.h>
+#include <xml/XMLToken.h>
+#include <xml/XMLNode.h>
+#include <xml/XMLTriple.h>
+#include <xml/XMLInputStream.h>
+#include <xml/XMLOutputStream.h>
+#include <xml/XMLError.h>
+#include <xml/XMLErrorLog.h>
 
 
