@@ -139,7 +139,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                 self.write_line_verbatim('#include <{0}/{1}'
                                          '.h>'.format(self.language,
                                                       lo_name))
-            self.write_line_verbatim('#include <sbml/xml/XMLInputStream.h>')
+            self.write_line_verbatim('#include <xml/XMLInputStream.h>')
 
         # determine whether we need to write other headers
         write_element_filter = False
