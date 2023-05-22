@@ -5,7 +5,7 @@ import shutil
 import pytest
 
 from ...pytest_files import functions
-from . import run_other_library_tests as rolt
+from . import run_other_library_tests as test_utils
 from ...util import global_variables as gv
 
 
@@ -30,7 +30,7 @@ def teardown():
 
 
 @pytest.mark.parametrize('name, num, class_name, test_case, list_of', [
-    # Tests from old rolt.testSedML()
+    # Tests from old test_utils.testSedML()
     # todo fails    ('test_sedml', 1, 'SedModel', 'model', 'SedListOfModels'),
     # todo fails    ('test_sedml', 0, 'SedDocument', 'document', ''),
     ('test_sedml', 3, 'SedAddXML', 'xmlnode used', ''),
@@ -47,14 +47,14 @@ def teardown():
     ('test_sedml', 13, 'SedOutput', 'catch different abstract types',
      'SedListOfOutputs'),
 
-    # Tests from old rolt.testCombine()
+    # Tests from old test_utils.testCombine()
 #    ('combine-archive', 0, 'CaContent', 'check includes', 'CaListOfContents'),
     # todo fails ('combine-archive', 1, 'CaOmexManifest', 'document', ''),
 
 ])
 def test_cpp(name, num, class_name, test_case, list_of):
     """
-    Based on rolt.run_test(). Run the C++ file tests.
+    Based on test_utils.run_test(). Run the C++ file tests.
 
     :param name: name of test group e.g. 'test_sedml', 'combine-archive'.
     :param num: list index, so we only generate a
@@ -68,24 +68,24 @@ def test_cpp(name, num, class_name, test_case, list_of):
     gv.reset()
     xml_filename = functions.set_up_test(name, class_name, test_case)
     assert xml_filename is not None and xml_filename != ""
-    rolt.generate_new_cpp_header(xml_filename, num)
-    assert 0 == rolt.compare_code_headers(class_name)
-    assert 0 == rolt.compare_code_impl(class_name)
+    test_utils.generate_new_cpp_header(xml_filename, num)
+    assert 0 == test_utils.compare_code_headers(class_name)
+    assert 0 == test_utils.compare_code_impl(class_name)
     if len(list_of) > 0:
         class_name = list_of
-        assert 0 == rolt.compare_code_headers(class_name)
-        assert 0 == rolt.compare_code_impl(class_name)
+        assert 0 == test_utils.compare_code_headers(class_name)
+        assert 0 == test_utils.compare_code_impl(class_name)
 
 
 @pytest.mark.parametrize('name, class_name, test_case, list_of', [
-    # Tests from old rolt.testCombine()
+    # Tests from old test_utils.testCombine()
     ('test_sedml', 'SedBase', 'templates', 'SedListOf'),
     ('combine-archive', 'CaBase', 'templates', 'CaListOf'),
 #    ('testsbxml', 'TSBBase', 'templates', 'TSBListOf'),
 ])
 def test_templates(name, class_name, test_case, list_of):
     """
-    Based on old rolt.run_templates() function. Run the 'template' file tests.
+    Based on old test_utils.run_templates() function. Run the 'template' file tests.
 
     :param name: name of test group e.g. 'test_sedml', 'combine-archive'.
     :param class_name: name of C++ class (and thus .cpp/.h filenames),
@@ -97,11 +97,11 @@ def test_templates(name, class_name, test_case, list_of):
     gv.reset()
     xml_filename = functions.set_up_test(name, class_name, test_case)
     assert xml_filename is not None and xml_filename != ""
-    rolt.generate_templates(xml_filename)
-    assert 0 == rolt.compare_code_headers(class_name)
-    assert 0 == rolt.compare_code_impl(class_name)
-    assert 0 == rolt.compare_code_headers(list_of)
-    assert 0 == rolt.compare_code_impl(list_of)
+    test_utils.generate_templates(xml_filename)
+    assert 0 == test_utils.compare_code_headers(class_name)
+    assert 0 == test_utils.compare_code_impl(class_name)
+    assert 0 == test_utils.compare_code_headers(list_of)
+    assert 0 == test_utils.compare_code_impl(list_of)
 
 
 @pytest.mark.parametrize('name, class_name, test_case, prefix, lib', [
@@ -111,7 +111,7 @@ def test_templates(name, class_name, test_case, list_of):
 ])
 def test_common_templates(name, class_name, test_case, prefix, lib):
     """
-    Based on rolt.test_common_templates() function.
+    Based on test_utils.test_common_templates() function.
     Compare 'common' template files.
 
     :param name: e.g. 'test_sedml'
@@ -123,18 +123,18 @@ def test_common_templates(name, class_name, test_case, prefix, lib):
     """
     gv.reset()
     xml_filename = functions.set_up_test(name, class_name, test_case)
-    rolt.generate_common_templates(xml_filename)
-    assert 0 == rolt.compare_code_headers('common')
-    assert 0 == rolt.compare_code_headers('extern')
-    assert 0 == rolt.compare_code_headers('lib{0}-config'.format(lib))
-    assert 0 == rolt.compare_code_impl('lib{0}-version'.format(lib))
-    assert 0 == rolt.compare_code_headers('{0}OperationReturnValues'.
-                                          format(prefix))
-    assert 0 == rolt.compare_code_impl('{0}OperationReturnValues'.
-                                       format(prefix))
-    assert 0 == rolt.compare_code_cmake('lib{0}-version.h'.format(lib))
-    assert 0 == rolt.compare_code_cmake('lib{0}-config-common.h'.format(lib))
-    assert 0 == rolt.compare_code_cmake('lib{0}-namespace.h'.format(lib))
+    test_utils.generate_common_templates(xml_filename)
+    assert 0 == test_utils.compare_code_headers('common')
+    assert 0 == test_utils.compare_code_headers('extern')
+    assert 0 == test_utils.compare_code_headers('lib{0}-config'.format(lib))
+    assert 0 == test_utils.compare_code_impl('lib{0}-version'.format(lib))
+    assert 0 == test_utils.compare_code_headers('{0}OperationReturnValues'.
+                                                format(prefix))
+    assert 0 == test_utils.compare_code_impl('{0}OperationReturnValues'.
+                                             format(prefix))
+    assert 0 == test_utils.compare_code_cmake('lib{0}-version.h'.format(lib))
+    assert 0 == test_utils.compare_code_cmake('lib{0}-config-common.h'.format(lib))
+    assert 0 == test_utils.compare_code_cmake('lib{0}-namespace.h'.format(lib))
 
 
 @pytest.mark.parametrize('name, class_name, test_case', [
@@ -152,9 +152,9 @@ def test_enum(name, class_name, test_case):
     """
     gv.reset()
     xml_filename = functions.set_up_test(name, class_name, test_case)
-    rolt.generate_enum(xml_filename)
-    assert 0 == rolt.compare_code_headers(class_name)
-    assert 0 == rolt.compare_code_impl(class_name)
+    test_utils.generate_enum(xml_filename)
+    assert 0 == test_utils.compare_code_headers(class_name)
+    assert 0 == test_utils.compare_code_impl(class_name)
 
 
 @pytest.mark.parametrize('name, class_name, test_case, binding, prefix', [
@@ -178,27 +178,27 @@ def test_bindings(name, class_name, test_case, binding, prefix):
     """
     gv.reset()
     xml_filename = functions.set_up_test(name, class_name, test_case)
-    rolt.generate_binding(xml_filename, binding)
+    test_utils.generate_binding(xml_filename, binding)
     if binding == 'swig':
-        assert 0 == rolt.compare_binding_headers('ListWrapper', binding, "")
-        assert 0 == rolt.compare_binding_headers('OStream', binding, "")
-        assert 0 == rolt.compare_binding_impl('OStream', binding, "")
-        assert 0 == rolt.compare_binding_interface('std_set', binding, "")
-        assert 0 == rolt.compare_binding_headers('lib{0}'.format(prefix),
-                                                 binding, "")
-        assert 0 == rolt.compare_binding_interface('lib{0}'.format(prefix),
-                                                   binding, "")
-        assert 0 == rolt.compare_binding_interface('ASTNodes', binding, "")
+        assert 0 == test_utils.compare_binding_headers('ListWrapper', binding, "")
+        assert 0 == test_utils.compare_binding_headers('OStream', binding, "")
+        assert 0 == test_utils.compare_binding_impl('OStream', binding, "")
+        assert 0 == test_utils.compare_binding_interface('std_set', binding, "")
+        assert 0 == test_utils.compare_binding_headers('lib{0}'.format(prefix),
+                                                       binding, "")
+        assert 0 == test_utils.compare_binding_interface('lib{0}'.format(prefix),
+                                                         binding, "")
+        assert 0 == test_utils.compare_binding_interface('ASTNodes', binding, "")
     elif binding == 'csharp':
-        assert 0 == rolt.compare_binding_impl('local', binding, "")
-        assert 0 == rolt.compare_binding_interface('local', binding, "")
-        assert 0 == rolt.compare_binding_interface('lib{0}'.format(prefix),
-                                                   binding, "")
-        assert 0 == rolt.compare_binding_file('CMakeLists.txt', binding, "")
-        assert 0 == rolt.compare_binding_file('compile-native-files.cmake',
-                                              binding, "")
-        assert 0 == rolt.compare_binding_file('AssemblyInfo.cs.in',
-                                              binding, "")
+        assert 0 == test_utils.compare_binding_impl('local', binding, "")
+        assert 0 == test_utils.compare_binding_interface('local', binding, "")
+        assert 0 == test_utils.compare_binding_interface('lib{0}'.format(prefix),
+                                                         binding, "")
+        assert 0 == test_utils.compare_binding_file('CMakeLists.txt', binding, "")
+        assert 0 == test_utils.compare_binding_file('compile-native-files.cmake',
+                                                    binding, "")
+        assert 0 == test_utils.compare_binding_file('AssemblyInfo.cs.in',
+                                                    binding, "")
 
 
 @pytest.mark.parametrize('name, class_name', [
@@ -218,11 +218,11 @@ def test_cmake(name, class_name):
     """
     gv.reset()
     xml_filename = functions.set_up_test(name, class_name, "cmake")
-    rolt.generate_cmake(xml_filename, "cmake")
-    assert 0 == rolt.compare_cmake_file('')
-    assert 0 == rolt.compare_cmake_file('src')
-    assert 0 == rolt.compare_cmake_file('src/bindings')
-    assert 0 == rolt.compare_cmake_file('src/{0}'.format(gv.language))
+    test_utils.generate_cmake(xml_filename, "cmake")
+    assert 0 == test_utils.compare_cmake_file('')
+    assert 0 == test_utils.compare_cmake_file('src')
+    assert 0 == test_utils.compare_cmake_file('src/bindings')
+    assert 0 == test_utils.compare_cmake_file('src/{0}'.format(gv.language))
 
 
 @pytest.mark.parametrize('name, class_name, test_case', [
@@ -230,7 +230,7 @@ def test_cmake(name, class_name):
 ])
 def test_global(name, class_name, test_case):
     """
-    Based on old rolt.test_global() function.
+    Based on old test_utils.test_global() function.
     Generate and compare 'global' files, e.g. VERSION.txt, README.md.
 
     :param name: test file stub, e.g. 'test_sedml' for test_sedml.xml
@@ -238,9 +238,9 @@ def test_global(name, class_name, test_case):
     :param test_case: brief description of test, e.g. 'global files'
     """
     xml_filename = functions.set_up_test(name, class_name, test_case)
-    rolt.generate_global(xml_filename)
-    assert 0 == rolt.compare_code_txt('VERSION')
-    assert 0 == rolt.compare_code_txt('README', '.md')
+    test_utils.generate_global(xml_filename)
+    assert 0 == test_utils.compare_code_txt('VERSION')
+    assert 0 == test_utils.compare_code_txt('README', '.md')
 
 
 @pytest.mark.parametrize('name, class_name, test_case', [
@@ -258,5 +258,5 @@ def test_forward(name, class_name, test_case):
     """
     gv.reset()
     xml_filename = functions.set_up_test(name, class_name, test_case)
-    rolt.generate_forward(xml_filename)
-    assert 0 == rolt.compare_code_headers(class_name)
+    test_utils.generate_forward(xml_filename)
+    assert 0 == test_utils.compare_code_headers(class_name)
