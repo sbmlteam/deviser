@@ -50,7 +50,7 @@ from ..util import strFunctions as SF, global_variables as gv, query
 from ..base_files import BaseCMakeFile, BaseTemplateFile
 
 
-class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
+class OtherLibraryFiles(BaseTemplateFile.BaseTemplateFile):
     """Class for all Base files"""
 
     def __init__(self, name, elements, verbose=False):

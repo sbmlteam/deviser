@@ -2,7 +2,7 @@
 
 import os
 
-from ...code_files import CppFiles, BaseClassFiles, ValidationFiles, ExtensionFiles
+from ...code_files import CppFiles, OtherLibraryFiles, ValidationFiles, ExtensionFiles
 from ...cmake_files import CMakeFiles
 from ...bindings_files import BindingsFiles
 from ...parseXML import ParseXML
@@ -94,7 +94,7 @@ def generate_templates(filename):
     go_into_new_directory()
 
     prefix = gv.prefix
-    base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
+    base_files = OtherLibraryFiles.OtherLibraryFiles(prefix, ob['baseElements'], True)
     base_files.write_files()
     os.chdir('../../.')
 
@@ -112,7 +112,7 @@ def generate_common_templates(filename):
     go_into_new_directory()
 
     prefix = gv.prefix
-    base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
+    base_files = OtherLibraryFiles.OtherLibraryFiles(prefix, ob['baseElements'], True)
     base_files.write_common_files()
     os.chdir('../../.')
 

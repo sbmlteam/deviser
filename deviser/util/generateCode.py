@@ -45,8 +45,8 @@ import sys
 from ..base_files import BaseFile, BaseTemplateFile
 from ..bindings_files import BindingsFiles
 from ..cmake_files import CMakeFiles
-from ..code_files import (BaseClassFiles, CppFiles, ExtensionFiles,
-                        ValidationFiles)
+from ..code_files import (OtherLibraryFiles, CppFiles, ExtensionFiles,
+                          ValidationFiles)
 from ..parseXML import ParseXML
 
 from ..util import global_variables as gv
@@ -359,7 +359,7 @@ def generate_other_library_code_files(name, ob):
         all_files = CppFiles.CppFiles(working_class, True)
         all_files.write_files()
     base_files = BaseClassFiles.\
-        BaseClassFiles(prefix, ob['baseElements'], True)
+        OtherLibraryFiles(prefix, ob['baseElements'], True)
     base_files.write_files()
     os.chdir(this_dir)
 
