@@ -282,7 +282,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
         # if we another library we need the libsbml ns qualifier
         if not global_variables.is_package:
-            include_lines += ['<sbml/common/libsbml-namespace.h>']
+            include_lines += ['<common/libsbml-namespace.h>']
 
 
         # write them out
