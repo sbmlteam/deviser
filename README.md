@@ -40,7 +40,7 @@ The [Deviser Edit](https://github.com/sbmlteam/QtDeviser) tool allows you to qui
 3.	Generate TeX files and generate a PDF of a basic specification document for the package.
 4.	Integrate and test the package with libSBML.
 
-The Deviser Edit tool creates an XML description of the package that is used by the deviser code to generate the requested files. This XML description is exemplified in the [samples](deviser/samples) directory.
+The Deviser Edit tool creates an XML description of the package that is used by the deviser code to generate the requested files. This XML description is exemplified in the [samples](samples) directory.
 
 ### Command Line Interface ###
 
@@ -52,7 +52,7 @@ This program will use a Deviser XML file, and generate either a C++
 libSBML extension for it, or generate a LaTeX scaffold for its 
 specification. 
 
-Full documentation is available in the [docs](deviser\docs) directory.
+Full documentation is available in the [docs](docs) directory.
 
 
 ## Installation ##
