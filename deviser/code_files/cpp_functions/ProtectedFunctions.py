@@ -174,12 +174,13 @@ class ProtectedFunctions():
         # create the function declaration
         function = 'createObject'
         return_type = '{0}*'.format(self.std_base)
-        if global_variables.is_package:
-            arguments = ['XMLInputStream& stream']
-            xmlns = 'XMLNamespaces'
-        else:
-            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream']
-            xmlns = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces'
+        # libsbml ns not needed in v 2.0
+#        if global_variables.is_package:
+        arguments = ['XMLInputStream& stream']
+        xmlns = 'XMLNamespaces'
+#        else:
+#            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream']
+#            xmlns = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces'
 
         # create the function implementation
         code = []
