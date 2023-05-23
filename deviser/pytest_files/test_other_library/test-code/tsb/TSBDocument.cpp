@@ -994,8 +994,7 @@ TSBDocument::getNumErrors(unsigned int severity) const
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 TSBBase*
-TSBDocument::createObject( XMLInputStream&
-  stream)
+TSBDocument::createObject(XMLInputStream& stream)
 {
   TSBBase* obj = NULL;
 

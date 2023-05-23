@@ -300,8 +300,7 @@ TSBListOfComments::getItemTypeCode() const
  * Creates a new TSBComment in this TSBListOfComments
  */
 TSBBase*
-TSBListOfComments::createObject( XMLInputStream&
-  stream)
+TSBListOfComments::createObject(XMLInputStream& stream)
 {
   const std::string& name = stream.peek().getName();
   TSBBase* object = NULL;

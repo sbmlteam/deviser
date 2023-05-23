@@ -367,8 +367,7 @@ protected:
   /**
    * Creates a new TSBComment in this TSBListOfComments
    */
-  virtual TSBBase* createObject( XMLInputStream&
-    stream);
+  virtual TSBBase* createObject(XMLInputStream& stream);
 
   /** @endcond */
 

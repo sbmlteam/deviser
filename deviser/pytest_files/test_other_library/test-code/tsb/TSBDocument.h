@@ -911,8 +911,7 @@ protected:
   /**
    * Creates a new object from the next XMLToken on the XMLInputStream
    */
-  virtual TSBBase* createObject( XMLInputStream&
-    stream);
+  virtual TSBBase* createObject(XMLInputStream& stream);
 
   /** @endcond */
 
