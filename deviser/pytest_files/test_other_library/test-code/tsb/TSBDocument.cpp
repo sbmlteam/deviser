@@ -909,7 +909,7 @@ TSBDocument::getAllElements(TSBElementFilter* filter)
 /*
  * Returns the value of the "Namespaces" element of this TSBDocument.
  */
-const  XMLNamespaces*
+const XMLNamespaces*
 TSBDocument::getNamespaces() const
 {
   return mTSBNamespaces->getNamespaces();
@@ -919,7 +919,7 @@ TSBDocument::getNamespaces() const
 /*
  * Returns the value of the "Namespaces" element of this TSBDocument.
  */
- XMLNamespaces*
+XMLNamespaces*
 TSBDocument::getNamespaces()
 {
   return mTSBNamespaces->getNamespaces();
@@ -1162,16 +1162,14 @@ TSBDocument::writeAttributes(XMLOutputStream& stream) const
  * Writes the namespace for the Tsb package
  */
 void
-TSBDocument::writeXMLNS( XMLOutputStream&
-  stream) const
+TSBDocument::writeXMLNS(XMLOutputStream& stream) const
 {
-   XMLNamespaces xmlns;
+  XMLNamespaces xmlns;
   std::string prefix = getPrefix();
 
   if (prefix.empty())
   {
-    const  XMLNamespaces* thisxmlns =
-      getNamespaces();
+    const XMLNamespaces* thisxmlns = getNamespaces();
     if (thisxmlns && thisxmlns->hasURI(TSB_XMLNS_L1V1))
     {
       xmlns.add(TSB_XMLNS_L1V1, prefix);

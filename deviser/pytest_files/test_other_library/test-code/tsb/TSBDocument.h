@@ -815,19 +815,18 @@ public:
    * Returns the value of the "Namespaces" element of this TSBDocument.
    *
    * @return the value of the "Namespaces" element of this TSBDocument as a
-   *  XMLNamespaces*.
+   * XMLNamespaces*.
    */
-  virtual const  XMLNamespaces* getNamespaces()
-    const;
+  virtual const XMLNamespaces* getNamespaces() const;
 
 
   /**
    * Returns the value of the "Namespaces" element of this TSBDocument.
    *
    * @return the value of the "Namespaces" element of this TSBDocument as a
-   *  XMLNamespaces*.
+   * XMLNamespaces*.
    */
-  virtual  XMLNamespaces* getNamespaces();
+  virtual XMLNamespaces* getNamespaces();
 
 
   /**
@@ -956,8 +955,7 @@ protected:
   /**
    * Writes the namespace for the Tsb package
    */
-  virtual void writeXMLNS( XMLOutputStream&
-    stream) const;
+  virtual void writeXMLNS(XMLOutputStream& stream) const;
 
   /** @endcond */
 
