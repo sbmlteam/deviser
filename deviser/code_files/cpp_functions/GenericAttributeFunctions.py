@@ -592,7 +592,7 @@ class GenericAttributeFunctions():
         code = []
         if not self.has_elements_with_same_xml_name():
             # create the function implementation
-            last_line = ['return LIBSBML_OPERATION_FAILED']
+            last_line = ['return {0}'.format(global_variables.ret_failed)]
             first = True
             block = []
             if_block = []

@@ -1010,10 +1010,11 @@ class ProtectedFunctions():
         pkg_version = self.lv_info[version]['pkg_version']
         function = 'writeL{0}V{1}V{2}Attributes'.format(level_val, version_val, pkg_version)
         return_type = 'void'
-        if global_variables.is_package:
-            arguments = ['XMLOutputStream& stream']
-        else:
-            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
+        # not needed in v 2.0
+#        if global_variables.is_package:
+        arguments = ['XMLOutputStream& stream']
+#        else:
+#            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
 
         # create the function implementation
         code = []
@@ -1059,12 +1060,13 @@ class ProtectedFunctions():
         # create the function declaration
         function = 'writeXMLNS'
         return_type = 'void'
-        if global_variables.is_package:
-            arguments = ['XMLOutputStream& stream']
-            xmlns = 'XMLNamespaces'
-        else:
-            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
-            xmlns = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces'
+        # not needed for v 2.0
+#        if global_variables.is_package:
+        arguments = ['XMLOutputStream& stream']
+        xmlns = 'XMLNamespaces'
+#        else:
+#            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
+#            xmlns = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces'
 
         # create the function implementation
         implementation = ['{0} xmlns'.format(xmlns),
