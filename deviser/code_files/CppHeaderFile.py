@@ -281,9 +281,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             include_lines += ['<{0}/{1}ErrorLog.h>'.format(self.language, global_variables.prefix)]
 
         # if we another library we need the libsbml ns qualifier
-        if not global_variables.is_package:
-            include_lines += ['<common/libsbml-namespace.h>']
-
+        # not tru in v 2.0
+#        if not global_variables.is_package:
+#            include_lines += ['<common/libsbml-namespace.h>']
 
         # write them out
         for line in include_lines:
