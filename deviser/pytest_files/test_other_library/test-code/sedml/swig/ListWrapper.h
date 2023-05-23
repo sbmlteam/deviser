@@ -39,8 +39,8 @@
 #ifndef ListWrapper_h
 #define ListWrapper_h
 
-#include <sbml/util/List.h>
-#include <sedml/common/extern.h>
+#include <util/List.h>
+#include <common/extern.h>
 
 LIBSEDML_CPP_NAMESPACE_USE
 

@@ -2,7 +2,7 @@
 #define LIBSBML_COMMON_H 1
 
 
-#include <sbml/common/libsbml-config.h>
+#include <common/libsbml-config.h>
 
 
 #include <stdio.h>
@@ -74,11 +74,11 @@ static const int SBML_INT_MIN = -2147483647 - 1;
 #define LIBSBML_UNKNOWN_COLUMN	SBML_INT_MAX
 
 
-#include <sbml/common/extern.h>
+#include <common/extern.h>
 <verbatim>
-#include <sbml/util/memory.h>
-#include <sbml/util/util.h>
+#include <util/memory.h>
+#include <util/util.h>
 </verbatim>
-#include <sbml/common/SBMLOperationReturnValues.h>
+#include <common/SBMLOperationReturnValues.h>
 
 #endif  /* LIBSBML_COMMON_H */

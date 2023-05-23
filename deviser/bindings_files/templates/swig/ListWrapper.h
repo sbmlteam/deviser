@@ -2,9 +2,9 @@
 #define ListWrapper_h
 
 <verbatim>
-#include <sbml/util/List.h>
+#include <util/List.h>
+#include <common/extern.h>
 </verbatim>
-#include <sbml/common/extern.h>
 
 LIBSBML_CPP_NAMESPACE_USE
 

@@ -40,7 +40,7 @@
 #define LIBSEDML_COMMON_H 1
 
 
-#include <sedml/common/libsedml-config.h>
+#include <common/libsedml-config.h>
 
 
 #include <stdio.h>
@@ -112,9 +112,9 @@ static const int SEDML_INT_MIN = -2147483647 - 1;
 #define LIBSEDML_UNKNOWN_COLUMN	SEDML_INT_MAX
 
 
-#include <sedml/common/extern.h>
-#include <sbml/util/memory.h>
-#include <sbml/util/util.h>
-#include <sedml/common/SedOperationReturnValues.h>
+#include <common/extern.h>
+#include <util/memory.h>
+#include <util/util.h>
+#include <common/SedOperationReturnValues.h>
 
 #endif  /* LIBSEDML_COMMON_H */

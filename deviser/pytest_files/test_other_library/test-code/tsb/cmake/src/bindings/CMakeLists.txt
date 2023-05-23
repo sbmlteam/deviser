@@ -1,8 +1,8 @@
 #
 # When checked removes all generated SWIG wrappers upon configure
 #
-option(LIBSEDML_REMOVE_WRAPPERS   "Remove generated SWIG wrappers." OFF)
-mark_as_advanced(LIBSEDML_REMOVE_WRAPPERS)
+option(LIBTSB_REMOVE_WRAPPERS   "Remove generated SWIG wrappers." OFF)
+mark_as_advanced(LIBTSB_REMOVE_WRAPPERS)
 
 #
 # and build selected language bindings

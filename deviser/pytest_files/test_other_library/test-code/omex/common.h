@@ -43,7 +43,7 @@
 #define LIBCOMBINE_COMMON_H 1
 
 
-#include <omex/common/libcombine-config.h>
+#include <common/libcombine-config.h>
 
 
 #include <stdio.h>
@@ -115,9 +115,9 @@ static const int OMEX_INT_MIN = -2147483647 - 1;
 #define LIBCOMBINE_UNKNOWN_COLUMN	OMEX_INT_MAX
 
 
-#include <omex/common/extern.h>
-#include <sbml/util/memory.h>
-#include <sbml/util/util.h>
-#include <omex/common/CaOperationReturnValues.h>
+#include <common/extern.h>
+#include <util/memory.h>
+#include <util/util.h>
+#include <common/CaOperationReturnValues.h>
 
 #endif  /* LIBCOMBINE_COMMON_H */

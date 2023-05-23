@@ -1,7 +1,7 @@
 #ifndef SBML_CONSTRUCTOR_EXCEPTION_H
 #define SBML_CONSTRUCTOR_EXCEPTION_H
 
-#include <sbml/common/extern.h>
+#include <common/extern.h>
 #include <sbml/SBMLNamespaces.h>
 
 #ifdef __cplusplus

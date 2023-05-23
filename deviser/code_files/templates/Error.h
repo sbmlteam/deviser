@@ -1,9 +1,9 @@
 #ifndef SBMLError_h
 #define SBMLError_h
 
-#include <sbml/common/extern.h>
+#include <common/extern.h>
 <verbatim>
-#include <sbml/xml/XMLError.h>
+#include <xml/XMLError.h>
 </verbatim>
 #include <sbml/SBMLNamespaces.h>
 
@@ -52,9 +52,9 @@ typedef enum
 typedef enum
 {
 <sbml>
-    LIBREPLACE_CAT_INTERNAL = LIBSBML_CAT_INTERNAL,
-    LIBREPLACE_CAT_SYSTEM = LIBSBML_CAT_SYSTEM,
-    LIBREPLACE_CAT_XML = LIBSBML_CAT_XML,
+    LIBREPLACE_CAT_INTERNAL = 1,
+    LIBREPLACE_CAT_SYSTEM = 2,
+    LIBREPLACE_CAT_XML = 3,
 </sbml>
 
     LIBSBML_CAT_SBML = (LIBSBML_CAT_XML + 1)
@@ -103,9 +103,9 @@ typedef enum
    * of the codes is done in SBMLError.cpp.
    */
 <sbml>
-    LIBREPLACE_SEV_WARNING = LIBSBML_SEV_WARNING,
-    LIBREPLACE_SEV_ERROR = LIBSBML_SEV_ERROR,
-    LIBREPLACE_SEV_FATAL = LIBSBML_SEV_FATAL,
+    LIBREPLACE_SEV_WARNING = 1,
+    LIBREPLACE_SEV_ERROR = 2,
+    LIBREPLACE_SEV_FATAL = 3,
 </sbml>
 
     LIBSBML_SEV_SCHEMA_ERROR    = (LIBSBML_SEV_FATAL + 1)

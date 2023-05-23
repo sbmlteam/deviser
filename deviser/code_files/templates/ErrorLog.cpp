@@ -4,8 +4,8 @@
 #include <list>
 
 <verbatim>
-#include <sbml/xml/XMLToken.h>
-#include <sbml/xml/XMLParser.h>
+#include <xml/XMLToken.h>
+#include <xml/XMLParser.h>
 </verbatim>
 
 #include <sbml/SBMLError.h>

@@ -30,12 +30,12 @@ LIBSBML_CPP_NAMESPACE_USE
 #include "local.cpp"
 %}
 
-%import  sbml/common/libsbml-namespace.h
-%import  sbml/common/extern.h
-%import  sbml/common/sbmlfwd.h
+%import  common/libsbml-namespace.h
+%import  common/extern.h
+%import  common/sbmlfwd.h
 <verbatim>
-%import  sbml/common/extern.h
-%import  sbml/xml/XMLExtern.h
+%import  common/extern.h
+%import  xml/XMLExtern.h
 </verbatim>
 
 /**
@@ -296,25 +296,25 @@ typedef std::vector<XMLError*> XmlErrorStdVector;
 %template(SBMLErrorStdVector) std::vector<SBMLError>;
 typedef std::vector<SBMLError> SBMLErrorStdVector;
 
-%include sbml/common/libsbml-version.h
-%include sbml/common/SBMLOperationReturnValues.h
+%include common/libsbml-version.h
+%include common/SBMLOperationReturnValues.h
 <verbatim>
-%include sbml/common/libsbml-version.h
-%include sbml/common/operationReturnValues.h
+%include common/libsbml-version.h
+%include common/operationReturnValues.h
 
 %include sbml/SyntaxChecker.h
 %include sbml/ExpectedAttributes.h
 
-%include sbml/xml/XMLAttributes.h
-%include sbml/xml/XMLConstructorException.h
-%include sbml/xml/XMLNamespaces.h
-%include sbml/xml/XMLToken.h
-%include sbml/xml/XMLNode.h
-%include sbml/xml/XMLTriple.h
-%include sbml/xml/XMLOutputStream.h
-%include sbml/xml/XMLInputStream.h
-%include sbml/xml/XMLError.h
-%include sbml/xml/XMLErrorLog.h
+%include xml/XMLAttributes.h
+%include xml/XMLConstructorException.h
+%include xml/XMLNamespaces.h
+%include xml/XMLToken.h
+%include xml/XMLNode.h
+%include xml/XMLTriple.h
+%include xml/XMLOutputStream.h
+%include xml/XMLInputStream.h
+%include xml/XMLError.h
+%include xml/XMLErrorLog.h
 
 %include ASTNodes.i
 </verbatim> 

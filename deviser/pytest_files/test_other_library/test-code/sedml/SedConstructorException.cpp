@@ -36,8 +36,8 @@
 #include <sedml/SedConstructorException.h>
 
 #include <sedml/SedNamespaces.h>
-#include <sbml/xml/XMLNamespaces.h>
-#include <sbml/xml/XMLOutputStream.h>
+#include <xml/XMLNamespaces.h>
+#include <xml/XMLOutputStream.h>
 
 #include <string>
 #include <sstream>

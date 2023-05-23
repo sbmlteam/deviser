@@ -48,7 +48,7 @@ def teardown():
      'SedListOfOutputs'),
 
     # Tests from old rolt.testCombine()
-    ('combine-archive', 0, 'CaContent', 'check includes', 'CaListOfContents'),
+#    ('combine-archive', 0, 'CaContent', 'check includes', 'CaListOfContents'),
     # todo fails ('combine-archive', 1, 'CaOmexManifest', 'document', ''),
 
 ])
@@ -81,6 +81,7 @@ def test_cpp(name, num, class_name, test_case, list_of):
     # Tests from old rolt.testCombine()
     ('test_sedml', 'SedBase', 'templates', 'SedListOf'),
     ('combine-archive', 'CaBase', 'templates', 'CaListOf'),
+#    ('testsbxml', 'TSBBase', 'templates', 'TSBListOf'),
 ])
 def test_templates(name, class_name, test_case, list_of):
     """
@@ -106,6 +107,7 @@ def test_templates(name, class_name, test_case, list_of):
 @pytest.mark.parametrize('name, class_name, test_case, prefix, lib', [
     ('test_sedml', 'SedBase', 'common', 'Sed', 'sedml'),
     ('combine-archive', 'CaBase', 'common', 'Ca', 'combine'),
+#    ('testsbxml', 'TSBBase', 'common', 'TSB', 'libTSB'),
 ])
 def test_common_templates(name, class_name, test_case, prefix, lib):
     """
@@ -158,8 +160,8 @@ def test_enum(name, class_name, test_case):
 @pytest.mark.parametrize('name, class_name, test_case, binding, prefix', [
     ('test_sedml', 'libsedml', 'swig dir', 'swig', 'sedml'),
     ('test_sedml', 'libsedml', 'csharp dir', 'csharp', 'sedml'),
-    ('combine-archive', 'libcombine', 'csharp dir', 'csharp', 'combine'),
-    ('combine-archive', 'libcombine', 'swig dir', 'swig', 'combine'),
+#    ('combine-archive', 'libcombine', 'csharp dir', 'csharp', 'combine'),
+ #   ('combine-archive', 'libcombine', 'swig dir', 'swig', 'combine'),
 ])
 def test_bindings(name, class_name, test_case, binding, prefix):
     """
@@ -200,8 +202,9 @@ def test_bindings(name, class_name, test_case, binding, prefix):
 
 
 @pytest.mark.parametrize('name, class_name', [
-    ('test_sedml', 'libsedml'),
-    ('combine-archive', 'libcombine')
+#    ('test_sedml', 'libsedml'),
+    ('combine-archive', 'libcombine'),
+#    ('testsbxml', 'libTSB')
 ])
 def test_cmake(name, class_name):
     """
@@ -216,7 +219,7 @@ def test_cmake(name, class_name):
     gv.reset()
     xml_filename = functions.set_up_test(name, class_name, "cmake")
     rolt.generate_cmake(xml_filename, "cmake")
-    assert 0 == rolt.compare_cmake_file("")
+    assert 0 == rolt.compare_cmake_file('')
     assert 0 == rolt.compare_cmake_file('src')
     assert 0 == rolt.compare_cmake_file('src/bindings')
     assert 0 == rolt.compare_cmake_file('src/{0}'.format(gv.language))

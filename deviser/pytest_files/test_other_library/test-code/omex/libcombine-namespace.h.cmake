@@ -8,7 +8,7 @@
 #define LIBCOMBINE_NAMESPACE_H 1
 
 #ifndef SWIG
-#include <sbml/common/libsbml-namespace.h>
+#include <common/libsbml-namespace.h>
 
 LIBSBML_CPP_NAMESPACE_USE
 
