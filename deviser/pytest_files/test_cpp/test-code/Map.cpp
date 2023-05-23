@@ -35,7 +35,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sbgn/Map.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 
 using namespace std;
@@ -868,8 +868,7 @@ Map::hasRequiredElements() const
  * Write any contained elements
  */
 void
-Map::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream)
-  const
+Map::writeElements(XMLOutputStream& stream) const
 {
   SBase::writeElements(stream);
 
@@ -1273,7 +1272,7 @@ Map::addChildObject(const std::string& elementName, const SbgnBase* element)
     return addArcGroup((const ArcGroup*)(element));
   }
 
-  return LIBSBML_OPERATION_FAILED;
+  return LIBSBGN_OPERATION_FAILED;
 }
 
 /** @endcond */
@@ -1480,7 +1479,7 @@ Map::getAllElements(SbgnElementFilter* filter)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SbgnBase*
-Map::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
+Map::createObject(XMLInputStream& stream)
 {
   SbgnBase* obj = SBase::createObject(stream);
 
@@ -1526,8 +1525,7 @@ Map::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
  * Adds the expected attributes for this element
  */
 void
-Map::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes&
-  attributes)
+Map::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SBase::addExpectedAttributes(attributes);
 
@@ -1546,11 +1544,8 @@ Map::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes&
  * Reads the expected attributes into the member data variables
  */
 void
-Map::readAttributes(
-                    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes&
-                      attributes,
-                    const LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes&
-                      expectedAttributes)
+Map::readAttributes(const XMLAttributes& attributes,
+                    const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1649,8 +1644,7 @@ Map::readAttributes(
  * Writes the attributes to the stream
  */
 void
-Map::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream)
-  const
+Map::writeAttributes(XMLOutputStream& stream) const
 {
   SBase::writeAttributes(stream);
 
@@ -1729,7 +1723,7 @@ Map_getId(const Map_t * m)
     return NULL;
   }
 
-  return m->getId().empty() ? NULL : safe_strdup(m->getId().c_str());
+  return m->getId().empty() ? NULL : sbgn_safe_strdup(m->getId().c_str());
 }
 
 

@@ -36,7 +36,7 @@
  */
 #include <sbml/Event.h>
 #include <sbml/SBMLListOfEvents.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 
 using namespace std;
@@ -780,8 +780,7 @@ Event::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-Event::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream)
-  const
+Event::writeElements(XMLOutputStream& stream) const
 {
   SBase::writeElements(stream);
 
@@ -1430,7 +1429,7 @@ Event::getAllElements(ElementFilter* filter)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SBase*
-Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
+Event::createObject(XMLInputStream& stream)
 {
   SBase* obj = NULL;
 
@@ -1498,8 +1497,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
  * Adds the expected attributes for this element
  */
 void
-Event::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+Event::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SBase::addExpectedAttributes(attributes);
 
@@ -1518,11 +1516,8 @@ Event::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-Event::readAttributes(
-                      const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes&
-                        attributes,
-                      const LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes&
-                        expectedAttributes)
+Event::readAttributes(const XMLAttributes& attributes,
+                      const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1627,8 +1622,7 @@ Event::readAttributes(
  * Writes the attributes to the stream
  */
 void
-Event::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream)
-  const
+Event::writeAttributes(XMLOutputStream& stream) const
 {
   SBase::writeAttributes(stream);
 

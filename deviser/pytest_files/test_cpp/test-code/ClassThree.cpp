@@ -1669,3 +1669,5 @@ ClassThree_hasRequiredAttributes(const ClassThree_t * ct)
 
 
 LIBSBML_CPP_NAMESPACE_END
+
+

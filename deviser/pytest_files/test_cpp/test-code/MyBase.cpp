@@ -713,3 +713,5 @@ MyBase_hasRequiredAttributes(const MyBase_t * mb)
 
 
 LIBSBML_CPP_NAMESPACE_END
+
+

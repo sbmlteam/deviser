@@ -36,7 +36,7 @@
  */
 #include <sbml/ModifierSpeciesReference.h>
 #include <sbml/SBMLListOfModifierSpeciesReferences.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 
 using namespace std;
@@ -176,8 +176,7 @@ ModifierSpeciesReference::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-ModifierSpeciesReference::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  XMLOutputStream& stream) const
+ModifierSpeciesReference::writeElements(XMLOutputStream& stream) const
 {
   SimpleSpeciesReference::writeElements(stream);
 }
@@ -459,8 +458,7 @@ ModifierSpeciesReference::unsetAttribute(const std::string& attributeName)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SBase*
-ModifierSpeciesReference::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  XMLInputStream& stream)
+ModifierSpeciesReference::createObject(XMLInputStream& stream)
 {
   SBase* obj = SimpleSpeciesReference::createObject(stream);
 
@@ -479,8 +477,7 @@ ModifierSpeciesReference::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Adds the expected attributes for this element
  */
 void
-ModifierSpeciesReference::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+ModifierSpeciesReference::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SimpleSpeciesReference::addExpectedAttributes(attributes);
 }
@@ -495,12 +492,9 @@ ModifierSpeciesReference::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-ModifierSpeciesReference::readAttributes(
-                                         const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                           XMLAttributes& attributes,
-                                         const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                           ExpectedAttributes&
-                                             expectedAttributes)
+ModifierSpeciesReference::readAttributes(const XMLAttributes& attributes,
+                                         const ExpectedAttributes&
+                                           expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -553,8 +547,7 @@ ModifierSpeciesReference::readAttributes(
  * Writes the attributes to the stream
  */
 void
-ModifierSpeciesReference::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  XMLOutputStream& stream) const
+ModifierSpeciesReference::writeAttributes(XMLOutputStream& stream) const
 {
   SimpleSpeciesReference::writeAttributes(stream);
 }

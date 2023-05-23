@@ -56,7 +56,6 @@
 #include <sbml/SBase.h>
 #include <sbml/math/ASTNode.h>
 #include <sbml/xml/XMLNode.h>
-#include <sbml/common/libsbml-namespace.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
@@ -264,8 +263,7 @@ public:
   /**
    * Write any contained elements
    */
-  virtual void writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-    stream) const;
+  virtual void writeElements(XMLOutputStream& stream) const;
 
   /** @endcond */
 

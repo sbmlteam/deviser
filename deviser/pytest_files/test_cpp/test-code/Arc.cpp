@@ -36,7 +36,7 @@
  */
 #include <sbgn/Arc.h>
 #include <sbgn/SbgnListOfArcs.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 
 using namespace std;
@@ -1109,8 +1109,7 @@ Arc::hasRequiredElements() const
  * Write any contained elements
  */
 void
-Arc::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream)
-  const
+Arc::writeElements(XMLOutputStream& stream) const
 {
   SBase::writeElements(stream);
 
@@ -1571,7 +1570,7 @@ Arc::addChildObject(const std::string& elementName, const SbgnBase* element)
     return addPort((const Port*)(element));
   }
 
-  return LIBSBML_OPERATION_FAILED;
+  return LIBSBGN_OPERATION_FAILED;
 }
 
 /** @endcond */
@@ -1809,7 +1808,7 @@ Arc::getAllElements(SbgnElementFilter* filter)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SbgnBase*
-Arc::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
+Arc::createObject(XMLInputStream& stream)
 {
   SbgnBase* obj = SBase::createObject(stream);
 
@@ -1869,8 +1868,7 @@ Arc::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
  * Adds the expected attributes for this element
  */
 void
-Arc::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes&
-  attributes)
+Arc::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SBase::addExpectedAttributes(attributes);
 
@@ -1893,11 +1891,8 @@ Arc::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes&
  * Reads the expected attributes into the member data variables
  */
 void
-Arc::readAttributes(
-                    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes&
-                      attributes,
-                    const LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes&
-                      expectedAttributes)
+Arc::readAttributes(const XMLAttributes& attributes,
+                    const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -2077,8 +2072,7 @@ Arc::readAttributes(
  * Writes the attributes to the stream
  */
 void
-Arc::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream)
-  const
+Arc::writeAttributes(XMLOutputStream& stream) const
 {
   SBase::writeAttributes(stream);
 
@@ -2166,7 +2160,7 @@ Arc_getId(const Arc_t * a)
     return NULL;
   }
 
-  return a->getId().empty() ? NULL : safe_strdup(a->getId().c_str());
+  return a->getId().empty() ? NULL : sbgn_safe_strdup(a->getId().c_str());
 }
 
 
@@ -2182,7 +2176,8 @@ Arc_getClazz(const Arc_t * a)
     return NULL;
   }
 
-  return a->getClazz().empty() ? NULL : safe_strdup(a->getClazz().c_str());
+  return a->getClazz().empty() ? NULL :
+    sbgn_safe_strdup(a->getClazz().c_str());
 }
 
 
@@ -2198,7 +2193,8 @@ Arc_getSource(const Arc_t * a)
     return NULL;
   }
 
-  return a->getSource().empty() ? NULL : safe_strdup(a->getSource().c_str());
+  return a->getSource().empty() ? NULL :
+    sbgn_safe_strdup(a->getSource().c_str());
 }
 
 
@@ -2214,7 +2210,8 @@ Arc_getTarget(const Arc_t * a)
     return NULL;
   }
 
-  return a->getTarget().empty() ? NULL : safe_strdup(a->getTarget().c_str());
+  return a->getTarget().empty() ? NULL :
+    sbgn_safe_strdup(a->getTarget().c_str());
 }
 
 
