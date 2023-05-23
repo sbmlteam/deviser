@@ -434,8 +434,7 @@ TSBDocument::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-TSBDocument::writeElements( XMLOutputStream&
-  stream) const
+TSBDocument::writeElements(XMLOutputStream& stream) const
 {
   TSBBase::writeElements(stream);
 
@@ -891,6 +890,23 @@ TSBDocument::getElementBySId(const std::string& id)
 
 
 /*
+ * Returns a List of all child TSBBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+TSBDocument::getAllElements(TSBElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+
+  ADD_TSB_FILTERED_LIST(ret, sublist, mComments, filter);
+
+  return ret;
+}
+
+
+/*
  * Returns the value of the "Namespaces" element of this TSBDocument.
  */
 const  XMLNamespaces*
@@ -1011,8 +1027,7 @@ TSBDocument::createObject( XMLInputStream&
  * Adds the expected attributes for this element
  */
 void
-TSBDocument::addExpectedAttributes(
-  ExpectedAttributes& attributes)
+TSBDocument::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   TSBBase::addExpectedAttributes(attributes);
 
@@ -1031,11 +1046,8 @@ TSBDocument::addExpectedAttributes(
  * Reads the expected attributes into the member data variables
  */
 void
-TSBDocument::readAttributes(
-                            const 
-                              XMLAttributes& attributes,
-                            const 
-                              ExpectedAttributes& expectedAttributes)
+TSBDocument::readAttributes(const XMLAttributes& attributes,
+                            const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1126,8 +1138,7 @@ TSBDocument::readAttributes(
  * Writes the attributes to the stream
  */
 void
-TSBDocument::writeAttributes( XMLOutputStream&
-  stream) const
+TSBDocument::writeAttributes(XMLOutputStream& stream) const
 {
   TSBBase::writeAttributes(stream);
 

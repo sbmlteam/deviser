@@ -420,8 +420,7 @@ public:
   /**
    * Write any contained elements
    */
-  virtual void writeElements( XMLOutputStream&
-    stream) const;
+  virtual void writeElements(XMLOutputStream& stream) const;
 
   /** @endcond */
 
@@ -800,6 +799,19 @@ public:
 
 
   /**
+   * Returns a List of all child TSBBase objects, including those nested to an
+   * arbitrary depth.
+   *
+   * @param filter an ElementFilter that may impose restrictions on the objects
+   * to be retrieved.
+   *
+   * @return a List pointer of pointers to all TSBBase child objects with any
+   * restriction imposed.
+   */
+  virtual List* getAllElements(TSBElementFilter * filter = NULL);
+
+
+  /**
    * Returns the value of the "Namespaces" element of this TSBDocument.
    *
    * @return the value of the "Namespaces" element of this TSBDocument as a
@@ -911,8 +923,7 @@ protected:
   /**
    * Adds the expected attributes for this element
    */
-  virtual void addExpectedAttributes(
-    ExpectedAttributes& attributes);
+  virtual void addExpectedAttributes(ExpectedAttributes& attributes);
 
   /** @endcond */
 
@@ -923,11 +934,8 @@ protected:
   /**
    * Reads the expected attributes into the member data variables
    */
-  virtual void readAttributes(
-                              const 
-                                XMLAttributes& attributes,
-                              const 
-                                ExpectedAttributes& expectedAttributes);
+  virtual void readAttributes(const XMLAttributes& attributes,
+                              const ExpectedAttributes& expectedAttributes);
 
   /** @endcond */
 
@@ -938,8 +946,7 @@ protected:
   /**
    * Writes the attributes to the stream
    */
-  virtual void writeAttributes( XMLOutputStream&
-    stream) const;
+  virtual void writeAttributes(XMLOutputStream& stream) const;
 
   /** @endcond */
 
