@@ -333,8 +333,7 @@ TSBComment::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-TSBComment::writeElements( XMLOutputStream&
-  stream) const
+TSBComment::writeElements(XMLOutputStream& stream) const
 {
   TSBBase::writeElements(stream);
 }
@@ -655,8 +654,7 @@ TSBComment::unsetAttribute(const std::string& attributeName)
  * Adds the expected attributes for this element
  */
 void
-TSBComment::addExpectedAttributes(
-  ExpectedAttributes& attributes)
+TSBComment::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   TSBBase::addExpectedAttributes(attributes);
 
@@ -677,11 +675,8 @@ TSBComment::addExpectedAttributes(
  * Reads the expected attributes into the member data variables
  */
 void
-TSBComment::readAttributes(
-                           const  XMLAttributes&
-                             attributes,
-                           const 
-                             ExpectedAttributes& expectedAttributes)
+TSBComment::readAttributes(const XMLAttributes& attributes,
+                           const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -799,8 +794,7 @@ TSBComment::readAttributes(
  * Writes the attributes to the stream
  */
 void
-TSBComment::writeAttributes( XMLOutputStream&
-  stream) const
+TSBComment::writeAttributes(XMLOutputStream& stream) const
 {
   TSBBase::writeAttributes(stream);
 

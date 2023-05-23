@@ -1591,8 +1591,7 @@ class SetGetFunctions():
                                          self.cap_language)]
         elif attribute['attType'] == 'double':
             line = ['return ({0} != NULL) ? {0}->get{1}() : '
-                    'util_NaN()'.format(self.abbrev_parent,
-                                        attribute['capAttName'])]
+                    '{2}'.format(self.abbrev_parent, attribute['capAttName'], global_variables.util_NaN)]
         elif attribute['attType'] == 'boolean':
             line = ['return ({0} != NULL) ? static_cast<int>({0}->get{1}()) : '
                     '0'.format(self.abbrev_parent,
@@ -1608,9 +1607,10 @@ class SetGetFunctions():
                 use_name = 'static_cast<const ' \
                            '{0}*>({1})'.format(self.class_name,
                                                self.abbrev_parent)
-            line = ['return {0}->get{1}().empty() ? NULL : safe_strdup({0}'
+            line = ['return {0}->get{1}().empty() ? NULL : {2}({0}'
                     '->get{1}().c_str())'.format(use_name,
-                                                 attribute['capAttName'])]
+                                                 attribute['capAttName'],
+                                                 global_variables.safe_strdup)]
         code.append(self.create_code_block('line', line))
         return code
 

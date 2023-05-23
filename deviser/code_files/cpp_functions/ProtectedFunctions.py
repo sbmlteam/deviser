@@ -609,10 +609,11 @@ class ProtectedFunctions():
         # create the function declaration
         function = 'addExpectedAttributes'
         return_type = 'void'
-        if global_variables.is_package:
-            arguments = ['ExpectedAttributes& attributes']
-        else:
-            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes& attributes']
+        # no longer necessary to have libsbml namespace in v2
+        # if global_variables.is_package:
+        arguments = ['ExpectedAttributes& attributes']
+        # else:
+        #     arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes& attributes']
 
         # create the function implementation
         if self.base_class:
@@ -679,12 +680,13 @@ class ProtectedFunctions():
         # create function declaration
         function = 'readAttributes'
         return_type = 'void'
-        if global_variables.is_package:
-            arguments = ['const XMLAttributes& attributes',
-                         'const ExpectedAttributes& expectedAttributes']
-        else:
-            arguments = ['const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes',
-                         'const LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes& expectedAttributes']
+        # no longer necessary to have libsbml namespace in v2
+#        if global_variables.is_package:
+        arguments = ['const XMLAttributes& attributes',
+                     'const ExpectedAttributes& expectedAttributes']
+#        else:
+#            arguments = ['const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes',
+#                         'const LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes& expectedAttributes']
 
         # create the function implementation
         implementation = ['unsigned int level = getLevel()',
@@ -934,10 +936,11 @@ class ProtectedFunctions():
         # create function declaration
         function = 'writeAttributes'
         return_type = 'void'
-        if global_variables.is_package:
-            arguments = ['XMLOutputStream& stream']
-        else:
-            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
+        # no longer necessary to have libsbml namespace in v2
+#        if global_variables.is_package:
+        arguments = ['XMLOutputStream& stream']
+#        else:
+#            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
 
         # create the function implementation
         if self.base_class:
