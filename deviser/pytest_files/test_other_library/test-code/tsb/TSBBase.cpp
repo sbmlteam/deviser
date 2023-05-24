@@ -183,12 +183,12 @@ TSBBase::TSBBase(const TSBBase& orig)
   , mURI(orig.mURI)
 {
   if(orig.mNotes != NULL)
-    this->mNotes = new  XMLNode(*const_cast<TSBBase&>(orig).getNotes());
+    this->mNotes = new XMLNode(*const_cast<TSBBase&>(orig).getNotes());
   else
     this->mNotes = NULL;
 
   if(orig.mTestAnnotation != NULL)
-    this->mTestAnnotation = new  XMLNode(*const_cast<TSBBase&>(orig).mTestAnnotation);
+    this->mTestAnnotation = new XMLNode(*const_cast<TSBBase&>(orig).mTestAnnotation);
   else
     this->mTestAnnotation = NULL;
 
@@ -226,14 +226,14 @@ TSBBase& TSBBase::operator=(const TSBBase& rhs)
     delete this->mNotes;
 
     if(rhs.mNotes != NULL)
-      this->mNotes = new  XMLNode(*const_cast<TSBBase&>(rhs).getNotes());
+      this->mNotes = new XMLNode(*const_cast<TSBBase&>(rhs).getNotes());
     else
       this->mNotes = NULL;
 
     delete this->mTestAnnotation;
 
     if(rhs.mTestAnnotation != NULL)
-      this->mTestAnnotation = new  XMLNode(*const_cast<TSBBase&>(rhs).mTestAnnotation);
+      this->mTestAnnotation = new XMLNode(*const_cast<TSBBase&>(rhs).mTestAnnotation);
     else
       this->mTestAnnotation = NULL;
 
@@ -289,14 +289,14 @@ TSBBase::getId() const
 /*
  * @return the notes of this TSB object.
  */
- XMLNode*
+XMLNode*
 TSBBase::getNotes()
 {
   return mNotes;
 }
 
 
-const  XMLNode*
+const XMLNode*
 TSBBase::getNotes() const
 {
   return mNotes;
@@ -309,28 +309,28 @@ TSBBase::getNotes() const
 std::string
 TSBBase::getNotesString()
 {
-  return  XMLNode::convertXMLNodeToString(mNotes);
+  return XMLNode::convertXMLNodeToString(mNotes);
 }
 
 
 std::string
 TSBBase::getNotesString() const
 {
-  return  XMLNode::convertXMLNodeToString(mNotes);
+  return XMLNode::convertXMLNodeToString(mNotes);
 }
 
 
 /*
  * @return the annotation of this TSB object.
  */
- XMLNode*
+XMLNode*
 TSBBase::getTestAnnotation ()
 {
   return mTestAnnotation;
 }
 
 
-const  XMLNode*
+const XMLNode*
 TSBBase::getTestAnnotation () const
 {
   return const_cast<TSBBase *>(this)->getTestAnnotation();
@@ -343,14 +343,14 @@ TSBBase::getTestAnnotation () const
 std::string
 TSBBase::getTestAnnotationString ()
 {
-  return  XMLNode::convertXMLNodeToString(getTestAnnotation());
+  return XMLNode::convertXMLNodeToString(getTestAnnotation());
 }
 
 
 std::string
 TSBBase::getTestAnnotationString () const
 {
-  return  XMLNode::convertXMLNodeToString(getTestAnnotation());
+  return XMLNode::convertXMLNodeToString(getTestAnnotation());
 }
 
 
@@ -428,7 +428,7 @@ TSBBase::unsetUserData()
 /*
  * @return the Namespaces associated with this TSB object
  */
- XMLNamespaces*
+XMLNamespaces*
 TSBBase::getNamespaces()
 {
   if (mTSB != NULL)
@@ -438,7 +438,7 @@ TSBBase::getNamespaces()
 }
 
 
-const  XMLNamespaces*
+const XMLNamespaces*
 TSBBase::getNamespaces() const
 {
   if (mTSB != NULL)
@@ -662,7 +662,7 @@ TSBBase::setId (const std::string& sid)
  * Sets the annotation of this TSB object to a copy of annotation.
  */
 int
-TSBBase::setTestAnnotation ( XMLNode* annotation)
+TSBBase::setTestAnnotation (XMLNode* annotation)
 {
   if (annotation == NULL)
   {
@@ -695,17 +695,17 @@ TSBBase::setTestAnnotation (const std::string& annotation)
     return LIBTSB_OPERATION_SUCCESS;
   }
   
-   XMLNode* annt_xmln;
+  XMLNode* annt_xmln;
   
   // you might not have a document !!
   if (getTSBDocument() != NULL)
   {
-     XMLNamespaces* xmlns = getTSBDocument()->getNamespaces();
-    annt_xmln =  XMLNode::convertStringToXMLNode(annotation,xmlns);
+    XMLNamespaces* xmlns = getTSBDocument()->getNamespaces();
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
   {
-    annt_xmln =  XMLNode::convertStringToXMLNode(annotation);
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation);
   }
   
   if(annt_xmln != NULL)
@@ -723,7 +723,7 @@ TSBBase::setTestAnnotation (const std::string& annotation)
  * adding additional information.
  */
 int
-TSBBase::appendTestAnnotation (const  XMLNode* annotation)
+TSBBase::appendTestAnnotation (const XMLNode* annotation)
 {
   int success = LIBTSB_OPERATION_FAILED;
   unsigned int duplicates = 0;
@@ -731,14 +731,14 @@ TSBBase::appendTestAnnotation (const  XMLNode* annotation)
   if(annotation == NULL)
     return LIBTSB_OPERATION_SUCCESS;
 
-   XMLNode* new_annotation = NULL;
+  XMLNode* new_annotation = NULL;
   const string&  name = annotation->getName();
 
   // check for annotation tags and add if necessary
   if (name != "testAnnotation")
   {
-     XMLToken ann_t =  XMLToken( XMLTriple("testAnnotation", "", ""),  XMLAttributes());
-    new_annotation = new  XMLNode(ann_t);
+    XMLToken ann_t = XMLToken(XMLTriple("testAnnotation", "", ""), XMLAttributes());
+    new_annotation = new XMLNode(ann_t);
     new_annotation->addChild(*annotation);
   }
   else
@@ -787,7 +787,7 @@ TSBBase::appendTestAnnotation (const  XMLNode* annotation)
     }
     else
     {
-       XMLNode *copy = mTestAnnotation->clone();
+      XMLNode *copy = mTestAnnotation->clone();
       success = setTestAnnotation(copy);
       delete copy;
     }
@@ -813,15 +813,15 @@ int
 TSBBase::appendTestAnnotation (const std::string& annotation)
 {
   int success = LIBTSB_OPERATION_FAILED;
-   XMLNode* annt_xmln;
+  XMLNode* annt_xmln;
   if (getTSBDocument() != NULL)
   {
-     XMLNamespaces* xmlns = getTSBDocument()->getNamespaces();
-    annt_xmln =  XMLNode::convertStringToXMLNode(annotation,xmlns);
+    XMLNamespaces* xmlns = getTSBDocument()->getNamespaces();
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
   {
-    annt_xmln =  XMLNode::convertStringToXMLNode(annotation);
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation);
   }
 
   if(annt_xmln != NULL)
@@ -858,7 +858,7 @@ TSBBase::removeTopLevelTestAnnotationElement(const std::string elementName,
     // check uri matches
     if (elementURI.empty() == false)
     {
-       XMLNode child = mTestAnnotation->getChild(index);
+      XMLNode child = mTestAnnotation->getChild(index);
       std::string prefix = child.getPrefix();
 
       if (prefix.empty() == false
@@ -910,10 +910,10 @@ TSBBase::removeTopLevelTestAnnotationElement(const std::string elementName,
 
 
 int
-TSBBase::replaceTopLevelTestAnnotationElement(const  XMLNode* annotation)
+TSBBase::replaceTopLevelTestAnnotationElement(const XMLNode* annotation)
 {
   int success = LIBTSB_OPERATION_FAILED;
-   XMLNode * replacement = NULL;
+  XMLNode * replacement = NULL;
   if (annotation->getName() == "testAnnotation")
   {
     if (annotation->getNumChildren() != 1)
@@ -947,15 +947,15 @@ int
 TSBBase::replaceTopLevelTestAnnotationElement(const std::string& annotation)
 {
   int success = LIBTSB_OPERATION_FAILED;
-   XMLNode* annt_xmln;
+  XMLNode* annt_xmln;
   if (getTSBDocument() != NULL)
   {
-     XMLNamespaces* xmlns = getTSBDocument()->getNamespaces();
-    annt_xmln =  XMLNode::convertStringToXMLNode(annotation,xmlns);
+    XMLNamespaces* xmlns = getTSBDocument()->getNamespaces();
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
   {
-    annt_xmln =  XMLNode::convertStringToXMLNode(annotation);
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation);
   }
 
   if(annt_xmln != NULL)
@@ -973,7 +973,7 @@ TSBBase::replaceTopLevelTestAnnotationElement(const std::string& annotation)
  * Sets the notes of this TSB object to a copy of notes.
  */
 int
-TSBBase::setNotes(const  XMLNode* notes)
+TSBBase::setNotes(const XMLNode* notes)
 {
   if (mNotes == notes)
   {
@@ -993,13 +993,13 @@ TSBBase::setNotes(const  XMLNode* notes)
 
   if (name == "notes")
   {
-    mNotes = static_cast< XMLNode*>( notes->clone() );
+    mNotes = static_cast<XMLNode*>( notes->clone() );
   }
   else
   {
-     XMLToken notes_t =  XMLToken( XMLTriple("notes", "", ""),
-                                 XMLAttributes());
-    mNotes = new  XMLNode(notes_t);
+    XMLToken notes_t = XMLToken(XMLTriple("notes", "", ""),
+                                XMLAttributes());
+    mNotes = new XMLNode(notes_t);
 
     // The root node of the given XMLNode tree can be an empty XMLNode
     // (i.e. neither start, end, nor text XMLNode) if the given notes was
@@ -1041,17 +1041,17 @@ TSBBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
   }
   else
   {
-     XMLNode* notes_xmln;
+    XMLNode* notes_xmln;
 
     // you might not have a document !!
     if (getTSBDocument() != NULL)
     {
-       XMLNamespaces* xmlns = getTSBDocument()->getNamespaces();
-      notes_xmln =  XMLNode::convertStringToXMLNode(notes,xmlns);
+      XMLNamespaces* xmlns = getTSBDocument()->getNamespaces();
+      notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns);
     }
     else
     {
-      notes_xmln =  XMLNode::convertStringToXMLNode(notes);
+      notes_xmln = XMLNode::convertStringToXMLNode(notes);
     }
 
     if (notes_xmln != NULL)
@@ -1064,11 +1064,11 @@ TSBBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
             && notes_xmln->isText() == true)
         {
           //create a parent node of xhtml type p
-           XMLAttributes blank_att =  XMLAttributes();
-           XMLTriple triple =  XMLTriple("p", "http://www.w3.org/1999/xhtml", "");
-           XMLNamespaces xmlns =  XMLNamespaces();
+          XMLAttributes blank_att = XMLAttributes();
+          XMLTriple triple = XMLTriple("p", "http://www.w3.org/1999/xhtml", "");
+          XMLNamespaces xmlns = XMLNamespaces();
           xmlns.add("http://www.w3.org/1999/xhtml", "");
-           XMLNode *xmlnode = new  XMLNode( XMLToken(triple, blank_att, xmlns));
+          XMLNode *xmlnode = new XMLNode(XMLToken(triple, blank_att, xmlns));
 
           // create a text node from the text given
           xmlnode->addChild(*notes_xmln);
@@ -1098,7 +1098,7 @@ TSBBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
  * adding additional information.
  */
 int
-TSBBase::appendNotes(const  XMLNode* notes)
+TSBBase::appendNotes(const XMLNode* notes)
 {
   int success = LIBTSB_OPERATION_FAILED;
   if(notes == NULL)
@@ -1127,7 +1127,7 @@ TSBBase::appendNotes(const  XMLNode* notes)
   typedef enum { _ANotesHTML, _ANotesBody, _ANotesAny } _NotesType;
 
   _NotesType addedNotesType = _ANotesAny;
-   XMLNode   addedNotes;
+  XMLNode   addedNotes;
 
   //------------------------------------------------------------
   //
@@ -1238,7 +1238,7 @@ TSBBase::appendNotes(const  XMLNode* notes)
   if (getLevel() > 2
     || (getLevel() == 2 && getVersion() > 1))
   {
-     XMLNode tmpNotes( XMLTriple("notes","",""),  XMLAttributes());
+    XMLNode tmpNotes(XMLTriple("notes","",""), XMLAttributes());
 
     if (addedNotesType == _ANotesAny)
     {
@@ -1263,7 +1263,7 @@ TSBBase::appendNotes(const  XMLNode* notes)
     //------------------------------------------------------------
 
     _NotesType curNotesType   = _ANotesAny;
-     XMLNode&  curNotes = *mNotes;
+    XMLNode&  curNotes = *mNotes;
 
     // curNotes.getChild(0) must be "html", "body", or any XHTML
     // element that would be permitted within a "body" element .
@@ -1272,7 +1272,7 @@ TSBBase::appendNotes(const  XMLNode* notes)
 
     if (cname == "html")
     {
-       XMLNode& curHTML = curNotes.getChild(0);
+      XMLNode& curHTML = curNotes.getChild(0);
       //
       // checks the curHTML if the html tag contains "head" and "body" tags
       // which must be located in this order, otherwise nothing will be done.
@@ -1312,14 +1312,14 @@ TSBBase::appendNotes(const  XMLNode* notes)
 
     if (curNotesType == _ANotesHTML)
     {
-       XMLNode& curHTML = curNotes.getChild(0);
-       XMLNode& curBody = curHTML.getChild(1);
+      XMLNode& curHTML = curNotes.getChild(0);
+      XMLNode& curBody = curHTML.getChild(1);
 
       if (addedNotesType == _ANotesHTML)
       {
         // adds the given html tag to the current html tag
 
-         XMLNode& addedBody = addedNotes.getChild(1);
+        XMLNode& addedBody = addedNotes.getChild(1);
 
         for (i=0; i < addedBody.getNumChildren(); i++)
         {
@@ -1347,9 +1347,9 @@ TSBBase::appendNotes(const  XMLNode* notes)
       {
         // adds the given html tag to the current body tag
 
-         XMLNode  addedHTML(addedNotes);
-         XMLNode& addedBody = addedHTML.getChild(1);
-         XMLNode& curBody   = curNotes.getChild(0);
+        XMLNode  addedHTML(addedNotes);
+        XMLNode& addedBody = addedHTML.getChild(1);
+        XMLNode& curBody   = curNotes.getChild(0);
 
         for (i=0; i < curBody.getNumChildren(); i++)
         {
@@ -1365,7 +1365,7 @@ TSBBase::appendNotes(const  XMLNode* notes)
         // adds the given body or other tag (permitted in the body) to the current
         // body tag
 
-         XMLNode& curBody = curNotes.getChild(0);
+        XMLNode& curBody = curNotes.getChild(0);
 
         for (i=0; i < addedNotes.getNumChildren(); i++)
         {
@@ -1381,8 +1381,8 @@ TSBBase::appendNotes(const  XMLNode* notes)
       {
         // adds the given html tag to the current any tag permitted in the body.
 
-         XMLNode  addedHTML(addedNotes);
-         XMLNode& addedBody = addedHTML.getChild(1);
+        XMLNode  addedHTML(addedNotes);
+        XMLNode& addedBody = addedHTML.getChild(1);
 
         for (i=0; i < curNotes.getNumChildren(); i++)
         {
@@ -1397,7 +1397,7 @@ TSBBase::appendNotes(const  XMLNode* notes)
       {
         // adds the given body tag to the current any tag permitted in the body.
 
-         XMLNode addedBody(addedNotes);
+        XMLNode addedBody(addedNotes);
 
         for (i=0; i < curNotes.getNumChildren(); i++)
         {
@@ -1445,16 +1445,16 @@ TSBBase::appendNotes(const std::string& notes)
     return LIBTSB_OPERATION_SUCCESS;
   }
 
-   XMLNode* notes_xmln;
+  XMLNode* notes_xmln;
   // you might not have a document !!
   if (getTSBDocument() != NULL)
   {
-       XMLNamespaces* xmlns = getTSBDocument()->getNamespaces();
-      notes_xmln =  XMLNode::convertStringToXMLNode(notes,xmlns);
+      XMLNamespaces* xmlns = getTSBDocument()->getNamespaces();
+      notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns);
   }
   else
   {
-      notes_xmln =  XMLNode::convertStringToXMLNode(notes);
+      notes_xmln = XMLNode::convertStringToXMLNode(notes);
   }
 
   if(notes_xmln != NULL)
@@ -1578,7 +1578,7 @@ TSBBase::getAncestorOfType(int type) const
  * @param xmlns the namespaces to set
  */
 int
-TSBBase::setNamespaces( XMLNamespaces* xmlns)
+TSBBase::setNamespaces(XMLNamespaces* xmlns)
 {
   if (xmlns == NULL)
   {
@@ -1650,7 +1650,7 @@ TSBBase::unsetNotes ()
 int
 TSBBase::unsetTestAnnotation ()
 {
-   XMLNode* empty = NULL;
+  XMLNode* empty = NULL;
   return setTestAnnotation(empty);
 }
 
@@ -1708,7 +1708,7 @@ bool
 TSBBase::hasValidLevelVersionNamespaceCombination()
 {
   int typecode = getTypeCode();
-   XMLNamespaces *xmlns = getNamespaces();
+  XMLNamespaces *xmlns = getNamespaces();
 
   return hasValidLevelVersionNamespaceCombination(typecode, xmlns);
 }
@@ -1806,7 +1806,7 @@ TSBBase::matchesCoreTSBNamespace(const TSBBase * sb) const
 
 
 bool
-TSBBase::hasValidLevelVersionNamespaceCombination(int typecode,  XMLNamespaces *xmlns)
+TSBBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xmlns)
 {
 
 
@@ -1900,7 +1900,7 @@ char*
 TSBBase::toTSB ()
 {
   ostringstream    os;
-   XMLOutputStream  stream(os, "UTF-8", false);
+  XMLOutputStream  stream(os, "UTF-8", false);
 
   write(stream);
 
@@ -2104,11 +2104,11 @@ TSBBase::getObject(const std::string& objectName, unsigned int index)
  * Reads (initializes) this TSB object by reading from XMLInputStream.
  */
 void
-TSBBase::read ( XMLInputStream& stream)
+TSBBase::read (XMLInputStream& stream)
 {
   if ( !stream.peek().isStart() ) return;
 
-  const  XMLToken  element  = stream.next();
+  const XMLToken  element  = stream.next();
   int             position =  0;
 
   setTSBBaseFields( element );
@@ -2128,7 +2128,7 @@ TSBBase::read ( XMLInputStream& stream)
     // need to check that any prefix on the tsbns also occurs on element
     // remembering the horrible situation where the tsbns might be declared
     // with more than one prefix
-     XMLNamespaces * xmlns = this->getTSBNamespaces()->getNamespaces();
+    XMLNamespaces * xmlns = this->getTSBNamespaces()->getNamespaces();
     if (xmlns != NULL)
     {
       int i = xmlns->getIndexByPrefix(element.getPrefix());
@@ -2188,7 +2188,7 @@ TSBBase::read ( XMLInputStream& stream)
     checkDefaultNamespace(mTSBNamespaces->getNamespaces(), element.getName());
     if (!element.getPrefix().empty())
     {
-       XMLNamespaces * prefixedNS = new  XMLNamespaces();
+      XMLNamespaces * prefixedNS = new XMLNamespaces();
       prefixedNS->add(element.getURI(), element.getPrefix());
       checkDefaultNamespace(prefixedNS, element.getName(), element.getPrefix());
       delete prefixedNS;
@@ -2209,7 +2209,7 @@ TSBBase::read ( XMLInputStream& stream)
     }
     setElementText(text);
 
-    const  XMLToken& next = stream.peek();
+    const XMLToken& next = stream.peek();
 
     // Re-check stream.isGood() because stream.peek() could hit something.
     if ( !stream.isGood() ) break;
@@ -2264,7 +2264,7 @@ TSBBase::setElementText(const std::string &text)
  * Writes (serializes) this TSB object by writing it to XMLOutputStream.
  */
 void
-TSBBase::write ( XMLOutputStream& stream) const
+TSBBase::write (XMLOutputStream& stream) const
 {
   stream.startElement( getElementName(), getPrefix() );
 
@@ -2285,7 +2285,7 @@ TSBBase::write ( XMLOutputStream& stream) const
  * implementation of this method as well.
  */
 void
-TSBBase::writeElements ( XMLOutputStream& stream) const
+TSBBase::writeElements (XMLOutputStream& stream) const
 {
   if ( mNotes != NULL ) stream << *mNotes;
 
@@ -2303,7 +2303,7 @@ TSBBase::writeElements ( XMLOutputStream& stream) const
  * XMLInputStream or @c NULL if the token was not recognized.
  */
 TSBBase*
-TSBBase::createObject ( XMLInputStream& stream)
+TSBBase::createObject (XMLInputStream& stream)
 {
   return NULL;
 }
@@ -2320,7 +2320,7 @@ TSBBase::createObject ( XMLInputStream& stream)
  * @return true if the subclass read from the stream, false otherwise.
  */
 bool
-TSBBase::readOtherXML ( XMLInputStream& stream)
+TSBBase::readOtherXML (XMLInputStream& stream)
 {
   bool read = false;
   return read;
@@ -2333,7 +2333,7 @@ TSBBase::readOtherXML ( XMLInputStream& stream)
  * @return true if read an <annotation> element from the stream
  */
 bool
-TSBBase::readTestAnnotation ( XMLInputStream& stream)
+TSBBase::readTestAnnotation (XMLInputStream& stream)
 {
   const string& name = stream.peek().getName();
 
@@ -2350,7 +2350,7 @@ TSBBase::readTestAnnotation ( XMLInputStream& stream)
     }
 
     delete mTestAnnotation;
-    mTestAnnotation = new  XMLNode(stream);
+    mTestAnnotation = new XMLNode(stream);
     checkTestAnnotation();
     return true;
   }
@@ -2365,7 +2365,7 @@ TSBBase::readTestAnnotation ( XMLInputStream& stream)
  * @return true if read a <notes> element from the stream
  */
 bool
-TSBBase::readNotes ( XMLInputStream& stream)
+TSBBase::readNotes (XMLInputStream& stream)
 {
   const string& name = stream.peek().getName();
 
@@ -2381,13 +2381,13 @@ TSBBase::readNotes ( XMLInputStream& stream)
     }
 
     delete mNotes;
-    mNotes = new  XMLNode(stream);
+    mNotes = new XMLNode(stream);
 
     //
     // checks if the given default namespace (if any) is a valid
     // TSB namespace
     //
-    const  XMLNamespaces &xmlns = mNotes->getNamespaces();
+    const XMLNamespaces &xmlns = mNotes->getNamespaces();
     checkDefaultNamespace(&xmlns,"notes");
 
     return true;
@@ -2556,10 +2556,10 @@ TSBBase::addExpectedAttributes(ExpectedAttributes& attributes)
  * parents implementation of this method as well.
  */
 void
-TSBBase::readAttributes (const  XMLAttributes& attributes,
-                       const  ExpectedAttributes& expectedAttributes)
+TSBBase::readAttributes (const XMLAttributes& attributes,
+                       const ExpectedAttributes& expectedAttributes)
 {
-  const_cast< XMLAttributes&>(attributes).setErrorLog(getErrorLog());
+  const_cast<XMLAttributes&>(attributes).setErrorLog(getErrorLog());
 
   const unsigned int level   = getLevel  ();
   const unsigned int version = getVersion();
@@ -2623,7 +2623,7 @@ TSBBase::getPrefix() const
 {
   std::string prefix = "";
 
-  const  XMLNamespaces *xmlns = getNamespaces();
+  const XMLNamespaces *xmlns = getNamespaces();
   string uri = getURI();
   if(xmlns && mTSB)
   {
@@ -2642,7 +2642,7 @@ TSBBase::getTSBPrefix() const
 {
   std::string prefix = "";
 
-  const  XMLNamespaces *xmlns = getNamespaces();
+  const XMLNamespaces *xmlns = getNamespaces();
   if (xmlns == NULL)
     return getPrefix();
 
@@ -2687,7 +2687,7 @@ TSBBase::getRootElement()
  * of this method as well.
  */
 void
-TSBBase::writeAttributes ( XMLOutputStream& stream) const
+TSBBase::writeAttributes (XMLOutputStream& stream) const
 {
   string tsbPrefix    = getTSBPrefix();
   if ( !mMetaId.empty() )
@@ -2706,7 +2706,7 @@ TSBBase::writeAttributes ( XMLOutputStream& stream) const
  *
  */
 void
-TSBBase::writeXMLNS ( XMLOutputStream& stream) const
+TSBBase::writeXMLNS (XMLOutputStream& stream) const
 {
   // do nothing.
 }
@@ -2764,7 +2764,7 @@ int TSBBase::removeFromParentAndDelete()
 
 /** @cond doxygenLibtsbInternal */
 const std::string
-TSBBase::checkMathMLNamespace(const  XMLToken elem)
+TSBBase::checkMathMLNamespace(const XMLToken elem)
 {
   std::string prefix = "";
   unsigned int match = 0;
@@ -2810,7 +2810,7 @@ TSBBase::checkMathMLNamespace(const  XMLToken elem)
 
 /** @cond doxygenLibtsbInternal */
 void
-TSBBase::checkDefaultNamespace(const  XMLNamespaces* xmlns,
+TSBBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
                              const std::string& elementName,
                              const std::string& prefix)
 {
@@ -2860,12 +2860,12 @@ TSBBase::checkTestAnnotation()
   // checks if the given default namespace (if any) is a valid
   // TSB namespace
   //
-  const  XMLNamespaces &xmlns = mTestAnnotation->getNamespaces();
+  const XMLNamespaces &xmlns = mTestAnnotation->getNamespaces();
   checkDefaultNamespace(&xmlns,"testAnnotation");
 
   while (nNodes < mTestAnnotation->getNumChildren())
   {
-     XMLNode topLevel = mTestAnnotation->getChild(nNodes);
+    XMLNode topLevel = mTestAnnotation->getChild(nNodes);
 
     // the top level must be an element (so it should be a start)
     if (topLevel.isStart() == false)
@@ -2961,7 +2961,7 @@ TSBBase::checkTestAnnotation()
  * an tsb document, an error is logged.
  */
 void
-TSBBase::checkXHTML(const  XMLNode * xhtml)
+TSBBase::checkXHTML(const XMLNode * xhtml)
 {
   if (xhtml == NULL) return;
 
@@ -3054,14 +3054,14 @@ TSBBase::checkCompatibility(const TSBBase * object) const
  * roundtripping) declared on this TSB (XML) element.
  */
 void
-TSBBase::setTSBBaseFields (const  XMLToken& element)
+TSBBase::setTSBBaseFields (const XMLToken& element)
 {
   mLine   = element.getLine  ();
   mColumn = element.getColumn();
 
   if (element.getNamespaces().getLength() > 0)
   {
-     XMLNamespaces tmpxmlns(element.getNamespaces());
+    XMLNamespaces tmpxmlns(element.getNamespaces());
     setNamespaces(&tmpxmlns);
   }
   else
