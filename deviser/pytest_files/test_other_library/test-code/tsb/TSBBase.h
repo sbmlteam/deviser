@@ -62,7 +62,6 @@
 #include <tsb/TSBErrorLog.h>
 #include <tsb/TSBVisitor.h>
 
-class Model;
 
 class List;
 
@@ -71,6 +70,7 @@ class XMLInputStream;
 class XMLNamespaces;
 class XMLOutputStream;
 class XMLToken;
+
 
 LIBTSB_CPP_NAMESPACE_BEGIN
 
@@ -263,7 +263,7 @@ public:
    * @see unsetNotes()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  const  XMLNode* getNotes() const;
+  const XMLNode* getNotes() const;
 
 
   /**
@@ -357,7 +357,7 @@ public:
    * @see appendTestAnnotation(const std::string& annotation)
    * @see unsetTestAnnotation()
    */
-  const  XMLNode* getTestAnnotation () const;
+  const XMLNode* getTestAnnotation () const;
 
 
   /**
@@ -414,7 +414,7 @@ public:
    * @see getLevel()
    * @see getVersion()
    */
-  virtual const  XMLNamespaces* getNamespaces() const ;
+  virtual const XMLNamespaces* getNamespaces() const ;
 
 
   /**
@@ -431,7 +431,7 @@ public:
    * @see getLevel()
    * @see getVersion()
    */
-  virtual  XMLNamespaces* getNamespaces();
+  virtual XMLNamespaces* getNamespaces();
 
 
   /**
@@ -788,7 +788,7 @@ public:
    * @see appendTestAnnotation(const std::string& annotation)
    * @see unsetTestAnnotation()
    */
-  virtual int setTestAnnotation ( XMLNode* annotation);
+  virtual int setTestAnnotation (XMLNode* annotation);
 
 
   /**
@@ -876,7 +876,7 @@ public:
    * @see appendTestAnnotation(const std::string& annotation)
    * @see unsetTestAnnotation()
    */
-  virtual int appendTestAnnotation (const  XMLNode* annotation);
+  virtual int appendTestAnnotation (const XMLNode* annotation);
 
 
   /**
@@ -977,7 +977,7 @@ public:
    * @see removeTopLevelTestAnnotationElement(const std::string elementName, const std::string elementURI)
    * @see replaceTopLevelTestAnnotationElement(const std::string&)
    */
-  int replaceTopLevelTestAnnotationElement(const  XMLNode* annotation);
+  int replaceTopLevelTestAnnotationElement(const XMLNode* annotation);
 
 
   /**
@@ -1051,7 +1051,7 @@ public:
    * @see unsetNotes()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  int setNotes(const  XMLNode* notes);
+  int setNotes(const XMLNode* notes);
 
 
   /**
@@ -1148,7 +1148,7 @@ public:
    * @see unsetNotes()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  int appendNotes(const  XMLNode* notes);
+  int appendNotes(const XMLNode* notes);
 
 
   /**
@@ -1259,7 +1259,7 @@ public:
    * @copydetails doc_returns_success_code
    * @li @tsbconstant{LIBTSB_OPERATION_SUCCESS, OperationReturnValues_t}
    */
-  int setNamespaces( XMLNamespaces* xmlns);
+  int setNamespaces(XMLNamespaces* xmlns);
 
 
   /**
@@ -1558,7 +1558,7 @@ public:
   /**
    * Reads (initializes) this TSB object by reading from XMLInputStream.
    */
-  void read ( XMLInputStream& stream);
+  void read (XMLInputStream& stream);
   /** @endcond */
 
 
@@ -1566,7 +1566,7 @@ public:
   /**
    * Writes (serializes) this TSB object by writing it to XMLOutputStream.
    */
-  virtual void write ( XMLOutputStream& stream) const;
+  virtual void write (XMLOutputStream& stream) const;
   /** @endcond */
 
 
@@ -1582,7 +1582,7 @@ public:
    *   ...
    * </pre>@endif@~
    */
-  virtual void writeElements ( XMLOutputStream& stream) const;
+  virtual void writeElements (XMLOutputStream& stream) const;
   /** @endcond */
 
 
@@ -1800,7 +1800,7 @@ protected:
    * @return the TSB object corresponding to next XMLToken in the
    * XMLInputStream or @c NULL if the token was not recognized.
    */
-  virtual TSBBase* createObject ( XMLInputStream& stream);
+  virtual TSBBase* createObject (XMLInputStream& stream);
 
 
   /**
@@ -1817,7 +1817,7 @@ protected:
    * @return @c true if the level, version and namespace values of this 
    * TSB object correspond to a valid set of values, @c false otherwise.
    */
-  bool hasValidLevelVersionNamespaceCombination(int typecode,  XMLNamespaces *xmlns);
+  bool hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xmlns);
 
 
   /**
@@ -1826,7 +1826,7 @@ protected:
    *
    * @return true if the subclass read from the stream, false otherwise.
    */
-  virtual bool readOtherXML ( XMLInputStream& stream);
+  virtual bool readOtherXML (XMLInputStream& stream);
 
 
   /**
@@ -1896,8 +1896,8 @@ protected:
    * XMLAttributes set into their specific fields.  Be sure to call your
    * parents implementation of this method as well.
    */
-  virtual void readAttributes (const  XMLAttributes& attributes, 
-                               const  ExpectedAttributes& expectedAttributes);
+  virtual void readAttributes (const XMLAttributes& attributes, 
+                               const ExpectedAttributes& expectedAttributes);
 
 
   /**
@@ -1914,7 +1914,7 @@ protected:
    * Be sure to implement wirteXMLNS() function to write xmlns attributes.
    *
    */
-  virtual void writeAttributes ( XMLOutputStream& stream) const;
+  virtual void writeAttributes (XMLOutputStream& stream) const;
 
 
   /**
@@ -1923,7 +1923,7 @@ protected:
    * (if any) to the XMLOutputStream. 
    *
    */
-  virtual void writeXMLNS ( XMLOutputStream& stream) const;
+  virtual void writeXMLNS (XMLOutputStream& stream) const;
 
 
   /**
@@ -1937,7 +1937,7 @@ protected:
    * Checks that the given default namespace in the given element is valid.
    * If the given default namespace is not valid, an error is logged.
    */
-  void checkDefaultNamespace(const  XMLNamespaces* xmlns, 
+  void checkDefaultNamespace(const XMLNamespaces* xmlns, 
     const std::string& elementName, const std::string& prefix = "");
 
   /**
@@ -1952,13 +1952,13 @@ protected:
    * If the xhtml does not conform to the specification of valid xhtml within
    * an tsb document, an error is logged.
    */
-  void checkXHTML(const  XMLNode *);
+  void checkXHTML(const XMLNode *);
 
 
   /**
    * Checks that the math ml ns has been declared
    */
-  const std::string checkMathMLNamespace(const  XMLToken elem);
+  const std::string checkMathMLNamespace(const XMLToken elem);
 
    /**
    * Sets the XML namespace to which this element belongs to.
@@ -2012,8 +2012,8 @@ protected:
 
   std::string     mMetaId;
   std::string     mId;
-   XMLNode*        mNotes;
-   XMLNode*        mTestAnnotation;
+  XMLNode*        mNotes;
+  XMLNode*        mTestAnnotation;
   TSBDocument*   mTSB;
   TSBNamespaces* mTSBNamespaces;
   void*           mUserData;
@@ -2054,7 +2054,7 @@ private:
    * Stores the location (line and column) and any XML namespaces (for
    * roundtripping) declared on this TSB (XML) element.
    */
-  void setTSBBaseFields (const  XMLToken& element);
+  void setTSBBaseFields (const XMLToken& element);
 
 
   /**
@@ -2062,7 +2062,7 @@ private:
    *
    * @return true if read an <annotation> element from the stream
    */
-  bool readTestAnnotation ( XMLInputStream& stream);
+  bool readTestAnnotation (XMLInputStream& stream);
 
 
   /**
@@ -2070,7 +2070,7 @@ private:
    *
    * @return true if read a <notes> element from the stream
    */
-  bool readNotes ( XMLInputStream& stream);
+  bool readNotes (XMLInputStream& stream);
 
 
   /** @endcond */
@@ -2135,12 +2135,6 @@ TSBBase_getParentTSBObject (TSBBase_t *sb);
 /**
  * Returns the ancestor TSBBase_t structure of the given TSBBase_t
  * structure that corresponds to the given type.
- *
- * This function allows any structure to determine its exact
- * location/function within a model. For example a
- * StoichiometryMath_t structure has ancestors of type SpeciesReference_t,
- * TSBListOf_t(Products/Reactants), Reaction_t, TSBListOfReactions_t and Model_t;
- * any of which can be accessed via this function.
  *
  * @param sb the TSBBase_t structure
  * @param type the typecode (int) of the structure to be returned
