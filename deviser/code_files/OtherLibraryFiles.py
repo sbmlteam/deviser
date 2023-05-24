@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# @file    BaseClassFiles.py
+# @file    OtherLibraryFiles.py
 # @brief   class for generating base files for other library implementations
 # @author  Frank Bergmann
 # @author  Sarah Keating
