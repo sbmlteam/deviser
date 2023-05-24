@@ -611,8 +611,7 @@ SedModel::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-SedModel::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedModel::writeElements(XMLOutputStream& stream) const
 {
   SedBase::writeElements(stream);
 
@@ -1032,7 +1031,7 @@ SedModel::addChildObject(const std::string& elementName,
     return addChange((const SedChange*)(element));
   }
 
-  return LIBSBML_OPERATION_FAILED;
+  return LIBSEDML_OPERATION_FAILED;
 }
 
 /** @endcond */
@@ -1199,7 +1198,7 @@ SedModel::getAllElements(SedElementFilter* filter)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedModel::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
+SedModel::createObject(XMLInputStream& stream)
 {
   SedBase* obj = NULL;
 
@@ -1231,8 +1230,7 @@ SedModel::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
  * Adds the expected attributes for this element
  */
 void
-SedModel::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+SedModel::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
 
@@ -1255,11 +1253,8 @@ SedModel::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-SedModel::readAttributes(
-                         const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes&
-                           attributes,
-                         const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                           ExpectedAttributes& expectedAttributes)
+SedModel::readAttributes(const XMLAttributes& attributes,
+                         const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1394,8 +1389,7 @@ SedModel::readAttributes(
  * Writes the attributes to the stream
  */
 void
-SedModel::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedModel::writeAttributes(XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
 
@@ -1483,7 +1477,7 @@ SedModel_getId(const SedModel_t * sm)
     return NULL;
   }
 
-  return sm->getId().empty() ? NULL : safe_strdup(sm->getId().c_str());
+  return sm->getId().empty() ? NULL : sedml_safe_strdup(sm->getId().c_str());
 }
 
 
@@ -1499,7 +1493,8 @@ SedModel_getName(const SedModel_t * sm)
     return NULL;
   }
 
-  return sm->getName().empty() ? NULL : safe_strdup(sm->getName().c_str());
+  return sm->getName().empty() ? NULL :
+    sedml_safe_strdup(sm->getName().c_str());
 }
 
 
@@ -1516,7 +1511,7 @@ SedModel_getLanguage(const SedModel_t * sm)
   }
 
   return sm->getLanguage().empty() ? NULL :
-    safe_strdup(sm->getLanguage().c_str());
+    sedml_safe_strdup(sm->getLanguage().c_str());
 }
 
 
@@ -1532,7 +1527,8 @@ SedModel_getSource(const SedModel_t * sm)
     return NULL;
   }
 
-  return sm->getSource().empty() ? NULL : safe_strdup(sm->getSource().c_str());
+  return sm->getSource().empty() ? NULL :
+    sedml_safe_strdup(sm->getSource().c_str());
 }
 
 

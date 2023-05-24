@@ -330,8 +330,7 @@ SedAbstractTask::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-SedAbstractTask::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedAbstractTask::writeElements(XMLOutputStream& stream) const
 {
   SedBase::writeElements(stream);
 }
@@ -631,8 +630,7 @@ SedAbstractTask::unsetAttribute(const std::string& attributeName)
  * Adds the expected attributes for this element
  */
 void
-SedAbstractTask::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+SedAbstractTask::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
 
@@ -651,11 +649,8 @@ SedAbstractTask::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-SedAbstractTask::readAttributes(
-                                const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                  XMLAttributes& attributes,
-                                const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                  ExpectedAttributes& expectedAttributes)
+SedAbstractTask::readAttributes(const XMLAttributes& attributes,
+                                const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -752,8 +747,7 @@ SedAbstractTask::readAttributes(
  * Writes the attributes to the stream
  */
 void
-SedAbstractTask::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  XMLOutputStream& stream) const
+SedAbstractTask::writeAttributes(XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
 
@@ -869,7 +863,7 @@ SedAbstractTask_getId(const SedAbstractTask_t * sat)
     return NULL;
   }
 
-  return sat->getId().empty() ? NULL : safe_strdup(sat->getId().c_str());
+  return sat->getId().empty() ? NULL : sedml_safe_strdup(sat->getId().c_str());
 }
 
 
@@ -885,7 +879,8 @@ SedAbstractTask_getName(const SedAbstractTask_t * sat)
     return NULL;
   }
 
-  return sat->getName().empty() ? NULL : safe_strdup(sat->getName().c_str());
+  return sat->getName().empty() ? NULL :
+    sedml_safe_strdup(sat->getName().c_str());
 }
 
 

@@ -507,8 +507,7 @@ SedSetValue::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-SedSetValue::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedSetValue::writeElements(XMLOutputStream& stream) const
 {
   SedBase::writeElements(stream);
 
@@ -860,8 +859,7 @@ SedSetValue::unsetAttribute(const std::string& attributeName)
  * Adds the expected attributes for this element
  */
 void
-SedSetValue::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+SedSetValue::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
 
@@ -884,11 +882,8 @@ SedSetValue::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-SedSetValue::readAttributes(
-                            const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                              XMLAttributes& attributes,
-                            const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                              ExpectedAttributes& expectedAttributes)
+SedSetValue::readAttributes(const XMLAttributes& attributes,
+                            const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1067,8 +1062,7 @@ SedSetValue::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
  * Writes the attributes to the stream
  */
 void
-SedSetValue::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedSetValue::writeAttributes(XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
 
@@ -1158,7 +1152,7 @@ SedSetValue_getModelReference(const SedSetValue_t * ssv)
   }
 
   return ssv->getModelReference().empty() ? NULL :
-    safe_strdup(ssv->getModelReference().c_str());
+    sedml_safe_strdup(ssv->getModelReference().c_str());
 }
 
 
@@ -1175,7 +1169,7 @@ SedSetValue_getSymbol(const SedSetValue_t * ssv)
   }
 
   return ssv->getSymbol().empty() ? NULL :
-    safe_strdup(ssv->getSymbol().c_str());
+    sedml_safe_strdup(ssv->getSymbol().c_str());
 }
 
 
@@ -1192,7 +1186,7 @@ SedSetValue_getTarget(const SedSetValue_t * ssv)
   }
 
   return ssv->getTarget().empty() ? NULL :
-    safe_strdup(ssv->getTarget().c_str());
+    sedml_safe_strdup(ssv->getTarget().c_str());
 }
 
 
@@ -1208,7 +1202,8 @@ SedSetValue_getRange(const SedSetValue_t * ssv)
     return NULL;
   }
 
-  return ssv->getRange().empty() ? NULL : safe_strdup(ssv->getRange().c_str());
+  return ssv->getRange().empty() ? NULL :
+    sedml_safe_strdup(ssv->getRange().c_str());
 }
 
 

@@ -401,8 +401,7 @@ SedListOfTasks::getItemTypeCode() const
  * Creates a new SedAbstractTask in this SedListOfTasks
  */
 SedBase*
-SedListOfTasks::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-  stream)
+SedListOfTasks::createObject(XMLInputStream& stream)
 {
   const std::string& name = stream.peek().getName();
   SedBase* object = NULL;

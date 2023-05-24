@@ -1676,8 +1676,7 @@ SedDocument::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-SedDocument::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedDocument::writeElements(XMLOutputStream& stream) const
 {
   SedBase::writeElements(stream);
 
@@ -2206,7 +2205,7 @@ SedDocument::addChildObject(const std::string& elementName,
     return addStyle((const SedStyle*)(element));
   }
 
-  return LIBSBML_OPERATION_FAILED;
+  return LIBSEDML_OPERATION_FAILED;
 }
 
 /** @endcond */
@@ -2475,7 +2474,7 @@ SedDocument::getAllElements(SedElementFilter* filter)
 /*
  * Returns the value of the "Namespaces" element of this SedDocument.
  */
-const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*
+const XMLNamespaces*
 SedDocument::getNamespaces() const
 {
   return mSedNamespaces->getNamespaces();
@@ -2485,7 +2484,7 @@ SedDocument::getNamespaces() const
 /*
  * Returns the value of the "Namespaces" element of this SedDocument.
  */
-LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*
+XMLNamespaces*
 SedDocument::getNamespaces()
 {
   return mSedNamespaces->getNamespaces();
@@ -2560,8 +2559,7 @@ SedDocument::getNumErrors(unsigned int severity) const
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-  stream)
+SedDocument::createObject(XMLInputStream& stream)
 {
   SedBase* obj = NULL;
 
@@ -2653,8 +2651,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
  * Adds the expected attributes for this element
  */
 void
-SedDocument::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+SedDocument::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
 
@@ -2673,11 +2670,8 @@ SedDocument::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-SedDocument::readAttributes(
-                            const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                              XMLAttributes& attributes,
-                            const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                              ExpectedAttributes& expectedAttributes)
+SedDocument::readAttributes(const XMLAttributes& attributes,
+                            const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -2768,8 +2762,7 @@ SedDocument::readAttributes(
  * Writes the attributes to the stream
  */
 void
-SedDocument::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedDocument::writeAttributes(XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
 
@@ -2794,16 +2787,14 @@ SedDocument::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
  * Writes the namespace for the Sedml package
  */
 void
-SedDocument::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedDocument::writeXMLNS(XMLOutputStream& stream) const
 {
-  LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces xmlns;
+  XMLNamespaces xmlns;
   std::string prefix = getPrefix();
 
   if (prefix.empty())
   {
-    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* thisxmlns =
-      getNamespaces();
+    const XMLNamespaces* thisxmlns = getNamespaces();
     if (thisxmlns && thisxmlns->hasURI(SEDML_XMLNS_L1V1))
     {
       xmlns.add(SEDML_XMLNS_L1V1, prefix);

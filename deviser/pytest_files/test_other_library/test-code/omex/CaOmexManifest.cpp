@@ -275,8 +275,7 @@ CaOmexManifest::getTypeCode() const
  * Write any contained elements
  */
 void
-CaOmexManifest::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+CaOmexManifest::writeElements(XMLOutputStream& stream) const
 {
   CaBase::writeElements(stream);
 
@@ -588,7 +587,7 @@ CaOmexManifest::addChildObject(const std::string& elementName,
     return addContent((const CaContent*)(element));
   }
 
-  return LIBSBML_OPERATION_FAILED;
+  return LIBCOMBINE_OPERATION_FAILED;
 }
 
 /** @endcond */
@@ -711,7 +710,7 @@ CaOmexManifest::getAllElements(CaElementFilter* filter)
 /*
  * Returns the value of the "Namespaces" element of this CaOmexManifest.
  */
-const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*
+const XMLNamespaces*
 CaOmexManifest::getNamespaces() const
 {
   return mCaNamespaces->getNamespaces();
@@ -721,7 +720,7 @@ CaOmexManifest::getNamespaces() const
 /*
  * Returns the value of the "Namespaces" element of this CaOmexManifest.
  */
-LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*
+XMLNamespaces*
 CaOmexManifest::getNamespaces()
 {
   return mCaNamespaces->getNamespaces();
@@ -796,8 +795,7 @@ CaOmexManifest::getNumErrors(unsigned int severity) const
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 CaBase*
-CaOmexManifest::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-  stream)
+CaOmexManifest::createObject(XMLInputStream& stream)
 {
   CaBase* obj = NULL;
 
@@ -823,16 +821,14 @@ CaOmexManifest::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
  * Writes the namespace for the Combine package
  */
 void
-CaOmexManifest::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+CaOmexManifest::writeXMLNS(XMLOutputStream& stream) const
 {
-  LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces xmlns;
+  XMLNamespaces xmlns;
   std::string prefix = getPrefix();
 
   if (prefix.empty())
   {
-    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* thisxmlns =
-      getNamespaces();
+    const XMLNamespaces* thisxmlns = getNamespaces();
     if (thisxmlns && thisxmlns->hasURI(OMEX_XMLNS_L1V1))
     {
       xmlns.add(OMEX_XMLNS_L1V1, prefix);

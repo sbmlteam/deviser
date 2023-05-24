@@ -220,8 +220,7 @@ SedVectorRange::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-SedVectorRange::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedVectorRange::writeElements(XMLOutputStream& stream) const
 {
   SedRange::writeElements(stream);
 
@@ -501,8 +500,7 @@ SedVectorRange::unsetAttribute(const std::string& attributeName)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedVectorRange::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-  stream)
+SedVectorRange::createObject(XMLInputStream& stream)
 {
   SedBase* obj = SedRange::createObject(stream);
 
@@ -521,8 +519,7 @@ SedVectorRange::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
  * Adds the expected attributes for this element
  */
 void
-SedVectorRange::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+SedVectorRange::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SedRange::addExpectedAttributes(attributes);
 
@@ -539,11 +536,8 @@ SedVectorRange::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-SedVectorRange::readAttributes(
-                               const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                 XMLAttributes& attributes,
-                               const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                 ExpectedAttributes& expectedAttributes)
+SedVectorRange::readAttributes(const XMLAttributes& attributes,
+                               const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -623,8 +617,7 @@ SedVectorRange::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
  * Writes the attributes to the stream
  */
 void
-SedVectorRange::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  XMLOutputStream& stream) const
+SedVectorRange::writeAttributes(XMLOutputStream& stream) const
 {
   SedRange::writeAttributes(stream);
 }

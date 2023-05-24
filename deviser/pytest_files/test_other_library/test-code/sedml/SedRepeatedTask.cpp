@@ -872,8 +872,7 @@ SedRepeatedTask::hasRequiredElements() const
  * Write any contained elements
  */
 void
-SedRepeatedTask::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedRepeatedTask::writeElements(XMLOutputStream& stream) const
 {
   SedAbstractTask::writeElements(stream);
 
@@ -1298,7 +1297,7 @@ SedRepeatedTask::addChildObject(const std::string& elementName,
     return addSubTask((const SedSubTask*)(element));
   }
 
-  return LIBSBML_OPERATION_FAILED;
+  return LIBSEDML_OPERATION_FAILED;
 }
 
 /** @endcond */
@@ -1483,8 +1482,7 @@ SedRepeatedTask::getAllElements(SedElementFilter* filter)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedRepeatedTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-  stream)
+SedRepeatedTask::createObject(XMLInputStream& stream)
 {
   SedBase* obj = SedAbstractTask::createObject(stream);
 
@@ -1536,8 +1534,7 @@ SedRepeatedTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
  * Adds the expected attributes for this element
  */
 void
-SedRepeatedTask::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+SedRepeatedTask::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SedAbstractTask::addExpectedAttributes(attributes);
 
@@ -1556,11 +1553,8 @@ SedRepeatedTask::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-SedRepeatedTask::readAttributes(
-                                const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                  XMLAttributes& attributes,
-                                const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                  ExpectedAttributes& expectedAttributes)
+SedRepeatedTask::readAttributes(const XMLAttributes& attributes,
+                                const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1641,8 +1635,7 @@ SedRepeatedTask::readAttributes(
  * Writes the attributes to the stream
  */
 void
-SedRepeatedTask::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  XMLOutputStream& stream) const
+SedRepeatedTask::writeAttributes(XMLOutputStream& stream) const
 {
   SedAbstractTask::writeAttributes(stream);
 
@@ -1722,7 +1715,7 @@ SedRepeatedTask_getRangeId(const SedRepeatedTask_t * srt)
   }
 
   return srt->getRangeId().empty() ? NULL :
-    safe_strdup(srt->getRangeId().c_str());
+    sedml_safe_strdup(srt->getRangeId().c_str());
 }
 
 

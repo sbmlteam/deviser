@@ -56,7 +56,6 @@
 #include <omex/CaBase.h>
 #include <omex/CaListOfContents.h>
 #include <omex/CaErrorLog.h>
-#include <common/libsbml-namespace.h>
 
 
 LIBCOMBINE_CPP_NAMESPACE_BEGIN
@@ -323,8 +322,7 @@ public:
   /**
    * Write any contained elements
    */
-  virtual void writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-    stream) const;
+  virtual void writeElements(XMLOutputStream& stream) const;
 
   /** @endcond */
 
@@ -719,19 +717,18 @@ public:
    * Returns the value of the "Namespaces" element of this CaOmexManifest.
    *
    * @return the value of the "Namespaces" element of this CaOmexManifest as a
-   * LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*.
+   * XMLNamespaces*.
    */
-  virtual const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* getNamespaces()
-    const;
+  virtual const XMLNamespaces* getNamespaces() const;
 
 
   /**
    * Returns the value of the "Namespaces" element of this CaOmexManifest.
    *
    * @return the value of the "Namespaces" element of this CaOmexManifest as a
-   * LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*.
+   * XMLNamespaces*.
    */
-  virtual LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* getNamespaces();
+  virtual XMLNamespaces* getNamespaces();
 
 
   /**
@@ -815,8 +812,7 @@ protected:
   /**
    * Creates a new object from the next XMLToken on the XMLInputStream
    */
-  virtual CaBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-    stream);
+  virtual CaBase* createObject(XMLInputStream& stream);
 
   /** @endcond */
 
@@ -827,8 +823,7 @@ protected:
   /**
    * Writes the namespace for the Combine package
    */
-  virtual void writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-    stream) const;
+  virtual void writeXMLNS(XMLOutputStream& stream) const;
 
   /** @endcond */
 

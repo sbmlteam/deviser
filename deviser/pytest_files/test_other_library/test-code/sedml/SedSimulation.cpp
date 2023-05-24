@@ -433,8 +433,7 @@ SedSimulation::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-SedSimulation::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedSimulation::writeElements(XMLOutputStream& stream) const
 {
   SedBase::writeElements(stream);
 
@@ -795,7 +794,7 @@ SedSimulation::addChildObject(const std::string& elementName,
     return setAlgorithm((const SedAlgorithm*)(element));
   }
 
-  return LIBSBML_OPERATION_FAILED;
+  return LIBSEDML_OPERATION_FAILED;
 }
 
 /** @endcond */
@@ -927,8 +926,7 @@ SedSimulation::getAllElements(SedElementFilter* filter)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedSimulation::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-  stream)
+SedSimulation::createObject(XMLInputStream& stream)
 {
   SedBase* obj = NULL;
 
@@ -962,8 +960,7 @@ SedSimulation::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
  * Adds the expected attributes for this element
  */
 void
-SedSimulation::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+SedSimulation::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
 
@@ -982,11 +979,8 @@ SedSimulation::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-SedSimulation::readAttributes(
-                              const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                XMLAttributes& attributes,
-                              const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                ExpectedAttributes& expectedAttributes)
+SedSimulation::readAttributes(const XMLAttributes& attributes,
+                              const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1083,8 +1077,7 @@ SedSimulation::readAttributes(
  * Writes the attributes to the stream
  */
 void
-SedSimulation::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedSimulation::writeAttributes(XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
 
@@ -1187,7 +1180,7 @@ SedSimulation_getId(const SedSimulation_t * ss)
     return NULL;
   }
 
-  return ss->getId().empty() ? NULL : safe_strdup(ss->getId().c_str());
+  return ss->getId().empty() ? NULL : sedml_safe_strdup(ss->getId().c_str());
 }
 
 
@@ -1203,7 +1196,8 @@ SedSimulation_getName(const SedSimulation_t * ss)
     return NULL;
   }
 
-  return ss->getName().empty() ? NULL : safe_strdup(ss->getName().c_str());
+  return ss->getName().empty() ? NULL :
+    sedml_safe_strdup(ss->getName().c_str());
 }
 
 

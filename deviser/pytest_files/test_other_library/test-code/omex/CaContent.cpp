@@ -332,8 +332,7 @@ CaContent::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-CaContent::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+CaContent::writeElements(XMLOutputStream& stream) const
 {
   CaBase::writeElements(stream);
 }
@@ -653,8 +652,7 @@ CaContent::unsetAttribute(const std::string& attributeName)
  * Adds the expected attributes for this element
  */
 void
-CaContent::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+CaContent::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   CaBase::addExpectedAttributes(attributes);
 
@@ -675,11 +673,8 @@ CaContent::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-CaContent::readAttributes(
-                          const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes&
-                            attributes,
-                          const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                            ExpectedAttributes& expectedAttributes)
+CaContent::readAttributes(const XMLAttributes& attributes,
+                          const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -797,8 +792,7 @@ CaContent::readAttributes(
  * Writes the attributes to the stream
  */
 void
-CaContent::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+CaContent::writeAttributes(XMLOutputStream& stream) const
 {
   CaBase::writeAttributes(stream);
 
@@ -882,7 +876,7 @@ CaContent_getLocation(const CaContent_t * cc)
   }
 
   return cc->getLocation().empty() ? NULL :
-    safe_strdup(cc->getLocation().c_str());
+    omex_safe_strdup(cc->getLocation().c_str());
 }
 
 
@@ -898,7 +892,8 @@ CaContent_getFormat(const CaContent_t * cc)
     return NULL;
   }
 
-  return cc->getFormat().empty() ? NULL : safe_strdup(cc->getFormat().c_str());
+  return cc->getFormat().empty() ? NULL :
+    omex_safe_strdup(cc->getFormat().c_str());
 }
 
 
