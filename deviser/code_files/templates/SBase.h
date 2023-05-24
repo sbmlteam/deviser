@@ -2,19 +2,14 @@
 #define SBase_h
 
 
-#include <common/extern.h>
-#include <common/libsbml-namespace.h>
-<verbatim>
-#include <common/libsbml-namespace.h>
-</verbatim>
-#include <common/sbmlfwd.h>
+#include <sbml/common/extern.h>
+#include <sbml/common/libsbml-namespace.h>
+#include <sbml/common/sbmlfwd.h>
 #include <sbml/SBMLTypeCodes.h>
 #include <sbml/SBMLNamespaces.h>
 #include <sbml/SBMLConstructorException.h>
+#include <sbml/util/ExpectedAttributes.h>
 <verbatim>
-#include <util/List.h>
-#include <sbml/SyntaxChecker.h>
-#include <sbml/ExpectedAttributes.h>
 #include <xml/XMLNode.h>
 </verbatim>
 
@@ -29,9 +24,6 @@
 #include <sbml/SBMLVisitor.h>
 
 <verbatim>
-LIBSBML_CPP_NAMESPACE_BEGIN
-
-class Model;
 
 class List;
 
@@ -41,7 +33,6 @@ class XMLNamespaces;
 class XMLOutputStream;
 class XMLToken;
 
-LIBSBML_CPP_NAMESPACE_END
 </verbatim>
 
 LIBSBML_CPP_NAMESPACE_BEGIN
@@ -209,7 +200,7 @@ public:
    * @see unset<Notes>()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  <NS>XMLNode* get<Notes>();
+   XMLNode* get<Notes>();
 
 
   /**
@@ -235,7 +226,7 @@ public:
    * @see unset<Notes>()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  const <NS>XMLNode* get<Notes>() const;
+  const XMLNode* get<Notes>() const;
 
 
   /**
@@ -306,7 +297,7 @@ public:
    * @see append<Annotation>(const std::string& annotation)
    * @see unset<Annotation>()
    */
-  <NS>XMLNode* get<Annotation> ();
+   XMLNode* get<Annotation> ();
 
 
   /**
@@ -329,7 +320,7 @@ public:
    * @see append<Annotation>(const std::string& annotation)
    * @see unset<Annotation>()
    */
-  const <NS>XMLNode* get<Annotation> () const;
+  const XMLNode* get<Annotation> () const;
 
 
   /**
@@ -386,7 +377,7 @@ public:
    * @see getLevel()
    * @see getVersion()
    */
-  virtual const <NS>XMLNamespaces* getNamespaces() const ;
+  virtual const XMLNamespaces* getNamespaces() const ;
 
 
   /**
@@ -403,7 +394,7 @@ public:
    * @see getLevel()
    * @see getVersion()
    */
-  virtual <NS>XMLNamespaces* getNamespaces();
+  virtual XMLNamespaces* getNamespaces();
 
 
   /**
@@ -760,7 +751,7 @@ public:
    * @see append<Annotation>(const std::string& annotation)
    * @see unset<Annotation>()
    */
-  virtual int set<Annotation> (<NS>XMLNode* annotation);
+  virtual int set<Annotation> (XMLNode* annotation);
 
 
   /**
@@ -848,7 +839,7 @@ public:
    * @see append<Annotation>(const std::string& annotation)
    * @see unset<Annotation>()
    */
-  virtual int append<Annotation> (const <NS>XMLNode* annotation);
+  virtual int append<Annotation> (const XMLNode* annotation);
 
 
   /**
@@ -949,7 +940,7 @@ public:
    * @see removeTopLevel<Annotation>Element(const std::string elementName, const std::string elementURI)
    * @see replaceTopLevel<Annotation>Element(const std::string&)
    */
-  int replaceTopLevel<Annotation>Element(const <NS>XMLNode* annotation);
+  int replaceTopLevel<Annotation>Element(const XMLNode* annotation);
 
 
   /**
@@ -1023,7 +1014,7 @@ public:
    * @see unset<Notes>()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  int set<Notes>(const <NS>XMLNode* notes);
+  int set<Notes>(const XMLNode* notes);
 
 
   /**
@@ -1120,7 +1111,7 @@ public:
    * @see unset<Notes>()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  int append<Notes>(const <NS>XMLNode* notes);
+  int append<Notes>(const XMLNode* notes);
 
 
   /**
@@ -1231,7 +1222,7 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    */
-  int setNamespaces(<NS>XMLNamespaces* xmlns);
+  int setNamespaces(XMLNamespaces* xmlns);
 
 
   /**
@@ -1530,7 +1521,7 @@ public:
   /**
    * Reads (initializes) this SBML_Lang object by reading from XMLInputStream.
    */
-  void read (<NS>XMLInputStream& stream);
+  void read (XMLInputStream& stream);
   /** @endcond */
 
 
@@ -1538,7 +1529,7 @@ public:
   /**
    * Writes (serializes) this SBML_Lang object by writing it to XMLOutputStream.
    */
-  virtual void write (<NS>XMLOutputStream& stream) const;
+  virtual void write (XMLOutputStream& stream) const;
   /** @endcond */
 
 
@@ -1554,7 +1545,7 @@ public:
    *   ...
    * </pre>@endif@~
    */
-  virtual void writeElements (<NS>XMLOutputStream& stream) const;
+  virtual void writeElements (XMLOutputStream& stream) const;
   /** @endcond */
 
 
@@ -1772,7 +1763,7 @@ protected:
    * @return the SBML_Lang object corresponding to next XMLToken in the
    * XMLInputStream or @c NULL if the token was not recognized.
    */
-  virtual SBase* createObject (<NS>XMLInputStream& stream);
+  virtual SBase* createObject (XMLInputStream& stream);
 
 
   /**
@@ -1789,7 +1780,7 @@ protected:
    * @return @c true if the level, version and namespace values of this 
    * SBML_Lang object correspond to a valid set of values, @c false otherwise.
    */
-  bool hasValidLevelVersionNamespaceCombination(int typecode, <NS>XMLNamespaces *xmlns);
+  bool hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xmlns);
 
 
   /**
@@ -1798,7 +1789,7 @@ protected:
    *
    * @return true if the subclass read from the stream, false otherwise.
    */
-  virtual bool readOtherXML (<NS>XMLInputStream& stream);
+  virtual bool readOtherXML (XMLInputStream& stream);
 
 
   /**
@@ -1868,8 +1859,8 @@ protected:
    * XMLAttributes set into their specific fields.  Be sure to call your
    * parents implementation of this method as well.
    */
-  virtual void readAttributes (const <NS>XMLAttributes& attributes, 
-                               const <NS>ExpectedAttributes& expectedAttributes);
+  virtual void readAttributes (const XMLAttributes& attributes, 
+                               const ExpectedAttributes& expectedAttributes);
 
 
   /**
@@ -1886,7 +1877,7 @@ protected:
    * Be sure to implement wirteXMLNS() function to write xmlns attributes.
    *
    */
-  virtual void writeAttributes (<NS>XMLOutputStream& stream) const;
+  virtual void writeAttributes (XMLOutputStream& stream) const;
 
 
   /**
@@ -1895,7 +1886,7 @@ protected:
    * (if any) to the XMLOutputStream. 
    *
    */
-  virtual void writeXMLNS (<NS>XMLOutputStream& stream) const;
+  virtual void writeXMLNS (XMLOutputStream& stream) const;
 
 
   /**
@@ -1909,7 +1900,7 @@ protected:
    * Checks that the given default namespace in the given element is valid.
    * If the given default namespace is not valid, an error is logged.
    */
-  void checkDefaultNamespace(const <NS>XMLNamespaces* xmlns, 
+  void checkDefaultNamespace(const XMLNamespaces* xmlns, 
     const std::string& elementName, const std::string& prefix = "");
 
   /**
@@ -1924,13 +1915,13 @@ protected:
    * If the xhtml does not conform to the specification of valid xhtml within
    * an sbml document, an error is logged.
    */
-  void checkXHTML(const <NS>XMLNode *);
+  void checkXHTML(const XMLNode *);
 
 
   /**
    * Checks that the math ml ns has been declared
    */
-  const std::string checkMathMLNamespace(const <NS>XMLToken elem);
+  const std::string checkMathMLNamespace(const XMLToken elem);
 
    /**
    * Sets the XML namespace to which this element belongs to.
@@ -1984,8 +1975,8 @@ protected:
 
   std::string     mMetaId;
   std::string     mId;
-  <NS>XMLNode*        m<Notes>;
-  <NS>XMLNode*        m<Annotation>;
+  XMLNode*        m<Notes>;
+  XMLNode*        m<Annotation>;
   SBMLDocument*   mSBML;
   SBMLNamespaces* mSBMLNamespaces;
   void*           mUserData;
@@ -2026,7 +2017,7 @@ private:
    * Stores the location (line and column) and any XML namespaces (for
    * roundtripping) declared on this SBML_Lang (XML) element.
    */
-  void setSBaseFields (const <NS>XMLToken& element);
+  void setSBaseFields (const XMLToken& element);
 
 
   /**
@@ -2034,7 +2025,7 @@ private:
    *
    * @return true if read an <annotation> element from the stream
    */
-  bool read<Annotation> (<NS>XMLInputStream& stream);
+  bool read<Annotation> (XMLInputStream& stream);
 
 
   /**
@@ -2042,7 +2033,7 @@ private:
    *
    * @return true if read a <notes> element from the stream
    */
-  bool read<Notes> (<NS>XMLInputStream& stream);
+  bool read<Notes> (XMLInputStream& stream);
 
 
   /** @endcond */
@@ -2107,12 +2098,6 @@ SBase_getParentSBMLObject (SBase_t *sb);
 /**
  * Returns the ancestor SBase_t structure of the given SBase_t
  * structure that corresponds to the given type.
- *
- * This function allows any structure to determine its exact
- * location/function within a model. For example a
- * StoichiometryMath_t structure has ancestors of type SpeciesReference_t,
- * ListOf_t(Products/Reactants), Reaction_t, ListOfReactions_t and Model_t;
- * any of which can be accessed via this function.
  *
  * @param sb the SBase_t structure
  * @param type the typecode (int) of the structure to be returned
@@ -2520,20 +2505,6 @@ SBase_unset<Notes> (SBase_t *sb);
 LIBSBML_EXTERN
 int
 SBase_unset<Annotation> (SBase_t *sb);
-
-
-/**
- * Returns the Model_t structure in which the given instance is located.
- *
- * @param sb the SBase_t structure
- *
- * @return the parent Model_t strucdture of the given structure.
- *
- * @memberof SBase_t
- */
-LIBSBML_EXTERN
-const Model_t *
-SBase_getModel (const SBase_t *sb);
 
 
 /**
