@@ -139,7 +139,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                 self.write_line_verbatim('#include <{0}/{1}'
                                          '.h>'.format(self.language,
                                                       lo_name))
-            self.write_line_verbatim('#include <sbml/xml/XMLInputStream.h>')
+            self.write_line_verbatim('#include <xml/XMLInputStream.h>')
 
         # determine whether we need to write other headers
         write_element_filter = False
@@ -559,8 +559,9 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         num_elements = len(self.child_elements)
         # add error log and ns to child elements
         att_tc = 'XMLNamespaces*'
-        if not global_variables.is_package:
-            att_tc = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*'
+        # not needed in v 2.0
+#        if not global_variables.is_package:
+#            att_tc = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*'
         element = dict({'name': 'Namespaces',
                         'isArray': False,
                         'attTypeCode': att_tc,

@@ -52,7 +52,7 @@
 
 #include <sedml/SedBase.h>
 #include <sbml/math/ASTNode.h>
-#include <sbml/common/libsbml-namespace.h>
+#include <common/libsbml-namespace.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN

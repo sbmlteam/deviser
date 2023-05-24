@@ -33,7 +33,7 @@
  */
 #include <sedml/SedAbstractTask.h>
 #include <sedml/SedListOfTasks.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 #include <sedml/SedTask.h>
 #include <sedml/SedRepeatedTask.h>

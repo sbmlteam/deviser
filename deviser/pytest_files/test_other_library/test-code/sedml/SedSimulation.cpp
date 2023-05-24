@@ -33,7 +33,7 @@
  */
 #include <sedml/SedSimulation.h>
 #include <sedml/SedListOfSimulations.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 #include <sedml/SedUniformTimeCourse.h>
 #include <sedml/SedOneStep.h>
@@ -900,6 +900,23 @@ SedSimulation::getElementBySId(const std::string& id)
   }
 
   return obj;
+}
+
+
+/*
+ * Returns a List of all child SedBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+SedSimulation::getAllElements(SedElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+  ADD_SED_FILTERED_POINTER(ret, sublist, mAlgorithm, filter);
+
+
+  return ret;
 }
 
 

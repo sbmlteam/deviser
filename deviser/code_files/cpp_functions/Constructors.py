@@ -789,7 +789,8 @@ class Constructors():
         else:
             sep = ','
         for attrib in self.attributes:
-            if not self.is_plugin and global_variables.language == 'sbml' and (attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName'):
+            if not self.is_plugin and global_variables.language == 'sbml' and \
+                    (attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName'):
                 continue
             elif global_variables.language != 'sbml' and attrib['memberName'] == 'mId':
                 continue

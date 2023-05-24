@@ -36,7 +36,7 @@
  */
 #include <sbml/Constraint.h>
 #include <sbml/SBMLListOfConstraints.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 
 using namespace std;
@@ -323,8 +323,7 @@ Constraint::getTypeCode() const
  * Write any contained elements
  */
 void
-Constraint::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+Constraint::writeElements(XMLOutputStream& stream) const
 {
   SBase::writeElements(stream);
 

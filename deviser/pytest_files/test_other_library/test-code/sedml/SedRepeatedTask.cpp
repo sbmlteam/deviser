@@ -32,7 +32,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sedml/SedRepeatedTask.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 #include <sedml/SedUniformRange.h>
 #include <sedml/SedVectorRange.h>
@@ -1454,6 +1454,25 @@ SedRepeatedTask::getElementBySId(const std::string& id)
   }
 
   return obj;
+}
+
+
+/*
+ * Returns a List of all child SedBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+SedRepeatedTask::getAllElements(SedElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+
+  ADD_SED_FILTERED_LIST(ret, sublist, mRanges, filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mSetValues, filter);
+  ADD_SED_FILTERED_LIST(ret, sublist, mSubTasks, filter);
+
+  return ret;
 }
 
 

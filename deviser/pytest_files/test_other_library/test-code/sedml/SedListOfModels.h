@@ -52,7 +52,7 @@
 
 #include <sedml/SedListOf.h>
 #include <sedml/SedModel.h>
-#include <sbml/common/libsbml-namespace.h>
+#include <common/libsbml-namespace.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN

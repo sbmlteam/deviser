@@ -33,7 +33,7 @@
  */
 #include <sedml/SedModel.h>
 #include <sedml/SedListOfModels.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 #include <sedml/SedAddXML.h>
 #include <sedml/SedChangeXML.h>
@@ -1172,6 +1172,23 @@ SedModel::getElementBySId(const std::string& id)
   }
 
   return obj;
+}
+
+
+/*
+ * Returns a List of all child SedBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+SedModel::getAllElements(SedElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+
+  ADD_SED_FILTERED_LIST(ret, sublist, mChanges, filter);
+
+  return ret;
 }
 
 

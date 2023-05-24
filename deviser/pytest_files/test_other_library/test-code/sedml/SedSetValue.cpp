@@ -33,7 +33,7 @@
  */
 #include <sedml/SedSetValue.h>
 #include <sedml/SedListOfSetValues.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 #include <sbml/math/MathML.h>
 
 

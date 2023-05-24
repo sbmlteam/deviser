@@ -151,6 +151,12 @@ add_implementation = []
 global add_declaration
 add_declaration = []
 
+global util_NaN
+util_NaN = ''
+
+global safe_strdup
+safe_strdup = ''
+
 
 def add_additional_implementation(filename):
     if filename is not None:
@@ -287,6 +293,15 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
 
     global is_package
     is_package = is_pack
+
+    global util_NaN
+    if language == 'sbml':
+        util_NaN = 'util_NaN()'
+    else:
+        util_NaN = '{0}_util_NaN()'.format(language.lower())
+
+    global safe_strdup
+    safe_strdup = 'safe_strdup' if language == 'sbml' else '{0}_safe_strdup'.format(language)
 
     global ret_success
     ret_success = '{0}_OPERATION_SUCCESS'.format(library_name.upper())

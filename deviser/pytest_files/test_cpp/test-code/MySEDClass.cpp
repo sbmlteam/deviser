@@ -19,7 +19,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sedml/MySEDClass.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 
 using namespace std;
@@ -187,8 +187,7 @@ MySEDClass::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-MySEDClass::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+MySEDClass::writeElements(XMLOutputStream& stream) const
 {
   SedBase::writeElements(stream);
 }
@@ -468,8 +467,7 @@ MySEDClass::unsetAttribute(const std::string& attributeName)
  * Adds the expected attributes for this element
  */
 void
-MySEDClass::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+MySEDClass::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
 
@@ -486,11 +484,8 @@ MySEDClass::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-MySEDClass::readAttributes(
-                           const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes&
-                             attributes,
-                           const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                             ExpectedAttributes& expectedAttributes)
+MySEDClass::readAttributes(const XMLAttributes& attributes,
+                           const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -547,8 +542,7 @@ MySEDClass::readAttributes(
  * Writes the attributes to the stream
  */
 void
-MySEDClass::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+MySEDClass::writeAttributes(XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
 
@@ -622,7 +616,8 @@ MySEDClass_getId(const MySEDClass_t * msedc)
     return NULL;
   }
 
-  return msedc->getId().empty() ? NULL : safe_strdup(msedc->getId().c_str());
+  return msedc->getId().empty() ? NULL :
+    sedml_safe_strdup(msedc->getId().c_str());
 }
 
 

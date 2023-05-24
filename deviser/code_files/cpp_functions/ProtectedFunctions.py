@@ -174,12 +174,13 @@ class ProtectedFunctions():
         # create the function declaration
         function = 'createObject'
         return_type = '{0}*'.format(self.std_base)
-        if global_variables.is_package:
-            arguments = ['XMLInputStream& stream']
-            xmlns = 'XMLNamespaces'
-        else:
-            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream']
-            xmlns = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces'
+        # libsbml ns not needed in v 2.0
+#        if global_variables.is_package:
+        arguments = ['XMLInputStream& stream']
+        xmlns = 'XMLNamespaces'
+#        else:
+#            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream']
+#            xmlns = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces'
 
         # create the function implementation
         code = []
@@ -609,10 +610,11 @@ class ProtectedFunctions():
         # create the function declaration
         function = 'addExpectedAttributes'
         return_type = 'void'
-        if global_variables.is_package:
-            arguments = ['ExpectedAttributes& attributes']
-        else:
-            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes& attributes']
+        # no longer necessary to have libsbml namespace in v2
+        # if global_variables.is_package:
+        arguments = ['ExpectedAttributes& attributes']
+        # else:
+        #     arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes& attributes']
 
         # create the function implementation
         if self.base_class:
@@ -679,12 +681,13 @@ class ProtectedFunctions():
         # create function declaration
         function = 'readAttributes'
         return_type = 'void'
-        if global_variables.is_package:
-            arguments = ['const XMLAttributes& attributes',
-                         'const ExpectedAttributes& expectedAttributes']
-        else:
-            arguments = ['const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes',
-                         'const LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes& expectedAttributes']
+        # no longer necessary to have libsbml namespace in v2
+#        if global_variables.is_package:
+        arguments = ['const XMLAttributes& attributes',
+                     'const ExpectedAttributes& expectedAttributes']
+#        else:
+#            arguments = ['const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes',
+#                         'const LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes& expectedAttributes']
 
         # create the function implementation
         implementation = ['unsigned int level = getLevel()',
@@ -934,10 +937,11 @@ class ProtectedFunctions():
         # create function declaration
         function = 'writeAttributes'
         return_type = 'void'
-        if global_variables.is_package:
-            arguments = ['XMLOutputStream& stream']
-        else:
-            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
+        # no longer necessary to have libsbml namespace in v2
+#        if global_variables.is_package:
+        arguments = ['XMLOutputStream& stream']
+#        else:
+#            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
 
         # create the function implementation
         if self.base_class:
@@ -1006,10 +1010,11 @@ class ProtectedFunctions():
         pkg_version = self.lv_info[version]['pkg_version']
         function = 'writeL{0}V{1}V{2}Attributes'.format(level_val, version_val, pkg_version)
         return_type = 'void'
-        if global_variables.is_package:
-            arguments = ['XMLOutputStream& stream']
-        else:
-            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
+        # not needed in v 2.0
+#        if global_variables.is_package:
+        arguments = ['XMLOutputStream& stream']
+#        else:
+#            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
 
         # create the function implementation
         code = []
@@ -1055,12 +1060,13 @@ class ProtectedFunctions():
         # create the function declaration
         function = 'writeXMLNS'
         return_type = 'void'
-        if global_variables.is_package:
-            arguments = ['XMLOutputStream& stream']
-            xmlns = 'XMLNamespaces'
-        else:
-            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
-            xmlns = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces'
+        # not needed for v 2.0
+#        if global_variables.is_package:
+        arguments = ['XMLOutputStream& stream']
+        xmlns = 'XMLNamespaces'
+#        else:
+#            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
+#            xmlns = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces'
 
         # create the function implementation
         implementation = ['{0} xmlns'.format(xmlns),

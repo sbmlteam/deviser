@@ -35,7 +35,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sbgn/SbgnListOfPoints.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 
 using namespace std;
@@ -317,8 +317,7 @@ SbgnListOfPoints::getItemTypeCode() const
  * Creates a new Point in this SbgnListOfPoints
  */
 SbgnBase*
-SbgnListOfPoints::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-  stream)
+SbgnListOfPoints::createObject(XMLInputStream& stream)
 {
   const std::string& name = stream.peek().getName();
   SbgnBase* object = NULL;

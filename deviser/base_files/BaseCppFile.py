@@ -296,7 +296,10 @@ class BaseCppFile(BaseFile.BaseFile):
         :return: nothing
         """
         # Now update the dictionary, with the set of values according
-        # to att_type:
+        # to att_type
+
+        # note util_NaN must be prefixed by language if used in other library in v2
+
         if att_type in ['SId', 'SIdRef', 'IDREF', 'ID', 'UnitSId',
                         'UnitSIdRef', 'string']:
             mydict.update({'attType': 'string', 'attTypeCode': 'std::string&',
@@ -306,7 +309,7 @@ class BaseCppFile(BaseFile.BaseFile):
         elif att_type == 'double':
             mydict.update({'attType': 'double', 'attTypeCode': 'double',
                            'CType': 'double', 'isNumber': True,
-                           'default': 'util_NaN()'})
+                           'default': gv.util_NaN})
 
         elif att_type == 'int':
             mydict.update({'attType': 'integer', 'attTypeCode': 'int',

@@ -56,7 +56,7 @@
 #include <omex/CaBase.h>
 #include <omex/CaListOfContents.h>
 #include <omex/CaErrorLog.h>
-#include <sbml/common/libsbml-namespace.h>
+#include <common/libsbml-namespace.h>
 
 
 LIBCOMBINE_CPP_NAMESPACE_BEGIN
@@ -700,6 +700,19 @@ public:
    * object is found, this method returns @c NULL.
    */
   virtual CaBase* getElementBySId(const std::string& id);
+
+
+  /**
+   * Returns a List of all child CaBase objects, including those nested to an
+   * arbitrary depth.
+   *
+   * @param filter an ElementFilter that may impose restrictions on the objects
+   * to be retrieved.
+   *
+   * @return a List pointer of pointers to all CaBase child objects with any
+   * restriction imposed.
+   */
+  virtual List* getAllElements(CaElementFilter * filter = NULL);
 
 
   /**

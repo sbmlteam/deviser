@@ -663,10 +663,11 @@ class GeneralFunctions():
         # create the function declaration
         function = 'writeElements'
         return_type = 'void'
-        if global_variables.is_package:
-            arguments = ['XMLOutputStream& stream']
-        else:
-            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
+        # no longer necessary to have libsbml namespace in v2
+#        if global_variables.is_package:
+        arguments = ['XMLOutputStream& stream']
+#        else:
+#            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
 
         # create the function implementation
         base = self.base_class
@@ -917,10 +918,11 @@ class GeneralFunctions():
         # create the function declaration
         function = 'write'
         return_type = 'void'
-        if global_variables.is_package:
-            arguments = ['XMLOutputStream& stream']
-        else:
-            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
+        # not needed in v 2.0
+#        if global_variables.is_package:
+        arguments = ['XMLOutputStream& stream']
+#        else:
+#            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
 
         # create the function implementation
         # find the array attribute

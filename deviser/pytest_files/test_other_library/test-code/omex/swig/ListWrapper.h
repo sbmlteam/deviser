@@ -43,7 +43,7 @@
 #define ListWrapper_h
 
 #include <util/List.h>
-#include <omex/common/extern.h>
+#include <common/extern.h>
 
 LIBCOMBINE_CPP_NAMESPACE_USE
 

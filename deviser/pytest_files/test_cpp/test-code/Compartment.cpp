@@ -36,7 +36,7 @@
  */
 #include <sbml/Compartment.h>
 #include <sbml/SBMLListOfCompartments.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 
 using namespace std;
@@ -609,8 +609,7 @@ Compartment::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-Compartment::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+Compartment::writeElements(XMLOutputStream& stream) const
 {
   SBase::writeElements(stream);
 }
@@ -1014,8 +1013,7 @@ Compartment::unsetAttribute(const std::string& attributeName)
  * Adds the expected attributes for this element
  */
 void
-Compartment::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+Compartment::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SBase::addExpectedAttributes(attributes);
 
@@ -1044,11 +1042,8 @@ Compartment::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-Compartment::readAttributes(
-                            const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                              XMLAttributes& attributes,
-                            const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                              ExpectedAttributes& expectedAttributes)
+Compartment::readAttributes(const XMLAttributes& attributes,
+                            const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1267,8 +1262,7 @@ Compartment::readAttributes(
  * Writes the attributes to the stream
  */
 void
-Compartment::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+Compartment::writeAttributes(XMLOutputStream& stream) const
 {
   SBase::writeAttributes(stream);
 

@@ -55,7 +55,6 @@
 
 #include <sbgn/SbgnListOf.h>
 #include <sbgn/Point.h>
-#include <sbml/common/libsbml-namespace.h>
 
 
 LIBSBGN_CPP_NAMESPACE_BEGIN
@@ -380,8 +379,7 @@ protected:
   /**
    * Creates a new Point in this SbgnListOfPoints
    */
-  virtual SbgnBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
-    XMLInputStream& stream);
+  virtual SbgnBase* createObject(XMLInputStream& stream);
 
   /** @endcond */
 

@@ -35,7 +35,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <omex/CaOmexManifest.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 
 using namespace std;
@@ -688,6 +688,23 @@ CaOmexManifest::getElementBySId(const std::string& id)
   }
 
   return obj;
+}
+
+
+/*
+ * Returns a List of all child CaBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+CaOmexManifest::getAllElements(CaElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+
+  ADD_CA_FILTERED_LIST(ret, sublist, mContents, filter);
+
+  return ret;
 }
 
 

@@ -36,7 +36,7 @@
  */
 #include <sbgn/Point.h>
 #include <sbgn/SbgnListOfPoints.h>
-#include <sbml/xml/XMLInputStream.h>
+#include <xml/XMLInputStream.h>
 
 
 using namespace std;
@@ -56,9 +56,9 @@ LIBSBGN_CPP_NAMESPACE_BEGIN
  */
 Point::Point(unsigned int level, unsigned int version)
   : SBase(level, version)
-  , mX (util_NaN())
+  , mX (sbgn_util_NaN())
   , mIsSetX (false)
-  , mY (util_NaN())
+  , mY (sbgn_util_NaN())
   , mIsSetY (false)
   , mPoints (new SbgnListOfPoints (level, version))
   , mElementName("point")
@@ -73,9 +73,9 @@ Point::Point(unsigned int level, unsigned int version)
  */
 Point::Point(SbgnNamespaces *sbgnns)
   : SBase(sbgnns)
-  , mX (util_NaN())
+  , mX (sbgn_util_NaN())
   , mIsSetX (false)
-  , mY (util_NaN())
+  , mY (sbgn_util_NaN())
   , mIsSetY (false)
   , mPoints (new SbgnListOfPoints (sbgnns))
   , mElementName("point")
@@ -227,7 +227,7 @@ Point::setY(double y)
 int
 Point::unsetX()
 {
-  mX = util_NaN();
+  mX = sbgn_util_NaN();
   mIsSetX = false;
 
   if (isSetX() == false)
@@ -247,7 +247,7 @@ Point::unsetX()
 int
 Point::unsetY()
 {
-  mY = util_NaN();
+  mY = sbgn_util_NaN();
   mIsSetY = false;
 
   if (isSetY() == false)
@@ -459,8 +459,7 @@ Point::hasRequiredElements() const
  * Write any contained elements
  */
 void
-Point::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream)
-  const
+Point::writeElements(XMLOutputStream& stream) const
 {
   SBase::writeElements(stream);
 
@@ -809,7 +808,7 @@ Point::addChildObject(const std::string& elementName, const SbgnBase* element)
     return addPoint((const Point*)(element));
   }
 
-  return LIBSBML_OPERATION_FAILED;
+  return LIBSBGN_OPERATION_FAILED;
 }
 
 /** @endcond */
@@ -941,7 +940,7 @@ Point::getAllElements(SbgnElementFilter* filter)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SbgnBase*
-Point::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
+Point::createObject(XMLInputStream& stream)
 {
   SbgnBase* obj = SBase::createObject(stream);
 
@@ -967,8 +966,7 @@ Point::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
  * Adds the expected attributes for this element
  */
 void
-Point::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+Point::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SBase::addExpectedAttributes(attributes);
 
@@ -987,11 +985,8 @@ Point::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-Point::readAttributes(
-                      const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes&
-                        attributes,
-                      const LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes&
-                        expectedAttributes)
+Point::readAttributes(const XMLAttributes& attributes,
+                      const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1098,8 +1093,7 @@ Point::readAttributes(
  * Writes the attributes to the stream
  */
 void
-Point::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream)
-  const
+Point::writeAttributes(XMLOutputStream& stream) const
 {
   SBase::writeAttributes(stream);
 
@@ -1172,7 +1166,7 @@ LIBSBGN_EXTERN
 double
 Point_getX(const Point_t * p)
 {
-  return (p != NULL) ? p->getX() : util_NaN();
+  return (p != NULL) ? p->getX() : sbgn_util_NaN();
 }
 
 
@@ -1183,7 +1177,7 @@ LIBSBGN_EXTERN
 double
 Point_getY(const Point_t * p)
 {
-  return (p != NULL) ? p->getY() : util_NaN();
+  return (p != NULL) ? p->getY() : sbgn_util_NaN();
 }
 
 
