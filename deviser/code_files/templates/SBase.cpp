@@ -8,7 +8,6 @@
 #include <xml/XMLInputStream.h>
 #include <xml/XMLToken.h>
 #include <xml/XMLNode.h>
-#include <util/util.h>
 </verbatim>
 
 #include <sbml/SBMLError.h>
@@ -148,12 +147,12 @@ SBase::SBase(const SBase& orig)
   , mURI(orig.mURI)
 {
   if(orig.m<Notes> != NULL)
-    this->m<Notes> = new <NS>XMLNode(*const_cast<SBase&>(orig).get<Notes>());
+    this->m<Notes> = new XMLNode(*const_cast<SBase&>(orig).get<Notes>());
   else
     this->m<Notes> = NULL;
 
   if(orig.m<Annotation> != NULL)
-    this->m<Annotation> = new <NS>XMLNode(*const_cast<SBase&>(orig).m<Annotation>);
+    this->m<Annotation> = new XMLNode(*const_cast<SBase&>(orig).m<Annotation>);
   else
     this->m<Annotation> = NULL;
 
@@ -191,14 +190,14 @@ SBase& SBase::operator=(const SBase& rhs)
     delete this->m<Notes>;
 
     if(rhs.m<Notes> != NULL)
-      this->m<Notes> = new <NS>XMLNode(*const_cast<SBase&>(rhs).get<Notes>());
+      this->m<Notes> = new XMLNode(*const_cast<SBase&>(rhs).get<Notes>());
     else
       this->m<Notes> = NULL;
 
     delete this->m<Annotation>;
 
     if(rhs.m<Annotation> != NULL)
-      this->m<Annotation> = new <NS>XMLNode(*const_cast<SBase&>(rhs).m<Annotation>);
+      this->m<Annotation> = new XMLNode(*const_cast<SBase&>(rhs).m<Annotation>);
     else
       this->m<Annotation> = NULL;
 
@@ -254,14 +253,14 @@ SBase::getId() const
 /*
  * @return the notes of this SBML_Lang object.
  */
-<NS>XMLNode*
+XMLNode*
 SBase::get<Notes>()
 {
   return m<Notes>;
 }
 
 
-const <NS>XMLNode*
+const XMLNode*
 SBase::get<Notes>() const
 {
   return m<Notes>;
@@ -274,28 +273,28 @@ SBase::get<Notes>() const
 std::string
 SBase::get<Notes>String()
 {
-  return <NS>XMLNode::convertXMLNodeToString(m<Notes>);
+  return XMLNode::convertXMLNodeToString(m<Notes>);
 }
 
 
 std::string
 SBase::get<Notes>String() const
 {
-  return <NS>XMLNode::convertXMLNodeToString(m<Notes>);
+  return XMLNode::convertXMLNodeToString(m<Notes>);
 }
 
 
 /*
  * @return the annotation of this SBML_Lang object.
  */
-<NS>XMLNode*
+XMLNode*
 SBase::get<Annotation> ()
 {
   return m<Annotation>;
 }
 
 
-const <NS>XMLNode*
+const XMLNode*
 SBase::get<Annotation> () const
 {
   return const_cast<SBase *>(this)->get<Annotation>();
@@ -308,14 +307,14 @@ SBase::get<Annotation> () const
 std::string
 SBase::get<Annotation>String ()
 {
-  return <NS>XMLNode::convertXMLNodeToString(get<Annotation>());
+  return XMLNode::convertXMLNodeToString(get<Annotation>());
 }
 
 
 std::string
 SBase::get<Annotation>String () const
 {
-  return <NS>XMLNode::convertXMLNodeToString(get<Annotation>());
+  return XMLNode::convertXMLNodeToString(get<Annotation>());
 }
 
 
@@ -393,7 +392,7 @@ SBase::unsetUserData()
 /*
  * @return the Namespaces associated with this SBML_Lang object
  */
-<NS>XMLNamespaces*
+XMLNamespaces*
 SBase::getNamespaces()
 {
   if (mSBML != NULL)
@@ -403,7 +402,7 @@ SBase::getNamespaces()
 }
 
 
-const <NS>XMLNamespaces*
+const XMLNamespaces*
 SBase::getNamespaces() const
 {
   if (mSBML != NULL)
@@ -597,10 +596,6 @@ SBase::setMetaId (const std::string& metaid)
     mMetaId.erase();
     return LIBSBML_OPERATION_SUCCESS;
   }
-  else if (!(SyntaxChecker::isValidXMLID(metaid)))
-  {
-    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
-  }
   else
   {
     mMetaId = metaid;
@@ -619,10 +614,6 @@ SBase::setId (const std::string& sid)
     mId.erase();
     return LIBSBML_OPERATION_SUCCESS;
   }
-  else if (!(SyntaxChecker::isValidXMLID(sid)))
-  {
-    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
-  }
   else
   {
     mId = sid;
@@ -635,7 +626,7 @@ SBase::setId (const std::string& sid)
  * Sets the annotation of this SBML_Lang object to a copy of annotation.
  */
 int
-SBase::set<Annotation> (<NS>XMLNode* annotation)
+SBase::set<Annotation> (XMLNode* annotation)
 {
   if (annotation == NULL)
   {
@@ -668,17 +659,17 @@ SBase::set<Annotation> (const std::string& annotation)
     return LIBSBML_OPERATION_SUCCESS;
   }
   
-  <NS>XMLNode* annt_xmln;
+  XMLNode* annt_xmln;
   
   // you might not have a document !!
   if (getSBMLDocument() != NULL)
   {
-    <NS>XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
-    annt_xmln = <NS>XMLNode::convertStringToXMLNode(annotation,xmlns);
+    XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
   {
-    annt_xmln = <NS>XMLNode::convertStringToXMLNode(annotation);
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation);
   }
   
   if(annt_xmln != NULL)
@@ -696,7 +687,7 @@ SBase::set<Annotation> (const std::string& annotation)
  * adding additional information.
  */
 int
-SBase::append<Annotation> (const <NS>XMLNode* annotation)
+SBase::append<Annotation> (const XMLNode* annotation)
 {
   int success = LIBSBML_OPERATION_FAILED;
   unsigned int duplicates = 0;
@@ -704,14 +695,14 @@ SBase::append<Annotation> (const <NS>XMLNode* annotation)
   if(annotation == NULL)
     return LIBSBML_OPERATION_SUCCESS;
 
-  <NS>XMLNode* new_annotation = NULL;
+  XMLNode* new_annotation = NULL;
   const string&  name = annotation->getName();
 
   // check for annotation tags and add if necessary
   if (name != <annotation_variable>)
   {
-    <NS>XMLToken ann_t = <NS>XMLToken(<NS>XMLTriple(<annotation_variable>, "", ""), <NS>XMLAttributes());
-    new_annotation = new <NS>XMLNode(ann_t);
+    XMLToken ann_t = XMLToken(XMLTriple(<annotation_variable>, "", ""), XMLAttributes());
+    new_annotation = new XMLNode(ann_t);
     new_annotation->addChild(*annotation);
   }
   else
@@ -760,7 +751,7 @@ SBase::append<Annotation> (const <NS>XMLNode* annotation)
     }
     else
     {
-      <NS>XMLNode *copy = m<Annotation>->clone();
+      XMLNode *copy = m<Annotation>->clone();
       success = set<Annotation>(copy);
       delete copy;
     }
@@ -786,15 +777,15 @@ int
 SBase::append<Annotation> (const std::string& annotation)
 {
   int success = LIBSBML_OPERATION_FAILED;
-  <NS>XMLNode* annt_xmln;
+  XMLNode* annt_xmln;
   if (getSBMLDocument() != NULL)
   {
-    <NS>XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
-    annt_xmln = <NS>XMLNode::convertStringToXMLNode(annotation,xmlns);
+    XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
   {
-    annt_xmln = <NS>XMLNode::convertStringToXMLNode(annotation);
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation);
   }
 
   if(annt_xmln != NULL)
@@ -831,7 +822,7 @@ SBase::removeTopLevel<Annotation>Element(const std::string elementName,
     // check uri matches
     if (elementURI.empty() == false)
     {
-      <NS>XMLNode child = m<Annotation>->getChild(index);
+      XMLNode child = m<Annotation>->getChild(index);
       std::string prefix = child.getPrefix();
 
       if (prefix.empty() == false
@@ -883,10 +874,10 @@ SBase::removeTopLevel<Annotation>Element(const std::string elementName,
 
 
 int
-SBase::replaceTopLevel<Annotation>Element(const <NS>XMLNode* annotation)
+SBase::replaceTopLevel<Annotation>Element(const XMLNode* annotation)
 {
   int success = LIBSBML_OPERATION_FAILED;
-  <NS>XMLNode * replacement = NULL;
+  XMLNode * replacement = NULL;
   if (annotation->getName() == <annotation_variable>)
   {
     if (annotation->getNumChildren() != 1)
@@ -920,15 +911,15 @@ int
 SBase::replaceTopLevel<Annotation>Element(const std::string& annotation)
 {
   int success = LIBSBML_OPERATION_FAILED;
-  <NS>XMLNode* annt_xmln;
+  XMLNode* annt_xmln;
   if (getSBMLDocument() != NULL)
   {
-    <NS>XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
-    annt_xmln = <NS>XMLNode::convertStringToXMLNode(annotation,xmlns);
+    XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
   {
-    annt_xmln = <NS>XMLNode::convertStringToXMLNode(annotation);
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation);
   }
 
   if(annt_xmln != NULL)
@@ -946,7 +937,7 @@ SBase::replaceTopLevel<Annotation>Element(const std::string& annotation)
  * Sets the notes of this SBML_Lang object to a copy of notes.
  */
 int
-SBase::set<Notes>(const <NS>XMLNode* notes)
+SBase::set<Notes>(const XMLNode* notes)
 {
   if (m<Notes> == notes)
   {
@@ -966,13 +957,13 @@ SBase::set<Notes>(const <NS>XMLNode* notes)
 
   if (name == "notes")
   {
-    m<Notes> = static_cast<<NS>XMLNode*>( notes->clone() );
+    m<Notes> = static_cast<XMLNode*>( notes->clone() );
   }
   else
   {
-    <NS>XMLToken notes_t = <NS>XMLToken(<NS>XMLTriple("notes", "", ""),
-                                <NS>XMLAttributes());
-    m<Notes> = new <NS>XMLNode(notes_t);
+    XMLToken notes_t = XMLToken(XMLTriple("notes", "", ""),
+                                XMLAttributes());
+    m<Notes> = new XMLNode(notes_t);
 
     // The root node of the given XMLNode tree can be an empty XMLNode
     // (i.e. neither start, end, nor text XMLNode) if the given notes was
@@ -996,13 +987,6 @@ SBase::set<Notes>(const <NS>XMLNode* notes)
     }
   }
 
-    if (!SyntaxChecker::hasExpectedXHTMLSyntax(m<Notes>, NULL))
-    {
-      delete m<Notes>;
-      m<Notes> = NULL;
-      return LIBSBML_INVALID_OBJECT;
-    }
-
   return LIBSBML_OPERATION_SUCCESS;
 
 }
@@ -1021,17 +1005,17 @@ SBase::set<Notes>(const std::string& notes, bool addXHTMLMarkup)
   }
   else
   {
-    <NS>XMLNode* notes_xmln;
+    XMLNode* notes_xmln;
 
     // you might not have a document !!
     if (getSBMLDocument() != NULL)
     {
-      <NS>XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
-      notes_xmln = <NS>XMLNode::convertStringToXMLNode(notes,xmlns);
+      XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
+      notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns);
     }
     else
     {
-      notes_xmln = <NS>XMLNode::convertStringToXMLNode(notes);
+      notes_xmln = XMLNode::convertStringToXMLNode(notes);
     }
 
     if (notes_xmln != NULL)
@@ -1044,11 +1028,11 @@ SBase::set<Notes>(const std::string& notes, bool addXHTMLMarkup)
             && notes_xmln->isText() == true)
         {
           //create a parent node of xhtml type p
-          <NS>XMLAttributes blank_att = <NS>XMLAttributes();
-          <NS>XMLTriple triple = <NS>XMLTriple("p", "http://www.w3.org/1999/xhtml", "");
-          <NS>XMLNamespaces xmlns = <NS>XMLNamespaces();
+          XMLAttributes blank_att = XMLAttributes();
+          XMLTriple triple = XMLTriple("p", "http://www.w3.org/1999/xhtml", "");
+          XMLNamespaces xmlns = XMLNamespaces();
           xmlns.add("http://www.w3.org/1999/xhtml", "");
-          <NS>XMLNode *xmlnode = new <NS>XMLNode(<NS>XMLToken(triple, blank_att, xmlns));
+          XMLNode *xmlnode = new XMLNode(XMLToken(triple, blank_att, xmlns));
 
           // create a text node from the text given
           xmlnode->addChild(*notes_xmln);
@@ -1078,7 +1062,7 @@ SBase::set<Notes>(const std::string& notes, bool addXHTMLMarkup)
  * adding additional information.
  */
 int
-SBase::append<Notes>(const <NS>XMLNode* notes)
+SBase::append<Notes>(const XMLNode* notes)
 {
   int success = LIBSBML_OPERATION_FAILED;
   if(notes == NULL)
@@ -1107,7 +1091,7 @@ SBase::append<Notes>(const <NS>XMLNode* notes)
   typedef enum { _A<Notes>HTML, _A<Notes>Body, _A<Notes>Any } _<Notes>Type;
 
   _<Notes>Type added<Notes>Type = _A<Notes>Any;
-  <NS>XMLNode   added<Notes>;
+  XMLNode   added<Notes>;
 
   //------------------------------------------------------------
   //
@@ -1218,7 +1202,7 @@ SBase::append<Notes>(const <NS>XMLNode* notes)
   if (getLevel() > 2
     || (getLevel() == 2 && getVersion() > 1))
   {
-    <NS>XMLNode tmp<Notes>(<NS>XMLTriple("notes","",""), <NS>XMLAttributes());
+    XMLNode tmp<Notes>(XMLTriple("notes","",""), XMLAttributes());
 
     if (added<Notes>Type == _A<Notes>Any)
     {
@@ -1232,14 +1216,6 @@ SBase::append<Notes>(const <NS>XMLNode* notes)
       tmp<Notes>.addChild(added<Notes>);
     }
 
-    if (!SyntaxChecker::hasExpectedXHTMLSyntax(&tmp<Notes>, NULL))
-    {
-      return LIBSBML_INVALID_OBJECT;
-    }
-  }
-
-
-  if ( m<Notes> != NULL )
   {
     //------------------------------------------------------------
     //
@@ -1248,7 +1224,7 @@ SBase::append<Notes>(const <NS>XMLNode* notes)
     //------------------------------------------------------------
 
     _<Notes>Type cur<Notes>Type   = _A<Notes>Any;
-    <NS>XMLNode&  cur<Notes> = *m<Notes>;
+    XMLNode&  cur<Notes> = *m<Notes>;
 
     // cur<Notes>.getChild(0) must be "html", "body", or any XHTML
     // element that would be permitted within a "body" element .
@@ -1257,7 +1233,7 @@ SBase::append<Notes>(const <NS>XMLNode* notes)
 
     if (cname == "html")
     {
-      <NS>XMLNode& curHTML = cur<Notes>.getChild(0);
+      XMLNode& curHTML = cur<Notes>.getChild(0);
       //
       // checks the curHTML if the html tag contains "head" and "body" tags
       // which must be located in this order, otherwise nothing will be done.
@@ -1297,14 +1273,14 @@ SBase::append<Notes>(const <NS>XMLNode* notes)
 
     if (cur<Notes>Type == _A<Notes>HTML)
     {
-      <NS>XMLNode& curHTML = cur<Notes>.getChild(0);
-      <NS>XMLNode& curBody = curHTML.getChild(1);
+      XMLNode& curHTML = cur<Notes>.getChild(0);
+      XMLNode& curBody = curHTML.getChild(1);
 
       if (added<Notes>Type == _A<Notes>HTML)
       {
         // adds the given html tag to the current html tag
 
-        <NS>XMLNode& addedBody = added<Notes>.getChild(1);
+        XMLNode& addedBody = added<Notes>.getChild(1);
 
         for (i=0; i < addedBody.getNumChildren(); i++)
         {
@@ -1332,9 +1308,9 @@ SBase::append<Notes>(const <NS>XMLNode* notes)
       {
         // adds the given html tag to the current body tag
 
-        <NS>XMLNode  addedHTML(added<Notes>);
-        <NS>XMLNode& addedBody = addedHTML.getChild(1);
-        <NS>XMLNode& curBody   = cur<Notes>.getChild(0);
+        XMLNode  addedHTML(added<Notes>);
+        XMLNode& addedBody = addedHTML.getChild(1);
+        XMLNode& curBody   = cur<Notes>.getChild(0);
 
         for (i=0; i < curBody.getNumChildren(); i++)
         {
@@ -1350,7 +1326,7 @@ SBase::append<Notes>(const <NS>XMLNode* notes)
         // adds the given body or other tag (permitted in the body) to the current
         // body tag
 
-        <NS>XMLNode& curBody = cur<Notes>.getChild(0);
+        XMLNode& curBody = cur<Notes>.getChild(0);
 
         for (i=0; i < added<Notes>.getNumChildren(); i++)
         {
@@ -1366,8 +1342,8 @@ SBase::append<Notes>(const <NS>XMLNode* notes)
       {
         // adds the given html tag to the current any tag permitted in the body.
 
-        <NS>XMLNode  addedHTML(added<Notes>);
-        <NS>XMLNode& addedBody = addedHTML.getChild(1);
+        XMLNode  addedHTML(added<Notes>);
+        XMLNode& addedBody = addedHTML.getChild(1);
 
         for (i=0; i < cur<Notes>.getNumChildren(); i++)
         {
@@ -1382,7 +1358,7 @@ SBase::append<Notes>(const <NS>XMLNode* notes)
       {
         // adds the given body tag to the current any tag permitted in the body.
 
-        <NS>XMLNode addedBody(added<Notes>);
+        XMLNode addedBody(added<Notes>);
 
         for (i=0; i < cur<Notes>.getNumChildren(); i++)
         {
@@ -1430,16 +1406,16 @@ SBase::append<Notes>(const std::string& notes)
     return LIBSBML_OPERATION_SUCCESS;
   }
 
-  <NS>XMLNode* notes_xmln;
+  XMLNode* notes_xmln;
   // you might not have a document !!
   if (getSBMLDocument() != NULL)
   {
-      <NS>XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
-      notes_xmln = <NS>XMLNode::convertStringToXMLNode(notes,xmlns);
+      XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
+      notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns);
   }
   else
   {
-      notes_xmln = <NS>XMLNode::convertStringToXMLNode(notes);
+      notes_xmln = XMLNode::convertStringToXMLNode(notes);
   }
 
   if(notes_xmln != NULL)
@@ -1563,7 +1539,7 @@ SBase::getAncestorOfType(int type) const
  * @param xmlns the namespaces to set
  */
 int
-SBase::setNamespaces(<NS>XMLNamespaces* xmlns)
+SBase::setNamespaces(XMLNamespaces* xmlns)
 {
   if (xmlns == NULL)
   {
@@ -1635,7 +1611,7 @@ SBase::unset<Notes> ()
 int
 SBase::unset<Annotation> ()
 {
-  <NS>XMLNode* empty = NULL;
+  XMLNode* empty = NULL;
   return set<Annotation>(empty);
 }
 
@@ -1701,7 +1677,7 @@ bool
 SBase::hasValidLevelVersionNamespaceCombination()
 {
   int typecode = getTypeCode();
-  <NS>XMLNamespaces *xmlns = getNamespaces();
+  XMLNamespaces *xmlns = getNamespaces();
 
   return hasValidLevelVersionNamespaceCombination(typecode, xmlns);
 }
@@ -1799,7 +1775,7 @@ SBase::matchesCoreSBMLNamespace(const SBase * sb) const
 
 
 bool
-SBase::hasValidLevelVersionNamespaceCombination(int typecode, <NS>XMLNamespaces *xmlns)
+SBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xmlns)
 {
 
 
@@ -1893,11 +1869,11 @@ char*
 SBase::toSBML ()
 {
   ostringstream    os;
-  <NS>XMLOutputStream  stream(os, "UTF-8", false);
+  XMLOutputStream  stream(os, "UTF-8", false);
 
   write(stream);
 
-  return safe_strdup( os.str().c_str() );
+  return sbml_safe_strdup( os.str().c_str() );
 }
 
 
@@ -2097,11 +2073,11 @@ SBase::getObject(const std::string& objectName, unsigned int index)
  * Reads (initializes) this SBML_Lang object by reading from XMLInputStream.
  */
 void
-SBase::read (<NS>XMLInputStream& stream)
+SBase::read (XMLInputStream& stream)
 {
   if ( !stream.peek().isStart() ) return;
 
-  const <NS>XMLToken  element  = stream.next();
+  const XMLToken  element  = stream.next();
   int             position =  0;
 
   setSBaseFields( element );
@@ -2121,7 +2097,7 @@ SBase::read (<NS>XMLInputStream& stream)
     // need to check that any prefix on the sbmlns also occurs on element
     // remembering the horrible situation where the sbmlns might be declared
     // with more than one prefix
-    <NS>XMLNamespaces * xmlns = this->getSBMLNamespaces()->getNamespaces();
+    XMLNamespaces * xmlns = this->getSBMLNamespaces()->getNamespaces();
     if (xmlns != NULL)
     {
       int i = xmlns->getIndexByPrefix(element.getPrefix());
@@ -2178,7 +2154,7 @@ SBase::read (<NS>XMLInputStream& stream)
     checkDefaultNamespace(mSBMLNamespaces->getNamespaces(), element.getName());
     if (!element.getPrefix().empty())
     {
-      <NS>XMLNamespaces * prefixedNS = new <NS>XMLNamespaces();
+      XMLNamespaces * prefixedNS = new XMLNamespaces();
       prefixedNS->add(element.getURI(), element.getPrefix());
       checkDefaultNamespace(prefixedNS, element.getName(), element.getPrefix());
       delete prefixedNS;
@@ -2199,7 +2175,7 @@ SBase::read (<NS>XMLInputStream& stream)
     }
     setElementText(text);
 
-    const <NS>XMLToken& next = stream.peek();
+    const XMLToken& next = stream.peek();
 
     // Re-check stream.isGood() because stream.peek() could hit something.
     if ( !stream.isGood() ) break;
@@ -2254,7 +2230,7 @@ SBase::setElementText(const std::string &text)
  * Writes (serializes) this SBML_Lang object by writing it to XMLOutputStream.
  */
 void
-SBase::write (<NS>XMLOutputStream& stream) const
+SBase::write (XMLOutputStream& stream) const
 {
   stream.startElement( getElementName(), getPrefix() );
 
@@ -2275,7 +2251,7 @@ SBase::write (<NS>XMLOutputStream& stream) const
  * implementation of this method as well.
  */
 void
-SBase::writeElements (<NS>XMLOutputStream& stream) const
+SBase::writeElements (XMLOutputStream& stream) const
 {
   if ( m<Notes> != NULL ) stream << *m<Notes>;
 
@@ -2293,7 +2269,7 @@ SBase::writeElements (<NS>XMLOutputStream& stream) const
  * XMLInputStream or @c NULL if the token was not recognized.
  */
 SBase*
-SBase::createObject (<NS>XMLInputStream& stream)
+SBase::createObject (XMLInputStream& stream)
 {
   return NULL;
 }
@@ -2310,7 +2286,7 @@ SBase::createObject (<NS>XMLInputStream& stream)
  * @return true if the subclass read from the stream, false otherwise.
  */
 bool
-SBase::readOtherXML (<NS>XMLInputStream& stream)
+SBase::readOtherXML (XMLInputStream& stream)
 {
   bool read = false;
   return read;
@@ -2323,7 +2299,7 @@ SBase::readOtherXML (<NS>XMLInputStream& stream)
  * @return true if read an <annotation> element from the stream
  */
 bool
-SBase::read<Annotation> (<NS>XMLInputStream& stream)
+SBase::read<Annotation> (XMLInputStream& stream)
 {
   const string& name = stream.peek().getName();
 
@@ -2340,7 +2316,7 @@ SBase::read<Annotation> (<NS>XMLInputStream& stream)
     }
 
     delete m<Annotation>;
-    m<Annotation> = new <NS>XMLNode(stream);
+    m<Annotation> = new XMLNode(stream);
     check<Annotation>();
     return true;
   }
@@ -2355,7 +2331,7 @@ SBase::read<Annotation> (<NS>XMLInputStream& stream)
  * @return true if read a <notes> element from the stream
  */
 bool
-SBase::read<Notes> (<NS>XMLInputStream& stream)
+SBase::read<Notes> (XMLInputStream& stream)
 {
   const string& name = stream.peek().getName();
 
@@ -2371,13 +2347,13 @@ SBase::read<Notes> (<NS>XMLInputStream& stream)
     }
 
     delete m<Notes>;
-    m<Notes> = new <NS>XMLNode(stream);
+    m<Notes> = new XMLNode(stream);
 
     //
     // checks if the given default namespace (if any) is a valid
     // SBML_Lang namespace
     //
-    const <NS>XMLNamespaces &xmlns = m<Notes>->getNamespaces();
+    const XMLNamespaces &xmlns = m<Notes>->getNamespaces();
     checkDefaultNamespace(&xmlns,"notes");
 
     return true;
@@ -2546,10 +2522,10 @@ SBase::addExpectedAttributes(ExpectedAttributes& attributes)
  * parents implementation of this method as well.
  */
 void
-SBase::readAttributes (const <NS>XMLAttributes& attributes,
-                       const <NS>ExpectedAttributes& expectedAttributes)
+SBase::readAttributes (const XMLAttributes& attributes,
+                       const ExpectedAttributes& expectedAttributes)
 {
-  const_cast<<NS>XMLAttributes&>(attributes).setErrorLog(getErrorLog());
+  const_cast<XMLAttributes&>(attributes).setErrorLog(getErrorLog());
 
   const unsigned int level   = getLevel  ();
   const unsigned int version = getVersion();
@@ -2601,15 +2577,6 @@ SBase::readAttributes (const <NS>XMLAttributes& attributes,
       logEmptyString("metaid", level, version,
                      SBMLTypeCode_toString(getTypeCode()));
     }
-
-    if (isSetMetaId())
-    {
-      if (!SyntaxChecker::isValidXMLID(mMetaId))
-      {
-        logError(SBMLInvalidMetaidSyntax, getLevel(), getVersion(), "The metaid '" + mMetaId + "' does not conform to the syntax.");
-      }
-  }
-
 }
 
 
@@ -2622,7 +2589,7 @@ SBase::getPrefix() const
 {
   std::string prefix = "";
 
-  const <NS>XMLNamespaces *xmlns = getNamespaces();
+  const XMLNamespaces *xmlns = getNamespaces();
   string uri = getURI();
   if(xmlns && mSBML)
   {
@@ -2641,7 +2608,7 @@ SBase::getSBMLPrefix() const
 {
   std::string prefix = "";
 
-  const <NS>XMLNamespaces *xmlns = getNamespaces();
+  const XMLNamespaces *xmlns = getNamespaces();
   if (xmlns == NULL)
     return getPrefix();
 
@@ -2686,7 +2653,7 @@ SBase::getRootElement()
  * of this method as well.
  */
 void
-SBase::writeAttributes (<NS>XMLOutputStream& stream) const
+SBase::writeAttributes (XMLOutputStream& stream) const
 {
   string sbmlPrefix    = getSBMLPrefix();
   if ( !mMetaId.empty() )
@@ -2705,7 +2672,7 @@ SBase::writeAttributes (<NS>XMLOutputStream& stream) const
  *
  */
 void
-SBase::writeXMLNS (<NS>XMLOutputStream& stream) const
+SBase::writeXMLNS (XMLOutputStream& stream) const
 {
   // do nothing.
 }
@@ -2763,7 +2730,7 @@ int SBase::removeFromParentAndDelete()
 
 /** @cond doxygenLibsbmlInternal */
 const std::string
-SBase::checkMathMLNamespace(const <NS>XMLToken elem)
+SBase::checkMathMLNamespace(const XMLToken elem)
 {
   std::string prefix = "";
   unsigned int match = 0;
@@ -2809,7 +2776,7 @@ SBase::checkMathMLNamespace(const <NS>XMLToken elem)
 
 /** @cond doxygenLibsbmlInternal */
 void
-SBase::checkDefaultNamespace(const <NS>XMLNamespaces* xmlns,
+SBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
                              const std::string& elementName,
                              const std::string& prefix)
 {
@@ -2859,12 +2826,12 @@ SBase::check<Annotation>()
   // checks if the given default namespace (if any) is a valid
   // SBML_Lang namespace
   //
-  const <NS>XMLNamespaces &xmlns = m<Annotation>->getNamespaces();
+  const XMLNamespaces &xmlns = m<Annotation>->getNamespaces();
   checkDefaultNamespace(&xmlns,<annotation_variable>);
 
   while (nNodes < m<Annotation>->getNumChildren())
   {
-    <NS>XMLNode topLevel = m<Annotation>->getChild(nNodes);
+    XMLNode topLevel = m<Annotation>->getChild(nNodes);
 
     // the top level must be an element (so it should be a start)
     if (topLevel.isStart() == false)
@@ -2960,7 +2927,7 @@ SBase::check<Annotation>()
  * an sbml document, an error is logged.
  */
 void
-SBase::checkXHTML(const <NS>XMLNode * xhtml)
+SBase::checkXHTML(const XMLNode * xhtml)
 {
   if (xhtml == NULL) return;
 
@@ -2996,61 +2963,6 @@ SBase::checkXHTML(const <NS>XMLNode * xhtml)
     if (getErrorLog()->getError(i)->getErrorId() == BadlyFormedXML)
     {
       logError(errorDOC);
-    }
-  }
-
-  <NS>XMLNamespaces* toplevelNS = (mSBML) ? mSBML->getNamespaces() : NULL;
-
-  /*
-  * namespace declaration is variable
-  * if a whole html tag has been used
-  * or a whole body tag then namespace can be implicitly declared
-  */
-  unsigned int children = xhtml->getNumChildren();
-
-  if (children > 1)
-  {
-    for (i=0; i < children; i++)
-    {
-      if (SyntaxChecker::isAllowedElement(xhtml->getChild(i)))
-      {
-        if (!SyntaxChecker::hasDeclaredNS(xhtml->getChild(i),
-                                                  toplevelNS))
-        {
-          logError(errorNS);
-        }
-      }
-      else
-      {
-        logError(errorELEM);
-      }
-    }
-  }
-  else
-  {
-    /* only one element which can be html or body with either implicit/explicit
-    * namespace declaration
-    * OR could be one of the listed elements.
-    */
-
-    const string& top_name = xhtml->getChild(0).getName();
-
-    if (top_name != "html" && top_name != "body"
-      && !SyntaxChecker::isAllowedElement(xhtml->getChild(0)))
-    {
-      logError(errorELEM);
-    }
-    else
-    {
-      if (!SyntaxChecker::hasDeclaredNS(xhtml->getChild(0), toplevelNS))
-      {
-        logError(errorNS);
-      }
-      if (top_name == "html"
-        && !SyntaxChecker::isCorrectHTMLNode(xhtml->getChild(0)))
-      {
-        logError(errorELEM);
-      }
     }
   }
 }
@@ -3107,14 +3019,14 @@ SBase::checkCompatibility(const SBase * object) const
  * roundtripping) declared on this SBML_Lang (XML) element.
  */
 void
-SBase::setSBaseFields (const <NS>XMLToken& element)
+SBase::setSBaseFields (const XMLToken& element)
 {
   mLine   = element.getLine  ();
   mColumn = element.getColumn();
 
   if (element.getNamespaces().getLength() > 0)
   {
-    <NS>XMLNamespaces tmpxmlns(element.getNamespaces());
+    XMLNamespaces tmpxmlns(element.getNamespaces());
     setNamespaces(&tmpxmlns);
   }
   else
@@ -3217,7 +3129,7 @@ char*
 SBase_get<Notes>String (SBase_t *sb)
 {
   return (sb != NULL && sb->isSet<Notes>()) ?
-    safe_strdup(sb->get<Notes>String().c_str()) : NULL;
+    sbml_safe_strdup(sb->get<Notes>String().c_str()) : NULL;
 }
 
 
@@ -3234,7 +3146,7 @@ char*
 SBase_get<Annotation>String (SBase_t *sb)
 {
   return (sb != NULL && sb->isSet<Annotation>()) ?
-    safe_strdup(sb->get<Annotation>String().c_str()) : NULL;
+    sbml_safe_strdup(sb->get<Annotation>String().c_str()) : NULL;
 }
 
 
