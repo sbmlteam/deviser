@@ -259,8 +259,7 @@ SedAddXML::hasRequiredElements() const
  * Write any contained elements
  */
 void
-SedAddXML::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedAddXML::writeElements(XMLOutputStream& stream) const
 {
   SedChange::writeElements(stream);
 
@@ -535,7 +534,7 @@ SedAddXML::unsetAttribute(const std::string& attributeName)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedAddXML::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
+SedAddXML::createObject(XMLInputStream& stream)
 {
   SedBase* obj = SedChange::createObject(stream);
 
@@ -554,8 +553,7 @@ SedAddXML::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
  * Adds the expected attributes for this element
  */
 void
-SedAddXML::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+SedAddXML::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SedChange::addExpectedAttributes(attributes);
 }
@@ -570,11 +568,8 @@ SedAddXML::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-SedAddXML::readAttributes(
-                          const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes&
-                            attributes,
-                          const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                            ExpectedAttributes& expectedAttributes)
+SedAddXML::readAttributes(const XMLAttributes& attributes,
+                          const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -648,8 +643,7 @@ SedAddXML::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
  * Writes the attributes to the stream
  */
 void
-SedAddXML::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedAddXML::writeAttributes(XMLOutputStream& stream) const
 {
   SedChange::writeAttributes(stream);
 }

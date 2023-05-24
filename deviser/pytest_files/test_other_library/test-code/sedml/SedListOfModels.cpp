@@ -297,8 +297,7 @@ SedListOfModels::getItemTypeCode() const
  * Creates a new SedModel in this SedListOfModels
  */
 SedBase*
-SedListOfModels::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-  stream)
+SedListOfModels::createObject(XMLInputStream& stream)
 {
   const std::string& name = stream.peek().getName();
   SedBase* object = NULL;

@@ -300,8 +300,7 @@ CaListOfContents::getItemTypeCode() const
  * Creates a new CaContent in this CaListOfContents
  */
 CaBase*
-CaListOfContents::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-  stream)
+CaListOfContents::createObject(XMLInputStream& stream)
 {
   const std::string& name = stream.peek().getName();
   CaBase* object = NULL;

@@ -55,7 +55,6 @@
 
 #include <omex/CaListOf.h>
 #include <omex/CaContent.h>
-#include <common/libsbml-namespace.h>
 
 
 LIBCOMBINE_CPP_NAMESPACE_BEGIN
@@ -369,8 +368,7 @@ protected:
   /**
    * Creates a new CaContent in this CaListOfContents
    */
-  virtual CaBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-    stream);
+  virtual CaBase* createObject(XMLInputStream& stream);
 
   /** @endcond */
 

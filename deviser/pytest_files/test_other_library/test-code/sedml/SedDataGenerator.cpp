@@ -739,8 +739,7 @@ SedDataGenerator::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-SedDataGenerator::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  XMLOutputStream& stream) const
+SedDataGenerator::writeElements(XMLOutputStream& stream) const
 {
   SedBase::writeElements(stream);
 
@@ -1117,7 +1116,7 @@ SedDataGenerator::addChildObject(const std::string& elementName,
     return addParameter((const SedParameter*)(element));
   }
 
-  return LIBSBML_OPERATION_FAILED;
+  return LIBSEDML_OPERATION_FAILED;
 }
 
 /** @endcond */
@@ -1259,8 +1258,7 @@ SedDataGenerator::getAllElements(SedElementFilter* filter)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedDataGenerator::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-  stream)
+SedDataGenerator::createObject(XMLInputStream& stream)
 {
   SedBase* obj = NULL;
 
@@ -1302,8 +1300,7 @@ SedDataGenerator::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
  * Adds the expected attributes for this element
  */
 void
-SedDataGenerator::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+SedDataGenerator::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
 
@@ -1322,11 +1319,8 @@ SedDataGenerator::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-SedDataGenerator::readAttributes(
-                                 const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                   XMLAttributes& attributes,
-                                 const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                   ExpectedAttributes& expectedAttributes)
+SedDataGenerator::readAttributes(const XMLAttributes& attributes,
+                                 const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1456,8 +1450,7 @@ SedDataGenerator::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
  * Writes the attributes to the stream
  */
 void
-SedDataGenerator::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  XMLOutputStream& stream) const
+SedDataGenerator::writeAttributes(XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
 
@@ -1536,7 +1529,7 @@ SedDataGenerator_getId(const SedDataGenerator_t * sdg)
     return NULL;
   }
 
-  return sdg->getId().empty() ? NULL : safe_strdup(sdg->getId().c_str());
+  return sdg->getId().empty() ? NULL : sedml_safe_strdup(sdg->getId().c_str());
 }
 
 
@@ -1552,7 +1545,8 @@ SedDataGenerator_getName(const SedDataGenerator_t * sdg)
     return NULL;
   }
 
-  return sdg->getName().empty() ? NULL : safe_strdup(sdg->getName().c_str());
+  return sdg->getName().empty() ? NULL :
+    sedml_safe_strdup(sdg->getName().c_str());
 }
 
 

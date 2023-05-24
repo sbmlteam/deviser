@@ -59,7 +59,6 @@
 #include <sedml/SedListOfOutputs.h>
 #include <sedml/SedListOfStyles.h>
 #include <sedml/SedErrorLog.h>
-#include <common/libsbml-namespace.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
@@ -2006,8 +2005,7 @@ public:
   /**
    * Write any contained elements
    */
-  virtual void writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-    stream) const;
+  virtual void writeElements(XMLOutputStream& stream) const;
 
   /** @endcond */
 
@@ -2402,19 +2400,18 @@ public:
    * Returns the value of the "Namespaces" element of this SedDocument.
    *
    * @return the value of the "Namespaces" element of this SedDocument as a
-   * LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*.
+   * XMLNamespaces*.
    */
-  virtual const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* getNamespaces()
-    const;
+  virtual const XMLNamespaces* getNamespaces() const;
 
 
   /**
    * Returns the value of the "Namespaces" element of this SedDocument.
    *
    * @return the value of the "Namespaces" element of this SedDocument as a
-   * LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*.
+   * XMLNamespaces*.
    */
-  virtual LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* getNamespaces();
+  virtual XMLNamespaces* getNamespaces();
 
 
   /**
@@ -2498,8 +2495,7 @@ protected:
   /**
    * Creates a new object from the next XMLToken on the XMLInputStream
    */
-  virtual SedBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-    stream);
+  virtual SedBase* createObject(XMLInputStream& stream);
 
   /** @endcond */
 
@@ -2510,8 +2506,7 @@ protected:
   /**
    * Adds the expected attributes for this element
    */
-  virtual void addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-    ExpectedAttributes& attributes);
+  virtual void addExpectedAttributes(ExpectedAttributes& attributes);
 
   /** @endcond */
 
@@ -2522,11 +2517,8 @@ protected:
   /**
    * Reads the expected attributes into the member data variables
    */
-  virtual void readAttributes(
-                              const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                XMLAttributes& attributes,
-                              const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                                ExpectedAttributes& expectedAttributes);
+  virtual void readAttributes(const XMLAttributes& attributes,
+                              const ExpectedAttributes& expectedAttributes);
 
   /** @endcond */
 
@@ -2537,8 +2529,7 @@ protected:
   /**
    * Writes the attributes to the stream
    */
-  virtual void writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-    stream) const;
+  virtual void writeAttributes(XMLOutputStream& stream) const;
 
   /** @endcond */
 
@@ -2549,8 +2540,7 @@ protected:
   /**
    * Writes the namespace for the Sedml package
    */
-  virtual void writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-    stream) const;
+  virtual void writeXMLNS(XMLOutputStream& stream) const;
 
   /** @endcond */
 

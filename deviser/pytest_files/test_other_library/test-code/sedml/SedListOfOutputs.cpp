@@ -398,8 +398,7 @@ SedListOfOutputs::getItemTypeCode() const
  * Creates a new SedOutput in this SedListOfOutputs
  */
 SedBase*
-SedListOfOutputs::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-  stream)
+SedListOfOutputs::createObject(XMLInputStream& stream)
 {
   const std::string& name = stream.peek().getName();
   SedBase* object = NULL;

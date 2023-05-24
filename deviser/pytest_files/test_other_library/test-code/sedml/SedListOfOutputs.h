@@ -52,7 +52,6 @@
 
 #include <sedml/SedListOf.h>
 #include <sedml/SedOutput.h>
-#include <common/libsbml-namespace.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
@@ -442,8 +441,7 @@ protected:
   /**
    * Creates a new SedOutput in this SedListOfOutputs
    */
-  virtual SedBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-    stream);
+  virtual SedBase* createObject(XMLInputStream& stream);
 
   /** @endcond */
 

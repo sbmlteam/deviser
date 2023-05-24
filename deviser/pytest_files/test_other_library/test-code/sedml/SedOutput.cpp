@@ -327,8 +327,7 @@ SedOutput::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-SedOutput::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedOutput::writeElements(XMLOutputStream& stream) const
 {
   SedBase::writeElements(stream);
 }
@@ -624,8 +623,7 @@ SedOutput::unsetAttribute(const std::string& attributeName)
  * Adds the expected attributes for this element
  */
 void
-SedOutput::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  ExpectedAttributes& attributes)
+SedOutput::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
 
@@ -644,11 +642,8 @@ SedOutput::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-SedOutput::readAttributes(
-                          const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes&
-                            attributes,
-                          const LIBSBML_CPP_NAMESPACE_QUALIFIER
-                            ExpectedAttributes& expectedAttributes)
+SedOutput::readAttributes(const XMLAttributes& attributes,
+                          const ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -745,8 +740,7 @@ SedOutput::readAttributes(
  * Writes the attributes to the stream
  */
 void
-SedOutput::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-  stream) const
+SedOutput::writeAttributes(XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
 
@@ -857,7 +851,7 @@ SedOutput_getId(const SedOutput_t * so)
     return NULL;
   }
 
-  return so->getId().empty() ? NULL : safe_strdup(so->getId().c_str());
+  return so->getId().empty() ? NULL : sedml_safe_strdup(so->getId().c_str());
 }
 
 
@@ -873,7 +867,8 @@ SedOutput_getName(const SedOutput_t * so)
     return NULL;
   }
 
-  return so->getName().empty() ? NULL : safe_strdup(so->getName().c_str());
+  return so->getName().empty() ? NULL :
+    sedml_safe_strdup(so->getName().c_str());
 }
 
 
