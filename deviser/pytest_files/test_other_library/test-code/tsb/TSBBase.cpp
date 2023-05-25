@@ -1251,10 +1251,9 @@ TSBBase::appendNotes(const XMLNode* notes)
     {
       tmpNotes.addChild(addedNotes);
     }
- }
+  }
 
-
-  if ( mNotes != NULL )
+  if (mNotes != NULL)
   {
     //------------------------------------------------------------
     //
@@ -2999,7 +2998,6 @@ TSBBase::checkXHTML(const XMLNode * xhtml)
       logError(errorDOC);
     }
   }
-
 }
 /** @endcond */
 /** @cond doxygenLibtsbInternal */
