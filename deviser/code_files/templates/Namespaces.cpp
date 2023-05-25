@@ -1,6 +1,6 @@
 #include <sbml/SBMLNamespaces.h>
 #include <sstream>
-#include <common/common.h>
+#include <sbml/common/common.h>
 #include <iostream>
 
 /** @cond doxygenIgnored */
@@ -400,7 +400,7 @@ LIBSBML_EXTERN
 char *
 SBMLNamespaces_getSBMLNamespaceURI(unsigned int level, unsigned int version)
 {
-  return safe_strdup(SBMLNamespaces::getSBMLNamespaceURI(level, version).c_str());
+  return sbml_safe_strdup(SBMLNamespaces::getSBMLNamespaceURI(level, version).c_str());
 }
 
 

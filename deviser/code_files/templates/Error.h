@@ -1,7 +1,7 @@
 #ifndef SBMLError_h
 #define SBMLError_h
 
-#include <common/extern.h>
+#include <sbml/common/extern.h>
 <verbatim>
 #include <xml/XMLError.h>
 </verbatim>
