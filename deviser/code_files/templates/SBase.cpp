@@ -1215,7 +1215,9 @@ SBase::append<Notes>(const XMLNode* notes)
     {
       tmp<Notes>.addChild(added<Notes>);
     }
+  }
 
+  if (m<Notes> != NULL)
   {
     //------------------------------------------------------------
     //
