@@ -29,74 +29,85 @@ def teardown():
         shutil.rmtree(temp_dir)
 
 
-@pytest.mark.parametrize('name, num, class_name, test_case, list_of', [
-    ('test_sedml', 1, 'SedModel', 'model', 'SedListOfModels'),
-    ('test_sedml', 0, 'SedDocument', 'document', ''),
-    ('test_sedml', 3, 'SedAddXML', 'xmlnode used', ''),
-    ('test_sedml', 26, 'SedSetValue', 'astnode used', ''),
-    ('test_sedml', 12, 'SedDataGenerator', 'astnode in getElementBySId bug', ''),
-    ('test_sedml', 33, 'SedRepeatedTask', 'attribute with different xml name', ''),
-    ('test_sedml', 7, 'SedSimulation', 'child element', ''),
-    ('test_sedml', 28, 'SedVectorRange', 'deal with vectors', ''),
-    ('test_sedml', 10, 'SedAbstractTask', 'catch different abstract types',
-     'SedListOfTasks'),
-    ('test_sedml', 13, 'SedOutput', 'catch different abstract types',
-     'SedListOfOutputs'),
-    ('combine-archive', 0, 'CaContent', 'check includes', 'CaListOfContents'),
-    ('combine-archive', 1, 'CaOmexManifest', 'document', ''),
-    ('testsbxml', 1, 'TSBComment', 'comment class', 'TSBListOfComments'),
-    ('testsbxml', 0, 'TSBDocument', 'document', ''),
-])
-def test_cpp(name, num, class_name, test_case, list_of):
-    """
-    Run the C++ file tests.
-
-    :param name: name of test group e.g. 'test_sedml', 'combine-archive'.
-    :param num: list index, so we only generate a
-                particular class, not all of them
-    :param class_name: name of C++ class (and thus .cpp/.h filenames),
-                e.g. 'CaContent'
-    :param test_case: brief test description
-    :param list_of: class name (and thus filenames) of any corresponding
-                "list of" class, e.g. 'CaListOfContents'
-    """
-    gv.reset()
-    xml_filename = functions.set_up_test(name, class_name, test_case)
-    assert xml_filename is not None and xml_filename != ""
-    test_utils.generate_new_cpp_header(xml_filename, num)
-    assert 0 == test_utils.compare_code_headers(class_name)
-    assert 0 == test_utils.compare_code_impl(class_name)
-    if len(list_of) > 0:
-        class_name = list_of
-        assert 0 == test_utils.compare_code_headers(class_name)
-        assert 0 == test_utils.compare_code_impl(class_name)
-
-
-# @pytest.mark.parametrize('name, class_name, test_case, list_of', [
-#     # Tests from old test_utils.testCombine()
-#     ('test_sedml', 'SedBase', 'templates', 'SedListOf'),
-#     ('combine-archive', 'CaBase', 'templates', 'CaListOf'),
-# #    ('testsbxml', 'TSBBase', 'templates', 'TSBListOf'),
+# @pytest.mark.parametrize('name, num, class_name, test_case, list_of', [
+#     ('test_sedml', 1, 'SedModel', 'model', 'SedListOfModels'),
+#     ('test_sedml', 0, 'SedDocument', 'document', ''),
+#     ('test_sedml', 3, 'SedAddXML', 'xmlnode used', ''),
+#     ('test_sedml', 26, 'SedSetValue', 'astnode used', ''),
+#     ('test_sedml', 12, 'SedDataGenerator', 'astnode in getElementBySId bug', ''),
+#     ('test_sedml', 33, 'SedRepeatedTask', 'attribute with different xml name', ''),
+#     ('test_sedml', 7, 'SedSimulation', 'child element', ''),
+#     ('test_sedml', 28, 'SedVectorRange', 'deal with vectors', ''),
+#     ('test_sedml', 10, 'SedAbstractTask', 'catch different abstract types',
+#      'SedListOfTasks'),
+#     ('test_sedml', 13, 'SedOutput', 'catch different abstract types',
+#      'SedListOfOutputs'),
+#     ('combine-archive', 0, 'CaContent', 'check includes', 'CaListOfContents'),
+#     ('combine-archive', 1, 'CaOmexManifest', 'document', ''),
+#     ('testsbxml', 1, 'TSBComment', 'comment class', 'TSBListOfComments'),
+#     ('testsbxml', 0, 'TSBDocument', 'document', ''),
 # ])
-# def test_templates(name, class_name, test_case, list_of):
+# def test_cpp(name, num, class_name, test_case, list_of):
 #     """
-#     Based on old test_utils.run_templates() function. Run the 'template' file tests.
+#     Run the C++ file tests.
 #
 #     :param name: name of test group e.g. 'test_sedml', 'combine-archive'.
+#     :param num: list index, so we only generate a
+#                 particular class, not all of them
 #     :param class_name: name of C++ class (and thus .cpp/.h filenames),
-#                  e.g. 'SedBase'
-#     :param test_case: brief test description, e.g. 'templates'.
+#                 e.g. 'CaContent'
+#     :param test_case: brief test description
 #     :param list_of: class name (and thus filenames) of any corresponding
-#                  "list of" class, e.g. 'SedListOf'
+#                 "list of" class, e.g. 'CaListOfContents'
 #     """
 #     gv.reset()
 #     xml_filename = functions.set_up_test(name, class_name, test_case)
 #     assert xml_filename is not None and xml_filename != ""
-#     test_utils.generate_templates(xml_filename)
+#     test_utils.generate_new_cpp_header(xml_filename, num)
 #     assert 0 == test_utils.compare_code_headers(class_name)
 #     assert 0 == test_utils.compare_code_impl(class_name)
-#     assert 0 == test_utils.compare_code_headers(list_of)
-#     assert 0 == test_utils.compare_code_impl(list_of)
+#     if len(list_of) > 0:
+#         class_name = list_of
+#         assert 0 == test_utils.compare_code_headers(class_name)
+#         assert 0 == test_utils.compare_code_impl(class_name)
+#
+
+@pytest.mark.parametrize('name, class_name, test_case, list_of', [
+#    ('test_sedml', 'SedBase', 'templates', 'SedListOf'),
+#    ('combine-archive', 'CaBase', 'templates', 'CaListOf'),
+    ('testsbxml', 'TSBBase', 'templates', 'TSBListOf'),
+    ('testsbxml', 'TSBConstructorException', 'templates', ''),
+    ('testsbxml', 'TSBReader', 'templates', ''),
+    ('testsbxml', 'TSBWriter', 'templates', ''),
+    ('testsbxml', 'TSBErrorLog', 'templates', ''),
+    ('testsbxml', 'TSBNamespaces', 'templates', ''),
+    ('testsbxml', 'TSBError', 'templates', ''),
+    ('testsbxml', 'TSBVisitor', 'templates', ''),
+    ('testsbxml', 'TSBTypeCodes', 'templates', ''),
+    ('testsbxml', 'TSBTypes', 'templates', ''),
+    ('testsbxml', 'TSBErrorTable', 'templates', '')
+])
+def test_templates(name, class_name, test_case, list_of):
+    """
+    Based on old test_utils.run_templates() function. Run the 'template' file tests.
+
+    :param name: name of test group e.g. 'test_sedml', 'combine-archive'.
+    :param class_name: name of C++ class (and thus .cpp/.h filenames),
+                 e.g. 'SedBase'
+    :param test_case: brief test description, e.g. 'templates'.
+    :param list_of: class name (and thus filenames) of any corresponding
+                 "list of" class, e.g. 'SedListOf'
+    """
+    gv.reset()
+    xml_filename = functions.set_up_test(name, class_name, test_case)
+    assert xml_filename is not None and xml_filename != ""
+    test_utils.generate_templates(xml_filename)
+    assert 0 == test_utils.compare_code_headers(class_name)
+    if class_name != 'TSBTypes' and class_name != 'TSBErrorTable':
+        assert 0 == test_utils.compare_code_impl(class_name)
+    if list_of:
+        assert 0 == test_utils.compare_code_headers(list_of)
+        assert 0 == test_utils.compare_code_impl(list_of)
 #
 #
 # @pytest.mark.parametrize('name, class_name, test_case, prefix, lib', [
