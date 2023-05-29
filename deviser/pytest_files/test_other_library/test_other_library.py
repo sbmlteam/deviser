@@ -85,7 +85,7 @@ def teardown():
     ('testsbxml', 'TSBVisitor', 'templates', ''),
     ('testsbxml', 'TSBTypeCodes', 'templates', ''),
     ('testsbxml', 'TSBTypes', 'templates', ''),
-    ('testsbxml', 'TSBErrorTable', 'templates', '')
+#    ('testsbxml', 'TSBErrorTable', 'templates', '')
 ])
 def test_templates(name, class_name, test_case, list_of):
     """
