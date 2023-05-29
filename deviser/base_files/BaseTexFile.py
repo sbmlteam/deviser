@@ -39,8 +39,8 @@
 # ------------------------------------------------------------------------ -->
 
 
+from ..util import global_variables, strFunctions
 from . import BaseFile
-from ..util import strFunctions, global_variables
 
 
 class BaseTexFile(BaseFile.BaseFile):
@@ -57,27 +57,27 @@ class BaseTexFile(BaseFile.BaseFile):
         BaseFile.BaseFile.__init__(self, name, extension)
 
         # change the comment delimiter and line length
-        self.comment = '%'
+        self.comment = "%"
         self.line_length = 72
 
-        self.package = object_desc['name']
-        self.fullname = object_desc['fullname']
-        self.sbml_classes = object_desc['baseElements']
-        self.offset = object_desc['offset']
-        self.plugins = object_desc['plugins']
-        self.enums = object_desc['enums']
-        self.level = object_desc['base_level']
-        self.version = object_desc['base_version']
-        self.pkg_version = object_desc['pkg_version']
-        if object_desc['required']:
-            self.reqd_status = 'true'
+        self.package = object_desc["name"]
+        self.fullname = object_desc["fullname"]
+        self.sbml_classes = object_desc["baseElements"]
+        self.offset = object_desc["offset"]
+        self.plugins = object_desc["plugins"]
+        self.enums = object_desc["enums"]
+        self.level = object_desc["base_level"]
+        self.version = object_desc["base_version"]
+        self.pkg_version = object_desc["pkg_version"]
+        if object_desc["required"]:
+            self.reqd_status = "true"
         else:
-            self.reqd_status = 'false'
+            self.reqd_status = "false"
 
         self.prim_class = []
 
-        self.start_b = '{'
-        self.end_b = '}'
+        self.start_b = "{"
+        self.end_b = "}"
 
         # expand the information for the classes
         self.fulltexname = strFunctions.texify(self.fullname)
@@ -86,12 +86,12 @@ class BaseTexFile(BaseFile.BaseFile):
         self.sort_attribute_names(self.sbml_classes)
         self.sort_enum_names(self.enums)
 
-        if global_variables.language == 'sbml':
-            self.full_pkg_command = '\\{0}Package'.format(self.fulltexname)
+        if global_variables.language == "sbml":
+            self.full_pkg_command = "\\{0}Package".format(self.fulltexname)
         else:
-            self.full_pkg_command = '\\{0}'.format(self.fulltexname)
+            self.full_pkg_command = "\\{0}".format(self.fulltexname)
 
-        self.brief_pkg_command = '\\{0}'.format(self.upper_package)
+        self.brief_pkg_command = "\\{0}".format(self.upper_package)
 
     ########################################################################
 
@@ -103,14 +103,14 @@ class BaseTexFile(BaseFile.BaseFile):
         """
         if classes is not None:
             for i in range(0, len(classes)):
-                name = classes[i]['name']
+                name = classes[i]["name"]
                 texname = strFunctions.texify(name)
-                classes[i]['texname'] = texname
+                classes[i]["texname"] = texname
                 # hack for render
-                if name == 'Ellipse' or name == 'Rectangle':
-                    texname = 'Render' + name
-                    classes[i]['texname'] = texname
-                if name == 'RelAbsVector':
+                if name == "Ellipse" or name == "Rectangle":
+                    texname = "Render" + name
+                    classes[i]["texname"] = texname
+                if name == "RelAbsVector":
                     self.prim_class.append(classes[i])
 
     @staticmethod
@@ -122,28 +122,12 @@ class BaseTexFile(BaseFile.BaseFile):
         """
         if classes is not None:
             for i in range(0, len(classes)):
-                attribs = classes[i]['attribs']
+                attribs = classes[i]["attribs"]
                 BaseTexFile.update_attrib_dicts(attribs)
-                # for j in range(0, len(attribs)):
-                #     if attribs[j]['type'] in ['lo_element', 'element',
-                #                               'inline_lo_element']:
-                #         name = attribs[j]['element']
-                #     else:
-                #         name = attribs[j]['name']
-                #     texname = strFunctions.texify(name)
-                #     attribs[j]['texname'] = texname
             for i in range(0, len(classes)):
-                if 'lo_attribs' in classes[i]:
-                    lo_attribs = classes[i]['lo_attribs']
+                if "lo_attribs" in classes[i]:
+                    lo_attribs = classes[i]["lo_attribs"]
                     BaseTexFile.update_attrib_dicts(lo_attribs)
-                    # for j in range(0, len(lo_attribs)):
-                    #     if lo_attribs[j]['type'] in ['lo_element', 'element',
-                    #                                  'inline_lo_element']:
-                    #         name = lo_attribs[j]['element']
-                    #     else:
-                    #         name = lo_attribs[j]['name']
-                    #     texname = strFunctions.texify(name)
-                    #     lo_attribs[j]['texname'] = texname
 
     @staticmethod
     def update_attrib_dicts(my_list):
@@ -153,13 +137,12 @@ class BaseTexFile(BaseFile.BaseFile):
         :param my_list: the list which we update.
         """
         for j in range(0, len(my_list)):
-            if my_list[j]['type'] in ['lo_element', 'element',
-                                      'inline_lo_element']:
-                name = my_list[j]['element']
+            if my_list[j]["type"] in ["lo_element", "element", "inline_lo_element"]:
+                name = my_list[j]["element"]
             else:
-                name = my_list[j]['name']
+                name = my_list[j]["name"]
             texname = strFunctions.texify(name)
-            my_list[j]['texname'] = texname
+            my_list[j]["texname"] = texname
 
     @staticmethod
     def sort_enum_names(enums):
@@ -170,9 +153,9 @@ class BaseTexFile(BaseFile.BaseFile):
         """
         if enums is not None:
             for i in range(0, len(enums)):
-                name = enums[i]['name']
+                name = enums[i]["name"]
                 texname = strFunctions.texify(name)
-                enums[i]['texname'] = texname
+                enums[i]["texname"] = texname
 
     def write_to_do(self, text):
         """
@@ -181,8 +164,7 @@ class BaseTexFile(BaseFile.BaseFile):
 
         :param text: the text describing the TODO.
         """
-        self.write_text_line('\\TODO{0}{1}{2}'.format(self.start_b, text,
-                                                      self.end_b))
+        self.write_text_line("\\TODO{0}{1}{2}".format(self.start_b, text, self.end_b))
         self.skip_line()
 
     def write_text_line(self, line):
