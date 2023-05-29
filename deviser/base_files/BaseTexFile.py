@@ -40,7 +40,7 @@
 
 
 from . import BaseFile
-from ..util import strFunctions
+from ..util import strFunctions, global_variables
 
 
 class BaseTexFile(BaseFile.BaseFile):
@@ -86,7 +86,11 @@ class BaseTexFile(BaseFile.BaseFile):
         self.sort_attribute_names(self.sbml_classes)
         self.sort_enum_names(self.enums)
 
-        self.full_pkg_command = '\\{0}Package'.format(self.fulltexname)
+        if global_variables.language == 'sbml':
+            self.full_pkg_command = '\\{0}Package'.format(self.fulltexname)
+        else:
+            self.full_pkg_command = '\\{0}'.format(self.fulltexname)
+
         self.brief_pkg_command = '\\{0}'.format(self.upper_package)
 
     ########################################################################
