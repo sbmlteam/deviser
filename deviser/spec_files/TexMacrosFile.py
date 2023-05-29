@@ -41,7 +41,7 @@
 import re
 
 from ..base_files import BaseTexFile
-from ..util import strFunctions
+from ..util import strFunctions, global_variables
 
 
 class TexMacrosFile(BaseTexFile.BaseTexFile):
@@ -81,6 +81,8 @@ class TexMacrosFile(BaseTexFile.BaseTexFile):
                     and sbml_class['lo_elementName'] != '':
                 lo_name = strFunctions.upper_first(
                     sbml_class['lo_elementName'])
+            elif global_variables.language != 'sbml':
+                lo_name = strFunctions.cap_list_of_name(sbml_class['name'], False)
             else:
                 lo_name = strFunctions.cap_list_of_name(sbml_class['name'])
             self.write_text_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{1}{2}'
@@ -128,25 +130,33 @@ class TexMacrosFile(BaseTexFile.BaseTexFile):
         self.write_text_line('\\newcommand{0}\\const{1}[1]{0}\\texttt{0} #1{1}{1}'
                              .format(self.start_b, self.end_b))
         self.skip_line()
-        self.write_text_line('\\newcommand{0}\\sbmlthreecore{1}{0}SBML Level~{2} '
-                        'Version~{3} Core\\xspace{1}'.format(self.start_b,
-                                                             self.end_b,
-                                                             self.level,
-                                                             self.version))
-        self.write_text_line('\\newcommand{0}{1}{2}{0}\\textsf{0}{3}'
-                        '{2} package\\xspace{2}'.format(self.start_b,
-                                                        self.full_pkg_command,
-                                                        self.end_b,
-                                                        self.fullname))
+        if global_variables.language == 'sbml':
+            self.write_text_line('\\newcommand{0}\\sbmlthreecore{1}{0}SBML Level~{2} '
+                                 'Version~{3} Core\\xspace{1}'.format(self.start_b,
+                                                                      self.end_b,
+                                                                      self.level,
+                                                                      self.version))
+            self.write_text_line('\\newcommand{0}{1}{2}{0}\\textsf{0}{3}'
+                                 '{2} package\\xspace{2}'.format(self.start_b,
+                                                                 self.full_pkg_command,
+                                                                 self.end_b,
+                                                                 self.fullname))
+        else:
+            self.write_text_line('\\newcommand{0}{1}{2}{0}\\textsf{0}{3}'
+                                 '{2}\\xspace{2}'.format(self.start_b,
+                                                                 self.full_pkg_command,
+                                                                 self.end_b,
+                                                                 self.fullname))
+
         self.write_text_line('\\newcommand{0}{1}{2}{0}\\textsf{0}{3}{2}'
-                        '\\xspace{2}'
+                             '\\xspace{2}'
                              .format(self.start_b,
-                                self.brief_pkg_command,
-                                self.end_b,
-                                self.fullname))
+                                     self.brief_pkg_command,
+                                     self.end_b,
+                                     self.fullname))
         self.skip_line()
         self.write_text_line('\\newcommand{0}\\TODO{1}[1]{0}\\colorbox{0}blue{1}'
-                        '{0}\\textcolor{0}white{1}{0}TODO: #1{1}{1}{1}'
+                             '{0}\\textcolor{0}white{1}{0}TODO: #1{1}{1}{1}'
                              .format(self.start_b, self.end_b))
         self.skip_line()
 
