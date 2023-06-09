@@ -41,6 +41,7 @@ import os
 import re
 
 from ..base_files import BaseTexFile
+from ..util import global_variables
 from ..validation import ValidationRulesForClass
 from ..validation import ValidationRulesForPlugin
 from ..validation import ValidationRulesGeneral
@@ -62,9 +63,16 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         self.full_pkg_command = '\\{0}Package'.format(self.fulltexname)
         self.brief_pkg_command = '\\{0}'.format(self.upper_package)
 
-        self.pkg_ref = 'SBML Level~{0} Specification for {1}, ' \
-                       'Version~{2}'.format(self.level,
-                                            self.fullname, self.pkg_version)
+        if global_variables.is_sbml:
+            self.pkg_ref = 'SBML Level~{0} Specification for {1}, ' \
+                           'Version~{2}'.format(self.level,
+                                                self.fullname, self.pkg_version)
+        else:
+            self.pkg_ref = '{3} Level~{0} Specification for {1}, ' \
+                           'Version~{2}'.format(self.level,
+                                                self.fullname, self.version,
+                                                global_variables.language)
+
         self.reqd_status = object_desc['required']
 
     ########################################################################

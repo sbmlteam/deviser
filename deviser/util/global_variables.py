@@ -59,6 +59,8 @@ current_dir = os.getcwd()
 
 global language
 language = 'sbml'
+global is_sbml
+is_sbml = True
 global baseClass
 baseClass = 'SBase'
 global std_base
@@ -192,6 +194,9 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
                 use_name_1=True, ast=False, xml=False, top_name=''):
     global language
     language = lang
+    if language != 'sbml':
+        global is_sbml
+        is_sbml = False
 
     global namespaces
     global has_level_version

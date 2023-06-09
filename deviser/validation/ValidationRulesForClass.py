@@ -59,8 +59,12 @@ class ValidationRulesForClass():
         self.start_b = '{'
         self.end_b = '}'
 
-        self.lower_name = strFunctions.lower_first(strFunctions.remove_prefix(self.name))
-        self.formatted_name = r'\{0}'.format(strFunctions.remove_prefix(self.name))
+        if global_variables.is_sbml:
+            self.lower_name = strFunctions.lower_first(strFunctions.remove_prefix(self.name))
+            self.formatted_name = r'\{0}'.format(strFunctions.remove_prefix(self.name))
+        else
+            self.lower_name = strFunctions.lower_first(self.name)
+            self.formatted_name = r'\{0}'.format(self.name)
         self.indef = strFunctions.get_indefinite(self.lower_name)
         self.indef_u = strFunctions.upper_first(self.indef)
 
