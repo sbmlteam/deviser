@@ -46,8 +46,9 @@ class ValidationRulesForClass():
 
     def __init__(self, object_desc, spec_name, number, package, pkg_ref):
         # members from object
+        remove_doc_prefix = True if global_variables.is_sbml else False
         self.name = strFunctions.remove_prefix(object_desc['name'],
-                                               remove_doc_prefix=True)
+                                               remove_doc_prefix)
         self.fullname = spec_name
         self.number = number
         self.package = package.lower() 
@@ -62,7 +63,7 @@ class ValidationRulesForClass():
         if global_variables.is_sbml:
             self.lower_name = strFunctions.lower_first(strFunctions.remove_prefix(self.name))
             self.formatted_name = r'\{0}'.format(strFunctions.remove_prefix(self.name))
-        else
+        else:
             self.lower_name = strFunctions.lower_first(self.name)
             self.formatted_name = r'\{0}'.format(self.name)
         self.indef = strFunctions.get_indefinite(self.lower_name)
@@ -88,11 +89,12 @@ class ValidationRulesForClass():
 
     def determine_rules(self):
         # write rules increasing the number
-        self.number += 1
-        self.rules.append(self.write_core_attribute_rule(self))
+        if global_variables.is_sbml:
+            self.number += 1
+            self.rules.append(self.write_core_attribute_rule(self))
 
-        self.number += 1
-        self.rules.append(self.write_core_subobject_rule(self))
+            self.number += 1
+            self.rules.append(self.write_core_subobject_rule(self))
 
         self.number += 1
         rule = self.write_package_attribute_rule(self)
@@ -108,10 +110,15 @@ class ValidationRulesForClass():
             self.add_rule(rule)
 
         for i in range(0, len(self.opt_att)):
+            if not global_variables.is_sbml and self.opt_att[i]['name'] == 'metaid':
+                continue
             self.number += 1
             rule = self.write_attribute_type_rule(self, self.opt_att[i])
             self.add_rule(rule)
+        if global_variables.is_sbml:
+            self.add_lo_rules()
 
+    def add_lo_rules(self):
         if len(self.opt_child_lo_elem) > 0:
             self.number += 1
             rule = self.write_optional_lo_rule()
@@ -431,9 +438,16 @@ class ValidationRulesForClass():
             return
         reqd = self.parse_required(self, self.reqd_att)
         opt = self.parse_optional(self, self.opt_att)
-        no_other_statement = 'No other attributes from the SBML Level~3 {0} ' \
-                             'namespaces are permitted on {1} {2} object. '\
-            .format(self.fullname, self.indef, self.formatted_name)
+        if global_variables.is_sbml:
+            no_other_statement = 'No other attributes from the SBML Level~3 {0} ' \
+                                 'namespaces are permitted on {1} {2} object. '\
+                .format(self.fullname, self.indef, self.formatted_name)
+        else:
+            no_other_statement = 'No other attributes from the {3} Level~{4} Version~{5} ' \
+                                 'namespaces are permitted on {1} {2} object. ' \
+                .format(self.fullname, self.indef, self.formatted_name, global_variables.language.upper(),
+                        global_variables.namespaces[0]['level'], global_variables.namespaces[0]['version'])
+
         if len(opt) == 0 and len(reqd) > 0:
             text = '{0} {1} object must have {2}. {3}'\
                 .format(self.indef_u, self.formatted_name,
@@ -465,21 +479,43 @@ class ValidationRulesForClass():
             return
         reqd = self.parse_required_elements(self.reqd_elem)
         opt = self.parse_optional_elements(self.opt_elem)
-        no_other_statement = 'No other elements from the SBML Level~3 {0} ' \
-                             'namespaces are permitted on {1} {2} object. '\
-            .format(self.fullname, self.indef, self.formatted_name)
-        if len(opt) == 0 and len(reqd) > 0:
-            text = '{0} {1} object must contain {2}. {3}'\
-                .format(self.indef_u, self.formatted_name,
-                        reqd, no_other_statement)
-        elif len(reqd) == 0 and len(opt) > 0:
-            text = '{0} {1} object may contain {2}. {3}'\
-                .format(self.indef_u, self.formatted_name,
-                        opt, no_other_statement)
+        if global_variables.is_sbml:
+            no_other_statement = 'No other elements from the SBML Level~3 {0} ' \
+                                 'namespaces are permitted on {1} {2} object. '\
+                .format(self.fullname, self.indef, self.formatted_name)
+            if len(opt) == 0 and len(reqd) > 0:
+                text = '{0} {1} object must contain {2}. {3}'\
+                    .format(self.indef_u, self.formatted_name,
+                            reqd, no_other_statement)
+            elif len(reqd) == 0 and len(opt) > 0:
+                text = '{0} {1} object may contain {2}. {3}'\
+                    .format(self.indef_u, self.formatted_name,
+                            opt, no_other_statement)
+            else:
+                text = '{0} {1} object must contain {2}, and may contain {3}. {4}'\
+                    .format(self.indef_u, self.formatted_name,
+                            reqd, opt, no_other_statement)
         else:
-            text = '{0} {1} object must contain {2}, and may contain {3}. {4}'\
-                .format(self.indef_u, self.formatted_name,
-                        reqd, opt, no_other_statement)
+            common = 'Apart from the general \\{0} and \\{1} subobjects permitted ' \
+                     'on all {2} components,'.format('Notes', global_variables.annot_element,
+                                                     global_variables.language.upper())
+            no_other_statement = 'No other objects from the {3} Level~{4} Version~{5} ' \
+                                 'namespaces are permitted on {1} {2} object. ' \
+                .format(self.fullname, self.indef, self.formatted_name, global_variables.language.upper(),
+                        global_variables.namespaces[0]['level'], global_variables.namespaces[0]['version'])
+            if len(opt) == 0 and len(reqd) > 0:
+                text = '{4} {0} {1} object must contain {2}. {3}'\
+                    .format(self.indef_u, self.formatted_name,
+                            reqd, no_other_statement, common)
+            elif len(reqd) == 0 and len(opt) > 0:
+                text = '{4} {0} {1} object may contain {2}. {3}'\
+                    .format(self.indef_u, self.formatted_name,
+                            opt, no_other_statement, common)
+            else:
+                text = '{5} {0} {1} object must contain {2}, and may contain {3}. {4}'\
+                    .format(self.indef_u, self.formatted_name,
+                            reqd, opt, no_other_statement, common)
+
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
@@ -686,6 +722,10 @@ class ValidationRulesForClass():
     # parse the required attribute sentence
     @staticmethod
     def parse_required(self, attributes):
+        if global_variables.is_sbml:
+            prefix = self.package
+        else:
+            prefix = global_variables.language
         for attrib in attributes:
             if 'texname' not in attrib or attrib['texname'] == 'RelAbsVector':
                 attrib['texname'] = attrib['name']
@@ -695,25 +735,31 @@ class ValidationRulesForClass():
         elif num == 1:
             return 'the required attribute {0}'\
                 .format(strFunctions.wrap_token(attributes[0]['texname'],
-                                                self.package))
+                                                prefix))
         else:
             required_statement = 'the required attributes {0}'\
                 .format(strFunctions.wrap_token(attributes[0]['texname'],
-                                                self.package))
+                                                prefix))
             i = 1
             while i < num - 1:
                 required_statement += ', {0}'\
                     .format(strFunctions.wrap_token(attributes[i]['texname'],
-                                                    self.package))
+                                                    prefix))
                 i += 1
             required_statement += ' and {0}'\
                 .format(strFunctions.wrap_token(attributes[i]['texname'],
-                                                self.package))
+                                                prefix))
             return required_statement
 
     # parse the optional attribute sentence
     @staticmethod
     def parse_optional(self, attributes):
+        if global_variables.is_sbml:
+            prefix = self.package
+        else:
+            prefix = global_variables.language
+            metaid = {'name': 'metaid', 'type': 'string'}
+            attributes.append(metaid)
         for attrib in attributes:
             if 'texname' not in attrib or attrib['texname'] == 'RelAbsVector':
                 attrib['texname'] = attrib['name']
@@ -723,20 +769,20 @@ class ValidationRulesForClass():
         elif num == 1:
             return 'the optional attribute {0}' \
                 .format(strFunctions.wrap_token(attributes[0]['texname'],
-                                                self.package))
+                                                prefix))
         else:
             optional_statement = 'the optional attributes {0}' \
                 .format(strFunctions.wrap_token(attributes[0]['texname'],
-                                                self.package))
+                                                prefix))
             i = 1
             while i < num - 1:
                 optional_statement += ', {0}' \
                     .format(strFunctions.wrap_token(attributes[i]['texname'],
-                                                    self.package))
+                                                    prefix))
                 i += 1
             optional_statement += ' and {0}' \
                 .format(strFunctions.wrap_token(attributes[i]['texname'],
-                                                self.package))
+                                                prefix))
             return optional_statement
 
     # parse the required elements sentence

@@ -60,19 +60,32 @@ class BaseTexFile(BaseFile.BaseFile):
         self.comment = "%"
         self.line_length = 72
 
-        self.package = object_desc["name"]
-        self.fullname = object_desc["fullname"]
-        self.sbml_classes = object_desc["baseElements"]
-        self.offset = object_desc["offset"]
-        self.plugins = object_desc["plugins"]
-        self.enums = object_desc["enums"]
-        self.level = object_desc["base_level"]
-        self.version = object_desc["base_version"]
-        self.pkg_version = object_desc["pkg_version"]
-        if object_desc["required"]:
-            self.reqd_status = "true"
+        if global_variables.is_sbml:
+            self.package = object_desc["name"]
+            self.fullname = object_desc["fullname"]
+            self.sbml_classes = object_desc["baseElements"]
+            self.offset = object_desc["offset"]
+            self.plugins = object_desc["plugins"]
+            self.enums = object_desc["enums"]
+            self.level = object_desc["base_level"]
+            self.version = object_desc["base_version"]
+            self.pkg_version = object_desc["pkg_version"]
+            if object_desc["required"]:
+                self.reqd_status = "true"
+            else:
+                self.reqd_status = "false"
         else:
+            self.package = ''
+            self.fullname = global_variables.package_full_name
+            self.sbml_classes = object_desc["baseElements"]
+            self.offset = object_desc["offset"]
+            self.plugins = []
+            self.enums = object_desc["enums"]
+            self.level = object_desc["base_level"]
+            self.version = object_desc["base_version"]
+            self.pkg_version = 0
             self.reqd_status = "false"
+
 
         self.prim_class = []
 
@@ -86,7 +99,7 @@ class BaseTexFile(BaseFile.BaseFile):
         self.sort_attribute_names(self.sbml_classes)
         self.sort_enum_names(self.enums)
 
-        if global_variables.language == "sbml":
+        if global_variables.is_sbml:
             self.full_pkg_command = "\\{0}Package".format(self.fulltexname)
         else:
             self.full_pkg_command = "\\{0}".format(self.fulltexname)
