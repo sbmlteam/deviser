@@ -350,10 +350,17 @@ class ValidationRulesGeneral:
 
     @staticmethod
     def write_metaid_syntax_rule(self):
-        text = 'The value of a {0} must conform to the syntax of ' \
-               'the XML Type ID'\
-            .format(strFunctions.wrap_token('metaid', self.package))
-        ref = 'SBML Level~3 Version~1 Core, Section~3.1.6.'
+        if global_variables.is_sbml:
+            text = 'The value of a {0} must conform to the syntax of ' \
+                   'the XML Type ID'\
+                .format(strFunctions.wrap_token('metaid', self.package))
+            ref = 'SBML Level~3 Version~1 Core, Section~3.1.6.'
+        else:
+            text = 'The value of a {0} must conform to the syntax of ' \
+                   'the XML Type ID'\
+                .format(strFunctions.wrap_token('metaid', self.package))
+            ref = 'metaid'
+
         # ref = '{0} {1}.'\
         #     .format(self.pkg_ref,
         #             strFunctions.wrap_section('primitive-types', False))
