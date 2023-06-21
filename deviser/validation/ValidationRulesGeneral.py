@@ -432,7 +432,7 @@ class ValidationRulesGeneral:
             tc = '{0}RepeatAnnotationNS'.format(global_variables.prefix)
         else:
             text = 'A given {0} element may contain at most one \\{1} ' \
-                   'subobject.'.format(global_variables.up_full_lib, global_variables.annot_element)
+                   'subobject.'.format(global_variables.language.upper(), global_variables.annot_element)
             short = 'Only one {0}'.format(global_variables.annot_element)
             tc = '{0}OnlyOneAnnotation'.format(global_variables.prefix)
 
@@ -466,7 +466,7 @@ class ValidationRulesGeneral:
             tc = 'DOCTYPEInNotes'
         else:
             text = 'A given {0} element may contain at most one \\{1} ' \
-                   'subobject.'.format(global_variables.up_full_lib, 'Notes')
+                   'subobject.'.format(global_variables.language.upper(), 'Notes')
             short = 'Only one {0}'.format('Notes')
             tc = '{0}OnlyOneNotes'.format(global_variables.prefix)
 
