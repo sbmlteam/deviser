@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="tsb" fullname="Test SB XML Library" number="100" offset="100000" version="1" required="false">
+<package name="tsb" fullname="Test TSB XML Library" number="100" offset="0" version="1" required="false">
   <language name="TSB" baseClass="TSBBase" documentClass="TSBDocument" prefix="TSB" libraryName="libTSB" 
   annotationElementName="TestAnnotation" topLevelElementName="tsb" isPackage="false" uses_ASTNode="false" 
   uses_XMLNode="true">
