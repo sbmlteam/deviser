@@ -136,7 +136,7 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         :return:
         """
         self.write_text_line(
-            '\subsubsection*{0}General rules for \\token{0}{1}{2} elements{2}'.format('{', global_variables.annot_element, '}'))
+            '\subsubsection*{0}General rules for \\{1} elements{2}'.format('{', global_variables.annot_element, '}'))
         self.skip_line()
         for i in range(4, 7):
             self.write_rule(rules[i])
@@ -149,7 +149,7 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         :return:
         """
         self.write_text_line(
-            '\subsubsection*{General rules for \\token{notes} elements}')
+            '\subsubsection*{General rules for \\notes elements}')
         self.skip_line()
         for i in range(7, 11):
             self.write_rule(rules[i])
@@ -277,7 +277,8 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
 
                         rules.add_lo_rules()
                         self.write_rules_for_class(strFunctions.cap_list_of_name_no_prefix(att['name']),
-                                                   att['texname'], rules.rules)
+                                                   strFunctions.cap_list_of_name_no_prefix(att['texname']),
+                                                   rules.rules)
                         self.skip_line()
 
             number += 100

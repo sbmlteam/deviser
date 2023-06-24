@@ -126,8 +126,7 @@ class ValidationRulesForClass():
 
         for i in range(0, len(self.opt_child_lo_elem)):
             self.number += 1
-            rule = \
-                self.write_core_subobject_rule(self, self.opt_child_lo_elem[i])
+            rule = self.write_core_subobject_rule(self, self.opt_child_lo_elem[i])
             self.add_rule(rule)
 
         if len(self.reqd_child_lo_elem) > 0:
@@ -353,39 +352,77 @@ class ValidationRulesForClass():
     @staticmethod
     # write core attribute rule
     def write_core_attribute_rule(self, lo_child=None):
-        if lo_child is None:
-            text = '{0} {1} object may have the optional SBML Level~3 ' \
-                   'Core attributes {2} and {3}. No other attributes from the ' \
-                   'SBML Level~3 Core namespaces are permitted on {4} {1}.'\
-                .format(self.indef_u, self.formatted_name,
-                        strFunctions.wrap_token('metaid'),
-                        strFunctions.wrap_token('sboTerm'), self.indef)
-            ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
-            sev = 'ERROR'
-            lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
-            tc = '{0}{1}AllowedCoreAttributes'.format(self.up_package,
-                                                      self.name)
-            short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
-            lo = False
+        if global_variables.is_sbml:
+            if lo_child is None:
+                text = '{0} {1} object may have the optional SBML Level~3 ' \
+                       'Core attributes {2} and {3}. No other attributes from the ' \
+                       'SBML Level~3 Core namespaces are permitted on {4} {1}.'\
+                    .format(self.indef_u, self.formatted_name,
+                            strFunctions.wrap_token('metaid'),
+                            strFunctions.wrap_token('sboTerm'), self.indef)
+                ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
+                sev = 'ERROR'
+                lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
+                tc = '{0}{1}AllowedCoreAttributes'.format(self.up_package,
+                                                          self.name)
+                short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
+                lo = False
+            else:
+                loname = strFunctions.get_tex_element_name(lo_child, leave_pkg_prefix=False)
+                temp = strFunctions.remove_prefix(lo_child['element'])
+                lo_name = loname[7:] #strFunctions.plural(temp)
+                text = 'A {0} object may have the optional SBML Level~3 ' \
+                       'Core attributes {1} and {2}. No other attributes from the ' \
+                       'SBML Level~3 Core namespaces are permitted on a {0} object.'\
+                    .format(strFunctions.get_tex_element_name(lo_child, False),
+                            strFunctions.wrap_token('metaid'),
+                            strFunctions.wrap_token('sboTerm'))
+                sec_name = 'listof' + lo_name.lower()
+                ref = '{0}, {1}.'\
+                    .format(self.pkg_ref, strFunctions.wrap_section(sec_name))
+                sev = 'ERROR'
+                lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
+                tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
+                                                               self.name, lo_name)
+                lo = True
+                short = 'Core attributes allowed on <listOf{0}>.'.format(lo_name)
         else:
-            loname = strFunctions.get_tex_element_name(lo_child, leave_pkg_prefix=False)
-            temp = strFunctions.remove_prefix(lo_child['element'])
-            lo_name = loname[7:] #strFunctions.plural(temp)
-            text = 'A {0} object may have the optional SBML Level~3 ' \
-                   'Core attributes {1} and {2}. No other attributes from the ' \
-                   'SBML Level~3 Core namespaces are permitted on a {0} object.'\
-                .format(strFunctions.get_tex_element_name(lo_child, False),
-                        strFunctions.wrap_token('metaid'),
-                        strFunctions.wrap_token('sboTerm'))
-            sec_name = 'listof' + lo_name.lower()
-            ref = '{0}, {1}.'\
-                .format(self.pkg_ref, strFunctions.wrap_section(sec_name))
-            sev = 'ERROR'
-            lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
-            tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
-                                                           self.name, lo_name)
-            lo = True
-            short = 'Core attributes allowed on <listOf{0}>.'.format(lo_name)
+            if lo_child is None:
+                text = '{0} {1} object may have the optional SBML Level~3 ' \
+                       'Core attributes {2} and {3}. No other attributes from the ' \
+                       'SBML Level~3 Core namespaces are permitted on {4} {1}.'\
+                    .format(self.indef_u, self.formatted_name,
+                            strFunctions.wrap_token('metaid'),
+                            strFunctions.wrap_token('sboTerm'), self.indef)
+                ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
+                sev = 'ERROR'
+                lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
+                tc = '{0}{1}AllowedCoreAttributes'.format(self.up_package,
+                                                          self.name)
+                short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
+                lo = False
+            else:
+                loname = strFunctions.get_tex_element_name(lo_child, leave_pkg_prefix=False)
+                temp = strFunctions.remove_prefix(lo_child['element'])
+                lo_name = loname[7:] #strFunctions.plural(temp)
+                text = 'A {0} object may have the optional attribute {1}. No other attributes from the ' \
+                       '{2} Level~{3} Version~{4} namespaces are permitted on a {0} object.'\
+                    .format(strFunctions.get_tex_element_name(lo_child, False),
+                            strFunctions.wrap_token('metaid'),
+                            global_variables.language.upper(),
+                            global_variables.namespaces[0]['level'],
+                            global_variables.namespaces[0]['version']
+                            )
+                sec_name = 'listof' + lo_name.lower()
+                ref = '{0}, {1}.'\
+                    .format(self.pkg_ref, strFunctions.wrap_section(sec_name))
+                sev = 'ERROR'
+                lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
+                tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
+                                                               self.name, lo_name)
+                lo = True
+                short = 'Core attributes allowed on <listOf{0}>.'.format(lo_name)
+
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
@@ -396,36 +433,68 @@ class ValidationRulesForClass():
     # write core subobjects rule
     @staticmethod
     def write_core_subobject_rule(self, lo_child=None):
-        if lo_child is None:
-            text = '{0} {1} object may have the optional SBML Level~3 ' \
-                   'Core subobjects for notes and annotations. No other ' \
-                   'elements from the SBML Level~3 Core namespaces are ' \
-                   'permitted on {2} {1}.'\
-                .format(self.indef_u, self.formatted_name, self.indef)
-            ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
-            sev = 'ERROR'
-            lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
-            tc = '{0}{1}AllowedCoreElements'.format(self.up_package, self.name)
-            short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
-            lo = False
+        if global_variables.is_sbml:
+            if lo_child is None:
+                text = '{0} {1} object may have the optional SBML Level~3 ' \
+                       'Core subobjects for notes and annotations. No other ' \
+                       'elements from the SBML Level~3 Core namespaces are ' \
+                       'permitted on {2} {1}.'\
+                    .format(self.indef_u, self.formatted_name, self.indef)
+                ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
+                sev = 'ERROR'
+                lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
+                tc = '{0}{1}AllowedCoreElements'.format(self.up_package, self.name)
+                short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
+                lo = False
+            else:
+                loname = strFunctions.get_tex_element_name(lo_child, leave_pkg_prefix=False)
+                temp = strFunctions.remove_prefix(lo_child['element'])
+                lo_name = loname[7:] #strFunctions.plural(temp)
+                text = r'Apart from the general notes and annotations subobjects ' \
+                       r'permitted on all SBML objects, a {0} container object ' \
+                       r'may only contain \{1} objects.'\
+                    .format(loname, temp)
+                sec_name = 'listof' + lo_name.lower()
+                ref = '{0}, {1}.'\
+                    .format(self.pkg_ref, strFunctions.wrap_section(sec_name))
+                sev = 'ERROR'
+                lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
+                tc = '{0}{1}LO{2}AllowedCoreElements'.format(self.up_package, self.name,
+                                                         lo_name)
+                lo = True
+                short = 'Core elements allowed on <listOf{0}>.'.format(lo_name)
+            lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         else:
-            loname = strFunctions.get_tex_element_name(lo_child, leave_pkg_prefix=False)
-            temp = strFunctions.remove_prefix(lo_child['element'])
-            lo_name = loname[7:] #strFunctions.plural(temp)
-            text = r'Apart from the general notes and annotations subobjects ' \
-                   r'permitted on all SBML objects, a {0} container object ' \
-                   r'may only contain \{1} objects.'\
-                .format(loname, temp)
-            sec_name = 'listof' + lo_name.lower()
-            ref = '{0}, {1}.'\
-                .format(self.pkg_ref, strFunctions.wrap_section(sec_name))
-            sev = 'ERROR'
-            lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
-            tc = '{0}{1}LO{2}AllowedCoreElements'.format(self.up_package, self.name,
-                                                     lo_name)
-            lo = True
-            short = 'Core elements allowed on <listOf{0}>.'.format(lo_name)
-        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+            if lo_child is None:
+                text = '{0} {1} object may have the optional SBML Level~3 ' \
+                       'Core subobjects for notes and annotations. No other ' \
+                       'elements from the SBML Level~3 Core namespaces are ' \
+                       'permitted on {2} {1}.'\
+                    .format(self.indef_u, self.formatted_name, self.indef)
+                ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
+                sev = 'ERROR'
+                lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
+                tc = '{0}{1}AllowedCoreElements'.format(self.up_package, self.name)
+                short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
+                lo = False
+            else:
+                child = strFunctions.remove_prefix(lo_child['element'])
+                loname = strFunctions.list_of_name(child, False)
+                text = r'Apart from the general \notes and \{2} subobjects ' \
+                       r'permitted on all {3} objects, a \{0} container object ' \
+                       r'may only contain \{1} objects.' \
+                    .format(loname, child, global_variables.annot_element,
+                            global_variables.language.upper())
+                sec_name = loname.lower()
+                ref = '{0}, {1}.' \
+                    .format(self.pkg_ref, strFunctions.wrap_section(sec_name))
+                sev = 'ERROR'
+                lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
+                tc = '{0}{1}LO{2}AllowedCoreElements'.format(self.up_package, self.name, child)
+                lo = True
+                short = 'Core elements allowed on <listOf{0}>.'.format(child)
+            lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,

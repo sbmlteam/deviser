@@ -52,16 +52,16 @@ validation rules concern objects and attributes specifically defined in
 the \TestTSBXMLLibraryPackage package.
 
 For \notice convenience and brevity, we use the shorthand
-``\token{tsb:\-x}'' to stand for an attribute or element name \token{x}
-in the namespace for the \TestTSBXMLLibraryPackage package, using the
-namespace prefix \token{tsb}. In reality, the prefix string may be
-different from the literal ``\token{tsb}'' used here (and indeed, it can
-be any valid XML namespace prefix that the modeler or software chooses).
-We use ``\token{tsb:\-x}'' because it is shorter than to write a full
+``\token{:\-x}'' to stand for an attribute or element name \token{x} in
+the namespace for the \TestTSBXMLLibraryPackage package, using the
+namespace prefix \token{}. In reality, the prefix string may be
+different from the literal ``\token{}'' used here (and indeed, it can be
+any valid XML namespace prefix that the modeler or software chooses). We
+use ``\token{:\-x}'' because it is shorter than to write a full
 explanation everywhere we refer to an attribute or element in the
 \TestTSBXMLLibraryPackage namespace.
 
-\subsubsection*{General rules about this language.}
+\subsubsection*{General rules about this package}
 
 \validRule{tsb-10101}{To conform to the \TestTSBXMLLibrary specification
 for TSB Level~1 Version~1, an TSB document must declare
@@ -77,10 +77,8 @@ TSB XML Library, Version~1 \sec{xml-namespace}.)}
 
 \subsubsection*{General rules about identifiers}
 
-\validRule{tsb-10201}{The value of a \token{tsb:\-metaid} must conform
-to the syntax of the XML Type ID (Reference: )}
-
-
+\validRule{tsb-10201}{The value of a \token{metaid} must conform to the
+syntax of the XML Type ID (Reference: metaid)}
 
 \subsubsection*{General rules for \TestAnnotation elements}
 
@@ -114,8 +112,8 @@ XML DOCTYPE declaration, \ie a string beginning with the characters
 \val{<!DOCTYPE}. (Reference: TSB Level~1 Specification for Test TSB XML
 Library, Version~1 \sec{notes}.)}
 
-\validRule{tsb-10404}{A given TSB element may contain at most one
-\Notes subobject. (Reference: TSB Level~1 Specification for Test TSB XML
+\validRule{tsb-10404}{A given TSB element may contain at most one \Notes
+subobject. (Reference: TSB Level~1 Specification for Test TSB XML
 Library, Version~1 \sec{notes}.)}
 
 \subsubsection*{Rules for \class{TSBDocument} object}
@@ -134,37 +132,35 @@ other objects from the TSB Level~1 Version~1 namespaces are permitted on
 a \TSBDocument object. (Reference: TSB Level~1 Specification for Test
 TSB XML Library, Version~1, \sec{tsbdocument-class}.)}
 
-\validRule{tsb-20103}{The attribute \token{tsb:\-level} on a \TSBDocument
-must have a value of data type \token{integer}, and must be non
-negative. (Reference: TSB Level~1 Specification for TSB
-Library, Version~1, \sec{document-class}.)}
+\validRule{tsb-20103}{The attribute \token{level} on a \TSBDocument must
+have a value of data type \token{integer}, and must be non negative.
+(Reference: TSB Level~1 Specification for Test TSB XML Library,
+Version~1, \sec{tsbdocument-class}.)}
 
-\validRule{tsb-20104}{The attribute \token{tsb:\-version} on a \TSBDocument
+\validRule{tsb-20104}{The attribute \token{version} on a \TSBDocument
 must have a value of data type \token{integer}, and must be non
 negative. (Reference: TSB Level~1 Specification for Test TSB XML
-Library, Version~1, \sec{document-class}.)}
+Library, Version~1, \sec{tsbdocument-class}.)}
 
-\subsubsection*{Rules for \class{\ListOfComments} object}
 
-\validRule{tsb-20201}{Apart from the general notes and testAnnotations
+\subsubsection*{Rules for \class{ListOfComments} object}
+
+\validRule{tsb-20201}{Apart from the general \notes and \TestAnnotation
 subobjects permitted on all TSB objects, a \ListOfComments container
-object may only contain \Comment objects.  No other elements from the TSB
-Level~3 TSB Library namespaces are permitted on a \ListOfComments
-object.  
-(Reference: TSB Level~1
+object may only contain \Comment objects. (Reference: TSB Level~1
 Specification for Test TSB XML Library, Version~1,
 \sec{listofcomments-class}.)}
 
 \validRule{tsb-20202}{A \ListOfComments object may have the optional
- attribute \token{metaid}.  No other
- attributes from the TSB Level~1 Version~1 namespaces are
-a \ListOfComments object. (Reference: TSB Level~1 Specification for Test
-TSB XML Library, Version~1, \sec{listofcomments-class}.)}
+attribute \token{metaid}. No other attributes from the TSB Level~1
+Version~1 namespaces are permitted on a \ListOfComments object.
+(Reference: TSB Level~1 Specification for Test TSB XML Library,
+Version~1, \sec{listofcomments-class}.)}
 
 
 \subsubsection*{Rules for \class{Comment} object}
 
-\validRule{tsb-20201}{A \Comment object must have the required
+\validRule{tsb-20301}{A \Comment object must have the required
 attributes \token{tsb:\-contributor} and \token{tsb:\-number}, and may
 have the optional attributes \token{tsb:\-point} and
 \token{tsb:\-metaid}. No other attributes from the TSB Level~1 Version~1
@@ -172,17 +168,17 @@ namespaces are permitted on a \Comment object. (Reference: TSB Level~1
 Specification for Test TSB XML Library, Version~1,
 \sec{comment-class}.)}
 
-\validRule{tsb-20202}{The attribute \token{contributor} on a \Comment
+\validRule{tsb-20302}{The attribute \token{contributor} on a \Comment
 must have a value of data type \token{string}. (Reference: TSB Level~1
 Specification for Test TSB XML Library, Version~1,
 \sec{comment-class}.)}
 
-\validRule{tsb-20203}{The attribute \token{number} on a \Comment must
+\validRule{tsb-20303}{The attribute \token{number} on a \Comment must
 have a value of data type \token{double}. (Reference: TSB Level~1
 Specification for Test TSB XML Library, Version~1,
 \sec{comment-class}.)}
 
-\validRule{tsb-20204}{The attribute \token{point} on a \Comment must
+\validRule{tsb-20304}{The attribute \token{point} on a \Comment must
 have a value of data type \token{string}. (Reference: TSB Level~1
 Specification for Test TSB XML Library, Version~1,
 \sec{comment-class}.)}
