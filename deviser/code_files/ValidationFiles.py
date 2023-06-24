@@ -106,7 +106,8 @@ class ValidationFiles():
         rules = ValidationRulesGeneral\
             .ValidationRulesGeneral(self.fullname, number, self.package,
                                     self.pkg_ref, self.level, self.version,
-                                    self.pkg_version, self.reqd_status)
+                                    self.pkg_version, self.reqd_status,
+                                    global_variables.language)
         rules.determine_rules()
         self.class_rules += rules.rules
         if global_variables.is_package:

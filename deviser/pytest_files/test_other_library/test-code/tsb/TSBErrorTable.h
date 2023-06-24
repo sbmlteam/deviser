@@ -244,10 +244,9 @@ static const tsbErrorTableEntry tsbErrorTable[] =
     "The Tsb namespace is not correctly declared.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
-    "To conform to the Package specification for SBML Level 0 Version 1, an "
-    "SBML document must declare "
-    "'http://www.sbml.org/sbml/level0/version1/tsb/version0' as the "
-    "XMLNamespace to use for elements of this package.",
+    "To conform to the tsb specification for TSB Level 1 Version 1, an TSB "
+    "document must declare 'http://testsbxml.org/l1v1' as the XMLNamespace to "
+    "use for elements of this package.",
     { "L3V1 Tsb V1 Section 3.1"
     }
   },
@@ -446,20 +445,20 @@ static const tsbErrorTableEntry tsbErrorTable[] =
     }
   },
 
-  // 20303
+  // 20301
   { TsbCommentAllowedAttributes,
     "Attributes allowed on <comment>.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
     "A <comment> object must have the required attributes 'tsb:contributor' and "
-    "'tsb:number', and may have the optional attribute 'tsb:point'. No other "
-    "attributes from the SBML Level 3 Test SB XML Library namespaces are "
-    "permitted on a <comment> object. ",
+    "'tsb:number', and may have the optional attributes 'tsb:point' and "
+    "'tsb:metaid'. No other attributes from the TSB Level 1 Version 1 "
+    "namespaces are permitted on a <comment> object. ",
     { "L3V1 Tsb V1 Section"
     }
   },
 
-  // 20304
+  // 20302
   { TsbCommentContributorMustBeString,
     "The 'contributor' attribute must be String.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
@@ -470,7 +469,7 @@ static const tsbErrorTableEntry tsbErrorTable[] =
     }
   },
 
-  // 20305
+  // 20303
   { TsbCommentNumberMustBeDouble,
     "The 'number' attribute must be Double.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
@@ -481,7 +480,7 @@ static const tsbErrorTableEntry tsbErrorTable[] =
     }
   },
 
-  // 20306
+  // 20304
   { TsbCommentPointMustBeString,
     "The 'point' attribute must be String.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
