@@ -45,30 +45,29 @@ def teardown():
 #     ('combine-archive', 0, 'CaContent', 'check includes', 'CaListOfContents'),
 #     ('combine-archive', 1, 'CaOmexManifest', 'document', ''),
      ('testsbxml', 1, 'TSBComment', 'comment class', 'TSBListOfComments'),
-     ('testsbxml', 0, 'TSBDocument', 'document', ''),
- ])
+    ('testsbxml', 0, 'TSBDocument', 'document', ''),
+])
 def test_cpp(name, num, class_name, test_case, list_of):
     """
-    Based on old test_utils.run_templates() function. Run the 'template' file tests.
+    Based on old test_utils.run_templates() function. Run the 'template' file tests.#
 
     :param name: name of test group e.g. 'test_sedml', 'combine-archive'.
     :param class_name: name of C++ class (and thus .cpp/.h filenames),
-                 e.g. 'SedBase'
+                e.g. 'SedBase'
     :param test_case: brief test description, e.g. 'templates'.
     :param list_of: class name (and thus filenames) of any corresponding
-                 "list of" class, e.g. 'SedListOf'
+                "list of" class, e.g. 'SedListOf'
     """
-    # gv.reset()
-    # xml_filename = functions.set_up_test(name, class_name, test_case)
-    # assert xml_filename is not None and xml_filename != ""
-    # test_utils.generate_new_cpp_header(xml_filename, num)
-    # assert 0 == test_utils.compare_code_headers(class_name)
-    # assert 0 == test_utils.compare_code_impl(class_name)
-    # if len(list_of) > 0:
-    #     class_name = list_of
-    #     assert 0 == test_utils.compare_code_headers(class_name)
-    #     assert 0 == test_utils.compare_code_impl(class_name)
-    print('skip')
+    gv.reset()
+    xml_filename = functions.set_up_test(name, class_name, test_case)
+    assert xml_filename is not None and xml_filename != ""
+    test_utils.generate_new_cpp_header(xml_filename, num)
+    assert 0 == test_utils.compare_code_headers(class_name)
+    assert 0 == test_utils.compare_code_impl(class_name)
+    if len(list_of) > 0:
+       class_name = list_of
+       assert 0 == test_utils.compare_code_headers(class_name)
+       assert 0 == test_utils.compare_code_impl(class_name)
 
 
 @pytest.mark.parametrize('name, class_name, test_case, list_of', [
@@ -76,6 +75,15 @@ def test_cpp(name, num, class_name, test_case, list_of):
 #     ('test_sedml', 'SedBase', 'templates', 'SedListOf'),
 #     ('combine-archive', 'CaBase', 'templates', 'CaListOf'),
     ('testsbxml', 'TSBBase', 'templates', 'TSBListOf'),
+    ('testsbxml', 'TSBError', 'templates', ''),
+    ('testsbxml', 'TSBErrorTable', 'templates', ''),
+    ('testsbxml', 'TSBErrorLog', 'templates', ''),
+    ('testsbxml', 'TSBNamespaces', 'templates', ''),
+    ('testsbxml', 'TSBReader', 'templates', ''),
+    ('testsbxml', 'TSBVisitor', 'templates', ''),
+    ('testsbxml', 'TSBTypeCodes', 'templates', ''),
+    ('testsbxml', 'TSBTypes', 'templates', ''),
+    ('testsbxml', 'TSBWriter', 'templates', ''),
 ])
 def test_templates(name, class_name, test_case, list_of):
     """
@@ -93,7 +101,8 @@ def test_templates(name, class_name, test_case, list_of):
     assert xml_filename is not None and xml_filename != ""
     test_utils.generate_templates(xml_filename)
     assert 0 == test_utils.compare_code_headers(class_name)
-    assert 0 == test_utils.compare_code_impl(class_name)
+    if not class_name.endswith('ErrorTable') and not class_name.endswith('Types'):
+        assert 0 == test_utils.compare_code_impl(class_name)
     assert 0 == test_utils.compare_code_headers(list_of)
     assert 0 == test_utils.compare_code_impl(list_of)
 

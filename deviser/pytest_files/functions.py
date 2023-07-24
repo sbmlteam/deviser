@@ -82,8 +82,6 @@ def compare_files(infile, outfile, fails, not_tested):
     :returns: 0 on success, or file not present; 1 on failure.
     """
     ret = 0
-    if infile.endswith('ErrorTable.cpp'):
-        return 0
     if not os.path.isfile(infile):
         # we have not added a file to compare to
         not_tested.append(infile)
