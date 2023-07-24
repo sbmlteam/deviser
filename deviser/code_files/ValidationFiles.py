@@ -454,6 +454,8 @@ class ValidationFiles():
         # we dont want to lower the s of SBase
         # or name if it starts with the prefix for the language
         isSBase = False
+        is_language_prefix = False
+        num_letters = 0
         while in_name and i < length:
             letter = text_string[i]
             if i != length-1:
@@ -461,12 +463,21 @@ class ValidationFiles():
             else:
                 next_letter = ' '
             if letter == '\\':
-                isSBase = self.is_sbase(text_string, i, next_letter)
+                if global_variables.is_sbml:
+                    isSBase = self.is_sbase(text_string, i, next_letter)
+                else:
+                    [is_language_prefix, num_letters] = self.is_language_prefix(text_string, i, next_letter)
                 if isSBase:
                     return_name_rep += '\'S'
+                    i += 1
+                elif is_language_prefix:
+                    return_name_rep += '<'
+                    for j in range(0, num_letters):
+                        return_name_rep += '{0}'.format(text_string[i + j + 1].upper())
+                    i += num_letters
                 else:
                     return_name_rep += '<{0}'.format(next_letter.lower())
-                i += 1
+                    i += 1
             elif next_letter == ' ' or next_letter == '.':
                 if isSBase:
                     return_name_rep += '{0}\''.format(letter)
@@ -479,7 +490,19 @@ class ValidationFiles():
             continue
         return [i-1, return_name_rep]
 
-    def is_sbase(self, text, index, next_letter):
+    def is_language_prefix(self, text, index, next_letter):
+        prefix = global_variables.language.upper()
+        if not prefix.startswith(next_letter):
+            return [False, 0]
+        length_prefix = len(prefix)
+        match = True
+        for i in range(0, length_prefix):
+            if prefix[i] != text[index + i + 1]:
+                match = False
+        return [match, length_prefix]
+
+    @staticmethod
+    def is_sbase(text, index, next_letter):
         if len(text) < index + 7:
             return False
         if next_letter == 'S' or next_letter == 's':
