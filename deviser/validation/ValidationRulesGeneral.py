@@ -69,6 +69,13 @@ class ValidationRulesGeneral:
 
         self.rules = []
         self.tc = 'TBC'
+        # constants for rules
+        if global_variables.is_sbml:
+            self.lib_ref = 'L3V1 {0} V1 Section 3.1'.format(self.up_package)
+            self.up_package = strFunctions.upper_first(self.package)
+        else:
+            self.lib_ref = '{0} L{1}V{2} Section '.format(self.up_package.upper(), self.level, self.version)
+            self.up_package = self.package.upper()
 
     ########################################################################
 
@@ -184,16 +191,15 @@ class ValidationRulesGeneral:
     # write rule about ns
     @staticmethod
     def write_unknown_rule(self):
-        text = 'Unknown error from {0}'.format(self.up_package)
+        text = 'Unknown error from {0}'.format(self.up_package.upper())
         ref = ''
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
-        short = 'Unknown error from {0}'.format(self.up_package)
-        lib_ref = ''
+        short = 'Unknown error from {0}'.format(self.up_package.upper())*10
         tc = global_variables.unknown_error
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     # write rules about ns
     @staticmethod
@@ -223,11 +229,11 @@ class ValidationRulesGeneral:
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'The {0} namespace is not correctly ' \
                 'declared.'.format(self.up_package)
-        lib_ref = 'L3V1 {0} V1 Section 3.1'.format(self.up_package)
+
         tc = '{0}NSUndeclared'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     @staticmethod
     def write_element_not_ns_rule(self):
@@ -253,11 +259,10 @@ class ValidationRulesGeneral:
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Element not in {0} namespace'.format(self.up_package)
-        lib_ref = 'L3V1 {0} V1 Section 3.1'.format(self.up_package)
         tc = '{0}ElementNotInNs'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     @staticmethod
     def write_id_rule(self):
@@ -270,11 +275,10 @@ class ValidationRulesGeneral:
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Duplicate \'id\' attribute value'
-        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}DuplicateComponentId'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     @staticmethod
     def write_id_syntax_rule(self):
@@ -289,11 +293,10 @@ class ValidationRulesGeneral:
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Invalid SId syntax'.format(self.up_package)
-        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}IdSyntaxRule'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     @staticmethod
     def write_reqd_rule(self):
@@ -306,11 +309,10 @@ class ValidationRulesGeneral:
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Required {0}:required attribute on <sbml>'.format(self.package)
-        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}AttributeRequiredMissing'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     @staticmethod
     def write_reqd_bool_rule(self):
@@ -323,11 +325,10 @@ class ValidationRulesGeneral:
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'The {0}:required attribute must be Boolean' \
                 ''.format(self.package)
-        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}AttributeRequiredMustBeBoolean'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     @staticmethod
     def write_reqd_value_rule(self):
@@ -342,11 +343,10 @@ class ValidationRulesGeneral:
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'The {0}:required attribute must be \'{1}\'' \
                 ''.format(self.package, self.reqd_status)
-        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}AttributeRequiredMustHaveValue'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     @staticmethod
     def write_metaid_syntax_rule(self):
@@ -367,11 +367,10 @@ class ValidationRulesGeneral:
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Invalid SId syntax'.format(self.up_package)
-        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}InvalidMetaidSyntax'.format(global_variables.prefix)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     @staticmethod
     def write_valid_ns_rule(self):
@@ -382,11 +381,10 @@ class ValidationRulesGeneral:
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Invalid namespace'.format(self.up_package)
-        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = 'InvalidNamespaceOn{0}'.format(global_variables.prefix)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     @staticmethod
     def write_allowed_attributes_rule(self):
@@ -397,11 +395,10 @@ class ValidationRulesGeneral:
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Allowed attributes'.format(self.up_package)
-        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = 'AllowedAttributes'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     @staticmethod
     def write_empty_list_rule(self):
@@ -412,11 +409,10 @@ class ValidationRulesGeneral:
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'No empty listOf'.format(self.up_package)
-        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}EmptyListElement'.format(global_variables.prefix)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     @staticmethod
     def write_annotation_rule(self, num):
@@ -441,10 +437,9 @@ class ValidationRulesGeneral:
                     strFunctions.wrap_section('annotation-use', False))
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
-        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     @staticmethod
     def write_notes_rule(self, num):
@@ -469,14 +464,11 @@ class ValidationRulesGeneral:
                    'subobject.'.format(global_variables.language.upper(), 'Notes')
             short = 'Only one {0}'.format('Notes')
             tc = '{0}OnlyOneNotes'.format(global_variables.prefix)
-
-
         ref = '{0} {1}.' \
             .format(self.pkg_ref,
                     strFunctions.wrap_section('notes', False))
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
-        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})

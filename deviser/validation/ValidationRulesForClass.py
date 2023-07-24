@@ -41,7 +41,7 @@
 from ..util import strFunctions, query, global_variables
 
 
-class ValidationRulesForClass():
+class ValidationRulesForClass:
     """Class for creating the validation rules for an object"""
 
     def __init__(self, object_desc, spec_name, number, package, pkg_ref):
@@ -53,7 +53,8 @@ class ValidationRulesForClass():
         self.number = number
         self.package = package.lower() 
         self.pkg_ref = pkg_ref
-        self.up_package = strFunctions.upper_first(self.package)
+        self.level = object_desc['root']['base_level']
+        self.version = object_desc['root']['base_version']
 
         # useful repeated text strings
         self.valid = '\\validRule{'
@@ -82,6 +83,14 @@ class ValidationRulesForClass():
         self.parse_elements(self, object_desc['attribs'], object_desc['root'])
         self.rules = []
         self.tc = 'TBC'
+        # constants for rules
+        if global_variables.is_sbml:
+            self.up_package = strFunctions.upper_first(self.package)
+            self.lib_ref = 'L3V1 {0} V1 Section 3.1'.format(self.up_package)
+        else:
+            self.up_package = self.package.upper()
+            self.lib_ref = '{0} L{1}V{2} Section '.format(self.up_package, self.level, self.version)
+
 
     ########################################################################
 
@@ -185,9 +194,9 @@ class ValidationRulesForClass():
                 self.write_lochild_attribute_rule(self.lo_reqd_att[i], lo_info)
             self.add_rule(rule)
             if rule and 'attributes' in lo_info[0]:
-                for i in range(0, len(lo_info[0]['attributes'])):
+                for j in range(0, len(lo_info[0]['attributes'])):
                     self.number += 1
-                    rule = self.write_attribute_type_rule(self, lo_info[0]['attributes'][i], lo_info[0])
+                    rule = self.write_attribute_type_rule(self, lo_info[0]['attributes'][j], lo_info[0])
                     self.add_rule(rule)
 
         lo_info = []
@@ -197,9 +206,9 @@ class ValidationRulesForClass():
                 self.write_lochild_attribute_rule(self.lo_opt_att[i], lo_info)
             self.add_rule(rule)
             if rule and 'attributes' in lo_info[0]:
-                for i in range(0, len(lo_info[0]['attributes'])):
+                for j in range(0, len(lo_info[0]['attributes'])):
                     self.number += 1
-                    rule = self.write_attribute_type_rule(self, lo_info[0]['attributes'][i], lo_info[0])
+                    rule = self.write_attribute_type_rule(self, lo_info[0]['attributes'][j], lo_info[0])
                     self.add_rule(rule)
 
     def add_rule(self, rule):
@@ -225,7 +234,7 @@ class ValidationRulesForClass():
             refname = self.name
             abbrev = self.name
         att_type = attribute['type']
-        [att_name_no_hyphen, unused] = strFunctions.remove_hyphens(attribute['name'])
+        [att_name_no_hyphen, __] = strFunctions.remove_hyphens(attribute['name'])
         att_name = strFunctions.upper_first(att_name_no_hyphen)
         name = strFunctions.wrap_token(attribute['texname'], self.package)
         rule_type = 'String'
@@ -345,7 +354,7 @@ class ValidationRulesForClass():
                                          rule_type)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref,
                      'object': refname, 'attrib': att_name,
                      'attrib_type': att_type})
 
@@ -426,7 +435,7 @@ class ValidationRulesForClass():
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref,
                      'plugin': False, 'object': self.name, 'lo': lo,
                      'reqd': self.reqd_elem, 'opt': self.opt_elem})
 
@@ -497,7 +506,7 @@ class ValidationRulesForClass():
 
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref,
                      'plugin': False, 'object': self.name, 'lo': lo,
                      'reqd': self.reqd_elem, 'opt': self.opt_elem})
 
@@ -538,7 +547,7 @@ class ValidationRulesForClass():
         tc = '{0}{1}AllowedAttributes'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref,
                      'plugin': False, 'object': self.name, 'lo': False,
                      'reqd': self.reqd_att, 'opt': self.opt_att})
 
@@ -594,7 +603,7 @@ class ValidationRulesForClass():
         tc = '{0}{1}AllowedElements'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref,
                      'plugin': False, 'object': self.name,
                      'reqd': self.reqd_elem, 'opt': self.opt_elem})
 
@@ -657,7 +666,7 @@ class ValidationRulesForClass():
                                                    strFunctions.plural(name))
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref,
                      'plugin': False, 'object': self.name, 'lo': True,
                      'reqd': child_reqd, 'opt': child_opt,
                      'lo_object': lo_info[0]['name']})
@@ -722,7 +731,7 @@ class ValidationRulesForClass():
             tc = '{0}{1}EmptyLOElements'.format(self.up_package, self.name, )
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref,
                      'plugin': False, 'object': self.name,
                      'lo_object': self.opt_child_lo_elem})
 
@@ -783,7 +792,7 @@ class ValidationRulesForClass():
             tc = '{0}{1}EmptyReqdLOElements'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': self.lib_ref})
 
     #########################################################################
 

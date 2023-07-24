@@ -110,10 +110,11 @@ class ValidationFiles():
                                     global_variables.language)
         rules.determine_rules()
         self.class_rules += rules.rules
-        if global_variables.is_package:
-            number = self.offset + 20200
-        else:
-            number = 20200
+        number = self.offset + 20200 if global_variables.is_sbml else 20100
+#        if global_variables.is_package:
+#            number = self.offset + 20200
+#        else:
+#            number = 20200
         for i in range(0, len(self.plugins)):
             rules = ValidationRulesForPlugin.ValidationRulesForPlugin(
                 self.plugins[i], self.fullname, number,
@@ -131,6 +132,15 @@ class ValidationFiles():
                                          self.pkg_ref)
             rules.determine_rules()
             self.class_rules += rules.rules
+            if not global_variables.is_sbml:
+                for att in self.sbml_classes[i]['attribs']:
+                    if att['type'] == 'lo_element':
+                        rules.rules = []
+                        number += 100
+                        rules.number = number
+                        rules.add_lo_rules()
+                        self.class_rules += rules.rules
+
             number += 100
         self.populate_error_list()
 
@@ -438,10 +448,12 @@ class ValidationFiles():
             is_package = True
         return [is_package, len_word]
 
-    @staticmethod
-    def replace_name(i, text_string, length):
+    def replace_name(self, i, text_string, length):
         in_name = True
         return_name_rep = ''
+        # we dont want to lower the s of SBase
+        # or name if it starts with the prefix for the language
+        isSBase = False
         while in_name and i < length:
             letter = text_string[i]
             if i != length-1:
@@ -449,12 +461,7 @@ class ValidationFiles():
             else:
                 next_letter = ' '
             if letter == '\\':
-                isSBase = False
-                # we dont want to lower the s of SBase
-                if next_letter == 'S' or next_letter == 's':
-                    test_str = text_string[i+1:i+7]
-                    if test_str.lower() == 'sbase ':
-                        isSBase = True
+                isSBase = self.is_sbase(text_string, i, next_letter)
                 if isSBase:
                     return_name_rep += '\'S'
                 else:
@@ -471,6 +478,15 @@ class ValidationFiles():
             i += 1
             continue
         return [i-1, return_name_rep]
+
+    def is_sbase(self, text, index, next_letter):
+        if len(text) < index + 7:
+            return False
+        if next_letter == 'S' or next_letter == 's':
+            test_str = text[index + 1:index + 7]
+            if test_str.lower() == 'sbase ':
+                return True
+        return False
 
     @staticmethod
     def replace_uri(i, text_string, length):
