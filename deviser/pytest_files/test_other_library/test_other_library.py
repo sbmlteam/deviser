@@ -107,37 +107,37 @@ def test_templates(name, class_name, test_case, list_of):
     assert 0 == test_utils.compare_code_impl(list_of)
 
 
-# @pytest.mark.parametrize('name, class_name, test_case, prefix, lib', [
+@pytest.mark.parametrize('name, class_name, test_case, prefix, lib', [
 #     ('test_sedml', 'SedBase', 'common', 'Sed', 'sedml'),
 #     ('combine-archive', 'CaBase', 'common', 'Ca', 'combine'),
-# #    ('testsbxml', 'TSBBase', 'common', 'TSB', 'libTSB'),
-# ])
-# def test_common_templates(name, class_name, test_case, prefix, lib):
-#     """
-#     Based on test_utils.test_common_templates() function.
-#     Compare 'common' template files.
-#
-#     :param name: e.g. 'test_sedml'
-#     :param class_name: C++ class/filenames, e.g. 'SedBase'
-#     :param test_case: e.g. 'common'
-#     :param prefix: e.g. 'Sed'
-#     :param lib: used for comparing lib files, e.g. 'sedml' for 'libsedml-*'.
-#     :return: number of failed tests.
-#     """
-#     gv.reset()
-#     xml_filename = functions.set_up_test(name, class_name, test_case)
-#     test_utils.generate_common_templates(xml_filename)
-#     assert 0 == test_utils.compare_code_headers('common')
-#     assert 0 == test_utils.compare_code_headers('extern')
-#     assert 0 == test_utils.compare_code_headers('lib{0}-config'.format(lib))
-#     assert 0 == test_utils.compare_code_impl('lib{0}-version'.format(lib))
-#     assert 0 == test_utils.compare_code_headers('{0}OperationReturnValues'.
-#                                                 format(prefix))
-#     assert 0 == test_utils.compare_code_impl('{0}OperationReturnValues'.
-#                                              format(prefix))
-#     assert 0 == test_utils.compare_code_cmake('lib{0}-version.h'.format(lib))
-#     assert 0 == test_utils.compare_code_cmake('lib{0}-config-common.h'.format(lib))
-#     assert 0 == test_utils.compare_code_cmake('lib{0}-namespace.h'.format(lib))
+    ('testsbxml', 'TSBBase', 'common', 'TSB', 'tsb'),
+])
+def test_common_templates(name, class_name, test_case, prefix, lib):
+    """
+    Based on test_utils.test_common_templates() function.
+    Compare 'common' template files.
+
+    :param name: e.g. 'test_sedml'
+    :param class_name: C++ class/filenames, e.g. 'SedBase'
+    :param test_case: e.g. 'common'
+    :param prefix: e.g. 'Sed'
+    :param lib: used for comparing lib files, e.g. 'sedml' for 'libsedml-*'.
+    :return: number of failed tests.
+    """
+    gv.reset()
+    xml_filename = functions.set_up_test(name, class_name, test_case)
+    test_utils.generate_common_templates(xml_filename)
+    assert 0 == test_utils.compare_code_headers('common')
+    assert 0 == test_utils.compare_code_headers('extern')
+    assert 0 == test_utils.compare_code_headers('lib{0}-config'.format(lib))
+    assert 0 == test_utils.compare_code_impl('lib{0}-version'.format(lib))
+    assert 0 == test_utils.compare_code_headers('{0}OperationReturnValues'.
+                                                format(prefix))
+    assert 0 == test_utils.compare_code_impl('{0}OperationReturnValues'.
+                                             format(prefix))
+    assert 0 == test_utils.compare_code_cmake('lib{0}-version.h'.format(lib))
+    assert 0 == test_utils.compare_code_cmake('lib{0}-config-common.h'.format(lib))
+    assert 0 == test_utils.compare_code_cmake('lib{0}-namespace.h'.format(lib))
 #
 #
 # @pytest.mark.parametrize('name, class_name, test_case', [
@@ -204,28 +204,28 @@ def test_templates(name, class_name, test_case, list_of):
 #                                                     binding, "")
 #
 #
-# @pytest.mark.parametrize('name, class_name', [
+@pytest.mark.parametrize('name, class_name', [
 # #    ('test_sedml', 'libsedml'),
 #     ('combine-archive', 'libcombine'),
-#     ('testsbxml', 'libTSB')
-# ])
-# def test_cmake(name, class_name):
-#     """
-#     Based on old test_cmake() function in run_other_library_tests.py
-#     Generate and compare CMake files.
-#
-#     TODO the following need more details:
-#
-#     :param name: name of test, e.g. 'test_sedml' or 'combine-archive'.
-#     :param class_name:   e.g. 'libsedml' or 'libcombine'
-#     """
-#     gv.reset()
-#     xml_filename = functions.set_up_test(name, class_name, "cmake")
-#     test_utils.generate_cmake(xml_filename, "cmake")
-#     assert 0 == test_utils.compare_cmake_file('')
-#     assert 0 == test_utils.compare_cmake_file('src')
-#     assert 0 == test_utils.compare_cmake_file('src/bindings')
-#     assert 0 == test_utils.compare_cmake_file('src/{0}'.format(gv.language))
+     ('testsbxml', 'libTSB')
+])
+def test_cmake(name, class_name):
+    """
+    Based on old test_cmake() function in run_other_library_tests.py
+    Generate and compare CMake files.
+
+    TODO the following need more details:
+
+    :param name: name of test, e.g. 'test_sedml' or 'combine-archive'.
+    :param class_name:   e.g. 'libsedml' or 'libcombine'
+    """
+    gv.reset()
+    xml_filename = functions.set_up_test(name, class_name, "cmake")
+    test_utils.generate_cmake(xml_filename, "cmake")
+    assert 0 == test_utils.compare_cmake_file('')
+    assert 0 == test_utils.compare_cmake_file('src')
+    assert 0 == test_utils.compare_cmake_file('src/bindings')
+    assert 0 == test_utils.compare_cmake_file('src/{0}'.format(gv.language))
 #
 #
 # @pytest.mark.parametrize('name, class_name, test_case', [
