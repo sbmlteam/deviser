@@ -246,20 +246,20 @@ def test_global(name, class_name, test_case):
     assert 0 == test_utils.compare_code_txt('README', '.md')
 
 
-# @pytest.mark.parametrize('name, class_name, test_case', [
-#     ('test_sedml', 'sedmlfwd', 'forward declarations'),
-# ])
-# def test_forward(name, class_name, test_case):
-#     """
-#     Based on old run_forward() function.
-#     Run 'forward declaration' tests.
-#
-#     :param name: stub of XML filename, e.g. 'test_sedml'
-#                  for file test_sedml.xml.
-#     :param class_name: test class, e.g. 'sedmlfwd'
-#     :param test_case: brief test description, e.g. 'forward declarations'
-#     """
-#     gv.reset()
-#     xml_filename = functions.set_up_test(name, class_name, test_case)
-#     test_utils.generate_forward(xml_filename)
-#     assert 0 == test_utils.compare_code_headers(class_name)
+@pytest.mark.parametrize('name, class_name, test_case', [
+    ('testsbxml', 'tsbfwd', 'forward declarations'),
+])
+def test_forward(name, class_name, test_case):
+    """
+    Based on old run_forward() function.
+    Run 'forward declaration' tests.
+
+    :param name: stub of XML filename, e.g. 'test_sedml'
+                 for file test_sedml.xml.
+    :param class_name: test class, e.g. 'sedmlfwd'
+    :param test_case: brief test description, e.g. 'forward declarations'
+    """
+    gv.reset()
+    xml_filename = functions.set_up_test(name, class_name, test_case)
+    test_utils.generate_forward(xml_filename)
+    assert 0 == test_utils.compare_code_headers(class_name)
