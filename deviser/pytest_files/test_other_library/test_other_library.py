@@ -226,26 +226,26 @@ def test_cmake(name, class_name):
     assert 0 == test_utils.compare_cmake_file('src')
     assert 0 == test_utils.compare_cmake_file('src/bindings')
     assert 0 == test_utils.compare_cmake_file('src/{0}'.format(gv.language))
-#
-#
-# @pytest.mark.parametrize('name, class_name, test_case', [
-#     ('test_sedml', 'libsedml', 'global files'),
-# ])
-# def test_global(name, class_name, test_case):
-#     """
-#     Based on old test_utils.test_global() function.
-#     Generate and compare 'global' files, e.g. VERSION.txt, README.md.
-#
-#     :param name: test file stub, e.g. 'test_sedml' for test_sedml.xml
-#     :param class_name: test class e.g. 'libsedml'
-#     :param test_case: brief description of test, e.g. 'global files'
-#     """
-#     xml_filename = functions.set_up_test(name, class_name, test_case)
-#     test_utils.generate_global(xml_filename)
-#     assert 0 == test_utils.compare_code_txt('VERSION')
-#     assert 0 == test_utils.compare_code_txt('README', '.md')
-#
-#
+
+
+@pytest.mark.parametrize('name, class_name, test_case', [
+    ('testsbxml', 'libTSB', 'global files'),
+])
+def test_global(name, class_name, test_case):
+    """
+    Based on old test_utils.test_global() function.
+    Generate and compare 'global' files, e.g. VERSION.txt, README.md.
+
+    :param name: test file stub, e.g. 'test_sedml' for test_sedml.xml
+    :param class_name: test class e.g. 'libsedml'
+    :param test_case: brief description of test, e.g. 'global files'
+    """
+    xml_filename = functions.set_up_test(name, class_name, test_case)
+    test_utils.generate_global(xml_filename)
+    assert 0 == test_utils.compare_code_txt('VERSION')
+    assert 0 == test_utils.compare_code_txt('README', '.md')
+
+
 # @pytest.mark.parametrize('name, class_name, test_case', [
 #     ('test_sedml', 'sedmlfwd', 'forward declarations'),
 # ])
