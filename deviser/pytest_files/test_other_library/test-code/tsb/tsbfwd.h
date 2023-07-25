@@ -61,22 +61,20 @@
 LIBTSB_CPP_NAMESPACE_BEGIN
 
 
-typedef CLASS_OR_STRUCT TSBDocument   TSBDocument_t;
-typedef CLASS_OR_STRUCT TSBComment    TSBComment_t;
-typedef CLASS_OR_STRUCT TSBBase       TSBBase_t;
-typedef CLASS_OR_STRUCT TSBListOf     TSBListOf_t;
-typedef CLASS_OR_STRUCT TSBReader     TSBReader_t;
-typedef CLASS_OR_STRUCT TSBWriter     TSBWriter_t;
-typedef CLASS_OR_STRUCT TSBNamespaces TSBNamespaces_t;
-typedef CLASS_OR_STRUCT TSBError      TSBError_t;
-typedef CLASS_OR_STRUCT List                      List_t;
-typedef CLASS_OR_STRUCT ListNode                  ListNode_t;
-typedef CLASS_OR_STRUCT ExpectedAttributes    ExpectedAttributes_t;
-
+typedef CLASS_OR_STRUCT TSBDocument        TSBDocument_t;
+typedef CLASS_OR_STRUCT TSBComment         TSBComment_t;
+typedef CLASS_OR_STRUCT TSBBase            TSBBase_t;
+typedef CLASS_OR_STRUCT TSBListOf          TSBListOf_t;
+typedef CLASS_OR_STRUCT TSBReader          TSBReader_t;
+typedef CLASS_OR_STRUCT TSBWriter          TSBWriter_t;
+typedef CLASS_OR_STRUCT TSBNamespaces      TSBNamespaces_t;
+typedef CLASS_OR_STRUCT TSBError           TSBError_t;
+typedef CLASS_OR_STRUCT List               List_t;
+typedef CLASS_OR_STRUCT ListNode           ListNode_t;
+typedef CLASS_OR_STRUCT ExpectedAttributes ExpectedAttributes_t;
 
 
 LIBTSB_CPP_NAMESPACE_END
-
 
 
 #undef CLASS_OR_STRUCT

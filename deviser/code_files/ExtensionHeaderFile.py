@@ -419,6 +419,10 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
             prefixed_name = '{0}{1}'.format(global_variables.prefix, name)
             new_element = dict({'name': prefixed_name})
             elements.append(new_element)
+        others = ['List', 'ListNode', 'ExpectedAttributes']
+        for name in others:
+            new_element = dict({'name': name})
+            elements.append(new_element)
         self.write_classes(elements)
         new_length = len(elements)
         for i in range(new_length, no_elements, -1):
@@ -483,7 +487,8 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         self.write_cppns_end()
         # if we are in another library and using either ASTNode or XMLNode
         # we need to declare these here
-        if global_variables.uses_ASTNode or global_variables.uses_XMLNode:
+        # don't need xmlnode for now
+        if global_variables.uses_ASTNode:
             self.write_libsbml_fwd()
         self.write_end_class_or_struct()
         self.write_defn_end()
