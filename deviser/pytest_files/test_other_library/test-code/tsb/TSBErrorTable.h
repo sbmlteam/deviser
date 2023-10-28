@@ -115,380 +115,236 @@ static const tsbErrorTableEntry tsbErrorTable[] =
     }
   },
 
-  //10201
-  {
-    TSBInvalidMathElement,
-    "Invalid MathML",
-    LIBTSB_CAT_MATHML_CONSISTENCY,
-    LIBTSB_SEV_ERROR,
-    "All MathML content in TSB must appear within a <math> element, and the "
-    "<math> element must be either explicitly or implicitly in the XML "
-    "namespace \"http://www.w3.org/1998/Math/MathML\".",
-    {""
-    }
-  },
-
-  //10401
-  {
-    TSBMissingTestAnnotationNamespace,
-    "Missing declaration of the XML namespace for the annotation",
-    LIBTSB_CAT_TSB,
-    LIBTSB_SEV_ERROR,
-    "Every top-level element within an annotation element must "
-    "have a namespace declared.",
-    {""
-    }
-  },
-
-  //10402
-  {
-    TSBDuplicateTestAnnotationNamespaces,
-    "Multiple annotations using the same XML namespace",
-    LIBTSB_CAT_TSB,
-    LIBTSB_SEV_ERROR,
-    "There cannot be more than one top-level element using a "
-    "given namespace inside a given annotation element. ", 
-    {""
-    }
-  },
-
-  //10403
-  {
-    TSBNamespaceInTestAnnotation,
-    "The TSB XML namespace cannot be used in an TestAnnotation object",
-    LIBTSB_CAT_TSB,
-    LIBTSB_SEV_ERROR,
-    "Top-level elements within an annotation element cannot use any TSB "
-    "namespace, whether explicitly or implicitly (by failing "
-    "to declare any namespace).",
-    {""
-    }
-  },
-
-  //10404
-  {
-    TSBMultipleTestAnnotations,
-    "Only one TestAnnotation object is permitted under a given TSB object",
-    LIBTSB_CAT_TSB,
-    LIBTSB_SEV_ERROR,
-    "A given TSB object may contain at most one <annotation> element.",
-    {""
-    }
-  },
-
-  //10801
-  {
-    TSBNotesNotInXHTMLNamespace,
-    "Notes must be placed in the XHTML XML namespace",
-    LIBTSB_CAT_TSB,
-    LIBTSB_SEV_ERROR,
-    "The contents of the <notes> element must be explicitly placed in the "
-    "XHTML XML namespace.", 
-    {""
-    }
-  },
-
-  //10802
-  {
-    TSBNotesContainsXMLDecl,
-    "XML declarations are not permitted in Notes objects",
-    LIBTSB_CAT_TSB,
-    LIBTSB_SEV_ERROR,
-    "The contents of the <notes> element must not contain an XML declaration "
-    "(i.e., a string of the form \"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\" "
-    "or similar).",
-    {""
-    }
-  },
-
-  //10803
-  {
-    TSBNotesContainsDOCTYPE,
-    "XML DOCTYPE elements are not permitted in Notes objects",
-    LIBTSB_CAT_TSB,
-    LIBTSB_SEV_ERROR,
-    "The contents of the <notes> element must not contain an XML DOCTYPE "
-    "declaration (i.e., a string beginning with the characters \"<!DOCTYPE\". ",
-    {""
-    }
-  },
-
-  //10804
-  {
-    TSBInvalidNotesContent,
-    "Invalid notes content",
-    LIBTSB_CAT_TSB,
-    LIBTSB_SEV_ERROR,
-    "Invalid contents in a <notes> element. ",
-    {""
-    }
-  },
-
-  //10805
-  {
-    TSBOnlyOneNotesElementAllowed,
-    "Only one Notes subobject is permitted on a given TSB object",
-    LIBTSB_CAT_TSB,
-    LIBTSB_SEV_ERROR,
-    "A given TSB object may contain at most one <notes> element. ",
-    {""
-    }
-  },
-
   /* --------------------------------------------------------------------------
    * Boundary marker.  TSB specific errors.
    * ----------------------------------------------------------------------- */
 
   // 10101
-  { TsbNSUndeclared,
-    "The Tsb namespace is not correctly declared.",
+  { TSBNSUndeclared,
+    "The TSB namespace is not correctly declared.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
-    "To conform to the Package specification for SBML Level 0 Version 1, an "
-    "SBML document must declare "
-    "'http://www.sbml.org/sbml/level0/version1/tsb/version0' as the "
-    "XMLNamespace to use for elements of this package.",
-    { "L3V1 Tsb V1 Section 3.1"
+    "To conform to the tsb specification for TSB Level 1 Version 1, an TSB "
+    "document must declare 'http://testsbxml.org/l1v1' as the XMLNamespace to "
+    "use for elements of this package.",
+    { "TSB L1V1 Section "
     }
   },
 
   // 10102
-  { TsbElementNotInNs,
-    "Element not in Tsb namespace",
+  { TSBElementNotInNs,
+    "Element not in TSB namespace",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
-    "Wherever they appear in an SBML document, elements and attributes from the "
-    "Package must use the "
-    "'http://www.sbml.org/sbml/level0/version1/tsb/version0' namespace, "
-    "declaring so either explicitly or implicitly.",
-    { "L3V1 Tsb V1 Section 3.1"
+    "Wherever they appear in a TSB document, elements and attributes from the "
+    "tsb must use the 'http://testsbxml.org/l1v1' namespace, declaring so "
+    "either explicitly or implicitly.",
+    { "TSB L1V1 Section "
     }
   },
 
-  // 10301
-  { TsbDuplicateComponentId,
-    "Duplicate 'id' attribute value",
-    LIBTSB_CAT_GENERAL_CONSISTENCY,
-    LIBTSB_SEV_ERROR,
-    "(Extends validation rule #10301 in the SBML Level 3 Core specification. TO "
-    "DO list scope of ids)",
-    { "L3V1 Tsb V1 Section"
-    }
-  },
-
-  // 10302
-  { TsbIdSyntaxRule,
-    "Invalid SId syntax",
-    LIBTSB_CAT_GENERAL_CONSISTENCY,
-    LIBTSB_SEV_ERROR,
-    "The value of a 'tsb:id' must conform to the syntax of the <sbml> data type "
-    "'SId'",
-    { "L3V1 Tsb V1 Section"
-    }
-  },
-
-  // 10303
+  // 10201
   { TSBInvalidMetaidSyntax,
     "Invalid SId syntax",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
     "The value of a 'tsb:metaid' must conform to the syntax of the XML Type "
     "ID",
-    { "L3V1 Tsb V1 Section"
+    { "TSB L1V1 Section "
+    }
+  },
+
+  // 10301
+  { TSBNoAnnotationNS,
+    "No ns for TestAnnotation",
+    LIBTSB_CAT_GENERAL_CONSISTENCY,
+    LIBTSB_SEV_ERROR,
+    "Every top-level XML element within an <testAnnotation> object must have an "
+    "XML namespace declared.",
+    { "TSB L1V1 Section "
+    }
+  },
+
+  // 10302
+  { TSBRepeatAnnotationNS,
+    "Repeat ns for TestAnnotation",
+    LIBTSB_CAT_GENERAL_CONSISTENCY,
+    LIBTSB_SEV_ERROR,
+    "A given XML namespace cannot be the namespace of more than one "
+    "top-levelelement within a given <testAnnotation> object.",
+    { "TSB L1V1 Section "
+    }
+  },
+
+  // 10303
+  { TSBOnlyOneAnnotation,
+    "Only one TestAnnotation",
+    LIBTSB_CAT_GENERAL_CONSISTENCY,
+    LIBTSB_SEV_ERROR,
+    "A given TSB element may contain at most one <testAnnotation> subobject.",
+    { "TSB L1V1 Section "
+    }
+  },
+
+  // 10401
+  { NotesInXHTML,
+    "Notes not in XHTML",
+    LIBTSB_CAT_GENERAL_CONSISTENCY,
+    LIBTSB_SEV_ERROR,
+    "The contents of a <notes> object must be explicitly placed in the XHTML "
+    "XML namespace. ",
+    { "TSB L1V1 Section "
+    }
+  },
+
+  // 10402
+  { XMLDeclNotes,
+    "No XML decl in Notes",
+    LIBTSB_CAT_GENERAL_CONSISTENCY,
+    LIBTSB_SEV_ERROR,
+    "The contents of a <notes> object must not contain an XML declaration, <ie> "
+    "a string of the form '<?xml version="1.0" encoding="UTF-8"?>' or
+    similar.",
+    { "TSB L1V1 Section "
+    }
+  },
+
+  // 10403
+  { DOCTYPEInNotes,
+    "No DOCTYPE in Notes",
+    LIBTSB_CAT_GENERAL_CONSISTENCY,
+    LIBTSB_SEV_ERROR,
+    "The content of a <notes> object must not contain an XML DOCTYPE "
+    "declaration, <ie> a string beginning with the characters '<!DOCTYPE'.",
+    { "TSB L1V1 Section "
+    }
+  },
+
+  // 10404
+  { TSBOnlyOneNotes,
+    "Only one Notes",
+    LIBTSB_CAT_GENERAL_CONSISTENCY,
+    LIBTSB_SEV_ERROR,
+    "A given TSB element may contain at most one <notes> subobject.",
+    { "TSB L1V1 Section "
     }
   },
 
   // 20101
-  { InvalidNamespaceOnTSB,
-    "Invalid namespace",
+  { TSBTSBDocumentAllowedAttributes,
+    "Attributes allowed on <tSBDocument>.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
-    "Invalid namespace declared.",
-    { "L3V1 Tsb V1 Section"
+    "A <TSBDocument> object must have the required attributes 'tsb:level' and "
+    "'tsb:version', and may have the optional attribute 'tsb:metaid'. No other "
+    "attributes from the TSB Level 1 Version 1 namespaces are permitted on a "
+    "<TSBDocument> object. ",
+    { "TSB L1V1 Section "
     }
   },
 
   // 20102
-  { AllowedAttributes,
-    "Allowed attributes",
+  { TSBTSBDocumentAllowedElements,
+    "Elements allowed on <tSBDocument>.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
-    "Allowed attributes",
-    { "L3V1 Tsb V1 Section"
+    "Apart from the general <notes> and <testAnnotation> subobjects permitted "
+    "on all TSB components, A <TSBDocument> object may contain one and only one "
+    "instance of the <listOfComments> element. No other objects from the TSB "
+    "Level 1 Version 1 namespaces are permitted on a <TSBDocument> object. ",
+    { "TSB L1V1 Section "
     }
   },
 
   // 20103
-  { TSBEmptyListElement,
-    "No empty listOf",
+  { TSBTSBDocumentLevelMustBeNonNegativeInteger,
+    "The 'level' attribute must be NonNegativeInteger.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
-    "No empty lists",
-    { "L3V1 Tsb V1 Section"
+    "The attribute 'tsb:level' on a <TSBDocument> must have a value of data "
+    "type 'integer', and must be non negative.",
+    { "TSB L1V1 Section "
+    }
+  },
+
+  // 20104
+  { TSBTSBDocumentVersionMustBeNonNegativeInteger,
+    "The 'version' attribute must be NonNegativeInteger.",
+    LIBTSB_CAT_GENERAL_CONSISTENCY,
+    LIBTSB_SEV_ERROR,
+    "The attribute 'tsb:version' on a <TSBDocument> must have a value of data "
+    "type 'integer', and must be non negative.",
+    { "TSB L1V1 Section "
     }
   },
 
   // 20201
-  { TsbDocumentAllowedCoreAttributes,
-    "Core attributes allowed on <document>.",
+  { TSBTSBDocumentLOCommentAllowedCoreElements,
+    "Core elements allowed on <listOfComment>.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
-    "A <document> object may have the optional SBML Level 3 Core attributes "
-    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
-    "namespaces are permitted on a <document>.",
-    { "L3V1 Tsb V1 Section"
+    "Apart from the general <notes> and <testAnnotation> subobjects permitted "
+    "on all TSB objects, a <listOfComments> container object may only contain "
+    "<comment> objects.",
+    { "TSB L1V1 Section "
     }
   },
 
   // 20202
-  { TsbDocumentAllowedCoreElements,
-    "Core elements allowed on <document>.",
-    LIBTSB_CAT_GENERAL_CONSISTENCY,
-    LIBTSB_SEV_ERROR,
-    "A <document> object may have the optional SBML Level 3 Core subobjects for "
-    "notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on a <document>.",
-    { "L3V1 Tsb V1 Section"
-    }
-  },
-
-  // 20203
-  { TsbDocumentAllowedAttributes,
-    "Attributes allowed on <document>.",
-    LIBTSB_CAT_GENERAL_CONSISTENCY,
-    LIBTSB_SEV_ERROR,
-    "A <document> object must have the required attributes 'tsb:level' and "
-    "'tsb:version'. No other attributes from the SBML Level 3 Test SB XML "
-    "Library namespaces are permitted on a <document> object. ",
-    { "L3V1 Tsb V1 Section"
-    }
-  },
-
-  // 20204
-  { TsbDocumentAllowedElements,
-    "Elements allowed on <document>.",
-    LIBTSB_CAT_GENERAL_CONSISTENCY,
-    LIBTSB_SEV_ERROR,
-    "A <document> object may contain one and only one instance of the "
-    "<listOfComments> element. No other elements from the SBML Level 3 Test SB "
-    "XML Library namespaces are permitted on a <document> object. ",
-    { "L3V1 Tsb V1 Section"
-    }
-  },
-
-  // 20205
-  { TsbDocumentLevelMustBeNonNegativeInteger,
-    "The 'level' attribute must be NonNegativeInteger.",
-    LIBTSB_CAT_GENERAL_CONSISTENCY,
-    LIBTSB_SEV_ERROR,
-    "The attribute 'tsb:level' on a <document> must have a value of data type "
-    "'integer', and must be non negative.",
-    { "L3V1 Tsb V1 Section"
-    }
-  },
-
-  // 20206
-  { TsbDocumentVersionMustBeNonNegativeInteger,
-    "The 'version' attribute must be NonNegativeInteger.",
-    LIBTSB_CAT_GENERAL_CONSISTENCY,
-    LIBTSB_SEV_ERROR,
-    "The attribute 'tsb:version' on a <document> must have a value of data type "
-    "'integer', and must be non negative.",
-    { "L3V1 Tsb V1 Section"
-    }
-  },
-
-  // 20207
-  { TsbDocumentLOCommentsAllowedCoreElements,
-    "Core elements allowed on <listOfComments>.",
-    LIBTSB_CAT_GENERAL_CONSISTENCY,
-    LIBTSB_SEV_ERROR,
-    "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfComments> container object may only contain "
-    "<comment> objects.",
-    { "L3V1 Tsb V1 Section"
-    }
-  },
-
-  // 20208
-  { TsbDocumentLOCommentsAllowedCoreAttributes,
+  { TSBTSBDocumentLOCommentsAllowedCoreAttributes,
     "Core attributes allowed on <listOfComments>.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
-    "A <listOfComments> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <listOfComments> object.",
-    { "L3V1 Tsb V1 Section"
+    "A <listOfComments> object may have the optional attribute 'metaid'. No "
+    "other attributes from the TSB Level 1 Version 1 namespaces are permitted "
+    "on a <listOfComments> object.",
+    { "TSB L1V1 Section "
     }
   },
 
   // 20301
-  { TsbCommentAllowedCoreAttributes,
-    "Core attributes allowed on <comment>.",
-    LIBTSB_CAT_GENERAL_CONSISTENCY,
-    LIBTSB_SEV_ERROR,
-    "A <comment> object may have the optional SBML Level 3 Core attributes "
-    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
-    "namespaces are permitted on a <comment>.",
-    { "L3V1 Tsb V1 Section"
-    }
-  },
-
-  // 20302
-  { TsbCommentAllowedCoreElements,
-    "Core elements allowed on <comment>.",
-    LIBTSB_CAT_GENERAL_CONSISTENCY,
-    LIBTSB_SEV_ERROR,
-    "A <comment> object may have the optional SBML Level 3 Core subobjects for "
-    "notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on a <comment>.",
-    { "L3V1 Tsb V1 Section"
-    }
-  },
-
-  // 20303
-  { TsbCommentAllowedAttributes,
+  { TSBCommentAllowedAttributes,
     "Attributes allowed on <comment>.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
     "A <comment> object must have the required attributes 'tsb:contributor' and "
-    "'tsb:number', and may have the optional attribute 'tsb:point'. No other "
-    "attributes from the SBML Level 3 Test SB XML Library namespaces are "
-    "permitted on a <comment> object. ",
-    { "L3V1 Tsb V1 Section"
+    "'tsb:number', and may have the optional attributes 'tsb:point' and "
+    "'tsb:metaid'. No other attributes from the TSB Level 1 Version 1 "
+    "namespaces are permitted on a <comment> object. ",
+    { "TSB L1V1 Section "
     }
   },
 
-  // 20304
-  { TsbCommentContributorMustBeString,
+  // 20302
+  { TSBCommentContributorMustBeString,
     "The 'contributor' attribute must be String.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
     "The attribute 'tsb:contributor' on a <comment> must have a value of data "
     "type 'string'.",
-    { "L3V1 Tsb V1 Section"
+    { "TSB L1V1 Section "
     }
   },
 
-  // 20305
-  { TsbCommentNumberMustBeDouble,
+  // 20303
+  { TSBCommentNumberMustBeDouble,
     "The 'number' attribute must be Double.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
     "The attribute 'tsb:number' on a <comment> must have a value of data type "
     "'double'.",
-    { "L3V1 Tsb V1 Section"
+    { "TSB L1V1 Section "
     }
   },
 
-  // 20306
-  { TsbCommentPointMustBeString,
+  // 20304
+  { TSBCommentPointMustBeString,
     "The 'point' attribute must be String.",
     LIBTSB_CAT_GENERAL_CONSISTENCY,
     LIBTSB_SEV_ERROR,
     "The attribute 'tsb:point' on a <comment> must have a value of data type "
     "'string'.",
-    { "L3V1 Tsb V1 Section"
+    { "TSB L1V1 Section "
     }
   },
 

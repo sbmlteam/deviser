@@ -28,18 +28,22 @@ def teardown():
 
 # @pytest.mark.skipif(sys.version_info < (3,6),
 #                    reason="requires python3.6")
+
+
 @pytest.mark.parametrize("name, test_type", [
-    ('spatial', 'body'),
-    ('qual', 'apdx-validation'),
-    ('groups', 'macros'),
-    ('groups', 'apdx-validation'),
-    ('groups', 'body'),
-    ('unknown_type', 'apdx-validation'),
-    ('test_sidrefs', 'apdx-validation'),
-    ('test_sidrefs', 'body'),
-    ('test_lists', 'apdx-validation'),
-    ('test_lists', 'body'),
-    ('test_att', 'apdx-validation'),
+        ('spatial', 'body'),
+        ('qual', 'apdx-validation'),
+        ('groups', 'macros'),
+        ('groups', 'apdx-validation'),
+        ('groups', 'body'),
+        ('unknown_type', 'apdx-validation'),
+        ('test_sidrefs', 'apdx-validation'),
+        ('test_sidrefs', 'body'),
+        ('test_lists', 'apdx-validation'),
+        ('test_lists', 'body'),
+        ('test_att', 'apdx-validation'),
+        ('testsbxml', 'apdx-validation'),
+ #    ('testsbxml', 'macros'),
 ])
 def test_tex(name, test_type):
     assert rtt.run_test(name, test_type) == 0

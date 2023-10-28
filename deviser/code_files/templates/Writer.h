@@ -2,8 +2,8 @@
 #define SBMLWriter_h
 
 
-#include <common/extern.h>
-#include <common/sbmlfwd.h>
+#include <sbml/common/extern.h>
+#include <sbml/common/sbmlfwd.h>
 
 
 #ifdef __cplusplus

@@ -428,9 +428,9 @@ class OtherLibraryFiles(BaseTemplateFile.BaseTemplateFile):
             docname = SF.remove_prefix(doc['name'], remove_package=False,
                                        remove_doc_prefix=True)
         libname = SF.get_library_suffix(gv.library_name)
-        if not libname.endswith('ml'):
-            libname = libname + 'ml'
-        fileout.copy_line_verbatim((10 * '') + 'if ( errorId == {0}{1}Allowed'
+#        if not libname.endswith('ml'):
+#            libname = libname + 'ml'
+        fileout.copy_line_verbatim((10 * ' ') + 'if ( errorId == {0}{1}Allowed'
                                    'CoreAttributes\n'.format(libname, docname))
         level = False
         version = False

@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 
-#include <common/common.h>
+#include <sbml/common/common.h>
 <verbatim>
 #include <xml/XMLOutputStream.h>
 </verbatim>
@@ -237,7 +237,7 @@ SBMLWriter::writeToString (const SBMLDocument* d)
   ostringstream stream;
   writeSBML(d, stream);
 
-  return safe_strdup( stream.str().c_str() );
+  return sbml_safe_strdup( stream.str().c_str() );
 }
 
 std::string 

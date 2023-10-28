@@ -102,8 +102,8 @@ def compare_files(infile, outfile, fails, not_tested):
     else:
         fails.append(infile)
         print('{0}=================>> FAILED'.format(outfile))
-        print('\n\nEXPECTED:\n{0}'.format(indata.strip()))
-        print('=================\n\nGOT:\n{0}'.format(out.strip()))
+#        print('\n\nEXPECTED:\n{0}'.format(indata.strip()))
+#        print('=================\n\nGOT:\n{0}'.format(out.strip()))
         print('=================')
         ret = 1
     return ret

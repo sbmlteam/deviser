@@ -358,7 +358,7 @@ def generate_other_library_code_files(name, ob):
             working_class['document'] = True
         all_files = CppFiles.CppFiles(working_class, True)
         all_files.write_files()
-    base_files = OtherLibraryFiles(prefix, ob['baseElements'], True)
+    base_files = OtherLibraryFiles.OtherLibraryFiles(prefix, ob['baseElements'], True)
     base_files.write_files()
     os.chdir(this_dir)
 

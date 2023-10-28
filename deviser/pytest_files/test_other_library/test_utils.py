@@ -245,10 +245,10 @@ def compare_code(class_name, end):
     return compare_files(correct_file, temp_file)
 
 def compare_code_headers(class_name):
-    return compare_code(class_name, ".h")
+    return compare_code(class_name, ".h") if not class_name == '' else 0
 
 def compare_code_impl(class_name):
-    return compare_code(class_name, ".cpp")
+    return compare_code(class_name, ".cpp") if not class_name == '' else 0
 
 def compare_code_cmake(class_name):
     return compare_code(class_name, ".cmake")

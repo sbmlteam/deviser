@@ -41,6 +41,7 @@ import os
 import re
 
 from ..base_files import BaseTexFile
+from ..util import global_variables, strFunctions
 from ..validation import ValidationRulesForClass
 from ..validation import ValidationRulesForPlugin
 from ..validation import ValidationRulesGeneral
@@ -59,13 +60,21 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
 
         BaseTexFile.BaseTexFile.__init__(self, 'apdx-validation', 'tex',
                                          object_desc)
-        self.full_pkg_command = '\\{0}Package'.format(self.fulltexname)
-        self.brief_pkg_command = '\\{0}'.format(self.upper_package)
-
-        self.pkg_ref = 'SBML Level~{0} Specification for {1}, ' \
-                       'Version~{2}'.format(self.level,
-                                            self.fullname, self.pkg_version)
-        self.reqd_status = object_desc['required']
+        if global_variables.is_sbml:
+            self.pkg_ref = 'SBML Level~{0} Specification for {1}, ' \
+                           'Version~{2}'.format(self.level,
+                                                self.fullname, self.pkg_version)
+            self.full_pkg_command = '\\{0}Package'.format(self.fulltexname)
+            self.brief_pkg_command = '\\{0}'.format(self.upper_package)
+            self.reqd_status = object_desc['required']
+        else:
+            self.pkg_ref = '{3} Level~{0} Specification for {1}, ' \
+                           'Version~{2}'.format(self.level,
+                                                self.fullname, self.version,
+                                                global_variables.language.upper())
+            self.full_pkg_command = '\\{0}'.format(self.fulltexname)
+            self.brief_pkg_command = '\\{0}'.format(self.upper_package)
+            self.reqd_status = False
 
     ########################################################################
 
@@ -86,11 +95,18 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         else:
             severity = self.consist
 
-        self.write_text_line('{0}{1}-{2}{3}{4}{5} (Reference: {6}){7}'
-                             .format(severity, self.package,
-                                rule['number']-self.offset,
-                                self.end_b, self.start_b, text,
-                                ref, self.end_b))
+        if global_variables.is_sbml:
+            self.write_text_line('{0}{1}-{2}{3}{4}{5} (Reference: {6}){7}'
+                                 .format(severity, self.package,
+                                    rule['number']-self.offset,
+                                    self.end_b, self.start_b, text,
+                                    ref, self.end_b))
+        else:
+            self.write_text_line('{0}{1}-{2}{3}{4}{5} (Reference: {6}){7}'
+                                 .format(severity, global_variables.language,
+                                    rule['number'],
+                                    self.end_b, self.start_b, text,
+                                    ref, self.end_b))
 
     ####################################################################
 
@@ -105,7 +121,37 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         self.write_text_line(
             '\subsubsection*{General rules about identifiers}')
         self.skip_line()
-        for i in range(3, 5):
+        if global_variables.is_sbml:
+            for i in range(3, 5):
+                self.write_rule(rules[i])
+                self.skip_line()
+        else:
+            self.write_rule(rules[3])
+            self.skip_line()
+
+    def write_rules_for_annotation(self, rules):
+        """
+        Write the annotation rules for another library
+        :param rules:
+        :return:
+        """
+        self.write_text_line(
+            '\subsubsection*{0}General rules for \\{1} elements{2}'.format('{', global_variables.annot_element, '}'))
+        self.skip_line()
+        for i in range(4, 7):
+            self.write_rule(rules[i])
+            self.skip_line()
+
+    def write_rules_for_notes(self, rules):
+        """
+        Write the notes rules for another library
+        :param rules:
+        :return:
+        """
+        self.write_text_line(
+            '\subsubsection*{General rules for \\notes elements}')
+        self.skip_line()
+        for i in range(7, 11):
             self.write_rule(rules[i])
             self.skip_line()
 
@@ -190,13 +236,17 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         rules = ValidationRulesGeneral.ValidationRulesGeneral(
             self.fullname, self.offset,
             self.package, self.pkg_ref, self.level, self.version,
-            self.pkg_version, self.reqd_status)
+            self.pkg_version, self.reqd_status, self.full_pkg_command)
         rules.determine_rules()
         self.write_general_rules(rules.rules)
         self.write_identifier_rules(rules.rules)
-        self.write_to_do('ANY LIST OF ELEMENTS THAT HAVE ATTRIBUTES')
-        self.write_extended_sbml_rules(rules.rules)
-        number = self.offset + 20200
+        if global_variables.is_sbml:
+            self.write_to_do('ANY LIST OF ELEMENTS THAT HAVE ATTRIBUTES')
+            self.write_extended_sbml_rules(rules.rules)
+        else:
+            self.write_rules_for_annotation(rules.rules)
+            self.write_rules_for_notes(rules.rules)
+        number = self.offset + 20200 if global_variables.is_sbml else 20100
         for i in range(0, len(self.plugins)):
             rules = ValidationRulesForPlugin.ValidationRulesForPlugin(
                 self.plugins[i], self.fullname, number,
@@ -218,6 +268,19 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
                                        self.sbml_classes[i]['texname'],
                                        rules.rules)
             self.skip_line()
+            if not global_variables.is_sbml:
+                for att in self.sbml_classes[i]['attribs']:
+                    if att['type'] == 'lo_element':
+                        rules.rules = []
+                        number += 100
+                        rules.number = number
+
+                        rules.add_lo_rules()
+                        self.write_rules_for_class(strFunctions.cap_list_of_name_no_prefix(att['name']),
+                                                   strFunctions.cap_list_of_name_no_prefix(att['texname']),
+                                                   rules.rules)
+                        self.skip_line()
+
             number += 100
 
     # override

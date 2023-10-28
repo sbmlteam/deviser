@@ -7,14 +7,6 @@
 #ifndef LIBSBML_NAMESPACE_H
 #define LIBSBML_NAMESPACE_H 1
 
-<verbatim>
-#ifndef SWIG
-#include <common/libsbml-namespace.h>
-
-LIBSBML_CPP_NAMESPACE_USE
-
-#endif
-</verbatim>
 /*
  *
  * The idea of the following marcors are borrowed from 

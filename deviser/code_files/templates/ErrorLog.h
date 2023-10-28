@@ -4,8 +4,8 @@
 
 #include <sbml/common/extern.h>
 <verbatim>
-#include <sbml/xml/XMLError.h>
-#include <sbml/xml/XMLErrorLog.h>
+#include <xml/XMLError.h>
+#include <xml/XMLErrorLog.h>
 </verbatim>
 #include <sbml/SBMLError.h>
 

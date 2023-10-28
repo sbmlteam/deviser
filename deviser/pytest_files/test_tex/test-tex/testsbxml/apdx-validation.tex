@@ -1,0 +1,186 @@
+% -*- TeX-master: "main"; fill-column: 72 -*-
+
+\section{Validation of SBML documents}
+\label{apdx-validation}
+
+\subsection{Validation and consistency rules}
+\label{validation-rules}
+
+This section summarizes all the conditions that must (or in some cases,
+at least \emph{should}) be true of an SBML Level~1 Version~1 model that
+uses the \TestTSBXMLLibraryPackage. We use the same conventions as are
+used in the SBML Level~1 Version~1 Core specification document. In
+particular, there are different degrees of rule strictness. Formally,
+the differences are expressed in the statement of a rule: either a rule
+states that a condition \emph{must} be true, or a rule states that it
+\emph{should} be true. Rules of the former kind are strict SBML
+validation rules---a model encoded in SBML must conform to all of them
+in order to be considered valid. Rules of the latter kind are
+consistency rules. To help highlight these differences, we use the
+following three symbols next to the rule numbers:
+
+\begin{description}
+
+\item[\hspace*{6.5pt}\vSymbol\vsp] A \vSymbolName indicates a
+\emph{requirement} for SBML conformance. If a model does not follow this
+rule, it does not conform to the \TestTSBXMLLibraryPackage
+specification. (Mnemonic intention behind the choice of symbol: ``This
+must be checked.'')
+
+\item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a
+\emph{recommendation} for model consistency. If a model does not follow
+this rule, it is not considered strictly invalid as far as the
+\TestTSBXMLLibraryPackage specification is concerned; however, it
+indicates that the model contains a physical or conceptual
+inconsistency. (Mnemonic intention behind the choice of symbol: ``This
+is a cause for warning.'')
+
+\item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a strong
+recommendation for good modeling practice. This rule is not strictly a
+matter of SBML encoding, but the recommendation comes from logical
+reasoning. As in the previous case, if a model does not follow this
+rule, it is not strictly considered an invalid SBML encoding. (Mnemonic
+intention behind the choice of symbol: ``You're a star if you heed
+this.'')
+
+\end{description}
+
+The validation rules listed in the following subsections are all stated
+or implied in the rest of this specification document. They are
+enumerated here for convenience. Unless explicitly stated, all
+validation rules concern objects and attributes specifically defined in
+the \TestTSBXMLLibraryPackage package.
+
+For \notice convenience and brevity, we use the shorthand
+``\token{:\-x}'' to stand for an attribute or element name \token{x} in
+the namespace for the \TestTSBXMLLibraryPackage package, using the
+namespace prefix \token{}. In reality, the prefix string may be
+different from the literal ``\token{}'' used here (and indeed, it can be
+any valid XML namespace prefix that the modeler or software chooses). We
+use ``\token{:\-x}'' because it is shorter than to write a full
+explanation everywhere we refer to an attribute or element in the
+\TestTSBXMLLibraryPackage namespace.
+
+\subsubsection*{General rules about this package}
+
+\validRule{tsb-10101}{To conform to the \TestTSBXMLLibrary specification
+for TSB Level~1 Version~1, an TSB document must declare
+\uri{http://testsbxml.org/l1v1} as the XMLNamespace to use for elements
+of this package. (Reference: TSB Level~1 Specification for Test TSB XML
+Library, Version~1 \sec{xml-namespace}.)}
+
+\validRule{tsb-10102}{Wherever they appear in a TSB document, elements
+and attributes from the \TestTSBXMLLibrary must use the
+\uri{http://testsbxml.org/l1v1} namespace, declaring so either
+explicitly or implicitly. (Reference: TSB Level~1 Specification for Test
+TSB XML Library, Version~1 \sec{xml-namespace}.)}
+
+\subsubsection*{General rules about identifiers}
+
+\validRule{tsb-10201}{The value of a \token{metaid} must conform to the
+syntax of the XML Type ID (Reference: metaid)}
+
+\subsubsection*{General rules for \TestAnnotation elements}
+
+\validRule{tsb-10301}{Every top-level XML element within an
+\TestAnnotation object must have an XML namespace declared. (Reference:
+TSB Level~1 Specification for Test TSB XML Library, Version~1
+\sec{annotation-use}.)}
+
+\validRule{tsb-10302}{A given XML namespace cannot be the namespace of
+more than one top-levelelement within a given \TestAnnotation object.
+(Reference: TSB Level~1 Specification for Test TSB XML Library,
+Version~1 \sec{annotation-use}.)}
+
+\validRule{tsb-10303}{A given TSB element may contain at most one
+\TestAnnotation subobject. (Reference: TSB Level~1 Specification for
+Test TSB XML Library, Version~1 \sec{annotation-use}.)}
+
+\subsubsection*{General rules for \notes elements}
+
+\validRule{tsb-10401}{The contents of a \Notes object must be explicitly
+placed in the XHTML XML namespace. (Reference: TSB Level~1 Specification
+for Test TSB XML Library, Version~1 \sec{notes}.)}
+
+\validRule{tsb-10402}{The contents of a \Notes object must not contain
+an XML declaration, \ie a string of the form \val{<?xml version="1.0"
+encoding="UTF-8"?>} or similar. (Reference: TSB Level~1 Specification
+for Test TSB XML Library, Version~1 \sec{notes}.)}
+
+\validRule{tsb-10403}{The content of a \Notes object must not contain an
+XML DOCTYPE declaration, \ie a string beginning with the characters
+\val{<!DOCTYPE}. (Reference: TSB Level~1 Specification for Test TSB XML
+Library, Version~1 \sec{notes}.)}
+
+\validRule{tsb-10404}{A given TSB element may contain at most one \Notes
+subobject. (Reference: TSB Level~1 Specification for Test TSB XML
+Library, Version~1 \sec{notes}.)}
+
+\subsubsection*{Rules for \class{TSBDocument} object}
+
+\validRule{tsb-20101}{A \TSBDocument object must have the required
+attributes \token{tsb:\-level} and \token{tsb:\-version}, and may have
+the optional attribute \token{tsb:\-metaid}. No other attributes from
+the TSB Level~1 Version~1 namespaces are permitted on a \TSBDocument
+object. (Reference: TSB Level~1 Specification for Test TSB XML Library,
+Version~1, \sec{tsbdocument-class}.)}
+
+\validRule{tsb-20102}{Apart from the general \Notes and \TestAnnotation
+subobjects permitted on all TSB components, A \TSBDocument object may
+contain one and only one instance of the \ListOfComments element. No
+other objects from the TSB Level~1 Version~1 namespaces are permitted on
+a \TSBDocument object. (Reference: TSB Level~1 Specification for Test
+TSB XML Library, Version~1, \sec{tsbdocument-class}.)}
+
+\validRule{tsb-20103}{The attribute \token{level} on a \TSBDocument must
+have a value of data type \token{integer}, and must be non negative.
+(Reference: TSB Level~1 Specification for Test TSB XML Library,
+Version~1, \sec{tsbdocument-class}.)}
+
+\validRule{tsb-20104}{The attribute \token{version} on a \TSBDocument
+must have a value of data type \token{integer}, and must be non
+negative. (Reference: TSB Level~1 Specification for Test TSB XML
+Library, Version~1, \sec{tsbdocument-class}.)}
+
+
+\subsubsection*{Rules for \class{ListOfComments} object}
+
+\validRule{tsb-20201}{Apart from the general \notes and \TestAnnotation
+subobjects permitted on all TSB objects, a \ListOfComments container
+object may only contain \Comment objects. (Reference: TSB Level~1
+Specification for Test TSB XML Library, Version~1,
+\sec{listofcomments-class}.)}
+
+\validRule{tsb-20202}{A \ListOfComments object may have the optional
+attribute \token{metaid}. No other attributes from the TSB Level~1
+Version~1 namespaces are permitted on a \ListOfComments object.
+(Reference: TSB Level~1 Specification for Test TSB XML Library,
+Version~1, \sec{listofcomments-class}.)}
+
+
+\subsubsection*{Rules for \class{Comment} object}
+
+\validRule{tsb-20301}{A \Comment object must have the required
+attributes \token{tsb:\-contributor} and \token{tsb:\-number}, and may
+have the optional attributes \token{tsb:\-point} and
+\token{tsb:\-metaid}. No other attributes from the TSB Level~1 Version~1
+namespaces are permitted on a \Comment object. (Reference: TSB Level~1
+Specification for Test TSB XML Library, Version~1,
+\sec{comment-class}.)}
+
+\validRule{tsb-20302}{The attribute \token{contributor} on a \Comment
+must have a value of data type \token{string}. (Reference: TSB Level~1
+Specification for Test TSB XML Library, Version~1,
+\sec{comment-class}.)}
+
+\validRule{tsb-20303}{The attribute \token{number} on a \Comment must
+have a value of data type \token{double}. (Reference: TSB Level~1
+Specification for Test TSB XML Library, Version~1,
+\sec{comment-class}.)}
+
+\validRule{tsb-20304}{The attribute \token{point} on a \Comment must
+have a value of data type \token{string}. (Reference: TSB Level~1
+Specification for Test TSB XML Library, Version~1,
+\sec{comment-class}.)}
+
+

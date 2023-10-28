@@ -180,7 +180,7 @@ SBMLReader::readInternal (const char* content, bool isFile)
 {
   SBMLDocument* d = new SBMLDocument();
 
-  if (isFile && content != NULL && (util_file_exists(content) == false))
+  if (isFile && content != NULL && (sbml_util_file_exists(content) == false))
   {
     d->getErrorLog()->logError(XMLFileUnreadable);
   }
@@ -232,7 +232,7 @@ SBMLReader::readInternal (const char* content, bool isFile)
       {
         d->getErrorLog()->logError(MissingXMLEncoding);
       }
-      else if (strcmp_insensitive(stream.getEncoding().c_str(), "UTF-8") != 0)
+      else if (sbml_strcmp_insensitive(stream.getEncoding().c_str(), "UTF-8") != 0)
       {
         d->getErrorLog()->logError(SBMLNotUTF8);
       }
@@ -241,7 +241,7 @@ SBMLReader::readInternal (const char* content, bool isFile)
       {
         d->getErrorLog()->logError(BadXMLDecl);
       }
-      else if (strcmp_insensitive(stream.getVersion().c_str(), "1.0") != 0)
+      else if (sbml_strcmp_insensitive(stream.getVersion().c_str(), "1.0") != 0)
       {
         d->getErrorLog()->logError(BadXMLDecl);
       }
