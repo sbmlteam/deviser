@@ -71,7 +71,7 @@ class ValidationRulesGeneral:
         self.tc = 'TBC'
         # constants for rules
         if global_variables.is_sbml:
-            self.lib_ref = 'L3V1 {0} V1 Section 3.1'.format(self.up_package)
+            self.lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
             self.up_package = strFunctions.upper_first(self.package)
         else:
             self.lib_ref = '{0} L{1}V{2} Section '.format(self.up_package.upper(), self.level, self.version)
