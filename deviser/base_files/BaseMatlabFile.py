@@ -41,6 +41,7 @@
 
 from . import BaseFile
 from ..util import strFunctions as SF
+from ..util import query
 
 
 class BaseMatlabFile(BaseFile.BaseFile):
@@ -56,7 +57,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.matlab_comment_line = 68 * '%'
         self.long_matlab_comment_line = 78 * '%'
         self.short_matlab_comment_line = 32 * '%'
-        self.matlab_big_space = 70 * ' '
+        self.matlab_big_space = 55 * ' '
 
         self.package = object_desc['name']
         self.up_pack = self.package.upper()
@@ -68,6 +69,8 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.level = object_desc['base_level']
         self.version = object_desc['base_version']
         self.pkg_version = object_desc['pkg_version']
+        self.num_versions = 1 if 'num_versions' not in object_desc else object_desc['num_versions']
+
         if object_desc['required']:
             self.reqd_status = 'true'
         else:
@@ -101,11 +104,11 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('%%%% ADD isExtension')
         self.write_line('%%%% ADD isExtension')   # TODO both necessary?
         if self.filetype == 'sf':
-            self.write_is_extension('Fieldname')
+            self.write_is_extension()
         elif self.filetype == 'dv':
-            self.write_is_extension('DefaultValue')
+            self.write_is_extension()
         elif self.filetype == 'vt':
-            self.write_is_extension('ValueType')
+            self.write_is_extension()
         self.write_line('%%%% END isExtension')
         self.skip_line(2)
         self.write_line('%%%% ADD getFieldname')
@@ -178,19 +181,16 @@ class BaseMatlabFile(BaseFile.BaseFile):
             self.write_get_class_values_types(sbmlclass)
             self.skip_line(2)
 
-    def write_some_common_lines(self):
+    def write_function_args(self):
         """
         Utility function to write some common output.
-        TODO a more descriptive name wouldn't go amiss.
         The first line closes a matlab function argument list.
         """
-        self.write_line(self.matlab_big_space + 'version, pkgVersion)')
-        self.write_more_common_lines()
+        self.write_line_verbatim(self.matlab_big_space + 'version, pkgVersion)')
 
-    def write_more_common_lines(self):
+    def write_function_setup(self):
         """
-        Another utility function
-        TODO yep, this one also needs a better name!
+        Utility function to write some common output.
         """
         self.up_indent()
         self.write_line('if (~isValidLevelVersionCombination(level,'
@@ -198,7 +198,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.up_indent()
         self.write_line('error (\'invalid level/version combination\');')
         self.down_indent()
-        self.write_line('end;')
+        self.write_line('end')
         self.skip_line()
 
         self.write_line('SBMLfieldnames = [];')
@@ -216,9 +216,8 @@ class BaseMatlabFile(BaseFile.BaseFile):
         Another utility function, used a number of times.
         Write the `end` keywords at the end of a code block.
         """
-        self.down_indent()
         for _ in range(0, 3):
-            self.write_line('end;')
+            self.write_line('end')
             self.down_indent()
 
     def write_get_plugin_values_types(self, plugin):
@@ -232,21 +231,43 @@ class BaseMatlabFile(BaseFile.BaseFile):
                                  'get{0}{1}ValueType(level, ...'.
                                  format(self.up_pack, plugin['sbase']))
 
-        self.write_some_common_lines()
-        num_fields = 1
-        self.write_line('SBMLfieldnames = {')
-        self.write_line('\'uint\', ...')
-        for extension in plugin['extension']:
-            self.write_line('\'structure\', ...'.format())
-            num_fields += 1
-        for extension in plugin['lo_extension']:
-            self.write_line('\'structure\', ...')
-            num_fields += 1
-        for attrib in plugin['attribs']:
-            self.write_line('{0}, ...'.format(self.get_value_type(attrib)))
-            num_fields += 1
-        self.write_line('};')
-        self.write_line('nNumberFields = {0};'.format(num_fields))
+        self.write_function_args()
+        self.write_function_setup()
+        v = 1
+        for i in range(0, self.num_versions):
+            num_fields = 0
+            if plugin['version_info'][i]:
+                self.write_line('SBMLfieldnames = {')
+                for extension in plugin['extension']:
+                    if extension['version_info'][i]:
+                        self.write_line('\'structure\', ...'.format())
+                        num_fields += 1
+                        attribs = self.get_lo_attributes(extension)
+                        for attrib in attribs:
+                            num_fields = self.write_attribute_vt(attrib, i, num_fields)
+                for extension in plugin['lo_extension']:
+                    if extension['version_info'][i]:
+                        self.write_line('\'structure\', ...')
+                        num_fields += 1
+                        attribs = self.get_lo_attributes(extension)
+                        for attrib in attribs:
+                            num_fields = self.write_attribute_vt(attrib, i, num_fields)
+                for attrib in plugin['attribs']:
+                    num_fields = self.write_attribute_vt(attrib, i, num_fields)
+                self.write_line('\'uint\', ...')
+                self.write_line('\'uint\', ...')
+                self.write_line('\'uint\', ...'.format(v))
+                # e.g. "'qual_version', ..."
+                num_fields += 3
+                self.write_line('};')
+                self.write_line('nNumberFields = {0};'.format(num_fields))
+
+            self.down_indent()
+            v = v + 1
+            if v <= self.num_versions:
+                self.write_line('elseif (pkgVersion == {0})'.format(v))
+                self.up_indent()
+
         self.write_ends()
 
     def write_get_class_values_types(self, sbmlclass):
@@ -259,23 +280,32 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = '
                                  'get{0}ValueType(level, ...'.
                                  format(sbmlclass['name']))
-        self.write_some_common_lines()
+        self.write_function_args()
+        self.write_function_setup()
 
-        num_fields = 9
-        self.write_line('SBMLfieldnames = {')
-        self.write_line('\'{0}\', ...'.format(sbmlclass['typecode']))
-        for _ in range(0, 3):
-            self.write_line('\'char\', ...')
-        self.write_line('\'structure\', ...')
-        self.write_line('\'int\', ...')
-        for attrib in sbmlclass['attribs']:
-            self.write_line('{0}, ...'.format(self.get_value_type(attrib)))
-            num_fields += 1
-        self.write_line('\'uint\', ...')
-        self.write_line('\'uint\', ...')
-        self.write_line('\'uint\', ...')  # .format(self.package))
-        self.write_line('};')
-        self.write_line('nNumberFields = {0};'.format(num_fields))
+        v = 1
+        for i in range(0, self.num_versions):
+            num_fields = 0
+            if sbmlclass['version_info'][i]:
+                self.write_line('SBMLfieldnames = {')
+                num_fields = 9
+                self.write_line('\'{0}\', ...'.format(sbmlclass['typecode']))
+                for _ in range(0, 3):
+                    self.write_line('\'char\', ...')
+                self.write_line('\'structure\', ...')
+                self.write_line('\'int\', ...')
+                for attrib in sbmlclass['attribs']:
+                    num_fields = self.write_attribute_vt(attrib, i, num_fields)
+                self.write_line('\'uint\', ...')
+                self.write_line('\'uint\', ...')
+                self.write_line('\'uint\', ...')  # .format(self.package))
+                self.write_line('};')
+                self.write_line('nNumberFields = {0};'.format(num_fields))
+            self.down_indent()
+            v = v + 1
+            if v <= self.num_versions:
+                self.write_line('elseif (pkgVersion == {0})'.format(v))
+                self.up_indent()
         self.write_ends()
 
     def get_value_type(self, attrib):
@@ -290,9 +320,11 @@ class BaseMatlabFile(BaseFile.BaseFile):
             return '\'char\''
         elif att_type == 'bool':
             return '\'bool\''
-        elif att_type == 'uint' or att_type == 'int':
+        elif att_type == 'uint':
             return '\'uint\''
-        elif att_type == 'lo_element':
+        elif att_type == 'int':
+            return '\'int\''
+        elif att_type == 'lo_element' or att_type == 'inline_lo_element':
             return '\'structure\''
         elif att_type == 'element':
             if att_name == 'math':
@@ -314,27 +346,45 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = '
                                  'get{0}{1}DefaultValues(level, ...'.
                                  format(self.up_pack, plugin['sbase']))
-        self.write_some_common_lines()
+        self.write_function_args()
+        self.write_function_setup()
 
-        num_fields = 1
-        self.write_line('SBMLfieldnames = {')
-        self.write_line('int32(pkgVersion), ...')
-        for extension in plugin['extension']:
-            self.write_line('[], ...'.format())
-            num_fields += 1
-        for extension in plugin['lo_extension']:
-            self.write_line('[], ...')
-            num_fields += 1
-        for attrib in plugin['attribs']:
-            self.write_line('{0}, ...'.format(self.get_type(attrib)))
-            num_fields += 1
-        self.write_line('};')
-        self.write_line('nNumberFields = {0};'.format(num_fields))
+        v = 1
+        for i in range(0, self.num_versions):
+            num_fields = 0
+            if plugin['version_info'][i]:
+                self.write_line('SBMLfieldnames = {')
+                for extension in plugin['extension']:
+                    if extension['version_info'][i]:
+                        self.write_line('[], ...'.format())
+                        num_fields += 1
+                        attribs = self.get_lo_attributes(extension)
+                        for attrib in attribs:
+                            num_fields = self.write_attribute_dv(attrib, i, num_fields)
+                for extension in plugin['lo_extension']:
+                    if extension['version_info'][i]:
+                        self.write_line('[], ...')
+                        num_fields += 1
+                        attribs = self.get_lo_attributes(extension)
+                        for attrib in attribs:
+                            num_fields = self.write_attribute_dv(attrib, i, num_fields)
+                for attrib in plugin['attribs']:
+                    num_fields = self.write_attribute_dv(attrib, i, num_fields)
+                self.write_line('int32(3), ...')
+                self.write_line('int32(1), ...')
+                self.write_line('int32({0}), ...'.format(v))
+                # e.g. "'qual_version', ..."
+                num_fields += 3
+                self.write_line('};')
+                self.write_line('nNumberFields = {0};'.format(num_fields))
 
-        self.down_indent()
-        for _ in range(0, 3):
-            self.write_line('end;')
             self.down_indent()
+            v = v + 1
+            if v <= self.num_versions:
+                self.write_line('elseif (pkgVersion == {0})'.format(v))
+                self.up_indent()
+
+        self.write_ends()
 
     def write_get_class_default_values(self, sbmlclass):
         """
@@ -347,23 +397,32 @@ class BaseMatlabFile(BaseFile.BaseFile):
                                  ' = get{0}DefaultValues(level, ...'.
                                  format(sbmlclass['name']))
 
-        self.write_some_common_lines()
+        self.write_function_args()
+        self.write_function_setup()
 
-        num_fields = 9
-        self.write_line('SBMLfieldnames = {')
-        self.write_line('\'{0}\', ...'.format(sbmlclass['typecode']))
-        for _ in range(0, 3):
-            self.write_line('\'\', ...')
-        self.write_line('[], ...')
-        self.write_line('int32(-1), ...')
-        for attrib in sbmlclass['attribs']:
-            self.write_line('{0}, ...'.format(self.get_type(attrib)))
-            num_fields += 1
-        self.write_line('3, ...')
-        self.write_line('int32(version), ...')
-        self.write_line('int32(pkgVersion), ...')  # .format(self.package))
-        self.write_line('};')
-        self.write_line('nNumberFields = {0};'.format(num_fields))
+        v = 1
+        for i in range(0, self.num_versions):
+            num_fields = 0
+            if sbmlclass['version_info'][i]:
+                self.write_line('SBMLfieldnames = {')
+                num_fields = 9
+                self.write_line('\'{0}\', ...'.format(sbmlclass['typecode']))
+                for _ in range(0, 3):
+                    self.write_line('\'\', ...')
+                self.write_line('[], ...')
+                self.write_line('int32(-1), ...')
+                for attrib in sbmlclass['attribs']:
+                    num_fields = self.write_attribute_dv(attrib, i, num_fields)
+                self.write_line('int32(3), ...')
+                self.write_line('int32(1), ...')
+                self.write_line('int32({0}), ...'.format(v))
+                self.write_line('};')
+                self.write_line('nNumberFields = {0};'.format(num_fields))
+            self.down_indent()
+            v = v + 1
+            if v <= self.num_versions:
+                self.write_line('elseif (pkgVersion == {0})'.format(v))
+                self.up_indent()
         self.write_ends()
 
     def get_type(self, attrib):
@@ -381,7 +440,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
             return '\'\''
         elif att_type in ['bool', 'uint', 'int']:
             return 'int32(0)'
-        elif att_type == 'lo_element':
+        elif att_type in ['lo_element', 'inline_lo_element']:
             return '[]'
         elif att_type == 'element':
             return '\'\'' if att_name == 'math' else '[]'
@@ -389,6 +448,65 @@ class BaseMatlabFile(BaseFile.BaseFile):
             return '0/0'
         else:
             return att_type
+
+    def write_attribute_dv(self, attrib, version, num_fields):
+        if attrib['version_info'][version]:
+            if attrib['name'] == 'math':
+                self.write_line('\'{0}\', ...'.format(attrib['name']))
+            else:
+                self.write_line('{0}, ...'.format(self.get_type(attrib)))
+            num_fields += 1
+            if self.get_type(attrib) == 'int32(0)' or self.get_type(attrib) == '0/0':
+                self.write_line('int32(0), ...')
+                num_fields += 1
+        return num_fields
+
+    def write_attribute_vt(self, attrib, version, num_fields):
+        if attrib['version_info'][version]:
+            if attrib['name'] == 'math':
+                self.write_line('\'{0}\', ...'.format(attrib['name']))
+            else:
+                self.write_line('{0}, ...'.format(self.get_value_type(attrib)))
+            num_fields += 1
+            if self.get_type(attrib) == 'int32(0)' or self.get_type(attrib) == '0/0':
+                self.write_line('\'bool\', ...')
+                num_fields += 1
+        return num_fields
+
+    def get_lo_attributes(self, extension):
+        element = query.get_class(extension['name'], extension['root'])
+        return element['lo_attribs']
+
+    def write_attribute(self, attrib, version, num_fields):
+        if attrib['version_info'][version]:
+            if attrib['name'] == 'math':
+                self.write_structure_cell(attrib['name'], '', 0, 5)
+            else:
+                self.write_structure_cell(attrib['name'], self.package)
+            num_fields += 1
+            if self.get_type(attrib) == 'int32(0)' or self.get_type(attrib) == '0/0':
+                self.write_structure_cell(attrib['name'], self.package, 0, 7)
+                num_fields += 1
+        return num_fields
+
+    def write_structure_cell(self, attrib, plugin, is_sbml=1, sbml_type=20):
+        if plugin == '':
+            if is_sbml:
+                self.write_line_verbatim('{0}\'{2}\', \'{2}\', \'\', {3}, {4}{1}, ...'
+                                         .format(self.open_br, self.close_br, attrib, is_sbml, sbml_type))
+            else:
+                self.write_line_verbatim('{0}\'{2}\', \'\', \'\', {3}, {4}{1}, ...'
+                                         .format(self.open_br, self.close_br, attrib, is_sbml, sbml_type))
+
+        else:
+            if sbml_type == 7:
+                sbmlname = 'isSet{0}_{1}'.format(self.package, SF.lower_first(attrib))
+                self.write_line_verbatim('{0}\'{6}\', \'{3}\', \'{2}\', {4}, {5}{1}, ...'
+                                         .format(self.open_br, self.close_br, plugin, attrib, is_sbml, sbml_type,
+                                                 sbmlname))
+            else:
+                self.write_line_verbatim('{0}\'{2}_{3}\', \'{3}\', \'{2}\', {4}, {5}{1}, ...'
+                                         .format(self.open_br, self.close_br, plugin, attrib, is_sbml, sbml_type))
 
     def write_get_plugin_fieldname(self, plugin):
         """
@@ -401,31 +519,44 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line_verbatim('function [SBMLfieldnames, nNumberFields]'
                                  ' = get{0}{1}Fieldnames(level, ...'.
                                  format(self.up_pack, plugin['sbase']))
+        self.write_function_args()
+        self.write_function_setup()
 
-        self.write_some_common_lines()  # writes "nNumberFields = 0;" (etc.)
+        v = 1
+        for i in range(0, self.num_versions):
+            num_fields = 0
+            if plugin['version_info'][i]:
+                self.write_line('SBMLfieldnames = {')
+                for extension in plugin['extension']:
+                    if extension['version_info'][i]:
+                        self.write_structure_cell(SF.lower_first(extension['name']), self.package)
+                        num_fields += 1
+                        attribs = self.get_lo_attributes(extension)
+                        for attrib in attribs:
+                            num_fields = self.write_attribute(attrib, i, num_fields)
 
-        self.write_line('SBMLfieldnames = {')
-        self.write_line('\'{0}_version\', ...'.format(self.package))
-        # e.g. "'qual_version', ..."
-        num_fields = 1
+                for extension in plugin['lo_extension']:
+                    if extension['version_info'][i]:
+                        self.write_structure_cell(SF.lower_first(extension['name']), self.package)
+                        num_fields += 1
+                        attribs = self.get_lo_attributes(extension)
+                        for attrib in attribs:
+                            num_fields = self.write_attribute(attrib, i, num_fields)
+                for attrib in plugin['attribs']:
+                    num_fields = self.write_attribute(attrib, i, num_fields)
+                self.write_structure_cell('level', '', 0, 0)
+                self.write_structure_cell('version', '', 0, 0)
+                self.write_structure_cell('version', self.package, 1, 20)
+                # e.g. "'qual_version', ..."
+                num_fields += 3
 
-        for extension in plugin['extension']:
-            self.write_line('\'{0}_{1}\', ...'.
-                            format(self.package,
-                                   SF.lower_first(extension['name'])))
-            num_fields += 1
-        for extension in plugin['lo_extension']:
-            self.write_line('\'{0}_{1}\', ...'.
-                            format(self.package,
-                                   SF.lower_first(extension['name'])))
-            num_fields += 1
-        for attrib in plugin['attribs']:
-            self.write_line('\'{0}_{1}\', ...'.
-                            format(self.package,
-                                   SF.lower_first(attrib['name'])))
-            num_fields += 1
-        self.write_line('};')
-        self.write_line('nNumberFields = {0};'.format(num_fields))
+                self.write_line('};')
+                self.write_line('nNumberFields = {0};'.format(num_fields))
+            self.down_indent()
+            v = v + 1
+            if v <= self.num_versions:
+                self.write_line('elseif (pkgVersion == {0})'.format(v))
+                self.up_indent()
 
         self.write_ends()
 
@@ -441,29 +572,33 @@ class BaseMatlabFile(BaseFile.BaseFile):
                                  ' = get{0}Fieldnames(level, ...'.
                                  format(sbmlclass['name']))
 
-        self.write_some_common_lines()
+        self.write_function_args()
+        self.write_function_setup()
 
-        num_fields = 9
-        self.write_line('SBMLfieldnames = {')
-        self.write_line('\'typecode\', ...')
-        self.write_line('\'metaid\', ...')
-        self.write_line('\'notes\', ...')
-        self.write_line('\'annotation\', ...')
-        self.write_line('\'cvterms\', ...')
-        self.write_line('\'sboTerm\', ...')
-        for attrib in sbmlclass['attribs']:
-            if attrib['name'] == 'math':
-                self.write_line('\'{0}\', ...'.format(attrib['name']))
-            else:
-                self.write_line('\'{0}_{1}\', ...'.format(self.package,
-                                                          attrib['name']))
-            num_fields += 1
-        self.write_line('\'level\', ...')
-        self.write_line('\'version\', ...')
-        self.write_line('\'{0}_version\', ...'.format(self.package))
-        self.write_line('};')
-        self.write_line('nNumberFields = {0};'.format(num_fields))
-
+        v = 1
+        for i in range(0, self.num_versions):
+            num_fields = 0
+            if sbmlclass['version_info'][i]:
+                self.write_line('SBMLfieldnames = {')
+                num_fields = 9
+                self.write_structure_cell('typecode', '', 0, 0)
+                self.write_structure_cell('metaid', '', 1, 20)
+                self.write_structure_cell('notes', '', 1, 1)
+                self.write_structure_cell('annotation', '', 1, 2)
+                self.write_structure_cell('cvterms', '', 0, 4)
+                self.write_structure_cell('sboTerm', '', 1, 20)
+                for attrib in sbmlclass['attribs']:
+                    num_fields = self.write_attribute(attrib, i, num_fields)
+                self.write_structure_cell('level', '', 0, 0)
+                self.write_structure_cell('version', '', 0, 0)
+                self.write_structure_cell('version', self.package, 1, 20)
+                self.write_line('};')
+                self.write_line('nNumberFields = {0};'.format(num_fields))
+            self.down_indent()
+            v = v + 1
+            if v <= self.num_versions:
+                self.write_line('elseif (pkgVersion == {0})'.format(v))
+                self.up_indent()
         self.write_ends()
 
     def write_get_fieldname_function(self, functionType):
@@ -521,11 +656,9 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('end;')
         self.down_indent()
 
-    def write_is_extension(self, functionType):
+    def write_is_extension(self):
         """
         Write an isXXXExtension() function in the Matlab file.
-
-        TODO the functionType argument isn't used
         """
         self.write_line('function extend = is{0}Extension(typecode)'.
                         format(self.up_pack))

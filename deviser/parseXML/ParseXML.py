@@ -849,8 +849,11 @@ class ParseXML():
         :param element: element to be updated
         :return: nothing
         """
+        element['version_info'][version_count] = True
+
         # <attribute> node(s) are listed within an <element> node
         for attr in node.getElementsByTagName('attribute'):
+
             # Add the dictionary for attribute `attr` to the list.
             element['attribs'].append(
                 self.get_attribute_description(self, attr, version_count))
@@ -886,6 +889,11 @@ class ParseXML():
                      minNumListOfChildren="0"
                      maxNumListOfChildren="0" abstract="false">
         '''
+        version_info = []
+        for i in range(0, self.num_versions):
+            version_info.append(False)
+        version_info[version_count] = True
+
         element_name = self.get_element_class_name(self, node)
         # e.g. "DynElement"
         if not element_name:
@@ -959,7 +967,8 @@ class ParseXML():
                             'min_lo_children': min_lo_children,
                             'num_versions': self.num_versions,
                             'version': version_count,
-                            'childrenOverwriteElementName': children_overwrite
+                            'childrenOverwriteElementName': children_overwrite,
+                            'version_info': version_info
                             })
             if add_decls is not None:
                 element['addDecls'] = add_decls
@@ -982,6 +991,7 @@ class ParseXML():
         :param plugin: existing plugin dict to update
         :return: nothing
         """
+        plugin['version_info'][version_count] = True
         for reference in node.getElementsByTagName('reference'):
             temp = self.find_element(self.elements,
                                      self.get_value(reference, 'name'))
@@ -1024,6 +1034,11 @@ class ParseXML():
               </attributes>
             </plugin>
         '''
+        version_info = []
+        for i in range(0, self.num_versions):
+            version_info.append(False)
+        version_info[version_count] = True
+
         ext_point = self.get_value(node, 'extensionPoint')  # e.g. "Model"
         plugin = None
         # check whether we have an element with this
@@ -1069,7 +1084,8 @@ class ParseXML():
             plugin_dict = dict({'sbase': ext_point,
                                 'extension': plug_elements,
                                 'attribs': attributes,
-                                'lo_extension': plug_lo_elements})
+                                'lo_extension': plug_lo_elements,
+                                'version_info': version_info})
 
             if add_decls is not None:
                 if os.path.exists(self.temp_dir + '/' + add_decls):
@@ -1128,7 +1144,8 @@ class ParseXML():
                                                element['lo_class_name'],
                                            'xml_name': element['elementName'],
                                            'min_lo_children':
-                                               element['min_lo_children']}))
+                                               element['min_lo_children'],
+                                           'version_info': element['version_info']}))
                 self.sbml_elements.append(element)
 
     def populate_plugins_for_version(self, pkg_node):
