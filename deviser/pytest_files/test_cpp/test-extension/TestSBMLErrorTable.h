@@ -53,11 +53,11 @@ static const packageErrorTableEntry testErrorTable[] =
 {
   // 10010100
   { TestUnknown,
-    "Unknown error from Test",
+    "Unknown error from TEST",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "Unknown error from Test",
-    { ""
+    "Unknown error from TEST",
+    { "L3V1 Test V1 Section"
     }
   },
 
@@ -70,7 +70,7 @@ static const packageErrorTableEntry testErrorTable[] =
     "Version 1, an SBML document must declare "
     "'http://www.sbml.org/sbml/level3/version1/test/version1' as the "
     "XMLNamespace to use for elements of this package.",
-    { "L3V1 Test V1 Section 3.1"
+    { "L3V1 Test V1 Section"
     }
   },
 
@@ -83,7 +83,7 @@ static const packageErrorTableEntry testErrorTable[] =
     "testAttributes Package must use the "
     "'http://www.sbml.org/sbml/level3/version1/test/version1' namespace, "
     "declaring so either explicitly or implicitly.",
-    { "L3V1 Test V1 Section 3.1"
+    { "L3V1 Test V1 Section"
     }
   },
 
