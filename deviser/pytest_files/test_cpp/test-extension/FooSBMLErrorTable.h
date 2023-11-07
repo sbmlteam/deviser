@@ -53,11 +53,11 @@ static const packageErrorTableEntry fooErrorTable[] =
 {
   // 110100
   { FooUnknown,
-    "Unknown error from Foo",
+    "Unknown error from FOO",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "Unknown error from Foo",
-    { ""
+    "Unknown error from FOO",
+    { "L3V1 Foo V1 Section"
     }
   },
 
@@ -70,7 +70,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "SBML document must declare "
     "'http://www.sbml.org/sbml/level3/version1/foo/version1' as the "
     "XMLNamespace to use for elements of this package.",
-    { "L3V1 Foo V1 Section 3.1"
+    { "L3V1 Foo V1 Section"
     }
   },
 
@@ -83,7 +83,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Foo Package must use the "
     "'http://www.sbml.org/sbml/level3/version1/foo/version1' namespace, "
     "declaring so either explicitly or implicitly.",
-    { "L3V1 Foo V1 Section 3.1"
+    { "L3V1 Foo V1 Section"
     }
   },
 

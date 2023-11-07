@@ -53,11 +53,11 @@ static const packageErrorTableEntry renderErrorTable[] =
 {
   // 1310100
   { RenderUnknown,
-    "Unknown error from Render",
+    "Unknown error from RENDER",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "Unknown error from Render",
-    { ""
+    "Unknown error from RENDER",
+    { "L3V1 Render V1 Section"
     }
   },
 
@@ -70,7 +70,7 @@ static const packageErrorTableEntry renderErrorTable[] =
     "an SBML document must declare "
     "'http://www.sbml.org/sbml/level3/version1/render/version1' as the "
     "XMLNamespace to use for elements of this package.",
-    { "L3V1 Render V1 Section 3.1"
+    { "L3V1 Render V1 Section"
     }
   },
 
@@ -83,7 +83,7 @@ static const packageErrorTableEntry renderErrorTable[] =
     "Render Package must use the "
     "'http://www.sbml.org/sbml/level3/version1/render/version1' namespace, "
     "declaring so either explicitly or implicitly.",
-    { "L3V1 Render V1 Section 3.1"
+    { "L3V1 Render V1 Section"
     }
   },
 

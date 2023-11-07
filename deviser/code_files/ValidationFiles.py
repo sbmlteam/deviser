@@ -103,11 +103,12 @@ class ValidationFiles():
             number = self.offset
         else:
             number = 0
+        full_package = f'{global_variables.package_full_name} Package' if global_variables.is_sbml else global_variables.language
         rules = ValidationRulesGeneral\
             .ValidationRulesGeneral(self.fullname, number, self.package,
                                     self.pkg_ref, self.level, self.version,
                                     self.pkg_version, self.reqd_status,
-                                    global_variables.language)
+                                    full_package)
         rules.determine_rules()
         self.class_rules += rules.rules
         number = self.offset + 20200 if global_variables.is_sbml else 20100

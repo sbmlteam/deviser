@@ -53,11 +53,11 @@ static const packageErrorTableEntry distribErrorTable[] =
 {
   // 1510100
   { DistribUnknown,
-    "Unknown error from Distrib",
+    "Unknown error from DISTRIB",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "Unknown error from Distrib",
-    { ""
+    "Unknown error from DISTRIB",
+    { "L3V1 Distrib V1 Section"
     }
   },
 
@@ -70,7 +70,7 @@ static const packageErrorTableEntry distribErrorTable[] =
     "Version 2, an SBML document must declare "
     "'http://www.sbml.org/sbml/level3/version2/distrib/version1' as the "
     "XMLNamespace to use for elements of this package.",
-    { "L3V1 Distrib V1 Section 3.1"
+    { "L3V1 Distrib V1 Section"
     }
   },
 
@@ -83,7 +83,7 @@ static const packageErrorTableEntry distribErrorTable[] =
     "Distributions Package must use the "
     "'http://www.sbml.org/sbml/level3/version2/distrib/version1' namespace, "
     "declaring so either explicitly or implicitly.",
-    { "L3V1 Distrib V1 Section 3.1"
+    { "L3V1 Distrib V1 Section"
     }
   },
 
