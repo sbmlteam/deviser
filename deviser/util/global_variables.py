@@ -192,10 +192,11 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
                 specifications=[], depend=[], library_vers=[],
                 my_copyright='', annot_elem='', notes_elem='', use_id_1=True,
                 use_name_1=True, ast=False, xml=False, top_name=''):
+    global is_sbml
+    is_sbml = True
     global language
     language = lang
     if language != 'sbml':
-        global is_sbml
         is_sbml = False
 
     global namespaces
