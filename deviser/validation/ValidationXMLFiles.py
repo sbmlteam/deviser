@@ -67,6 +67,7 @@ class ValidationXMLFiles():
         self.pkg_version = lib_object['pkg_version']
         self.pkg_ref = 'NA'
         self.reqd_status = lib_object['required']
+        self.full_package_command = lib_object['name'] + ' Package'
 
         self.tree = query.create_object_tree(lib_object, False)
 
@@ -127,7 +128,7 @@ class ValidationXMLFiles():
         rules = ValidationRulesGeneral\
             .ValidationRulesGeneral(self.fullname, number, self.package,
                                     self.pkg_ref, self.level, self.version,
-                                    self.pkg_version, self.reqd_status)
+                                    self.pkg_version, self.reqd_status, self.full_package_command)
         rules.determine_rules()
         self.class_rules += rules.rules
         number = self.offset + 20200
