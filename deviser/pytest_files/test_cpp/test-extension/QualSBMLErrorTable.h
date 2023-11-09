@@ -53,11 +53,11 @@ static const packageErrorTableEntry qualErrorTable[] =
 {
   // 3010100
   { QualUnknown,
-    "Unknown error from Qual",
+    "Unknown error from QUAL",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "Unknown error from Qual",
-    { ""
+    "Unknown error from QUAL",
+    { "L3V1 Qual V1 Section"
     }
   },
 
@@ -70,7 +70,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "3 Version 1, an SBML document must declare "
     "'http://www.sbml.org/sbml/level3/version1/qual/version1' as the "
     "XMLNamespace to use for elements of this package.",
-    { "L3V1 Qual V1 Section 3.1"
+    { "L3V1 Qual V1 Section"
     }
   },
 
@@ -83,7 +83,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Qualitative Models Package must use the "
     "'http://www.sbml.org/sbml/level3/version1/qual/version1' namespace, "
     "declaring so either explicitly or implicitly.",
-    { "L3V1 Qual V1 Section 3.1"
+    { "L3V1 Qual V1 Section"
     }
   },
 

@@ -71,7 +71,7 @@ class ValidationRulesGeneral:
         self.tc = 'TBC'
         # constants for rules
         if global_variables.is_sbml:
-            self.lib_ref = 'L3V1 {0} V1 Section 3.1'.format(self.up_package)
+            self.lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
             self.up_package = strFunctions.upper_first(self.package)
         else:
             self.lib_ref = '{0} L{1}V{2} Section '.format(self.up_package.upper(), self.level, self.version)
@@ -195,7 +195,7 @@ class ValidationRulesGeneral:
         ref = ''
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
-        short = 'Unknown error from {0}'.format(self.up_package.upper())*10
+        short = 'Unknown error from {0}'.format(self.up_package.upper())
         tc = global_variables.unknown_error
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,

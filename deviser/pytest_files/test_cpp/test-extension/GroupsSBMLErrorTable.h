@@ -53,11 +53,11 @@ static const packageErrorTableEntry groupsErrorTable[] =
 {
   // 4010100
   { GroupsUnknown,
-    "Unknown error from Groups",
+    "Unknown error from GROUPS",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "Unknown error from Groups",
-    { ""
+    "Unknown error from GROUPS",
+    { "L3V1 Groups V1 Section"
     }
   },
 
@@ -70,7 +70,7 @@ static const packageErrorTableEntry groupsErrorTable[] =
     "an SBML document must declare "
     "'http://www.sbml.org/sbml/level3/version1/groups/version1' as the "
     "XMLNamespace to use for elements of this package.",
-    { "L3V1 Groups V1 Section 3.1"
+    { "L3V1 Groups V1 Section"
     }
   },
 
@@ -83,7 +83,7 @@ static const packageErrorTableEntry groupsErrorTable[] =
     "Groups Package must use the "
     "'http://www.sbml.org/sbml/level3/version1/groups/version1' namespace, "
     "declaring so either explicitly or implicitly.",
-    { "L3V1 Groups V1 Section 3.1"
+    { "L3V1 Groups V1 Section"
     }
   },
 

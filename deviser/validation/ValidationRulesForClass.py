@@ -86,7 +86,7 @@ class ValidationRulesForClass:
         # constants for rules
         if global_variables.is_sbml:
             self.up_package = strFunctions.upper_first(self.package)
-            self.lib_ref = 'L3V1 {0} V1 Section 3.1'.format(self.up_package)
+            self.lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         else:
             self.up_package = self.package.upper()
             self.lib_ref = '{0} L{1}V{2} Section '.format(self.up_package, self.level, self.version)
